@@ -14,14 +14,6 @@ using static BattleIntroEnum;
 //@author: Andrew
 public class PreQueenFight : DialogueClasses
 {
-    // demo cutoff
-    [SerializeField] private TextMeshProUGUI endofdemotext;
-    [SerializeField] private TextMeshProUGUI wishlisttext;
-    [SerializeField] private GameObject mainMenuButton;
-    
-    // anrui if you see this you're really not gonna like this...
-    [SerializeField] private TextMeshProUGUI backgroundtext;
-    
     [SerializeField] private Jackie jackie;
     [SerializeField] private Ives ives;
     [SerializeField] private Transform playerCombatTransform;
@@ -92,22 +84,7 @@ public class PreQueenFight : DialogueClasses
 
     private const float BRIEF_PAUSE = 0.2f; // For use after an animation to make it visually seem smoother
     private const float MEDIUM_PAUSE = 1f; //For use after a text box comes down and we want to add some weight to the text.
-
-    private void Start()
-    {
-        Color c = endofdemotext.color;
-        c.a = 0;
-        
-        endofdemotext.color = c;
-        wishlisttext.color = c;
-        mainMenuButton.GetComponent<TextMeshProUGUI>().color = c;
-        mainMenuButton.GetComponent<Button>().interactable = false;
-        
-        c = backgroundtext.color;
-        c.a = 0;
-        backgroundtext.color = c;
-    }
-
+    
     protected override void GameStateChange(GameState gameState)
     {
         if (gameState == GameState.GAME_START)
@@ -534,20 +511,43 @@ public class PreQueenFight : DialogueClasses
             }
             yield return StartCoroutine(theQueen.MoveToPosition(queenTransform.position, 0f, 1.5f));
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(LastBitDialogue.Dialogue));
-
-
+            
             jackie.DeEmphasize();
             ives.DeEmphasize();
             theQueen.DeEmphasize();
-            StartCoroutine(AudioManager.Instance.StartCombatMusic());
 
-            yield return StartCoroutine(FadeTMP(backgroundtext, 1f));
-            yield return StartCoroutine(FadeTMP(endofdemotext, 2f));
-            yield return new WaitForSeconds(MEDIUM_PAUSE);
-            yield return StartCoroutine(FadeTMP(wishlisttext, 2f));
-            yield return new WaitForSeconds(MEDIUM_PAUSE);
-            mainMenuButton.GetComponent<Button>().interactable = true;
-            yield return StartCoroutine(FadeTMP(mainMenuButton.GetComponent<TextMeshProUGUI>(), 1f));
+            ives.InCombat();
+            jackie.InCombat();
+            theQueen.InCombat();
+            theQueen.SetReturnPosition(theQueen.transform.position);
+            theQueen.IntializeChildBeetles(queenGuardBeetles);
+            for (int i = 0; i < queenGuardBeetles.Count; i++)
+            {
+                queenGuardBeetles[i].InCombat();
+                queenGuardBeetles[i].SetReturnPosition(queenGuardBeetles[i].transform.position);
+            }
+            foreach (Crystals crystal in crystals)
+            {
+                crystal.InCombat();
+            }
+
+            CombatManager.Instance.BeginCombat();
+            new BattleIntroEvent(Get<ClashIntro>()).Invoke();
+            BeginQueenCombat();
+            yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
+            AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
+
+            GameStateManager.Instance.FirstTimeFinished = GameStateManager.Instance.CurrentLevelProgress < StageInformation.PRINCESS_FROG_FIGHT.LevelID;
+            GameStateManager.Instance.UpdateLevelProgress(StageInformation.PRINCESS_FROG_FIGHT);
+
+            yield return new WaitForSeconds(1.5f);
+            DialogueManager.Instance.MoveBoxToBottom();
+
+            yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
+
+            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(PostFight.Dialogue));
+
+            GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.PostQueenFight>().SceneName);
         }
         
     }
