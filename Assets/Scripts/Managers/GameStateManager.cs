@@ -42,7 +42,7 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
 
     public float CurrentLevelProgress
     {
-        get { return (IS_DEVELOPMENT) ? 3f : Data.CurrentLevelProgress; }
+        get { return (IS_DEVELOPMENT) ? 999f : Data.CurrentLevelProgress; }
         set => Data.CurrentLevelProgress = value;
     }
 
