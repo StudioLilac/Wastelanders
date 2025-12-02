@@ -95,10 +95,10 @@ namespace Steamworks {
                 // Once you get a Steam AppID assigned by Valve, you need to replace AppId_t.Invalid with it and
                 // remove steam_appid.txt from the game depot. eg: "(AppId_t)480" or "new AppId_t(480)".
                 // See the Valve documentation for more information: https://partner.steamgames.com/doc/sdk/api#initialization_and_shutdown
-                if (SteamAPI.RestartAppIfNecessary(new AppId_t(1347112))) {
-                    Application.Quit();
-                    return;
-                }
+                // if (SteamAPI.RestartAppIfNecessary(new AppId_t(1347112))) {
+                //     Application.Quit();
+                //     return;
+                // }
             }
             catch (System.DllNotFoundException e) {
                 // We catch this exception here, as it will be the first occurrence of it.
