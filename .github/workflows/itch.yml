@@ -22,16 +22,15 @@ jobs:
           restore-keys: |
             Library-${{ runner.os }}-
 
-      # 🔧 Build the Unity project with game-ci v4
       - name: Build project
         uses: game-ci/unity-builder@v4
         env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+            UNITY_LICENSING_SERVER: true
         with:
-          unityVersion: 2022.3.40f1   # ← set this to your exact version
-          targetPlatform: WebGL
-          buildName: WebGL           # ← required for v4
-          allowDirtyBuild: true       # avoids failing on version control differences
+            unityVersion: 2022.3.40f1
+            targetPlatform: WebGL
+            buildName: WebGL
+            allowDirtyBuild: true
 
       # 📦 Zip the finished WebGL build
       # game-ci v4 outputs builds to: build/${{ inputs.build-name }}/
