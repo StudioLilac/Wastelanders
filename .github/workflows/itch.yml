@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     name: Build WebGL
-    runs-on: ubuntu-24.04-large
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
