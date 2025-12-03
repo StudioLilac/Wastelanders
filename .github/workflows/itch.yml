@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - itchio
+      - main
 
 jobs:
   build:
@@ -21,6 +22,9 @@ jobs:
           key: Library-${{ runner.os }}-${{ github.sha }}
           restore-keys: |
             Library-${{ runner.os }}-
+        
+      - name: Request Activation File
+        uses: game-ci/unity-request-activation-file@v2
 
       - name: Build project
         uses: game-ci/unity-builder@v4
