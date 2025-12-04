@@ -5,8 +5,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.ConstrainedExecution;
 using Systems.Persistence;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using static BattleIntroEnum;
 
 //@author: Andrew
@@ -53,7 +55,7 @@ public class PreQueenFight : DialogueClasses
     [SerializeField] private List<Crystals> crystals;
     [SerializeField] private Crystals middleBigCrystal;
     [SerializeField] private List<Crystals> bigCrystals;
-
+    [SerializeField] private SpriteRenderer treeOverlay;
 
     [SerializeField] private QueenBeetle theQueen;
     [SerializeField] private Transform queenTransform;
@@ -82,7 +84,7 @@ public class PreQueenFight : DialogueClasses
 
     private const float BRIEF_PAUSE = 0.2f; // For use after an animation to make it visually seem smoother
     private const float MEDIUM_PAUSE = 1f; //For use after a text box comes down and we want to add some weight to the text.
-
+    
     protected override void GameStateChange(GameState gameState)
     {
         if (gameState == GameState.GAME_START)
@@ -163,9 +165,9 @@ public class PreQueenFight : DialogueClasses
 
 
 
-
+        
         if (!GameStateManager.Instance.JumpToCombat)
-        {
+        {   
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(initialPlanByJackie.Dialogue));
 
             //Activate First Plan
@@ -361,6 +363,7 @@ public class PreQueenFight : DialogueClasses
 
                 jackie.Emphasize();
                 ives.Emphasize();
+
                 foreach (EntityClass entity in entitiesInPlanThree)
                 {
                     Coroutine coroutine = StartCoroutine(FadeSprite(entity.gameObject.GetComponent<SpriteRenderer>(), 0f, 1f, 0.8f));
@@ -387,6 +390,12 @@ public class PreQueenFight : DialogueClasses
                 yield return StartCoroutine(DialogueManager.Instance.StartDialogue(planThreeDialogue.Dialogue));
                 yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(0.5f));
 
+                var jackieSprite = jackie.GetComponent<SpriteRenderer>();
+                var oldLayer = treeOverlay.sortingLayerName;
+                var oldOrder = treeOverlay.sortingOrder;
+                treeOverlay.sortingLayerName = jackieSprite.sortingLayerName;
+                treeOverlay.sortingOrder = jackieSprite.sortingOrder + 1;
+
                 StartCoroutine(ives.ResetPosition());
                 yield return StartCoroutine(jackie.ResetPosition()); //Jackie Runs into the scene
                 yield return new WaitForSeconds(MEDIUM_PAUSE);
@@ -402,6 +411,8 @@ public class PreQueenFight : DialogueClasses
                 yield return StartCoroutine(NoCombatClash(jackie, campBeetles[1], false,StaffCards.STAFF_SOUND_FX_NAME));
 
                 yield return new WaitForSeconds(MEDIUM_PAUSE);
+                treeOverlay.sortingLayerName = oldLayer;
+                treeOverlay.sortingOrder = oldOrder;
 
                 //Clean up props used this scene
                 foreach (EntityClass entity in entitiesInPlanThree)
@@ -500,8 +511,7 @@ public class PreQueenFight : DialogueClasses
             }
             yield return StartCoroutine(theQueen.MoveToPosition(queenTransform.position, 0f, 1.5f));
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(LastBitDialogue.Dialogue));
-
-
+            
             jackie.DeEmphasize();
             ives.DeEmphasize();
             theQueen.DeEmphasize();
@@ -540,6 +550,22 @@ public class PreQueenFight : DialogueClasses
             GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.PostQueenFight>().SceneName);
         }
         
+    }
+    
+    public IEnumerator FadeTMP(TextMeshProUGUI text, float duration)
+    {
+        Color c = text.color;
+        c.a = 0;
+        text.color = c;
+
+        float time = 0f;
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            c.a = Mathf.Clamp01(time / duration);
+            text.color = c;
+            yield return null;
+        }
     }
 
     void BeginQueenCombat()
