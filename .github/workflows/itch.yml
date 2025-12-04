@@ -22,8 +22,8 @@ jobs:
           sudo rm -rf /usr/local/share/boost
           docker system prune -af
 
-      # Cache Unity Library for faster builds
-      - uses: actions/cache@v3
+      - name: Cache Unity Library
+        uses: actions/cache@v3
         with:
           path: Library
           key: Library-${{ runner.os }}-${{ github.sha }}
@@ -50,11 +50,9 @@ jobs:
           zip -r ../../webgl.zip .
 
       # 🧰 Install Butler CLI
-      - name: Setup Butler
-        uses: itchio/butler-action@v2
-        with:
-          api_key: ${{ secrets.BUTLER_API_KEY }}
-      
+      - name: Setup butler
+        uses: remarkablegames/setup-butler@v2
+
       # 🚀 Upload to itch.io
       - name: Upload to itch.io
         env:
