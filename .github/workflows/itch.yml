@@ -50,13 +50,11 @@ jobs:
           zip -r ../../webgl.zip .
 
       # 🧰 Install Butler CLI
-      - name: Install Butler
-        run: |
-          curl -L https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default > butler.zip
-          unzip butler.zip butler
-          chmod +x butler
-          sudo mv butler /usr/local/bin/
-
+      - name: Setup Butler
+        uses: itchio/butler-action@v2
+        with:
+          api_key: ${{ secrets.BUTLER_API_KEY }}
+      
       # 🚀 Upload to itch.io
       - name: Upload to itch.io
         env:
