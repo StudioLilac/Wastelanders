@@ -504,8 +504,8 @@ public class BeetleFight : DialogueClasses
             AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
             yield return new WaitForSeconds(1f);
 
-            GameStateManager.Instance.UpdateLevelProgress(StageInformation.QUEEN_BEETLE_STAGE);
-            GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.PreQueenFight>().SceneName);
+            GameStateManager.Instance.UpdateLevelProgress(StageInformation.QUEEN_PREPARATION_STAGE);
+            GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.SelectionScreen>().SceneName);
             yield break;
         }
     }
