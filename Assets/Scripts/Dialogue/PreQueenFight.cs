@@ -552,22 +552,6 @@ public class PreQueenFight : DialogueClasses
         
     }
     
-    public IEnumerator FadeTMP(TextMeshProUGUI text, float duration)
-    {
-        Color c = text.color;
-        c.a = 0;
-        text.color = c;
-
-        float time = 0f;
-        while (time < duration)
-        {
-            time += Time.deltaTime;
-            c.a = Mathf.Clamp01(time / duration);
-            text.color = c;
-            yield return null;
-        }
-    }
-
     void BeginQueenCombat()
     {
         CombatManager.PlayersWinEvent += PlayersWin;
