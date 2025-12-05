@@ -6,7 +6,7 @@ on:
       - steam
 
 jobs:
-  buildForWindowsAndLinux:
+  buildForWindows:
     name: Build for ${{ matrix.targetPlatform }}
     runs-on: ubuntu-latest
     strategy:
@@ -34,6 +34,8 @@ jobs:
         id: buildStep
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           targetPlatform: ${{ matrix.targetPlatform }}
           versioning: Semantic
@@ -42,7 +44,7 @@ jobs:
           name: Build-${{ matrix.targetPlatform }}
           path: build/${{ matrix.targetPlatform }}
   deployToSteam:
-    needs: [buildForWindowsAndLinux]
+    needs: [buildForWindows]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -59,7 +61,7 @@ jobs:
           username: ${{ secrets.STEAM_USERNAME }}
           configVdf: ${{ secrets.STEAM_CONFIG_VDF}}
           appId: ${{ secrets.STEAM_APP_ID }}
-          buildDescription: v${{ needs.buildForWindowsAndLinux.outputs.buildVersion }}
+          buildDescription: v${{ needs.buildForWindows.outputs.buildVersion }}
           rootPath: build
           depot1Path: StandaloneWindows64
           depot1InstallScriptPath: StandaloneWindows64/install_script.vdf
