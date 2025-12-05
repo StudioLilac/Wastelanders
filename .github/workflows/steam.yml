@@ -1,0 +1,53 @@
+name: "[CI/CD] Build Windows and Upload to Steam"
+
+on:
+  push:
+    branches:
+      - steam
+
+jobs:
+  build-and-deploy:
+    name: Build and Deploy Windows
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Free up disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /usr/local/lib/android
+          sudo rm -rf /opt/ghc
+          sudo rm -rf /usr/local/share/boost
+          docker system prune -af
+
+      - name: Cache Unity Library
+        uses: actions/cache@v3
+        with:
+          path: Library
+          key: Library-${{ runner.os }}-${{ hashFiles('ProjectSettings/ProjectVersion.txt', 'Packages/manifest.json', 'Packages/packages-lock.json') }}
+          restore-keys: |
+            Library-${{ runner.os }}-
+
+      - name: Build project (Windows)
+        uses: game-ci/unity-builder@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          unityVersion: 6000.0.62f1
+          targetPlatform: StandaloneWindows64
+          buildName: Windows
+          allowDirtyBuild: true
+
+      - name: Upload to Steam
+        uses: game-ci/steam-deploy@v3
+        with:
+          configVdf: ${{ secrets.STEAM_CONFIG_VDF }}
+          appId: 1347112
+          buildDescription: ${{ github.sha }}
+
+          rootPath: build
+          depot1Path: Windows
