@@ -12,6 +12,7 @@ using static BattleIntroEnum;
 //@author: Andrew
 public class BeetleFight : DialogueClasses
 {
+    [SerializeField] private bool jumpintoCombat;
     [SerializeField] private Jackie jackie;
     [SerializeField] private Transform jackieDefaultTransform;
     [SerializeField] private Transform jackieChasingTransform;
@@ -189,7 +190,7 @@ public class BeetleFight : DialogueClasses
         yield return new WaitForEndOfFrame(); // Necessary to load in enemies and managers. 
         SetUpEnemyLists();
         SetUpCombatStatus();
-        if (!GameStateManager.Instance.JumpToCombat)
+        if (!GameStateManager.Instance.JumpToCombat && !jumpintoCombat)
         {
             sceneCamera.Priority = 2;
             yield return new WaitForSeconds(1f);
@@ -377,7 +378,8 @@ public class BeetleFight : DialogueClasses
             RemoveEnemyFromScene(ambushBeetle);
             floorBg.SetActive(false);
             ives.transform.position = playerWave1CombatPosition.position + new Vector3(-4, 0, 0);
-            yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(2f));
+            yield return new WaitForSeconds(1f);
+            yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(2f));
         }
 
         //kill off the other entities in the scene
@@ -408,7 +410,6 @@ public class BeetleFight : DialogueClasses
             ives.InCombat();
             jackie.Targetable();
             ives.Targetable();
-            DialogueManager.Instance.MoveBoxToTop();
 
             yield return new WaitForSeconds(0.2f);
             CombatManager.Instance.BeginCombat();
