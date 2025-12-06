@@ -103,10 +103,10 @@ TextureImporter:
       name: Stylized Cursor_0
       rect:
         serializedVersion: 2
-        x: 159
-        y: 63
-        width: 274
-        height: 386
+        x: 9
+        y: 3
+        width: 19
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
