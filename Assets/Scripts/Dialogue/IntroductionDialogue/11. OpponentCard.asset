@@ -18,8 +18,8 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: After the training you've done since your last exam, you should be
-      able to read enemy attacks more clearly.
+  - bodyText: The training you've done since your last exam should help you read
+      enemy attacks more clearly.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: fbdbcaab28794334bb84176f7e052fb5, type: 3}
     sfx: 
