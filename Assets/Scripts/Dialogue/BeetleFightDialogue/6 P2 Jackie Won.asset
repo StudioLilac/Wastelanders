@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: 6 P2 Jackie Won
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: Alright! Let's see what we have here...
+  - bodyText: Okay! Let's see what we have here...
     speakerName: Jackie
     displayingImage: {fileID: 0}
+    sfx: 
     broadcastAnEvent: 0
