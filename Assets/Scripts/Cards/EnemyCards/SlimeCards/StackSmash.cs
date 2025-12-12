@@ -15,7 +15,7 @@ public class StackSmash : SlimeAttacks, IPlayableSlimeCard
     public override void Initialize()
     {
         base.Initialize();
-        lowerBound = 2;
+        lowerBound = 1;
         upperBound = 4;
         Speed = 2;
         CostToAddToDeck = 1;

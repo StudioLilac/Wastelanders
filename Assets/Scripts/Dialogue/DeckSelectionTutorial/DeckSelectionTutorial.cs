@@ -49,7 +49,11 @@ public class DeckSelectionTutorial : MonoBehaviour
         }
 
 
-        if (Mathf.Approximately(GameStateManager.Instance.CurrentLevelProgress, StageInformation.DECK_SELECTION_TUTORIAL.LevelID) || activateTutorial)
+        bool showTutorial =
+            SceneData.Get<SceneData.TutorialFight>() == GameStateManager.Instance.PreviousScene &&
+            GameStateManager.Instance.CurrentLevelProgress > StageInformation.DECK_SELECTION_TUTORIAL.LevelID;
+
+        if (Mathf.Approximately(GameStateManager.Instance.CurrentLevelProgress, StageInformation.DECK_SELECTION_TUTORIAL.LevelID) || showTutorial || activateTutorial)
         {
             NormalizeTutorialDecks();
 
@@ -117,9 +121,13 @@ public class DeckSelectionTutorial : MonoBehaviour
     {
         playerDatabase.JackieData.selectedWeapons.Remove(CardDatabase.WeaponType.PISTOL);
         SerializableWeaponListEntry pistolDeck = playerDatabase.JackieData.GetPlayerWeaponDeck(CardDatabase.WeaponType.PISTOL);
-        pistolDeck.weaponDeck.Clear();
+        pistolDeck.weaponDeck = new List<SerializableActionClassInfo>
+        {
+            new(nameof(IronSights)),
+            new(nameof(Silencer))
+        };
         WeaponProficiency pointsAvailableForPistol = playerDatabase.JackieData.GetProficiencyPointsTuple(CardDatabase.WeaponType.PISTOL);
-        pointsAvailableForPistol.CurrentPoints = 0;
+        pointsAvailableForPistol.CurrentPoints = 4;
     }
 
 

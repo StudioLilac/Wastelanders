@@ -1778,7 +1778,7 @@ MonoBehaviour:
     Part2: 1333047437
     Part3: 3777487801
     Part4: 1112175064
-  JumpToCombat: 1
+  JumpToCombat: 0
   FirstTimeFinished: 0
 --- !u!4 &1398448087
 Transform:

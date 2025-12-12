@@ -8,7 +8,7 @@ public class Hurl : FrogAttacks, IPlayableFrogCard
     public override void Initialize()
     {
         base.Initialize();
-        lowerBound = 3;
+        lowerBound = 1;
         upperBound = 7;
         
         Speed = 5;

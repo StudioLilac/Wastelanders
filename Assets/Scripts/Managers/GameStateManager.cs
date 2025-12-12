@@ -9,7 +9,9 @@ using UnityEngine.SceneManagement;
 //Singleton Class that keeps track of values representing general Game states
 public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<GameStateData>
 {
-    public static readonly bool IS_DEVELOPMENT = false;
+    public static readonly bool IS_DEVELOPMENT = true;
+
+    public SceneData PreviousScene { get; private set; } = SceneData.Get<SceneData.MainMenu>();
 
     //Fields for persistence
     [field: SerializeField] public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
@@ -40,7 +42,7 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
 
     public float CurrentLevelProgress
     {
-        get { return (IS_DEVELOPMENT) ? 100f : Data.CurrentLevelProgress; }
+        get { return (IS_DEVELOPMENT) ? 999f : Data.CurrentLevelProgress; }
         set => Data.CurrentLevelProgress = value;
     }
 
@@ -58,6 +60,7 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
 
     public void LoadScene(string scene)
     {
+        PreviousScene = SceneData.FromSceneName(SceneManager.GetActiveScene().name);
         StartCoroutine(FadeAndLoadScene(scene));
     }
 

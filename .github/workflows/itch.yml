@@ -1,4 +1,4 @@
-name: Build WebGL and Upload to itch.io
+name: "[CI/CD] Build WebGL and Upload to itch.io"
 
 on:
   push:
@@ -14,23 +14,33 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Cache Unity Library for faster builds
-      - uses: actions/cache@v3
+      - name: Free up disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /usr/local/lib/android
+          sudo rm -rf /opt/ghc
+          sudo rm -rf /usr/local/share/boost
+          docker system prune -af
+
+      - name: Cache Unity Library
+        uses: actions/cache@v3
         with:
           path: Library
-          key: Library-${{ runner.os }}-${{ github.sha }}
+          key: Library-${{ runner.os }}-${{ hashFiles('ProjectSettings/ProjectVersion.txt', 'Packages/manifest.json', 'Packages/packages-lock.json') }}
           restore-keys: |
             Library-${{ runner.os }}-
 
       - name: Build project
         uses: game-ci/unity-builder@v4
         env:
-            UNITY_LICENSING_SERVER: true
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
-            unityVersion: 2022.3.40f1
-            targetPlatform: WebGL
-            buildName: WebGL
-            allowDirtyBuild: true
+          unityVersion: 6000.0.62f1   # ← set this to your exact version
+          targetPlatform: WebGL
+          buildName: WebGL           # ← required for v4
+          allowDirtyBuild: true       # avoids failing on version control differences
 
       # 📦 Zip the finished WebGL build
       # game-ci v4 outputs builds to: build/${{ inputs.build-name }}/
@@ -40,12 +50,8 @@ jobs:
           zip -r ../../webgl.zip .
 
       # 🧰 Install Butler CLI
-      - name: Install Butler
-        run: |
-          curl -L https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default > butler.zip
-          unzip butler.zip butler
-          chmod +x butler
-          sudo mv butler /usr/local/bin/
+      - name: Setup butler
+        uses: remarkablegames/setup-butler@v2
 
       # 🚀 Upload to itch.io
       - name: Upload to itch.io

@@ -18,6 +18,14 @@ public abstract class SceneData : Enum<SceneData>
         public override MonoBehaviour[] RequiredPrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
             { prefabs.audioManager, prefabs.uiFadeScreenManager };
     }
+    
+    public class SplashScreenWebGL : SceneData {
+        public override string SceneName => "SplashScreenWebGL";
+        public override SceneAudio GetAudio(AudioDatabase database) => database.MainMenu;
+        
+        public override MonoBehaviour[] RequiredPrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
+            { prefabs.audioManager, prefabs.uiFadeScreenManager };
+    }
 
     public class MainMenu : SceneData
     {

@@ -8,7 +8,7 @@ public class ChargeUp : FrogAttacks
     {
         base.Initialize();
         lowerBound = 1;
-        upperBound = 3;
+        upperBound = 1;
         
         Speed = 1;
 
