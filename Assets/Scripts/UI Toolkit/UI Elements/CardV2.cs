@@ -7,7 +7,15 @@ namespace UI_Toolkit.UI_Elements
     [UxmlElement]
     public partial class CardV2 : VisualElement
     {
+        // these two booleans track the current "state" of the pointer's action.
+        // clicked refers to whether an OnMouseDown event has happened on this card.
+        // dragging refers to if the card is actively being dragged.
+        // Both of these are necessary to allow the existing behaviour of clicking a card to select it, plus the new
+        // dragging behaviour.
+        private bool clicked;
         private bool dragging;
+        
+        
         private Vector2 startPos;
         
         // TODO: is it bad to hold a reference to the actionclass associated with this card?
@@ -47,7 +55,7 @@ namespace UI_Toolkit.UI_Elements
         }
 
         private void OnPointerDown(PointerDownEvent eventData) {
-            dragging = true;
+            clicked = true;
             startPos = layout.position;
             
             this.CapturePointer(eventData.pointerId);
@@ -55,31 +63,51 @@ namespace UI_Toolkit.UI_Elements
 
         private void OnPointerMove(PointerMoveEvent evt)
         {
-            if (!dragging) return;
-
-            Debug.Log("OnPointerMove");
+            if (!clicked) return;
+            dragging = true;
         }
 
         private void OnPointerUp(PointerUpEvent eventData) {
+            if (!clicked) return;
+            clicked = false;
+            
             if (!dragging) return;
             dragging = false;
-
-            Debug.Log("Playing card");
+            
             actionClass.ToggleUnSelected();
             if (this.HasPointerCapture(eventData.pointerId))
                 this.ReleasePointer(eventData.pointerId);
-
+            
+            IPanel hudPanel = (eventData.target as VisualElement)?.panel;
             TryClickEntity(eventData.position);
         }
         
+        // Helper method for the raycast in the below method. Since our HUDV2 panel is scaled with screen size,
+        // we need to convert coordinates accordingly.
+        Vector2 ToScreenPoint(Vector2 panelPos)
+        {
+            float scale = panel.scaledPixelsPerPoint;
+            return new Vector2(
+                panelPos.x * scale,
+                (panel.visualTree.layout.height - panelPos.y) * scale
+            );
+        }
+        
+        // Raycasts from the screen point to world space, looking for EntityClasses. If it finds one, it uses the
+        // existing behaviour in HighlightManager.cs.
+        
+        // If I open a PR and forget to remove all these debug logs I hope you catch this @anrui
         private void TryClickEntity(Vector2 screenPos)
         {
             Camera cam = Camera.main;
+            
             if (cam == null)
             {
-                Debug.LogWarning("TryClickEntity: Camera.main is null");
+                Debug.LogWarning("[TryClickEntity] Camera.main is null");
                 return;
             }
+            
+            screenPos = ToScreenPoint(screenPos);
 
             Ray ray = cam.ScreenPointToRay(screenPos);
             Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red, 2f);
@@ -89,25 +117,11 @@ namespace UI_Toolkit.UI_Elements
             if (!Physics.Raycast(ray, out RaycastHit hit, 1000f))
             {
                 Debug.Log("Raycast hit NOTHING");
+                HighlightManager.Instance.ResetCurrentHighlightedAction();
                 return;
             }
-
-            Debug.Log($"Raycast hit: {hit.collider.name}");
-            Debug.Log($"Hit collider type: {hit.collider.GetType()}");
-            Debug.Log($"Hit collider layer: {LayerMask.LayerToName(hit.collider.gameObject.layer)}");
 
             EntityClass entity = hit.collider.GetComponentInParent<EntityClass>();
-
-            if (entity == null)
-            {
-                Debug.Log("Collider found, but NO EntityClass in parents");
-                Debug.Log("Components on hit object:");
-
-                foreach (var c in hit.collider.GetComponents<Component>())
-                    Debug.Log($" - {c.GetType().Name}");
-
-                return;
-            }
 
             Debug.Log($"Entity FOUND: {entity.name} ({entity.GetType().Name})");
             HighlightManager.Instance.OnEntityClicked(entity);
