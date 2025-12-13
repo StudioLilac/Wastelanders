@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
 namespace UI_Toolkit.UI_Elements
@@ -6,6 +7,12 @@ namespace UI_Toolkit.UI_Elements
     [UxmlElement]
     public partial class CardV2 : VisualElement
     {
+        private bool dragging;
+        private Vector2 startPos;
+        
+        // TODO: is it bad to hold a reference to the actionclass associated with this card?
+        private ActionClass actionClass;
+        
         public void WithAttrsFromActionClass(ActionClass ac)
         {
             WithAttrs(ac.GetIcon(), ac.GetName(), ac.Speed.ToString(), FormatStats(ac.GetRolledStats()));
@@ -31,7 +38,81 @@ namespace UI_Toolkit.UI_Elements
             RegisterCallback<MouseDownEvent>(_ => ac.OnMouseDown());
             RegisterCallback<MouseEnterEvent>(_ => ac.OnMouseEnter());
             RegisterCallback<MouseLeaveEvent>(_ => ac.OnMouseExit());
+            
+            RegisterCallback<PointerDownEvent>(OnPointerDown);
+            RegisterCallback<PointerMoveEvent>(OnPointerMove);
+            RegisterCallback<PointerUpEvent>(OnPointerUp);
+
+            actionClass = ac;
         }
+
+        private void OnPointerDown(PointerDownEvent eventData) {
+            dragging = true;
+            startPos = layout.position;
+            
+            this.CapturePointer(eventData.pointerId);
+        }
+
+        private void OnPointerMove(PointerMoveEvent evt)
+        {
+            if (!dragging) return;
+
+            Debug.Log("OnPointerMove");
+        }
+
+        private void OnPointerUp(PointerUpEvent eventData) {
+            if (!dragging) return;
+            dragging = false;
+
+            Debug.Log("Playing card");
+            actionClass.ToggleUnSelected();
+            if (this.HasPointerCapture(eventData.pointerId))
+                this.ReleasePointer(eventData.pointerId);
+
+            TryClickEntity(eventData.position);
+        }
+        
+        private void TryClickEntity(Vector2 screenPos)
+        {
+            Camera cam = Camera.main;
+            if (cam == null)
+            {
+                Debug.LogWarning("TryClickEntity: Camera.main is null");
+                return;
+            }
+
+            Ray ray = cam.ScreenPointToRay(screenPos);
+            Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red, 2f);
+
+            Debug.Log($"Raycasting from screenPos {screenPos}");
+
+            if (!Physics.Raycast(ray, out RaycastHit hit, 1000f))
+            {
+                Debug.Log("Raycast hit NOTHING");
+                return;
+            }
+
+            Debug.Log($"Raycast hit: {hit.collider.name}");
+            Debug.Log($"Hit collider type: {hit.collider.GetType()}");
+            Debug.Log($"Hit collider layer: {LayerMask.LayerToName(hit.collider.gameObject.layer)}");
+
+            EntityClass entity = hit.collider.GetComponentInParent<EntityClass>();
+
+            if (entity == null)
+            {
+                Debug.Log("Collider found, but NO EntityClass in parents");
+                Debug.Log("Components on hit object:");
+
+                foreach (var c in hit.collider.GetComponents<Component>())
+                    Debug.Log($" - {c.GetType().Name}");
+
+                return;
+            }
+
+            Debug.Log($"Entity FOUND: {entity.name} ({entity.GetType().Name})");
+            HighlightManager.Instance.OnEntityClicked(entity);
+        }
+
 
         private void WithAttrs(
             Sprite fg = null,
