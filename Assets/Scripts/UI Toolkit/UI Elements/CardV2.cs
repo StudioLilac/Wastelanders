@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
 namespace UI_Toolkit.UI_Elements
@@ -15,11 +14,11 @@ namespace UI_Toolkit.UI_Elements
         private bool clicked;
         private bool dragging;
         
-        
         private Vector2 startPos;
+        private Vector2 pointerDownPos;
         
-        // TODO: is it bad to hold a reference to the actionclass associated with this card?
-        private ActionClass actionClass;
+        private VisualElement dragLayer;
+        private VisualElement originalParent;
         
         public void WithAttrsFromActionClass(ActionClass ac)
         {
@@ -47,39 +46,73 @@ namespace UI_Toolkit.UI_Elements
             RegisterCallback<MouseEnterEvent>(_ => ac.OnMouseEnter());
             RegisterCallback<MouseLeaveEvent>(_ => ac.OnMouseExit());
             
+            // TODO: move these to a non-AC function call
             RegisterCallback<PointerDownEvent>(OnPointerDown);
             RegisterCallback<PointerMoveEvent>(OnPointerMove);
             RegisterCallback<PointerUpEvent>(OnPointerUp);
-
-            actionClass = ac;
+            RegisterCallback<AttachToPanelEvent>(evt =>
+            {
+                dragLayer = panel.visualTree.Q<VisualElement>("drag-layer");
+            });
         }
 
-        private void OnPointerDown(PointerDownEvent eventData) {
+        private void OnPointerDown(PointerDownEvent evt)
+        {
             clicked = true;
-            startPos = layout.position;
-            
-            this.CapturePointer(eventData.pointerId);
+            dragging = false;
+
+            originalParent = parent;
+
+            originalParent.Remove(this);
+            dragLayer.Add(this);
+
+            style.position = Position.Absolute;
+
+            startPos = evt.position;
+            pointerDownPos = evt.position;
+
+            BringToFront();
+            this.CapturePointer(evt.pointerId);
         }
 
         private void OnPointerMove(PointerMoveEvent evt)
         {
-            if (!clicked) return;
+            if (!clicked || !this.HasPointerCapture(evt.pointerId))
+                return;
+
             dragging = true;
+
+            Vector2 delta = (Vector2)evt.position - pointerDownPos;
+            Vector2 newPos = startPos + delta;
+
+            style.left = newPos.x;
+            style.top = newPos.y;
+
+            evt.StopPropagation();
         }
 
-        private void OnPointerUp(PointerUpEvent eventData) {
-            if (!clicked) return;
+
+        private void OnPointerUp(PointerUpEvent evt)
+        {
+            if (!clicked)
+                return;
+
             clicked = false;
-            
-            if (!dragging) return;
+
+            if (this.HasPointerCapture(evt.pointerId))
+                this.ReleasePointer(evt.pointerId);
+
+            if (dragging)
+            {
+                dragLayer.Remove(this);
+                originalParent.Add(this);
+
+                style.position = Position.Relative;
+                style.left = StyleKeyword.Auto;
+                style.top = StyleKeyword.Auto;
+            }
+
             dragging = false;
-            
-            actionClass.ToggleUnSelected();
-            if (this.HasPointerCapture(eventData.pointerId))
-                this.ReleasePointer(eventData.pointerId);
-            
-            IPanel hudPanel = (eventData.target as VisualElement)?.panel;
-            TryClickEntity(eventData.position);
         }
         
         // Helper method for the raycast in the below method. Since our HUDV2 panel is scaled with screen size,
