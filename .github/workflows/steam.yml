@@ -71,5 +71,4 @@ jobs:
           buildDescription: v${{ needs.buildForWindows.outputs.buildVersion }}
           rootPath: build
           depot1Path: StandaloneWindows64
-          depot1InstallScriptPath: StandaloneWindows64/install_script.vdf
           releaseBranch: beta
