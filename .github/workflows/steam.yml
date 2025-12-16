@@ -71,4 +71,5 @@ jobs:
           buildDescription: v${{ needs.buildForWindows.outputs.buildVersion }}
           rootPath: build
           depot1Path: StandaloneWindows64
+          depot1Id: 3830471
           releaseBranch: beta
