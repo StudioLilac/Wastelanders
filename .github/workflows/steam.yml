@@ -14,6 +14,7 @@ jobs:
       matrix:
         targetPlatform:
           - StandaloneWindows64
+          - StandaloneOSX
     outputs:
       buildVersion: ${{ steps.buildStep.outputs.buildVersion }}
     steps:
@@ -71,5 +72,7 @@ jobs:
           buildDescription: v${{ needs.buildForWindows.outputs.buildVersion }}
           rootPath: build
           depot1Path: StandaloneWindows64
+          depot2Path: StandaloneOSX
           depot1Id: 3830471
+          depot2ID: 3830472
           releaseBranch: beta
