@@ -64,6 +64,10 @@ jobs:
         with:
           name: Build-StandaloneWindows64
           path: build/StandaloneWindows64
+      - name: List build directory
+        run: |
+          echo "=== Build directory structure ==="
+          ls -R build/
       - uses: game-ci/steam-deploy@v3
         with:
           username: ${{ secrets.STEAM_USERNAME }}
