@@ -104,6 +104,7 @@ namespace UI_Toolkit
                 card.WithAttrsFromActionClass(ac);
                 card.BindActionClassCardState(ac);
                 card.BindActionClassCallbacks(ac);
+                card.RegisterPointerEventCallbacks();
 
                 handElem.Add(cardLayout);
                 ac.SetCanPlay(ac.IsPlayableByPlayer(out _));
