@@ -1,0 +1,95 @@
+name: "[CI/CD] Build Windows and Upload to Steam"
+
+on:
+  push:
+    branches:
+      - steam
+
+jobs:
+  buildForWindows:
+    name: Build for ${{ matrix.targetPlatform }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        targetPlatform:
+          - StandaloneWindows64
+          - StandaloneOSX
+    outputs:
+      buildVersion: ${{ steps.buildStep.outputs.buildVersion }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          lfs: true
+      - name: Free up disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /usr/local/lib/android
+          sudo rm -rf /opt/ghc
+          sudo rm -rf /usr/local/share/boost
+          docker system prune -af
+      - uses: actions/cache@v3
+        with:
+          path: Library
+          key:
+            Library-${{ matrix.targetPlatform }}-${{ hashFiles('Assets/**', 'Packages/**',
+            'ProjectSettings/**') }}
+          restore-keys: |
+            Library-${{ matrix.targetPlatform }}-
+            Library-
+      - uses: game-ci/unity-builder@v4
+        id: buildStep
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          targetPlatform: ${{ matrix.targetPlatform }}
+          versioning: Semantic
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Build-${{ matrix.targetPlatform }}
+          path: build/${{ matrix.targetPlatform }}
+  deployToSteam:
+    needs: [buildForWindows]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download StandaloneWindows64 Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: Build-StandaloneWindows64
+          path: build/StandaloneWindows64
+      - name: Rename Windows executable
+        run: |
+          mv build/StandaloneWindows64/StandaloneWindows64.exe build/StandaloneWindows64/WastelandersGame.exe
+          mv build/StandaloneWindows64/StandaloneWindows64_Data build/StandaloneWindows64/WastelandersGame_Data
+
+      - name: Download StandaloneOSX Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: Build-StandaloneOSX
+          path: build/StandaloneOSX
+      - name: Rename MacOS executable
+        run: |
+          mv build/StandaloneOSX/StandaloneOSX.app build/StandaloneOSX/WastelandersGame.app
+
+      - name: List build directory
+        run: |
+          echo "=== Build directory structure ==="
+          ls -R build/
+      - uses: game-ci/steam-deploy@v3
+        with:
+          username: ${{ secrets.STEAM_USERNAME }}
+          configVdf: ${{ secrets.STEAM_CONFIG_VDF}}
+          appId: ${{ secrets.STEAM_APP_ID }}
+          buildDescription: v${{ needs.buildForWindows.outputs.buildVersion }}
+          rootPath: build
+          depot1Path: StandaloneWindows64
+          depot2Path: StandaloneOSX
+          releaseBranch: beta
