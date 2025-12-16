@@ -129,7 +129,21 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
         BattleQueue.BattleQueueInstance.AddAction(currentHighlightedAction);
         PlayerManuallyInsertedAction?.Invoke(currentHighlightedAction);
         selectedPlayer!.HandleUseCard(currentHighlightedAction);
-
+        
+        if (currentHighlightedEnemyEntity) {
+            Vector2 mouseScreenPos = Input.mousePosition;
+            float scale = HUDV2.Instance?.rootDocument?.rootVisualElement?.panel.scaledPixelsPerPoint ?? 1f;
+            Vector2 panelPos = new Vector2(
+                mouseScreenPos.x / scale,
+                (Screen.height - mouseScreenPos.y) / scale
+            );
+            UI_Toolkit.UI_Elements.CardPlayEffect.SpawnAtPanelPosition(
+                HUDV2.Instance?.rootDocument?.rootVisualElement,
+                HUDV2.Instance?.cardTemplate,
+                currentHighlightedAction,
+                panelPos
+            );
+        }
 
         currentHighlightedEnemyEntity!.DeHighlight();
         currentHighlightedAction.ForceNormalState();
