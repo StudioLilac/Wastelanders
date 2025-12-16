@@ -15,8 +15,8 @@ namespace UI_Toolkit.UI_Elements
         private bool clicked;
         private bool dragging;
         
-        
-        private Vector2 startPos;
+        // Stores the starting mouse position when drag begins, used to calculate drag delta
+        private Vector2 dragStartMousePos;
         
         // TODO: is it bad to hold a reference to the actionclass associated with this card?
         private ActionClass actionClass;
@@ -56,30 +56,45 @@ namespace UI_Toolkit.UI_Elements
 
         private void OnPointerDown(PointerDownEvent eventData) {
             clicked = true;
-            startPos = layout.position;
+            dragStartMousePos = eventData.position;
             
             this.CapturePointer(eventData.pointerId);
+            BringToFront();
         }
 
         private void OnPointerMove(PointerMoveEvent evt)
         {
             if (!clicked) return;
             dragging = true;
+            
+            // Calculate the delta from the drag start position and apply as transform
+            Vector2 delta = (Vector2)evt.position - dragStartMousePos;
+            style.translate = new Translate(delta.x, delta.y, 0);
         }
 
         private void OnPointerUp(PointerUpEvent eventData) {
             if (!clicked) return;
             clicked = false;
             
-            if (!dragging) return;
+            if (!dragging)
+            {
+                // Reset any transform offset if we didn't actually drag
+                style.translate = StyleKeyword.Null;
+                return;
+            }
             dragging = false;
             
             actionClass.ToggleUnSelected();
             if (this.HasPointerCapture(eventData.pointerId))
                 this.ReleasePointer(eventData.pointerId);
             
-            IPanel hudPanel = (eventData.target as VisualElement)?.panel;
-            TryClickEntity(eventData.position);
+            bool entityFound = TryClickEntity(eventData.position);
+            
+            // If no valid entity was found, animate the card back to its original position
+            if (!entityFound)
+            {
+                style.translate = StyleKeyword.Null;
+            }
         }
         
         // Helper method for the raycast in the below method. Since our HUDV2 panel is scaled with screen size,
@@ -95,16 +110,17 @@ namespace UI_Toolkit.UI_Elements
         
         // Raycasts from the screen point to world space, looking for EntityClasses. If it finds one, it uses the
         // existing behaviour in HighlightManager.cs.
+        // Returns true if an entity was found and clicked, false otherwise.
         
         // If I open a PR and forget to remove all these debug logs I hope you catch this @anrui
-        private void TryClickEntity(Vector2 screenPos)
+        private bool TryClickEntity(Vector2 screenPos)
         {
             Camera cam = Camera.main;
             
             if (cam == null)
             {
                 Debug.LogWarning("[TryClickEntity] Camera.main is null");
-                return;
+                return false;
             }
             
             screenPos = ToScreenPoint(screenPos);
@@ -118,13 +134,21 @@ namespace UI_Toolkit.UI_Elements
             {
                 Debug.Log("Raycast hit NOTHING");
                 HighlightManager.Instance.ResetCurrentHighlightedAction();
-                return;
+                return false;
             }
 
             EntityClass entity = hit.collider.GetComponentInParent<EntityClass>();
+            
+            if (entity == null)
+            {
+                Debug.Log("Raycast hit something but no EntityClass found");
+                HighlightManager.Instance.ResetCurrentHighlightedAction();
+                return false;
+            }
 
             Debug.Log($"Entity FOUND: {entity.name} ({entity.GetType().Name})");
             HighlightManager.Instance.OnEntityClicked(entity);
+            return true;
         }
 
 
