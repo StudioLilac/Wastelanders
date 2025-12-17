@@ -61,7 +61,7 @@ MonoBehaviour:
   - {fileID: 2376898879351982445, guid: e07f0aec029f647ed8f2d61db2fd2989, type: 3}
 --- !u!95 &3297183234373819581
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -75,6 +75,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -97,6 +98,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -217,9 +221,21 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -8.65
       objectReference: {fileID: 0}
+    - target: {fileID: 1780026738479455662, guid: 68bdc6d0a90e34878ae0a9ede9cccf74, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -7.43
+      objectReference: {fileID: 0}
+    - target: {fileID: 3535233543202800076, guid: 68bdc6d0a90e34878ae0a9ede9cccf74, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
     - target: {fileID: 4069533204553400354, guid: 68bdc6d0a90e34878ae0a9ede9cccf74, type: 3}
       propertyPath: m_Name
       value: CombatCardInfo Boss
+      objectReference: {fileID: 0}
+    - target: {fileID: 4790538894842069777, guid: 68bdc6d0a90e34878ae0a9ede9cccf74, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
       objectReference: {fileID: 0}
     - target: {fileID: 5931393434224162323, guid: 68bdc6d0a90e34878ae0a9ede9cccf74, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -237,6 +253,14 @@ PrefabInstance:
       propertyPath: diceAnimator
       value: 
       objectReference: {fileID: 312121961921081749}
+    - target: {fileID: 7952427947801547136, guid: 68bdc6d0a90e34878ae0a9ede9cccf74, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8098927657887801092, guid: 68bdc6d0a90e34878ae0a9ede9cccf74, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
     - target: {fileID: 8105243005514012597, guid: 68bdc6d0a90e34878ae0a9ede9cccf74, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 1

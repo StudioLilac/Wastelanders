@@ -53,6 +53,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -74,8 +77,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 2146528631
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1d59623b22cafd84cb32164685717017, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -122,15 +125,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 7638263227755287879}
+  icon: {fileID: 21300000, guid: 8ab5c83e49fa48f44b1cd1c0b8eb3ed2, type: 3}
   animator: {fileID: -6096755080030448896}
   combatInfo: {fileID: 3230769655843684543}
   boxCollider: {fileID: 1125175451406190241}
-  icon: {fileID: 21300000, guid: 8ab5c83e49fa48f44b1cd1c0b8eb3ed2, type: 3}
+  <AnimatorController>k__BackingField: {fileID: 0}
   availableActions: []
-  dupActions: []
 --- !u!95 &-6096755080030448896
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -144,6 +147,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -157,13 +161,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7638263227755287879}
     m_Modifications:
+    - target: {fileID: 230661372266811410, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
+    - target: {fileID: 1550763909045383249, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
     - target: {fileID: 3781379592661886730, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
       propertyPath: diceAnimator
       value: 
       objectReference: {fileID: 3661330117416005111}
+    - target: {fileID: 4153076578835620544, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5150959248165338579, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -8.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5714486089811996398, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -7
       objectReference: {fileID: 0}
     - target: {fileID: 6018344303403229583, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -204,6 +224,10 @@ PrefabInstance:
     - target: {fileID: 6018344303403229583, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7417901496945242764, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
       objectReference: {fileID: 0}
     - target: {fileID: 8036639253418242914, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
       propertyPath: m_Name

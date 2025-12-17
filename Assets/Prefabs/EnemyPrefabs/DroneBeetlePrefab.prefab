@@ -53,6 +53,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -74,8 +77,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 2146528631
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: c4daaaf4112fc7e41b48f0e27c19807f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -131,7 +134,7 @@ MonoBehaviour:
   - {fileID: 2376898879351982445, guid: 38b1a7009416e41d1b59bcad42219d05, type: 3}
 --- !u!95 &9113950075905683569
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -145,6 +148,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -158,14 +162,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 617082415006753302}
     m_Modifications:
+    - target: {fileID: 230661372266811410, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
     - target: {fileID: 607299130714548600, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.38
+      objectReference: {fileID: 0}
+    - target: {fileID: 1550763909045383249, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
+    - target: {fileID: 1551835403743073738, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -7.5
       objectReference: {fileID: 0}
     - target: {fileID: 3781379592661886730, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
       propertyPath: diceAnimator
       value: 
       objectReference: {fileID: 7032118543032652037}
+    - target: {fileID: 4153076578835620544, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5150959248165338579, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -8.6
@@ -213,6 +233,10 @@ PrefabInstance:
     - target: {fileID: 6373172873634443639, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0.77
+      objectReference: {fileID: 0}
+    - target: {fileID: 7417901496945242764, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
       objectReference: {fileID: 0}
     - target: {fileID: 7669802168277398618, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
       propertyPath: m_LocalPosition.y

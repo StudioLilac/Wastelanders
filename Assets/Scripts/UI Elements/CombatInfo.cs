@@ -98,7 +98,7 @@ public class CombatInfo : MonoBehaviour
 
     public void Update()
     {
-        crosshair.transform.Rotate(Vector3.forward * ROTATION_SPEED * Time.deltaTime);
+        //crosshair.transform.Rotate(Vector3.forward * ROTATION_SPEED * Time.deltaTime);
     }
 
     /* 
