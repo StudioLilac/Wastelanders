@@ -96,6 +96,8 @@ namespace UI_Toolkit.UI_Elements
             if (!clicked) return;
             dragging = true;
             
+            HighlightManager.Instance.SetSelectedAction(actionClass);
+            
             // code that moves the card
             Vector2 delta = (Vector2)evt.position - dragStartMousePos;
             float velocityX = evt.position.x - lastMousePos.x;
@@ -134,14 +136,10 @@ namespace UI_Toolkit.UI_Elements
             dragging = false;
             
             actionClass.ToggleUnSelected();
+            TryClickEntity(eventData.position);
             
-            bool entityFound = TryClickEntity(eventData.position);
-            
-            if (!entityFound)
-            {
-                style.translate = StyleKeyword.Null;
-                style.rotate = StyleKeyword.Null;
-            }
+            style.translate = StyleKeyword.Null;
+            style.rotate = StyleKeyword.Null;
         }
         
         // Helper method for the raycast in the below method. Since our HUDV2 panel is scaled with screen size,
@@ -158,13 +156,13 @@ namespace UI_Toolkit.UI_Elements
         // Raycasts from the screen point to world space, looking for EntityClasses. If it finds one, it uses the
         // existing behaviour in HighlightManager.cs.
         // Returns true if an entity was found and clicked, false otherwise.
-        private bool TryClickEntity(Vector2 screenPos)
+        private void TryClickEntity(Vector2 screenPos)
         {
             Camera cam = Camera.main;
             
             if (cam == null)
             {
-                return false;
+                return;
             }
             
             screenPos = ToScreenPoint(screenPos);
@@ -175,7 +173,7 @@ namespace UI_Toolkit.UI_Elements
             if (!Physics.Raycast(ray, out RaycastHit hit, 1000f))
             {
                 HighlightManager.Instance.ResetCurrentHighlightedAction();
-                return false;
+                return;
             }
 
             // Right now, I'm only looking for enemies. This is because there aren't ANY cards in the game that
@@ -190,11 +188,10 @@ namespace UI_Toolkit.UI_Elements
             if (enemy == null)
             {
                 HighlightManager.Instance.ResetCurrentHighlightedAction();
-                return false;
+                return;
             }
 
             HighlightManager.Instance.OnEntityClicked(enemy);
-            return true;
         }
 
 
