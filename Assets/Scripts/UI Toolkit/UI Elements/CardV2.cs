@@ -19,6 +19,7 @@ namespace UI_Toolkit.UI_Elements
         private Vector2 lastMousePos;
         private float currentRotation;
         private float targetRotation;
+        private int activePointerId = -1;
         
         private IVisualElementScheduledItem rotationSchedule;
         
@@ -75,7 +76,10 @@ namespace UI_Toolkit.UI_Elements
                 PopUpNotificationManager.Instance.DisplayWarning(popupType);
                 return;
             }
+            if (clicked) return; 
+            
             clicked = true;
+            activePointerId = eventData.pointerId;
             dragStartMousePos = eventData.position;
             lastMousePos = eventData.position;
             currentRotation = 0f;
