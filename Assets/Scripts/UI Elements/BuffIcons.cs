@@ -1,12 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class BuffIcons : MonoBehaviour
+public class BuffIcons : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public Image buffIcon;
     public TextMeshProUGUI textMeshProUGUI;
@@ -27,16 +24,14 @@ public class BuffIcons : MonoBehaviour
         buffIcon.sprite = icon;
     }
 
-    // potential issue with several bufficons calling the same static event...
-    public void OnMouseEnter()
+    // potential issue with several bufficons invoking the same static event...
+    public void OnPointerEnter(PointerEventData eventData)
     {
         OnBuffIconHovered?.Invoke(buffName, stacks, hovered: true);
-        Debug.Log("hovered");
     }
 
-    public void OnMouseExit()
+    public void OnPointerExit(PointerEventData eventData)
     {
         OnBuffIconHovered?.Invoke(buffName, stacks, hovered: false);
-        Debug.Log("unhovered");
     }
 }
