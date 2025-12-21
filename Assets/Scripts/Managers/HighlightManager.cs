@@ -82,7 +82,7 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
         }
     }
 
-    private void ResetCurrentHighlightedAction()
+    public void ResetCurrentHighlightedAction()
     {
         currentHighlightedAction?.ForceNormalState();
         currentHighlightedAction = null;
