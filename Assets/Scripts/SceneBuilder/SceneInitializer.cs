@@ -66,4 +66,5 @@ public class SceneInitializerPrefabs
     public PopUpNotificationManager popupManager = null!;
     public GameOver gameOver = null!;
     public DialogueBoxV2 dialogueBoxV2 = null!;
+    public Tooltip tooltip = null!;
 }
