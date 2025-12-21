@@ -9,7 +9,7 @@ namespace UI_Toolkit
         [SerializeField] private UIDocument uiDocument;
 
         private VisualElement tooltipBox;
-        private bool isTooltipVisible = false;
+        private bool isTooltipVisible;
 
         public void OnEnable()
         {
@@ -32,7 +32,6 @@ namespace UI_Toolkit
                 return;
             }
 
-            // Start hidden
             HideTooltip();
         }
 
@@ -40,11 +39,9 @@ namespace UI_Toolkit
         {
             if (isTooltipVisible && tooltipBox != null)
             {
-                // Convert screen coordinates to UI Toolkit panel coordinates
                 Vector2 mousePos = Input.mousePosition;
                 Vector2 panelPos = UICoordinateHelper.ToPanelPoint(mousePos, tooltipBox.panel);
 
-                // Offset so tooltip doesn't cover the cursor
                 tooltipBox.style.left = panelPos.x + 15;
                 tooltipBox.style.top = panelPos.y + 15;
             }
@@ -62,11 +59,10 @@ namespace UI_Toolkit
             }
         }
 
-        public void ShowTooltip(string buffName, int stacks)
+        private void ShowTooltip(string buffName, int stacks)
         {
             if (tooltipBox == null) return;
 
-            // Update tooltip content
             var nameLabel = tooltipBox.Q<Label>("buff-name");
             var stacksLabel = tooltipBox.Q<Label>("buff-stacks");
 
@@ -76,12 +72,11 @@ namespace UI_Toolkit
             if (stacksLabel != null)
                 stacksLabel.text = $"Stacks: {stacks}";
 
-            // Show the tooltip
             tooltipBox.style.display = DisplayStyle.Flex;
             isTooltipVisible = true;
         }
 
-        public void HideTooltip()
+        private void HideTooltip()
         {
             if (tooltipBox == null) return;
 
