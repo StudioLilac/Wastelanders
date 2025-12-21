@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7054822229635162144
 Transform:
   m_ObjectHideFlags: 0
@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 4261275721436125956}
   - component: {fileID: 7906473761616336545}
   - component: {fileID: 5812891396139451015}
+  - component: {fileID: 3901843611137202927}
   m_Layer: 0
   m_Name: FloorCrosshair_0
   m_TagString: Untagged
@@ -142,3 +143,24 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3901843611137202927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5937908613146783021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0f4fd8e5f13458eabafd270a7e06de5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  glowColorInner: {r: 0.19339621, g: 1, b: 0.89338773, a: 0.6}
+  glowColorOuter: {r: 0.21226418, g: 0.705944, b: 1, a: 0}
+  glowPadding: 10
+  pulseSpeed: 2
+  pulseIntensity: 0.2
+  breatheSpeed: 1.5
+  breatheAmount: 0.05
+  sortingLayerName: Default
+  sortingOrder: 2

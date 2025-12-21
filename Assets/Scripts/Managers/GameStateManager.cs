@@ -85,7 +85,7 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
      * Is set by GameOver prefab upon restart, and read by dialogue classes
      * Dialogue classes should reset this value when read, such that it does not cause unexpected behaviour in upcoming scenes
      */
-    public bool JumpToCombat = false;
+    public bool JumpToCombat = true;
 
     // Check for level select whether player finished the game first time to display bounty dialogue
     public bool FirstTimeFinished = false;
