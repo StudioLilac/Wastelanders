@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CylinderGlowEffect : MonoBehaviour
+public class CrosshairGlowEffect : MonoBehaviour
 {
     [Header("Glow Settings")]
     [SerializeField] private Color glowColorInner = new Color(1f, 0.85f, 0.3f, 0.6f);
