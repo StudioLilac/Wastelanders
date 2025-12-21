@@ -1,15 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ui:UXML
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ui="UnityEngine.UIElements"
-    xmlns:uie="UnityEditor.UIElements"
-    xsi:noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd"
->
-    <ui:VisualElement name="tooltip-box" class="tooltip">
-        <ui:Label name="tooltip-bg" class="background" style="width: 294px; margin-top: 16px; padding-top: 19px; padding-left: 20px; padding-right: 22px; padding-bottom: 30px; white-space: normal; -unity-font-definition: initial; -unity-font: url(&apos;project://database/Assets/TextMesh%20Pro/Fonts/VT323-Regular.ttf?fileID=12800000&amp;guid=46b9139fed5cc6a42a6a5d42b82c3c7e&amp;type=3#VT323-Regular&apos;); font-size: 28px; color: rgb(0, 0, 0); min-height: 158px; -unity-slice-left: 22; -unity-slice-top: 22; -unity-slice-right: 22; -unity-slice-bottom: 22; -unity-slice-scale: 3.590909px;">
-            <ui:Label name="buff-name" text="Buff Name" />
-            <ui:Label name="buff-stacks" text="Stacks: 0" />
-        </ui:Label>
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Tooltip.uss?fileID=7433441132597879392&amp;guid=9d5d30a81995149389b2c019af547af1&amp;type=3#Tooltip" />
+    <ui:VisualElement name="tooltip-box" class="tooltip" style="position: absolute;">
+        <ui:VisualElement name="tooltip-bg" class="background" style="width: 294px; margin-top: 16px; padding-top: 19px; padding-left: 20px; padding-right: 22px; padding-bottom: 30px; -unity-font-definition: initial; -unity-font: url(&quot;project://database/Assets/TextMesh%20Pro/Fonts/VT323-Regular.ttf?fileID=12800000&amp;guid=46b9139fed5cc6a42a6a5d42b82c3c7e&amp;type=3#VT323-Regular&quot;); font-size: 28px; color: rgb(0, 0, 0); min-height: 158px; -unity-slice-left: 22; -unity-slice-top: 22; -unity-slice-right: 22; -unity-slice-bottom: 22; -unity-slice-scale: 3.590909px;">
+            <ui:Label name="buff-name" text="Buff Name" style="white-space: normal;" />
+            <ui:Label name="buff-stacks" text="Stacks: 0" style="white-space: normal;" />
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
-

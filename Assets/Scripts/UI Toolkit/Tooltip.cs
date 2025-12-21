@@ -1,14 +1,25 @@
+using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace UI_Toolkit
 {
-    public class TooltipManager : PersistentSingleton<TooltipManager>
+    public class Tooltip : MonoBehaviour
     {
         [SerializeField] private UIDocument uiDocument;
 
         private VisualElement tooltipBox;
         private bool isTooltipVisible = false;
+
+        public void OnEnable()
+        {
+            BuffIcons.OnBuffIconHovered += HandleOnBuffIconHovered;
+        }
+
+        public void OnDisable()
+        {
+            BuffIcons.OnBuffIconHovered -= HandleOnBuffIconHovered;
+        }
 
         private void Start()
         {
@@ -29,16 +40,25 @@ namespace UI_Toolkit
         {
             if (isTooltipVisible && tooltipBox != null)
             {
-                // Update position to follow mouse
+                // Convert screen coordinates to UI Toolkit panel coordinates
                 Vector2 mousePos = Input.mousePosition;
-
-                // Convert screen coordinates to UI Toolkit coordinates
-                // (bottom-left origin to top-left origin)
-                float adjustedY = Screen.height - mousePos.y;
+                Vector2 panelPos = UICoordinateHelper.ToPanelPoint(mousePos, tooltipBox.panel);
 
                 // Offset so tooltip doesn't cover the cursor
-                tooltipBox.style.left = mousePos.x + 15;
-                tooltipBox.style.top = adjustedY + 15;
+                tooltipBox.style.left = panelPos.x + 15;
+                tooltipBox.style.top = panelPos.y + 15;
+            }
+        }
+
+        private void HandleOnBuffIconHovered(string buffName, int stacks, bool hovered)
+        {
+            if (hovered)
+            {
+                ShowTooltip(buffName, stacks);
+            }
+            else
+            {
+                HideTooltip();
             }
         }
 
