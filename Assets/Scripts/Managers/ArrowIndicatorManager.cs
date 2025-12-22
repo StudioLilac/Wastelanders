@@ -52,7 +52,7 @@ namespace Managers {
 
         private void HandleOnHovered(ActionClass ac) {
             Debug.Log("ArrowIndicatorManager: HandleOnHovered");
-            DrawArrow(ac.Origin.transform, ac.Target.transform);
+            DrawArrow(ac.Target.transform, ac.Origin.transform);
         }
 
         void InitializePool() {
