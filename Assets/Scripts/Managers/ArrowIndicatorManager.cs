@@ -5,28 +5,25 @@ using System.Collections.Generic;
 
 namespace Managers {
     public class ArrowIndicatorManager : MonoBehaviour {
-        [Header("References")] [SerializeField]
-        private Canvas worldSpaceCanvas;
+        [Header("References")]
+        [SerializeField] private Canvas worldSpaceCanvas;
+        [SerializeField] private GameObject chevronPrefab;
 
-        [SerializeField] private GameObject chevronPrefab; // UI Image with chevron sprite
-
-        [Header("Settings")] [SerializeField]
-        private float chevronSpacing = 0.5f; // Distance between chevrons in world units
-
-        [SerializeField] private float animationSpeed = 2f; // Speed of the scrolling animation
-        [SerializeField] private float fadeDistance = 1f; // Distance over which chevrons fade in/out
-        [SerializeField] private float padding = 0.5f; // Offset from entities before arrow starts/ends
-        [SerializeField] private int poolSize = 50; // Initial pool size
+        [Header("Settings")]
+        [SerializeField] private float chevronSpacing = 0.5f;
+        [SerializeField] private float animationSpeed = 2f;
+        [SerializeField] private float fadeDistance = 1f;
+        [SerializeField] private float padding = 0.5f;
+        [SerializeField] private int poolSize = 50;
 
         private List<GameObject> chevronPool = new List<GameObject>();
-        private Dictionary<string, ArrowInstance> activeArrows = new Dictionary<string, ArrowInstance>();
-
-        private class ArrowInstance {
-            public Transform entity1;
-            public Transform entity2;
-            public List<GameObject> activeChevrons = new List<GameObject>();
-            public float animationOffset = 0f;
-        }
+        private List<GameObject> activeChevrons = new List<GameObject>();
+        
+        private Transform entity1;
+        private Transform entity2;
+        private bool hasActiveArrow = false;
+        private bool isBidirectional = false;
+        private float animationOffset = 0f;
 
         void Awake() {
             if (worldSpaceCanvas == null) {
@@ -42,17 +39,30 @@ namespace Managers {
 
         private void OnEnable() {
             DisplayableClass.OnHovered += HandleOnHovered;
-            DisplayableClass.OnUnhovered += ClearAllArrows;
+            DisplayableClass.OnUnhovered += ClearArrow;
         }
         
         private void OnDisable() {
             DisplayableClass.OnHovered -= HandleOnHovered;
-            DisplayableClass.OnUnhovered -= ClearAllArrows;
+            DisplayableClass.OnUnhovered -= ClearArrow;
         }
 
         private void HandleOnHovered(ActionClass ac) {
             Debug.Log("ArrowIndicatorManager: HandleOnHovered");
-            DrawArrow(ac.Target.transform, ac.Origin.transform);
+            
+            // Check if this action is part of a clash
+            bool isClashing = false;
+            if (BattleQueue.BattleQueueInstance != null) {
+                foreach (var wrapper in BattleQueue.BattleQueueInstance.ProvideArray()) {
+                    if (wrapper.IsClashing() && 
+                        (wrapper.PlayerAction == ac || wrapper.EnemyAction == ac)) {
+                        isClashing = true;
+                        break;
+                    }
+                }
+            }
+            
+            DrawArrow(ac.Origin.transform, ac.Target.transform, isClashing);
         }
 
         void InitializePool() {
@@ -71,128 +81,123 @@ namespace Managers {
         GameObject GetChevronFromPool() {
             foreach (var chevron in chevronPool) {
                 if (!chevron.activeInHierarchy) {
+                    Image image = chevron.GetComponent<Image>();
+                    if (image != null) {
+                        Color color = image.color;
+                        color.a = 0f;
+                        image.color = color;
+                    }
                     chevron.SetActive(true);
                     return chevron;
                 }
             }
 
-            // Pool exhausted, create new chevron
             GameObject newChevron = Instantiate(chevronPrefab, worldSpaceCanvas.transform);
             chevronPool.Add(newChevron);
             return newChevron;
         }
 
         void ReturnChevronToPool(GameObject chevron) {
+            Image image = chevron.GetComponent<Image>();
+            if (image != null) {
+                Color color = image.color;
+                color.a = 0f;
+                image.color = color;
+            }
             chevron.SetActive(false);
         }
 
-        public void DrawArrow(Transform entity1, Transform entity2) {
-            string key = GetArrowKey(entity1, entity2);
-
-            if (!activeArrows.ContainsKey(key)) {
-                activeArrows[key] = new ArrowInstance {
-                    entity1 = entity1,
-                    entity2 = entity2
-                };
-            }
+        public void DrawArrow(Transform fromEntity, Transform toEntity, bool bidirectional = false) {
+            ClearArrow();
+            
+            entity1 = fromEntity;
+            entity2 = toEntity;
+            isBidirectional = bidirectional;
+            hasActiveArrow = true;
+            animationOffset = 0f;
         }
 
-        public void RemoveArrow(Transform entity1, Transform entity2) {
-            string key = GetArrowKey(entity1, entity2);
-
-            if (activeArrows.TryGetValue(key, out ArrowInstance arrow)) {
-                // Return all chevrons to pool
-                foreach (var chevron in arrow.activeChevrons) {
-                    ReturnChevronToPool(chevron);
-                }
-
-                arrow.activeChevrons.Clear();
-                activeArrows.Remove(key);
+        public void ClearArrow() {
+            foreach (var chevron in activeChevrons) {
+                ReturnChevronToPool(chevron);
             }
-        }
-
-        public void ClearAllArrows() {
-            foreach (var arrow in activeArrows.Values) {
-                foreach (var chevron in arrow.activeChevrons) {
-                    ReturnChevronToPool(chevron);
-                }
-            }
-
-            activeArrows.Clear();
+            activeChevrons.Clear();
+            
+            hasActiveArrow = false;
+            entity1 = null;
+            entity2 = null;
         }
 
         void Update() {
-            foreach (var arrow in activeArrows.Values) {
-                UpdateArrow(arrow);
-            }
-        }
-
-        void UpdateArrow(ArrowInstance arrow) {
-            if (arrow.entity1 == null || arrow.entity2 == null) {
+            if (!hasActiveArrow || entity1 == null || entity2 == null) {
                 return;
             }
 
-            Vector3 actualStart = arrow.entity1.position;
-            Vector3 actualEnd = arrow.entity2.position;
+            Vector3 actualStart = entity1.position;
+            Vector3 actualEnd = entity2.position;
             Vector3 fullDirection = (actualEnd - actualStart);
             float fullDistance = fullDirection.magnitude;
 
-            if (fullDistance < 0.1f) return; // Too close, don't draw
+            if (fullDistance < 0.1f) return;
 
             fullDirection.Normalize();
             
-            // Apply padding to start and end positions
             Vector3 start = actualStart + fullDirection * padding;
             Vector3 end = actualEnd - fullDirection * padding;
             float distance = (end - start).magnitude;
             
-            if (distance < 0.1f) return; // After padding, too short to draw
+            if (distance < 0.1f) return;
             
             Vector3 direction = fullDirection;
 
-            // Update animation offset
-            arrow.animationOffset += animationSpeed * Time.deltaTime;
-            if (arrow.animationOffset >= chevronSpacing) {
-                arrow.animationOffset -= chevronSpacing;
+            animationOffset += animationSpeed * Time.deltaTime;
+            if (animationOffset >= chevronSpacing) {
+                animationOffset -= chevronSpacing;
             }
 
-            // Calculate how many chevrons we need
-            int chevronCount = Mathf.CeilToInt(distance / chevronSpacing) + 2; // +2 for fade buffer
+            if (isBidirectional) {
+                UpdateBidirectionalArrow(start, end, direction, distance);
+            } else {
+                UpdateUnidirectionalArrow(start, end, direction, distance);
+            }
+        }
 
-            // Adjust active chevron count
-            while (arrow.activeChevrons.Count < chevronCount) {
-                arrow.activeChevrons.Add(GetChevronFromPool());
+        void UpdateUnidirectionalArrow(Vector3 start, Vector3 end, Vector3 direction, float distance) {
+            int chevronCount = Mathf.CeilToInt(distance / chevronSpacing) + 2;
+
+            while (activeChevrons.Count < chevronCount) {
+                activeChevrons.Add(GetChevronFromPool());
             }
 
-            while (arrow.activeChevrons.Count > chevronCount) {
-                GameObject chevron = arrow.activeChevrons[arrow.activeChevrons.Count - 1];
-                arrow.activeChevrons.RemoveAt(arrow.activeChevrons.Count - 1);
+            while (activeChevrons.Count > chevronCount) {
+                GameObject chevron = activeChevrons[activeChevrons.Count - 1];
+                activeChevrons.RemoveAt(activeChevrons.Count - 1);
                 ReturnChevronToPool(chevron);
             }
 
-            // Position and fade chevrons
-            for (int i = 0; i < arrow.activeChevrons.Count; i++) {
-                GameObject chevron = arrow.activeChevrons[i];
+            for (int i = 0; i < activeChevrons.Count; i++) {
+                GameObject chevron = activeChevrons[i];
                 RectTransform rectTransform = chevron.GetComponent<RectTransform>();
                 Image image = chevron.GetComponent<Image>();
 
-                // Calculate position along the line
-                float t = (i * chevronSpacing - arrow.animationOffset) / distance;
+                float t = (i * chevronSpacing + animationOffset) / distance;
 
                 if (t < -0.1f || t > 1.1f) {
-                    chevron.SetActive(false);
+                    if (chevron.activeInHierarchy) {
+                        Color resetColor = image.color;
+                        resetColor.a = 0f;
+                        image.color = resetColor;
+                        chevron.SetActive(false);
+                    }
                     continue;
                 }
 
-                chevron.SetActive(true);
-                Vector3 position = start + direction * (i * chevronSpacing - arrow.animationOffset);
+                Vector3 position = start + direction * (i * chevronSpacing + animationOffset);
                 rectTransform.position = position;
 
-                // Calculate rotation to point along the arrow
                 float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
                 rectTransform.rotation = Quaternion.Euler(0, 0, angle);
-
-                // Calculate fade based on distance from start and end
+                
                 float distFromStart = Vector3.Distance(start, position);
                 float distFromEnd = Vector3.Distance(end, position);
                 float fadeStart = Mathf.Clamp01(distFromStart / fadeDistance);
@@ -202,11 +207,112 @@ namespace Managers {
                 Color color = image.color;
                 color.a = alpha;
                 image.color = color;
+                
+                if (!chevron.activeInHierarchy) {
+                    chevron.SetActive(true);
+                }
             }
         }
 
-        string GetArrowKey(Transform entity1, Transform entity2) {
-            return entity1.GetInstanceID() + "_" + entity2.GetInstanceID();
+        void UpdateBidirectionalArrow(Vector3 start, Vector3 end, Vector3 direction, float distance) {
+            Vector3 midpoint = (start + end) / 2f;
+            float halfDistance = distance / 2f;
+            Vector3 reverseDirection = -direction;
+
+            int chevronsPerSide = Mathf.CeilToInt(halfDistance / chevronSpacing) + 2;
+            int totalChevronCount = chevronsPerSide * 2;
+
+            while (activeChevrons.Count < totalChevronCount) {
+                activeChevrons.Add(GetChevronFromPool());
+            }
+
+            while (activeChevrons.Count > totalChevronCount) {
+                GameObject chevron = activeChevrons[activeChevrons.Count - 1];
+                activeChevrons.RemoveAt(activeChevrons.Count - 1);
+                ReturnChevronToPool(chevron);
+            }
+
+            // Chevrons from entity1 traveling toward midpoint
+            for (int i = 0; i < chevronsPerSide; i++) {
+                GameObject chevron = activeChevrons[i];
+                RectTransform rectTransform = chevron.GetComponent<RectTransform>();
+                Image image = chevron.GetComponent<Image>();
+
+                float localOffset = i * chevronSpacing + animationOffset;
+                float t = localOffset / halfDistance;
+
+                if (t < -0.1f || t > 1.1f) {
+                    if (chevron.activeInHierarchy) {
+                        Color resetColor = image.color;
+                        resetColor.a = 0f;
+                        image.color = resetColor;
+                        chevron.SetActive(false);
+                    }
+                    continue;
+                }
+
+                Vector3 position = start + direction * localOffset;
+                rectTransform.position = position;
+
+                // Chevron faces the direction it's traveling (toward midpoint)
+                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                rectTransform.rotation = Quaternion.Euler(0, 0, angle);
+
+                float distFromStart = Vector3.Distance(start, position);
+                float distFromMid = Vector3.Distance(midpoint, position);
+                float fadeStart = Mathf.Clamp01(distFromStart / fadeDistance);
+                float fadeMid = Mathf.Clamp01(distFromMid / fadeDistance);
+                float alpha = Mathf.Min(fadeStart, fadeMid);
+
+                Color color = image.color;
+                color.a = alpha;
+                image.color = color;
+
+                if (!chevron.activeInHierarchy) {
+                    chevron.SetActive(true);
+                }
+            }
+
+            // Chevrons from entity2 traveling toward midpoint
+            for (int i = 0; i < chevronsPerSide; i++) {
+                GameObject chevron = activeChevrons[chevronsPerSide + i];
+                RectTransform rectTransform = chevron.GetComponent<RectTransform>();
+                Image image = chevron.GetComponent<Image>();
+
+                float localOffset = i * chevronSpacing + animationOffset;
+                float t = localOffset / halfDistance;
+
+                if (t < -0.1f || t > 1.1f) {
+                    if (chevron.activeInHierarchy) {
+                        Color resetColor = image.color;
+                        resetColor.a = 0f;
+                        image.color = resetColor;
+                        chevron.SetActive(false);
+                    }
+                    continue;
+                }
+
+                Vector3 position = end + reverseDirection * localOffset;
+                rectTransform.position = position;
+
+                // Chevron faces the direction it's traveling (toward midpoint)
+                float angle = Mathf.Atan2(reverseDirection.y, reverseDirection.x) * Mathf.Rad2Deg;
+                rectTransform.rotation = Quaternion.Euler(0, 0, angle);
+
+                float distFromEnd = Vector3.Distance(end, position);
+                float distFromMid = Vector3.Distance(midpoint, position);
+                float fadeEnd = Mathf.Clamp01(distFromEnd / fadeDistance);
+                float fadeMid = Mathf.Clamp01(distFromMid / fadeDistance);
+                float alpha = Mathf.Min(fadeEnd, fadeMid);
+
+                Color color = image.color;
+                color.a = alpha;
+                image.color = color;
+
+                if (!chevron.activeInHierarchy) {
+                    chevron.SetActive(true);
+                }
+            }
         }
     }
 }

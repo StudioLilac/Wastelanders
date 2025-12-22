@@ -108,6 +108,6 @@ MonoBehaviour:
   chevronPrefab: {fileID: 8927587966484559271, guid: ffb563f6718f64f4c903f04394ca6e79, type: 3}
   chevronSpacing: 0.5
   animationSpeed: 2
-  fadeDistance: 0.5
-  padding: 1
+  fadeDistance: 0.75
+  padding: 0.75
   poolSize: 40
