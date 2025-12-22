@@ -171,6 +171,18 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
         }
     }
 
+    /// <summary>
+    /// Sets the internal "selected" action to the given ActionClass.
+    /// </summary>
+    /// Andrew: I needed this method because clicking twice on a card deselects it. But in the drag and drop
+    /// case, it should remain selected while it's dragged. However, at that point currentHighlightedAction
+    /// has been clobbered already. So we need to reset it using a setter method like this.
+    public void SetSelectedAction(ActionClass clicked) {
+        currentHighlightedAction?.ToggleUnSelected();
+        currentHighlightedAction = clicked;
+        currentHighlightedAction?.ToggleSelected();
+    }
+
     private void ResetSelection(GameState gameState)
     {
         if (gameState == GameState.FIGHTING)
