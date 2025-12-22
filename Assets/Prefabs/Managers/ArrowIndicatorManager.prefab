@@ -106,7 +106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   worldSpaceCanvas: {fileID: 8553321085024395732}
   chevronPrefab: {fileID: 8927587966484559271, guid: ffb563f6718f64f4c903f04394ca6e79, type: 3}
-  chevronSpacing: 50
+  chevronSpacing: 1
   animationSpeed: 2
-  fadeDistance: 100
-  poolSize: 50
+  fadeDistance: 1
+  poolSize: 40

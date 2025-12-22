@@ -11,10 +11,11 @@ namespace Managers {
         [SerializeField] private GameObject chevronPrefab; // UI Image with chevron sprite
 
         [Header("Settings")] [SerializeField]
-        private float chevronSpacing = 50f; // Distance between chevrons in world units
+        private float chevronSpacing = 0.5f; // Distance between chevrons in world units
 
         [SerializeField] private float animationSpeed = 2f; // Speed of the scrolling animation
-        [SerializeField] private float fadeDistance = 100f; // Distance over which chevrons fade in/out
+        [SerializeField] private float fadeDistance = 1f; // Distance over which chevrons fade in/out
+        [SerializeField] private float padding = 0.5f; // Offset from entities before arrow starts/ends
         [SerializeField] private int poolSize = 50; // Initial pool size
 
         private List<GameObject> chevronPool = new List<GameObject>();
@@ -131,14 +132,23 @@ namespace Managers {
                 return;
             }
 
-            Vector3 start = arrow.entity1.position;
-            Vector3 end = arrow.entity2.position;
-            Vector3 direction = (end - start);
-            float distance = direction.magnitude;
+            Vector3 actualStart = arrow.entity1.position;
+            Vector3 actualEnd = arrow.entity2.position;
+            Vector3 fullDirection = (actualEnd - actualStart);
+            float fullDistance = fullDirection.magnitude;
 
-            if (distance < 0.1f) return; // Too close, don't draw
+            if (fullDistance < 0.1f) return; // Too close, don't draw
 
-            direction.Normalize();
+            fullDirection.Normalize();
+            
+            // Apply padding to start and end positions
+            Vector3 start = actualStart + fullDirection * padding;
+            Vector3 end = actualEnd - fullDirection * padding;
+            float distance = (end - start).magnitude;
+            
+            if (distance < 0.1f) return; // After padding, too short to draw
+            
+            Vector3 direction = fullDirection;
 
             // Update animation offset
             arrow.animationOffset += animationSpeed * Time.deltaTime;
