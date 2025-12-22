@@ -1,4 +1,5 @@
 ﻿using System;
+using UI_Toolkit;
 using UnityEngine;
 
 // This class is a parent class of both BattleQueueIcons and CombatCardUI. This is because both of them
@@ -12,6 +13,12 @@ public abstract class DisplayableClass : SelectClass
     
     public static event Action<ActionClass>? OnShowCard;
     public static event Action<ActionClass>? OnHideCard;
+    
+    public delegate void HoveredHandler(ActionClass actionClass);
+    
+    public static event HoveredHandler? OnHovered;
+    
+    public static event Action? OnUnhovered;
 
     protected void ShowCard()
     {
@@ -49,10 +56,14 @@ public abstract class DisplayableClass : SelectClass
 
     public virtual void OnMouseEnter()
     {
-        if (CombatManager.Instance.CanHighlight() && !grewLarger)
-        {
-            myTransform.localScale += new Vector3((float)0.05, (float)0.05, 0);
+        if (CombatManager.Instance.CanHighlight() && !grewLarger && !PauseMenuV2.IsPaused) {
+            transform.localScale *= 1.25f;
             grewLarger = true;
+            HighlightTarget();
+            ShowCard();
+            if (ActionClass != null) {
+                OnHovered?.Invoke(ActionClass);
+            }
         }
     }
 
@@ -60,8 +71,11 @@ public abstract class DisplayableClass : SelectClass
     {
         if (grewLarger)
         {
-            myTransform.localScale -= new Vector3((float)0.05, (float)0.05, 0);
+            transform.localScale /= 1.25f;
             grewLarger = false;
+            DeHighlightTarget();
+            HideCard();
+            OnUnhovered?.Invoke();
         }
     }
 }
