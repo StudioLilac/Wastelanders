@@ -50,7 +50,7 @@ namespace Managers {
         private void HandleOnHovered(ActionClass ac) {
             Debug.Log("ArrowIndicatorManager: HandleOnHovered");
             
-            // Check if this action is part of a clash
+            // Check if this action is part of a clash (cause then we need to draw the clashing arrow)
             bool isClashing = false;
             if (BattleQueue.BattleQueueInstance != null) {
                 foreach (var wrapper in BattleQueue.BattleQueueInstance.ProvideArray()) {
@@ -232,7 +232,6 @@ namespace Managers {
                 ReturnChevronToPool(chevron);
             }
 
-            // Chevrons from entity1 traveling toward midpoint
             for (int i = 0; i < chevronsPerSide; i++) {
                 GameObject chevron = activeChevrons[i];
                 RectTransform rectTransform = chevron.GetComponent<RectTransform>();
@@ -254,7 +253,6 @@ namespace Managers {
                 Vector3 position = start + direction * localOffset;
                 rectTransform.position = position;
 
-                // Chevron faces the direction it's traveling (toward midpoint)
                 float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
                 rectTransform.rotation = Quaternion.Euler(0, 0, angle);
 
@@ -273,7 +271,6 @@ namespace Managers {
                 }
             }
 
-            // Chevrons from entity2 traveling toward midpoint
             for (int i = 0; i < chevronsPerSide; i++) {
                 GameObject chevron = activeChevrons[chevronsPerSide + i];
                 RectTransform rectTransform = chevron.GetComponent<RectTransform>();
@@ -295,7 +292,6 @@ namespace Managers {
                 Vector3 position = end + reverseDirection * localOffset;
                 rectTransform.position = position;
 
-                // Chevron faces the direction it's traveling (toward midpoint)
                 float angle = Mathf.Atan2(reverseDirection.y, reverseDirection.x) * Mathf.Rad2Deg;
                 rectTransform.rotation = Quaternion.Euler(0, 0, angle);
 
