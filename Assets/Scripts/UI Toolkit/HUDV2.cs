@@ -8,6 +8,8 @@ namespace UI_Toolkit
 {
     public class HUDV2 : MonoBehaviour
     {
+        public static HUDV2 Instance { get; private set; }
+        
         public VisualTreeAsset cardTemplate;
         public UIDocument rootDocument;
 
@@ -17,6 +19,7 @@ namespace UI_Toolkit
 
         public void Awake()
         {
+            Instance = this;
             rootElem = rootDocument?.rootVisualElement ?? throw new Exception($"{nameof(rootDocument)} unset");
             handElem = rootElem.Q<VisualElement>("layout-hand-container");
             infoElem = rootElem.Q<VisualElement>("layout-info-container");
@@ -24,6 +27,11 @@ namespace UI_Toolkit
 
             RegisterCallbacks();
             LoadInitialValues();
+        }
+        
+        public void SpawnCardPlayEffect(ActionClass actionClass, Vector3 worldPosition)
+        {
+            UI_Elements.CardPlayEffect.SpawnAt(rootElem, cardTemplate, actionClass, worldPosition);
         }
 
         public void OnEnable()
