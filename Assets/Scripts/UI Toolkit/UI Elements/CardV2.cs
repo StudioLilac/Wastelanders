@@ -135,7 +135,7 @@ namespace UI_Toolkit.UI_Elements
             }
             dragging = false;
             
-            actionClass.ToggleUnSelected();
+            actionClass.ToggleSelected();
             TryClickEntity(eventData.position);
             
             style.translate = StyleKeyword.Null;
@@ -172,7 +172,6 @@ namespace UI_Toolkit.UI_Elements
 
             if (!Physics.Raycast(ray, out RaycastHit hit, 1000f))
             {
-                HighlightManager.Instance.ResetCurrentHighlightedAction();
                 return;
             }
 
@@ -187,7 +186,6 @@ namespace UI_Toolkit.UI_Elements
             
             if (enemy == null)
             {
-                HighlightManager.Instance.ResetCurrentHighlightedAction();
                 return;
             }
 
