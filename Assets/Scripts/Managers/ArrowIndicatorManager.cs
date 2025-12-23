@@ -38,18 +38,7 @@ namespace Managers {
 
         private void HandleOnHovered(DisplayableHoveredEvent evt) {
             var ac = evt.ActionClass;
-            // Check if this action is part of a clash (cause then we need to draw the clashing arrow)
-            bool isClashing = false;
-            if (BattleQueue.BattleQueueInstance != null) {
-                foreach (var wrapper in BattleQueue.BattleQueueInstance.ProvideArray()) {
-                    if (wrapper.IsClashing() && 
-                        (wrapper.PlayerAction == ac || wrapper.EnemyAction == ac)) {
-                        isClashing = true;
-                        break;
-                    }
-                }
-            }
-            
+            bool isClashing = BattleQueue.BattleQueueInstance?.IsActionPartOfClash(ac) ?? false;
             DrawArrow(ac.Origin.transform, ac.Target.transform, isClashing);
         }
 
