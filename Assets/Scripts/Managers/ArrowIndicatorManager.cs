@@ -14,9 +14,7 @@ namespace Managers {
         [SerializeField] private float animationSpeed = 2f;
         [SerializeField] private float fadeDistance = 1f;
         [SerializeField] private float padding = 0.5f;
-        [SerializeField] private int poolSize = 50;
 
-        private List<GameObject> chevronPool = new List<GameObject>();
         private List<GameObject> activeChevrons = new List<GameObject>();
         
         private Transform entity1;
@@ -33,8 +31,6 @@ namespace Managers {
                     return;
                 }
             }
-
-            InitializePool();
         }
 
         private void OnEnable() {
@@ -65,46 +61,19 @@ namespace Managers {
             DrawArrow(ac.Origin.transform, ac.Target.transform, isClashing);
         }
 
-        void InitializePool() {
-            if (chevronPrefab == null) {
-                Debug.LogError("ArrowIndicatorManager: Chevron prefab not assigned!");
-                return;
-            }
-
-            for (int i = 0; i < poolSize; i++) {
-                GameObject chevron = Instantiate(chevronPrefab, worldSpaceCanvas.transform);
-                chevron.SetActive(false);
-                chevronPool.Add(chevron);
-            }
-        }
-
-        GameObject GetChevronFromPool() {
-            foreach (var chevron in chevronPool) {
-                if (!chevron.activeInHierarchy) {
-                    Image image = chevron.GetComponent<Image>();
-                    if (image != null) {
-                        Color color = image.color;
-                        color.a = 0f;
-                        image.color = color;
-                    }
-                    chevron.SetActive(true);
-                    return chevron;
-                }
-            }
-
-            GameObject newChevron = Instantiate(chevronPrefab, worldSpaceCanvas.transform);
-            chevronPool.Add(newChevron);
-            return newChevron;
-        }
-
-        void ReturnChevronToPool(GameObject chevron) {
+        GameObject CreateChevron() {
+            GameObject chevron = Instantiate(chevronPrefab, worldSpaceCanvas.transform);
             Image image = chevron.GetComponent<Image>();
             if (image != null) {
                 Color color = image.color;
                 color.a = 0f;
                 image.color = color;
             }
-            chevron.SetActive(false);
+            return chevron;
+        }
+
+        void DestroyChevron(GameObject chevron) {
+            Destroy(chevron);
         }
 
         public void DrawArrow(Transform fromEntity, Transform toEntity, bool bidirectional = false) {
@@ -119,7 +88,7 @@ namespace Managers {
 
         public void ClearArrow() {
             foreach (var chevron in activeChevrons) {
-                ReturnChevronToPool(chevron);
+                DestroyChevron(chevron);
             }
             activeChevrons.Clear();
             
@@ -150,10 +119,8 @@ namespace Managers {
             
             Vector3 direction = fullDirection;
 
+            // Let animationOffset grow continuously - we'll use modulo per-chevron
             animationOffset += animationSpeed * Time.deltaTime;
-            if (animationOffset >= chevronSpacing) {
-                animationOffset -= chevronSpacing;
-            }
 
             if (isBidirectional) {
                 UpdateBidirectionalArrow(start, end, direction, distance);
@@ -166,13 +133,13 @@ namespace Managers {
             int chevronCount = Mathf.CeilToInt(distance / chevronSpacing) + 2;
 
             while (activeChevrons.Count < chevronCount) {
-                activeChevrons.Add(GetChevronFromPool());
+                activeChevrons.Add(CreateChevron());
             }
 
             while (activeChevrons.Count > chevronCount) {
                 GameObject chevron = activeChevrons[activeChevrons.Count - 1];
                 activeChevrons.RemoveAt(activeChevrons.Count - 1);
-                ReturnChevronToPool(chevron);
+                DestroyChevron(chevron);
             }
 
             for (int i = 0; i < activeChevrons.Count; i++) {
@@ -180,26 +147,25 @@ namespace Managers {
                 RectTransform rectTransform = chevron.GetComponent<RectTransform>();
                 Image image = chevron.GetComponent<Image>();
 
-                float t = (i * chevronSpacing + animationOffset) / distance;
+                // Use modulo so each chevron wraps independently when it reaches the end
+                float patternLength = activeChevrons.Count * chevronSpacing;
+                float rawOffset = i * chevronSpacing + animationOffset;
+                float wrappedOffset = rawOffset % patternLength;
+                float t = wrappedOffset / distance;
 
-                if (t < -0.1f || t > 1.1f) {
-                    if (chevron.activeInHierarchy) {
-                        Color resetColor = image.color;
-                        resetColor.a = 0f;
-                        image.color = resetColor;
-                        chevron.SetActive(false);
-                    }
+                if (t < 0f || t > 1f) {
+                    chevron.SetActive(false);
                     continue;
                 }
 
-                Vector3 position = start + direction * (i * chevronSpacing + animationOffset);
+                Vector3 position = start + direction * wrappedOffset;
                 rectTransform.position = position;
 
                 float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
                 rectTransform.rotation = Quaternion.Euler(0, 0, angle);
                 
-                float distFromStart = Vector3.Distance(start, position);
-                float distFromEnd = Vector3.Distance(end, position);
+                float distFromStart = wrappedOffset;
+                float distFromEnd = distance - wrappedOffset;
                 float fadeStart = Mathf.Clamp01(distFromStart / fadeDistance);
                 float fadeEnd = Mathf.Clamp01(distFromEnd / fadeDistance);
                 float alpha = Mathf.Min(fadeStart, fadeEnd);
@@ -208,9 +174,7 @@ namespace Managers {
                 color.a = alpha;
                 image.color = color;
                 
-                if (!chevron.activeInHierarchy) {
-                    chevron.SetActive(true);
-                }
+                chevron.SetActive(true);
             }
         }
 
@@ -223,13 +187,13 @@ namespace Managers {
             int totalChevronCount = chevronsPerSide * 2;
 
             while (activeChevrons.Count < totalChevronCount) {
-                activeChevrons.Add(GetChevronFromPool());
+                activeChevrons.Add(CreateChevron());
             }
 
             while (activeChevrons.Count > totalChevronCount) {
                 GameObject chevron = activeChevrons[activeChevrons.Count - 1];
                 activeChevrons.RemoveAt(activeChevrons.Count - 1);
-                ReturnChevronToPool(chevron);
+                DestroyChevron(chevron);
             }
 
             for (int i = 0; i < chevronsPerSide; i++) {
@@ -237,16 +201,14 @@ namespace Managers {
                 RectTransform rectTransform = chevron.GetComponent<RectTransform>();
                 Image image = chevron.GetComponent<Image>();
 
-                float localOffset = i * chevronSpacing + animationOffset;
+                // Use modulo so each chevron wraps independently
+                float patternLength = chevronsPerSide * chevronSpacing;
+                float rawOffset = i * chevronSpacing + animationOffset;
+                float localOffset = rawOffset % patternLength;
                 float t = localOffset / halfDistance;
 
-                if (t < -0.1f || t > 1.1f) {
-                    if (chevron.activeInHierarchy) {
-                        Color resetColor = image.color;
-                        resetColor.a = 0f;
-                        image.color = resetColor;
-                        chevron.SetActive(false);
-                    }
+                if (t < 0f || t > 1f) {
+                    chevron.SetActive(false);
                     continue;
                 }
 
@@ -256,8 +218,8 @@ namespace Managers {
                 float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
                 rectTransform.rotation = Quaternion.Euler(0, 0, angle);
 
-                float distFromStart = Vector3.Distance(start, position);
-                float distFromMid = Vector3.Distance(midpoint, position);
+                float distFromStart = localOffset;
+                float distFromMid = halfDistance - localOffset;
                 float fadeStart = Mathf.Clamp01(distFromStart / fadeDistance);
                 float fadeMid = Mathf.Clamp01(distFromMid / fadeDistance);
                 float alpha = Mathf.Min(fadeStart, fadeMid);
@@ -266,9 +228,7 @@ namespace Managers {
                 color.a = alpha;
                 image.color = color;
 
-                if (!chevron.activeInHierarchy) {
-                    chevron.SetActive(true);
-                }
+                chevron.SetActive(true);
             }
 
             for (int i = 0; i < chevronsPerSide; i++) {
@@ -276,16 +236,14 @@ namespace Managers {
                 RectTransform rectTransform = chevron.GetComponent<RectTransform>();
                 Image image = chevron.GetComponent<Image>();
 
-                float localOffset = i * chevronSpacing + animationOffset;
+                // Use modulo so each chevron wraps independently
+                float patternLength = chevronsPerSide * chevronSpacing;
+                float rawOffset = i * chevronSpacing + animationOffset;
+                float localOffset = rawOffset % patternLength;
                 float t = localOffset / halfDistance;
 
-                if (t < -0.1f || t > 1.1f) {
-                    if (chevron.activeInHierarchy) {
-                        Color resetColor = image.color;
-                        resetColor.a = 0f;
-                        image.color = resetColor;
-                        chevron.SetActive(false);
-                    }
+                if (t < 0f || t > 1f) {
+                    chevron.SetActive(false);
                     continue;
                 }
 
@@ -295,8 +253,8 @@ namespace Managers {
                 float angle = Mathf.Atan2(reverseDirection.y, reverseDirection.x) * Mathf.Rad2Deg;
                 rectTransform.rotation = Quaternion.Euler(0, 0, angle);
 
-                float distFromEnd = Vector3.Distance(end, position);
-                float distFromMid = Vector3.Distance(midpoint, position);
+                float distFromEnd = localOffset;
+                float distFromMid = halfDistance - localOffset;
                 float fadeEnd = Mathf.Clamp01(distFromEnd / fadeDistance);
                 float fadeMid = Mathf.Clamp01(distFromMid / fadeDistance);
                 float alpha = Mathf.Min(fadeEnd, fadeMid);
@@ -305,9 +263,7 @@ namespace Managers {
                 color.a = alpha;
                 image.color = color;
 
-                if (!chevron.activeInHierarchy) {
-                    chevron.SetActive(true);
-                }
+                chevron.SetActive(true);
             }
         }
     }
