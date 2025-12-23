@@ -31,21 +31,13 @@ namespace Managers {
                     return;
                 }
             }
+
+            this.Subscribe<DisplayableHoveredEvent>(HandleOnHovered);
+            this.Subscribe<DisplayableUnhoveredEvent>(HandleOnUnhovered);
         }
 
-        private void OnEnable() {
-            DisplayableClass.OnHovered += HandleOnHovered;
-            DisplayableClass.OnUnhovered += ClearArrow;
-        }
-        
-        private void OnDisable() {
-            DisplayableClass.OnHovered -= HandleOnHovered;
-            DisplayableClass.OnUnhovered -= ClearArrow;
-        }
-
-        private void HandleOnHovered(ActionClass ac) {
-            Debug.Log("ArrowIndicatorManager: HandleOnHovered");
-            
+        private void HandleOnHovered(DisplayableHoveredEvent evt) {
+            var ac = evt.ActionClass;
             // Check if this action is part of a clash (cause then we need to draw the clashing arrow)
             bool isClashing = false;
             if (BattleQueue.BattleQueueInstance != null) {
@@ -59,6 +51,10 @@ namespace Managers {
             }
             
             DrawArrow(ac.Origin.transform, ac.Target.transform, isClashing);
+        }
+
+        private void HandleOnUnhovered(DisplayableUnhoveredEvent evt) {
+            ClearArrow();
         }
 
         GameObject CreateChevron() {

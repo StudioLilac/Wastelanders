@@ -13,12 +13,6 @@ public abstract class DisplayableClass : SelectClass
     
     public static event Action<ActionClass>? OnShowCard;
     public static event Action<ActionClass>? OnHideCard;
-    
-    public delegate void HoveredHandler(ActionClass actionClass);
-    
-    public static event HoveredHandler? OnHovered;
-    
-    public static event Action? OnUnhovered;
 
     protected void ShowCard()
     {
@@ -62,7 +56,7 @@ public abstract class DisplayableClass : SelectClass
             HighlightTarget();
             ShowCard();
             if (ActionClass != null) {
-                OnHovered?.Invoke(ActionClass);
+                EventBus.Raise(new DisplayableHoveredEvent(ActionClass));
             }
         }
     }
@@ -75,8 +69,11 @@ public abstract class DisplayableClass : SelectClass
             grewLarger = false;
             DeHighlightTarget();
             HideCard();
-            OnUnhovered?.Invoke();
+            EventBus.Raise(new DisplayableUnhoveredEvent());
         }
     }
 }
+
+public record DisplayableHoveredEvent(ActionClass ActionClass) : IEvent;
+public record DisplayableUnhoveredEvent() : IEvent;
 
