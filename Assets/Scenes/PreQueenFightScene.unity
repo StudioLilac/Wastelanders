@@ -5417,9 +5417,9 @@ MonoBehaviour:
   - {fileID: 1896831619}
   - {fileID: 2041861088}
   endOfExamImage: {fileID: 996424401}
+  treeSprite: {fileID: 56201828}
   jumpToCombat: 0
   instaKill: 0
-  spriteFadeHandler: {fileID: 0}
   initialPlanByJackie: {fileID: 11400000, guid: 676fbdb59dc05df4485f6797ab239b84, type: 2}
   planOneDialogue: {fileID: 11400000, guid: b3b33f8c6e5019947af9a624dfce19f7, type: 2}
   planTwoDialogue: {fileID: 11400000, guid: ce3c83dea88d125429799d89ca58b08d, type: 2}
