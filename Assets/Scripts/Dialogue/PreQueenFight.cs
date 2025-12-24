@@ -63,11 +63,10 @@ public class PreQueenFight : DialogueClasses
     [SerializeField] private List<Transform> queenGuardBeetleTransforms;
 
     [SerializeField] private Image endOfExamImage;
-
+    [SerializeField] private SpriteRenderer treeSprite;
 
     [SerializeField] private bool jumpToCombat;
     [SerializeField] private bool instaKill;
-    [SerializeField] private SpriteFadeHandler spriteFadeHandler;
     private DefaultSceneBuilder defaultSceneBuilder;
 
 
@@ -541,6 +540,7 @@ public class PreQueenFight : DialogueClasses
                 jackie.AddStacks(Resonate.buffName, 900);
             }
 
+            treeSprite.gameObject.SetActive(false);
             CombatManager.Instance.BeginCombat();
             new BattleIntroEvent(Get<ClashIntro>()).Invoke();
             BeginQueenCombat();

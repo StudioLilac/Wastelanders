@@ -210,9 +210,9 @@ public abstract class EntityClass : SelectClass
     public virtual IEnumerator Die()
     {
         float runDirection = (Team == EntityTeam.PlayerTeam) ? -1f : 1f;
+        
         if (damageSourceDirection != default)
             runDirection = Mathf.Sign(damageSourceDirection.x);
-        
 
         float runDistance = 10f * runDirection;
 
