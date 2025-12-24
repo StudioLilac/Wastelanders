@@ -51,6 +51,7 @@ public abstract class EntityClass : SelectClass
     protected BoxCollider boxCollider;
 
 #nullable enable
+    private Vector3 damageSourceDirection = default;
 
     #if UNITY_EDITOR
     // Used to support handling arbitrary foreign animations 
@@ -139,11 +140,9 @@ public abstract class EntityClass : SelectClass
      */
     public IEnumerator StaggerEntities(EntityClass origin, EntityClass target, float percentageDone)
     {
-        Vector3 directionVector = target.myTransform.position - origin.myTransform.position;
-        
-        Vector3 normalizedDirection = directionVector.normalized;
+        damageSourceDirection = (target.myTransform.position - origin.myTransform.position).normalized;
         float staggerPower = StaggerPowerCalculation(percentageDone);
-        yield return StartCoroutine(target.StaggerBack(target.myTransform.position + normalizedDirection * staggerPower));
+        yield return StartCoroutine(target.StaggerBack(target.myTransform.position + damageSourceDirection * staggerPower));
     }
 
     //Calculates the power of the stagger based on the percentage health done
@@ -210,7 +209,12 @@ public abstract class EntityClass : SelectClass
     //Removes entity cards and self from BQ and combat manager. Kills itself
     public virtual IEnumerator Die()
     {
-        int runDistance = (Team == EntityTeam.PlayerTeam) ? -10 : 10;
+        float runDirection = (Team == EntityTeam.PlayerTeam) ? -1f : 1f;
+        if (damageSourceDirection != default)
+            runDirection = Mathf.Sign(damageSourceDirection.x);
+        
+
+        float runDistance = 10f * runDirection;
 
         BattleQueue.BattleQueueInstance.RemoveAllInstancesOfEntity(this);
         DestroyDeck();
