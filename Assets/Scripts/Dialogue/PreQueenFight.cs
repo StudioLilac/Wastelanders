@@ -108,8 +108,10 @@ public class PreQueenFight : DialogueClasses
         rain = FindAnyObjectByType<Rain>();
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
         CombatManager.Instance.SetDarkScreen();
-        
-        rain?.SetIntensity(0);
+
+        if (!GameStateManager.Instance.JumpToCombat) {
+            rain?.SetIntensity(0);
+        }
 
         yield return new WaitForSeconds(0.5f);
         ives.OutOfCombat();
