@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.ConstrainedExecution;
+using JetBrains.Annotations;
 using Systems.Persistence;
 using TMPro;
 using UnityEngine;
@@ -85,6 +86,8 @@ public class PreQueenFight : DialogueClasses
     private const float BRIEF_PAUSE = 0.2f; // For use after an animation to make it visually seem smoother
     private const float MEDIUM_PAUSE = 1f; //For use after a text box comes down and we want to add some weight to the text.
     
+    [CanBeNull] private Rain rain; // the rain object in the scene
+    
     protected override void GameStateChange(GameState gameState)
     {
         if (gameState == GameState.GAME_START)
@@ -102,8 +105,11 @@ public class PreQueenFight : DialogueClasses
 
     private IEnumerator ExecuteGameStart()
     {
+        rain = FindAnyObjectByType<Rain>();
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
         CombatManager.Instance.SetDarkScreen();
+        
+        rain?.SetIntensity(0);
 
         yield return new WaitForSeconds(0.5f);
         ives.OutOfCombat();
@@ -389,6 +395,8 @@ public class PreQueenFight : DialogueClasses
 
                 yield return StartCoroutine(DialogueManager.Instance.StartDialogue(planThreeDialogue.Dialogue));
                 yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(0.5f));
+                
+                rain?.SetIntensity(1);
 
                 var jackieSprite = jackie.GetComponent<SpriteRenderer>();
                 var oldLayer = treeOverlay.sortingLayerName;

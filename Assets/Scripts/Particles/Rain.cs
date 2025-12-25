@@ -9,7 +9,7 @@ public class Rain : MonoBehaviour
 {
     [Header("Rain Settings")]
     [Tooltip("Number of rain particles emitted per second")]
-    [SerializeField] private float emissionRate = 500f;
+    [SerializeField] private float emissionRate = 100f;
     
     [Tooltip("Lifetime of each rain drop in seconds")]
     [SerializeField] private float lifetime = 1.5f;
