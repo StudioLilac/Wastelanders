@@ -1,7 +1,6 @@
 using UnityEngine;
 
 namespace Particles {
-
     /// <summary>
     /// Controls a rain particle system effect in the foreground of the scene.
     /// Attach this to a GameObject with a ParticleSystem component.
@@ -15,16 +14,16 @@ namespace Particles {
         private float lifetime = 1.5f;
 
         [Tooltip("Speed of falling rain")] [SerializeField]
-        private float fallSpeed = 10f;
+        private float fallSpeed = 20f;
 
         [Tooltip("Width of the rain spawn area")] [SerializeField]
-        private float spawnWidth = 20f;
+        private float spawnWidth = 40f;
 
         [Tooltip("Height of the rain spawn area")] [SerializeField]
         private float spawnHeight = 2f;
 
         [Tooltip("Length/stretch of rain drops")] [SerializeField]
-        private float dropLength = 0.5f;
+        private float dropLength = 100f;
 
         [Tooltip("Width of rain drops")] [SerializeField]
         private float dropWidth = 0.02f;
@@ -55,36 +54,42 @@ namespace Particles {
         }
 
         private void InitializeParticleSystem() {
+            // Cache modules
             mainModule = rainParticleSystem.main;
             emissionModule = rainParticleSystem.emission;
             shapeModule = rainParticleSystem.shape;
             velocityModule = rainParticleSystem.velocityOverLifetime;
 
+            // Configure main module
             mainModule.simulationSpace = ParticleSystemSimulationSpace.World;
             mainModule.startLifetime = lifetime;
-            mainModule.startSpeed = 0f;
-            mainModule.startSize = dropWidth;
+            mainModule.startSpeed = 0f; // We control speed via velocity over lifetime
+            mainModule.startSize = dropWidth; // Width of the rain drop (length controlled by renderer lengthScale)
             mainModule.startColor = rainColor;
-            mainModule.gravityModifier = 0f;
+            mainModule.gravityModifier = 0f; // We handle gravity manually
             mainModule.maxParticles = 10000;
 
+            // Configure emission
             baseEmissionRate = emissionRate;
             emissionModule.rateOverTime = emissionRate * intensity;
 
+            // Configure shape (box emitter above the camera)
             shapeModule.shapeType = ParticleSystemShapeType.Box;
             shapeModule.scale = new Vector3(spawnWidth, spawnHeight, 1f);
 
+            // Configure velocity for falling rain
             velocityModule.enabled = true;
             velocityModule.space = ParticleSystemSimulationSpace.World;
             velocityModule.x = windStrength;
             velocityModule.y = -fallSpeed;
             velocityModule.z = 0f;
 
+            // Configure renderer for stretched billboards (rain effect)
             var renderer = rainParticleSystem.GetComponent<ParticleSystemRenderer>();
             if (renderer != null) {
                 renderer.renderMode = ParticleSystemRenderMode.Stretch;
-                renderer.velocityScale = 0f;
-                renderer.lengthScale = dropLength;
+                renderer.velocityScale = 0f; // Disable velocity-based stretching
+                renderer.lengthScale = dropLength; // Use dropLength to control visual length
             }
         }
 
