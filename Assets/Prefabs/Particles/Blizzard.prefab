@@ -4878,10 +4878,11 @@ MonoBehaviour:
   fallSpeed: 3
   spawnWidth: 50
   spawnHeight: 3
+  windStrength: -7
+  intensity: 1
   flakeSize: 1
   flakeSizeVariation: 0.2
   snowColor: {r: 1, g: 1, b: 1, a: 0.6}
-  windStrength: -7
   windInfluence: 2
   windGustAmount: 0
   windGustSpeed: 1
@@ -4889,4 +4890,3 @@ MonoBehaviour:
   flutterSpeed: 2
   enableRotation: 1
   rotationSpeed: 90
-  intensity: 1
