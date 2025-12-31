@@ -33,15 +33,6 @@ namespace Particles {
         [SerializeField]
         private float windGustSpeed = 1f;
 
-        [Header("Fluttering Effect")]
-        [Tooltip("Amount of side-to-side fluttering motion")]
-        [SerializeField]
-        private float flutterAmount = 0.5f;
-
-        [Tooltip("Speed of the fluttering motion")]
-        [SerializeField]
-        private float flutterSpeed = 2f;
-
         [Header("Rotation")]
         [Tooltip("Enable snowflake rotation for tumbling effect")]
         [SerializeField]
