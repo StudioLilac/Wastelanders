@@ -6219,10 +6219,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8032606345709588493, guid: f9d610b739dde21419bb2da4482af8d7, type: 3}
-      propertyPath: emissionRate
-      value: 400
-      objectReference: {fileID: 0}
     - target: {fileID: 8954479230948101677, guid: f9d610b739dde21419bb2da4482af8d7, type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
       value: 400
