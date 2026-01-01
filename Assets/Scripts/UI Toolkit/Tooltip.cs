@@ -12,6 +12,8 @@ namespace UI_Toolkit
 
         private VisualElement tooltipBox;
         private bool isTooltipVisible;
+
+        private bool disableTooltip;
         
         public static readonly Dictionary<string, Color> TooltipColors = new Dictionary<string, Color>
         {
@@ -24,11 +26,13 @@ namespace UI_Toolkit
         public void OnEnable()
         {
             BuffIcons.OnBuffIconHovered += HandleOnBuffIconHovered;
+            CombatManager.OnGameStateChanged += HandleOnGameStateChanged;
         }
 
         public void OnDisable()
         {
             BuffIcons.OnBuffIconHovered -= HandleOnBuffIconHovered;
+            CombatManager.OnGameStateChanged -= HandleOnGameStateChanged;
         }
 
         private void Start()
@@ -57,6 +61,16 @@ namespace UI_Toolkit
             }
         }
 
+        private void HandleOnGameStateChanged(GameState state) {
+            if (state == GameState.FIGHTING) {
+                disableTooltip = true;
+                HideTooltip();
+            }
+            else {
+                disableTooltip = false;
+            }
+        }
+
         private void HandleOnBuffIconHovered(string buffName, int stacks, Sprite buffIcon, bool hovered)
         {
             if (hovered)
@@ -71,7 +85,7 @@ namespace UI_Toolkit
 
         private void ShowTooltip(string buffName, int stacks, Sprite buffIcon)
         {
-            if (tooltipBox == null) return;
+            if (tooltipBox == null || disableTooltip) return;
 
             buffName = buffName.ToUpper();
 
