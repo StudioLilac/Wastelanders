@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -11,6 +12,14 @@ namespace UI_Toolkit
 
         private VisualElement tooltipBox;
         private bool isTooltipVisible;
+        
+        public static readonly Dictionary<string, Color> TooltipColors = new Dictionary<string, Color>
+        {
+            ["ACCURACY"] = Color.blue,
+            ["FLOW"] = new Color(1f, 143f/255f, 143f/255f, 1f),
+            ["WOUND"] = Color.red,
+            ["RESONATE"] = Color.magenta
+        };
 
         public void OnEnable()
         {
@@ -76,8 +85,11 @@ namespace UI_Toolkit
             if (nameLabel != null)
                 nameLabel.text = buffName;
 
-            if (stacksLabel != null)
-                stacksLabel.text = $"{stacks} stacks";
+            if (stacksLabel != null) {
+                stacksLabel.text = $"{stacks} stack{(stacks != 1 ? "s" : "")}";
+                stacksLabel.style.color = TooltipColors[buffName];
+            }
+                
             
             if (iconLabel != null)
                 iconLabel.style.backgroundImage = new StyleBackground(buffIcon);
