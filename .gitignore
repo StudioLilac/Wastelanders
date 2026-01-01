@@ -73,3 +73,6 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 **/.DS_Store
+Assets/Plugins/FMOD.meta
+Assets/Plugins/FMOD/Resources.meta
+Assets/Plugins/FMOD/Resources/FMODStudioSettings.asset.meta
