@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -47,11 +48,11 @@ namespace UI_Toolkit
             }
         }
 
-        private void HandleOnBuffIconHovered(string buffName, int stacks, bool hovered)
+        private void HandleOnBuffIconHovered(string buffName, int stacks, Sprite buffIcon, bool hovered)
         {
             if (hovered)
             {
-                ShowTooltip(buffName, stacks);
+                ShowTooltip(buffName, stacks, buffIcon);
             }
             else
             {
@@ -59,18 +60,30 @@ namespace UI_Toolkit
             }
         }
 
-        private void ShowTooltip(string buffName, int stacks)
+        private void ShowTooltip(string buffName, int stacks, Sprite buffIcon)
         {
             if (tooltipBox == null) return;
 
+            buffName = buffName.ToUpper();
+
             var nameLabel = tooltipBox.Q<Label>("buff-name");
             var stacksLabel = tooltipBox.Q<Label>("buff-stacks");
+            var iconLabel = tooltipBox.Q<VisualElement>("buff-icon");
+            var descriptionLabel = tooltipBox.Q<Label>("buff-description");
+            
+            var buffDescription = BuffExplainer.WeaponExplanation.Values.FirstOrDefault(exp => exp.ExplanationTitle == buffName)?.ExplanationText;
 
             if (nameLabel != null)
                 nameLabel.text = buffName;
 
             if (stacksLabel != null)
-                stacksLabel.text = $"Stacks: {stacks}";
+                stacksLabel.text = $"{stacks} stacks";
+            
+            if (iconLabel != null)
+                iconLabel.style.backgroundImage = new StyleBackground(buffIcon);
+            
+            if (descriptionLabel != null)
+                descriptionLabel.text = buffDescription;
 
             tooltipBox.style.display = DisplayStyle.Flex;
             isTooltipVisible = true;

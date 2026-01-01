@@ -1,17 +1,20 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class BuffIcons : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public Image buffIcon;
+    [FormerlySerializedAs("buffIcon")] public Image buffIconImage;
     public TextMeshProUGUI textMeshProUGUI;
 
     public string buffName;
     public int stacks;
+    public Sprite buffIcon;
+    public string buffDescription;
     
-    public delegate void BuffIconHoveredHandler(string buffName, int stacks, bool hovered);
+    public delegate void BuffIconHoveredHandler(string buffName, int stacks, Sprite buffIcon, bool hovered);
     public static event BuffIconHoveredHandler OnBuffIconHovered;
 
     public void SetText(string text)
@@ -21,16 +24,16 @@ public class BuffIcons : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public void SetIcon(Sprite icon)
     {
-        buffIcon.sprite = icon;
+        buffIconImage.sprite = icon;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        OnBuffIconHovered?.Invoke(buffName, stacks, hovered: true);
+        OnBuffIconHovered?.Invoke(buffName, stacks, buffIcon, hovered: true);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        OnBuffIconHovered?.Invoke(buffName, stacks, hovered: false);
+        OnBuffIconHovered?.Invoke(buffName, stacks, buffIcon, hovered: false);
     }
 }
