@@ -102,7 +102,6 @@ namespace UI_Toolkit
 
         private void OnUpdateHand(PlayerClass player)
         {
-            rootElem.Q<Label>("txt-deck-info").text = player.Pool.Count.ToString();
             handElem.Clear();
 
             foreach (var ac in player.Hand.Select(go => go.GetComponent<ActionClass>()).Where(ac => ac))
