@@ -6,23 +6,27 @@
 }
 
 .button:hover {
-    opacity: 0.8;
+    opacity: 0.7;
 }
 
 .button:active {
-    opacity: 0.6;
+    opacity: 0.4;
 }
 
 .button-bg {
-    background-image: url('project://database/Assets/Sprites/pause-menu-v2/bg-btn.png?fileID=21300000&guid=a6a4ac5bdd4ea48268cc817b36fc9ff7&type=3#bg-btn');
+    background-image: url("project://database/Assets/Sprites/pause-menu-v2/bg-btn.png?fileID=21300000&guid=a6a4ac5bdd4ea48268cc817b36fc9ff7&type=3#bg-btn");
 }
 
 .button-bg:hover {
-    background-image: url('project://database/Assets/Sprites/pause-menu-v2/bg-btn-hover.png?fileID=21300000&guid=cad42784cc533405abfbdbb75f5fba4e&type=3#bg-btn-hover');
+    background-image: url("project://database/Assets/Sprites/pause-menu-v2/bg-btn-hover.png?fileID=21300000&guid=cad42784cc533405abfbdbb75f5fba4e&type=3#bg-btn-hover");
+}
+
+.button-bg:active {
+    background-image: url("project://database/Assets/Sprites/pause-menu-v2/bg-btn-click.png?fileID=2800000&guid=c23f722fed69175468210e320637ded4&type=3#bg-btn-click");
 }
 
 .slider .unity-base-slider__dragger {
-    background-image: url('project://database/Assets/Sprites/UISprites/Volume%20Slider%20Knob.png?fileID=21300000&guid=d6adfb3a59ecf1a4b99e68446ca31bf9&type=3#Volume Slider Knob');
+    background-image: url("project://database/Assets/Sprites/UISprites/Volume%20Slider%20Knob.png?fileID=21300000&guid=d6adfb3a59ecf1a4b99e68446ca31bf9&type=3#Volume Slider Knob");
     height: 40px;
     margin-top: -20px;
     scale: 2;
@@ -50,31 +54,31 @@
 }
 
 #toggle-mus .unity-toggle__input {
-    background-image: url('project://database/Assets/Sprites/pause-menu-v2/ic-music.png?fileID=2800000&guid=42d6d39ef6dd248f39f0dfa74201cc7d&type=3#ic-music');
+    background-image: url("project://database/Assets/Sprites/pause-menu-v2/ic-music.png?fileID=2800000&guid=42d6d39ef6dd248f39f0dfa74201cc7d&type=3#ic-music");
 }
 
 #toggle-mus:checked .unity-toggle__input {
-    background-image: url('project://database/Assets/Sprites/pause-menu-v2/ic-music-muted.png?fileID=2800000&guid=623eac09825ec41e0ac84e378893960d&type=3#ic-music-muted');
+    background-image: url("project://database/Assets/Sprites/pause-menu-v2/ic-music-muted.png?fileID=2800000&guid=623eac09825ec41e0ac84e378893960d&type=3#ic-music-muted");
 }
 
 #toggle-sfx .unity-toggle__input {
-    background-image: url('project://database/Assets/Sprites/pause-menu-v2/ic-sound.png?fileID=2800000&guid=b5e9ca402cf7e4068ac074b454961269&type=3#ic-sound');
+    background-image: url("project://database/Assets/Sprites/pause-menu-v2/ic-sound.png?fileID=2800000&guid=b5e9ca402cf7e4068ac074b454961269&type=3#ic-sound");
 }
 
 #toggle-sfx:checked .unity-toggle__input {
-    background-image: url('project://database/Assets/Sprites/pause-menu-v2/ic-sound-muted.png?fileID=2800000&guid=38ab01e6e119f4546ba11efd83d2141a&type=3#ic-sound-muted');
+    background-image: url("project://database/Assets/Sprites/pause-menu-v2/ic-sound-muted.png?fileID=2800000&guid=38ab01e6e119f4546ba11efd83d2141a&type=3#ic-sound-muted");
 }
 
 #toggle-vfx .unity-toggle__input {
-    background-image: url('project://database/Assets/Sprites/pause-menu-v2/ic-checkbox.png?fileID=2800000&guid=f525fbb470c1744a9aee03f8d8b2ed42&type=3#ic-checkbox');
+    background-image: url("project://database/Assets/Sprites/pause-menu-v2/ic-checkbox.png?fileID=2800000&guid=f525fbb470c1744a9aee03f8d8b2ed42&type=3#ic-checkbox");
 }
 
 #toggle-vfx:checked .unity-toggle__input {
-    background-image: url('project://database/Assets/Sprites/pause-menu-v2/ic-checkbox-checked.png?fileID=2800000&guid=adcf4d5c4eb2d4002be83eed340e12ce&type=3#ic-checkbox-checked');
+    background-image: url("project://database/Assets/Sprites/pause-menu-v2/ic-checkbox-checked.png?fileID=2800000&guid=adcf4d5c4eb2d4002be83eed340e12ce&type=3#ic-checkbox-checked");
 }
 
 .dynamic-dialogue-name {
-    -unity-font: url('project://database/Assets/TextMesh%20Pro/Fonts/VT323-Regular.ttf?fileID=12800000&guid=46b9139fed5cc6a42a6a5d42b82c3c7e&type=3#VT323-Regular');
+    -unity-font: url("project://database/Assets/TextMesh%20Pro/Fonts/VT323-Regular.ttf?fileID=12800000&guid=46b9139fed5cc6a42a6a5d42b82c3c7e&type=3#VT323-Regular");
     -unity-font-definition: initial;
     -unity-font-style: bold;
     color: rgb(255, 255, 255);
@@ -82,7 +86,7 @@
 }
 
 .dynamic-dialogue-text {
-    -unity-font: url('project://database/Assets/TextMesh%20Pro/Fonts/VT323-Regular.ttf?fileID=12800000&guid=46b9139fed5cc6a42a6a5d42b82c3c7e&type=3#VT323-Regular');
+    -unity-font: url("project://database/Assets/TextMesh%20Pro/Fonts/VT323-Regular.ttf?fileID=12800000&guid=46b9139fed5cc6a42a6a5d42b82c3c7e&type=3#VT323-Regular");
     -unity-font-definition: initial;
     background-color: rgba(126, 66, 156, 0.2);
     color: rgb(203, 108, 230);
