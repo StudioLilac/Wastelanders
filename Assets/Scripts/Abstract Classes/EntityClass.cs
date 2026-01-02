@@ -263,39 +263,7 @@ public abstract class EntityClass : SelectClass
      */
     public virtual IEnumerator StaggerBack(Vector3 staggeredPosition)
     {
-        Vector3 originalPosition = myTransform.position;
-        float elapsedTime = 0f;
-
-        Vector3 diffInLocation = staggeredPosition - originalPosition;
-        if ((Vector2)diffInLocation == Vector2.zero) yield break;
-        UpdateFacing(-diffInLocation, null);
-
-        if (HasAnimationParameter(STAGGERED_ANIMATION_NAME))
-        {
-            animator.SetBool(STAGGERED_ANIMATION_NAME, true);
-        }
-
-        float duration = animator.GetCurrentAnimatorStateInfo(0).length;
-        if (duration > CardComparator.COMBAT_BUFFER_TIME) duration = CardComparator.COMBAT_BUFFER_TIME - 0.2f; //Ensure that animation doesn't exceed buffer time or bug will happen with death.
-
-        while (elapsedTime < duration)
-        {
-            myTransform.position = Vector3.Lerp(originalPosition, staggeredPosition, AnimationCurve(elapsedTime, duration));
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        if (HasAnimationParameter(STAGGERED_ANIMATION_NAME))
-        {
-            animator.SetBool(STAGGERED_ANIMATION_NAME, false);
-        }
-
-    }
-    private float AnimationCurve(float elapsedTime, float duration)
-    {
-        float speed = 0.8f; //Lower value is faster
-        float power = 5f; //Modifies the curvature of the curve
-        return (Mathf.Pow(speed, power) / Mathf.Pow(((-elapsedTime) / duration - speed), power) + 1);
+        yield return StartCoroutine(entityMovement.StaggerBack(staggeredPosition));
     }
 
     public virtual void Heal(int val)
