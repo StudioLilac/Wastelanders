@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
-  m_RaycastPadding: {x: -2, y: 0, z: 2, w: 0}
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -364,10 +364,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc9c73fb64538174fa847ca773682947, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buffIcon: {fileID: 1156540308573898057}
+  buffIconImage: {fileID: 1156540308573898057}
   textMeshProUGUI: {fileID: 7109150430243128439}
   buffName: 
   stacks: 0
+  buffIcon: {fileID: 0}
+  buffDescription: 
 --- !u!114 &5638829709072448918
 MonoBehaviour:
   m_ObjectHideFlags: 0
