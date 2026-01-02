@@ -146,11 +146,7 @@ namespace UI_Toolkit.UI_Elements
         // we need to convert coordinates accordingly.
         Vector2 ToScreenPoint(Vector2 panelPos)
         {
-            float scale = panel.scaledPixelsPerPoint;
-            return new Vector2(
-                panelPos.x * scale,
-                (panel.visualTree.layout.height - panelPos.y) * scale
-            );
+            return UICoordinateHelper.ToScreenPoint(panelPos, panel);
         }
         
         // Raycasts from the screen point to world space, looking for EntityClasses. If it finds one, it uses the
