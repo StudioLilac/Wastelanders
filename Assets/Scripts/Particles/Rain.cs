@@ -26,7 +26,7 @@ namespace Particles {
             mainModule.startColor = rainColor;
 
             // Configure renderer for stretched billboards (rain effect)
-            var renderer = particleSystem.GetComponent<ParticleSystemRenderer>();
+            var renderer = mainParticleSystem.GetComponent<ParticleSystemRenderer>();
             if (renderer != null) {
                 renderer.renderMode = ParticleSystemRenderMode.Stretch;
                 renderer.velocityScale = 0f;
@@ -36,10 +36,10 @@ namespace Particles {
 
 #if UNITY_EDITOR
         private void OnValidate() {
-            if (particleSystem == null)
-                particleSystem = GetComponent<ParticleSystem>();
+            if (mainParticleSystem == null)
+                mainParticleSystem = GetComponent<ParticleSystem>();
 
-            if (particleSystem != null && Application.isPlaying) {
+            if (mainParticleSystem != null && Application.isPlaying) {
                 InitializeParticleSystem();
             }
         }

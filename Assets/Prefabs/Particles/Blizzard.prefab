@@ -4886,7 +4886,5 @@ MonoBehaviour:
   windInfluence: 2
   windGustAmount: 0
   windGustSpeed: 1
-  flutterAmount: 0.5
-  flutterSpeed: 2
   enableRotation: 1
   rotationSpeed: 90

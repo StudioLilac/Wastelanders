@@ -1,15 +1,9 @@
 using LevelSelectInformation;
 using SceneBuilder;
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.ConstrainedExecution;
-using JetBrains.Annotations;
 using Particles;
-using Systems.Persistence;
-using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static BattleIntroEnum;
 
@@ -66,6 +60,7 @@ public class PreQueenFight : DialogueClasses
 
     [SerializeField] private Image endOfExamImage;
     [SerializeField] private SpriteRenderer treeSprite;
+    [SerializeField] private Rain rain;
 
     [SerializeField] private bool jumpToCombat;
     [SerializeField] private bool instaKill;
@@ -88,8 +83,7 @@ public class PreQueenFight : DialogueClasses
 
     private const float BRIEF_PAUSE = 0.2f; // For use after an animation to make it visually seem smoother
     private const float MEDIUM_PAUSE = 1f; //For use after a text box comes down and we want to add some weight to the text.
-    
-    [CanBeNull] private Rain rain; // the rain object in the scene
+
     
     protected override void GameStateChange(GameState gameState)
     {
@@ -109,13 +103,9 @@ public class PreQueenFight : DialogueClasses
 
     private IEnumerator ExecuteGameStart()
     {
-        rain = FindAnyObjectByType<Rain>();
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
         CombatManager.Instance.SetDarkScreen();
-
-        if (!GameStateManager.Instance.JumpToCombat) {
-            rain?.SetIntensity(0);
-        }
+        rain.SetIntensity(0);
 
         yield return new WaitForSeconds(0.5f);
         ives.OutOfCombat();
@@ -402,7 +392,7 @@ public class PreQueenFight : DialogueClasses
                 yield return StartCoroutine(DialogueManager.Instance.StartDialogue(planThreeDialogue.Dialogue));
                 yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(0.5f));
                 
-                rain?.SetIntensity(1);
+                rain.SetIntensity(1);
 
                 var jackieSprite = jackie.GetComponent<SpriteRenderer>();
                 var oldLayer = treeOverlay.sortingLayerName;
@@ -476,6 +466,7 @@ public class PreQueenFight : DialogueClasses
             CleanUpScene2();
             CleanUpScene3();
 
+            rain.SetIntensity(1);
             yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(0.5f));
         }
         {

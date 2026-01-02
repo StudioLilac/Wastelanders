@@ -39,7 +39,7 @@ namespace Particles {
         [SerializeField]
         protected float intensity = 1f;
 
-        protected ParticleSystem particleSystem;
+        protected ParticleSystem mainParticleSystem;
         protected ParticleSystem.MainModule mainModule;
         protected ParticleSystem.EmissionModule emissionModule;
         protected ParticleSystem.ShapeModule shapeModule;
@@ -48,16 +48,16 @@ namespace Particles {
         protected float baseEmissionRate;
 
         protected virtual void Awake() {
-            particleSystem = GetComponent<ParticleSystem>();
+            mainParticleSystem = GetComponent<ParticleSystem>();
             InitializeParticleSystem();
         }
 
         protected virtual void InitializeParticleSystem() {
             // Each piece of code below initializes a "module" (part) of the particle system.
-            mainModule = particleSystem.main;
-            emissionModule = particleSystem.emission;
-            shapeModule = particleSystem.shape;
-            velocityModule = particleSystem.velocityOverLifetime;
+            mainModule = mainParticleSystem.main;
+            emissionModule = mainParticleSystem.emission;
+            shapeModule = mainParticleSystem.shape;
+            velocityModule = mainParticleSystem.velocityOverLifetime;
 
             // Main module
             mainModule.simulationSpace = ParticleSystemSimulationSpace.World;
@@ -95,8 +95,8 @@ namespace Particles {
         /// Starts the particle effect
         /// </summary>
         protected void StartEffect() {
-            if (!particleSystem.isPlaying) {
-                particleSystem.Play();
+            if (!mainParticleSystem.isPlaying) {
+                mainParticleSystem.Play();
             }
         }
 
@@ -104,14 +104,14 @@ namespace Particles {
         /// Stops the particle effect
         /// </summary>
         protected void StopEffect() {
-            if (particleSystem.isPlaying) {
-                particleSystem.Stop();
+            if (mainParticleSystem.isPlaying) {
+                mainParticleSystem.Stop();
             }
         }
 
         /// <summary>
         /// Checks if the effect is currently active
         /// </summary>
-        public virtual bool IsActive => particleSystem.isPlaying && intensity > 0f;
+        public virtual bool IsActive => mainParticleSystem.isPlaying && intensity > 0f;
     }
 }

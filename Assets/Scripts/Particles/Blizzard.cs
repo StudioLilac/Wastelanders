@@ -64,8 +64,8 @@ namespace Particles {
             base.InitializeParticleSystem();
 
             // Cache additional modules
-            sizeModule = particleSystem.sizeOverLifetime;
-            rotationModule = particleSystem.rotationOverLifetime;
+            sizeModule = mainParticleSystem.sizeOverLifetime;
+            rotationModule = mainParticleSystem.rotationOverLifetime;
 
             // Configure main module specifics
             mainModule.startSize = new ParticleSystem.MinMaxCurve(flakeSize * (1f - flakeSizeVariation), flakeSize * (1f + flakeSizeVariation));
@@ -88,7 +88,7 @@ namespace Particles {
             }
 
             // Configure renderer for billboard particles (snowflakes)
-            var renderer = particleSystem.GetComponent<ParticleSystemRenderer>();
+            var renderer = mainParticleSystem.GetComponent<ParticleSystemRenderer>();
             if (renderer != null) {
                 renderer.renderMode = ParticleSystemRenderMode.Billboard;
                 renderer.alignment = ParticleSystemRenderSpace.World;
@@ -111,10 +111,10 @@ namespace Particles {
 
 #if UNITY_EDITOR
         private void OnValidate() {
-            if (particleSystem == null)
-                particleSystem = GetComponent<ParticleSystem>();
+            if (mainParticleSystem == null)
+                mainParticleSystem = GetComponent<ParticleSystem>();
 
-            if (particleSystem != null) {
+            if (mainParticleSystem != null) {
                 InitializeParticleSystem();
             }
         }
