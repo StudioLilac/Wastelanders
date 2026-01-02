@@ -42,29 +42,6 @@ public class BattleQueueIcons : DisplayableClass
         }  
     }
 
-
-    public override void OnMouseEnter()
-    {
-        // Increase the size of the Combat UI to indicate it's clickable
-        if (CombatManager.Instance.CanHighlight() && !PauseMenuV2.IsPaused)
-        {
-            Vector3 scale = transform.localScale;
-            scale *= 1.25f;
-            transform.localScale = scale;
-            HighlightTarget();
-            ShowCard();
-        }
-    }
-
-    public override void OnMouseExit()
-    {
-        // Reset the size when the mouse is no longer over the Combat UI
-        Vector3 scale = new Vector3(20, 20, (float)1.25);
-        transform.localScale = scale;
-        DeHighlightTarget();
-        HideCard();
-    }
-
     public void RenderBQIcon(ActionClass ac)
     {
         ActionClass = ac;
