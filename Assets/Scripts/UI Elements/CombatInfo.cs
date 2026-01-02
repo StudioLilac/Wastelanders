@@ -351,6 +351,9 @@ public class CombatInfo : MonoBehaviour
             buffIcon.transform.SetParent(buffList.transform, false);
             buffIcon.SetIcon(buffs[str].GetIcon());
             buffIcon.SetText(buffs[str].Stacks.ToString());
+            buffIcon.buffName = str;
+            buffIcon.stacks = buffs[str].Stacks;
+            buffIcon.buffIcon = buffs[str].GetIcon();
             if (IsFacingRight())
             {
                 FlipTransform(buffIcon.transform, true);

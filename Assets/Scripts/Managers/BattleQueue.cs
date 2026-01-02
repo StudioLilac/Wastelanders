@@ -140,6 +140,19 @@ public class BattleQueue : MonoBehaviour
         return new(actionQueue.GetList());
     }
 
+    // Returns true iff the given action is part of a clash
+    public bool IsActionPartOfClash(ActionClass action)
+    {
+        foreach (var wrapper in actionQueue.GetList())
+        {
+            if (wrapper.IsClashing() && (wrapper.PlayerAction == action || wrapper.EnemyAction == action))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     // A sorted array implementation for ActionWrapper No duplicate speed invariants inherently added for flexibility in the future.
     // However, please call CanInsertCard if you want to prevent the player from inserting cards with dupicate speeds
     internal class SortedArray
