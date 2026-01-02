@@ -56,7 +56,7 @@ public abstract class DisplayableClass : SelectClass
             HighlightTarget();
             ShowCard();
             if (ActionClass != null) {
-                EventBus.Raise(new DisplayableHoveredEvent(ActionClass));
+                new DisplayableHoveredEvent(ActionClass).Invoke();
             }
         }
     }
@@ -69,7 +69,7 @@ public abstract class DisplayableClass : SelectClass
             grewLarger = false;
             DeHighlightTarget();
             HideCard();
-            EventBus.Raise(new DisplayableUnhoveredEvent());
+            new DisplayableUnhoveredEvent().Invoke();
         }
     }
 }
