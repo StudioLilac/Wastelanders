@@ -1,0 +1,116 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4fafe43b89343e3a7ba1235e8987c0f, type: 3}
+  m_Name: 2 SoldierResults
+  m_EditorClassIdentifier: 
+  Entries:
+  - content: "So, Jackie, today\u2019s the big day again, you excited to hear your
+      test scores?"
+    speaker: {fileID: 11400000, guid: 8121c10b25930fa4dadfab5bd0c5fefe, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events:
+    - rid: 3264111934402461768
+    - rid: 3264111934402461770
+    - rid: 3264111934402461769
+    - rid: 3264111934402461767
+  - content: "As ready as I\u2019ll be. I\u2019ve been waiting ages for today."
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events:
+    - rid: 3264111934402461772
+    - rid: 3264111934402461775
+    - rid: 3264111934402461771
+    - rid: 3264111934402461774
+  - content: Well, you got here just in time, seems like the broadcast is starting.
+    speaker: {fileID: 11400000, guid: 8121c10b25930fa4dadfab5bd0c5fefe, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: '*CHZHCKK*'
+    speaker: {fileID: 11400000, guid: 474297f421f8c524e85a2e1640557075, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: Good morning citizens of New Haven City.
+    speaker: {fileID: 11400000, guid: 474297f421f8c524e85a2e1640557075, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: They discovered a newfound Waste power source five times more efficient
+      than what we synthesize today!
+    speaker: {fileID: 11400000, guid: 474297f421f8c524e85a2e1640557075, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: This great achievement means a safer city! Celebrate these heroes you
+      get the chance.
+    speaker: {fileID: 11400000, guid: 474297f421f8c524e85a2e1640557075, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: Nevertheless, this broadcast will announce the score of the NITES exam
+      candidates in energy units collected, and whether they passed.
+    speaker: {fileID: 11400000, guid: 474297f421f8c524e85a2e1640557075, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 3264111934402461767
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 8121c10b25930fa4dadfab5bd0c5fefe, type: 2}
+        sprite: {fileID: 21300000, guid: 01abf656002dc52488bb7a70d993c55d, type: 3}
+    - rid: 3264111934402461768
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 8121c10b25930fa4dadfab5bd0c5fefe, type: 2}
+        action: 40
+        duration: 0
+    - rid: 3264111934402461769
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 8121c10b25930fa4dadfab5bd0c5fefe, type: 2}
+        action: 10
+        duration: 1
+    - rid: 3264111934402461770
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 8121c10b25930fa4dadfab5bd0c5fefe, type: 2}
+        action: 60
+        duration: 1
+    - rid: 3264111934402461771
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        action: 50
+        duration: 0
+    - rid: 3264111934402461772
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        sprite: {fileID: 21300000, guid: 422f3cda08073664b8a46361afe442fb, type: 3}
+    - rid: 3264111934402461774
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        action: 30
+        duration: 1
+    - rid: 3264111934402461775
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        action: 60
+        duration: 1
