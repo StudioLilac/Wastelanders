@@ -96,17 +96,18 @@ public class QueenBeetle : EnemyClass
     {
         bool usedSpawnThisRound = false;
         var hatchery = deck[0];
+        var hatchery2 = deck[1];
         for (int i = 0; i < 2; i++)
         {
             if (GetBuffStacks(Resonate.buffName) >= 2 && FindFirstOpenSlot() != -1 && (!usedSpawnThisRound || NumberOfAvailableSlots() > 1)) //Last condition fixes a bug where the queen can try to spawn 2 beetles but then hit the max spawn cap
             {
-                AttackWith(hatchery, CalculateAttackTarget(targets));
+                AttackWith(usedSpawnThisRound ? hatchery2 : hatchery, CalculateAttackTarget(targets));
                 usedSpawnThisRound = true;
             }
             else
             {
-                // Deck[1] and deck[2] are both fragments. They must be different otherwise retargeting one will retarget both.
-                AttackWith(deck[i + 1], CalculateAttackTarget(targets));
+                // Deck[2] and deck[3] are both fragments. They must be different otherwise retargeting one will retarget both.
+                AttackWith(deck[i + 2], CalculateAttackTarget(targets));
             }
         }
     }
