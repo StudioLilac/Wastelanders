@@ -56,3 +56,5 @@ MonoBehaviour:
     popupManager: {fileID: -6348610105375762745, guid: dd2d1aac4fcb04e4995a2a5801677b35, type: 3}
     gameOver: {fileID: 3262440243184028450, guid: 8b6d446295f329442acd33132a6a5c1a, type: 3}
     dialogueBoxV2: {fileID: 5527553069504941489, guid: 33c870c32d0974dd4945fec924d1223e, type: 3}
+    arrowIndicatorManager: {fileID: 52575332116664228, guid: ea5cc50863a775645ba342e958c04e62, type: 3}
+    tooltip: {fileID: 5694149662472277880, guid: 4524d47b539ea464c9018f4aae690ce3, type: 3}

@@ -175,7 +175,7 @@ public class PreQueenFight : DialogueClasses
 
 
         
-        if (!GameStateManager.Instance.JumpToCombat)
+        if (!GameStateManager.Instance.JumpToCombat && !jumpToCombat)
         {   
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(initialPlanByJackie.Dialogue));
 

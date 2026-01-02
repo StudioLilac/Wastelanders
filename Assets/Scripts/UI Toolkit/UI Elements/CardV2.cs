@@ -135,7 +135,7 @@ namespace UI_Toolkit.UI_Elements
             }
             dragging = false;
             
-            actionClass.ToggleUnSelected();
+            actionClass.ToggleSelected();
             TryClickEntity(eventData.position);
             
             style.translate = StyleKeyword.Null;
@@ -146,11 +146,7 @@ namespace UI_Toolkit.UI_Elements
         // we need to convert coordinates accordingly.
         Vector2 ToScreenPoint(Vector2 panelPos)
         {
-            float scale = panel.scaledPixelsPerPoint;
-            return new Vector2(
-                panelPos.x * scale,
-                (panel.visualTree.layout.height - panelPos.y) * scale
-            );
+            return UICoordinateHelper.ToScreenPoint(panelPos, panel);
         }
         
         // Raycasts from the screen point to world space, looking for EntityClasses. If it finds one, it uses the
@@ -172,7 +168,6 @@ namespace UI_Toolkit.UI_Elements
 
             if (!Physics.Raycast(ray, out RaycastHit hit, 1000f))
             {
-                HighlightManager.Instance.ResetCurrentHighlightedAction();
                 return;
             }
 
@@ -187,7 +182,6 @@ namespace UI_Toolkit.UI_Elements
             
             if (enemy == null)
             {
-                HighlightManager.Instance.ResetCurrentHighlightedAction();
                 return;
             }
 
