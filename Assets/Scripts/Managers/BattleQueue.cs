@@ -89,7 +89,7 @@ public class BattleQueue : MonoBehaviour
                 GameObject clashingRenderedCopy = Instantiate(clashingPrefab, new Vector3(100, 100, -10), Quaternion.identity);
                 ActionClass leftClashItem = battlingWrapper.PlayerAction!;
                 ActionClass rightClashItem = battlingWrapper.EnemyAction!;
-                clashingRenderedCopy.GetComponent<ClashingBattleQueueIcon>().renderClashingIcons(leftClashItem, rightClashItem);
+                clashingRenderedCopy.GetComponent<ClashingBattleQueueIcon>().RenderClashingIcons(leftClashItem, rightClashItem);
                 clashingRenderedCopy.transform.SetParent(bqContainer, false);
             } else
             {

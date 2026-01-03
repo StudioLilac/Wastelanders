@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5114960397026057154}
   - component: {fileID: 4889160484734648282}
+  - component: {fileID: 6621047302733197497}
   m_Layer: 0
   m_Name: iron-swords-clash
   m_TagString: Untagged
@@ -49,6 +50,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -73,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 2146528631
   m_SortingLayer: 1
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
+  m_Sprite: {fileID: -5106593482681989063, guid: dbbb2e6520bb75a4f87347992d62b374, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -84,6 +88,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &6621047302733197497
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3593403167292888625}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: efab7e9b342b63242853a4720e94637f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5469894721144988013
 GameObject:
   m_ObjectHideFlags: 0
@@ -140,6 +166,7 @@ MonoBehaviour:
   leftClashingAction: {fileID: 7174745963015938159}
   rightClashingAction: {fileID: 4683123950711438762}
   swordsIcon: {fileID: 4889160484734648282}
+  swordsAnimator: {fileID: 6621047302733197497}
 --- !u!114 &6069768141182838962
 MonoBehaviour:
   m_ObjectHideFlags: 0
