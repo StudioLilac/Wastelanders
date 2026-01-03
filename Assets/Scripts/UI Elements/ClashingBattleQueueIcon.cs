@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 #nullable enable
 public class ClashingBattleQueueIcon : MonoBehaviour
@@ -10,21 +11,12 @@ public class ClashingBattleQueueIcon : MonoBehaviour
     private BattleQueueIcons leftClashingAction = null!;
     [SerializeField]
     private BattleQueueIcons rightClashingAction = null!;
-    [SerializeField]
-    private SpriteRenderer swordsIcon = null!;
 
-    [SerializeField] private Animator swordsAnimator = null!;
-    private static readonly int ClashStateHash = Animator.StringToHash("ClashState");
+    [SerializeField] private SwordIcon swordIcon = null!;
+
     private static readonly ClashCalculator Calculator = new();
     private ActionClass leftClashing = null!;
     private ActionClass rightClashing = null!;
-
-
-    public void Start()
-    {
-        swordsIcon.sortingLayerName = CombatFadeScreenHandler.Instance.FADE_SORTING_LAYER;
-        swordsIcon.sortingOrder = CombatFadeScreenHandler.Instance.FADE_SORTING_ORDER + 6;
-    }
 
     // Public initializer for this icon
     public void RenderClashingIcons(ActionClass leftClashingItem,  ActionClass rightClashingItem)
@@ -46,15 +38,8 @@ public class ClashingBattleQueueIcon : MonoBehaviour
         rightClashing.CardValuesUpdating -= UpdateSwordIcon;
     }
 
-    private void SetClashState(ClashResultType result)
-    {
-        swordsAnimator.SetInteger(ClashStateHash, (int) result);
-    }
-
-    private void UpdateSwordIcon(ActionClass? _)
-    {
-        SetClashState(Calculator.CompareRange(GetRange(leftClashing), GetRange(rightClashing)));
-    }
+    private void UpdateSwordIcon(ActionClass? _) =>
+        swordIcon.SetClashState(Calculator.CompareRange(GetRange(leftClashing), GetRange(rightClashing)));
 
     private (int, int) GetRange(ActionClass actionClass) => ((actionClass.GetRolledStats().RollFloor), (actionClass.GetRolledStats().RollCeiling));
 }
@@ -63,20 +48,20 @@ public enum ClashResultType
 {
     None = 0,
     Dominating = 1,
-    Favoured = 2,
-    Neutral = 3,
-    Struggling = 4,
-    Hopeless = 5
+    Favored = 2,
+    Even = 3,
+    Unfavored = 4,
+    Futile = 5
 }
 
 public class ClashCalculator
 {
     private readonly List<ClashBracket> _brackets = new()
     {
-        new ClashBracket { Threshold = 0.2f, Result = ClashResultType.Hopeless },   // 0% - 20%
-        new ClashBracket { Threshold = 0.4f, Result = ClashResultType.Struggling }, // 20% - 40%
-        new ClashBracket { Threshold = 0.6f, Result = ClashResultType.Neutral },    // 40% - 60%
-        new ClashBracket { Threshold = 0.8f, Result = ClashResultType.Favoured },   // 60% - 80%
+        new ClashBracket { Threshold = 0.2f, Result = ClashResultType.Futile },   // 0% - 20%
+        new ClashBracket { Threshold = 0.4f, Result = ClashResultType.Unfavored }, // 20% - 40%
+        new ClashBracket { Threshold = 0.6f, Result = ClashResultType.Even },    // 40% - 60%
+        new ClashBracket { Threshold = 0.8f, Result = ClashResultType.Favored },   // 60% - 80%
         new ClashBracket { Threshold = 1.0f, Result = ClashResultType.Dominating }  // 80% - 100%
     };
 
