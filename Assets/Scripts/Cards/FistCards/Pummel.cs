@@ -23,7 +23,19 @@ public class Pummel : FistCards
         base.Initialize();
     }
 
-    public override void ApplyEffect()
+    public override void CardIsUnstaggered()
+    {
+        base.CardIsUnstaggered();
+        InsertDuplicate();
+    }
+
+    public override void OnCardStagger()
+    {
+        base.OnCardStagger();
+        InsertDuplicate();
+    }
+
+    public void InsertDuplicate()
     {
         if (cardVersion == 1)
         {
@@ -50,6 +62,5 @@ public class Pummel : FistCards
             activeDuplicateInstance.Target = Target;
             BattleQueue.BattleQueueInstance.AddAction(activeDuplicateInstance!);
         }
-        base.ApplyEffect();
     }
 }

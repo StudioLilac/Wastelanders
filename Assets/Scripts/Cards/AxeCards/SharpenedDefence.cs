@@ -16,18 +16,13 @@ public class SharpenedDefence : AxeCards
         CardType = CardType.Defense;    
 
         myName = "Sharpened Defence";
-        description = "Inflict 2 wound on the target.";
+        description = "Inflict wound equal to damage blocked.";
     }
 
-    public override void CardIsUnstaggered()
+    public override void OnDefendClash(ActionClass opposingCard)
     {
-        base.CardIsUnstaggered();
-        Target.AddStacks(Wound.buffName, 2);
-    }
-
-    public override void OnCardStagger()
-    {
-        base.OnCardStagger();
-        Target.AddStacks(Wound.buffName, 2);
+        int blockedDamage = Mathf.Min(opposingCard.GetRolledStats().ActualRoll, GetRolledStats().ActualRoll);
+        Target.AddStacks(Wound.buffName, blockedDamage);
+        base.OnDefendClash(opposingCard);
     }
 }

@@ -21,7 +21,19 @@ public class CounterStrike : StaffCards
         base.Initialize();
     }
 
-    public override void ApplyEffect()
+    public override void CardIsUnstaggered()
+    {
+        base.CardIsUnstaggered();
+        InsertDuplicate();
+    }
+
+    public override void OnCardStagger()
+    {
+        base.OnCardStagger();
+        InsertDuplicate();
+    }
+
+    private void InsertDuplicate()
     {
         if (originalCopy)
         {
@@ -37,7 +49,6 @@ public class CounterStrike : StaffCards
             activeDuplicateInstance.Target = Target;
             BattleQueue.BattleQueueInstance.AddAction(activeDuplicateInstance!);
         }
-        base.ApplyEffect();
     }
 
     public override void OnDefendClash(ActionClass opposingCard)
