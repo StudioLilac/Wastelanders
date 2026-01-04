@@ -7,16 +7,14 @@ public interface IBattleQueueDisplayable
 {
     void Emphasize();
     void DeEmphasize();
-
     GameObject GameObject { get;  }
 }
 
 public class BattleQueueIcons : DisplayableClass, IBattleQueueDisplayable
 {
+    public GameObject GameObject => gameObject;
     [SerializeField] SpriteRenderer targetRenderer;
     private SpriteRenderer iconRenderer;
-    public GameObject GameObject => gameObject;
-
     private int FadeSortingOrder => CombatFadeScreenHandler.Instance.FADE_SORTING_ORDER;
     private string FadeSortingLayer => CombatFadeScreenHandler.Instance.FADE_SORTING_LAYER;
 

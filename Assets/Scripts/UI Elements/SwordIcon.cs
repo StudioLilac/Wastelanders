@@ -16,7 +16,6 @@ public class SwordIcon: MonoBehaviour
     {
         swordsIcon.sortingLayerName = CombatFadeScreenHandler.Instance.FADE_SORTING_LAYER;
         swordsIcon.sortingOrder = CombatFadeScreenHandler.Instance.FADE_SORTING_ORDER + 6;
-
     }
 
     public void DeEmphasize()

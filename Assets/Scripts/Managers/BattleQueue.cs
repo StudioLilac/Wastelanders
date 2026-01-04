@@ -137,6 +137,7 @@ public class BattleQueue : MonoBehaviour
                 yield return StartCoroutine(CardComparator.Instance.OneSidedAttack(actionWrapper));
             }
 
+            RenderBQ(); //Optional catch all for safety, current testing says this can be removed for performance gains.
         }
         if (CombatManager.Instance.GameState == GameState.FIGHTING)
         {
@@ -211,7 +212,6 @@ public class BattleQueue : MonoBehaviour
                 {
                     existingWrapper.SetClashingAction(actionCard);
                     array.Remove(existingWrapper);
-                    existingWrapper.DestroyBoundIcon();
                     return existingWrapper;
                 }
             }
@@ -243,7 +243,6 @@ public class BattleQueue : MonoBehaviour
                 if (existingWrapper.PlayerAction == removedCard || existingWrapper.EnemyAction == removedCard)
                 {
                     array.Remove(existingWrapper);
-                    existingWrapper.DestroyBoundIcon();
                     if (existingWrapper.IsClashing())
                     {
                         // Restores the targetting of the enemy card if the card was retrieved by the player
