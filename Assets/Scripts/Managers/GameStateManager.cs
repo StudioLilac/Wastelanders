@@ -64,19 +64,26 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
         StartCoroutine(FadeAndLoadScene(scene));
     }
 
+    private bool isFadingOut = false;
     private IEnumerator FadeAndLoadScene(string scene)
     {
-        yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInDarkScreen(0.6f));
-        yield return new WaitForSeconds(0.2f);
-        SaveLoadSystem.Instance.SaveGame();
-        SceneManager.LoadScene(scene);
-        yield return new WaitForEndOfFrame();
-        yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(0.6f));
+        if (!isFadingOut)
+        {
+            isFadingOut = true;
+            yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInDarkScreen(0.3f));
+            yield return new WaitForSeconds(0.1f);
+            SaveLoadSystem.Instance.SaveGame();
+            SceneManager.LoadScene(scene);
+            isFadingOut = false;
+            yield return new WaitForEndOfFrame();
+            yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(0.5f));
+        }
     }
 
     public const string SORTING_LAYER_TOP = "Top";
 
     /*
+     *
      * TEMPORARY FLAGS
      */
 

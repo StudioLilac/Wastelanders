@@ -38,7 +38,6 @@ public class DeckSelectionManager : MonoBehaviour
     public WeaponAmount weaponText;
     public PointsAmount pointsText;
     public BuffExplainer buffExplainer;
-    private bool isFadingOut = false;
     public static DeckSelectionManager Instance { get; private set; }
 #nullable enable
     public delegate void PlayerActionDeckDelegate(int points);
@@ -130,27 +129,20 @@ public class DeckSelectionManager : MonoBehaviour
         }
         else if (DeckSelectionState == DeckSelectionState.CharacterSelection)
         {
-            // Save user Data here
-            StartCoroutine(ExitDeckSelection());
+            ExitDeckSelection();
         }
     }
 
     public void OnHomeButtonClicked()
     {
-        StartCoroutine(ExitDeckSelection());
+        ExitDeckSelection();
     }
 
-    private IEnumerator ExitDeckSelection()
+    private void ExitDeckSelection()
     {
-        if (!isFadingOut)
-        {
-            isFadingOut = true;
-            SaveLoadSystem.Instance.SaveGame();
-            //EditorUtility.SetDirty(playerDatabase); // For easily resetting the default weaponDeck of playerDatabase
-            yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInDarkScreen(0.6f));
-            GameStateManager.Instance.LoadScene(nextScene);
-            isFadingOut = false;
-        }
+        SaveLoadSystem.Instance.SaveGame();
+        //EditorUtility.SetDirty(playerDatabase); // For easily resetting the default weaponDeck of playerDatabase
+        GameStateManager.Instance.LoadScene(nextScene);
     }
     public void SetNextScene(string newScene)
     {

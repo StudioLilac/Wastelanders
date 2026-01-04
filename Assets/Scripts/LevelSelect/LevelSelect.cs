@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class LevelSelect : MonoBehaviour
 {
-    protected void Awake()
-    {
-        UIFadeScreenManager.Instance.SetDarkScreen();
-        StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(1f));
-    }
-
     public void OnEnable()
     {
         StageInformation.StageInformationEvent += OpenScene;
@@ -23,13 +17,13 @@ public class LevelSelect : MonoBehaviour
 
     protected void OpenScene(string s)
     {
-        StartCoroutine(FadeLevelIn(s));
+        FadeLevelIn(s);
     }
 
     private void OpenBountyByTypeName(BountyInformation bountyInformation)
     {
         BountyManager.Instance.SelectedBountyInformation = bountyInformation;
-        StartCoroutine(FadeLevelIn(SceneData.Get<SceneData.ContractSelect>().SceneName));
+        FadeLevelIn(SceneData.Get<SceneData.ContractSelect>().SceneName);
     }
 
     public void DeckSelect()
@@ -77,9 +71,8 @@ public class LevelSelect : MonoBehaviour
         OpenBountyByTypeName(BountyInformation.PRINCESS_FROG_BOUNTY);
     }
 
-    IEnumerator FadeLevelIn(string levelName)
+    void FadeLevelIn(string levelName)
     {
-        yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInDarkScreen(0.6f));
         GameStateManager.Instance.LoadScene(levelName);
     }
 }
