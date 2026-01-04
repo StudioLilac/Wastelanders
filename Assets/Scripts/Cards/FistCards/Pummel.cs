@@ -35,7 +35,7 @@ public class Pummel : FistCards
         InsertDuplicate();
     }
 
-    public void InsertDuplicate()
+    private void InsertDuplicate()
     {
         if (cardVersion == 1)
         {
