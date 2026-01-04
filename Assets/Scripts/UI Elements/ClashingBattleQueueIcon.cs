@@ -5,18 +5,19 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 #nullable enable
-public class ClashingBattleQueueIcon : MonoBehaviour
+public class ClashingBattleQueueIcon : MonoBehaviour, IBattleQueueDisplayable
 {
+    public GameObject GameObject => gameObject;
     [SerializeField]
     private BattleQueueIcons leftClashingAction = null!;
     [SerializeField]
     private BattleQueueIcons rightClashingAction = null!;
-
     [SerializeField] private SwordIcon swordIcon = null!;
 
     private static readonly ClashCalculator Calculator = new();
     private ActionClass leftClashing = null!;
     private ActionClass rightClashing = null!;
+
 
     // Public initializer for this icon
     public void RenderClashingIcons(ActionClass leftClashingItem,  ActionClass rightClashingItem)
@@ -29,6 +30,7 @@ public class ClashingBattleQueueIcon : MonoBehaviour
         leftClashingItem.CardValuesUpdating += UpdateSwordIcon;
         rightClashingItem.CardValuesUpdating += UpdateSwordIcon;
 
+        Emphasize();
         UpdateSwordIcon(null);
     }
 
@@ -36,6 +38,20 @@ public class ClashingBattleQueueIcon : MonoBehaviour
     {
         leftClashing.CardValuesUpdating -= UpdateSwordIcon;
         rightClashing.CardValuesUpdating -= UpdateSwordIcon;
+    }
+
+    public void Emphasize()
+    {
+        swordIcon.Emphasize();
+        leftClashingAction.Emphasize();
+        rightClashingAction.Emphasize();
+    }
+
+    public void DeEmphasize()
+    {
+        swordIcon.DeEmphasize();
+        leftClashingAction.DeEmphasize();
+        rightClashingAction.DeEmphasize();
     }
 
     private void UpdateSwordIcon(ActionClass? _) =>
@@ -58,11 +74,11 @@ public class ClashCalculator
 {
     private readonly List<ClashBracket> _brackets = new()
     {
-        new ClashBracket { Threshold = 0.2f, Result = ClashResultType.Futile },   // 0% - 20%
-        new ClashBracket { Threshold = 0.4f, Result = ClashResultType.Unfavored }, // 20% - 40%
-        new ClashBracket { Threshold = 0.6f, Result = ClashResultType.Even },    // 40% - 60%
-        new ClashBracket { Threshold = 0.8f, Result = ClashResultType.Favored },   // 60% - 80%
-        new ClashBracket { Threshold = 1.0f, Result = ClashResultType.Dominating }  // 80% - 100%
+        new ClashBracket(0.2f, ClashResultType.Futile),
+        new ClashBracket(0.4f, ClashResultType.Unfavored),
+        new ClashBracket(0.6f, ClashResultType.Even),
+        new ClashBracket(0.8f, ClashResultType.Favored), 
+        new ClashBracket(1.0f, ClashResultType.Dominating)
     };
 
     [SerializeField] private bool _winsIncludeTies = true;
@@ -102,10 +118,6 @@ public class ClashCalculator
         return winningCombinations / totalCombinations;
     }
 
-    [System.Serializable]
-    private struct ClashBracket
-    {
-        public float Threshold;
-        public ClashResultType Result;
-    }
+
+    private record ClashBracket(float Threshold, ClashResultType Result) { }
 }

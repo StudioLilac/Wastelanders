@@ -7,14 +7,24 @@ public class SwordIcon: MonoBehaviour
     [SerializeField] private Animator swordsAnimator = null!;
     private ClashResultType currentClashType = default;
 
-    public void Start()
+    public void Awake()
+    {
+        Emphasize();
+    }
+
+    public void Emphasize()
     {
         swordsIcon.sortingLayerName = CombatFadeScreenHandler.Instance.FADE_SORTING_LAYER;
         swordsIcon.sortingOrder = CombatFadeScreenHandler.Instance.FADE_SORTING_ORDER + 6;
+
+    }
+
+    public void DeEmphasize()
+    {
+        swordsIcon.sortingOrder = CombatFadeScreenHandler.Instance.FADE_SORTING_ORDER - 1;
     }
 
     public void OnMouseEnter() => new TooltipText(currentClashType.ToString().ToUpper(), true).Invoke();
-    
 
     public void OnMouseExit() => new TooltipText(currentClashType.ToString().ToUpper(), false).Invoke();
     
