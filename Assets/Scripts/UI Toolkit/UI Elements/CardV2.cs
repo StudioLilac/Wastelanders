@@ -219,20 +219,21 @@ namespace UI_Toolkit.UI_Elements
 
         private static void ApplyStatStyle(Label label,int buffValue)
         {
-            label.style.unityFontStyleAndWeight = FontStyle.Bold;
-            if (buffValue > 0)
+            var (targetColor, fontStyle, blur) = buffValue switch
             {
-                label.style.color = Color.green;
-            }
-            else if (buffValue < 0)
+                > 0 => (Color.green, FontStyle.Bold, 2f),
+                < 0 => (Color.red, FontStyle.Bold, 2f),
+                _ => (Color.black, FontStyle.Normal, 0f) 
+            };
+
+            label.style.color = targetColor;
+            label.style.unityFontStyleAndWeight = fontStyle;
+            label.style.textShadow = new TextShadow
             {
-                label.style.color = Color.red;
-            }
-            else
-            {
-                label.style.color = Color.black;
-                label.style.unityFontStyleAndWeight = FontStyle.Normal;
-            }
+                offset = Vector2.zero,
+                blurRadius = blur,
+                color = targetColor
+            };
         }
     }
 }
