@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class BattleQueue : MonoBehaviour
@@ -74,6 +75,7 @@ public class BattleQueue : MonoBehaviour
     private void RenderBQ()
     {
         List<ActionWrapper> queue = actionQueue.GetList();
+        new OnQueueRendered(new(queue)).Invoke();
 
         foreach (Transform child in bqContainer.transform)
         {
@@ -288,8 +290,9 @@ public class BattleQueue : MonoBehaviour
             return array;
         }
     }
+    public record OnQueueRendered(List<ActionWrapper> Items) : IEvent { }
 
-    internal class ActionWrapper
+    public class ActionWrapper
     {
         public ActionClass? PlayerAction { get; private set; } 
         public ActionClass? EnemyAction { get; private set; }

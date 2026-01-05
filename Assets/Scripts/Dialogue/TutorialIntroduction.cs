@@ -21,7 +21,7 @@ public class TutorialIntroduction : DialogueClasses
     [SerializeField] private Transform dummy1StartingPos;
     [SerializeField] private Transform jackieEndPosition;
     [SerializeField] private Transform ivesPassiveBattlePosition;
-
+    [SerializeField] private Image battleBeginButton;
 
 
     [SerializeField] private Sprite laidBackSprite;
@@ -227,6 +227,7 @@ public class TutorialIntroduction : DialogueClasses
     {
         EntityClass.OnEntityDeath += FirstDummyDies; //Setup Listener to set state to Game Win
         PlayerClass.playerReshuffleDeck += PlayerLostOneMaxHandSize;
+        battleBeginButton.enabled = false;
         StartCoroutine(StartTutorial());
     }
 
@@ -279,6 +280,7 @@ public class TutorialIntroduction : DialogueClasses
         HighlightManager.Instance.PlayerManuallyInsertedAction -= OnPlayerFirstInsertCard;
         DialogueManager.Instance.MoveBoxToBottom();
         DialogueManager.Instance.DisplayNextSentence();
+        battleBeginButton.enabled = true;
         StartCoroutine(StartDialogueWithNextEvent(queueUpActionsTutorial.Dialogue, () => { CardComparator.Instance.playersAreRollingDiceEvent += OnPlayerFightsDummy; }));
     }
 

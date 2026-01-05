@@ -25,7 +25,6 @@ namespace UI_Toolkit
             infoElem = rootElem.Q<VisualElement>("layout-info-container");
             rootDocument.panelSettings.sortingOrder = UISortOrder.Hudv2.GetOrder();
 
-            RegisterCallbacks();
             LoadInitialValues();
         }
         
@@ -82,16 +81,6 @@ namespace UI_Toolkit
         private void OnHideCardInfo(ActionClass ac)
         {
             infoElem.style.display = DisplayStyle.None;
-        }
-
-        private static void OnConfirmClicked()
-        {
-            BattleQueue.BattleQueueInstance.BeginDequeue();
-        }
-
-        private void RegisterCallbacks()
-        {
-            rootElem.Q<Button>("btn-start").clicked += OnConfirmClicked;
         }
 
         private void LoadInitialValues()
