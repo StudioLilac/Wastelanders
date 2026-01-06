@@ -18,6 +18,30 @@ public class PlayerDatabase : ScriptableObject, IBind<PlayerInformation>
 
     public SerializableGuid Id { get; set; }
 
+    private void OnEnable()
+    {
+        CardDatabase.OnInvalidCardFound += HandleInvalidCardDetected;
+    }
+
+    private void OnDisable()
+    {
+        CardDatabase.OnInvalidCardFound -= HandleInvalidCardDetected;
+    }
+
+    private void HandleInvalidCardDetected(SerializableActionClassInfo invalidTuple)
+    {
+        string badCardName = invalidTuple.ActionClassName;
+        Debug.LogWarning($"[PlayerDatabase] Received cleanup request for: {badCardName}. Scrubbing data...");
+
+        int removedJackie = JackieData.PurgeCardByName(badCardName);
+        int removedIves = IvesData.PurgeCardByName(badCardName);
+
+        if (removedJackie + removedIves > 0)
+        {
+            Debug.Log($"[PlayerDatabase] Cleanup Complete. Removed {removedJackie + removedIves} instances of '{badCardName}' to prevent crashes.");
+        }
+    }
+
     public PlayerData GetDataByPlayerName(PlayerName player)
     {
         return player switch
@@ -179,11 +203,24 @@ public class PlayerDatabase : ScriptableObject, IBind<PlayerInformation>
             {
                 if (entry.weapon == weaponType)
                 {
-                    return entry.weaponDeck;
+                    return new(entry.weaponDeck);
                 }
             }
 
             return new List<SerializableActionClassInfo>();
+        }
+
+        public int PurgeCardByName(string targetCardName)
+        {
+            int totalRemoved = 0;
+
+            foreach (var weaponEntry in playerDeck)
+            {
+                int count = weaponEntry.weaponDeck.RemoveAll(card => card.ActionClassName == targetCardName);
+                totalRemoved += count;
+            }
+
+            return totalRemoved;
         }
     }
 
