@@ -1,4 +1,6 @@
-public class SharpenedDefence : AxeCards
+using UnityEngine;
+
+public class RazorGuard : AxeCards
 {
     public override void Initialize()
     {

@@ -100,7 +100,7 @@ public class PlayerDatabase : ScriptableObject, IBind<PlayerInformation>
                     WeaponType.AXE,
                     new() 
                     { 
-                        new(typeof(Execute).Name), new(typeof(SharpenedDefence).Name),
+                        new(typeof(Execute).Name), new(typeof(RazorGuard).Name),
                         new(typeof(Cleave).Name), new(typeof(Decimate).Name),
                         new(typeof(Mutilate).Name), new(typeof(Whirl).Name)
                     }
