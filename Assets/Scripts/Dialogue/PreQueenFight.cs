@@ -1,13 +1,9 @@
 using LevelSelectInformation;
 using SceneBuilder;
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.ConstrainedExecution;
-using Systems.Persistence;
-using TMPro;
+using Particles;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static BattleIntroEnum;
 
@@ -62,9 +58,12 @@ public class PreQueenFight : DialogueClasses
     [SerializeField] private List<Beetle> queenGuardBeetles;
     [SerializeField] private List<Transform> queenGuardBeetleTransforms;
 
+    [SerializeField] private Image endOfExamImage;
+    [SerializeField] private SpriteRenderer treeSprite;
+    [SerializeField] private Rain rain;
 
     [SerializeField] private bool jumpToCombat;
-    [SerializeField] private SpriteFadeHandler spriteFadeHandler;
+    [SerializeField] private bool instaKill;
     private DefaultSceneBuilder defaultSceneBuilder;
 
 
@@ -84,6 +83,7 @@ public class PreQueenFight : DialogueClasses
 
     private const float BRIEF_PAUSE = 0.2f; // For use after an animation to make it visually seem smoother
     private const float MEDIUM_PAUSE = 1f; //For use after a text box comes down and we want to add some weight to the text.
+
     
     protected override void GameStateChange(GameState gameState)
     {
@@ -98,12 +98,14 @@ public class PreQueenFight : DialogueClasses
         DialogueBox.ClearDialogueEvents();
         CombatManager.ClearEvents();
         Beetle.OnGainBuffs -= ExplainBeetleBuff;
+        DialogueBox.DialogueBoxEvent -= FadeInBackground;
     }
 
     private IEnumerator ExecuteGameStart()
     {
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
         CombatManager.Instance.SetDarkScreen();
+        rain.SetIntensity(0);
 
         yield return new WaitForSeconds(0.5f);
         ives.OutOfCombat();
@@ -166,7 +168,7 @@ public class PreQueenFight : DialogueClasses
 
 
         
-        if (!GameStateManager.Instance.JumpToCombat)
+        if (!GameStateManager.Instance.JumpToCombat && !jumpToCombat)
         {   
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(initialPlanByJackie.Dialogue));
 
@@ -389,6 +391,8 @@ public class PreQueenFight : DialogueClasses
 
                 yield return StartCoroutine(DialogueManager.Instance.StartDialogue(planThreeDialogue.Dialogue));
                 yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(0.5f));
+                
+                rain.SetIntensity(1);
 
                 var jackieSprite = jackie.GetComponent<SpriteRenderer>();
                 var oldLayer = treeOverlay.sortingLayerName;
@@ -462,6 +466,7 @@ public class PreQueenFight : DialogueClasses
             CleanUpScene2();
             CleanUpScene3();
 
+            rain.SetIntensity(1);
             yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(0.5f));
         }
         {
@@ -531,10 +536,18 @@ public class PreQueenFight : DialogueClasses
                 crystal.InCombat();
             }
 
+            if (instaKill)
+            {
+                jackie.AddStacks(Accuracy.buffName, 900);
+                jackie.AddStacks(Resonate.buffName, 900);
+            }
+
+            treeSprite.gameObject.SetActive(false);
             CombatManager.Instance.BeginCombat();
             new BattleIntroEvent(Get<ClashIntro>()).Invoke();
             BeginQueenCombat();
             yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
+
             AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
 
             GameStateManager.Instance.FirstTimeFinished = GameStateManager.Instance.CurrentLevelProgress < StageInformation.PRINCESS_FROG_FIGHT.LevelID;
@@ -544,12 +557,19 @@ public class PreQueenFight : DialogueClasses
             DialogueManager.Instance.MoveBoxToBottom();
 
             yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
-
+            DialogueBox.DialogueBoxEvent += FadeInBackground;
+            yield return new WaitUntil(() => (!DialogueManager.Instance.IsInDialogue()));
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(PostFight.Dialogue));
 
             GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.PostQueenFight>().SceneName);
         }
         
+    }
+
+    void FadeInBackground()
+    {
+        DialogueBox.DialogueBoxEvent -= FadeInBackground;
+        StartCoroutine(FadeImage(endOfExamImage, 1f, true));
     }
     
     void BeginQueenCombat()
@@ -644,6 +664,29 @@ public class PreQueenFight : DialogueClasses
             yield return null;
         }
 
+    }
+    IEnumerator FadeImage(Image image, float duration, bool fadeIn)
+    {
+        if (fadeIn)
+        {
+            // Fade in
+            image.color = new Color(image.color.r, image.color.g, image.color.b, 0);
+            while (image.color.a < 1.0f)
+            {
+                image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a + (Time.deltaTime / duration));
+                yield return null;
+            }
+        }
+        else
+        {
+            // Fade out
+            image.color = new Color(image.color.r, image.color.g, image.color.b, 1);
+            while (image.color.a > 0.0f)
+            {
+                image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a - (Time.deltaTime / duration));
+                yield return null;
+            }
+        }
     }
 
     void DieInScene(EntityClass entityClass)
