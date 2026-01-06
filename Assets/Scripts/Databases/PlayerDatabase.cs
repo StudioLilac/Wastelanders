@@ -51,11 +51,11 @@ public class PlayerDatabase : ScriptableObject, IBind<PlayerInformation>
             (
             name: typeof(Jackie).Name,
             playerWeaponProficiency: new() {
-                new WeaponProficiency(WeaponType.PISTOL, 12, 12),
-                new WeaponProficiency(WeaponType.STAFF, 12, 12),
-                new WeaponProficiency(WeaponType.AXE, 0, 10),
-                new WeaponProficiency(WeaponType.FIST, 0, 10),
-                new WeaponProficiency(WeaponType.ENEMY, 0, 10)
+                new WeaponProficiency(WeaponType.PISTOL,  12),
+                new WeaponProficiency(WeaponType.STAFF,  12),
+                new WeaponProficiency(WeaponType.AXE, 10),
+                new WeaponProficiency(WeaponType.FIST, 10),
+                new WeaponProficiency(WeaponType.ENEMY, 10)
             },
             selectedWeapons: new() { WeaponType.STAFF, WeaponType.PISTOL },
             playerDeck: new()
@@ -86,11 +86,11 @@ public class PlayerDatabase : ScriptableObject, IBind<PlayerInformation>
         public static readonly PlayerData IVES_DEFAULT = new(
             name: typeof(Ives).Name,
             playerWeaponProficiency: new() {
-                new WeaponProficiency(WeaponType.PISTOL, 0, 10),
-                new WeaponProficiency(WeaponType.STAFF, 0, 10),
-                new WeaponProficiency(WeaponType.AXE, 12, 12),
-                new WeaponProficiency(WeaponType.FIST, 12, 12),
-                new WeaponProficiency(WeaponType.ENEMY, 0, 10)
+                new WeaponProficiency(WeaponType.PISTOL, 10),
+                new WeaponProficiency(WeaponType.STAFF, 10),
+                new WeaponProficiency(WeaponType.AXE, 12),
+                new WeaponProficiency(WeaponType.FIST,  12),
+                new WeaponProficiency(WeaponType.ENEMY,  10)
             },
             selectedWeapons: new() { WeaponType.AXE, WeaponType.FIST },
             playerDeck: new()
@@ -149,7 +149,7 @@ public class PlayerDatabase : ScriptableObject, IBind<PlayerInformation>
             var proficiencyPointsTuple = playerWeaponProficiency.FirstOrDefault(entry => entry.WeaponType == weaponType);
             if (proficiencyPointsTuple == null)
             {
-                proficiencyPointsTuple = new WeaponProficiency(weaponType, 0, 0);
+                proficiencyPointsTuple = new WeaponProficiency(weaponType, 0);
                 playerWeaponProficiency.Add(proficiencyPointsTuple);
             }
             return proficiencyPointsTuple;

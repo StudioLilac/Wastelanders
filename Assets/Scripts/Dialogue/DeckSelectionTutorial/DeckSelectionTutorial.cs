@@ -129,8 +129,6 @@ public class DeckSelectionTutorial : MonoBehaviour
             new(nameof(IronSights)),
             new(nameof(Silencer))
         };
-        WeaponProficiency pointsAvailableForPistol = playerDatabase.JackieData.GetProficiencyPointsTuple(CardDatabase.WeaponType.PISTOL);
-        pointsAvailableForPistol.CurrentPoints = 4;
     }
 
 
