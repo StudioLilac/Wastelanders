@@ -83,7 +83,7 @@ public class CardDatabase : ScriptableObject
         var instantiableCardInfos = tuples.Select(tuple => new InstantiableActionClassInfo(
             actionClass: GetAllCards().Find(actionClass => actionClass.GetType().Name == tuple.ActionClassName),
             isEvolved: tuple.IsEvolved)
-        ).ToList();
+        ).Where(item => item.ActionClass != null).ToList();
         return instantiableCardInfos;
     }
 
