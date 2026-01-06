@@ -6,6 +6,8 @@ public class ProjectileBehaviour : MonoBehaviour
 {
 #nullable enable
     public delegate void OnHitDelegate();
+
+    public float projSpeed = 10f;
     [SerializeField]
     private GameObject? projectilePrefab;
 
@@ -33,7 +35,7 @@ public class ProjectileBehaviour : MonoBehaviour
         spitSpriteRenderer.sortingLayerName = CombatFadeScreenHandler.Instance.FADE_SORTING_LAYER;
         float flipTimer = 0.0f;
         float flipInterval = 0.2f;
-        float spitDuration = distance / 10f;
+        float spitDuration = distance / projSpeed;
 
         while (elapsedTime < spitDuration)
         {

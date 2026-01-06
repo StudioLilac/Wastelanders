@@ -91,6 +91,12 @@ namespace UI_Toolkit
             GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.LevelSelect>().SceneName);
         }
 
+        private void OnMnuClicked()
+        {
+            DoStart();
+            GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.MainMenu>().SceneName);
+        }
+
         private void OnGlsClicked()
         {
             SetState(State.Glossary);
@@ -143,6 +149,7 @@ namespace UI_Toolkit
             pauseMenuPanel.Q<Button>("button-lvl").clicked += OnLvlClicked;
             pauseMenuPanel.Q<Button>("button-gls").clicked += OnGlsClicked;
             pauseMenuPanel.Q<Button>("button-dlg").clicked += OnDlgClicked;
+            pauseMenuPanel.Q<Button>("button-mnu").clicked += OnMnuClicked;
 
             dialogue.Q<Button>("button-cls").clicked += OnClsClicked;
             glossary.Q<Button>("button-cls").clicked += OnClsClicked;
