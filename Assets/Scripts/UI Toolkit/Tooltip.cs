@@ -11,7 +11,9 @@ namespace UI_Toolkit
         [SerializeField] private UIDocument uiDocument;
 
         private VisualElement tooltipBox;
+        private Label textTip;
         private bool isTooltipVisible;
+        private bool isTextTipVisible;
 
         private bool disableTooltip;
         
@@ -37,16 +39,12 @@ namespace UI_Toolkit
 
         private void Start()
         {
+            this.Subscribe<TooltipText>(TooltipTextHandler);
             var root = uiDocument.rootVisualElement;
             tooltipBox = root.Q<VisualElement>("tooltip-box");
-
-            if (tooltipBox == null)
-            {
-                Debug.LogError("Tooltip box not found in UI Document!");
-                return;
-            }
-
+            textTip = root.Q<Label>("textip-text");
             HideTooltip();
+            HideTextTip();
         }
 
         private void Update()
@@ -58,6 +56,15 @@ namespace UI_Toolkit
 
                 tooltipBox.style.left = panelPos.x + 15;
                 tooltipBox.style.top = panelPos.y + 15;
+            }
+
+            if (isTextTipVisible && textTip != null)
+            {
+                Vector2 mousePos = Input.mousePosition;
+                Vector2 panelPos = UICoordinateHelper.ToPanelPoint(mousePos, textTip.panel);
+
+                textTip.style.left = panelPos.x + 15;
+                textTip.style.top = panelPos.y + 15;
             }
         }
 
@@ -122,5 +129,32 @@ namespace UI_Toolkit
             tooltipBox.style.display = DisplayStyle.None;
             isTooltipVisible = false;
         }
+
+        private void TooltipTextHandler(TooltipText text)
+        {
+            if (text.Displaying)
+                ShowGenericTooltip(text.Content);
+            else
+                HideTextTip();
+        }
+
+        private void ShowGenericTooltip(string text)
+        {
+            if (textTip == null || disableTooltip) return;
+
+            textTip.text = text;
+            textTip.style.display = DisplayStyle.Flex;
+            isTextTipVisible = true;
+        }
+
+        private void HideTextTip()
+        {
+            if (textTip == null) return;
+
+            textTip.style.display = DisplayStyle.None;
+            isTextTipVisible = false;
+        }
     }
 }
+
+public record TooltipText(string Content, bool Displaying) : IEvent {}
