@@ -33,17 +33,13 @@ public class BountySelect : MonoBehaviour
     {
         BountyButton.BountyOnHoverEvent += OnBountyHover;
         BountyButton.BountyOnHoverEndEvent += OnBountyHoverEnd;
-        DeckSelectionArrow.DeckSelectionArrowEvent += OnBackPressed;
         ConstructBountyButtons();
-        UIFadeScreenManager.Instance.SetDarkScreen();
-        StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(1f));
     }
 
     void OnDestroy()
     {
         BountyButton.BountyOnHoverEvent -= OnBountyHover;
         BountyButton.BountyOnHoverEndEvent -= OnBountyHoverEnd;
-        DeckSelectionArrow.DeckSelectionArrowEvent -= OnBackPressed;
     }
 
     public void ConstructBountyButtons()
@@ -69,7 +65,7 @@ public class BountySelect : MonoBehaviour
 
     public void OpenScene(string s)
     {
-        StartCoroutine(FadeLevelIn(s));
+        FadeLevelIn(s);
     }
 
     public void StartLevel()
@@ -80,10 +76,9 @@ public class BountySelect : MonoBehaviour
         }
     }
 
-    IEnumerator FadeLevelIn(string levelName)
+    void FadeLevelIn(string levelName)
     {
-        yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInDarkScreen(0.8f));
-        SceneManager.LoadScene(levelName);
+        GameStateManager.Instance.LoadScene(levelName);
     }
 
     private void ClearPopupText()
@@ -143,16 +138,10 @@ public class BountySelect : MonoBehaviour
         StartCrossFadeBackground(BountyManager.Instance.ActiveBounty, crossFadeDuration);
     }
 
-    private void OnBackPressed()
+    public void OnBackPressed()
     {
         BountyManager.Instance.ActiveBounty = null;
-        StartCoroutine(ExitBounty());
-    }
-
-    private IEnumerator ExitBounty()
-    {
-        yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInDarkScreen(0.8f));
-        GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.LevelSelect>().SceneName);
+        FadeLevelIn(SceneData.Get<SceneData.LevelSelect>().SceneName);
     }
 
     private void AbortCrossFade()

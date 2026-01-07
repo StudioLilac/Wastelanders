@@ -7,7 +7,7 @@ using BountySystem;
 using LevelSelectInformation;
 using System.Collections;
 
-# nullable enable
+#nullable enable
 // A class that persists the current bounty information during level selecting
 public class BountyManager : PersistentSingleton<BountyManager>, IBind<BountyStateData>
 {

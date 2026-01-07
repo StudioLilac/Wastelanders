@@ -1,14 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using static CardDatabase;
-using UnityEngine.SceneManagement;
 using System.Linq;
 using Systems.Persistence;
-using WeaponDeckSerialization;
-using UnityEditor;
-using System;
 using TMPro;
+using UnityEditor;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using WeaponDeckSerialization;
+using static CardDatabase;
+using static PlayerDatabase;
 
 public class DeckSelectionManager : MonoBehaviour
 {
@@ -35,10 +36,10 @@ public class DeckSelectionManager : MonoBehaviour
 
     private PlayerDatabase.PlayerData playerData;
     private WeaponType weaponType;
+    private int currentPointsForWeapon;
     public WeaponAmount weaponText;
     public PointsAmount pointsText;
     public BuffExplainer buffExplainer;
-    private bool isFadingOut = false;
     public static DeckSelectionManager Instance { get; private set; }
 #nullable enable
     public delegate void PlayerActionDeckDelegate(int points);
@@ -130,27 +131,20 @@ public class DeckSelectionManager : MonoBehaviour
         }
         else if (DeckSelectionState == DeckSelectionState.CharacterSelection)
         {
-            // Save user Data here
-            StartCoroutine(ExitDeckSelection());
+            ExitDeckSelection();
         }
     }
 
     public void OnHomeButtonClicked()
     {
-        StartCoroutine(ExitDeckSelection());
+        ExitDeckSelection();
     }
 
-    private IEnumerator ExitDeckSelection()
+    private void ExitDeckSelection()
     {
-        if (!isFadingOut)
-        {
-            isFadingOut = true;
-            SaveLoadSystem.Instance.SaveGame();
-            //EditorUtility.SetDirty(playerDatabase); // For easily resetting the default weaponDeck of playerDatabase
-            yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInDarkScreen(0.6f));
-            GameStateManager.Instance.LoadScene(nextScene);
-            isFadingOut = false;
-        }
+        SaveLoadSystem.Instance.SaveGame();
+        //EditorUtility.SetDirty(playerDatabase); // For easily resetting the default weaponDeck of playerDatabase
+        GameStateManager.Instance.LoadScene(nextScene);
     }
     public void SetNextScene(string newScene)
     {
@@ -201,7 +195,9 @@ public class DeckSelectionManager : MonoBehaviour
 
     private void OnUpdateDeck(WeaponProficiency weaponPointTuple)
     {
-        int availablePoints = weaponPointTuple.MaxPoints - weaponPointTuple.CurrentPoints;
+        currentPointsForWeapon = cardDatabase.GetPrefabInfoForDeck(playerData.GetPlayerWeaponDeck(weaponType).weaponDeck)
+            .Select(it => it.ActionClass.CostToAddToDeck).Sum();
+        int availablePoints = weaponPointTuple.MaxPoints - currentPointsForWeapon;
         pointsText.TextUpdate("Select Your Cards\nAvailable Points: <color=#FFD700>" + availablePoints.ToString() + "</color>");
 
         PlayerActionDeckModifiedEvent?.Invoke(availablePoints);
@@ -215,7 +211,7 @@ public class DeckSelectionManager : MonoBehaviour
 
         if (!performChecks || DeckContainsCard(ac))
         {
-            weaponPointTuple.CurrentPoints -= ac.CostToAddToDeck;
+            currentPointsForWeapon -= ac.CostToAddToDeck;
             ac.SetSelectedForDeck(false);
             var actionFound = playerWeaponDeck.weaponDeck.FirstOrDefault(action => action.ActionClassName == ac.GetType().Name);
             playerWeaponDeck.weaponDeck.Remove(actionFound);
@@ -229,9 +225,9 @@ public class DeckSelectionManager : MonoBehaviour
         WeaponProficiency weaponPointTuple = playerData.GetProficiencyPointsTuple(weaponType);
 
         // Do we have sufficient points? If so, are we trying to add the evolved form? If so, is the evolution progress sufficient?
-        if ((!performChecks || weaponPointTuple.CurrentPoints + ac.CostToAddToDeck <= weaponPointTuple.MaxPoints) && (!ac.IsFlipped || (ac.IsFlipped && ac.CanEvolve())))
+        if ((!performChecks || currentPointsForWeapon + ac.CostToAddToDeck <= weaponPointTuple.MaxPoints) && (!ac.IsFlipped || (ac.IsFlipped && ac.CanEvolve())))
         {
-            weaponPointTuple.CurrentPoints += ac.CostToAddToDeck;
+            currentPointsForWeapon += ac.CostToAddToDeck;
             ac.SetSelectedForDeck(true);
             playerWeaponDeck.weaponDeck.Add(new(ac.GetType().Name, ac.IsFlipped && ac.CanEvolve()));
             OnUpdateDeck(weaponPointTuple);

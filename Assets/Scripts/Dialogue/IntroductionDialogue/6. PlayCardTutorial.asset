@@ -13,12 +13,8 @@ MonoBehaviour:
   m_Name: 6. PlayCardTutorial
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: "Every round, you\u2019ll draw Action cards into your hand."
-    speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: ef17277e1ebf2f64abf4d8a5117608a3, type: 3}
-    sfx: 
-    broadcastAnEvent: 0
-  - bodyText: Each card represents a move you can play against the enemy.
+  - bodyText: "Every round, you\u2019ll draw Action cards into your hand that can
+      be played against the enemy."
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: ef17277e1ebf2f64abf4d8a5117608a3, type: 3}
     sfx: 

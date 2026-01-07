@@ -41,7 +41,10 @@ public class DeckSelectionTutorial : MonoBehaviour
 
     private IEnumerator ExecuteGameStart()
     {
-        if (Mathf.Approximately(GameStateManager.Instance.CurrentLevelProgress, StageInformation.QUEEN_PREPARATION_STAGE.LevelID))
+        bool moveToBossfight = SceneData.Get<SceneData.BeetleFight>() == GameStateManager.Instance.PreviousScene &&
+                               GameStateManager.Instance.CurrentLevelProgress > StageInformation.QUEEN_PREPARATION_STAGE.LevelID;
+
+        if (Mathf.Approximately(GameStateManager.Instance.CurrentLevelProgress, StageInformation.QUEEN_PREPARATION_STAGE.LevelID) || moveToBossfight)
         {
             GameStateManager.Instance.UpdateLevelProgress(StageInformation.QUEEN_BEETLE_STAGE);
             DeckSelectionManager.Instance.SetNextScene(SceneData.Get<SceneData.PreQueenFight>().SceneName);
@@ -126,8 +129,6 @@ public class DeckSelectionTutorial : MonoBehaviour
             new(nameof(IronSights)),
             new(nameof(Silencer))
         };
-        WeaponProficiency pointsAvailableForPistol = playerDatabase.JackieData.GetProficiencyPointsTuple(CardDatabase.WeaponType.PISTOL);
-        pointsAvailableForPistol.CurrentPoints = 4;
     }
 
 

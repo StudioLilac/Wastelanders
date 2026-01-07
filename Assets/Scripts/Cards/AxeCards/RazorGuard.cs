@@ -1,11 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Xml.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 
-public class SharpenedDefence : AxeCards
+public class RazorGuard : AxeCards
 {
     public override void Initialize()
     {
@@ -14,8 +9,7 @@ public class SharpenedDefence : AxeCards
         upperBound = 4;
         Speed = 3;
         CardType = CardType.Defense;    
-
-        myName = "Sharpened Defence";
+        myName = "Razor Guard";
         description = "Inflict wound equal to damage blocked.";
     }
 

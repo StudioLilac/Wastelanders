@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
 namespace UI_Toolkit.UI_Elements
@@ -36,7 +35,14 @@ namespace UI_Toolkit.UI_Elements
         
         public void WithAttrsFromActionClass(ActionClass ac)
         {
-            WithAttrs(ac.GetIcon(), ac.GetName(), ac.Speed.ToString(), FormatStats(ac.GetRolledStats()));
+            var stats = ac.GetRolledStats();
+            WithAttrs(ac.GetIcon(), ac.GetName(), ac.Speed.ToString(), stats.RollFloor.ToString(), stats.RollCeiling.ToString());
+
+            var floorLabel = this.Q<Label>("txt-stat-floor-outline");
+            ApplyStatStyle(floorLabel, stats.FloorBuffs);
+
+            var ceilingLabel = this.Q<Label>("txt-stat-ceiling-outline");
+            ApplyStatStyle(ceilingLabel, stats.CeilingBuffs);
 
             var icon = this.Q<VisualElement>("img-stat-icon");
             icon.ClearClassList();
@@ -185,6 +191,7 @@ namespace UI_Toolkit.UI_Elements
                 return;
             }
 
+            actionClass.OnMouseExit();
             HighlightManager.Instance.OnEntityClicked(enemy);
         }
 
@@ -193,12 +200,16 @@ namespace UI_Toolkit.UI_Elements
             Sprite fg = null,
             string tt = null,
             string sp = null,
-            string st = null)
+            string sf = null,
+            string sc = null)
         {
             if (fg) this.Q<VisualElement>("img-card-icon").style.backgroundImage = new StyleBackground(fg);
             if (tt != null) this.Q<Label>("txt-title").text = tt;
             if (sp != null) this.Q<Label>("txt-speed").text = sp;
-            if (st != null) this.Q<Label>("txt-stats").text = st;
+            if (sf != null) this.Q<Label>("txt-stat-floor").text = sf;
+            if (sf != null) this.Q<Label>("txt-stat-floor-outline").text = sf;
+            if (sc != null) this.Q<Label>("txt-stat-ceiling").text = sc;
+            if (sc != null) this.Q<Label>("txt-stat-ceiling-outline").text = sc;
         }
 
         private void WithState(ActionClass.CardState state)
@@ -207,6 +218,23 @@ namespace UI_Toolkit.UI_Elements
             AddToClassList($"card-state-{state switch { ActionClass.CardState.CANT_PLAY => "1", ActionClass.CardState.CLICKED_STATE => "2", _ => "0" }}");
         }
 
-        private static string FormatStats(ActionClass.RolledStats stats) => $"<color=#{stats.FloorBuffs switch { > 0 => "00FF", < 0 => "FF00", _ => "0000" }}00>{stats.RollFloor}</color> - <color=#{stats.CeilingBuffs switch { > 0 => "00FF", < 0 => "FF00", _ => "0000" }}00>{stats.RollCeiling}</color>";
+        private static void ApplyStatStyle(Label label,int buffValue)
+        {
+            var (targetColor, fontStyle, blur) = buffValue switch
+            {
+                > 0 => (Color.green, FontStyle.Bold, 2f),
+                < 0 => (Color.red, FontStyle.Bold, 2f),
+                _ => (Color.black, FontStyle.Normal, 0f) 
+            };
+
+            label.style.color = targetColor;
+            label.style.unityFontStyleAndWeight = fontStyle;
+            label.style.textShadow = new TextShadow
+            {
+                offset = Vector2.zero,
+                blurRadius = blur,
+                color = targetColor
+            };
+        }
     }
 }

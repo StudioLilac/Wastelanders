@@ -54,6 +54,7 @@ public class BattleQueueIcons : DisplayableClass, IBattleQueueDisplayable
     {
         if (CombatManager.Instance.CanHighlight())
         {
+            new BattleQueueIconClick().Invoke();
             DeHighlightTarget();
             BattleQueue.BattleQueueInstance.DeletePlayerAction(ActionClass);
         }  
@@ -66,3 +67,5 @@ public class BattleQueueIcons : DisplayableClass, IBattleQueueDisplayable
         GetComponent<SpriteRenderer>().sprite = ac.GetIcon();
     }
 }
+
+public record BattleQueueIconClick(): IEvent {}
