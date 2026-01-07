@@ -18,34 +18,30 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: The training you've done since your last exam should help you read
-      enemy attacks more clearly.
+  - bodyText: "When fighting an enemy that fights back, you\u2019ll see the Action
+      they\u2019re preparing next to them."
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: fbdbcaab28794334bb84176f7e052fb5, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: "Next to an enemy, you\u2019ll see the Action they\u2019re preparing."
-    speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: fbdbcaab28794334bb84176f7e052fb5, type: 3}
-    sfx: 
-    broadcastAnEvent: 0
-  - bodyText: "At the top of its icon, you\u2019ll find their target and Power range."
+  - bodyText: "At the top of its icon, you\u2019ll see their Target and Power range."
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: edb0bc1d86401ce4aadfe4358f987ea3, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: Hover over it to view more details like Speed and Abilities.
+  - bodyText: Hovering over the icon allows you to view more details like Abilities
+      and Speed.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 400ae0b25c96b3f48a991679eb1b7bde, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: Their Action also appears in the battle queue. You can hover there
-      too for the same info.
+  - bodyText: Their Action also appears in the battle queue too.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: fbdbcaab28794334bb84176f7e052fb5, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: Now, make your move and show me what you've got.
+  - bodyText: 'Now, read my attacks and make your move. Your first attack will be
+      played against mine. '
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
     sfx: 

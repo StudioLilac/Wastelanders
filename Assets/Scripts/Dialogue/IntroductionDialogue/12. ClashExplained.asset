@@ -13,14 +13,15 @@ MonoBehaviour:
   m_Name: 12. ClashExplained
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: A direct challenge. Good.
+  - bodyText: 'Good, a direct challenge. '
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: The <i>first</i> Action you play against an enemy will form a <i>Clash</i>.
+  - bodyText: The <i>first</i> Action you play against an enemy will form a <i>Clash</i>
+      with their first action.
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
+    displayingImage: {fileID: -2991674613422419996, guid: 1e6cf2fca7138174e8f34bd44807fdc0, type: 3}
     sfx: 
     broadcastAnEvent: 0
   - bodyText: In a Clash, both Actions will strike at the same moment. Its speed
@@ -35,10 +36,10 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: 3fea2e94140c08246a0e502ee92d3761, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: The higher roll wins and destroys the opposing Action. The losing Action
-      deals <i>no</i> damage.
+  - bodyText: The higher Power rolled wins and destroys the opposing Action. The
+      losing Action deals <i>no</i> damage.
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
+    displayingImage: {fileID: -2991674613422419996, guid: 1e6cf2fca7138174e8f34bd44807fdc0, type: 3}
     sfx: 
     broadcastAnEvent: 0
   - bodyText: So pay close attention to which Action you play <i>first</i> against

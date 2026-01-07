@@ -14,6 +14,7 @@ public class BattleBeginButton : MonoBehaviour, IPointerDownHandler, IPointerEnt
     [SerializeField] private Sprite activeDownState;
     [SerializeField] private Sprite defaultDownState;
     private bool isActive;
+    public bool CanStartCombat { private get; set; } = true;
 
     private void Awake()
     {
@@ -47,7 +48,7 @@ public class BattleBeginButton : MonoBehaviour, IPointerDownHandler, IPointerEnt
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        BattleQueue.BattleQueueInstance.BeginDequeue();
+        if (CanStartCombat) BattleQueue.BattleQueueInstance.BeginDequeue();
     }
 
     public void OnPointerEnter(PointerEventData eventData)

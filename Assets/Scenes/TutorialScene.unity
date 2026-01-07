@@ -1912,17 +1912,6 @@ Transform:
   - {fileID: 1542478171}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1504467390 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 20683372937831384, guid: 0ce0ee3d06315164a88fea5184a490b6, type: 3}
-  m_PrefabInstance: {fileID: 1931448501099863814}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1525248173
 GameObject:
   m_ObjectHideFlags: 0
@@ -2148,7 +2137,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.399355
+      value: -10.133734
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2570,6 +2559,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1705755449 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1933517300366859696, guid: 0ce0ee3d06315164a88fea5184a490b6, type: 3}
+  m_PrefabInstance: {fileID: 1931448501099863814}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ab3939275d9834b9adfd37570f4104, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1877041899
 GameObject:
   m_ObjectHideFlags: 0
@@ -2690,7 +2690,7 @@ MonoBehaviour:
   dummy1StartingPos: {fileID: 946615943}
   jackieEndPosition: {fileID: 1543907276}
   ivesPassiveBattlePosition: {fileID: 1644944200}
-  battleBeginButton: {fileID: 1504467390}
+  battleBeginButton: {fileID: 1705755449}
   laidBackSprite: {fileID: 21300000, guid: 46be2fbdcaa06464baed62813a873661, type: 3}
   puzzledSoldierSprite: {fileID: 21300000, guid: 54030bb3888339d42ad1e64c51446568, type: 3}
   cityBgImage: {fileID: 890942832}
@@ -2716,6 +2716,7 @@ MonoBehaviour:
   youCanPlayCardsTutorial: {fileID: 11400000, guid: 6d43839fd0107384abb9967c0251482b, type: 2}
   cardFieldsTutorial: {fileID: 11400000, guid: efbd3acb8d00ab846a47ac60b4707446, type: 2}
   queueUpActionsTutorial: {fileID: 11400000, guid: fd6ec7a5f36b06446ae283ddfcba6831, type: 2}
+  duplicateSpeedTutorial: {fileID: 11400000, guid: a463268402630b04fb5d12158d54e09a, type: 2}
   rollingDiceTutorial: {fileID: 11400000, guid: d27a0d6faaf6c4f498bfef868cf59caa, type: 2}
   buffTutorial: {fileID: 11400000, guid: 4deb6a53762a3be46bb69bd061d4d07a, type: 2}
   readingOpponentTutorial: {fileID: 11400000, guid: 6dbf20d7d0a1809409f0946743f823be, type: 2}

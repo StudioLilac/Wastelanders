@@ -15,12 +15,12 @@ MonoBehaviour:
   dialogue:
   - bodyText: Targeting an enemy adds the Action to the battle queue.
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 1196bb0135ba2a645ada67564f0da12f, type: 3}
+    displayingImage: {fileID: 21300000, guid: d960aa6e94a2c924badfb0dae38bc9b4, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: The queue is sorted by Speed, with the fastest on the left.
+  - bodyText: The queue is sorted by Speed, with the fastest Action on the left.
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 1196bb0135ba2a645ada67564f0da12f, type: 3}
+    displayingImage: {fileID: 21300000, guid: b1411cc1e1231574797f223a58264863, type: 3}
     sfx: 
     broadcastAnEvent: 0
   - bodyText: You can [Hover] over a queued card's icon to check its stats again.
@@ -28,29 +28,13 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: 57baba5992d9e224988e93fcacf9f7eb, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: Or [Left Click] it to pull it back into your hand.
+  - bodyText: Or [Left Click] it to retrieve it back into your hand.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 57baba5992d9e224988e93fcacf9f7eb, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: Each round, you can queue up as many Actions as you'd like. However...
+  - bodyText: Lets try retrieving that Action from the queue back to our hand!
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 57baba5992d9e224988e93fcacf9f7eb, type: 3}
-    sfx: 
-    broadcastAnEvent: 0
-  - bodyText: "You can\u2019t play two Actions that share the same Speed."
-    speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: b1411cc1e1231574797f223a58264863, type: 3}
-    sfx: 
-    broadcastAnEvent: 0
-  - bodyText: If a card turns red, that means another Action with the same Speed
-      is already queued.
-    speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 37984fb1d201d1246a4e2a0ac7061427, type: 3}
-    sfx: 
-    broadcastAnEvent: 0
-  - bodyText: Once you're confident in your setup, press Confirm to start combat.
-    speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: ac6eebf9323f6405fb24f7403fc43497, type: 3}
     sfx: 
     broadcastAnEvent: 0

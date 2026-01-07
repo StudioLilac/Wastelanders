@@ -191,6 +191,7 @@ namespace UI_Toolkit.UI_Elements
                 return;
             }
 
+            actionClass.OnMouseExit();
             HighlightManager.Instance.OnEntityClicked(enemy);
         }
 
