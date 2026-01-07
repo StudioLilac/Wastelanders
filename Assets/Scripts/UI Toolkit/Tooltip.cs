@@ -10,6 +10,8 @@ namespace UI_Toolkit
     {
         [SerializeField] private UIDocument uiDocument;
 
+        private const float CURSOR_OFFSET = 15f;
+        
         private VisualElement tooltipBox;
         private Label textTip;
         private bool isTooltipVisible;
@@ -51,21 +53,46 @@ namespace UI_Toolkit
         {
             if (isTooltipVisible && tooltipBox != null)
             {
-                Vector2 mousePos = Input.mousePosition;
-                Vector2 panelPos = UICoordinateHelper.ToPanelPoint(mousePos, tooltipBox.panel);
-
-                tooltipBox.style.left = panelPos.x + 15;
-                tooltipBox.style.top = panelPos.y + 15;
+                PositionTooltip(tooltipBox);
             }
 
             if (isTextTipVisible && textTip != null)
             {
-                Vector2 mousePos = Input.mousePosition;
-                Vector2 panelPos = UICoordinateHelper.ToPanelPoint(mousePos, textTip.panel);
-
-                textTip.style.left = panelPos.x + 15;
-                textTip.style.top = panelPos.y + 15;
+                PositionTooltip(textTip);
             }
+        }
+
+        private void PositionTooltip(VisualElement tooltip)
+        {
+            Vector2 mousePos = Input.mousePosition;
+            Vector2 panelPos = UICoordinateHelper.ToPanelPoint(mousePos, tooltip.panel);
+
+            var root = tooltip.panel.visualTree;
+
+            float panelWidth = root.resolvedStyle.width;
+            float panelHeight = root.resolvedStyle.height;
+
+            float tooltipWidth = tooltip.resolvedStyle.width;
+            float tooltipHeight = tooltip.resolvedStyle.height;
+
+            // by default we'll show the tooltip bottom-right
+            float x = panelPos.x + CURSOR_OFFSET;
+            float y = panelPos.y + CURSOR_OFFSET;
+
+            // if it would overflow right, flip to left
+            if (x + tooltipWidth > panelWidth)
+            {
+                x = panelPos.x - tooltipWidth - CURSOR_OFFSET;
+            }
+
+            // if it would overflow bottom, flip to top
+            if (y + tooltipHeight > panelHeight)
+            {
+                y = panelPos.y - tooltipHeight - CURSOR_OFFSET;
+            }
+
+            tooltip.style.left = x;
+            tooltip.style.top = y;
         }
 
         private void HandleOnGameStateChanged(GameState state) {
