@@ -55,10 +55,14 @@ namespace UI_Toolkit
             {
                 PositionTooltip(tooltipBox);
             }
-
+            
             if (isTextTipVisible && textTip != null)
             {
-                PositionTooltip(textTip);
+                Vector2 mousePos = Input.mousePosition;
+                Vector2 panelPos = UICoordinateHelper.ToPanelPoint(mousePos, textTip.panel);
+
+                textTip.style.left = panelPos.x + 15;
+                textTip.style.top = panelPos.y + 15;
             }
         }
 
