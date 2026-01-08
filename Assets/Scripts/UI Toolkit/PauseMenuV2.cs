@@ -16,6 +16,7 @@ namespace UI_Toolkit
         private VisualElement dialogue;
         private VisualElement glossary;
         private VisualElement pauseMenuPanel;
+        private Button pauseIconButton;
 
         private State state;
 
@@ -25,11 +26,14 @@ namespace UI_Toolkit
 
         public void Awake()
         {
-            rootElem = rootDocument?.rootVisualElement ?? throw new Exception($"{nameof(rootDocument)} unset");
+            rootElem = rootDocument.rootVisualElement.Q<VisualElement>("pause-menu-root") ?? throw new Exception($"{nameof(rootDocument)} unset");
             dialogue = rootElem.Q<VisualElement>("dialogue");
             glossary = rootElem.Q<VisualElement>("glossary");
             pauseMenuPanel = rootElem.Q<VisualElement>("pause-menu-panel");
+            pauseIconButton = rootDocument.rootVisualElement.Q<Button>("pause-icon-button");
             rootDocument.panelSettings.sortingOrder = UISortOrder.PauseMenu.GetOrder();
+
+            pauseIconButton.clicked += DoPause;
 
             RegisterCallbacks();
             LoadInitialValues();
@@ -66,6 +70,7 @@ namespace UI_Toolkit
             dialogue.style.display = to == State.Dialogue ? DisplayStyle.Flex : DisplayStyle.None;
             glossary.style.display = to == State.Glossary ? DisplayStyle.Flex : DisplayStyle.None;
             pauseMenuPanel.style.display = to == State.PauseMenuPanel ? DisplayStyle.Flex : DisplayStyle.None;
+            pauseIconButton.style.display = to == State.Unpaused ? DisplayStyle.Flex : DisplayStyle.None;
         }
 
         private void OnRsmClicked()
@@ -89,6 +94,12 @@ namespace UI_Toolkit
         {
             DoStart();
             GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.LevelSelect>().SceneName);
+        }
+
+        private void OnMnuClicked()
+        {
+            DoStart();
+            GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.MainMenu>().SceneName);
         }
 
         private void OnGlsClicked()
@@ -143,6 +154,7 @@ namespace UI_Toolkit
             pauseMenuPanel.Q<Button>("button-lvl").clicked += OnLvlClicked;
             pauseMenuPanel.Q<Button>("button-gls").clicked += OnGlsClicked;
             pauseMenuPanel.Q<Button>("button-dlg").clicked += OnDlgClicked;
+            pauseMenuPanel.Q<Button>("button-mnu").clicked += OnMnuClicked;
 
             dialogue.Q<Button>("button-cls").clicked += OnClsClicked;
             glossary.Q<Button>("button-cls").clicked += OnClsClicked;

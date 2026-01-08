@@ -17,26 +17,7 @@ public class CombatCardUI : DisplayableClass
 #nullable enable
     private int FadeSortingOrder => CombatFadeScreenHandler.Instance.FADE_SORTING_ORDER;
     private string FadeSortingLayer => CombatFadeScreenHandler.Instance.FADE_SORTING_LAYER;
-
-    public override void OnMouseEnter()
-    {
-        // Increase the size of the Combat UI to indicate it's clickable
-        if (CombatManager.Instance.CanHighlight())
-        {
-            transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-            HighlightTarget();
-            ShowCard();
-        }
-    }
-
-    public override void OnMouseExit()
-    {
-        // Reset the size when the mouse is no longer over the Combat UI
-        transform.localScale = Vector3.one;
-        DeHighlightTarget();
-        HideCard();
-    }
-
+    
     void OnDestroy()
     {
         if (ActionClass != null)
@@ -45,9 +26,7 @@ public class CombatCardUI : DisplayableClass
             ActionClass.CardValuesUpdating -= UpdateRangeText;
         }
     }
-
-
-
+    
     private void OnEnable()
     {
         GetComponent<SpriteRenderer>().sortingLayerName = FadeSortingLayer;

@@ -8,6 +8,8 @@ namespace UI_Toolkit
 {
     public class HUDV2 : MonoBehaviour
     {
+        public static HUDV2 Instance { get; private set; }
+        
         public VisualTreeAsset cardTemplate;
         public UIDocument rootDocument;
 
@@ -17,13 +19,18 @@ namespace UI_Toolkit
 
         public void Awake()
         {
+            Instance = this;
             rootElem = rootDocument?.rootVisualElement ?? throw new Exception($"{nameof(rootDocument)} unset");
             handElem = rootElem.Q<VisualElement>("layout-hand-container");
             infoElem = rootElem.Q<VisualElement>("layout-info-container");
             rootDocument.panelSettings.sortingOrder = UISortOrder.Hudv2.GetOrder();
 
-            RegisterCallbacks();
             LoadInitialValues();
+        }
+        
+        public void SpawnCardPlayEffect(ActionClass actionClass, Vector3 worldPosition)
+        {
+            UI_Elements.CardPlayEffect.SpawnAt(rootElem, cardTemplate, actionClass, worldPosition);
         }
 
         public void OnEnable()
@@ -76,16 +83,6 @@ namespace UI_Toolkit
             infoElem.style.display = DisplayStyle.None;
         }
 
-        private static void OnConfirmClicked()
-        {
-            BattleQueue.BattleQueueInstance.BeginDequeue();
-        }
-
-        private void RegisterCallbacks()
-        {
-            rootElem.Q<Button>("btn-start").clicked += OnConfirmClicked;
-        }
-
         private void LoadInitialValues()
         {
             handElem.Clear();
@@ -94,7 +91,6 @@ namespace UI_Toolkit
 
         private void OnUpdateHand(PlayerClass player)
         {
-            rootElem.Q<Label>("txt-deck-info").text = player.Pool.Count.ToString();
             handElem.Clear();
 
             foreach (var ac in player.Hand.Select(go => go.GetComponent<ActionClass>()).Where(ac => ac))

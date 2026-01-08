@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
 using DialogueScripts;
+using Managers;
 using UI_Toolkit;
 
 #nullable enable
@@ -66,4 +67,6 @@ public class SceneInitializerPrefabs
     public PopUpNotificationManager popupManager = null!;
     public GameOver gameOver = null!;
     public DialogueBoxV2 dialogueBoxV2 = null!;
+    public ArrowIndicatorManager arrowIndicatorManager = null!;
+    public Tooltip tooltip = null!;
 }

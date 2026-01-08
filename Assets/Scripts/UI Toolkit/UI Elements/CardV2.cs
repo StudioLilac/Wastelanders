@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
 namespace UI_Toolkit.UI_Elements
@@ -19,6 +18,7 @@ namespace UI_Toolkit.UI_Elements
         private Vector2 lastMousePos;
         private float currentRotation;
         private float targetRotation;
+        private int activePointerId = -1;
         
         private IVisualElementScheduledItem rotationSchedule;
         
@@ -35,7 +35,14 @@ namespace UI_Toolkit.UI_Elements
         
         public void WithAttrsFromActionClass(ActionClass ac)
         {
-            WithAttrs(ac.GetIcon(), ac.GetName(), ac.Speed.ToString(), FormatStats(ac.GetRolledStats()));
+            var stats = ac.GetRolledStats();
+            WithAttrs(ac.GetIcon(), ac.GetName(), ac.Speed.ToString(), stats.RollFloor.ToString(), stats.RollCeiling.ToString());
+
+            var floorLabel = this.Q<Label>("txt-stat-floor-outline");
+            ApplyStatStyle(floorLabel, stats.FloorBuffs);
+
+            var ceilingLabel = this.Q<Label>("txt-stat-ceiling-outline");
+            ApplyStatStyle(ceilingLabel, stats.CeilingBuffs);
 
             var icon = this.Q<VisualElement>("img-stat-icon");
             icon.ClearClassList();
@@ -75,7 +82,10 @@ namespace UI_Toolkit.UI_Elements
                 PopUpNotificationManager.Instance.DisplayWarning(popupType);
                 return;
             }
+            if (clicked) return; 
+            
             clicked = true;
+            activePointerId = eventData.pointerId;
             dragStartMousePos = eventData.position;
             lastMousePos = eventData.position;
             currentRotation = 0f;
@@ -91,6 +101,8 @@ namespace UI_Toolkit.UI_Elements
         {
             if (!clicked) return;
             dragging = true;
+            
+            HighlightManager.Instance.SetSelectedAction(actionClass);
             
             // code that moves the card
             Vector2 delta = (Vector2)evt.position - dragStartMousePos;
@@ -129,38 +141,30 @@ namespace UI_Toolkit.UI_Elements
             }
             dragging = false;
             
-            actionClass.ToggleUnSelected();
+            actionClass.ToggleSelected();
+            TryClickEntity(eventData.position);
             
-            bool entityFound = TryClickEntity(eventData.position);
-            
-            if (!entityFound)
-            {
-                style.translate = StyleKeyword.Null;
-                style.rotate = StyleKeyword.Null;
-            }
+            style.translate = StyleKeyword.Null;
+            style.rotate = StyleKeyword.Null;
         }
         
         // Helper method for the raycast in the below method. Since our HUDV2 panel is scaled with screen size,
         // we need to convert coordinates accordingly.
         Vector2 ToScreenPoint(Vector2 panelPos)
         {
-            float scale = panel.scaledPixelsPerPoint;
-            return new Vector2(
-                panelPos.x * scale,
-                (panel.visualTree.layout.height - panelPos.y) * scale
-            );
+            return UICoordinateHelper.ToScreenPoint(panelPos, panel);
         }
         
         // Raycasts from the screen point to world space, looking for EntityClasses. If it finds one, it uses the
         // existing behaviour in HighlightManager.cs.
         // Returns true if an entity was found and clicked, false otherwise.
-        private bool TryClickEntity(Vector2 screenPos)
+        private void TryClickEntity(Vector2 screenPos)
         {
             Camera cam = Camera.main;
             
             if (cam == null)
             {
-                return false;
+                return;
             }
             
             screenPos = ToScreenPoint(screenPos);
@@ -170,8 +174,7 @@ namespace UI_Toolkit.UI_Elements
 
             if (!Physics.Raycast(ray, out RaycastHit hit, 1000f))
             {
-                HighlightManager.Instance.ResetCurrentHighlightedAction();
-                return false;
+                return;
             }
 
             // Right now, I'm only looking for enemies. This is because there aren't ANY cards in the game that
@@ -185,12 +188,11 @@ namespace UI_Toolkit.UI_Elements
             
             if (enemy == null)
             {
-                HighlightManager.Instance.ResetCurrentHighlightedAction();
-                return false;
+                return;
             }
 
+            actionClass.OnMouseExit();
             HighlightManager.Instance.OnEntityClicked(enemy);
-            return true;
         }
 
 
@@ -198,12 +200,16 @@ namespace UI_Toolkit.UI_Elements
             Sprite fg = null,
             string tt = null,
             string sp = null,
-            string st = null)
+            string sf = null,
+            string sc = null)
         {
             if (fg) this.Q<VisualElement>("img-card-icon").style.backgroundImage = new StyleBackground(fg);
             if (tt != null) this.Q<Label>("txt-title").text = tt;
             if (sp != null) this.Q<Label>("txt-speed").text = sp;
-            if (st != null) this.Q<Label>("txt-stats").text = st;
+            if (sf != null) this.Q<Label>("txt-stat-floor").text = sf;
+            if (sf != null) this.Q<Label>("txt-stat-floor-outline").text = sf;
+            if (sc != null) this.Q<Label>("txt-stat-ceiling").text = sc;
+            if (sc != null) this.Q<Label>("txt-stat-ceiling-outline").text = sc;
         }
 
         private void WithState(ActionClass.CardState state)
@@ -212,6 +218,23 @@ namespace UI_Toolkit.UI_Elements
             AddToClassList($"card-state-{state switch { ActionClass.CardState.CANT_PLAY => "1", ActionClass.CardState.CLICKED_STATE => "2", _ => "0" }}");
         }
 
-        private static string FormatStats(ActionClass.RolledStats stats) => $"<color=#{stats.FloorBuffs switch { > 0 => "00FF", < 0 => "FF00", _ => "0000" }}00>{stats.RollFloor}</color> - <color=#{stats.CeilingBuffs switch { > 0 => "00FF", < 0 => "FF00", _ => "0000" }}00>{stats.RollCeiling}</color>";
+        private static void ApplyStatStyle(Label label,int buffValue)
+        {
+            var (targetColor, fontStyle, blur) = buffValue switch
+            {
+                > 0 => (Color.green, FontStyle.Bold, 2f),
+                < 0 => (Color.red, FontStyle.Bold, 2f),
+                _ => (Color.black, FontStyle.Normal, 0f) 
+            };
+
+            label.style.color = targetColor;
+            label.style.unityFontStyleAndWeight = fontStyle;
+            label.style.textShadow = new TextShadow
+            {
+                offset = Vector2.zero,
+                blurRadius = blur,
+                color = targetColor
+            };
+        }
     }
 }

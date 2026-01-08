@@ -15,6 +15,7 @@ namespace LevelSelectInformation
         QueenFight,
         PrincessFrogFight,
         PrincessFrogBounty,
+        IvesFinale
     }
 
     public interface ILevelSelectInformation
@@ -32,6 +33,7 @@ namespace LevelSelectInformation
             { Level.QueenFight, StageInformation.QUEEN_BEETLE_STAGE },
             { Level.PrincessFrogFight, StageInformation.PRINCESS_FROG_FIGHT },
             { Level.PrincessFrogBounty, BountyInformation.PRINCESS_FROG_BOUNTY },
+            { Level.IvesFinale, StageInformation.IVES_FINALE_FIGHT },
         };
     }
 
@@ -45,6 +47,7 @@ namespace LevelSelectInformation
         public static readonly StageInformation QUEEN_PREPARATION_STAGE = new(sceneName: SceneData.Get<SceneData.SelectionScreen>().SceneName, levelId: 2.5f);
         public static readonly StageInformation QUEEN_BEETLE_STAGE = new(sceneName: SceneData.Get<SceneData.PreQueenFight>().SceneName, levelId: 3f);
         public static readonly StageInformation PRINCESS_FROG_FIGHT = new(sceneName: SceneData.Get<SceneData.PrincessFrogBounty>().SceneName, levelId: 4f);
+        public static readonly StageInformation IVES_FINALE_FIGHT = new(sceneName: SceneData.Get<SceneData.PrincessFrogBounty>().SceneName, levelId: 5f);
         public string SceneName { get; set; }
         public float LevelID { get; set; }
 

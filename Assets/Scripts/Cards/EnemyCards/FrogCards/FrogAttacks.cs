@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+#nullable enable
 public abstract class FrogAttacks : ActionClass
 {
     public const string SPIT_SOUND_EFFECT_NAME = "Frog Hit";
@@ -10,13 +11,15 @@ public abstract class FrogAttacks : ActionClass
 
     protected string frogAttackAnimationName = FROG_ATTACK_NAME;
 
-    [SerializeField] private ProjectileBehaviour projectileBehaviour;
+    [SerializeField] private ProjectileBehaviour? projectileBehaviour;
 
 
     public override void Initialize()
     {
         base.Initialize();
         CardType = CardType.RangedAttack;
+        if (projectileBehaviour != null)
+            projectileBehaviour.projSpeed = 12f;
     }
 
     public override void OnHit()
@@ -41,7 +44,7 @@ public abstract class FrogAttacks : ActionClass
         var firstAttackFrame = 0.18f;
         // Most practical way to handle the delay for frog spitting before the projectile actually comes out. 
         yield return new WaitForSeconds(firstAttackFrame / scaledAnimationTime);
-        yield return projectileBehaviour.ProjectileAnimation(Origin.gameObject.transform.position, Target.gameObject.transform.position);
+        yield return projectileBehaviour!.ProjectileAnimation(Origin.gameObject.transform.position, Target.gameObject.transform.position);
         OnProjectileHit();
     }
     protected virtual void OnProjectileHit()

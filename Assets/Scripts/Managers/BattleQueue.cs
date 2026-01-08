@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class BattleQueue : MonoBehaviour
@@ -22,6 +24,8 @@ public class BattleQueue : MonoBehaviour
         {
             Destroy(this); 
         }
+
+        this.Subscribe<ConsumeActionWrapper>(RemoveActionWrapperFromQueue);
     }
 
     public void AddAction(ActionClass action)
@@ -74,6 +78,7 @@ public class BattleQueue : MonoBehaviour
     private void RenderBQ()
     {
         List<ActionWrapper> queue = actionQueue.GetList();
+        new OnQueueRendered(new(queue)).Invoke();
 
         foreach (Transform child in bqContainer.transform)
         {
@@ -87,16 +92,22 @@ public class BattleQueue : MonoBehaviour
             if (battlingWrapper.IsClashing())
             {
                 GameObject clashingRenderedCopy = Instantiate(clashingPrefab, new Vector3(100, 100, -10), Quaternion.identity);
+                var icon = clashingRenderedCopy.GetComponent<ClashingBattleQueueIcon>();
                 ActionClass leftClashItem = battlingWrapper.PlayerAction!;
                 ActionClass rightClashItem = battlingWrapper.EnemyAction!;
-                clashingRenderedCopy.GetComponent<ClashingBattleQueueIcon>().renderClashingIcons(leftClashItem, rightClashItem);
+                icon.RenderClashingIcons(leftClashItem, rightClashItem);
                 clashingRenderedCopy.transform.SetParent(bqContainer, false);
+                battlingWrapper.BindIcon(icon);
             } else
             {
                 GameObject renderedCopy = Instantiate(iconPrefab, new Vector3(100, 100, -10), Quaternion.identity);
+                var icon = renderedCopy.GetComponent<BattleQueueIcons>();
+                icon.RenderBQIcon(battlingWrapper.GetTheOnlyExistingAction());
+                battlingWrapper.BindIcon(icon);
                 renderedCopy.transform.SetParent(bqContainer, false);
-                renderedCopy.GetComponent<BattleQueueIcons>().RenderBQIcon(battlingWrapper.GetTheOnlyExistingAction());
             }
+
+            battlingWrapper.BattleIcon?.DeEmphasize();
         }
     }
 
@@ -111,22 +122,24 @@ public class BattleQueue : MonoBehaviour
     private IEnumerator Dequeue()
     {
         List<ActionWrapper> array = actionQueue.GetList();
-        if (!(array.Count == 0))
+        if (array.Count != 0)
         {
             CombatManager.Instance.GameState = GameState.FIGHTING;
         }
-        while (!(array.Count == 0))
+        while (array.Count != 0)
         {
             ActionWrapper actionWrapper = array[0];
+            actionWrapper.BattleIcon?.Emphasize();
+
             if (actionWrapper.IsClashing())
             {
-                yield return StartCoroutine(CardComparator.Instance.ClashCards(actionWrapper.PlayerAction!, actionWrapper.EnemyAction!));
+                yield return StartCoroutine(CardComparator.Instance.ClashCards(actionWrapper));
             } else
             {
-                yield return StartCoroutine(CardComparator.Instance.OneSidedAttack(actionWrapper.GetTheOnlyExistingAction()));
+                yield return StartCoroutine(CardComparator.Instance.OneSidedAttack(actionWrapper));
             }
-            array.Remove(actionWrapper); // this utilises the default method for lists 
-            RenderBQ();
+
+            RenderBQ(); //Optional catch all for safety, current testing says this can be removed for performance gains.
         }
         if (CombatManager.Instance.GameState == GameState.FIGHTING)
         {
@@ -134,10 +147,29 @@ public class BattleQueue : MonoBehaviour
         }
     }
 
+    private void RemoveActionWrapperFromQueue(ConsumeActionWrapper wrapper)
+    {
+        actionQueue.GetList().Remove(wrapper.Wrapper);
+        wrapper.Wrapper.DestroyBoundIcon();
+    }
+
     // Provide immutable copy of array
     internal List<ActionWrapper> ProvideArray()
     {
         return new(actionQueue.GetList());
+    }
+
+    // Returns true iff the given action is part of a clash
+    public bool IsActionPartOfClash(ActionClass action)
+    {
+        foreach (var wrapper in actionQueue.GetList())
+        {
+            if (wrapper.IsClashing() && (wrapper.PlayerAction == action || wrapper.EnemyAction == action))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     // A sorted array implementation for ActionWrapper No duplicate speed invariants inherently added for flexibility in the future.
@@ -199,6 +231,7 @@ public class BattleQueue : MonoBehaviour
                     (existingWrapper.HasEnemyAction() && (existingWrapper.EnemyAction!.Target == entity || existingWrapper.EnemyAction!.Origin == entity)))
                 {
                     array.RemoveAt(i);
+                    existingWrapper.DestroyBoundIcon();
                 }
             }
         }
@@ -275,13 +308,17 @@ public class BattleQueue : MonoBehaviour
             return array;
         }
     }
+    
+    public record OnQueueRendered(List<ActionWrapper> Items) : IEvent { }
+    public record ConsumeActionWrapper(ActionWrapper Wrapper) : IEvent { }
 
-    internal class ActionWrapper
+    public class ActionWrapper
     {
         public ActionClass? PlayerAction { get; private set; } 
         public ActionClass? EnemyAction { get; private set; }
         // Only non null when this wrapper is clashing. Represents the original enemy's target that may have been redirected by the player.
         public EntityClass? OriginalEnemysTarget { get; private set; }
+        public IBattleQueueDisplayable? BattleIcon { get; private set; }
 
 
         public int ClashingSpeed
@@ -293,6 +330,7 @@ public class BattleQueue : MonoBehaviour
                 return Mathf.Max(playerSpeed, enemySpeed);
             }
         }
+
 
         //ActionWrapper can only be instantiated with one ActionClass 
         public ActionWrapper(ActionClass insertedAction)
@@ -324,9 +362,21 @@ public class BattleQueue : MonoBehaviour
             }
         }
 
-        // Modifies: this to become a clashing wrapper.
-        // Requires: That (@param clashingAction) can clash with an Action within this wrapper (Call ClashesWithAction first)
-        public void SetClashingAction(ActionClass clashingAction)
+        public IBattleQueueDisplayable BindIcon(IBattleQueueDisplayable icon)
+        {
+            BattleIcon = icon;
+            return icon;
+        }
+
+        public void DestroyBoundIcon()
+        {
+            Destroy(BattleIcon?.GameObject);
+            BattleIcon = null;
+        }
+
+    // Modifies: this to become a clashing wrapper.
+    // Requires: That (@param clashingAction) can clash with an Action within this wrapper (Call ClashesWithAction first)
+    public void SetClashingAction(ActionClass clashingAction)
         {
             if (!CanClashWithAction(clashingAction))
             {

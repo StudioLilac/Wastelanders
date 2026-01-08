@@ -8,7 +8,7 @@ public class GameOver : MonoBehaviour
     [SerializeField] CanvasGroup canvasGroup;
     [SerializeField] Canvas fadeCanvas;
     [SerializeField] Canvas textCanvas;
-    [SerializeField] Button restartButton;
+    [SerializeField] ButtonFadable restartButton;
     [SerializeField] bool shouldJumpToCombatWhenRestart = true;
     [SerializeField] Button levelSelectButton;
     [SerializeField] Button deckSelectButton;
@@ -32,7 +32,7 @@ public class GameOver : MonoBehaviour
 
     void OnEnable()
     {
-        restartButton.onClick.AddListener(() => StartCoroutine(OnRestartClick()));
+        restartButton.OnClick += Restart;
         levelSelectButton.onClick.AddListener(() => StartCoroutine(OnLevelSelectClick()));
         deckSelectButton.onClick.AddListener(() => StartCoroutine(OnDeckSelectClick()));
         canvasGroup.alpha = 0f;
@@ -44,11 +44,12 @@ public class GameOver : MonoBehaviour
 
     void OnDisable()
     {
-        restartButton.onClick.RemoveListener(() => StartCoroutine(OnRestartClick()));
+        restartButton.OnClick -= Restart;
         levelSelectButton.onClick.RemoveListener(() => StartCoroutine(OnLevelSelectClick()));
         deckSelectButton.onClick.RemoveListener(() => StartCoroutine(OnDeckSelectClick()));
     }
 
+    void Restart() => StartCoroutine(OnRestartClick());
 
     public void FadeInWithDialogue(DialogueWrapper dialogue)
     {

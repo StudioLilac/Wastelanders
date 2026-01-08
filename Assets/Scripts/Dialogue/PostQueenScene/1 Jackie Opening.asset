@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4fafe43b89343e3a7ba1235e8987c0f, type: 3}
+  m_Name: 1 Jackie Opening
+  m_EditorClassIdentifier: 
+  Entries:
+  - content: New Haven City, East Wall Boot Camp - 1 week after the NITES exam.
+    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: Shoot, I better get going. The broadcast is starting soon.
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  references:
+    version: 2
+    RefIds: []

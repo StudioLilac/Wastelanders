@@ -15,7 +15,7 @@ public class Pound : SlimeAttacks, IPlayableSlimeCard
     {
         base.Initialize();
         lowerBound = 2;
-        upperBound = 5;
+        upperBound = 4;
         Speed = 2;
         CostToAddToDeck = 1;
 

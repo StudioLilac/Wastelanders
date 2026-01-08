@@ -129,7 +129,21 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
         BattleQueue.BattleQueueInstance.AddAction(currentHighlightedAction);
         PlayerManuallyInsertedAction?.Invoke(currentHighlightedAction);
         selectedPlayer!.HandleUseCard(currentHighlightedAction);
-
+        
+        if (currentHighlightedEnemyEntity) {
+            Vector2 mouseScreenPos = Input.mousePosition;
+            float scale = HUDV2.Instance?.rootDocument?.rootVisualElement?.panel.scaledPixelsPerPoint ?? 1f;
+            Vector2 panelPos = new Vector2(
+                mouseScreenPos.x / scale,
+                (Screen.height - mouseScreenPos.y) / scale
+            );
+            UI_Toolkit.UI_Elements.CardPlayEffect.SpawnAtPanelPosition(
+                HUDV2.Instance?.rootDocument?.rootVisualElement,
+                HUDV2.Instance?.cardTemplate,
+                currentHighlightedAction,
+                panelPos
+            );
+        }
 
         currentHighlightedEnemyEntity!.DeHighlight();
         currentHighlightedAction.ForceNormalState();
@@ -169,6 +183,18 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
                 }
             }
         }
+    }
+
+    /// <summary>
+    /// Sets the internal "selected" action to the given ActionClass.
+    /// </summary>
+    /// Andrew: I needed this method because clicking twice on a card deselects it. But in the drag and drop
+    /// case, it should remain selected while it's dragged. However, at that point currentHighlightedAction
+    /// has been clobbered already. So we need to reset it using a setter method like this.
+    public void SetSelectedAction(ActionClass clicked) {
+        currentHighlightedAction?.ToggleUnSelected();
+        currentHighlightedAction = clicked;
+        currentHighlightedAction?.ToggleSelected();
     }
 
     private void ResetSelection(GameState gameState)

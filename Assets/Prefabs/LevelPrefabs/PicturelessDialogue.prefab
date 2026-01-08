@@ -65,10 +65,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: Lorem ipsum
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ef98bd283b7bb734da8a833fccf0fb3e, type: 2}
-  m_sharedMaterial: {fileID: -1472579445266561125, guid: ef98bd283b7bb734da8a833fccf0fb3e, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 78def0a644b6e9240b0a07bd92cfbeea, type: 2}
+  m_sharedMaterial: {fileID: 1569851632624244390, guid: 78def0a644b6e9240b0a07bd92cfbeea, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -92,8 +92,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 12
-  m_fontSizeBase: 12
+  m_fontSize: 10
+  m_fontSizeBase: 10
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 1
@@ -387,10 +387,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: JACKIE
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 78def0a644b6e9240b0a07bd92cfbeea, type: 2}
-  m_sharedMaterial: {fileID: 1569851632624244390, guid: 78def0a644b6e9240b0a07bd92cfbeea, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ef98bd283b7bb734da8a833fccf0fb3e, type: 2}
+  m_sharedMaterial: {fileID: -1472579445266561125, guid: ef98bd283b7bb734da8a833fccf0fb3e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -414,14 +414,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 15
+  m_fontSize: 14.6
   m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 2
   m_fontSizeMax: 72
-  m_fontStyle: 1
-  m_HorizontalAlignment: 2
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0

@@ -1,0 +1,7 @@
+.background {
+    background-image: url("project://database/Assets/Sprites/card-v2/bg-card-info-player.png?fileID=2800000&guid=a520e8af37466400db0dd6dac9589749&type=3#bg-card-info-player");
+}
+
+.icon {
+    background-image: resource('StatusIcon/Accuracy');
+}

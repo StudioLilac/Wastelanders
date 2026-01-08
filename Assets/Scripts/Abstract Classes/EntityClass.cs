@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UI_Toolkit;
+using Unity.VisualScripting;
 using UnityEngine;
 using static CardComparator;
 using static StatusEffect;
@@ -13,7 +14,6 @@ public abstract class EntityClass : SelectClass
 {
     public const string STAGGERED_ANIMATION_NAME = "IsStaggered";
     public const string BLOCK_ANIMATION_NAME = "IsBlocking";
-    private float PLAY_RUNNING_ANIMATION_DELTA = 0.03f; //Represents how little change in position we should at least see before playing running animation
     protected int MAX_HEALTH;
     protected int MaxHealth
     {
@@ -51,6 +51,7 @@ public abstract class EntityClass : SelectClass
     protected BoxCollider boxCollider;
 
 #nullable enable
+    private Vector3 damageSourceDirection = default;
 
     #if UNITY_EDITOR
     // Used to support handling arbitrary foreign animations 
@@ -69,8 +70,11 @@ public abstract class EntityClass : SelectClass
     private string FadeSortingLayer => CombatFadeScreenHandler.Instance.FADE_SORTING_LAYER;
     private int FadeSortingOrder => CombatFadeScreenHandler.Instance.FADE_SORTING_ORDER;
 
+    private EntityMovementHandler entityMovement = null!;
+
     public virtual void Start()
     {
+        entityMovement = this.AddComponent<EntityMovementHandler>();
         initialPosition = myTransform.position;
 
         DeEmphasize();
@@ -139,11 +143,9 @@ public abstract class EntityClass : SelectClass
      */
     public IEnumerator StaggerEntities(EntityClass origin, EntityClass target, float percentageDone)
     {
-        Vector3 directionVector = target.myTransform.position - origin.myTransform.position;
-        
-        Vector3 normalizedDirection = directionVector.normalized;
+        damageSourceDirection = (target.myTransform.position - origin.myTransform.position).normalized;
         float staggerPower = StaggerPowerCalculation(percentageDone);
-        yield return StartCoroutine(target.StaggerBack(target.myTransform.position + normalizedDirection * staggerPower));
+        yield return StartCoroutine(target.StaggerBack(target.myTransform.position + damageSourceDirection * staggerPower));
     }
 
     //Calculates the power of the stagger based on the percentage health done
@@ -156,61 +158,23 @@ public abstract class EntityClass : SelectClass
     }
 
     /*
-     * Usage:
-    Vector3 destination: Destination Of the Moving individual
     float radius: Radius is the radius right before the destination the entity will stop at.
-    (Can be useful to prevent two enemies from clipping together)
-    float duration: Duration of the movement
-
-    Modifies: this.myTransform
-
-    Purpose: Moves this entity to a given location
-
     Requires: Entity is not dead
      */
     public virtual IEnumerator MoveToPosition(Vector3 destination, float radius, float duration, Vector3? lookAtPosition = null)
     {
-        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
-        float bottomOfCharacterZ = spriteRenderer.bounds.min.y - spriteRenderer.bounds.center.y;
-        Vector3 originalPosition = myTransform.position;
-        destination = new Vector3(destination.x, destination.y, destination.z + ZOffset(destination.y + bottomOfCharacterZ));
-        float elapsedTime = 0f;
-
-        Vector3 diffInLocation = destination - originalPosition;
-        if ((Vector2)diffInLocation == Vector2.zero) yield break;
-
-        float distance = Mathf.Sqrt(diffInLocation.x * diffInLocation.x + diffInLocation.y * diffInLocation.y);
-        float maxProportionTravelled = (distance - radius) / distance;
-
-
-        if (distance > radius + PLAY_RUNNING_ANIMATION_DELTA)
-        {
-            UpdateFacing(diffInLocation, lookAtPosition);
-            if (HasAnimationParameter("IsMoving"))
-            {
-                animator.SetBool("IsMoving", true);
-            }
-        }
-
-        while (elapsedTime < duration)
-        {
-            myTransform.position = Vector3.Lerp(originalPosition, destination, elapsedTime / duration * maxProportionTravelled);
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        if (radius == 0) myTransform.position = destination; // Ensure the final position is set exactly.
-
-        if (HasAnimationParameter("IsMoving"))
-        {
-            animator.SetBool("IsMoving", false);
-        }
+        yield return StartCoroutine(entityMovement.MoveToPosition(destination, radius, duration, lookAtPosition));
     }
 
     //Removes entity cards and self from BQ and combat manager. Kills itself
     public virtual IEnumerator Die()
     {
-        int runDistance = (Team == EntityTeam.PlayerTeam) ? -10 : 10;
+        float runDirection = (Team == EntityTeam.PlayerTeam) ? -1f : 1f;
+        
+        if (damageSourceDirection != default)
+            runDirection = Mathf.Sign(damageSourceDirection.x);
+
+        float runDistance = 10f * runDirection;
 
         BattleQueue.BattleQueueInstance.RemoveAllInstancesOfEntity(this);
         DestroyDeck();
@@ -299,39 +263,7 @@ public abstract class EntityClass : SelectClass
      */
     public virtual IEnumerator StaggerBack(Vector3 staggeredPosition)
     {
-        Vector3 originalPosition = myTransform.position;
-        float elapsedTime = 0f;
-
-        Vector3 diffInLocation = staggeredPosition - originalPosition;
-        if ((Vector2)diffInLocation == Vector2.zero) yield break;
-        UpdateFacing(-diffInLocation, null);
-
-        if (HasAnimationParameter(STAGGERED_ANIMATION_NAME))
-        {
-            animator.SetBool(STAGGERED_ANIMATION_NAME, true);
-        }
-
-        float duration = animator.GetCurrentAnimatorStateInfo(0).length;
-        if (duration > CardComparator.COMBAT_BUFFER_TIME) duration = CardComparator.COMBAT_BUFFER_TIME - 0.2f; //Ensure that animation doesn't exceed buffer time or bug will happen with death.
-
-        while (elapsedTime < duration)
-        {
-            myTransform.position = Vector3.Lerp(originalPosition, staggeredPosition, AnimationCurve(elapsedTime, duration));
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        if (HasAnimationParameter(STAGGERED_ANIMATION_NAME))
-        {
-            animator.SetBool(STAGGERED_ANIMATION_NAME, false);
-        }
-
-    }
-    private float AnimationCurve(float elapsedTime, float duration)
-    {
-        float speed = 0.8f; //Lower value is faster
-        float power = 5f; //Modifies the curvature of the curve
-        return (Mathf.Pow(speed, power) / Mathf.Pow(((-elapsedTime) / duration - speed), power) + 1);
+        yield return StartCoroutine(entityMovement.StaggerBack(staggeredPosition));
     }
 
     public virtual void Heal(int val)
@@ -524,6 +456,13 @@ public abstract class EntityClass : SelectClass
         }
     }
 
+    public void SetAnimationBool(string paramName, bool state, Animator? paramAnimator = null)
+    {
+        if (HasAnimationParameter(paramName, paramAnimator))
+        {
+            animator.SetBool(paramName, state);
+        }
+    }
     public bool HasAnimationParameter(string paramName, Animator? paramAnimator = null)
     {
         if (!paramAnimator)
@@ -567,6 +506,12 @@ public abstract class EntityClass : SelectClass
         transform.position = largeTransform;
         spriteRenderer.sortingOrder = FadeSortingOrder - 3;
         combatInfo.DeEmphasize();
+    }
+
+    public float GetSortingZ()
+    {
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        return ZOffset(spriteRenderer.bounds.min.y);
     }
 
     // Workaround to prevent z clipping for entities

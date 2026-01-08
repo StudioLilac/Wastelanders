@@ -18,6 +18,8 @@ public class CardDatabase : ScriptableObject
     public List<FistCards> fistCards;
     public List<AxeCards> axeCards;
     public List<ActionClass> enemyCards;
+    private Dictionary<string, ActionClass> cardLookup;
+    public static event Action<SerializableActionClassInfo> OnInvalidCardFound;
 
     //Grabs the corresponding weaponDeck to the (@param weaponType)
     public List<ActionClass> GetCardsByType(WeaponType type)
@@ -76,15 +78,39 @@ public class CardDatabase : ScriptableObject
         return allData;
     }
 
+    private void InitializeLookup()
+    {
+        cardLookup = GetAllCards().ToDictionary(
+            card => card.GetType().Name,
+            card => card
+        );
+    }
 
     // Converts a list of Action Class types to the actual prefab contained in this database. 
     public List<InstantiableActionClassInfo> GetPrefabInfoForDeck(List<SerializableActionClassInfo> tuples)
     {
-        var instantiableCardInfos = tuples.Select(tuple => new InstantiableActionClassInfo(
-            actionClass: GetAllCards().Find(actionClass => actionClass.GetType().Name == tuple.ActionClassName),
-            isEvolved: tuple.IsEvolved)
-        ).ToList();
-        return instantiableCardInfos;
+        if (cardLookup == null) InitializeLookup();
+
+        var validCards = new List<InstantiableActionClassInfo>(tuples.Count);
+        var iterationCopy = new List<SerializableActionClassInfo>(tuples);
+
+        foreach (var tuple in iterationCopy)
+        {
+            if (cardLookup!.TryGetValue(tuple.ActionClassName, out ActionClass prefab))
+            {
+                validCards.Add(new InstantiableActionClassInfo(
+                    actionClass: prefab,
+                    isEvolved: tuple.IsEvolved
+                ));
+            }
+            else
+            {
+                Debug.LogWarning($"Could not find card class with name '{tuple.ActionClassName}' in database.");
+                OnInvalidCardFound?.Invoke(tuple);
+            }
+        }
+
+        return validCards;
     }
 
     // For performance reasons, use this if you know the type

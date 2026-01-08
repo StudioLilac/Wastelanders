@@ -53,6 +53,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -129,12 +132,13 @@ MonoBehaviour:
   <AnimatorController>k__BackingField: {fileID: 9100000, guid: 1f9b8433c4aaa4a83b302cde41d14966, type: 2}
   availableActions:
   - {fileID: 2376898879351982445, guid: d9b234b17f5614282a831238d30604be, type: 3}
+  - {fileID: 2376898879351982445, guid: d9b234b17f5614282a831238d30604be, type: 3}
   - {fileID: 2376898879351982445, guid: 2d2d7caa1fc6840a6a62172b5b70f553, type: 3}
   - {fileID: 2376898879351982445, guid: 2d2d7caa1fc6840a6a62172b5b70f553, type: 3}
   availability: []
 --- !u!95 &376453256025329576
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -148,6 +152,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -161,6 +166,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2558249372607357620}
     m_Modifications:
+    - target: {fileID: 607299130714548600, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373172873634443639, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.94
+      objectReference: {fileID: 0}
+    - target: {fileID: 65455615891599125, guid: 68bdc6d0a90e34878ae0a9ede9cccf74, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 65455615891599125, guid: 68bdc6d0a90e34878ae0a9ede9cccf74, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -213,6 +230,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0.94
       objectReference: {fileID: 0}
+    - target: {fileID: 3535233543202800076, guid: 68bdc6d0a90e34878ae0a9ede9cccf74, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
     - target: {fileID: 4069533204553400354, guid: 68bdc6d0a90e34878ae0a9ede9cccf74, type: 3}
       propertyPath: m_Name
       value: CombatCardInfo Boss
@@ -220,6 +241,10 @@ PrefabInstance:
     - target: {fileID: 4435656812881348378, guid: 68bdc6d0a90e34878ae0a9ede9cccf74, type: 3}
       propertyPath: m_LocalPosition.y
       value: -4.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 4790538894842069777, guid: 68bdc6d0a90e34878ae0a9ede9cccf74, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
       objectReference: {fileID: 0}
     - target: {fileID: 7170903258362385482, guid: 68bdc6d0a90e34878ae0a9ede9cccf74, type: 3}
       propertyPath: healthBar
@@ -229,17 +254,13 @@ PrefabInstance:
       propertyPath: diceAnimator
       value: 
       objectReference: {fileID: 2720351359467239879}
+    - target: {fileID: 8098927657887801092, guid: 68bdc6d0a90e34878ae0a9ede9cccf74, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
     - target: {fileID: 9220877146257657822, guid: 68bdc6d0a90e34878ae0a9ede9cccf74, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.94
-      objectReference: {fileID: 0}
-    - target: {fileID: 607299130714548600, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -7.24
-      objectReference: {fileID: 0}
-    - target: {fileID: 6373172873634443639, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0.94
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
