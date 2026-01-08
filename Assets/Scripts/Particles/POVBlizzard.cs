@@ -81,7 +81,7 @@ namespace Particles {
 
             mainModule.startColor = snowColor;
             mainModule.gravityModifier = 0f;
-            mainModule.maxParticles = 6000;
+            mainModule.maxParticles = Mathf.FloorToInt(emissionRate * 5);
             mainModule.startLifetime = depthRange / intoCameraSpeed;
 
             // ───────── SHAPE (DEPTH SPAWN) ─────────
@@ -148,7 +148,7 @@ namespace Particles {
             if (mainParticleSystem == null)
                 mainParticleSystem = GetComponent<ParticleSystem>();
 
-            if (mainParticleSystem != null && Application.isPlaying == false) {
+            if (mainParticleSystem != null) {
                 InitializeParticleSystem();
             }
         }
