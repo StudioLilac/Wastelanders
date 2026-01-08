@@ -828,14 +828,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: POVBlizzard
       objectReference: {fileID: 0}
-    - target: {fileID: 8157571834103243792, guid: 2fe7944ceb1d38a44b3a038d9af440ba, type: 3}
-      propertyPath: m_SortingLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8157571834103243792, guid: 2fe7944ceb1d38a44b3a038d9af440ba, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 2146528631
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
