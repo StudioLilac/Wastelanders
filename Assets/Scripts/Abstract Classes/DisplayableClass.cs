@@ -8,12 +8,13 @@ public abstract class DisplayableClass : SelectClass
 {
 #nullable enable
     public ActionClass? ActionClass { get; protected set; }   
+    [SerializeField] protected SpriteRenderer? unseenEnemyActionIndicator;
     protected bool targetHighlighted = false;
     private bool grewLarger;
     
     public static event Action<ActionClass>? OnShowCard;
     public static event Action<ActionClass>? OnHideCard;
-
+    public static event Action<string>? OnEnemyActionSeen; // If there are multiple identical enemy actions, hovering one should remove indicator on all
     protected void ShowCard()
     {
         if (ActionClass != null)
@@ -27,6 +28,11 @@ public abstract class DisplayableClass : SelectClass
         if (ActionClass != null)
         {
             OnHideCard?.Invoke(ActionClass);
+            if (UnseenIndicatorVisible())
+            {
+                GameStateManager.Instance.AddEnemyActionToSeen(ActionClass);
+                OnEnemyActionSeen?.Invoke(ActionClass.GetName());
+            }
         }
     }
 
@@ -47,7 +53,7 @@ public abstract class DisplayableClass : SelectClass
         }
         targetHighlighted = false;
     }
-
+    
     public virtual void OnMouseEnter()
     {
         if (CombatManager.Instance.CanHighlight() && !grewLarger && !PauseMenuV2.IsPaused) {
@@ -71,6 +77,29 @@ public abstract class DisplayableClass : SelectClass
             HideCard();
             new DisplayableUnhoveredEvent().Invoke();
         }
+    }
+    
+    // Should be invoked if this Displayable is showing an enemy action
+    public void RenderUnseenIndicator() {
+        if (!ActionClass || GameStateManager.Instance.HasSeenEnemyAction(ActionClass)) return;
+        if (unseenEnemyActionIndicator) {
+            unseenEnemyActionIndicator.gameObject.SetActive(true);
+            OnEnemyActionSeen += OnEnemyActionMarkedScene;
+        }
+    }
+
+    private void OnEnemyActionMarkedScene(string actionName) {
+        if (!ActionClass || ActionClass.GetName() != actionName) return;
+        HideUnseenIndicator();
+    }
+
+    private bool UnseenIndicatorVisible() {
+        return (unseenEnemyActionIndicator && unseenEnemyActionIndicator.gameObject.activeSelf);
+    }
+
+    private void HideUnseenIndicator() {
+        if (!ActionClass || !UnseenIndicatorVisible()) return;
+        unseenEnemyActionIndicator!.gameObject.SetActive(false);
     }
 }
 

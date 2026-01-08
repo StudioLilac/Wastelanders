@@ -24,6 +24,7 @@ public class ClashingBattleQueueIcon : MonoBehaviour, IBattleQueueDisplayable
     {
         leftClashingAction.RenderBQIcon(leftClashingItem);
         rightClashingAction.RenderBQIcon(rightClashingItem);
+        rightClashingAction.RenderUnseenIndicator(); // Right clashing action is conventionally the enemy action
 
         leftClashing = leftClashingItem;
         rightClashing = rightClashingItem;
