@@ -62,20 +62,23 @@ Shader "Blizzard/ScrollingFog2D"
 
             fixed4 frag (v2f i) : SV_Target
             {
-                // Base scrolling
-                float2 baseUV = i.uv + _Speed.xy * _Time.y;
+                float2 uv = i.uv;
 
-                // Sample noise once to distort UVs
-                float distort = tex2D(_MainTex, baseUV * 0.75).r;
-                float2 distortedUV = baseUV + (distort - 0.5) * _DistortStrength;
+                // Time-driven offsets (very small)
+                float t = _Time.y * 0.1;
+
+                // Sample noise to create local distortion
+                float n1 = tex2D(_MainTex, uv + float2(t, 0)).r;
+                float n2 = tex2D(_MainTex, uv + float2(0, t)).r;
+
+                // Distort UVs locally instead of translating them
+                float2 warpedUV = uv + (float2(n1, n2) - 0.5) * 0.15;
 
                 // Final noise sample
-                float noise = tex2D(_MainTex, distortedUV).r;
+                float density = tex2D(_MainTex, warpedUV).r;
 
-                // Convert noise -> fog density
-                float density = smoothstep(_DensityMin, _DensityMax, noise);
-
-                // Extra softening
+                // Shape into fog
+                density = smoothstep(0.4, 0.7, density);
                 density *= density;
 
                 return fixed4(_Color.rgb, density * _Color.a);
