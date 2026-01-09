@@ -12,11 +12,16 @@ Shader "Blizzard/ScrollingFog2D"
         _DensityMax ("Density Max", Range(0,1)) = 0.7
 
         _DistortStrength ("Distortion Strength", Range(0,0.5)) = 0.15
+
+        // NEW
+        _NoiseOffset ("Noise Offset (XYZ)", Vector) = (0,0,0,0)
+        _WarpScale ("Warp Scale", Float) = 0.6
     }
 
     SubShader
     {
-        Tags {
+        Tags
+        {
             "Queue"="Transparent"
             "RenderType"="Transparent"
         }
@@ -39,6 +44,8 @@ Shader "Blizzard/ScrollingFog2D"
             float _DensityMin;
             float _DensityMax;
             float _DistortStrength;
+            float4 _NoiseOffset;
+            float _WarpScale;
 
             struct appdata
             {
@@ -62,24 +69,28 @@ Shader "Blizzard/ScrollingFog2D"
 
             fixed4 frag (v2f i) : SV_Target
             {
+                float time = _Time.y;
+
+                // Base UV with directional wind
                 float2 uv = i.uv;
+                uv += _Speed.xy * time;
 
-                // Time-driven offsets (very small)
-                float t = _Time.y * 0.1;
+                // --- WARP NOISE (turbulence) ---
+                float2 warpUV = uv * _WarpScale + _NoiseOffset.xy;
+                float2 warp =
+                    tex2D(_MainTex, warpUV).rg - 0.5;
 
-                // Sample noise to create local distortion
-                float n1 = tex2D(_MainTex, uv + float2(t, 0)).r;
-                float n2 = tex2D(_MainTex, uv + float2(0, t)).r;
+                uv += warp * _DistortStrength;
 
-                // Distort UVs locally instead of translating them
-                float2 warpedUV = uv + (float2(n1, n2) - 0.5) * 0.15;
+                // --- FAKE 3D NOISE ---
+                float nA = tex2D(_MainTex, uv + _NoiseOffset.xy).r;
+                float nB = tex2D(_MainTex, uv * 0.5 + _NoiseOffset.zw).r;
 
-                // Final noise sample
-                float density = tex2D(_MainTex, warpedUV).r;
+                float density = lerp(nA, nB, 0.5);
 
-                // Shape into fog
-                density = smoothstep(0.4, 0.7, density);
-                density *= density;
+                // Shape fog density
+                density = smoothstep(_DensityMin, _DensityMax, density);
+                density *= density; // soften
 
                 return fixed4(_Color.rgb, density * _Color.a);
             }
