@@ -246,10 +246,14 @@ MonoBehaviour:
   narrations:
   - content: The Princess Frog lets out a final wail as it dissolves into purple
       sludge. The controlled scouts collapse, unconscious but still alive.
+    manualDuration: 0
   - content: In the center of the crater, the monstrous, purple form of Ives sways.
       The cold rushing back as the adrenaline fades.
+    manualDuration: 0
   - content: She crashes into the snow.
+    manualDuration: 3
   - content: Jackie presses her fingers to Ives neck, checking for a pulse.
+    manualDuration: 0
   captionTextMesh: {fileID: 1163876813}
   whiteOverlay: {fileID: 1927283258}
   povBlizzard: {fileID: 1865732628}
@@ -5467,7 +5471,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 1024
   m_textAlignment: 65535
@@ -5857,7 +5861,7 @@ SpriteRenderer:
   m_Size: {x: 7, y: 3.6}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1927283256
@@ -6048,7 +6052,7 @@ Transform:
   m_GameObject: {fileID: 2046193101}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.82, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6098,7 +6102,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -2
-  m_Sprite: {fileID: 21300000, guid: ef7f92f4b249b5f41b11c8f828377aff, type: 3}
+  m_Sprite: {fileID: 1375026625284928786, guid: 503599564f6cf0943b1e833fd89858eb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
