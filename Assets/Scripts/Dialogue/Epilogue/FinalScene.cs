@@ -50,8 +50,7 @@ namespace Dialogue.Epilogue {
 
                 if (narration.manualDuration != 0) {
                     yield return new WaitForSeconds(narration.manualDuration);
-                }
-                else {
+                } else {
                     int wordCount = narration.content
                         .Split((char[])null, System.StringSplitOptions.RemoveEmptyEntries)
                         .Length;
