@@ -23,7 +23,7 @@ public class FogVolume2D : MonoBehaviour
     public float alphaFalloff = 0.9f;
 
     [Header("Debug")]
-    [Range(1, 64)]
+    [Range(1, 256)]
     public int debugIntensity = 16;
 
 
