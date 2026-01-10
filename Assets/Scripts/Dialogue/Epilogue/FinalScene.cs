@@ -11,6 +11,9 @@ namespace Dialogue.Epilogue {
         [Serializable]
         private class CaptionNarration {
             [SerializeField] [TextArea(1, 5)] public string content;
+            
+            // leave this as 0 to use the default timing.
+            [SerializeField] public int manualDuration = 0;
         }
         
         [SerializeField] private List<CaptionNarration> narrations;
@@ -42,9 +45,18 @@ namespace Dialogue.Epilogue {
             // now the scene starts, with the music synced up
             foreach (CaptionNarration narration in narrations) {
                 captionTextMesh.text = narration.content;
-                yield return StartCoroutine(FadeText(1f, 1f));
                 
-                yield return new WaitForSeconds(1f);
+                yield return StartCoroutine(FadeText(1f, 1f));
+
+                if (narration.manualDuration != 0) {
+                    yield return new WaitForSeconds(narration.manualDuration);
+                }
+                else {
+                    int wordCount = narration.content
+                        .Split((char[])null, System.StringSplitOptions.RemoveEmptyEntries)
+                        .Length;
+                    yield return new WaitForSeconds(wordCount / 3f);
+                }
                 
                 yield return StartCoroutine(FadeText(0f, 0.5f));
             }
