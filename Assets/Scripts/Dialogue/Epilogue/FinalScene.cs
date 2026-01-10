@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Particles;
@@ -7,8 +8,9 @@ using UnityEngine.UI;
 
 namespace Dialogue.Epilogue {
     public class FinalScene : MonoBehaviour {
+        [Serializable]
         private class CaptionNarration {
-            [SerializeField] [TextArea(1, 5)] private string content;
+            [SerializeField] [TextArea(1, 5)] public string content;
         }
         
         [SerializeField] private List<CaptionNarration> narrations;
@@ -16,11 +18,13 @@ namespace Dialogue.Epilogue {
         [SerializeField] private Image whiteOverlay;
         [SerializeField] private POVBlizzard povBlizzard;
         [SerializeField] private FogVolume2D fogVolume2D;
-        [SerializeField] private ParticleSystem fog;
+        [SerializeField] private ParticleSystem clouds;
 
         private void Start() {
             int n = narrations.Count;
             UIFadeScreenManager.Instance.SetDarkScreen();
+            captionTextMesh.alpha = 0;
+            whiteOverlay.color = new Color(0, 0, 0, 0);
             
             StartCoroutine(PlayScene());
         }
@@ -33,8 +37,34 @@ namespace Dialogue.Epilogue {
             // TODO: make this wait until fmod flips to the ending track
             yield return new WaitForSeconds(0.5f);
             
-            // now the scene starts, with the music synced up
+            yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(2f));
             
+            // now the scene starts, with the music synced up
+            foreach (CaptionNarration narration in narrations) {
+                captionTextMesh.text = narration.content;
+                yield return StartCoroutine(FadeText(1f, 1f));
+                
+                yield return new WaitForSeconds(1f);
+                
+                yield return StartCoroutine(FadeText(0f, 0.5f));
+            }
+        }
+        
+        private IEnumerator FadeText(float targetAlpha, float duration) {
+            if (captionTextMesh == null)
+                yield break;
+
+            float startAlpha = captionTextMesh.alpha;
+            float time = 0f;
+
+            while (time < duration)
+            {
+                time += Time.unscaledDeltaTime;
+                captionTextMesh.alpha = Mathf.Lerp(startAlpha, targetAlpha, time / duration);
+                yield return null;
+            }
+
+            captionTextMesh.alpha = targetAlpha;
         }
     }
 }
