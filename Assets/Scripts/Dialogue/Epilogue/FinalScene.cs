@@ -28,6 +28,7 @@ namespace Dialogue.Epilogue {
         }
 
         private Camera mainCamera;
+        [SerializeField] private float timeScale = 5f;
         
         [SerializeField] private List<CaptionNarration> narrations;
         
@@ -39,6 +40,10 @@ namespace Dialogue.Epilogue {
         [SerializeField] private TextMeshProUGUI captionTextMesh;
         [SerializeField] private TextMeshProUGUI jackieTextMesh;
         [SerializeField] private TextMeshProUGUI ivesTextMesh;
+
+        [Header("You killed her")] 
+        [SerializeField] private Image youKilledHerBg;
+        [SerializeField] private TextMeshProUGUI youKilledHerText;
         
         private void Start() {
             int n = narrations.Count;
@@ -48,6 +53,8 @@ namespace Dialogue.Epilogue {
             ivesTextMesh.alpha = 0;
             whiteOverlay.color = new Color(0, 0, 0, 0);
             mainCamera = Camera.main;
+            
+            youKilledHerBg.gameObject.SetActive(false);
             
             StartCoroutine(PlayScene());
         }
@@ -80,7 +87,7 @@ namespace Dialogue.Epilogue {
                     int wordCount = narration.content
                         .Split((char[])null, System.StringSplitOptions.RemoveEmptyEntries)
                         .Length;
-                    yield return new WaitForSeconds(wordCount / 3f);
+                    yield return new WaitForSeconds(wordCount / timeScale);
                 }
                 
                 yield return StartCoroutine(FadeText(activeText, 0f, 0.5f));
@@ -90,16 +97,32 @@ namespace Dialogue.Epilogue {
         private void HandleSignal(string signal) {
             switch (signal) {
                 case "ivescrashes":
-                    StartCoroutine(MoveCamera(new Vector2(0, -2), 1.5f));
+                    StartCoroutine(MoveCamera(new Vector2(0, -1), 2f));
                     StartCoroutine(ZoomCamera(-10, 2f));
                     break;
                 case "jackiesorry":
-                    StartCoroutine(MoveCamera(new Vector2(0, 3), 3f));
+                    StartCoroutine(MoveCamera(new Vector2(0, 2), 3f));
                     StartCoroutine(ZoomCamera(10, 2f));
+                    StartCoroutine(PlayYouKilledHerSequence());
                     break;
                 default:
                     break;
             }
+        }
+
+        private IEnumerator PlayYouKilledHerSequence() {
+            yield return new WaitForSeconds(1.5f);
+            
+            youKilledHerBg.gameObject.SetActive(true);
+            yield return StartCoroutine(FlashText(youKilledHerText, 1f));
+            youKilledHerText.text = "YOU DID THIS TO HER";
+            yield return new WaitForSeconds(1f);
+            yield return StartCoroutine(FlashText(youKilledHerText, 1f));
+            youKilledHerText.text = "YOU KILLED HER";
+            yield return new WaitForSeconds(1f);
+            yield return StartCoroutine(FlashText(youKilledHerText, 1f));
+            
+            
         }
         
         private IEnumerator FadeText(TextMeshProUGUI textMesh, float targetAlpha, float duration)
@@ -172,6 +195,32 @@ namespace Dialogue.Epilogue {
                 default:
                     return captionTextMesh;
             }
+        }
+
+        private IEnumerator FlashText(
+            TextMeshProUGUI textMesh,
+            float flashDuration,
+            float flashesPerSecond = 12f
+        )
+        {
+            if (textMesh == null)
+                yield break;
+
+            float elapsed = 0f;
+            float interval = 1f / flashesPerSecond;
+            bool visible = false;
+
+            while (elapsed < flashDuration)
+            {
+                visible = !visible;
+                textMesh.alpha = visible ? 1f : 0f;
+
+                yield return new WaitForSecondsRealtime(interval);
+                elapsed += interval;
+            }
+
+            // Force invisible at the end
+            textMesh.alpha = 0f;
         }
 
     }
