@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7db164943bf379d4e90a7bbef58b8701
+guid: 657f6fc9a6bebe642b2b933432af3e8b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8486409221406198596
-    second: jackie_poutOpen_recoloured_0
+      213: 7811314004181036976
+    second: cam_pouting_recoloured_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: jackie_poutOpen_recoloured_0
+      name: cam_pouting_recoloured_0
       rect:
         serializedVersion: 2
-        x: 515
+        x: 296
         y: 0
-        width: 1755
-        height: 2724
+        width: 837
+        height: 1360
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cb4fb7ba6c73a3a80800000000000000
-      internalID: -8486409221406198596
+      spriteID: 0bfae3063bc576c60800000000000000
+      internalID: 7811314004181036976
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      jackie_poutOpen_recoloured_0: -8486409221406198596
+      cam_pouting_recoloured_0: 7811314004181036976
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

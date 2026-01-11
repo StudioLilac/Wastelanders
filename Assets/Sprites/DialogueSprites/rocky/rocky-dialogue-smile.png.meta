@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7db164943bf379d4e90a7bbef58b8701
+guid: 701439697fac447e9becd89183c1ee61
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8486409221406198596
-    second: jackie_poutOpen_recoloured_0
+      213: -2541882969872714799
+    second: rocky_smile_recoloured_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: jackie_poutOpen_recoloured_0
+      name: rocky_smile_recoloured_0
       rect:
         serializedVersion: 2
-        x: 515
+        x: 124
         y: 0
-        width: 1755
-        height: 2724
+        width: 2572
+        height: 2823
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cb4fb7ba6c73a3a80800000000000000
-      internalID: -8486409221406198596
+      spriteID: 1d33f1808ea69bcd0800000000000000
+      internalID: -2541882969872714799
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      jackie_poutOpen_recoloured_0: -8486409221406198596
+      rocky_smile_recoloured_0: -2541882969872714799
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

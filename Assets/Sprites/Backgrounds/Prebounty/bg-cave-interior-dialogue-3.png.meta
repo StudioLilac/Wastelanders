@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 7db164943bf379d4e90a7bbef58b8701
+guid: be463e5acab2842408440974afadf553
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8486409221406198596
-    second: jackie_poutOpen_recoloured_0
+      213: 4308125698270186748
+    second: bg-cave-interior-dialogue-3_0
+  - first:
+      213: -7939862090289348134
+    second: bg-cave-interior-dialogue-3_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -75,7 +78,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -100,13 +103,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: jackie_poutOpen_recoloured_0
+      name: bg-cave-interior-dialogue-3_0
       rect:
         serializedVersion: 2
-        x: 515
+        x: 0
         y: 0
-        width: 1755
-        height: 2724
+        width: 124
+        height: 360
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +118,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cb4fb7ba6c73a3a80800000000000000
-      internalID: -8486409221406198596
+      spriteID: cfc40254f7989cb30800000000000000
+      internalID: 4308125698270186748
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg-cave-interior-dialogue-3_1
+      rect:
+        serializedVersion: 2
+        x: 277
+        y: 0
+        width: 363
+        height: 360
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad186befe71ffc190800000000000000
+      internalID: -7939862090289348134
       vertices: []
       indices: 
       edges: []
@@ -135,7 +160,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      jackie_poutOpen_recoloured_0: -8486409221406198596
+      bg-cave-interior-dialogue-3_0: 4308125698270186748
+      bg-cave-interior-dialogue-3_1: -7939862090289348134
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
