@@ -14,6 +14,9 @@ namespace Dialogue.Epilogue {
             
             // leave this as 0 to use the default timing.
             [SerializeField] public int manualDuration = 0;
+            
+            // use this to trigger events
+            [SerializeField] public string signal;
         }
 
         private Camera mainCamera;
@@ -53,6 +56,8 @@ namespace Dialogue.Epilogue {
                 captionTextMesh.text = narration.content;
                 
                 yield return StartCoroutine(FadeText(1f, 1f));
+                
+                HandleSignal(narration.signal);
 
                 if (narration.manualDuration != 0) {
                     yield return new WaitForSeconds(narration.manualDuration);
@@ -64,6 +69,19 @@ namespace Dialogue.Epilogue {
                 }
                 
                 yield return StartCoroutine(FadeText(0f, 0.5f));
+            }
+        }
+
+        private void HandleSignal(string signal) {
+            switch (signal) {
+                case "ivescrashes":
+                    StartCoroutine(MoveCamera(new Vector2(0, -2), 2f));
+                    StartCoroutine(ZoomCamera(-20, 2f));
+                    break;
+                case "flashback":
+                    break;
+                default:
+                    break;
             }
         }
         
@@ -103,6 +121,26 @@ namespace Dialogue.Epilogue {
             }
 
             mainCamera.transform.position = targetPos;
+        }
+        
+        private IEnumerator ZoomCamera(float deltaFov, float duration) {
+            float startPos = mainCamera.fieldOfView;
+            float targetPos = startPos + deltaFov;
+
+            float elapsed = 0f;
+
+            while (elapsed < duration)
+            {
+                elapsed += Time.deltaTime;
+                float t = Mathf.Clamp01(elapsed / duration);
+
+                float easedT = t * t * (3f - 2f * t);
+
+                mainCamera.fieldOfView = Mathf.Lerp(startPos, targetPos, easedT);
+                yield return null;
+            }
+
+            mainCamera.fieldOfView = targetPos;
         }
     }
 }
