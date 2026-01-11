@@ -43,10 +43,10 @@ namespace Dialogue.Epilogue {
 
         [Header("You killed her")] 
         [SerializeField] private float jitterAmount;
-        [SerializeField] private Image youKilledHerBg;
+        [SerializeField] private GameObject youKilledHerObj;
+        [SerializeField] private TextMeshProUGUI itsYourFaultText;
+        [SerializeField] private TextMeshProUGUI youDidThisToHerText;
         [SerializeField] private TextMeshProUGUI youKilledHerText;
-        
-        
         private void Start() {
             int n = narrations.Count;
             UIFadeScreenManager.Instance.SetDarkScreen();
@@ -55,8 +55,10 @@ namespace Dialogue.Epilogue {
             ivesTextMesh.alpha = 0;
             whiteOverlay.color = new Color(0, 0, 0, 0);
             mainCamera = Camera.main;
-            
-            youKilledHerBg.gameObject.SetActive(false);
+
+            itsYourFaultText.alpha = 0;
+            youDidThisToHerText.alpha = 0;
+            youKilledHerText.alpha = 0;
             
             StartCoroutine(PlayScene());
         }
@@ -115,15 +117,12 @@ namespace Dialogue.Epilogue {
         private IEnumerator PlayYouKilledHerSequence() {
             yield return new WaitForSeconds(1.5f);
             
-            youKilledHerBg.gameObject.SetActive(true);
-            yield return StartCoroutine(FlashText(youKilledHerText, 1f));
-            youKilledHerText.text = "YOU DID THIS TO HER";
-            yield return new WaitForSeconds(1f);
-            yield return StartCoroutine(FlashText(youKilledHerText, 1f));
-            youKilledHerText.text = "YOU KILLED HER";
-            yield return new WaitForSeconds(1f);
-            yield return StartCoroutine(FlashText(youKilledHerText, 1f));
+            StartCoroutine(FloatThoughtText(itsYourFaultText, 5f));
+            yield return new WaitForSeconds(2f);
+            StartCoroutine(FloatThoughtText(youDidThisToHerText, 3f));
+            yield return new WaitForSeconds(4f);
             
+            yield return StartCoroutine(FloatThoughtText(youKilledHerText, 3f));
             
         }
         
@@ -237,6 +236,127 @@ namespace Dialogue.Epilogue {
             }
 
             textMesh.alpha = 0f;
+        }
+        
+        private IEnumerator FloatThoughtText(
+            TextMeshProUGUI textMesh,
+            float duration,
+            float minAlpha = 0.5f,
+            float maxAlpha = 0.9f,
+            float orbitRadius = 30f,
+            float orbitSpeed = 0.25f,
+            float bobAmplitude = 6f,
+            float bobSpeed = 0.6f,
+            float fadeOutDuration = 0.8f
+        )
+        {
+            if (textMesh == null)
+                yield break;
+
+            RectTransform rect = textMesh.rectTransform;
+            Vector2 basePos = rect.anchoredPosition;
+
+            float elapsed = 0f;
+            textMesh.alpha = 0f;
+
+            float orbitPhase = UnityEngine.Random.Range(0f, Mathf.PI * 2f);
+            float bobPhase   = UnityEngine.Random.Range(0f, Mathf.PI * 2f);
+
+            float floatDuration = Mathf.Max(0f, duration - fadeOutDuration);
+
+            // ---------- Phase A: normal floating ----------
+            while (elapsed < floatDuration)
+            {
+                elapsed += Time.unscaledDeltaTime;
+
+                UpdateFloatingMotion(
+                    textMesh,
+                    rect,
+                    basePos,
+                    elapsed,
+                    minAlpha,
+                    maxAlpha,
+                    orbitRadius,
+                    orbitSpeed,
+                    bobAmplitude,
+                    bobSpeed,
+                    orbitPhase,
+                    bobPhase,
+                    alphaMultiplier: 1f
+                );
+
+                yield return null;
+            }
+
+            // ---------- Phase B: fade out while floating ----------
+            float fadeElapsed = 0f;
+
+            while (fadeElapsed < fadeOutDuration)
+            {
+                fadeElapsed += Time.unscaledDeltaTime;
+                float fadeT = Mathf.Clamp01(fadeElapsed / fadeOutDuration);
+
+                UpdateFloatingMotion(
+                    textMesh,
+                    rect,
+                    basePos,
+                    elapsed + fadeElapsed,
+                    minAlpha,
+                    maxAlpha,
+                    orbitRadius,
+                    orbitSpeed,
+                    bobAmplitude,
+                    bobSpeed,
+                    orbitPhase,
+                    bobPhase,
+                    alphaMultiplier: 1f - fadeT
+                );
+
+                yield return null;
+            }
+
+            // Final cleanup
+            textMesh.alpha = 0f;
+            rect.anchoredPosition = basePos;
+        }
+
+        private void UpdateFloatingMotion(
+            TextMeshProUGUI textMesh,
+            RectTransform rect,
+            Vector2 basePos,
+            float time,
+            float minAlpha,
+            float maxAlpha,
+            float orbitRadius,
+            float orbitSpeed,
+            float bobAmplitude,
+            float bobSpeed,
+            float orbitPhase,
+            float bobPhase,
+            float alphaMultiplier
+        )
+        {
+            // Alpha breathing
+            float alphaT =
+                (Mathf.Sin(time * 1.3f + orbitPhase) + 1f) * 0.5f;
+
+            float baseAlpha = Mathf.Lerp(minAlpha, maxAlpha, alphaT);
+            textMesh.alpha = baseAlpha * alphaMultiplier;
+
+            // Orbital motion
+            float orbitAngle = time * orbitSpeed + orbitPhase;
+
+            Vector2 orbitOffset = new Vector2(
+                Mathf.Cos(orbitAngle),
+                Mathf.Sin(orbitAngle * 0.9f)
+            ) * orbitRadius;
+
+            // Vertical bob
+            float bobOffset =
+                Mathf.Sin(time * bobSpeed + bobPhase) * bobAmplitude;
+
+            rect.anchoredPosition =
+                basePos + orbitOffset + Vector2.up * bobOffset;
         }
 
     }
