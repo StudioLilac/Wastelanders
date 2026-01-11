@@ -7,6 +7,12 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace Dialogue.Epilogue {
+    enum CaptionType {
+        Narration,
+        Jackie,
+        Ives
+    }
+    
     public class FinalScene : MonoBehaviour {
         [Serializable]
         private class CaptionNarration {
@@ -15,6 +21,8 @@ namespace Dialogue.Epilogue {
             // leave this as 0 to use the default timing.
             [SerializeField] public int manualDuration = 0;
             
+            [SerializeField] public CaptionType speaker = CaptionType.Narration;
+            
             // use this to trigger events
             [SerializeField] public string signal;
         }
@@ -22,16 +30,22 @@ namespace Dialogue.Epilogue {
         private Camera mainCamera;
         
         [SerializeField] private List<CaptionNarration> narrations;
-        [SerializeField] private TextMeshProUGUI captionTextMesh;
+        
         [SerializeField] private Image whiteOverlay;
         [SerializeField] private POVBlizzard povBlizzard;
         [SerializeField] private FogVolume2D fogVolume2D;
         [SerializeField] private ParticleSystem clouds;
-
+        
+        [SerializeField] private TextMeshProUGUI captionTextMesh;
+        [SerializeField] private TextMeshProUGUI jackieTextMesh;
+        [SerializeField] private TextMeshProUGUI ivesTextMesh;
+        
         private void Start() {
             int n = narrations.Count;
             UIFadeScreenManager.Instance.SetDarkScreen();
             captionTextMesh.alpha = 0;
+            jackieTextMesh.alpha = 0;
+            ivesTextMesh.alpha = 0;
             whiteOverlay.color = new Color(0, 0, 0, 0);
             mainCamera = Camera.main;
             
@@ -53,9 +67,10 @@ namespace Dialogue.Epilogue {
             
             
             foreach (CaptionNarration narration in narrations) {
-                captionTextMesh.text = narration.content;
-                
-                yield return StartCoroutine(FadeText(1f, 1f));
+                TextMeshProUGUI activeText = GetSpeakerTextMesh(narration.speaker);
+                activeText.text = narration.content;
+
+                yield return StartCoroutine(FadeText(activeText, 1f, 1f));
                 
                 HandleSignal(narration.signal);
 
@@ -68,39 +83,43 @@ namespace Dialogue.Epilogue {
                     yield return new WaitForSeconds(wordCount / 3f);
                 }
                 
-                yield return StartCoroutine(FadeText(0f, 0.5f));
+                yield return StartCoroutine(FadeText(activeText, 0f, 0.5f));
             }
         }
 
         private void HandleSignal(string signal) {
             switch (signal) {
                 case "ivescrashes":
-                    StartCoroutine(MoveCamera(new Vector2(0, -2), 1f));
-                    StartCoroutine(ZoomCamera(-20, 2f));
+                    StartCoroutine(MoveCamera(new Vector2(0, -2), 1.5f));
+                    StartCoroutine(ZoomCamera(-10, 2f));
                     break;
-                case "flashback":
+                case "jackiesorry":
+                    StartCoroutine(MoveCamera(new Vector2(0, 3), 3f));
+                    StartCoroutine(ZoomCamera(10, 2f));
                     break;
                 default:
                     break;
             }
         }
         
-        private IEnumerator FadeText(float targetAlpha, float duration) {
-            if (captionTextMesh == null)
+        private IEnumerator FadeText(TextMeshProUGUI textMesh, float targetAlpha, float duration)
+        {
+            if (textMesh == null)
                 yield break;
 
-            float startAlpha = captionTextMesh.alpha;
+            float startAlpha = textMesh.alpha;
             float time = 0f;
 
             while (time < duration)
             {
                 time += Time.unscaledDeltaTime;
-                captionTextMesh.alpha = Mathf.Lerp(startAlpha, targetAlpha, time / duration);
+                textMesh.alpha = Mathf.Lerp(startAlpha, targetAlpha, time / duration);
                 yield return null;
             }
 
-            captionTextMesh.alpha = targetAlpha;
+            textMesh.alpha = targetAlpha;
         }
+
 
         private IEnumerator MoveCamera(Vector2 deltaPosition, float duration)
         {
@@ -142,5 +161,18 @@ namespace Dialogue.Epilogue {
 
             mainCamera.fieldOfView = targetPos;
         }
+        
+        private TextMeshProUGUI GetSpeakerTextMesh(CaptionType speaker) {
+            switch (speaker) {
+                case CaptionType.Jackie:
+                    return jackieTextMesh;
+                case CaptionType.Ives:
+                    return ivesTextMesh;
+                case CaptionType.Narration:
+                default:
+                    return captionTextMesh;
+            }
+        }
+
     }
 }
