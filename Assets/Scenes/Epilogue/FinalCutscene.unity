@@ -246,7 +246,7 @@ MonoBehaviour:
       sludge. The controlled scouts collapse, unconscious but still alive.
     manualDuration: 0
     speaker: 0
-    signal: jackiesorry
+    signal: 
   - content: In the center of the crater, the monstrous, purple form of Ives sways.
       The cold rushing back as the adrenaline fades.
     manualDuration: 0
