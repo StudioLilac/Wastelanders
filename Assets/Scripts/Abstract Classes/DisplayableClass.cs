@@ -20,6 +20,11 @@ public abstract class DisplayableClass : SelectClass
         if (ActionClass != null)
         {
             OnShowCard?.Invoke(ActionClass);
+            if (UnseenIndicatorVisible())
+            {
+                GameStateManager.Instance.AddEnemyActionToSeen(ActionClass);
+                OnEnemyActionSeen?.Invoke(ActionClass.GetName());
+            }
         }
     }
 
@@ -28,11 +33,6 @@ public abstract class DisplayableClass : SelectClass
         if (ActionClass != null)
         {
             OnHideCard?.Invoke(ActionClass);
-            if (UnseenIndicatorVisible())
-            {
-                GameStateManager.Instance.AddEnemyActionToSeen(ActionClass);
-                OnEnemyActionSeen?.Invoke(ActionClass.GetName());
-            }
         }
     }
 
@@ -77,6 +77,10 @@ public abstract class DisplayableClass : SelectClass
             HideCard();
             new DisplayableUnhoveredEvent().Invoke();
         }
+    }
+
+    protected virtual void OnDestroy() {
+        OnEnemyActionSeen -= OnEnemyActionMarkedScene;
     }
     
     // Should be invoked if this Displayable is showing an enemy action

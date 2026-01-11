@@ -25,6 +25,8 @@ public class CombatCardUI : DisplayableClass
             ActionClass.TargetChanged -= SetTargetIcon;
             ActionClass.CardValuesUpdating -= UpdateRangeText;
         }
+        
+        base.OnDestroy();
     }
     
     private void OnEnable()
