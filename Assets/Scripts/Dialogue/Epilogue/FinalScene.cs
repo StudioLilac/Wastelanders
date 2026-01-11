@@ -105,8 +105,8 @@ namespace Dialogue.Epilogue {
                     StartCoroutine(ZoomCamera(-10, 2f));
                     break;
                 case "jackiesorry":
-                    StartCoroutine(MoveCamera(new Vector2(0, 2), 3f));
-                    StartCoroutine(ZoomCamera(10, 2f));
+                    StartCoroutine(MoveCamera(new Vector2(0, 2), 9f));
+                    StartCoroutine(ZoomCamera(10, 6f));
                     StartCoroutine(PlayYouKilledHerSequence());
                     break;
                 default:
@@ -117,12 +117,15 @@ namespace Dialogue.Epilogue {
         private IEnumerator PlayYouKilledHerSequence() {
             yield return new WaitForSeconds(1.5f);
             
-            StartCoroutine(FloatThoughtText(itsYourFaultText, 5f));
+            StartCoroutine(FloatThoughtText(itsYourFaultText, 4f));
             yield return new WaitForSeconds(2f);
-            StartCoroutine(FloatThoughtText(youDidThisToHerText, 3f));
-            yield return new WaitForSeconds(4f);
+            StartCoroutine(FloatThoughtText(youDidThisToHerText, 2f));
+            yield return new WaitForSeconds(3f);
             
             yield return StartCoroutine(FloatThoughtText(youKilledHerText, 3f));
+            youKilledHerObj.SetActive(false);
+            
+            StartCoroutine(UIFadeScreenManager.Instance.FadeInDarkScreen(3f));
             
         }
         
