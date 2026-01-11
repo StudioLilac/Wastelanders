@@ -667,8 +667,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: ITS YOUR FAULT
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 45655d31e91b67348a14c71c93e58413, type: 2}
-  m_sharedMaterial: {fileID: 4261834809065216310, guid: 45655d31e91b67348a14c71c93e58413, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: bdff944414a5c49f68a57d29e782b2dd, type: 2}
+  m_sharedMaterial: {fileID: -1472579445266561125, guid: bdff944414a5c49f68a57d29e782b2dd, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -692,8 +692,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 140
-  m_fontSizeBase: 140
+  m_fontSize: 200
+  m_fontSizeBase: 200
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
