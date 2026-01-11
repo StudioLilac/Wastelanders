@@ -42,8 +42,10 @@ namespace Dialogue.Epilogue {
         [SerializeField] private TextMeshProUGUI ivesTextMesh;
 
         [Header("You killed her")] 
+        [SerializeField] private float jitterAmount;
         [SerializeField] private Image youKilledHerBg;
         [SerializeField] private TextMeshProUGUI youKilledHerText;
+        
         
         private void Start() {
             int n = narrations.Count;
@@ -207,19 +209,33 @@ namespace Dialogue.Epilogue {
                 yield break;
 
             float elapsed = 0f;
-            float interval = 1f / flashesPerSecond;
             bool visible = false;
-
+            
+            float baseInterval = 1f / flashesPerSecond;
+            float jitter = baseInterval * 0.4f; 
+            
+            // also make the text move around slightly
+            Vector3 basePos = textMesh.rectTransform.anchoredPosition;
+            
             while (elapsed < flashDuration)
             {
                 visible = !visible;
-                textMesh.alpha = visible ? 1f : 0f;
+                float targetAlpha = visible
+                    ? UnityEngine.Random.Range(0.85f, 1f)
+                    : UnityEngine.Random.Range(0f, 0.15f);
 
-                yield return new WaitForSecondsRealtime(interval);
-                elapsed += interval;
+                textMesh.alpha = targetAlpha;
+
+                textMesh.rectTransform.anchoredPosition =
+                    (Vector2)basePos + UnityEngine.Random.insideUnitCircle * jitterAmount;
+
+                float actualInterval = baseInterval + UnityEngine.Random.Range(-jitter, jitter);
+                actualInterval = Mathf.Max(0.02f, actualInterval);
+
+                yield return new WaitForSecondsRealtime(actualInterval);
+                elapsed += actualInterval;
             }
 
-            // Force invisible at the end
             textMesh.alpha = 0f;
         }
 
