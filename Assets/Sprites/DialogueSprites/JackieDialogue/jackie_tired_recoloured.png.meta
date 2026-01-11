@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7db164943bf379d4e90a7bbef58b8701
+guid: a9901bbfc9728634b8252622c7f3882c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8486409221406198596
-    second: jackie_poutOpen_recoloured_0
+      213: 8839185279484830515
+    second: jackie_tired_recoloured_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: jackie_poutOpen_recoloured_0
+      name: jackie_tired_recoloured_0
       rect:
         serializedVersion: 2
         x: 515
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cb4fb7ba6c73a3a80800000000000000
-      internalID: -8486409221406198596
+      spriteID: 3332e8ffd281baa70800000000000000
+      internalID: 8839185279484830515
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      jackie_poutOpen_recoloured_0: -8486409221406198596
+      jackie_tired_recoloured_0: 8839185279484830515
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
