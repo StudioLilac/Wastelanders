@@ -244,49 +244,71 @@ MonoBehaviour:
   - content: The Princess Frog lets out a final wail as it dissolves into purple
       sludge. The controlled scouts collapse, unconscious but still alive.
     manualDuration: 0
+    signal: 
   - content: In the center of the crater, the monstrous, purple form of Ives sways.
       The cold rushing back as the adrenaline fades.
     manualDuration: 0
+    signal: 
   - content: She crashes into the snow.
     manualDuration: 3
+    signal: 
   - content: 'JACKIE: IVES!'
     manualDuration: 0
+    signal: 
   - content: Jackie presses her fingers to Ives neck, checking for a pulse.
     manualDuration: 0
+    signal: 
   - content: 'IVES: ...Jackie?'
     manualDuration: 0
+    signal: 
   - content: I'm here! Just... hold on. We have to get you back to Kade.
     manualDuration: 0
+    signal: 
   - content: 
     manualDuration: 0
+    signal: 
   - content: 
     manualDuration: 0
+    signal: 
   - content: 
     manualDuration: 0
+    signal: 
   - content: 
     manualDuration: 0
+    signal: 
   - content: 
     manualDuration: 0
+    signal: 
   - content: 
     manualDuration: 0
+    signal: 
   - content: 
     manualDuration: 0
+    signal: 
   - content: 
     manualDuration: 0
+    signal: 
   - content: 
     manualDuration: 0
+    signal: 
   - content: 
     manualDuration: 0
+    signal: 
   - content: 
     manualDuration: 0
+    signal: 
   - content: 
     manualDuration: 0
+    signal: 
   - content: 
     manualDuration: 0
+    signal: 
   - content: 
     manualDuration: 0
+    signal: 
   - content: 
     manualDuration: 0
+    signal: 
   captionTextMesh: {fileID: 1163876813}
   whiteOverlay: {fileID: 1927283258}
   povBlizzard: {fileID: 1865732628}
