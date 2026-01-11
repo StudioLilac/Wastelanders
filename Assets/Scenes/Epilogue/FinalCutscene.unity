@@ -300,14 +300,15 @@ MonoBehaviour:
     manualDuration: 0
     speaker: 1
     signal: 
-  - content: 
-    manualDuration: 30
-    speaker: 0
-    signal: this is a manual break
-  - content: 
+  - content: Jackie freezes. A familiar feeling rises up her throat, threatening
+      to burst from her chest.
     manualDuration: 0
     speaker: 0
     signal: 
+  - content: 
+    manualDuration: 30
+    speaker: 0
+    signal: hacky way to give some time for flashbacks
   - content: 
     manualDuration: 0
     speaker: 0
@@ -6098,7 +6099,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &853237458
 RectTransform:
   m_ObjectHideFlags: 0

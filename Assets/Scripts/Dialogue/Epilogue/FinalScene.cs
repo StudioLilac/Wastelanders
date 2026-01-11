@@ -47,6 +47,11 @@ namespace Dialogue.Epilogue {
         [SerializeField] private TextMeshProUGUI itsYourFaultText;
         [SerializeField] private TextMeshProUGUI youDidThisToHerText;
         [SerializeField] private TextMeshProUGUI youKilledHerText;
+        
+        [Header("Flashback")]
+        [SerializeField] private Image camFlashback;
+        [SerializeField] private Image jayFlashback;
+        
         private void Start() {
             int n = narrations.Count;
             UIFadeScreenManager.Instance.SetDarkScreen();
@@ -59,6 +64,9 @@ namespace Dialogue.Epilogue {
             itsYourFaultText.alpha = 0;
             youDidThisToHerText.alpha = 0;
             youKilledHerText.alpha = 0;
+            
+            camFlashback.color = new Color(0, 0, 0, 0);
+            jayFlashback.color = new Color(0, 0, 0, 0);
             
             StartCoroutine(PlayScene());
         }
@@ -124,9 +132,22 @@ namespace Dialogue.Epilogue {
             
             yield return StartCoroutine(FloatThoughtText(youKilledHerText, 3f));
             youKilledHerObj.SetActive(false);
+            yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInDarkScreen(3f));
             
-            StartCoroutine(UIFadeScreenManager.Instance.FadeInDarkScreen(3f));
+            camFlashback.color = new Color(1, 1, 1, 1);
+            yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(2f));
+            yield return new WaitForSeconds(2f);
+            yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInDarkScreen(3f));
             
+            camFlashback.color = new Color(0,0,0,0);
+            jayFlashback.color = new Color(1, 1, 1, 1);
+            yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(2f));
+            yield return new WaitForSeconds(2f);
+            yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInDarkScreen(3f));
+            jayFlashback.color = new Color(0,0,0,0);
+            
+            // quickly, now back to the real world.
+            yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(0.5f));
         }
         
         private IEnumerator FadeText(TextMeshProUGUI textMesh, float targetAlpha, float duration)
