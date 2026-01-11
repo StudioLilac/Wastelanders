@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 9. RollDiceTut
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: Remember how Power always falls within a range?
+  - bodyText: Remember how <i>Power</i> always falls within a range?
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     sfx: 

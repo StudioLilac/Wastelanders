@@ -378,11 +378,11 @@ public class CombatManager : MonoBehaviour
 
     private void HandleCrosshairEnemies(ActionClass.CardState previousState, ActionClass.CardState nextState)
     {
-        if (nextState == ActionClass.CardState.CLICKED_STATE && previousState == ActionClass.CardState.HOVER)
+        if (nextState == ActionClass.CardState.HOVER)
         {
             CrosshairAllEnemies();
         }
-        else if (nextState == ActionClass.CardState.HOVER && previousState == ActionClass.CardState.CLICKED_STATE)
+        else if (nextState == ActionClass.CardState.NORMAL)
         {
             UncrosshairAllEnemies();
         }

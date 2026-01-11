@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 207ddad3e1c90594ba3f48e2a5a6a796, type: 3}
+  m_Name: 17.5 DummiesDefeated
+  m_EditorClassIdentifier: 
+  dialogue:
+  - bodyText: 'Good hittin''. Could hardly tell you were the same gal as last year. '
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: be935693778d6004d9427d82e6ce5798, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: 'Well, I learned from the best after all. '
+    speakerName: Jackie
+    displayingImage: {fileID: 21300000, guid: c719baaafa8cd7148806ffb41907add6, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: Thanks Ives, I feel much better about the exam now.
+    speakerName: Jackie
+    displayingImage: {fileID: 21300000, guid: c719baaafa8cd7148806ffb41907add6, type: 3}
+    sfx: 
+    broadcastAnEvent: 0

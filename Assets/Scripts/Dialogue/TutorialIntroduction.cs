@@ -19,6 +19,7 @@ public class TutorialIntroduction : DialogueClasses
     [SerializeField] private Transform ivesDefaultTransform;
     [SerializeField] private GameObject trainingDummyPrefab;
     [SerializeField] private Transform dummy1StartingPos;
+    [SerializeField] private List<Transform> groupDummySpawnPos;
     [SerializeField] private Transform jackieEndPosition;
     [SerializeField] private Transform ivesPassiveBattlePosition;
     [SerializeField] private BattleBeginButton battleBeginButton;
@@ -58,6 +59,7 @@ public class TutorialIntroduction : DialogueClasses
 
     //After Ives is defeated
     [SerializeField] private DialogueWrapper ivesIsDefeated;
+    [SerializeField] private DialogueWrapper jackieBeatTheDummies;
     [SerializeField] private DialogueWrapper endingTutorialDialogue;
 
     [SerializeField] private DialogueWrapper gameLoseDialogue;
@@ -65,6 +67,8 @@ public class TutorialIntroduction : DialogueClasses
     [SerializeField] private bool jumpToCombat;
 
     private List<GameObject> trainingDummies = new();
+
+    private float dummiesLeft;
 
 
 
@@ -83,9 +87,6 @@ public class TutorialIntroduction : DialogueClasses
     {
         CombatManager.ClearEvents();
         DialogueBox.ClearDialogueEvents();
-        DialogueBox.DialogueBoxEvent -= SubscribeFirstHighlightMethod;
-        DialogueBox.DialogueBoxEvent -= SubscribePlayerInsertEvent;
-        PlayerClass.playerReshuffleDeck -= PlayerLostOneMaxHandSize;
         ActionClass.CardHighlightedEvent -= OnPlayerFirstHighlightCard;
         EntityClass.OnEntityDeath -= FirstDummyDies;
         DisplayableClass.OnShowCard -= ExplainDefense;
@@ -110,22 +111,13 @@ public class TutorialIntroduction : DialogueClasses
                 cityBgImage.gameObject.SetActive(false);
             }
 
-            yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(2f));
+            yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(1.2f));
 
-            jackie.Emphasize(); //Jackie shows up above the black background
-            yield return StartCoroutine(jackie.MoveToPosition(jackieDefaultTransform.position, 0, 1.5f)); //Jackie Runs into the scene and talks 
+           
+            yield return StartCoroutine(jackie.MoveToPosition(jackieDefaultTransform.position, 0, 1.2f)); //Jackie Runs into the scene and talks 
             yield return new WaitForSeconds(MEDIUM_PAUSE);
 
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieMonologue.Dialogue));
-            jackie.DeEmphasize(); //Jackie is below the black background
-
-            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(soldierGreeting.Dialogue));
-            yield return new WaitForSeconds(0.3f);
-
-            jackie.FaceLeft(); //Jackie faces the soldier talking to her
-            yield return new WaitForSeconds(0.6f);
-
-            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieTalksWithSolider.Dialogue));
             yield return new WaitForSeconds(MEDIUM_PAUSE);
 
             ives.SetReturnPosition(ivesDefaultTransform.position);
@@ -186,33 +178,35 @@ public class TutorialIntroduction : DialogueClasses
             Destroy(trainingDummy);
             yield return new WaitForSeconds(0.3f);
         }
+        trainingDummies.Clear();
 
-        // Have Ives fight and teach clashing now.
+        foreach (Transform pos in groupDummySpawnPos)
+        {
+            yield return StartCoroutine(ives.MoveToPosition(pos.position, 1.2f, 0.8f));
+            yield return new WaitForSeconds(0.2f);
+            trainingDummies.Add(Instantiate(trainingDummyPrefab, pos));
+            yield return new WaitForSeconds(0.8f);
+        }
 
-        ives.SetReturnPosition(dummy1StartingPos.position);
-        ives.InjectDeck(ivesTutorialDeck);
-        CombatManager.Instance.SetEnemiesHostile(new List<EnemyClass> { ives });
+        StartCoroutine(ives.ResetPosition());
 
-        yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
-        CombatManager.Instance.GameState = GameState.SELECTION;
-        yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
-        yield return new WaitForSeconds(1f);
-        BeginCombatIvesFight();
+        yield return StartCoroutine(SecondWave());
 
-        yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
-        CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
-        ives.OutOfCombat();
+        var jackieIvesChatter =  StartCoroutine(DialogueManager.Instance.StartDialogue(jackieBeatTheDummies.Dialogue));
 
-        yield return new WaitForSeconds(0.3f);
-        ives.animator.enabled = false;
-        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesIsDefeated.Dialogue));
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(1.0f);
+        
+        //Ives retrieves the dead training dummy
+        foreach (GameObject trainingDummy in trainingDummies)
+        {
+            trainingDummy.GetComponent<SpriteRenderer>().sortingOrder -= 1;
+            yield return StartCoroutine(ives.MoveToPosition(trainingDummy.transform.position, 0.8f, 0.8f));
+            yield return new WaitForSeconds(0.3f);
+            Destroy(trainingDummy);
+            yield return new WaitForSeconds(0.3f);
+        }
 
-        ives.animator.enabled = true;
-        //Ives Stands back up
-        ives.Heal(5);
-        ives.SetUnstaggered();
-        yield return new WaitForSeconds(0.8f);
+        yield return jackieIvesChatter;
 
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(endingTutorialDialogue.Dialogue));
 
@@ -229,72 +223,47 @@ public class TutorialIntroduction : DialogueClasses
     private void BeginCombatTutorial()
     {
         EntityClass.OnEntityDeath += FirstDummyDies; //Setup Listener to set state to Game Win
-        PlayerClass.playerReshuffleDeck += PlayerLostOneMaxHandSize;
-        battleBeginButton.gameObject.SetActive(false);
+        battleBeginButton.SelectionSprite.enabled = false;
         StartCoroutine(StartTutorial());
     }
 
     private IEnumerator StartTutorial()
     {
         yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
-        DialogueBox.DialogueBoxEvent += SubscribeFirstHighlightMethod;
-        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(youCanPlayCardsTutorial.Dialogue));   
-    }
-
-    void SubscribeFirstHighlightMethod()
-    {
-        DialogueBox.DialogueBoxEvent -= SubscribeFirstHighlightMethod;
         ActionClass.CardHighlightedEvent += OnPlayerFirstHighlightCard;
-    }
-
-    private void PlayerLostOneMaxHandSize(PlayerClass player)
-    {
-        if (player == jackie)
-        {
-            StartCoroutine(HandSizeDecreasedDialogue());
-        }
-    }
-
-    private IEnumerator HandSizeDecreasedDialogue()
-    {
-        PlayerClass.playerReshuffleDeck -= PlayerLostOneMaxHandSize;
-        yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
-        DialogueManager.Instance.MoveBoxToBottom();
-        StartCoroutine(DialogueManager.Instance.StartDialogue(cardsExhaustedTutorial.Dialogue));
+        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(youCanPlayCardsTutorial.Dialogue));   
     }
 
     //Once hovering over a card, we talk about speed and power
     private void OnPlayerFirstHighlightCard(ActionClass card)
     {
         ActionClass.CardHighlightedEvent -= OnPlayerFirstHighlightCard;
-        DialogueManager.Instance.DisplayNextSentence();
-        DialogueBox.DialogueBoxEvent += SubscribePlayerInsertEvent;
+        StartCoroutine(PlayerFirstHighlightCard(card));
+    }
+
+    private IEnumerator PlayerFirstHighlightCard(ActionClass card)
+    {
+        yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
+        HighlightManager.Instance.PlayerManuallyInsertedAction += OnPlayerFirstInsertCard;
         StartCoroutine(StartDialogueWithNextEvent(cardFieldsTutorial.Dialogue, () => { }));
     }
 
-    private void SubscribePlayerInsertEvent()
-    {
-        DialogueBox.DialogueBoxEvent -= SubscribePlayerInsertEvent;
-        HighlightManager.Instance.PlayerManuallyInsertedAction += OnPlayerFirstInsertCard;
-    }
 
     //Once a player targets an enemy, we talk about the queue
     private void OnPlayerFirstInsertCard(ActionClass card)
     {
         HighlightManager.Instance.PlayerManuallyInsertedAction -= OnPlayerFirstInsertCard;
-        DialogueManager.Instance.MoveBoxToBottom();
-        DialogueManager.Instance.DisplayNextSentence();
-        battleBeginButton.gameObject.SetActive(true);
+        battleBeginButton.SelectionSprite.enabled = true;
         battleBeginButton.CanStartCombat = false;
-        StartCoroutine(StartDialogueWithNextEvent(queueUpActionsTutorial.Dialogue, () => { this.Subscribe<BattleQueueIconClick>(DuplicateSpeed);}));
+        StartCoroutine(PlayerFirstInsertCard(card));
     }
 
-    private void DuplicateSpeed(BattleQueueIconClick ev)
+    private IEnumerator PlayerFirstInsertCard(ActionClass card)
     {
-        this.UnSubscribe<BattleQueueIconClick>(DuplicateSpeed);
-        StartCoroutine(StartDialogueWithNextEvent(duplicateSpeedTutorial.Dialogue, () =>
-        {
-            battleBeginButton.CanStartCombat = true; 
+        yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
+        DialogueManager.Instance.MoveBoxToBottom();
+        StartCoroutine(StartDialogueWithNextEvent(queueUpActionsTutorial.Dialogue, () => {
+            battleBeginButton.CanStartCombat = true;
             CardComparator.Instance.playersAreRollingDiceEvent += OnPlayerFightsDummy;
         }));
     }
@@ -313,6 +282,40 @@ public class TutorialIntroduction : DialogueClasses
             CombatManager.Instance.GameState = GameState.GAME_WIN;
         }
     }
+
+    // --------------------------------- Reworked Second phase -----------------------------
+
+    private IEnumerator SecondWave()
+    {
+        yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
+        CombatManager.Instance.GameState = GameState.SELECTION;
+        EntityClass.OnEntityDeath += OnDummyDies;
+        dummiesLeft = groupDummySpawnPos.Count;
+        CombatManager.OnGameStateChanged += HandSizeGameStateChange;
+        yield return new WaitUntil(() => dummiesLeft == 0);
+        CombatManager.Instance.GameState = GameState.GAME_WIN;
+        yield return new WaitForSeconds(1f);
+    }
+
+
+    private void HandSizeGameStateChange(GameState gameState)
+    {
+        if (gameState == GameState.SELECTION)
+        {
+            CombatManager.OnGameStateChanged -= HandSizeGameStateChange;
+            DialogueManager.Instance.MoveBoxToBottom();
+            StartCoroutine(DialogueManager.Instance.StartDialogue(cardsExhaustedTutorial.Dialogue));
+        }
+
+    }
+
+    private void OnDummyDies(EntityClass trainingDummy)
+    {
+        trainingDummy.OutOfCombat();
+        trainingDummy.UnTargetable();
+        dummiesLeft -= 1;
+    }
+
 
     //-----------------------------------Ives Fight----------------------------------------
 
