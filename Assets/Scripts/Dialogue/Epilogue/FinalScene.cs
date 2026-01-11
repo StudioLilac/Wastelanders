@@ -75,7 +75,7 @@ namespace Dialogue.Epilogue {
         private void HandleSignal(string signal) {
             switch (signal) {
                 case "ivescrashes":
-                    StartCoroutine(MoveCamera(new Vector2(0, -2), 2f));
+                    StartCoroutine(MoveCamera(new Vector2(0, -2), 1f));
                     StartCoroutine(ZoomCamera(-20, 2f));
                     break;
                 case "flashback":
