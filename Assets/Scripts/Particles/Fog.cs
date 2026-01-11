@@ -126,12 +126,12 @@ public class FogVolume2D : MonoBehaviour
     }
     
 #if UNITY_EDITOR
-    void OnValidate()
-    {
-        if (!Application.isPlaying)
-            return;
-
-        SetIntensity(debugIntensity);
-    }
+    // void OnValidate()
+    // {
+    //     if (!Application.isPlaying)
+    //         return;
+    //
+    //     SetIntensity(debugIntensity);
+    // }
 #endif
 }

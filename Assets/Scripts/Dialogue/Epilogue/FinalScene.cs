@@ -15,6 +15,8 @@ namespace Dialogue.Epilogue {
             // leave this as 0 to use the default timing.
             [SerializeField] public int manualDuration = 0;
         }
+
+        private Camera mainCamera;
         
         [SerializeField] private List<CaptionNarration> narrations;
         [SerializeField] private TextMeshProUGUI captionTextMesh;
@@ -28,6 +30,7 @@ namespace Dialogue.Epilogue {
             UIFadeScreenManager.Instance.SetDarkScreen();
             captionTextMesh.alpha = 0;
             whiteOverlay.color = new Color(0, 0, 0, 0);
+            mainCamera = Camera.main;
             
             StartCoroutine(PlayScene());
         }
@@ -39,10 +42,13 @@ namespace Dialogue.Epilogue {
             // at the right point.
             // TODO: make this wait until fmod flips to the ending track
             yield return new WaitForSeconds(0.5f);
+            // now the scene starts, with the music synced up
             
+            
+            StartCoroutine(MoveCamera(new Vector2(0, -2), 3f));
             yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(2f));
             
-            // now the scene starts, with the music synced up
+            
             foreach (CaptionNarration narration in narrations) {
                 captionTextMesh.text = narration.content;
                 
@@ -76,6 +82,27 @@ namespace Dialogue.Epilogue {
             }
 
             captionTextMesh.alpha = targetAlpha;
+        }
+
+        private IEnumerator MoveCamera(Vector2 deltaPosition, float duration)
+        {
+            Vector3 startPos = mainCamera.transform.position;
+            Vector3 targetPos = startPos + new Vector3(deltaPosition.x, deltaPosition.y, 0f);
+
+            float elapsed = 0f;
+
+            while (elapsed < duration)
+            {
+                elapsed += Time.deltaTime;
+                float t = Mathf.Clamp01(elapsed / duration);
+
+                float easedT = t * t * (3f - 2f * t);
+
+                mainCamera.transform.position = Vector3.Lerp(startPos, targetPos, easedT);
+                yield return null;
+            }
+
+            mainCamera.transform.position = targetPos;
         }
     }
 }
