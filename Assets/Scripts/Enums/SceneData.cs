@@ -184,9 +184,9 @@ public abstract class SceneData : Enum<SceneData>
         };
     }
 
-    public class PreBounty8 : SceneData
+    public class Epilogue_8 : SceneData
     {
-        public override string SceneName => "PreBounty_8";
+        public override string SceneName => "Epilogue_8";
 
         public override SceneAudio GetAudio(AudioDatabase database) => database.Empty;
 
