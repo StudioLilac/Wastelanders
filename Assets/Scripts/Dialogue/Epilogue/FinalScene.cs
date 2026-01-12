@@ -65,7 +65,7 @@ namespace Dialogue.Epilogue {
             captionTextMesh.alpha = 0;
             jackieTextMesh.alpha = 0;
             ivesTextMesh.alpha = 0;
-            whiteOverlay.color = new Color(0, 0, 0, 0);
+            whiteOverlay.color = new Color(1, 1, 1, 0);
             mainCamera = Camera.main;
 
             itsYourFaultText.alpha = 0;
@@ -140,10 +140,19 @@ namespace Dialogue.Epilogue {
                     emission.rateOverTime = emission.rateOverTime.constant + 10f;
                     break;
                 case "ivespassesout":
-                    StartCoroutine(MoveCamera(new Vector2(0, 2f), 6f));
+                    StartCoroutine(MoveCamera(new Vector2(0, 2f), 12f));
                     fogVolume2D.SetIntensity(30);
                     emission = clouds.emission;
                     emission.rateOverTime = emission.rateOverTime.constant + 10f;
+                    break;
+                case "end":
+                    StartCoroutine(FadeImageAlpha(
+                        whiteOverlay,
+                        1f,
+                        2f,
+                        AnimationCurve.EaseInOut(0, 0, 1, 1)
+                    ));
+                    StartCoroutine(FadeFMODVolume(blizzardInstance, 1f, 0f, 3f));
                     break;
                 default:
                     break;
@@ -432,6 +441,34 @@ namespace Dialogue.Epilogue {
             }
 
             instance.setVolume(to);
+        }
+
+        public static IEnumerator FadeImageAlpha(
+            Image image,
+            float targetAlpha,
+            float duration,
+            AnimationCurve easing
+        )
+        {
+            if (image == null)
+                yield break;
+
+            Color color = image.color;
+            float startAlpha = color.a;
+            float time = 0f;
+
+            while (time < duration)
+            {
+                time += Time.deltaTime;
+                float t = Mathf.Clamp01(time / duration);
+                float eased = easing.Evaluate(t);
+                color.a = Mathf.Lerp(startAlpha, targetAlpha, eased);
+                image.color = color;
+                yield return null;
+            }
+
+            color.a = targetAlpha;
+            image.color = color;
         }
 
     }
