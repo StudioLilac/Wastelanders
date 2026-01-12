@@ -36,3 +36,9 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: a9b93558fad3077429dd2674a34563e9, type: 3}
     sfx: 
     broadcastAnEvent: 0
+  - bodyText: '<i>Try picking Actions with wide varieties of Speed! This avoids speed
+      conflicts in battle. '
+    speakerName: Tutorial
+    displayingImage: {fileID: 21300000, guid: b1411cc1e1231574797f223a58264863, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
