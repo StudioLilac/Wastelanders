@@ -306,7 +306,7 @@ MonoBehaviour:
     speaker: 0
     signal: 
   - content: 
-    manualDuration: 30
+    manualDuration: 15
     speaker: 0
     signal: hacky way to give some time for flashbacks
   - content: 'The apology stops burning in her throat. '
