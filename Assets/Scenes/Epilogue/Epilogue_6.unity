@@ -773,7 +773,7 @@ MonoBehaviour:
     picture: {fileID: 0}
     events:
     - rid: 2403555690236084359
-  - content: Dammit.
+  - content: Damnation.
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     sfxName: 
     picture: {fileID: 0}
