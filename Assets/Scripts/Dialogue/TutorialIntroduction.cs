@@ -10,6 +10,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static BattleIntroEnum;
+using UI_Toolkit;
 
 public class TutorialIntroduction : DialogueClasses
 {
@@ -30,14 +31,17 @@ public class TutorialIntroduction : DialogueClasses
     [SerializeField] private Image cityBgImage;
     [SerializeField] private Image laidBackImageUI;
     [SerializeField] private Image puzzeledImageUI;
+    [SerializeField] private UIFadeHandler backgroundScrim;
 
     [SerializeField] private List<GameObject> ivesTutorialDeck;
     [SerializeField] private List<GameObject> jackieTutorialDeck;
 
     [SerializeField] private DialogueEntryWrapper openingDialogue;
     [SerializeField] private DialogueWrapper jackieMonologue;
+    [SerializeField] private DialogueEntryWrapper jackieSoloDialogue;
     [SerializeField] private DialogueWrapper soldierGreeting;
     [SerializeField] private DialogueWrapper jackieTalksWithSolider;
+    [SerializeField] private DialogueEntryWrapper jackieTalksWithIves;
     [SerializeField] private DialogueWrapper ivesChatsWithJackie;
 
     //SingleDummyTutorial
@@ -116,8 +120,9 @@ public class TutorialIntroduction : DialogueClasses
            
             yield return StartCoroutine(jackie.MoveToPosition(jackieDefaultTransform.position, 0, 1.2f)); //Jackie Runs into the scene and talks 
             yield return new WaitForSeconds(MEDIUM_PAUSE);
+            StartCoroutine(backgroundScrim.FadeToAlpha(0.7f, 1.0f));
 
-            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieMonologue.Dialogue));
+            yield return StartCoroutine(DialogueBoxV2.Instance.Play(jackieSoloDialogue));
             yield return new WaitForSeconds(MEDIUM_PAUSE);
 
             ives.SetReturnPosition(ivesDefaultTransform.position);
@@ -126,16 +131,13 @@ public class TutorialIntroduction : DialogueClasses
 
             jackie.FaceRight(); //Jackie turns to face the person approaching her
 
-            {
-                DialogueBox.DialogueBoxEvent += JackieGoesToGetStaff;
-                void JackieGoesToGetStaff()
-                {
-                    DialogueBox.DialogueBoxEvent -= JackieGoesToGetStaff;
-                    StartCoroutine(jackie.MoveToPosition(dummy1StartingPos.position, 1.4f, 0.8f));
-                }
-                yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesChatsWithJackie.Dialogue));
-            }
+            yield return StartCoroutine(DialogueBoxV2.Instance.Play(jackieTalksWithIves));
+            StartCoroutine(backgroundScrim.FadeToAlpha(0f, 1.0f));
+            var jackieMove = StartCoroutine(jackie.MoveToPosition(dummy1StartingPos.position, 1.4f, 0.8f));
+            yield return new WaitForSeconds(0.5f);
             yield return StartCoroutine(ives.MoveToPosition(dummy1StartingPos.position, 1.2f, 0.8f)); //Ives goes to place a dummy down
+            yield return jackieMove;
+
             trainingDummies.Add(Instantiate(trainingDummyPrefab, dummy1StartingPos)); //Ives summons Dummy
         } else
         {
@@ -224,6 +226,7 @@ public class TutorialIntroduction : DialogueClasses
     {
         EntityClass.OnEntityDeath += FirstDummyDies; //Setup Listener to set state to Game Win
         battleBeginButton.SelectionSprite.enabled = false;
+        HUDV2.Instance.SetDeckInfoVisibility(false);
         StartCoroutine(StartTutorial());
     }
 
@@ -291,22 +294,13 @@ public class TutorialIntroduction : DialogueClasses
         CombatManager.Instance.GameState = GameState.SELECTION;
         EntityClass.OnEntityDeath += OnDummyDies;
         dummiesLeft = groupDummySpawnPos.Count;
-        CombatManager.OnGameStateChanged += HandSizeGameStateChange;
+        HUDV2.Instance.SetDeckInfoVisibility(true);
+        DialogueManager.Instance.MoveBoxToBottom();
+        StartCoroutine(DialogueManager.Instance.StartDialogue(cardsExhaustedTutorial.Dialogue));
+
         yield return new WaitUntil(() => dummiesLeft == 0);
         CombatManager.Instance.GameState = GameState.GAME_WIN;
         yield return new WaitForSeconds(1f);
-    }
-
-
-    private void HandSizeGameStateChange(GameState gameState)
-    {
-        if (gameState == GameState.SELECTION)
-        {
-            CombatManager.OnGameStateChanged -= HandSizeGameStateChange;
-            DialogueManager.Instance.MoveBoxToBottom();
-            StartCoroutine(DialogueManager.Instance.StartDialogue(cardsExhaustedTutorial.Dialogue));
-        }
-
     }
 
     private void OnDummyDies(EntityClass trainingDummy)
