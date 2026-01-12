@@ -119,6 +119,180 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &653286146
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 653286147}
+  - component: {fileID: 653286150}
+  - component: {fileID: 653286149}
+  - component: {fileID: 653286148}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &653286147
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 653286146}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1864064444}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 180.29785, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &653286148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 653286146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AspectMode: 4
+  m_AspectRatio: 1.9444444
+--- !u!114 &653286149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 653286146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 7f9ca1d58e6334bc7908de7fffd1575c, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &653286150
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 653286146}
+  m_CullTransparentMesh: 1
+--- !u!1 &871148629
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 871148632}
+  - component: {fileID: 871148631}
+  - component: {fileID: 871148630}
+  m_Layer: 0
+  m_Name: Background 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &871148630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 871148629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UiScaleMode: 1
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 1920, y: 1080}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
+--- !u!223 &871148631
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 871148629}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 0
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 1
+  m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
+--- !u!224 &871148632
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 871148629}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1722650233}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
 --- !u!1 &1722617019
 GameObject:
   m_ObjectHideFlags: 0
@@ -211,6 +385,96 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1722650232
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1722650233}
+  - component: {fileID: 1722650236}
+  - component: {fileID: 1722650235}
+  - component: {fileID: 1722650234}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1722650233
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1722650232}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 871148632}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1722650234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1722650232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AspectMode: 4
+  m_AspectRatio: 1.9444444
+--- !u!114 &1722650235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1722650232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 926d5ff7ade7c7540af0f4cc1ab4f9ad, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1722650236
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1722650232}
+  m_CullTransparentMesh: 1
 --- !u!1 &1818432482
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,493 +504,1121 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c64bcc9600fbd264194d7878f5f553fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue:
-  - content: Ives?
-    speaker: {fileID: 0}
+  postDialogue0:
+  - content: 
+    speaker: {fileID: 11400000, guid: 4fef3aeb65460fd498ab9efe9bac8625, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
-  - content: "Headquarters placed your daughter under my watch. Odd way to say you
-      need a babysitter, don\u2019t you think?"
+    events:
+    - rid: 2124643721081258047
+    - rid: 2124643721081258048
+    - rid: 2124643721081258054
+  dialogue1:
+  - content: Ives?
+    speaker: {fileID: 11400000, guid: 91e7c860c0040a24eaaf9819f99b3d4b, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events:
+    - rid: 2124643721081258052
+  - content: Headquarters placed your daughter under my watch. Odd way to say you
+      need a babysitter, don't you think?
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 
-    picture: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
-    events: []
-  - content: "What? I don\u2019t know what you\u2019re\u2013"
-    speaker: {fileID: 0}
+    picture: {fileID: 0}
+    events:
+    - rid: 2124643721081258053
+    - rid: 2124643721081258141
+  - content: What? I don't know what you're-
+    speaker: {fileID: 11400000, guid: 91e7c860c0040a24eaaf9819f99b3d4b, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258142
   - content: <i>Deception.</i>
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 4dd2f768b5bf0b545b549292bb236880, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
-  - content: "Save it, Ailin. What\u2019s going on? First Jay goes missing, now you\u2019re
-      flaking on me."
-    speaker: {fileID: 0}
+    events:
+    - rid: 2124643721081258143
+  - content: Save it, Ailin. What's going on? First Jay goes missing, now you're
+      flaking on me.
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
-  - content: "<i>Ailin\u2019s gaze falters.</i>"
-    speaker: {fileID: 0}
+    events:
+    - rid: 2124643721081258144
+  - content: <i>Ailin's gaze falters.</i>
+    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
-  - content: "The team\u2019s going out to find Jay, first thing tomorrow."
-    speaker: {fileID: 0}
+    events:
+    - rid: 2124643721081258145
+  - content: The team's going out to find Jay, first thing tomorrow.
+    speaker: {fileID: 11400000, guid: 91e7c860c0040a24eaaf9819f99b3d4b, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258146
   - content: What? Without me?
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258147
   - content: I need you here for Jackie.
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 91e7c860c0040a24eaaf9819f99b3d4b, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258157
   - content: <i>Worthless.</i>
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 4dd2f768b5bf0b545b549292bb236880, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events:
+    - rid: 2124643721081258148
+  - content: Someone-<i>anyone</i>-else could do that! Let me come, Ailin! Jay is
+      my comrade too.
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events:
+    - rid: 2124643721081258149
+  - content: Do you not believe in me, after all we've been through?
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events: []
-  - content: "Someone\u2013<i>anyone</i>\u2013else could do that! Let me come, Ailin!
-      Jay is my comrade too."
-    speaker: {fileID: 0}
+  - content: Of course I do... That's why I need you here!
+    speaker: {fileID: 11400000, guid: 91e7c860c0040a24eaaf9819f99b3d4b, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events:
+    - rid: 2124643721081258150
+  - content: If anything happens to us out there... If we don't make it back... Jackie
+      will need you.
+    speaker: {fileID: 11400000, guid: 91e7c860c0040a24eaaf9819f99b3d4b, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events: []
-  - content: "Do you not believe in me, after all we\u2019ve been through?"
-    speaker: {fileID: 0}
+  - content: You're the only one I trust with her, Ives.
+    speaker: {fileID: 11400000, guid: 91e7c860c0040a24eaaf9819f99b3d4b, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events: []
-  - content: "Of course I do... That\u2019s why I need you here!"
-    speaker: {fileID: 0}
+  - content: ...
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
-  - content: "If anything happens to us out there... If we don\u2019t make it back...
-      Jackie will need you."
-    speaker: {fileID: 0}
-    sfxName: 
-    picture: {fileID: 0}
-    events: []
-  - content: "You\u2019re the only one I trust with her, Ives."
-    speaker: {fileID: 0}
-    sfxName: 
-    picture: {fileID: 0}
-    events: []
-  - content: "What about <i>you</i>? You\u2019re her mother."
-    speaker: {fileID: 0}
+    events:
+    - rid: 2124643721081258151
+  - content: What about <i>you</i>? You're her mother.
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events: []
   - content: "I know, but... I\u2019m the one who sent Jay out there. I have to find
       him. Please, Ives. Please just do this for me."
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 91e7c860c0040a24eaaf9819f99b3d4b, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258152
   - content: <i>Pathetic.</i>
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 4dd2f768b5bf0b545b549292bb236880, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258153
   - content: "...You\u2019d better come back. I won\u2019t play babysitter forever."
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events:
+    - rid: 2124643721081258155
+  postDialogue1:
+  - content: 
     speaker: {fileID: 0}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258060
+    - rid: 2124643721081258063
+    - rid: 2124643721081258064
+    - rid: 2124643721081258061
+    - rid: 2124643721081258065
+    - rid: 2124643721081258066
+    - rid: 2124643721081258062
+    - rid: 2124643721081258067
+    - rid: 2124643721081258068
+  dialogue2:
   - content: "Sir, her heart rate is stabilizing. But her arm, it\u2019s still\u2026"
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258069
   - content: "I understand. But for now, there\u2019s not much else we can do."
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 3d10d096fa496f44a9611dd7e88453a3, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258070
   - content: "Her natural Amplitude levels are subsid\xADing, which should help curb
-      the spread. As long as her \r\nvitals are stable, she should wake up soon.\r\n"
-    speaker: {fileID: 0}
+      the spread. As long as her \r\nvitals are stable, she should wake up soon."
+    speaker: {fileID: 11400000, guid: 3d10d096fa496f44a9611dd7e88453a3, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events: []
+  dialogue3:
   - content: Cam...?
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258071
+    - rid: 2124643721081258072
   - content: "Ah! Ives, thank goodness. You\u2019re awake. Your infection was...
       it got pretty bad."
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258073
   - content: "We\u2019re back at the base. This is Dr. Weise, he\u2019s been overseeing
       your recovery."
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258074
   - content: "Commander Ives. I\u2019m Dr. Aleksander Weise. A relief to see you
       conscious."
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258075
+    - rid: 2124643721081258076
+    - rid: 2124643721081258162
   - content: "...Where\u2019s Jackie?"
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258077
+    - rid: 2124643721081258078
   - content: "She\u2019s safe. Still in the Tundra. She wouldn\u2019t leave your
       side until we had you on the WRV."
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258079
+    - rid: 2124643721081258080
   - content: "She\u2019s... There was a look in her eyes, Ives. She\u2019s determined
       to stay."
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events: []
   - content: "Good. ...How long until I\u2019m cleared? I need to get back out there."
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258081
+    - rid: 2124643721081258082
   - content: Uh...
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
-  - content: I'm afraid that won't be possible, Commander.
-    speaker: {fileID: 0}
+    events:
+    - rid: 2124643721081258083
+    - rid: 2124643721081258084
+  - content: "I\u2019m afraid that won\u2019t be possible, Commander."
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258085
+    - rid: 2124643721081258086
   - content: And why is that?
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258087
   - content: Although your condition has stabilized, the Waste vectors in your system
       exhibited... an unfortunate reaction.
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258088
+    - rid: 2124643721081258089
   - content: To explain briefly, you must understand that all living beings transform
       energy to a specific unique <i>Frequency</i> signature before they are able
       to expend it for themselves.
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events: []
   - content: When the waste binds to biology, it feeds on this transformed energy
       to replicate itself.
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events: []
   - content: Thus it is imperative to neutralize it with the Anti-Waste serum before
       it becomes pervasive.
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events: []
   - content: The way the Serum does this is by taking advantage of a major property
       of the Waste.
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events: []
   - content: The Waste is naturally inclined to bind with objects of higher energy
       frequencies.
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events: []
   - content: And so the Anti-Waste Serum is synthesized using special materials to
       have a very high frequency, higher than any natural biology found on earth.
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258090
   - content: As a result, when you receive the serum, the Waste binds to the serum
       instead of the body.
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258091
   - content: In addition, to ensure the Waste has insufficient energy to consume
       and replicate, we also ensure the energy signatures of the Serum have very
       low <i>Amplitude</i>.
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events: []
   - content: However, something in the Tundra compromised the serum, causing its
       amplitude to spike.
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events: []
   - content: Instead of neutralizing the Waste vectors, the injection acted as a
       catalyst for its spread instead.
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events: []
   - content: The vector has spread through your entire system. To an extent where
       it is no longer feasible to purge.
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258092
   - content: "I\u2019m afraid the infection is permanent."
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258093
   - content: ...How bad is it?
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
-  - content: It's not terminal.
-    speaker: {fileID: 0}
+    events:
+    - rid: 2124643721081258094
+  - content: "It\u2019s not terminal."
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258095
+    - rid: 2124643721081258096
   - content: But when the Waste consumes Amplitude, it increases the <i>Frequency</i>
       of the transformer energy as a byproduct.
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258097
   - content: "This will disrupt your body\u2019s natural ability to utilize energy,
       and cause major complications."
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events: []
   - content: While we can manage the symptoms with suppressants and infusions, you
       will grow weaker.
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events: []
   - content: Any significant physical exertion, especially in the field, will increase
       the amount of energy your body transforms.
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events: []
   - content: And will drastically accelerate the Waste's spread.
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events: []
   - content: ...
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258098
   - content: "I\u2019m gonna be out there as long as I can. I have to be there for
       Jackie."
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events: []
   - content: ...
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258099
   - content: "Put me on the next re-supply transport. That\u2019s an order, Doctor."
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258100
   - content: ...
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258101
   - content: "Ives, you can\u2019t-"
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258102
+    - rid: 2124643721081258103
   - content: As you wish, Commander. I will prepare a regimen of our strongest suppressants.
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258104
+    - rid: 2124643721081258105
   - content: "Reichel? A word in my lab, when you\u2019re ready."
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events: []
+  postDialogue3:
+  - content: 
+    speaker: {fileID: 11400000, guid: 4fef3aeb65460fd498ab9efe9bac8625, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events:
+    - rid: 2124643721081258106
+    - rid: 2124643721081258107
+    - rid: 2124643721081258160
+  dialogue4:
   - content: "Ives... I\u2019m so sorry..."
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258108
+    - rid: 2124643721081258109
   - content: "Don\u2019t you start pitying me, kid. We both know this had nothing
       to do with you."
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258110
+    - rid: 2124643721081258111
   - content: But it was my invention that failed to protect us... failed you.
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258112
   - content: Hey, I knew the risks. All of us did.
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258113
   - content: Far as I see it, your invention got the NITES further than anyone else
       ever has. One step closer to Ailin. One step closer to the truth.
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events: []
   - content: "But I should\u2019ve known about the reaction, about the Frog. If only
       I knew more..."
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258114
+    - rid: 2124643721081258115
   - content: "Hah, I\u2019m sure if you had known, we wouldn\u2019t have been able
       to step out that morning."
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258116
+    - rid: 2124643721081258117
   - content: ...
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events:
+    - rid: 2124643721081258118
+  - content: "Listen, I get it. That terrible feeling of \u2018what could\u2019 if
+      you had <b>just known</b>..."
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events:
+    - rid: 2124643721081258123
+    - rid: 2124643721081258124
+  - content: "But you didn\u2019t. No one did. Hell, if there was someone who knew,
+      I\u2019d like to have some words with them."
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events:
+    - rid: 2124643721081258122
+  - content: So no one, especially not you, can blame you for not knowing.
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events: []
+  - content: "But it\u2019s my job as a Scientist to know! My whole life has been
+      spent pursuing the Waste to help people... and for what... to end up hurting
+      those closest to me?"
+    speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events:
+    - rid: 2124643721081258125
+    - rid: 2124643721081258126
+  - content: ...
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events:
+    - rid: 2124643721081258127
+    - rid: 2124643721081258128
   - content: Cam. I need you to understand something.
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258138
   - content: "I know you feel like shit right now. Like you\u2019re not enough."
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events: []
   - content: "I\u2019ve been there, kid. Walked that line to the end and back."
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258122
   - content: But you know where that damn feeling of inadequacy comes from?
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
-  - content: "From an expectation that you\u2019ve set for <i>yourself</i>."
-    speaker: {fileID: 0}
+    events:
+    - rid: 2124643721081258122
+  - content: "From an expectation that you\u2019ve set for <i>yourself.</i>"
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events: []
   - content: Of what it looks like to be some ideal scientist or NITES or whatever.
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events: []
   - content: "So when those expectations aren\u2019t met, that person you think you
       should be calls you worthless."
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events: []
   - content: But the you that everyone else sees is not the same as that one in your
       head.
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258129
   - content: "No one\u2019s blaming you. I don\u2019t blame you. And I never will."
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events: []
   - content: "The only person who\u2019s blaming you is yourself."
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258130
   - content: "So make peace with yourself. What\u2019s done is done."
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events: []
   - content: "Accept that it\u2019s okay to not quite be where you want to be right
       now."
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events: []
   - content: "Because if you keep focusing on where you\u2019ve tripped up, you\u2019ll
       never fully trust yourself to stand straight and walk forward again."
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events: []
   - content: To become that person you truly want to be.
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258131
   - content: Got it?
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events: []
   - content: Cam stays silent for a while, and eventually just nods.
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258132
   - content: So, what are you going to do now?
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258133
+    - rid: 2124643721081258134
   - content: "I\u2019m going to get some answers. I promise."
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258136
+    - rid: 2124643721081258137
   - content: Damn straight you are.
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258158
+    - rid: 2124643721081258159
   - content: Thank you, Ives.
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 2124643721081258139
+    - rid: 2124643721081258140
+  background1: {fileID: 871148629}
+  background2: {fileID: 1864064441}
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 2124643721081258047
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+        sprite: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    - rid: 2124643721081258048
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+        action: 20
+        duration: 1
+    - rid: 2124643721081258052
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 91e7c860c0040a24eaaf9819f99b3d4b, type: 2}
+    - rid: 2124643721081258053
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+        action: 60
+        duration: 1
+    - rid: 2124643721081258054
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+        action: 70
+        duration: 1
+    - rid: 2124643721081258060
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+        sprite: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    - rid: 2124643721081258061
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+        sprite: {fileID: 21300000, guid: 2c87828110c96b641b4334f1af609d2c, type: 3}
+    - rid: 2124643721081258062
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        sprite: {fileID: 662006735, guid: 6f315bf5a95086449a12face1f57d401, type: 3}
+    - rid: 2124643721081258063
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+        action: 20
+        duration: 1
+    - rid: 2124643721081258064
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+        action: 70
+        duration: 1
+    - rid: 2124643721081258065
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+        action: 10
+        duration: 1
+    - rid: 2124643721081258066
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+        action: 60
+        duration: 1
+    - rid: 2124643721081258067
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        action: 50
+        duration: 1
+    - rid: 2124643721081258068
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        action: 70
+        duration: 1
+    - rid: 2124643721081258069
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+    - rid: 2124643721081258070
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 3d10d096fa496f44a9611dd7e88453a3, type: 2}
+    - rid: 2124643721081258071
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    - rid: 2124643721081258072
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+        action: 60
+        duration: 1
+    - rid: 2124643721081258073
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+    - rid: 2124643721081258074
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+    - rid: 2124643721081258075
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+    - rid: 2124643721081258076
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        action: 30
+        duration: 1
+    - rid: 2124643721081258077
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    - rid: 2124643721081258078
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+        sprite: {fileID: 21300000, guid: 9c0fa92a7d9ea9547a72fa5d6fdbb220, type: 3}
+    - rid: 2124643721081258079
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+    - rid: 2124643721081258080
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+        sprite: {fileID: 21300000, guid: 7506e07004c52b347ac19f6a023d4bf9, type: 3}
+    - rid: 2124643721081258081
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    - rid: 2124643721081258082
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+        sprite: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    - rid: 2124643721081258083
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+    - rid: 2124643721081258084
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+        sprite: {fileID: 21300000, guid: f2ed6f852c9c1594590eea28f98518b3, type: 3}
+    - rid: 2124643721081258085
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+    - rid: 2124643721081258086
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        sprite: {fileID: 1706768821, guid: 6467eb84537387e43a1c3f0189c8ecdf, type: 3}
+    - rid: 2124643721081258087
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    - rid: 2124643721081258088
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+    - rid: 2124643721081258089
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        sprite: {fileID: 21300000, guid: 1ef02f9d4d05fe348b32438af675f662, type: 3}
+    - rid: 2124643721081258090
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        sprite: {fileID: 21300000, guid: 42072a06c1e5a294bb11950ad3649f25, type: 3}
+    - rid: 2124643721081258091
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        sprite: {fileID: -744682771, guid: ea2112d5713e6624686fcfcdbf79fc36, type: 3}
+    - rid: 2124643721081258092
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        sprite: {fileID: 21300000, guid: 2b9ceabc225258043a6f790f6abfb45a, type: 3}
+    - rid: 2124643721081258093
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        sprite: {fileID: 21300000, guid: 246a9e62a8abbc54abf32c5c6ca159bc, type: 3}
+    - rid: 2124643721081258094
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    - rid: 2124643721081258095
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+    - rid: 2124643721081258096
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        sprite: {fileID: -5165609147117949918, guid: a85d2b703f63d6347aedd30b6f4e2f3c, type: 3}
+    - rid: 2124643721081258097
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        sprite: {fileID: 21300000, guid: 2742f7cc8d1943c449399f347571923b, type: 3}
+    - rid: 2124643721081258098
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    - rid: 2124643721081258099
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+    - rid: 2124643721081258100
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    - rid: 2124643721081258101
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+    - rid: 2124643721081258102
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+    - rid: 2124643721081258103
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+        sprite: {fileID: 21300000, guid: 2c87828110c96b641b4334f1af609d2c, type: 3}
+    - rid: 2124643721081258104
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+    - rid: 2124643721081258105
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        sprite: {fileID: 21300000, guid: 70562f64108503147861dbc82d787ef9, type: 3}
+    - rid: 2124643721081258106
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        action: 50
+        duration: 1
+    - rid: 2124643721081258107
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+        action: 30
+        duration: 1
+    - rid: 2124643721081258108
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+    - rid: 2124643721081258109
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+        sprite: {fileID: 21300000, guid: 2c87828110c96b641b4334f1af609d2c, type: 3}
+    - rid: 2124643721081258110
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    - rid: 2124643721081258111
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+        sprite: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    - rid: 2124643721081258112
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+    - rid: 2124643721081258113
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    - rid: 2124643721081258114
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+    - rid: 2124643721081258115
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+        sprite: {fileID: 21300000, guid: f2ed6f852c9c1594590eea28f98518b3, type: 3}
+    - rid: 2124643721081258116
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    - rid: 2124643721081258117
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+        sprite: {fileID: 21300000, guid: 210deb6123a1c3e47b14c3399b32e065, type: 3}
+    - rid: 2124643721081258118
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+    - rid: 2124643721081258122
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+        sprite: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    - rid: 2124643721081258123
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    - rid: 2124643721081258124
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+        sprite: {fileID: 21300000, guid: 85e302f93093f564290df1bd57119113, type: 3}
+    - rid: 2124643721081258125
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+    - rid: 2124643721081258126
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+        sprite: {fileID: 21300000, guid: 2c87828110c96b641b4334f1af609d2c, type: 3}
+    - rid: 2124643721081258127
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    - rid: 2124643721081258128
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+        sprite: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    - rid: 2124643721081258129
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+        sprite: {fileID: 21300000, guid: 85e302f93093f564290df1bd57119113, type: 3}
+    - rid: 2124643721081258130
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+        sprite: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    - rid: 2124643721081258131
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+        sprite: {fileID: 21300000, guid: 85e302f93093f564290df1bd57119113, type: 3}
+    - rid: 2124643721081258132
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
+    - rid: 2124643721081258133
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    - rid: 2124643721081258134
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+        sprite: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    - rid: 2124643721081258136
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+    - rid: 2124643721081258137
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+        sprite: {fileID: 21300000, guid: 2c87828110c96b641b4334f1af609d2c, type: 3}
+    - rid: 2124643721081258138
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+        sprite: {fileID: 21300000, guid: f2ed6f852c9c1594590eea28f98518b3, type: 3}
+    - rid: 2124643721081258139
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+    - rid: 2124643721081258140
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+        sprite: {fileID: 21300000, guid: 7506e07004c52b347ac19f6a023d4bf9, type: 3}
+    - rid: 2124643721081258141
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    - rid: 2124643721081258142
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 91e7c860c0040a24eaaf9819f99b3d4b, type: 2}
+    - rid: 2124643721081258143
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 4dd2f768b5bf0b545b549292bb236880, type: 2}
+    - rid: 2124643721081258144
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    - rid: 2124643721081258145
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
+    - rid: 2124643721081258146
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 91e7c860c0040a24eaaf9819f99b3d4b, type: 2}
+    - rid: 2124643721081258147
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    - rid: 2124643721081258148
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 4dd2f768b5bf0b545b549292bb236880, type: 2}
+    - rid: 2124643721081258149
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    - rid: 2124643721081258150
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 91e7c860c0040a24eaaf9819f99b3d4b, type: 2}
+    - rid: 2124643721081258151
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    - rid: 2124643721081258152
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 91e7c860c0040a24eaaf9819f99b3d4b, type: 2}
+    - rid: 2124643721081258153
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 4dd2f768b5bf0b545b549292bb236880, type: 2}
+    - rid: 2124643721081258155
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    - rid: 2124643721081258157
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 91e7c860c0040a24eaaf9819f99b3d4b, type: 2}
+    - rid: 2124643721081258158
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    - rid: 2124643721081258159
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+        sprite: {fileID: 21300000, guid: 85e302f93093f564290df1bd57119113, type: 3}
+    - rid: 2124643721081258160
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        action: 70
+        duration: 1
+    - rid: 2124643721081258162
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        action: 60
+        duration: 1
 --- !u!4 &1818432484
 Transform:
   m_ObjectHideFlags: 0
@@ -742,6 +1634,90 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1864064441
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1864064444}
+  - component: {fileID: 1864064443}
+  - component: {fileID: 1864064442}
+  m_Layer: 0
+  m_Name: Background 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1864064442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1864064441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UiScaleMode: 1
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 1920, y: 1080}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
+--- !u!223 &1864064443
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1864064441}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 0
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 1
+  m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
+--- !u!224 &1864064444
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1864064441}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 653286147}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
 --- !u!1001 &2139433614
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -805,4 +1781,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 1722617022}
   - {fileID: 1818432484}
+  - {fileID: 871148632}
+  - {fileID: 1864064444}
   - {fileID: 2139433614}
