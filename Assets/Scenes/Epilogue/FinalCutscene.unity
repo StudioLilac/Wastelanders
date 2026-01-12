@@ -347,11 +347,11 @@ MonoBehaviour:
   - content: " I\u2019ll try\u2026 I\u2026 wish I saw it sooner. What you all were
       doing for me. So I could do the same for you."
     manualDuration: 0
-    speaker: 0
+    speaker: 1
     signal: 
   - content: ...
     manualDuration: 0
-    speaker: 0
+    speaker: 2
     signal: 
   - content: "I get it... you feel like a fraud... Like you\u2019re never doing enough
       for the people around you. \r\n"
@@ -365,45 +365,86 @@ MonoBehaviour:
   - content: "You may not feel like you\u2019ve done a lot for me, but that's where
       you\u2019re wrong."
     manualDuration: 0
-    speaker: 0
+    speaker: 2
     signal: 
   - content: 'Raising you was the best thing that ever happened to me. '
     manualDuration: 0
-    speaker: 0
+    speaker: 2
     signal: 
   - content: You could never be a burden, kid.
     manualDuration: 0
-    speaker: 0
+    speaker: 2
     signal: 
   - content: "When Ailin left me behind, I thought it was because I wasn\u2019t enough
       of a soldier. "
     manualDuration: 0
-    speaker: 0
+    speaker: 2
     signal: 
   - content: "But I realized that... she didn\u2019t need a soldier. She needed...
       a friend, for me and for you to have a family."
     manualDuration: 0
-    speaker: 0
+    speaker: 2
     signal: 
   - content: You gave me purpose, kid. You made me realize... you don't have to save
       the world to be enough for someone. Sometimes you just have to be there.
     manualDuration: 0
-    speaker: 0
+    speaker: 2
     signal: 
   - content: And you were always there for me.
     manualDuration: 0
-    speaker: 0
+    speaker: 2
     signal: 
   - content: ...
     manualDuration: 0
-    speaker: 0
+    speaker: 2
     signal: 
   - content: "You can\u2019t ever know what being enough is for someone else. So
       all you can do is be there for them..."
     manualDuration: 0
-    speaker: 0
+    speaker: 2
     signal: 
   - content: Can you promise me that?
+    manualDuration: 0
+    speaker: 2
+    signal: 
+  - content: I... will... I will always be there for you.
+    manualDuration: 0
+    speaker: 1
+    signal: 
+  - content: Good...
+    manualDuration: 0
+    speaker: 2
+    signal: 
+  - content: "That\u2019s good..."
+    manualDuration: 0
+    speaker: 0
+    signal: 
+  - content: Tell Cam that too...
+    manualDuration: 0
+    speaker: 0
+    signal: 
+  - content: Ives lets out a long, slow breath. Her eyes close and the movement of
+      her chest slows
+    manualDuration: 0
+    speaker: 0
+    signal: 
+  - content: Jackie sits in the snow.
+    manualDuration: 0
+    speaker: 0
+    signal: 
+  - content: She wipes her eyes.
+    manualDuration: 0
+    speaker: 0
+    signal: 
+  - content: "...I\u2019m here."
+    manualDuration: 0
+    speaker: 0
+    signal: 
+  - content: She stands up, taking Ives' arm, and puts it around her shoulder.
+    manualDuration: 0
+    speaker: 0
+    signal: 
+  - content: And begins the long trek back towards the firelight.
     manualDuration: 0
     speaker: 0
     signal: 
