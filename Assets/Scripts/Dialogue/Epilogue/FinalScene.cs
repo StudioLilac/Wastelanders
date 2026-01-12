@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FMOD.Studio;
+using FMODUnity;
 using Particles;
 using TMPro;
 using UnityEngine;
@@ -40,6 +42,9 @@ namespace Dialogue.Epilogue {
         [SerializeField] private TextMeshProUGUI captionTextMesh;
         [SerializeField] private TextMeshProUGUI jackieTextMesh;
         [SerializeField] private TextMeshProUGUI ivesTextMesh;
+        
+        [Header ("Sound")]
+        [SerializeField] public EventReference blizzardOneShot;
 
         [Header("You killed her")] 
         [SerializeField] private float jitterAmount;
@@ -51,6 +56,8 @@ namespace Dialogue.Epilogue {
         [Header("Flashback")]
         [SerializeField] private Image camFlashback;
         [SerializeField] private Image jayFlashback;
+        
+        private EventInstance blizzardInstance;
         
         private void Start() {
             int n = narrations.Count;
@@ -67,6 +74,15 @@ namespace Dialogue.Epilogue {
             
             camFlashback.color = new Color(0, 0, 0, 0);
             jayFlashback.color = new Color(0, 0, 0, 0);
+            
+            blizzardInstance = RuntimeManager.CreateInstance(blizzardOneShot);
+            RuntimeManager.AttachInstanceToGameObject(
+                blizzardInstance,
+                gameObject,
+                GetComponent<Rigidbody>()
+            );
+            
+            blizzardInstance.start();
             
             StartCoroutine(PlayScene());
         }
@@ -132,21 +148,24 @@ namespace Dialogue.Epilogue {
             
             yield return StartCoroutine(FloatThoughtText(youKilledHerText, 3f));
             youKilledHerObj.SetActive(false);
-            yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInDarkScreen(3f));
+            
+            StartCoroutine(FadeFMODVolume(blizzardInstance, 1f, 0f, 2f));
+            yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInDarkScreen(2f));
             
             camFlashback.color = new Color(1, 1, 1, 1);
-            yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(2f));
+            yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(1f));
             yield return new WaitForSeconds(2f);
-            yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInDarkScreen(3f));
+            yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInDarkScreen(2f));
             
             camFlashback.color = new Color(0,0,0,0);
             jayFlashback.color = new Color(1, 1, 1, 1);
-            yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(2f));
+            yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(1f));
             yield return new WaitForSeconds(2f);
-            yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInDarkScreen(3f));
+            yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInDarkScreen(2f));
             jayFlashback.color = new Color(0,0,0,0);
             
             // quickly, now back to the real world.
+            StartCoroutine(FadeFMODVolume(blizzardInstance, 0f, 1f, 0.5f));
             yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(0.5f));
         }
         
@@ -381,6 +400,26 @@ namespace Dialogue.Epilogue {
 
             rect.anchoredPosition =
                 basePos + orbitOffset + Vector2.up * bobOffset;
+        }
+
+        private IEnumerator FadeFMODVolume(
+            EventInstance instance,
+            float from,
+            float to,
+            float duration
+        )
+        {
+            float elapsed = 0f;
+
+            while (elapsed < duration)
+            {
+                elapsed += Time.unscaledDeltaTime;
+                float t = Mathf.Clamp01(elapsed / duration);
+                instance.setVolume(Mathf.Lerp(from, to, t));
+                yield return null;
+            }
+
+            instance.setVolume(to);
         }
 
     }

@@ -309,27 +309,101 @@ MonoBehaviour:
     manualDuration: 30
     speaker: 0
     signal: hacky way to give some time for flashbacks
-  - content: 
+  - content: 'The apology stops burning in her throat. '
+    manualDuration: 0
+    speaker: 0
+    signal: apologystops
+  - content: '...But how... '
+    manualDuration: 0
+    speaker: 1
+    signal: 
+  - content: "The one thing I can promise you\u2026 is that I will always be so proud
+      of you. Even if I\u2019m not here."
+    manualDuration: 0
+    speaker: 2
+    signal: 
+  - content: "Because I know you\u2019re constantly changing for the better."
+    manualDuration: 0
+    speaker: 2
+    signal: 
+  - content: "And because I\u2019m so proud of you right now."
+    manualDuration: 0
+    speaker: 2
+    signal: 
+  - content: You found out what happened to your mother, and you defeated that Frog.
+    manualDuration: 0
+    speaker: 2
+    signal: 
+  - content: But I never did that alone... Cam... You were with me. Without you...
+      what am I going to...
+    manualDuration: 0
+    speaker: 1
+    signal: 
+  - content: "There will always be more people like me. But you\u2019ll never find
+      them, if you don\u2019t open your heart\u2026 and let them in.\r\n"
+    manualDuration: 0
+    speaker: 2
+    signal: 
+  - content: " I\u2019ll try\u2026 I\u2026 wish I saw it sooner. What you all were
+      doing for me. So I could do the same for you."
     manualDuration: 0
     speaker: 0
     signal: 
-  - content: 
+  - content: ...
     manualDuration: 0
     speaker: 0
     signal: 
-  - content: 
+  - content: "I get it... you feel like a fraud... Like you\u2019re never doing enough
+      for the people around you. \r\n"
+    manualDuration: 0
+    speaker: 2
+    signal: 
+  - content: You wonder why you get so much, when you can offer so little.
+    manualDuration: 0
+    speaker: 2
+    signal: 
+  - content: "You may not feel like you\u2019ve done a lot for me, but that's where
+      you\u2019re wrong."
     manualDuration: 0
     speaker: 0
     signal: 
-  - content: 
+  - content: 'Raising you was the best thing that ever happened to me. '
     manualDuration: 0
     speaker: 0
     signal: 
-  - content: 
+  - content: You could never be a burden, kid.
     manualDuration: 0
     speaker: 0
     signal: 
-  - content: 
+  - content: "When Ailin left me behind, I thought it was because I wasn\u2019t enough
+      of a soldier. "
+    manualDuration: 0
+    speaker: 0
+    signal: 
+  - content: "But I realized that... she didn\u2019t need a soldier. She needed...
+      a friend, for me and for you to have a family."
+    manualDuration: 0
+    speaker: 0
+    signal: 
+  - content: You gave me purpose, kid. You made me realize... you don't have to save
+      the world to be enough for someone. Sometimes you just have to be there.
+    manualDuration: 0
+    speaker: 0
+    signal: 
+  - content: And you were always there for me.
+    manualDuration: 0
+    speaker: 0
+    signal: 
+  - content: ...
+    manualDuration: 0
+    speaker: 0
+    signal: 
+  - content: "You can\u2019t ever know what being enough is for someone else. So
+      all you can do is be there for them..."
+    manualDuration: 0
+    speaker: 0
+    signal: 
+  - content: Can you promise me that?
     manualDuration: 0
     speaker: 0
     signal: 
@@ -340,11 +414,20 @@ MonoBehaviour:
   captionTextMesh: {fileID: 1163876813}
   jackieTextMesh: {fileID: 1492153608}
   ivesTextMesh: {fileID: 458927058}
+  blizzardOneShot:
+    Guid:
+      Data1: -1615250403
+      Data2: 1251064760
+      Data3: -574290048
+      Data4: -479271046
+    Path: event:/Blizzard
   jitterAmount: 10
   youKilledHerObj: {fileID: 1157988944}
   itsYourFaultText: {fileID: 417187726}
   youDidThisToHerText: {fileID: 1258756871}
   youKilledHerText: {fileID: 425482849}
+  camFlashback: {fileID: 1439119402}
+  jayFlashback: {fileID: 853237459}
 --- !u!4 &158212706
 Transform:
   m_ObjectHideFlags: 0
@@ -7055,57 +7138,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5573e24fdb5443fdb8fa02c1ee6d3fb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1868351540
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1868351542}
-  - component: {fileID: 1868351541}
-  m_Layer: 0
-  m_Name: fmod
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1868351541
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1868351540}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 467c244c39684a318616e42ac8ccb2b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  eventReference:
-    Guid:
-      Data1: -1615250403
-      Data2: 1251064760
-      Data3: -574290048
-      Data4: -479271046
-    Path: event:/Blizzard
---- !u!4 &1868351542
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1868351540}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1447.7291, y: 997.0087, z: 8.497985}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1885153757
 GameObject:
   m_ObjectHideFlags: 0
@@ -7555,4 +7587,3 @@ SceneRoots:
   - {fileID: 528509681}
   - {fileID: 158212706}
   - {fileID: 739684615}
-  - {fileID: 1868351542}
