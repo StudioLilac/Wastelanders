@@ -133,6 +133,18 @@ namespace Dialogue.Epilogue {
                     StartCoroutine(ZoomCamera(10, 6f));
                     StartCoroutine(PlayYouKilledHerSequence());
                     break;
+                case "apologystops":
+                    StartCoroutine(MoveCamera(new Vector2(0, -1.5f), 3f));
+                    fogVolume2D.SetIntensity(24);
+                    var emission = clouds.emission;
+                    emission.rateOverTime = emission.rateOverTime.constant + 10f;
+                    break;
+                case "ivespassesout":
+                    StartCoroutine(MoveCamera(new Vector2(0, 2f), 6f));
+                    fogVolume2D.SetIntensity(30);
+                    emission = clouds.emission;
+                    emission.rateOverTime = emission.rateOverTime.constant + 10f;
+                    break;
                 default:
                     break;
             }
