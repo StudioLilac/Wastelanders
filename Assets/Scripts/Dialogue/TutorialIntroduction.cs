@@ -65,6 +65,7 @@ public class TutorialIntroduction : DialogueClasses
     [SerializeField] private DialogueWrapper ivesIsDefeated;
     [SerializeField] private DialogueWrapper jackieBeatTheDummies;
     [SerializeField] private DialogueWrapper endingTutorialDialogue;
+    [SerializeField] private DialogueEntryWrapper endOfTutorialV2;
 
     [SerializeField] private DialogueWrapper gameLoseDialogue;
 
@@ -194,7 +195,8 @@ public class TutorialIntroduction : DialogueClasses
 
         yield return StartCoroutine(SecondWave());
 
-        var jackieIvesChatter =  StartCoroutine(DialogueManager.Instance.StartDialogue(jackieBeatTheDummies.Dialogue));
+        var jackieIvesChatter =  StartCoroutine(DialogueBoxV2.Instance.Play(endOfTutorialV2));
+        StartCoroutine(backgroundScrim.FadeToAlpha(0.7f, 1.0f));
 
         yield return new WaitForSeconds(1.0f);
         
@@ -209,8 +211,6 @@ public class TutorialIntroduction : DialogueClasses
         }
 
         yield return jackieIvesChatter;
-
-        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(endingTutorialDialogue.Dialogue));
 
         AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
         StartCoroutine(CombatManager.Instance.FadeInDarkScreen(3f));

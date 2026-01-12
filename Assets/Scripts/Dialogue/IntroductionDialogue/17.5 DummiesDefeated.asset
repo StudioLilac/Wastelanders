@@ -15,7 +15,7 @@ MonoBehaviour:
   dialogue:
   - bodyText: 'Good hittin''. Could hardly tell you were the same gal as last year. '
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: be935693778d6004d9427d82e6ce5798, type: 3}
+    displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
     sfx: 
     broadcastAnEvent: 0
   - bodyText: 'Well, I learned from the best after all. '

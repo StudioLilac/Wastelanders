@@ -2889,6 +2889,7 @@ MonoBehaviour:
   ivesIsDefeated: {fileID: 11400000, guid: 9197dc84cf94ee44db4a70d04c3af5ce, type: 2}
   jackieBeatTheDummies: {fileID: 11400000, guid: 00e2d869642255f4cafd6fbddf9d5df4, type: 2}
   endingTutorialDialogue: {fileID: 11400000, guid: 71bc8b72e567a434fb451296dad29b2f, type: 2}
+  endOfTutorialV2: {fileID: 11400000, guid: 3efc7e8f04c11334ba52043dcbdf8bf6, type: 2}
   gameLoseDialogue: {fileID: 11400000, guid: 71aa9a544d4b56045a1b4ee4cb6b4f0d, type: 2}
   jumpToCombat: 0
 --- !u!1001 &2102825245
