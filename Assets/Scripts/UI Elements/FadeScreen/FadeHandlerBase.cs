@@ -85,7 +85,7 @@ public abstract class FadeHandlerBase : MonoBehaviour
             elapsedTime += Time.deltaTime;
             float fraction = elapsedTime / duration;
             // Using Lerp is fine here as we calculate fraction every frame
-            float newAlpha = Mathf.Lerp(startAlpha, endAlpha, fraction);
+            float newAlpha = Mathf.Lerp(startAlpha, endAlpha, Mathf.GammaToLinearSpace(fraction));
             SetAlpha(newAlpha);
             yield return null;
         }
