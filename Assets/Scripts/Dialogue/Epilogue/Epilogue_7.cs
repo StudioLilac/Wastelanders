@@ -8,12 +8,12 @@ public class Epilogue_7 : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer[] defaultBackground;
     [SerializeField] private SpriteRenderer[] deadCreatureBackground;
+
+    [SerializeField] private SpriteRenderer blackingOutSr1;
+    [SerializeField] private SpriteRenderer blackingOutSr2;
     [SerializeField] private SpriteRenderer[] blackScreen; // Used for a black screen, keeping dialogue visible
     [SerializeField] private SpriteRenderer[] wakeUpBackground;
     [SerializeField] private SpriteRenderer[] reversedCaveBackground;
-    [SerializeField] private SpriteRenderer kadeSprite;
-    [SerializeField] private Color kadeInitialColor;
-    [SerializeField] private Color kadeFinalColor;
     [SerializeField] private ScreenShakeHandler screenShakeHandler;
     [SerializeField] private CinemachineVirtualCamera dynamicCamera;
     [SerializeField] private DialogueEntryInUnityEditor[] preFightDialogue;
@@ -39,33 +39,52 @@ public class Epilogue_7 : MonoBehaviour
         // TODO: Shake and roar
         
         // [Fade into Dead Creature background with Jackie and creature]
-        yield return FadeOutSpriteRenderer(2, defaultBackground);
+        yield return FadeOutSpriteRenderers(2, defaultBackground);
         yield return DialogueBoxV2.Instance.Play(deadCreatureDialogue.Into());
-        // TODO: Start blackening edges of the screen
+        blackingOutSr1.gameObject.SetActive(true);
+        yield return FadeInSpriteRenderer(1f, blackingOutSr1);
         yield return DialogueBoxV2.Instance.Play(blackingOut1.Into());
-        // TODO: Blackening gets worse
+        blackingOutSr2.gameObject.SetActive(true);
+        yield return FadeInSpriteRenderer(1f, blackingOutSr2);
         yield return DialogueBoxV2.Instance.Play(blackingOut2.Into());
-        yield return FadeOutSpriteRenderer(2, deadCreatureBackground); // Fade into black screen without hiding dialogue
+        yield return FadeOutSpriteRenderers(2, deadCreatureBackground); // Fade into black screen without hiding dialogue
+        blackingOutSr1.gameObject.SetActive(false);
+        blackingOutSr2.gameObject.SetActive(false);
         yield return new WaitForSeconds(1f); // Small delay between black screen and next dialogue
         
+        // TODO: Sound of a bone popping in place
         yield return DialogueBoxV2.Instance.Play(bonePopping.Into());
-        yield return FadeOutSpriteRenderer(2, blackScreen);
+        yield return FadeOutSpriteRenderers(2, blackScreen);
         yield return new WaitForSeconds(1f);
         
         yield return DialogueBoxV2.Instance.Play(preKadeFadeDialogue.Into());
         yield return DialogueBoxV2.Instance.Play(postKadeFadeDialogue.Into());
         
-        yield return FadeOutSpriteRenderer(2, wakeUpBackground);
+        yield return FadeOutSpriteRenderers(2, wakeUpBackground);
         yield return new WaitForSeconds(1f);
         yield return DialogueBoxV2.Instance.Play(kadeAndOthersDialogue.Into());
         
-        yield return FadeOutSpriteRenderer(2, reversedCaveBackground);
+        yield return FadeOutSpriteRenderers(2, reversedCaveBackground);
         yield return new WaitForSeconds(1f);
         yield return DialogueBoxV2.Instance.Play(everyoneDialogue.Into());
         yield return UIFadeScreenManager.Instance.FadeInDarkScreen(2f);
     }
 
-    private IEnumerator FadeOutSpriteRenderer(float time, SpriteRenderer[] spriteRenderers) {
+
+
+    private IEnumerator FadeInSpriteRenderer(float time, SpriteRenderer sr) {
+        float curTime = 0;
+        sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 0f);
+        while (curTime < time)
+        {
+            curTime += Time.deltaTime;
+            sr.color = new Color(sr.color.r,sr.color.g,sr.color.b, curTime / time);
+            yield return null;
+        }
+        sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1f);
+    }
+
+    private IEnumerator FadeOutSpriteRenderers(float time, SpriteRenderer[] spriteRenderers) {
         float curTime = 0;
         while (curTime < time)
         {
