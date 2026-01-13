@@ -37,6 +37,7 @@ public class Epilogue_7 : MonoBehaviour
         // TODO: Boulder audio and roaring
         yield return DialogueBoxV2.Instance.Play(defaultBackgroundDialogue.Into());
         // TODO: Shake and roar
+        screenShakeHandler.AttackCameraEffect(0.8f);
         
         // [Fade into Dead Creature background with Jackie and creature]
         yield return FadeOutSpriteRenderers(2, defaultBackground);
