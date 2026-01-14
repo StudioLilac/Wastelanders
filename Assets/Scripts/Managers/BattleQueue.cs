@@ -88,7 +88,7 @@ public class BattleQueue : MonoBehaviour
         for (int i = 0; i < queue.Count; i++)
         {
             ActionWrapper battlingWrapper = queue[i];
-
+            
             if (battlingWrapper.IsClashing())
             {
                 GameObject clashingRenderedCopy = Instantiate(clashingPrefab, new Vector3(100, 100, -10), Quaternion.identity);
@@ -103,6 +103,7 @@ public class BattleQueue : MonoBehaviour
                 GameObject renderedCopy = Instantiate(iconPrefab, new Vector3(100, 100, -10), Quaternion.identity);
                 var icon = renderedCopy.GetComponent<BattleQueueIcons>();
                 icon.RenderBQIcon(battlingWrapper.GetTheOnlyExistingAction());
+                if (battlingWrapper.HasEnemyAction()) icon.RenderUnseenIndicator();
                 battlingWrapper.BindIcon(icon);
                 renderedCopy.transform.SetParent(bqContainer, false);
             }
