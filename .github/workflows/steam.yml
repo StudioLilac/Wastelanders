@@ -85,6 +85,14 @@ jobs:
         with:
           name: Build-StandaloneLinux64
           path: build/StandaloneLinux64
+      - name: List Linux build contents
+        run: |
+          echo "=== build/StandaloneLinux64 ==="
+          ls -la build/StandaloneLinux64
+
+          echo ""
+          echo "=== recursive ==="
+          find build/StandaloneLinux64 -maxdepth 2 -type f -ls
       - name: Rename Linux executable
         run: |
           chmod +x build/StandaloneLinux64/*.x86_64
