@@ -87,7 +87,9 @@ jobs:
           path: build/StandaloneLinux64
       - name: Rename Linux executable
         run: |
-          mv build/StandaloneLinux64/StandaloneLinux64.x86_64 build/StandaloneLinux64/WastelandersGame.x86_64
+          chmod +x build/StandaloneLinux64/*.x86_64
+          mv build/StandaloneLinux64/*.x86_64 \
+            build/StandaloneLinux64/WastelandersGame.x86_64
 
       - name: List build directory
         run: |
