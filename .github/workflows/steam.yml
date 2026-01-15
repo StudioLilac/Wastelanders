@@ -93,11 +93,14 @@ jobs:
           echo ""
           echo "=== recursive ==="
           find build/StandaloneLinux64 -maxdepth 2 -type f -ls
+      - name: Make Linux executable runnable
+        run: |
+          chmod +x build/StandaloneLinux64/StandaloneLinux64
       - name: Rename Linux executable
         run: |
-          chmod +x build/StandaloneLinux64/*.x86_64
-          mv build/StandaloneLinux64/*.x86_64 \
-            build/StandaloneLinux64/WastelandersGame.x86_64
+          chmod +x build/StandaloneLinux64/StandaloneLinux64
+          mv build/StandaloneLinux64/StandaloneLinux64 \
+            build/StandaloneLinux64/WastelandersGame
 
       - name: List build directory
         run: |
