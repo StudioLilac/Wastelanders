@@ -10,6 +10,7 @@ namespace Dialogue.Epilogue
         [SerializeField] private GameObject background1;
         [SerializeField] private GameObject background2;
 
+        [SerializeField] private Image purpleFlash;
         [SerializeField] private Image caveFlickerLayer;
         private bool shouldFlicker = false;
 
