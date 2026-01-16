@@ -6,7 +6,7 @@
 }
 
 #img-highlight {
-    display: none;
+    visibility: hidden;
 }
 
 .card-back-a {
@@ -38,7 +38,7 @@
 }
 
 .card-state-2 #img-highlight {
-    display: flex;
+    visibility: visible;
 }
 
 .card-state-2 #layout-container {
