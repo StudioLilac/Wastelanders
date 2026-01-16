@@ -27,7 +27,7 @@ public class CombatInfo : MonoBehaviour
 
     private int FadeSortingOrder => CombatFadeScreenHandler.Instance.FADE_SORTING_ORDER;
     private string FadeSortingLayer => CombatFadeScreenHandler.Instance.FADE_SORTING_LAYER;
-    private bool BelongsToEnemy => transform.parent && transform.parent.GetComponent<EnemyClass>() != null;
+private bool BelongsToEnemy => GetComponentInParent<EnemyClass>() != null;
 
     public void Awake()
     {
