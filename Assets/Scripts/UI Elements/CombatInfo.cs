@@ -27,6 +27,9 @@ public class CombatInfo : MonoBehaviour
 
     private int FadeSortingOrder => CombatFadeScreenHandler.Instance.FADE_SORTING_ORDER;
     private string FadeSortingLayer => CombatFadeScreenHandler.Instance.FADE_SORTING_LAYER;
+    
+    // TODO: [perf] cache this
+    private bool BelongsToEnemy => GetComponentInParent<EnemyClass>() != null;
 
     public void Awake()
     {
@@ -157,7 +160,7 @@ public class CombatInfo : MonoBehaviour
             combatIcon.transform.localPosition = new Vector3(0, startY - i * iconHeight, 0);
             combatIcon.GetComponent<CombatCardUI>().SetActionClass(combatCards[num - i - 1]); //Reverse the order of rendering 
             combatIcon.GetComponent<CombatCardUI>().DeEmphasize();
-            combatIcon.GetComponent<CombatCardUI>().RenderUnseenIndicator();
+            if (BelongsToEnemy) combatIcon.GetComponent<CombatCardUI>().RenderUnseenIndicator();
         }
     }
     private void UnrenderCombatIcons()
