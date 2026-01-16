@@ -250,7 +250,8 @@ public class CombatManager : MonoBehaviour
     {
         if (GameState == GameState.SELECTION || GameState == GameState.FIGHTING) return;
 
-        StartCoroutine(AudioManager.Instance.StartCombatMusic());
+
+        AudioManager.Instance.StartCombatMusic();
         GameState = GameState.SELECTION;
     }
 

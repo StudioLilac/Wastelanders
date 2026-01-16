@@ -64,22 +64,22 @@ public class ClashingBattleQueueIcon : MonoBehaviour, IBattleQueueDisplayable
 public enum ClashResultType
 {
     None = 0,
-    Dominating = 1,
-    Favored = 2,
+    Crushing = 1,
+    Favourable = 2,
     Even = 3,
-    Unfavored = 4,
-    Futile = 5
+    Unfavourable = 4,
+    Hopeless = 5
 }
 
 public class ClashCalculator
 {
     private readonly List<ClashBracket> _brackets = new()
     {
-        new ClashBracket(0.2f, ClashResultType.Futile),
-        new ClashBracket(0.4f, ClashResultType.Unfavored),
+        new ClashBracket(0.2f, ClashResultType.Hopeless),
+        new ClashBracket(0.4f, ClashResultType.Unfavourable),
         new ClashBracket(0.6f, ClashResultType.Even),
-        new ClashBracket(0.8f, ClashResultType.Favored), 
-        new ClashBracket(1.0f, ClashResultType.Dominating)
+        new ClashBracket(0.8f, ClashResultType.Favourable), 
+        new ClashBracket(1.0f, ClashResultType.Crushing)
     };
 
     [SerializeField] private bool _winsIncludeTies = true;
@@ -95,7 +95,7 @@ public class ClashCalculator
                 return bracket.Result;
             }
         }
-        return ClashResultType.Dominating;
+        return ClashResultType.Crushing;
     }
 
     private float CalculateWinProbability((int min, int max) left, (int min, int max) right, bool includeTies)

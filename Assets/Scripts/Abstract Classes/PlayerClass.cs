@@ -35,15 +35,17 @@ public abstract class PlayerClass : EntityClass
         InstantiatePool();
     }
 
-    protected void InstantiatePool()
+    public void InstantiatePool()
     {
-        while (cardPrefabs.Count > 0)
+        var availableCards = new List<InstantiableActionClassInfo>(cardPrefabs);
+
+        while (availableCards.Count > 0)
         {
-            int idx = UnityEngine.Random.Range(0, cardPrefabs.Count);
-            GameObject toAdd = InstantiateCardPrefab(cardPrefabs[idx]);
+            int idx = UnityEngine.Random.Range(0, availableCards.Count);
+            GameObject toAdd = InstantiateCardPrefab(availableCards[idx]);
             pool.Add(toAdd);
             toAdd.transform.position = new Vector3(-100, -100, 1);
-            cardPrefabs.RemoveAt(idx);
+            availableCards.RemoveAt(idx);
         }
     }
 

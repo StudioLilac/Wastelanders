@@ -42,7 +42,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
     [SerializeField] private Transform frog2WalkIn;
 
     [SerializeField] private SlimeStack firstTutorialSlime;
-    [SerializeField] private SlimeStack slime;
+    [SerializeField] private SlimeStack slimeStack;
     [SerializeField] private Transform slimeBattle;
     [SerializeField] private Transform slimeWalkIn;
 
@@ -72,7 +72,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
 
 
     [SerializeField] private DialogueEntryWrapper afterFirstCombat;
-
+    [SerializeField] private DialogueEntryWrapper defensiveCardsTutorial;   
     // After the frog enters the scene
     [SerializeField] private List<DialogueText> andNowWeWait;
     [SerializeField] private List<DialogueText> jackiePreMissedShot;
@@ -112,6 +112,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
         EntityClass.OnEntityDeath -= EnsureFrogDeath;
         DialogueBox.DialogueBoxEvent -= OnDialogueBoxEvent;
         HighlightManager.Instance.PlayerManuallyInsertedAction -= OnPlayerPlayClashingCard;
+        DisplayableClass.OnShowCard -= ExplainDefense;
     }
     private void SetUpCombatStatus()
     {
@@ -120,10 +121,18 @@ public class FrogSlimeFightDialogue : DialogueClasses
 
         frog.SetReturnPosition(frogFightPosition.position);
         frog2.SetReturnPosition(frog2Battle.position);
-        slime.SetReturnPosition(slimeBattle.position);
 
-        jackie.OutOfCombat(); frog.OutOfCombat(); frog2.OutOfCombat(); slime.OutOfCombat();
-        frog.UnTargetable(); frog2.UnTargetable(); slime.UnTargetable();
+        jackie.OutOfCombat(); frog.OutOfCombat(); frog2.OutOfCombat(); slimeStack.OutOfCombat(); firstTutorialSlime.OutOfCombat();
+        frog.UnTargetable(); frog2.UnTargetable(); firstTutorialSlime.UnTargetable(); slimeStack.UnTargetable();
+        CombatManager.Instance.SetEnemiesPassive(new List<EnemyClass>() { firstTutorialSlime, frog, frog2, slimeStack });
+    }
+
+    void Kill(EnemyClass enemy)
+    {
+        CombatManager.Instance.SetEnemiesPassive(new List<EnemyClass>() { enemy });
+        enemy.OutOfCombat();
+        enemy.UnTargetable();
+        Destroy(enemy);
     }
 
     private IEnumerator ExecuteGameStart()
@@ -184,10 +193,10 @@ public class FrogSlimeFightDialogue : DialogueClasses
             {
 
                 new BattleIntroEvent(Get<TutorialIntro>()).Invoke();
+                CombatManager.Instance.SetEnemiesHostile(new List<EnemyClass> { firstTutorialSlime });
                 firstTutorialSlime.SetReturnPosition(thirdSlimeCrawlPos.position);
                 jackie.SetReturnPosition(jackieFirstFightPosition.position);
                 StartCoroutine(jackie.ResetPosition());
-                CombatManager.Instance.SetEnemiesPassive(new List<EnemyClass>() { frog, frog2, slime });
                 yield return StartCoroutine(firstTutorialSlime.ResetPosition());
                 jackie.InCombat(); firstTutorialSlime.InCombat(); firstTutorialSlime.Targetable();
 
@@ -197,18 +206,25 @@ public class FrogSlimeFightDialogue : DialogueClasses
 
 
                 startingCamera.Priority = 0;
-                StartCoroutine(BeginClashTutorial());
+                var combatCoroutine = StartCoroutine(BeginClashTutorial());
                 yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
+                yield return new WaitForSeconds(2.0f);
                 CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
+                StopCoroutine(combatCoroutine);
+                AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
             }
 
             jackieSprite.sortingLayerName = treeOverlay.sortingLayerName;
             jackieSprite.sortingOrder = treeOverlay.sortingOrder - 1;
             slimeSprite.sortingLayerName = treeOverlay.sortingLayerName;
             slimeSprite.sortingOrder = treeOverlay.sortingOrder - 1;
-
+            mainBrain.m_DefaultBlend = oldStyle;
             {
-                yield return new WaitForSeconds(2f);
+                float distanceFrom = Vector3.Distance(jackie.transform.position, thirdSlimeCrawlPos.position);
+                float moveTime = distanceFrom / 4.0f;
+                yield return StartCoroutine(jackie.MoveToPosition(thirdSlimeCrawlPos.position + new Vector3(0, 1.5f, 0), 0, moveTime));
+                jackie.FaceRight();
+                yield return new WaitForSeconds(0.5f);
                 yield return StartCoroutine(DialogueBoxV2.Instance.Play(afterFirstCombat));
                 yield return new WaitForSeconds(0.5f);
             }
@@ -230,6 +246,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
                 jackie.gameObject.transform.position = treeHidingPositionJackie.position;
                 jackie.gameObject.transform.rotation = treeHidingPositionJackie.rotation;
                 yield return new WaitForSeconds(BRIEF_PAUSE);
+                baseCamera.transform.position = secondFightBaseCameraPosition.position;
 
 
                 yield return StartCoroutine(DialogueManager.Instance.StartDialogue(andNowWeWait));
@@ -259,13 +276,15 @@ public class FrogSlimeFightDialogue : DialogueClasses
                 StartCoroutine(jackie.MoveToPosition(frogConfrontPosition.position, 2f, 2f));
                 yield return new WaitForSeconds(0.5f);
                 StartCoroutine(frog2.MoveToPosition(frog2WalkIn.position, 0f, 2f));
-                yield return StartCoroutine(slime.MoveToPosition(slimeWalkIn.position, 0f, 2f));
+                yield return StartCoroutine(slimeStack.MoveToPosition(slimeWalkIn.position, 0, 2f));
 
                 frog.FaceLeft();
 
                 yield return new WaitForSeconds(MEDIUM_PAUSE);
             }
 
+            jackieSprite.sortingLayerName = jackieSpriteLayerName;
+            jackieSprite.sortingOrder = jackieSpriteSortingOrder;
             mainBrain.m_DefaultBlend = oldStyle;
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackiePreCombat));
         }
@@ -274,48 +293,34 @@ public class FrogSlimeFightDialogue : DialogueClasses
             yield return new WaitForSeconds(1f);
             marshBG.gameObject.SetActive(false);
             yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(1.0f));
+            Destroy(firstTutorialSlime.gameObject);
             GameStateManager.Instance.JumpToCombat = false;
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         
         closeTrees.ForEach(tree => StartCoroutine(tree.FadeInLightScreen(0.8f)));
 
         // start frog fight
         new BattleIntroEvent(Get<ClashIntro>()).Invoke();
-        CombatManager.Instance.SetEnemiesHostile(new List<EnemyClass>() { frog, frog2, slime });
+        CombatManager.Instance.SetEnemiesHostile(new List<EnemyClass>() { frog, frog2, slimeStack });
         baseCamera.transform.position = secondFightBaseCameraPosition.position;
+        slimeStack.SetReturnPosition(slimeBattle.position);
+        frog.SetReturnPosition(frogFightPosition.position);
         StartCoroutine(jackie.ResetPosition());
         StartCoroutine(frog2.ResetPosition());
-        StartCoroutine(slime.ResetPosition());
-        frog.SetReturnPosition(frogFightPosition.position);
+        StartCoroutine(slimeStack.ResetPosition());
+        jackie.DestroyDeck();
+        jackie.maxHandSize = 4;//Reset Jackie's deck
+        jackie.InstantiatePool();
+        jackie.Heal(30);
         yield return StartCoroutine(frog.ResetPosition());
         jackie.InCombat();
-        frog.Targetable(); frog.InCombat(); frog2.Targetable(); frog2.InCombat(); slime.Targetable(); slime.InCombat();
+        frog.Targetable(); frog.InCombat(); frog2.Targetable(); frog2.InCombat(); slimeStack.Targetable(); slimeStack.InCombat();
         yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
 
         CombatManager.PlayersWinEvent += PlayersWin;
         CombatManager.EnemiesWinEvent += EnemiesWin;
         EntityClass.OnEntityDeath += EnsureFrogDeath;
+        DisplayableClass.OnShowCard += ExplainDefense;
 
         CombatManager.Instance.BeginCombat();
         
@@ -363,7 +368,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(beetleEntrance));
         yield return new WaitForSeconds(BRIEF_PAUSE);
         //Beetle is spawned in and follows Jackie
-        Vector3 bottomLeft = mainCamera.ViewportToWorldPoint(new Vector3(0, 0.6f, mainCamera.nearClipPlane));
+        Vector3 bottomLeft = mainCamera.ViewportToWorldPoint(new Vector3(0, 0.3f, mainCamera.nearClipPlane));
         GameObject scoutBeetleObj = Instantiate(scoutBeetlePrefab, bottomLeft + new Vector3(-0.1f, 0, 0), Quaternion.identity);
         ScoutBeetle scoutBeetle = scoutBeetleObj.GetComponent<ScoutBeetle>();
         scoutBeetle.OutOfCombat();
@@ -469,6 +474,14 @@ public class FrogSlimeFightDialogue : DialogueClasses
         callbackToRun();
     }
 
+    private void ExplainDefense(ActionClass actionClass)
+    {
+        if (actionClass is ChargeUp)
+        {
+            DisplayableClass.OnShowCard -= ExplainDefense;
+            StartCoroutine(DialogueBoxV2.Instance.Play(defensiveCardsTutorial));
+        }
+    }
 
 
     IEnumerator FadeImage(Image image, float duration, bool fadeIn)
@@ -530,11 +543,12 @@ public class FrogSlimeFightDialogue : DialogueClasses
         }
     }
 
+    private int aliveFrogs = 2;
     private void EnsureFrogDeath(EntityClass entity)
     {
         if (entity is WasteFrog wasteFrog) 
         {
-            if (playDeadFrog)
+            if (aliveFrogs == 1)
             {
                 //Function that overrides death animation to die in the scene
                 IEnumerator DieInScene()
@@ -555,7 +569,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
                 lastKilledFrog = wasteFrog;
                 EntityClass.OnEntityDeath -= EnsureFrogDeath;
             }
-            playDeadFrog = true; //Only change death animation of the second frog
+            aliveFrogs--; //Only change death animation of the last frog
         }
     }
 
