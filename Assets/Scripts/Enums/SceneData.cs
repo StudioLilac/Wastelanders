@@ -154,6 +154,24 @@ public abstract class SceneData : Enum<SceneData>
     {
         public override string SceneName => "Epilogue_7";
 
+    public class Epilogue_10 : SceneData
+    {
+        public override string SceneName => "Epilogue_10";
+
+        public override SceneAudio GetAudio(AudioDatabase database) => database.Empty;
+
+        public override MonoBehaviour[] RequiredPrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
+        {
+            prefabs.audioManager,
+            prefabs.pauseMenuV2,
+            prefabs.dialogueManager,
+            prefabs.uiFadeScreenManager,
+            prefabs.dialogueBoxV2
+        };
+    }
+
+    public class PreBounty0 : SceneData {
+        public override string SceneName => "PreBounty_0";
         public override SceneAudio GetAudio(AudioDatabase database) => database.Empty;
 
         public override MonoBehaviour[] RequiredPrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
