@@ -111,6 +111,7 @@ public class CombatManager : MonoBehaviour
         battleQueueParent.SetActive(true);
         baseCamera.Priority = 1;
         dynamicCamera.Priority = 0;
+        PerformInCombat();
         StartCoroutine(FadeCombatBackground(false));
 
         // Might not capture newly spawned instances of cards, somehow they need to attract their evolved state and data binding. 
