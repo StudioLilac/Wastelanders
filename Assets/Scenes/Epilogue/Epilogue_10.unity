@@ -243,9 +243,9 @@ RectTransform:
   m_Father: {fileID: 1808720760}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1.5435791, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &370452770
 MonoBehaviour:
@@ -978,12 +978,170 @@ MonoBehaviour:
   background1: {fileID: 2146437735}
   background2: {fileID: 1945078872}
   purpleFlash: {fileID: 370452771}
+  tundraWithNoise: {fileID: 1550036737}
   caveFlickerLayer: {fileID: 1592478426}
-  jayOpeningDialogue: []
-  preBonfireDialogue: []
+  jayOpeningDialogue:
+  - content: "Feel that breeze picking up? There\u2019s an opening up ahead!"
+    speaker: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events:
+    - rid: 2403555872759611454
+  preBonfireDialogue:
+  - content: How close are we to the Frog, Jackie?
+    speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: "It should be just up ahead. We\u2019ve reached the same elevation."
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: Then we should make preparations for battle.
+    speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: Jay, take the vanguard and the rest of your team up to get a good read
+      on the situation.
+    speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: The rest of us will set up camp and secure the rear.
+    speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: Gotcha, Captain.
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: Jackie, give Jay your tracker.
+    speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: Sure, just give me a second.
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  postVisionDialogue:
+  - content: <i>To the rest of the group, Jackie seemingly turns into an exact copy
+      of the princess frog.</i>
+    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: <i>For a brief moment, the crown atop her head emanates some strange
+      energy before Jackie turns back into a human.</i>
+    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: Uncanny. Let me study that device of yours after all this, will you?
+    speaker: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: Sure thing. Pretty neat, huh?
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: <i>Jackie hands Jay the device.</i>
+    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: You gonna be okay with this, Jay? Any questions?
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: "Nah, I think I\u2019ll be okay, teach."
+    speaker: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: <i>After putting on the tracking device, Jay leads the scout team out
+      of the caves.</i>
+    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: <i>In the meantime, the rest of the Wastelanders begin setting up their
+      outpost. Before long, a large bonfire crackles in the center.</i>
+    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  postBonfireDialogue:
+  - content: <i>Jackie is cleaning her staff as Rocky approaches.</i>
+    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: Jackie?
+    speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: Yes?
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: About earlier... I'd like to apologize for what I said.
+    speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: I judged you too quickly, and I'm sorry.
+    speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: It's alright, I get it. You just wanted to protect me.
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: "Doesn\u2019t make it right."
+    speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events:
+    - rid: 2403555872759611455
+  - content: ...I think it's time I told you. About your mom. You okay to hear that?
+    speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: ...Yeah, yeah, I think so.
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: I overheard you talking to Jay earlier.
+    speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 2403555872759611454
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
+    - rid: 2403555872759611455
+      type: {class: AutoAdvanceAfter, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        Time: 2
 --- !u!1 &1808720757
 GameObject:
   m_ObjectHideFlags: 0
@@ -1001,7 +1159,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1808720758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1130,7 +1288,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_TargetDisplay: 0
 --- !u!224 &1945078876
 RectTransform:
@@ -1296,7 +1454,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_TargetDisplay: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
