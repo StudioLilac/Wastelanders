@@ -23,7 +23,7 @@ public class FollowThrough : FistCards
 
         CardType = CardType.MeleeAttack;
         myName = "Follow Through";
-        description = "If unstaggered, make this attack against the target again everytime they are hit this turn.";
+        description = "If not staggered, make this attack against the target again everytime they are hit this turn.";
         lowerBound = 1;
         upperBound = 2;
         Speed = 5;
