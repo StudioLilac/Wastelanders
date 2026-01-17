@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 using WeaponDeckSerialization;
 
 public class DeckSelectionTutorial : MonoBehaviour
@@ -22,6 +23,11 @@ public class DeckSelectionTutorial : MonoBehaviour
 
     [SerializeField] private List<WeaponEdit> weaponEditBoxCollidersToDisable;
     [SerializeField] private List<WeaponSelect> weaponSelectBoxCollidersToDisable;
+
+    [SerializeField] private SpriteRenderer playerSelectIndicator;
+    [SerializeField] private SpriteRenderer weaponSelectIndicator;
+    [SerializeField] private SpriteRenderer editDeckIndicator;
+    [SerializeField] private Image backButtonIndicator;
 
     [SerializeField] private bool activateTutorial;
 
@@ -75,16 +81,22 @@ public class DeckSelectionTutorial : MonoBehaviour
             }
             // Wait for fade screen to come in
             yield return new WaitForSeconds(1f);
-            yield return StartCoroutine(StartDialogueWithNextEvent(selectYourCharacter.Dialogue, () => { jackieSelect.GetComponent<BoxCollider2D>().enabled = true; CharacterSelect.CharacterSelectedEvent += HandleCharacterSelected; }));
+            yield return StartCoroutine(StartDialogueWithNextEvent(selectYourCharacter.Dialogue, () => {
+                playerSelectIndicator.enabled = true;
+                jackieSelect.GetComponent<BoxCollider2D>().enabled = true;
+                CharacterSelect.CharacterSelectedEvent += HandleCharacterSelected; 
+            }));
         }
     }
 
     private void HandleCharacterSelected(PlayerDatabase.PlayerName playerName)
     {
         CharacterSelect.CharacterSelectedEvent -= HandleCharacterSelected;
+        playerSelectIndicator.enabled = false;
         weaponSelectBoxCollidersToDisable.ForEach(ws => ws.GetComponent<PolygonCollider2D>().enabled = false);
         StartCoroutine(StartDialogueWithNextEvent(selectYourWeapon.Dialogue, () =>
         {
+            weaponSelectIndicator.enabled = true;
             weaponSelectBoxCollidersToDisable.ForEach(ws => ws.GetComponent<PolygonCollider2D>().enabled = true);
             WeaponSelect.WeaponSelectEvent += HandleWeaponSelected;
         }));
@@ -93,18 +105,21 @@ public class DeckSelectionTutorial : MonoBehaviour
     private void HandleWeaponSelected(WeaponSelect weaponSelect, CardDatabase.WeaponType type)
     {
         if (type != CardDatabase.WeaponType.PISTOL) return;
+        weaponSelectIndicator.enabled = false;
         WeaponSelect.WeaponSelectEvent -= HandleWeaponSelected;
         StartCoroutine(StartDialogueWithNextEvent(editYourWeapon.Dialogue, () => {
             foreach (WeaponEdit boxCollider in weaponEditBoxCollidersToDisable)
             {
                 boxCollider.GetComponent<BoxCollider2D>().enabled = true;
             }
+            editDeckIndicator.enabled = true;
             WeaponEdit.WeaponEditEvent += HandleWeaponEdited; }));
     }
 
     private void HandleWeaponEdited(WeaponEditInformation weaponEditInformation)
     {
         if (weaponEditInformation.WeaponType != CardDatabase.WeaponType.PISTOL) return;
+        editDeckIndicator.enabled = false;
         WeaponEdit.WeaponEditEvent -= HandleWeaponEdited;
         GameStateManager.Instance.UpdateLevelProgress(StageInformation.FROG_SLIME_STAGE);
         DeckSelectionManager.Instance.SetNextScene(SceneData.Get<SceneData.FrogSlimeFight>().SceneName);
@@ -115,6 +130,7 @@ public class DeckSelectionTutorial : MonoBehaviour
         if (points < 2)
         {
             DeckSelectionManager.Instance.PlayerActionDeckModifiedEvent -= HandleRunOutOfPoints;
+            backButtonIndicator.enabled = true;
             StartCoroutine(DialogueManager.Instance.StartDialogue(backButtonTutorial.Dialogue));
         }
     }

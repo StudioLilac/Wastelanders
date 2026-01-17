@@ -166,6 +166,37 @@ MonoBehaviour:
   bqContainer: {fileID: 713468929346325044}
   iconPrefab: {fileID: 7504458634070143618, guid: f9683846bad493e429dda3ece4900989, type: 3}
   clashingPrefab: {fileID: 5469894721144988013, guid: b10263b2eb9aadc41aa6c2d7606dba7a, type: 3}
+--- !u!1 &153882424
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 153882425}
+  m_Layer: 0
+  m_Name: Dummy3Pos.2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &153882425
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153882424}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.55, y: -1.74, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1536881501}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &157056468
 GameObject:
   m_ObjectHideFlags: 0
@@ -704,6 +735,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1225656226}
   - {fileID: 890942831}
   - {fileID: 1664471018}
   - {fileID: 157056469}
@@ -1766,6 +1798,95 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
+--- !u!1 &1225656225
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1225656226}
+  - component: {fileID: 1225656229}
+  - component: {fileID: 1225656228}
+  - component: {fileID: 1225656227}
+  m_Layer: 5
+  m_Name: BackgroundScrim
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1225656226
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1225656225}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 596087403}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -0.00012207031, y: 0}
+  m_SizeDelta: {x: -0.00012207031, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1225656227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1225656225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2a3c0ba8ef1824438650b6e205890b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiImage: {fileID: 1225656228}
+--- !u!114 &1225656228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1225656225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: -9099454923786360582, guid: 47f68ae05ef1d9f42b7e09191780a12d, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1225656229
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1225656225}
+  m_CullTransparentMesh: 1
 --- !u!1 &1264232811
 GameObject:
   m_ObjectHideFlags: 0
@@ -2088,6 +2209,8 @@ Transform:
   - {fileID: 525387720}
   - {fileID: 1538394867}
   - {fileID: 946615943}
+  - {fileID: 1555458600}
+  - {fileID: 153882425}
   - {fileID: 1644944200}
   - {fileID: 1543907276}
   m_Father: {fileID: 2011333043}
@@ -2137,7 +2260,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.133734
+      value: -10.134385
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2226,6 +2349,37 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 15.04, y: -0.49, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1536881501}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1555458599
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1555458600}
+  m_Layer: 0
+  m_Name: Dummy2Pos.1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1555458600
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1555458599}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: -0.46, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2688,6 +2842,9 @@ MonoBehaviour:
   ivesDefaultTransform: {fileID: 1538394867}
   trainingDummyPrefab: {fileID: 7915807930978314633, guid: 267f1a54b9abb71469992e756836dd87, type: 3}
   dummy1StartingPos: {fileID: 946615943}
+  groupDummySpawnPos:
+  - {fileID: 1555458600}
+  - {fileID: 153882425}
   jackieEndPosition: {fileID: 1543907276}
   ivesPassiveBattlePosition: {fileID: 1644944200}
   battleBeginButton: {fileID: 1705755449}
@@ -2696,6 +2853,7 @@ MonoBehaviour:
   cityBgImage: {fileID: 890942832}
   laidBackImageUI: {fileID: 157056470}
   puzzeledImageUI: {fileID: 1664471019}
+  backgroundScrim: {fileID: 1225656227}
   ivesTutorialDeck:
   - {fileID: 365813191591832820, guid: 29b90323f9f58f947a62ba6d9c11d4a0, type: 3}
   - {fileID: 1570116063941554911, guid: 4ceb98929208ac64ab848aa79d636595, type: 3}
@@ -2710,8 +2868,10 @@ MonoBehaviour:
   - {fileID: 7392447361912710173, guid: 96833b1ed63d040c08a43d590f8a54ec, type: 3}
   openingDialogue: {fileID: 11400000, guid: b924f74df439e0145ad1cd9ad986d1cd, type: 2}
   jackieMonologue: {fileID: 11400000, guid: ce06ffd35701a8c43805e8c382a8f93f, type: 2}
+  jackieSoloDialogue: {fileID: 11400000, guid: efd7b03ac0ad27c4b9ab445563baf7d3, type: 2}
   soldierGreeting: {fileID: 11400000, guid: 225d9d417d3f0054785ea3b22b2e8d18, type: 2}
   jackieTalksWithSolider: {fileID: 11400000, guid: bdaf40c6f840aab4f9917858f31c2c69, type: 2}
+  jackieTalksWithIves: {fileID: 11400000, guid: 8fbf50bcabbf83942a324abee814ff5e, type: 2}
   ivesChatsWithJackie: {fileID: 11400000, guid: 707ae62d407677b4883cb678c2660881, type: 2}
   youCanPlayCardsTutorial: {fileID: 11400000, guid: 6d43839fd0107384abb9967c0251482b, type: 2}
   cardFieldsTutorial: {fileID: 11400000, guid: efbd3acb8d00ab846a47ac60b4707446, type: 2}
@@ -2727,7 +2887,9 @@ MonoBehaviour:
   clashingStrategyTutorial: {fileID: 11400000, guid: 9e61a457e8191be4d8f55aeaac5aa904, type: 2}
   cardsExhaustedTutorial: {fileID: 11400000, guid: feb4de5b8e1861040af496de2b492462, type: 2}
   ivesIsDefeated: {fileID: 11400000, guid: 9197dc84cf94ee44db4a70d04c3af5ce, type: 2}
+  jackieBeatTheDummies: {fileID: 11400000, guid: 00e2d869642255f4cafd6fbddf9d5df4, type: 2}
   endingTutorialDialogue: {fileID: 11400000, guid: 71bc8b72e567a434fb451296dad29b2f, type: 2}
+  endOfTutorialV2: {fileID: 11400000, guid: 3efc7e8f04c11334ba52043dcbdf8bf6, type: 2}
   gameLoseDialogue: {fileID: 11400000, guid: 71aa9a544d4b56045a1b4ee4cb6b4f0d, type: 2}
   jumpToCombat: 0
 --- !u!1001 &2102825245

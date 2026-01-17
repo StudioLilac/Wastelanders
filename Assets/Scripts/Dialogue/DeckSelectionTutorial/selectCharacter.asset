@@ -25,7 +25,7 @@ MonoBehaviour:
     displayingImage: {fileID: 0}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: <i>Click on Jackie to edit her loadout.
+  - bodyText: <i>Click on Jackie to edit her loadout.</i>
     speakerName: Tutorial
     displayingImage: {fileID: 21300000, guid: edf85a48aa90dc84dbbffa358ce1c5ec, type: 3}
     sfx: 

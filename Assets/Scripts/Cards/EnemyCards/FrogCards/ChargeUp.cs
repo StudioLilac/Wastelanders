@@ -12,7 +12,7 @@ public class ChargeUp : FrogAttacks
         
         Speed = 1;
 
-        description = "Block, if unstaggered, use 'Hurl' next turn";
+        description = "Block, if not staggered, use 'Hurl' next turn";
 
         myName = "Charge Up";
         CardType = CardType.Defense;
