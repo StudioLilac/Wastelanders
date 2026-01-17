@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UI_Toolkit;
 using UnityEngine;
 
@@ -12,9 +13,22 @@ public abstract class DisplayableClass : SelectClass
     protected bool targetHighlighted = false;
     private bool grewLarger;
     
+    private readonly float scaleEaseDuration = 0.12f;
+
+    private Coroutine? scaleCoroutine;
+    private Vector3 baseScale = Vector3.one;
+    private Vector3 enlargedScale;
+    
     public static event Action<ActionClass>? OnShowCard;
     public static event Action<ActionClass>? OnHideCard;
     public static event Action<string>? OnEnemyActionSeen; // If there are multiple identical enemy actions, hovering one should remove indicator on all
+    
+    protected virtual void Start()
+    {
+        baseScale = transform.localScale;
+        enlargedScale = baseScale * 1.25f;
+    }
+
     protected void ShowCard()
     {
         if (ActionClass != null)
@@ -56,12 +70,16 @@ public abstract class DisplayableClass : SelectClass
     
     public virtual void OnMouseEnter()
     {
-        if (CombatManager.Instance.CanHighlight() && !grewLarger && !PauseMenuV2.IsPaused) {
-            transform.localScale *= 1.25f;
+        if (CombatManager.Instance.CanHighlight() && !grewLarger && !PauseMenuV2.IsPaused)
+        {
+            StartScale(true);
+
             grewLarger = true;
             HighlightTarget();
             ShowCard();
-            if (ActionClass != null) {
+
+            if (ActionClass != null)
+            {
                 new DisplayableHoveredEvent(ActionClass).Invoke();
             }
         }
@@ -71,13 +89,41 @@ public abstract class DisplayableClass : SelectClass
     {
         if (grewLarger)
         {
-            transform.localScale /= 1.25f;
+            StartScale(false);
+
             grewLarger = false;
             DeHighlightTarget();
             HideCard();
             new DisplayableUnhoveredEvent().Invoke();
         }
     }
+    
+    private void StartScale(bool grow)
+    {
+        if (scaleCoroutine != null)
+            StopCoroutine(scaleCoroutine);
+
+        Vector3 from = transform.localScale;
+        Vector3 to = grow ? enlargedScale : baseScale;
+
+        scaleCoroutine = StartCoroutine(EaseScale(from, to, scaleEaseDuration));
+    }
+    
+    private IEnumerator EaseScale(Vector3 from, Vector3 to, float duration)
+    {
+        float t = 0f;
+
+        while (t < 1f)
+        {
+            t += Time.unscaledDeltaTime / duration;
+            float eased = Mathf.SmoothStep(0f, 1f, t);
+            transform.localScale = Vector3.LerpUnclamped(from, to, eased);
+            yield return null;
+        }
+
+        transform.localScale = to;
+    }
+
 
     protected virtual void OnDestroy() {
         OnEnemyActionSeen -= OnEnemyActionMarkedScene;
