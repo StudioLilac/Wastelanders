@@ -64,7 +64,7 @@ public class ClashingBattleQueueIcon : MonoBehaviour, IBattleQueueDisplayable
 public enum ClashResultType
 {
     None = 0,
-    Crushing = 1,
+    Dominating = 1,
     Favourable = 2,
     Even = 3,
     Unfavourable = 4,
@@ -79,7 +79,7 @@ public class ClashCalculator
         new ClashBracket(0.4f, ClashResultType.Unfavourable),
         new ClashBracket(0.6f, ClashResultType.Even),
         new ClashBracket(0.8f, ClashResultType.Favourable), 
-        new ClashBracket(1.0f, ClashResultType.Crushing)
+        new ClashBracket(1.0f, ClashResultType.Dominating)
     };
 
     [SerializeField] private bool _winsIncludeTies = true;
@@ -95,7 +95,7 @@ public class ClashCalculator
                 return bracket.Result;
             }
         }
-        return ClashResultType.Crushing;
+        return ClashResultType.Dominating;
     }
 
     private float CalculateWinProbability((int min, int max) left, (int min, int max) right, bool includeTies)
