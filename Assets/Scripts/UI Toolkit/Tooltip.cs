@@ -15,10 +15,9 @@ namespace UI_Toolkit
         private VisualElement tooltipBox;
         private Label textTip;
         private bool isTooltipVisible;
-        private bool isTextTipVisible;
-
         private bool disableTooltip;
-        
+        private TextTipDisplayStyle currentTextStyle = TextTipDisplayStyle.BottomRight;
+
         public static readonly Dictionary<string, Color> TooltipColors = new Dictionary<string, Color>
         {
             ["ACCURACY"] = Color.blue,
@@ -45,6 +44,9 @@ namespace UI_Toolkit
             var root = uiDocument.rootVisualElement;
             tooltipBox = root.Q<VisualElement>("tooltip-box");
             textTip = root.Q<Label>("textip-text");
+            if (textTip != null) textTip.pickingMode = PickingMode.Ignore;
+            if (tooltipBox != null) tooltipBox.pickingMode = PickingMode.Ignore;
+
             HideTooltip();
             HideTextTip();
         }
@@ -55,14 +57,25 @@ namespace UI_Toolkit
             {
                 PositionTooltip(tooltipBox);
             }
-            
-            if (isTextTipVisible && textTip != null)
+
+            if (currentTextStyle != TextTipDisplayStyle.None && textTip != null)
             {
                 Vector2 mousePos = Input.mousePosition;
+                const float offset = 15f;
                 Vector2 panelPos = UICoordinateHelper.ToPanelPoint(mousePos, textTip.panel);
 
-                textTip.style.left = panelPos.x + 15;
-                textTip.style.top = panelPos.y + 15;
+                float targetX = panelPos.x + offset;
+                float targetY = currentTextStyle switch
+                {
+                    TextTipDisplayStyle.TopRight => panelPos.y - textTip.layout.height - offset,
+                    _ => panelPos.y + offset
+                };
+
+                textTip.style.left = targetX;
+                textTip.style.top = targetY;
+            } else
+            {
+                HideTextTip();
             }
         }
 
@@ -103,6 +116,7 @@ namespace UI_Toolkit
             if (state == GameState.FIGHTING) {
                 disableTooltip = true;
                 HideTooltip();
+                HideTextTip();
             }
             else {
                 disableTooltip = false;
@@ -163,19 +177,16 @@ namespace UI_Toolkit
 
         private void TooltipTextHandler(TooltipText text)
         {
-            if (text.Displaying)
-                ShowGenericTooltip(text.Content);
-            else
-                HideTextTip();
+            ShowGenericTooltip(text.Content, text.Style);
         }
 
-        private void ShowGenericTooltip(string text)
+        private void ShowGenericTooltip(string text, TextTipDisplayStyle style)
         {
             if (textTip == null || disableTooltip) return;
 
+            currentTextStyle = style;
             textTip.text = text;
             textTip.style.display = DisplayStyle.Flex;
-            isTextTipVisible = true;
         }
 
         private void HideTextTip()
@@ -183,9 +194,16 @@ namespace UI_Toolkit
             if (textTip == null) return;
 
             textTip.style.display = DisplayStyle.None;
-            isTextTipVisible = false;
+            currentTextStyle = TextTipDisplayStyle.None;
         }
     }
 }
 
-public record TooltipText(string Content, bool Displaying) : IEvent {}
+public record TooltipText(string Content, TextTipDisplayStyle Style) : IEvent {}
+
+public enum TextTipDisplayStyle
+{
+    BottomRight,
+    TopRight,
+    None,
+}

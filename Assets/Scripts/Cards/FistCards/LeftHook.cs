@@ -20,7 +20,7 @@ public class LeftHook : FistCards
         Speed = 3;
 
         myName = "Left Hook";
-        description = "If this attack is unstaggered, use 'Right Hook'.";
+        description = "If this attack is not staggered, use 'Right Hook'.";
         CardType = CardType.MeleeAttack;
         Renderer renderer = GetComponent<Renderer>();
         base.Initialize();

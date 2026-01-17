@@ -16,6 +16,7 @@ namespace UI_Toolkit
         private VisualElement rootElem;
         private VisualElement handElem;
         private VisualElement infoElem;
+        private Label deckInfoLabel;
 
         public void Awake()
         {
@@ -24,10 +25,24 @@ namespace UI_Toolkit
             handElem = rootElem.Q<VisualElement>("layout-hand-container");
             infoElem = rootElem.Q<VisualElement>("layout-info-container");
             rootDocument.panelSettings.sortingOrder = UISortOrder.Hudv2.GetOrder();
-
+            deckInfoLabel = rootElem.Q<Label>("txt-deck-info");
+            deckInfoLabel.RegisterCallback<MouseEnterEvent>(OnDeckHoverEnter);
+            deckInfoLabel.RegisterCallback<MouseLeaveEvent>(OnDeckHoverExit);
+            
             LoadInitialValues();
         }
-        
+
+        private void OnDeckHoverEnter(MouseEnterEvent ev)
+        {
+            new TooltipText("Cards Remaining Until \nNext Hand Size Decrease", TextTipDisplayStyle.TopRight).Invoke();
+        }
+
+        private void OnDeckHoverExit(MouseLeaveEvent ev)
+        {
+            new TooltipText("", TextTipDisplayStyle.None).Invoke();
+        }
+
+
         public void SpawnCardPlayEffect(ActionClass actionClass, Vector3 worldPosition)
         {
             UI_Elements.CardPlayEffect.SpawnAt(rootElem, cardTemplate, actionClass, worldPosition);
@@ -91,6 +106,7 @@ namespace UI_Toolkit
 
         private void OnUpdateHand(PlayerClass player)
         {
+            deckInfoLabel.text = player.Pool.Count.ToString();
             handElem.Clear();
 
             foreach (var ac in player.Hand.Select(go => go.GetComponent<ActionClass>()).Where(ac => ac))
@@ -105,6 +121,11 @@ namespace UI_Toolkit
                 handElem.Add(cardLayout);
                 ac.SetCanPlay(ac.IsPlayableByPlayer(out _));
             }
+        }
+
+        public void SetDeckInfoVisibility(bool visible)
+        {
+            deckInfoLabel.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
         }
     }
 }

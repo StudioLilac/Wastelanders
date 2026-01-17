@@ -21,7 +21,7 @@ public class StackSmash : SlimeAttacks, IPlayableSlimeCard
         CostToAddToDeck = 1;
 
         myName = "Stack Smash";
-        description = "If this attack is unstaggered, attack again";
+        description = "If this attack is not staggered, attack again";
         CardType = CardType.MeleeAttack;
     }
 
