@@ -93,10 +93,10 @@ namespace Steamworks {
                 // Steam client and also launches this game again if the User owns it. This can act as a rudimentary form of DRM.
                 
                 // See the Valve documentation for more information: https://partner.steamgames.com/doc/sdk/api#initialization_and_shutdown
-                if (SteamAPI.RestartAppIfNecessary(new AppId_t(1347112))) {
-                    Application.Quit();
-                    return;
-                }
+                // if (SteamAPI.RestartAppIfNecessary(new AppId_t(1347112))) {
+                //     Application.Quit();
+                //     return;
+                // }
             }
             catch (System.DllNotFoundException e) {
                 // We catch this exception here, as it will be the first occurrence of it.
