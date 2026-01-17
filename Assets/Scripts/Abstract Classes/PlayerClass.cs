@@ -166,7 +166,6 @@ public abstract class PlayerClass : EntityClass
 
     public override void PerformSelection()
     {
-        InCombat();
         DrawToMax();
         StartCoroutine(ResetPosition());
     }
