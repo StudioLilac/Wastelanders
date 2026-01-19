@@ -22,7 +22,7 @@ namespace UI_Toolkit.UI_Elements
         private const float FLUTTER_AMPLITUDE = 10f;   // Maximum rotation angle for flutter
         private const float FLUTTER_FREQUENCY = 1f;   // How fast the card flutters (oscillations per second)
         private const float SCALE = 0.5f;              // Size of the effect card relative to original
-        
+        private const float Y_OFFSET = 100f;            // Initial Y starting position.
         private float elapsedTime;
         private Vector2 startPosition;
         
@@ -95,7 +95,7 @@ namespace UI_Toolkit.UI_Elements
             }
             
             float easeOut = 1f - (1f - t) * (1f - t);
-            float yOffset = -FLOAT_DISTANCE * easeOut;
+            float yOffset = FLOAT_DISTANCE * easeOut - Y_OFFSET;
             float flutter = Mathf.Sin(elapsedTime * FLUTTER_FREQUENCY * Mathf.PI * 2f) * FLUTTER_AMPLITUDE * (1f - t);
             
             float fadeStart = 0.4f;

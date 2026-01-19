@@ -4,6 +4,8 @@ using UI_Toolkit;
 using UI_Toolkit.UI_Elements;
 using UnityEngine;
 
+public record CardInserted(ActionClass ActionClass) : IEvent { };
+
 public class BattleQueue : MonoBehaviour
 {
     public static BattleQueue BattleQueueInstance; 
@@ -33,8 +35,7 @@ public class BattleQueue : MonoBehaviour
         action.OnQueue();
         actionQueue.Insert(action);
         RenderBQ();
-
-        if (action.IsPlayedByPlayer()) RenderCardPlayEffectOnTarget(action);
+        new CardInserted(action).Invoke();
     }
 
     public void OnEnable()
@@ -173,15 +174,6 @@ public class BattleQueue : MonoBehaviour
             }
         }
         return false;
-    }
-
-    private static void RenderCardPlayEffectOnTarget(ActionClass ac)
-    {
-        CardPlayEffect.SpawnAt(
-            Tooltip.Instance.uiDocument.rootVisualElement,
-            HUDV2.Instance.cardTemplate,
-            ac,
-            ac.Target.myTransform.position);
     }
 
     // A sorted array implementation for ActionWrapper No duplicate speed invariants inherently added for flexibility in the future.

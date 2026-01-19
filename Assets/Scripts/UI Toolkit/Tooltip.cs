@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using UI_Toolkit.UI_Elements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -7,9 +8,8 @@ namespace UI_Toolkit
 {
     public class Tooltip : MonoBehaviour
     {
-        public static Tooltip Instance { get; private set; }
 
-        public UIDocument uiDocument;
+        [SerializeField] UIDocument uiDocument;
 
         private const float CURSOR_OFFSET = 15f;
         
@@ -39,13 +39,9 @@ namespace UI_Toolkit
             CombatManager.OnGameStateChanged -= HandleOnGameStateChanged;
         }
 
-        private void Awake()
-        {
-            Instance = this;
-        }
-
         private void Start()
         {
+            this.Subscribe<CardInserted>(CardInsertedEffectHandler);
             this.Subscribe<TooltipText>(TooltipTextHandler);
             var root = uiDocument.rootVisualElement;
             tooltipBox = root.Q<VisualElement>("tooltip-box");
@@ -184,6 +180,18 @@ namespace UI_Toolkit
         private void TooltipTextHandler(TooltipText text)
         {
             ShowGenericTooltip(text.Content, text.Style);
+        }
+
+        private void CardInsertedEffectHandler(CardInserted effect)
+        {
+            if (effect.ActionClass.IsPlayedByPlayer())
+            {
+                CardPlayEffect.SpawnAt(
+                uiDocument.rootVisualElement,
+                HUDV2.Instance.cardTemplate,
+                effect.ActionClass,
+                effect.ActionClass.Target.transform.position);
+            }
         }
 
         private void ShowGenericTooltip(string text, TextTipDisplayStyle style)
