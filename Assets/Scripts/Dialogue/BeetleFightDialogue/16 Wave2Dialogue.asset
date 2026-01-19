@@ -13,21 +13,24 @@ MonoBehaviour:
   m_Name: 16 Wave2Dialogue
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: 'Seems like there are more beetles than I thought. '
+  - bodyText: 'Seems like there are multiple waves of these beetles. '
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    displayingImage: {fileID: -6469218596377997877, guid: a90e130ec20cf4840b91919092d7dfe0, type: 3}
+    sfx: 
     broadcastAnEvent: 0
-  - bodyText: 'Let''s make good use of our abilities and buffs. My [Wound] stacks
-      should soften them up. '
+  - bodyText: 'My Wound stacks should soften them up. '
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: e3aa195cbddbdc746a9b7d4b661ecc77, type: 3}
+    sfx: 
     broadcastAnEvent: 0
-  - bodyText: Wound - Increase damage taken by +1 per stack of wound on this character.
+  - bodyText: Wound - Increases damage taken by +1 per stack of wound.
     speakerName: 
     displayingImage: {fileID: 21300000, guid: e3aa195cbddbdc746a9b7d4b661ecc77, type: 3}
+    sfx: 
     broadcastAnEvent: 0
   - bodyText: Remember not to overkill, exhausting your deck and reshuffling means
       losing one max hand size.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    sfx: 
     broadcastAnEvent: 0

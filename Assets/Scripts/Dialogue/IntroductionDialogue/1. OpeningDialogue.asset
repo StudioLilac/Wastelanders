@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 1. OpeningDialogue
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: '[The City of New Haven - East Wall Boot Camp]  '
-    speakerName: 'Narration:'
+  - bodyText: <i>The City of New Haven - East Wall Boot Camp
+    speakerName: Narration
     displayingImage: {fileID: 0}
     sfx: 
     broadcastAnEvent: 0

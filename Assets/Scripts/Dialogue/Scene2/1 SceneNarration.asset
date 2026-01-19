@@ -13,17 +13,20 @@ MonoBehaviour:
   m_Name: 1 SceneNarration
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: "After a day's worth of traveling, the Candidates arrive at The Western
-      Marsh, this year\u2019s exam destination."
-    speakerName: 
+  - bodyText: "<i>After a day's worth of traveling, the Candidates arrive at The
+      Western Marsh, this year\u2019s exam destination."
+    speakerName: Narration
     displayingImage: {fileID: 0}
+    sfx: 
     broadcastAnEvent: 0
-  - bodyText: They spend the night setting up base camp. Tension fills the camp,
+  - bodyText: <i>They spend the night setting up base camp. Tension fills the camp,
       and Candidates are restless throughout the night.
-    speakerName: 
+    speakerName: Narration
     displayingImage: {fileID: 0}
+    sfx: 
     broadcastAnEvent: 0
-  - bodyText: Finally, the morning of the exam arrives.
-    speakerName: 
+  - bodyText: <i>Finally, the morning of the exam arrives.
+    speakerName: Narration
     displayingImage: {fileID: 0}
+    sfx: 
     broadcastAnEvent: 0

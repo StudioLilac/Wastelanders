@@ -43,7 +43,7 @@ public class BuffExplainer : MonoBehaviour
         public static readonly WeaponExplanation PISTOL_EXPLANATION = new(weaponType: WeaponType.PISTOL, explanationTitle: "ACCURACY", explanationText: "Lower bound of power increases by 1 per stack. On taking damage, stacks are halved (rounded down).");
         public static readonly WeaponExplanation AXE_EXPLANATION = new(weaponType: WeaponType.AXE, explanationTitle: "WOUND", explanationText: "Damage taken increases by 1 per stack. Stacks are halved after each round (rounded down).");
         public static readonly WeaponExplanation FIST_EXPLANATION = new(weaponType: WeaponType.FIST, explanationTitle: "FIST", explanationText: "Makes several small but impactful attacks.");
-        public static readonly WeaponExplanation RESONATE_EXPLANATION = new(weaponType: WeaponType.ENEMY, explanationTitle: "RESONATE", explanationText: "Upper bound of power increases by 1 per stack.");
+        public static readonly WeaponExplanation RESONATE_EXPLANATION = new(weaponType: WeaponType.ENEMY, explanationTitle: "RESONANCE", explanationText: "Upper bound of power increases by 1 per stack.");
         public static readonly List<WeaponExplanation> Values = new() { STAFF_EXPLANATION, PISTOL_EXPLANATION, AXE_EXPLANATION, FIST_EXPLANATION, RESONATE_EXPLANATION };
         WeaponExplanation(WeaponType weaponType, string explanationTitle, string explanationText)
         {

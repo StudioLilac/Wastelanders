@@ -18,7 +18,7 @@ public class Fling : BeetleAttacks, IPlayableBeetleCard
         
         Speed = 3;
 
-        description = "If this card hits an opponent, gain +1 resonate.";
+        description = "If this card hits an opponent, gain +1 resonance.";
 
         myName = "Fling";
         CardType = CardType.RangedAttack;

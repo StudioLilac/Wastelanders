@@ -190,6 +190,7 @@ public class BeetleFight : DialogueClasses
         yield return new WaitForEndOfFrame(); // Necessary to load in enemies and managers. 
         SetUpEnemyLists();
         SetUpCombatStatus();
+        waveIndicator.Hide();
         if (!GameStateManager.Instance.JumpToCombat && !jumpintoCombat)
         {
             sceneCamera.Priority = 2;
@@ -431,9 +432,9 @@ public class BeetleFight : DialogueClasses
             yield return ShiftObjectCoroutine(CombatManager.Instance.baseCamera.gameObject, -7.5f, 3f);
             yield return new WaitForSeconds(0.5f);
             CombatManager.Instance.GameState = GameState.SELECTION;
+            waveIndicator.Show(2, 3);
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(wave2Dialogue.Dialogue));
             BeginWave2();
-            waveIndicator.Show(2, 3);
             yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
         }
 

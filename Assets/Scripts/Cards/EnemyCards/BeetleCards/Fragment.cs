@@ -19,7 +19,7 @@ public class Fragment : ActionClass, IPlayableQueenCard
         
         Speed = 5;
 
-        description = "If this attack hits an opponent, gain +1 resonate";
+        description = "If this attack hits an opponent, gain +1 resonance.";
 
         myName = "Fragment";
         CardType = CardType.RangedAttack;
