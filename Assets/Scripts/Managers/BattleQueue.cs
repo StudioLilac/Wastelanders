@@ -1,8 +1,10 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
+using UI_Toolkit;
+using UI_Toolkit.UI_Elements;
 using UnityEngine;
+
+public record CardInserted(ActionClass ActionClass) : IEvent { };
 
 public class BattleQueue : MonoBehaviour
 {
@@ -33,6 +35,7 @@ public class BattleQueue : MonoBehaviour
         action.OnQueue();
         actionQueue.Insert(action);
         RenderBQ();
+        new CardInserted(action).Invoke();
     }
 
     public void OnEnable()
