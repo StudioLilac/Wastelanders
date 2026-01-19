@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -8,7 +7,9 @@ namespace UI_Toolkit
 {
     public class Tooltip : MonoBehaviour
     {
-        [SerializeField] private UIDocument uiDocument;
+        public static Tooltip Instance { get; private set; }
+
+        public UIDocument uiDocument;
 
         private const float CURSOR_OFFSET = 15f;
         
@@ -36,6 +37,11 @@ namespace UI_Toolkit
         {
             BuffIcons.OnBuffIconHovered -= HandleOnBuffIconHovered;
             CombatManager.OnGameStateChanged -= HandleOnGameStateChanged;
+        }
+
+        private void Awake()
+        {
+            Instance = this;
         }
 
         private void Start()

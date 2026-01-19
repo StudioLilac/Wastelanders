@@ -119,10 +119,5 @@ namespace UI_Toolkit.UI_Elements
             
             new CardPlayEffect(root, cardTemplate, actionClass, new Vector2(screenPos.x, screenPos.y));
         }
-        
-        public static void SpawnAtPanelPosition(VisualElement root, VisualTreeAsset cardTemplate, ActionClass actionClass, Vector2 panelPosition)
-        {
-            new CardPlayEffect(root, cardTemplate, actionClass, panelPosition * root.panel.scaledPixelsPerPoint);
-        }
     }
 }

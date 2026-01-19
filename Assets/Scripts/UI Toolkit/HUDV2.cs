@@ -42,12 +42,6 @@ namespace UI_Toolkit
             new TooltipText("", TextTipDisplayStyle.None).Invoke();
         }
 
-
-        public void SpawnCardPlayEffect(ActionClass actionClass, Vector3 worldPosition)
-        {
-            UI_Elements.CardPlayEffect.SpawnAt(rootElem, cardTemplate, actionClass, worldPosition);
-        }
-
         public void OnEnable()
         {
             CombatManager.OnGameStateChanging += OnGameStateChanging;
