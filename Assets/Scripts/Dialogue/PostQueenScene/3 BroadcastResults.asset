@@ -86,7 +86,7 @@ MonoBehaviour:
     sfxName: 
     picture: {fileID: 0}
     events: []
-  - content: incredible, I think that's the highest score that anyone has ever achieved.
+  - content: Incredible, I think that's the highest score that anyone has ever achieved.
     speaker: {fileID: 11400000, guid: d5a65a5aa8d5f964fbd28b4f0ae8ecaf, type: 2}
     sfxName: 
     picture: {fileID: 0}

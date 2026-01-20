@@ -23,7 +23,7 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: e3aa195cbddbdc746a9b7d4b661ecc77, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: Wound - Increases damage taken by +1 per stack of wound.
+  - bodyText: Wound increases damage taken by +1 per stack of wound.
     speakerName: 
     displayingImage: {fileID: 21300000, guid: e3aa195cbddbdc746a9b7d4b661ecc77, type: 3}
     sfx: 
