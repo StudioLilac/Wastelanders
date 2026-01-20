@@ -235,7 +235,7 @@ public class CombatManager : MonoBehaviour
         baseCamera.Priority = 1;
         dynamicCamera.Priority = 0;
         PerformOutOfCombat();
-        // Save game after each win (including wiping out a wave) 
+        // Save game after each win 
         SaveLoadSystem.Instance.SaveGame();
     }
 
