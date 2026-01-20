@@ -13,6 +13,6 @@ public class CreditsManager : MonoBehaviour
     IEnumerator RollCredits()
     {
         yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.99f);
-        GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.LevelSelect>().SceneName);
+        GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.MainMenu>().SceneName);
     }
 }

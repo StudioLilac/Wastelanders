@@ -15,6 +15,7 @@ jobs:
         targetPlatform:
           - StandaloneWindows64
           - StandaloneOSX
+          - StandaloneLinux64
     outputs:
       buildVersion: ${{ steps.buildStep.outputs.buildVersion }}
     steps:
@@ -79,6 +80,20 @@ jobs:
         run: |
           mv build/StandaloneOSX/StandaloneOSX.app build/StandaloneOSX/WastelandersGame.app
 
+      - name: Download StandaloneLinux64 Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: Build-StandaloneLinux64
+          path: build/StandaloneLinux64
+      - name: Make Linux executable runnable
+        run: |
+          chmod +x build/StandaloneLinux64/StandaloneLinux64
+      - name: Rename Linux executable
+        run: |
+          chmod +x build/StandaloneLinux64/StandaloneLinux64
+          mv build/StandaloneLinux64/StandaloneLinux64 build/StandaloneLinux64/WastelandersGame
+          mv build/StandaloneLinux64/StandaloneLinux64_Data build/StandaloneLinux64/WastelandersGame_Data
+
       - name: List build directory
         run: |
           echo "=== Build directory structure ==="
@@ -92,4 +107,5 @@ jobs:
           rootPath: build
           depot1Path: StandaloneWindows64
           depot2Path: StandaloneOSX
+          depot3Path: StandaloneLinux64
           releaseBranch: beta

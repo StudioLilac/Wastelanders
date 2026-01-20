@@ -36,6 +36,7 @@ public class AudioManager : PersistentSingleton<AudioManager>
     private SceneAudio sceneAudio = null!;
     // We need this reference for serialization purposes
     private AudioPreferences audioPreferences = null!;
+    Coroutine? combatMusicCoroutine;
 
     protected override void Awake()
     {
@@ -65,7 +66,11 @@ public class AudioManager : PersistentSingleton<AudioManager>
         StartCoroutine(PlayStartAudio());
     }
 
-    public IEnumerator StartCombatMusic()
+    public void StartCombatMusic()
+    {
+        combatMusicCoroutine = StartCoroutine(BeginCombatMusic());
+    }
+    private IEnumerator BeginCombatMusic()
     {
         yield return StartCoroutine(FadeAudioRoutine(BackgroundMusicPlayer, true, 1f));
 
@@ -110,6 +115,7 @@ public class AudioManager : PersistentSingleton<AudioManager>
 
     public void FadeOutCurrentBackgroundTrack(float duration)
     {
+        StopCoroutine(combatMusicCoroutine);
         StartCoroutine(FadeAudioRoutine(BackgroundMusicPlayer, true, duration));
     }
 

@@ -550,7 +550,7 @@ public class PreQueenFight : DialogueClasses
             new BattleIntroEvent(Get<ClashIntro>()).Invoke();
             BeginQueenCombat();
             yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
-
+            yield return new WaitForSeconds(1.0f);
             AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
 
             GameStateManager.Instance.FirstTimeFinished = GameStateManager.Instance.CurrentLevelProgress < StageInformation.PRINCESS_FROG_FIGHT.LevelID;
