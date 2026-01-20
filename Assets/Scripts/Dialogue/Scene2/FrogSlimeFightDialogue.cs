@@ -41,6 +41,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
     [SerializeField] private Transform frog2Battle;
     [SerializeField] private Transform frog2WalkIn;
 
+    [SerializeField] private Pound pound;
     [SerializeField] private SlimeStack firstTutorialSlime;
     [SerializeField] private SlimeStack slimeStack;
     [SerializeField] private Transform slimeBattle;
@@ -88,7 +89,6 @@ public class FrogSlimeFightDialogue : DialogueClasses
     //Game Lose Dialogue
     [SerializeField] private List<DialogueText> gameLoseDialogue;
 
-    private bool playDeadFrog = false;
     private WasteFrog lastKilledFrog;
     private DefaultSceneBuilder sceneBuilder;
 
@@ -194,6 +194,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
 
                 new BattleIntroEvent(Get<TutorialIntro>()).Invoke();
                 CombatManager.Instance.SetEnemiesHostile(new List<EnemyClass> { firstTutorialSlime });
+                firstTutorialSlime.InjectCard(pound);
                 firstTutorialSlime.SetReturnPosition(thirdSlimeCrawlPos.position);
                 jackie.SetReturnPosition(jackieFirstFightPosition.position);
                 StartCoroutine(jackie.ResetPosition());
