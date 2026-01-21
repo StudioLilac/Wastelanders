@@ -105,7 +105,7 @@ namespace UI_Toolkit
         private void OnGlsClicked()
         {
             GameStateManager.Instance.JumpToCombat = true;
-            SetState(State.Glossary);
+            OnRstClicked();
         }
 
         private void OnDlgClicked()
