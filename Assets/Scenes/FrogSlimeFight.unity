@@ -3077,19 +3077,17 @@ MonoBehaviour:
     events:
     - rid: 5589630802696863808
   jackieStrategyPlan:
-  - bodyText: Hmm let me come up with a plan...
+  - bodyText: Hmm, what's my plan...
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: The more dangerous a Waste Creature is, the better the Waste Product
-      they drop.
+  - bodyText: Killing more dangerous Waste Creatures drop better Waste Products.
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: Should I work with a team again to try and hunt down a larger waste
-      monster?
+  - bodyText: Should I work with a team again to hunt down a larger waste monster?
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
     sfx: 
@@ -3105,8 +3103,8 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: 487226e5dae66424ea250466920a3086, type: 3}
     sfx: 
     broadcastAnEvent: 1
-  - bodyText: "I can push myself and do this solo, that\u2019s what the past year
-      of training was for."
+  - bodyText: "I can do this solo, that\u2019s what the past year of training was
+      for."
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
     sfx: 
@@ -4482,7 +4480,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.30375
+      value: -5.5696263
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y

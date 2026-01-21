@@ -6,8 +6,8 @@
 }
 
 .grid-3 {
-    left: 396px;
-    top: 297px;
+    left: 450px;
+    top: 320px;
     width: 666px;
 }
 
@@ -17,8 +17,8 @@
 }
 
 .grid-4 {
-    left: 139px;
-    top: 297px;
+    left: 175px;
+    top: 320px;
     width: 936px;
 }
 
@@ -28,10 +28,9 @@
 }
 
 .grid-5 {
-    left: 139px;
-    top: 350px;
+    left: 120px;
+    top: 320px;
     width: 1130px;
-    scale: 0.8181818 0.8181818;
     transform-origin: left top;
 }
 
