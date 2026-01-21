@@ -2963,7 +2963,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   instakill: 0
-  jumpToCombat: 0
+  jumpToCombat: 1
   jackie: {fileID: 1812891602}
   jackieDefaultTransform: {fileID: 1074057121}
   jackieWander1: {fileID: 893260480}
@@ -3092,8 +3092,8 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
     sfx: 
     broadcastAnEvent: 1
-  - bodyText: 'No, I came back almost empty handed last year after I froze up and
-      let the others do the fighting. '
+  - bodyText: 'No, I came back almost empty-handed last year after I froze up and
+      let others do the fighting. '
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 537908265661f2b44970c526d7724cfb, type: 3}
     sfx: 
@@ -3150,7 +3150,7 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: 537908265661f2b44970c526d7724cfb, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: <i>Jackie takes aim and steadies her pistol.
+  - bodyText: <i>Jackie steadies her breathing and takes aim.
     speakerName: Narration
     displayingImage: {fileID: 0}
     sfx: 
@@ -4480,7 +4480,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.5696263
+      value: -5.30272
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y

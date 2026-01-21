@@ -2,11 +2,12 @@ using System;
 using UI_Toolkit;
 using UnityEngine;
 
-public class HighlightManager : MonoBehaviour // later all entity highlighter
-{
 
-    public static HighlightManager Instance { get; private set; }
 #nullable enable
+public record CurrentPlayer() : IQuery<PlayerClass?>;
+public class HighlightManager : MonoBehaviour 
+{
+    public static HighlightManager Instance { get; private set; } = null!;
     private EntityClass? currentHighlightedEnemyEntity = null;
     private ActionClass? currentHighlightedAction = null;
     private PlayerClass? selectedPlayer = null;
@@ -30,8 +31,11 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
             Destroy(this);
         }
     }
+
+
     private void Start()
     {
+        this.Answer<CurrentPlayer, PlayerClass?>(GetCurrentPlayer);
         CombatManager.OnGameStateChanged += ResetSelection;
         EntityClass.OnEntityClicked += OnEntityClicked;
         ActionClass.CardClickedEvent += OnActionClicked;
@@ -212,6 +216,6 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
         selectedPlayer = player; 
         RenderHand(player);
     }
-
+    private PlayerClass? GetCurrentPlayer(CurrentPlayer q) => selectedPlayer;
     private static void RenderHand(PlayerClass player) => OnUpdateHand?.Invoke(player);
 }

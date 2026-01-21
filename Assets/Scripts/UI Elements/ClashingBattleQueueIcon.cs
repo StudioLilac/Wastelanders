@@ -71,6 +71,19 @@ public enum ClashResultType
     Hopeless = 5
 }
 
+public static class ClashResultExtensions
+{
+    public static string GetDescription(this ClashResultType clashResultType) => clashResultType switch
+    {
+        ClashResultType.Dominating => "You are overwhelmingly likely to win this clash.",
+        ClashResultType.Favourable => "You have a strong chance of winning this clash.",
+        ClashResultType.Even => "Both sides have an equal chance of winning this clash.",
+        ClashResultType.Unfavourable => "You are unlikely to win this clash.",
+        ClashResultType.Hopeless => "You are overwhelmingly unlikely to win this clash.",
+        _ => "No clash data available."
+    };
+}
+
 public class ClashCalculator
 {
     private readonly List<ClashBracket> _brackets = new()

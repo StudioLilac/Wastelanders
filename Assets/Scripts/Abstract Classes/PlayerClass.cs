@@ -5,7 +5,8 @@ using WeaponDeckSerialization;
 
 public abstract class PlayerClass : EntityClass
 {
-    protected List<InstantiableActionClassInfo> cardPrefabs; //Empty after intialization
+    protected List<InstantiableActionClassInfo> cardPrefabs; 
+
 #nullable enable
 
     public delegate void PlayerEventDelegate(PlayerClass player);
@@ -15,7 +16,7 @@ public abstract class PlayerClass : EntityClass
     
     private float MIN_ANIMATION_SPEED = 0.5f;
     private float MAX_ANIMATION_SPEED = 1.5f;
-
+    public int DeckSize => cardPrefabs.Count;
     public List<GameObject> Hand => new(hand);
     public List<GameObject> Pool => new(pool);
 

@@ -4,20 +4,24 @@ using UI_Toolkit.UI_Elements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+#nullable enable
 namespace UI_Toolkit
 {
     public class Tooltip : MonoBehaviour
     {
 
-        [SerializeField] UIDocument uiDocument;
+        [SerializeField] UIDocument uiDocument = null!;
 
         private const float CURSOR_OFFSET = 15f;
         
-        private VisualElement tooltipBox;
-        private Label textTip;
+        private VisualElement tooltipBox = null!;
         private bool isTooltipVisible;
         private bool disableTooltip;
-        private TextTipDisplayStyle currentTextStyle = TextTipDisplayStyle.BottomRight;
+        private Label nameLabel = null!;
+        private Label stacksLabel = null!;
+        private Label descriptionLabel = null!;
+        private VisualElement iconLabel = null!;
+
 
         public static readonly Dictionary<string, Color> TooltipColors = new Dictionary<string, Color>
         {
@@ -38,19 +42,19 @@ namespace UI_Toolkit
             BuffIcons.OnBuffIconHovered -= HandleOnBuffIconHovered;
             CombatManager.OnGameStateChanged -= HandleOnGameStateChanged;
         }
-
         private void Start()
         {
             this.Subscribe<CardInserted>(CardInsertedEffectHandler);
-            this.Subscribe<TooltipText>(TooltipTextHandler);
+            this.Subscribe<TooltipEvent>(TooltipTextHandler);
             var root = uiDocument.rootVisualElement;
             tooltipBox = root.Q<VisualElement>("tooltip-box");
-            textTip = root.Q<Label>("textip-text");
-            if (textTip != null) textTip.pickingMode = PickingMode.Ignore;
             if (tooltipBox != null) tooltipBox.pickingMode = PickingMode.Ignore;
+            nameLabel = tooltipBox.Q<Label>("buff-name");
+            stacksLabel = tooltipBox.Q<Label>("buff-stacks");
+            descriptionLabel = tooltipBox.Q<Label>("buff-description");
+            iconLabel = tooltipBox.Q<VisualElement>("buff-icon");
 
             HideTooltip();
-            HideTextTip();
         }
 
         private void Update()
@@ -58,26 +62,6 @@ namespace UI_Toolkit
             if (isTooltipVisible && tooltipBox != null)
             {
                 PositionTooltip(tooltipBox);
-            }
-
-            if (currentTextStyle != TextTipDisplayStyle.None && textTip != null)
-            {
-                Vector2 mousePos = Input.mousePosition;
-                const float offset = 15f;
-                Vector2 panelPos = UICoordinateHelper.ToPanelPoint(mousePos, textTip.panel);
-
-                float targetX = panelPos.x + offset;
-                float targetY = currentTextStyle switch
-                {
-                    TextTipDisplayStyle.TopRight => panelPos.y - textTip.layout.height - offset,
-                    _ => panelPos.y + offset
-                };
-
-                textTip.style.left = targetX;
-                textTip.style.top = targetY;
-            } else
-            {
-                HideTextTip();
             }
         }
 
@@ -118,7 +102,6 @@ namespace UI_Toolkit
             if (state == GameState.FIGHTING) {
                 disableTooltip = true;
                 HideTooltip();
-                HideTextTip();
             }
             else {
                 disableTooltip = false;
@@ -142,28 +125,32 @@ namespace UI_Toolkit
             if (tooltipBox == null || disableTooltip) return;
 
             buffName = buffName.ToUpper();
-
-            var nameLabel = tooltipBox.Q<Label>("buff-name");
-            var stacksLabel = tooltipBox.Q<Label>("buff-stacks");
-            var iconLabel = tooltipBox.Q<VisualElement>("buff-icon");
-            var descriptionLabel = tooltipBox.Q<Label>("buff-description");
             
             var buffDescription = BuffExplainer.WeaponExplanation.Values.FirstOrDefault(exp => exp.ExplanationTitle == buffName)?.ExplanationText;
 
             if (nameLabel != null)
+            {
                 nameLabel.text = buffName;
+                nameLabel.style.display = DisplayStyle.Flex;
+            }
 
             if (stacksLabel != null) {
                 stacksLabel.text = $"{stacks} stack{(stacks != 1 ? "s" : "")}";
                 stacksLabel.style.color = TooltipColors[buffName];
+                stacksLabel.style.display = DisplayStyle.Flex;
             }
                 
-            
             if (iconLabel != null)
+            {
                 iconLabel.style.backgroundImage = new StyleBackground(buffIcon);
+                iconLabel.style.display = DisplayStyle.Flex;
+            }
             
             if (descriptionLabel != null)
+            {
                 descriptionLabel.text = buffDescription;
+                descriptionLabel.style.display = DisplayStyle.Flex;
+            }
 
             tooltipBox.style.display = DisplayStyle.Flex;
             isTooltipVisible = true;
@@ -177,9 +164,43 @@ namespace UI_Toolkit
             isTooltipVisible = false;
         }
 
-        private void TooltipTextHandler(TooltipText text)
+        private void TooltipTextHandler(TooltipEvent toolTip)
         {
-            ShowGenericTooltip(text.Content, text.Style);
+            if (toolTip.Style == TextTipDisplayStyle.Display)
+                ShowTextTip(toolTip);
+            else
+                HideTooltip();
+        }
+
+        private void ShowTextTip(TooltipEvent text)
+        {
+            UpdateLabel(nameLabel, text.Title);
+            UpdateLabel(stacksLabel, text.Caption);
+            UpdateLabel(descriptionLabel, text.Body);
+            UpdateIcon(iconLabel, text.Icon);
+
+            stacksLabel.style.color = Color.blue;
+            tooltipBox.style.display = DisplayStyle.Flex;
+            isTooltipVisible = true;
+        }
+
+        private void UpdateLabel(Label label, string? content)
+        {
+            if (label == null) return;
+
+            bool hasContent = !string.IsNullOrEmpty(content);
+            label.style.display = hasContent ? DisplayStyle.Flex : DisplayStyle.None;
+            if (hasContent) label.text = content;
+        }
+
+        private void UpdateIcon(VisualElement iconElement, Sprite? icon)
+        {
+            if (iconElement == null) return;
+
+            bool hasIcon = icon != null;
+            iconElement.style.display = hasIcon ? DisplayStyle.Flex : DisplayStyle.None;
+
+            if (hasIcon) iconElement.style.backgroundImage = new StyleBackground(icon);
         }
 
         private void CardInsertedEffectHandler(CardInserted effect)
@@ -193,31 +214,14 @@ namespace UI_Toolkit
                 effect.ActionClass.Target.transform.position);
             }
         }
-
-        private void ShowGenericTooltip(string text, TextTipDisplayStyle style)
-        {
-            if (textTip == null || disableTooltip) return;
-
-            currentTextStyle = style;
-            textTip.text = text;
-            textTip.style.display = DisplayStyle.Flex;
-        }
-
-        private void HideTextTip()
-        {
-            if (textTip == null) return;
-
-            textTip.style.display = DisplayStyle.None;
-            currentTextStyle = TextTipDisplayStyle.None;
-        }
     }
 }
 
+public record TooltipEvent(TextTipDisplayStyle Style, string Title = "", string Body = "", string Caption = "", Sprite? Icon = null) : IEvent { }
 public record TooltipText(string Content, TextTipDisplayStyle Style) : IEvent {}
 
 public enum TextTipDisplayStyle
 {
-    BottomRight,
-    TopRight,
+    Display,
     None,
 }
