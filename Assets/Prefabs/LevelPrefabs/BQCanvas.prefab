@@ -407,6 +407,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 6234085889068335930}
+  scrollRect: {fileID: 1771873056772367513}
 --- !u!114 &785467685062423962
 MonoBehaviour:
   m_ObjectHideFlags: 0
