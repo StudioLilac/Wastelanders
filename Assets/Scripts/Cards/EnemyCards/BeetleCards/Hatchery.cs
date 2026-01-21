@@ -17,7 +17,7 @@ public class Hatchery : ActionClass, IPlayableQueenCard
         
         Speed = 1;
         
-        description = $"Spend +{HATCHERY_COST} resonate to play this card. If this card is unstaggered, spawn 1 random beetle.";
+        description = $"Spend +{HATCHERY_COST} resonance to play this card. If this card is not staggered, spawn 1 random beetle.";
 
         CostToAddToDeck = 2;
         myName = "Hatchery";

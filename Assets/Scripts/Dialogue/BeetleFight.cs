@@ -107,6 +107,7 @@ public class BeetleFight : DialogueClasses
     private const float BRIEF_PAUSE = 0.2f; // For use after an animation to make it visually seem smoother
     private const float MEDIUM_PAUSE = 1f; //For use after a text box comes down and we want to add some weight to the text.
 
+    private bool waveComplete = false;
     private void OnDestroy()
     { 
         HighlightManager.Instance.EntityClicked -= EntityClicked;
@@ -190,6 +191,7 @@ public class BeetleFight : DialogueClasses
         yield return new WaitForEndOfFrame(); // Necessary to load in enemies and managers. 
         SetUpEnemyLists();
         SetUpCombatStatus();
+        waveIndicator.Hide();
         if (!GameStateManager.Instance.JumpToCombat && !jumpintoCombat)
         {
             sceneCamera.Priority = 2;
@@ -404,6 +406,7 @@ public class BeetleFight : DialogueClasses
 
         //Start wave 1 
         {
+            waveComplete = false;
             new BattleIntroEvent(Get<ClashIntro>()).Invoke();
             wave2Fight.SetActive(false);
             wave3Fight.SetActive(false);
@@ -418,11 +421,12 @@ public class BeetleFight : DialogueClasses
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(twoPlayerCombatTutorial.Dialogue));
             Begin2PCombatTutorial();
             waveIndicator.Show(1, 3);
-            yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
+            yield return new WaitUntil(() => waveComplete);
         }
 
         //Start wave 2
         {
+            waveComplete = false;
             waveIndicator.Hide();
             wave2Fight.SetActive(true);
             CombatManager.Instance.SetEnemiesHostile(wave2);
@@ -430,15 +434,16 @@ public class BeetleFight : DialogueClasses
             sceneBuilder.PlayersPosition = playerWave2CombatPosition;
             yield return ShiftObjectCoroutine(CombatManager.Instance.baseCamera.gameObject, -7.5f, 3f);
             yield return new WaitForSeconds(0.5f);
-            CombatManager.Instance.GameState = GameState.SELECTION;
+            if (CombatManager.Instance.GameState != GameState.SELECTION) CombatManager.Instance.GameState = GameState.SELECTION;
+            waveIndicator.Show(2, 3);
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(wave2Dialogue.Dialogue));
             BeginWave2();
-            waveIndicator.Show(2, 3);
-            yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
+            yield return new WaitUntil(() => waveComplete);
         }
 
         //Start wave 3
         {
+            waveComplete = false;
             waveIndicator.Hide();
             wave3Fight.SetActive(true);
             CombatManager.Instance.SetEnemiesHostile(wave3);
@@ -446,11 +451,12 @@ public class BeetleFight : DialogueClasses
 
             yield return ShiftObjectCoroutine(CombatManager.Instance.baseCamera.gameObject, -9.5f, 3f);
             yield return new WaitForSeconds(0.5f);
-            CombatManager.Instance.GameState = GameState.SELECTION;
+            if (CombatManager.Instance.GameState != GameState.SELECTION) CombatManager.Instance.GameState = GameState.SELECTION;
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(wave3Dialogue.Dialogue));
             BeginWave3();
             waveIndicator.Show(3, 3);
-            yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
+            yield return new WaitUntil(() => waveComplete);
+            CombatManager.Instance.GameState = GameState.GAME_WIN;
         }
 
         //End of Scene
@@ -611,7 +617,7 @@ public class BeetleFight : DialogueClasses
 
     private void AllEntitiesDied()
     {
-        CombatManager.Instance.GameState = GameState.GAME_WIN;
+        waveComplete = true;
         CombatManager.PlayersWinEvent -= AllEntitiesDied;
         CombatManager.EnemiesWinEvent -= EnemiesWin;
     }

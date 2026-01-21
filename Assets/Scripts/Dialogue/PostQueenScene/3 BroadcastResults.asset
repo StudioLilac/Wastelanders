@@ -13,22 +13,22 @@ MonoBehaviour:
   m_Name: 3 BroadcastResults
   m_EditorClassIdentifier: 
   Entries:
-  - content: Alec with a score of 1500 U. in Waste products collected.
-    speaker: {fileID: 11400000, guid: 474297f421f8c524e85a2e1640557075, type: 2}
-    sfxName: 
-    picture: {fileID: 0}
-    events: []
-  - content: Pass.
-    speaker: {fileID: 11400000, guid: 474297f421f8c524e85a2e1640557075, type: 2}
-    sfxName: 
-    picture: {fileID: 0}
-    events: []
-  - content: Chloe with a score of 500 U.
+  - content: Chloe with a score of 200 U. in Waste products collected.
     speaker: {fileID: 11400000, guid: 474297f421f8c524e85a2e1640557075, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events: []
   - content: Fail.
+    speaker: {fileID: 11400000, guid: 474297f421f8c524e85a2e1640557075, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: Alec with a score of 1500 U.
+    speaker: {fileID: 11400000, guid: 474297f421f8c524e85a2e1640557075, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: Pass.
     speaker: {fileID: 11400000, guid: 474297f421f8c524e85a2e1640557075, type: 2}
     sfxName: 
     picture: {fileID: 0}
@@ -43,14 +43,22 @@ MonoBehaviour:
     sfxName: 
     picture: {fileID: 0}
     events: []
-  - content: "Shoot, as much as 900 was a fail this year. Excluding the crystal,
-      I think I only secured just about that much, I hope it was enough to push me
-      over\u2026 "
+  - content: <i>Shoot, as much as 900 was a fail this year?
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxName: 
     picture: {fileID: 0}
-    events:
-    - rid: 3264111934402461776
+    events: []
+  - content: <i>Besides the strange crystal from the frog, the other stuff I collected
+      is only worth about that much....
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: "<i>Please, be enough to push me over\u2026 "
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
   - content: "Jacqueline Page with a score of\u2026"
     speaker: {fileID: 11400000, guid: 474297f421f8c524e85a2e1640557075, type: 2}
     sfxName: 
@@ -78,13 +86,12 @@ MonoBehaviour:
     sfxName: 
     picture: {fileID: 0}
     events: []
-  - content: "Hah, Incredible, Jackie! I think it\u2019s the highest score that anyone
-      has ever achieved in the NITES exam."
-    speaker: {fileID: 11400000, guid: 8121c10b25930fa4dadfab5bd0c5fefe, type: 2}
+  - content: Incredible, I think that's the highest score that anyone has ever achieved.
+    speaker: {fileID: 11400000, guid: d5a65a5aa8d5f964fbd28b4f0ae8ecaf, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events: []
-  - content: "Wow, T-thank you, I can\u2019t believe it."
+  - content: "Wow, I can\u2019t believe it."
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxName: 
     picture: {fileID: 0}
@@ -100,11 +107,6 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 3264111934402461776
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
-      data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        sprite: {fileID: 21300000, guid: 534aff9f6dfd6c544b0144954e8ef0b0, type: 3}
     - rid: 3264111934402461777
       type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
@@ -124,6 +126,6 @@ MonoBehaviour:
     - rid: 3264111934402461780
       type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: {fileID: 11400000, guid: 8121c10b25930fa4dadfab5bd0c5fefe, type: 2}
+        actor: {fileID: 11400000, guid: d5a65a5aa8d5f964fbd28b4f0ae8ecaf, type: 2}
         action: 70
         duration: 1

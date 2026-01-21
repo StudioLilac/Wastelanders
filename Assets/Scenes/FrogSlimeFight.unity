@@ -2985,6 +2985,7 @@ MonoBehaviour:
   frog2: {fileID: 2026599494}
   frog2Battle: {fileID: 1942494672}
   frog2WalkIn: {fileID: 561866396}
+  pound: {fileID: 7445010627441748703, guid: 41158511bc5761d4386617623a2a562d, type: 3}
   firstTutorialSlime: {fileID: 1360125393}
   slimeStack: {fileID: 1941868523}
   slimeBattle: {fileID: 1422898870}
@@ -4481,7 +4482,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.3019524
+      value: -5.30375
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y

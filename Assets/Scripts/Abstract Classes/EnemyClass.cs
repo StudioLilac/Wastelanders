@@ -121,6 +121,14 @@ public abstract class EnemyClass : EntityClass
         StartCoroutine(ResetPosition());
     }
 
+    public void InjectCard(ActionClass card)
+    {
+        ActionClass toAdd = Instantiate(card);
+        toAdd.Origin = this;
+        pool.Insert(0, toAdd.gameObject);
+        toAdd.transform.position = new Vector3(-100, -100, 1);
+    }
+
     protected virtual List<EntityClass> GetOpponents()
     {
         return Team switch

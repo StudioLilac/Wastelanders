@@ -60,6 +60,7 @@ public class PreQueenFight : DialogueClasses
 
     [SerializeField] private Image endOfExamImage;
     [SerializeField] private SpriteRenderer treeSprite;
+    [SerializeField] private List<SpriteFadeHandler> closeTrees;
     [SerializeField] private Rain rain;
 
     [SerializeField] private bool jumpToCombat;
@@ -543,6 +544,8 @@ public class PreQueenFight : DialogueClasses
             }
 
             treeSprite.gameObject.SetActive(false);
+            closeTrees.ForEach(tree => StartCoroutine(tree.FadeInLightScreen(0.8f)));
+
             CombatManager.Instance.BeginCombat();
             new BattleIntroEvent(Get<ClashIntro>()).Invoke();
             BeginQueenCombat();

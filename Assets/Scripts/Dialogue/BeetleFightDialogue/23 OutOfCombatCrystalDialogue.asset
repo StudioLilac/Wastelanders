@@ -16,18 +16,22 @@ MonoBehaviour:
   - bodyText: Hey Ives, why do you think the beetles were so fixated on these crystals?
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
+    sfx: 
     broadcastAnEvent: 0
   - bodyText: Not too sure, but it seemed like the crystals on their back brightened
       up when they went near it. It must make them stronger somehow.
     speakerName: Ives
     displayingImage: {fileID: 0}
+    sfx: 
     broadcastAnEvent: 0
-  - bodyText: '[Crystals grant the attacker a resonate stack when dropping below
-      10, 5, 0 hp]'
-    speakerName: 
+  - bodyText: <i>Crystals grant the attacker a resonance stack when dropping below
+      10, 5, 0 hp.
+    speakerName: Tutorial
     displayingImage: {fileID: 0}
+    sfx: 
     broadcastAnEvent: 0
-  - bodyText: Whatever it is, it isn't good news to keep around.
+  - bodyText: <i>Whatever it is, we can't let them take more.
     speakerName: Jackie
     displayingImage: {fileID: 0}
+    sfx: 
     broadcastAnEvent: 0
