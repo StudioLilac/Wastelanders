@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Wastelanders.slnx"
+    "dotnet.defaultSolution": "Wastelanders.sln"
 }

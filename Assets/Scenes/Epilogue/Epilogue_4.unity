@@ -513,6 +513,12 @@ MonoBehaviour:
     - rid: 2124643721081258047
     - rid: 2124643721081258048
     - rid: 2124643721081258054
+    - rid: 2124643982316142592
+    - rid: 2124643982316142593
+    - rid: 2124643982316142594
+    - rid: 2124643982316142595
+    - rid: 2124643982316142596
+    - rid: 2124643982316142597
   dialogue1:
   - content: Ives?
     speaker: {fileID: 11400000, guid: 91e7c860c0040a24eaaf9819f99b3d4b, type: 2}
@@ -535,7 +541,7 @@ MonoBehaviour:
     events:
     - rid: 2124643721081258142
   - content: <i>Deception.</i>
-    speaker: {fileID: 11400000, guid: 4dd2f768b5bf0b545b549292bb236880, type: 2}
+    speaker: {fileID: 11400000, guid: f1e2e094931ab49479e4bf2319b9f492, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events:
@@ -572,7 +578,7 @@ MonoBehaviour:
     events:
     - rid: 2124643721081258157
   - content: <i>Worthless.</i>
-    speaker: {fileID: 11400000, guid: 4dd2f768b5bf0b545b549292bb236880, type: 2}
+    speaker: {fileID: 11400000, guid: f1e2e094931ab49479e4bf2319b9f492, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events:
@@ -625,7 +631,7 @@ MonoBehaviour:
     events:
     - rid: 2124643721081258152
   - content: <i>Pathetic.</i>
-    speaker: {fileID: 11400000, guid: 4dd2f768b5bf0b545b549292bb236880, type: 2}
+    speaker: {fileID: 11400000, guid: f1e2e094931ab49479e4bf2319b9f492, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events:
@@ -636,21 +642,12 @@ MonoBehaviour:
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258155
-  postDialogue1:
   - content: 
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 4fef3aeb65460fd498ab9efe9bac8625, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events:
-    - rid: 2124643721081258060
-    - rid: 2124643721081258063
-    - rid: 2124643721081258064
-    - rid: 2124643721081258061
-    - rid: 2124643721081258065
-    - rid: 2124643721081258066
-    - rid: 2124643721081258062
-    - rid: 2124643721081258067
-    - rid: 2124643721081258068
+    - rid: 2124643982316142667
   dialogue2:
   - content: "Sir, her heart rate is stabilizing. But her arm, it\u2019s still\u2026"
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
@@ -658,18 +655,29 @@ MonoBehaviour:
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258069
+    - rid: 2124643982316142598
+    - rid: 2124643982316142600
+    - rid: 2124643982316142603
   - content: "I understand. But for now, there\u2019s not much else we can do."
-    speaker: {fileID: 11400000, guid: 3d10d096fa496f44a9611dd7e88453a3, type: 2}
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258070
+    - rid: 2124643982316142601
+    - rid: 2124643982316142602
   - content: "Her natural Amplitude levels are subsid\xADing, which should help curb
       the spread. As long as her \r\nvitals are stable, she should wake up soon."
-    speaker: {fileID: 11400000, guid: 3d10d096fa496f44a9611dd7e88453a3, type: 2}
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events: []
+  - content: 
+    speaker: {fileID: 11400000, guid: 4fef3aeb65460fd498ab9efe9bac8625, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events:
+    - rid: 2124643982316142604
   dialogue3:
   - content: Cam...?
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
@@ -701,6 +709,7 @@ MonoBehaviour:
     - rid: 2124643721081258075
     - rid: 2124643721081258076
     - rid: 2124643721081258162
+    - rid: 2124643982316142668
   - content: "...Where\u2019s Jackie?"
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 
@@ -934,7 +943,6 @@ MonoBehaviour:
     events:
     - rid: 2124643721081258106
     - rid: 2124643721081258107
-    - rid: 2124643721081258160
   dialogue4:
   - content: "Ives... I\u2019m so sorry..."
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
@@ -1178,57 +1186,6 @@ MonoBehaviour:
         actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
         action: 70
         duration: 1
-    - rid: 2124643721081258060
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
-      data:
-        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-        sprite: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
-    - rid: 2124643721081258061
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
-      data:
-        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-        sprite: {fileID: 21300000, guid: 2c87828110c96b641b4334f1af609d2c, type: 3}
-    - rid: 2124643721081258062
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
-      data:
-        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-        sprite: {fileID: 662006735, guid: 6f315bf5a95086449a12face1f57d401, type: 3}
-    - rid: 2124643721081258063
-      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
-      data:
-        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-        action: 20
-        duration: 1
-    - rid: 2124643721081258064
-      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
-      data:
-        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-        action: 70
-        duration: 1
-    - rid: 2124643721081258065
-      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
-      data:
-        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-        action: 10
-        duration: 1
-    - rid: 2124643721081258066
-      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
-      data:
-        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-        action: 60
-        duration: 1
-    - rid: 2124643721081258067
-      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
-      data:
-        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-        action: 50
-        duration: 1
-    - rid: 2124643721081258068
-      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
-      data:
-        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-        action: 70
-        duration: 1
     - rid: 2124643721081258069
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
@@ -1236,7 +1193,7 @@ MonoBehaviour:
     - rid: 2124643721081258070
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: {fileID: 11400000, guid: 3d10d096fa496f44a9611dd7e88453a3, type: 2}
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     - rid: 2124643721081258071
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
@@ -1309,7 +1266,7 @@ MonoBehaviour:
       type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
         actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-        sprite: {fileID: 1706768821, guid: 6467eb84537387e43a1c3f0189c8ecdf, type: 3}
+        sprite: {fileID: -6888621227103538543, guid: 2da2e80130a351744801103b073bd661, type: 3}
     - rid: 2124643721081258087
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
@@ -1322,27 +1279,27 @@ MonoBehaviour:
       type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
         actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-        sprite: {fileID: 21300000, guid: 1ef02f9d4d05fe348b32438af675f662, type: 3}
+        sprite: {fileID: 5716319594728238710, guid: 30bd0e68e238a2746ac06e8f9527da16, type: 3}
     - rid: 2124643721081258090
       type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
         actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-        sprite: {fileID: 21300000, guid: 42072a06c1e5a294bb11950ad3649f25, type: 3}
+        sprite: {fileID: -6888621227103538543, guid: 2da2e80130a351744801103b073bd661, type: 3}
     - rid: 2124643721081258091
       type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
         actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-        sprite: {fileID: -744682771, guid: ea2112d5713e6624686fcfcdbf79fc36, type: 3}
+        sprite: {fileID: 5716319594728238710, guid: 30bd0e68e238a2746ac06e8f9527da16, type: 3}
     - rid: 2124643721081258092
       type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
         actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-        sprite: {fileID: 21300000, guid: 2b9ceabc225258043a6f790f6abfb45a, type: 3}
+        sprite: {fileID: -6888621227103538543, guid: 2da2e80130a351744801103b073bd661, type: 3}
     - rid: 2124643721081258093
       type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
         actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-        sprite: {fileID: 21300000, guid: 246a9e62a8abbc54abf32c5c6ca159bc, type: 3}
+        sprite: {fileID: 5716319594728238710, guid: 30bd0e68e238a2746ac06e8f9527da16, type: 3}
     - rid: 2124643721081258094
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
@@ -1355,12 +1312,12 @@ MonoBehaviour:
       type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
         actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-        sprite: {fileID: -5165609147117949918, guid: a85d2b703f63d6347aedd30b6f4e2f3c, type: 3}
+        sprite: {fileID: -6888621227103538543, guid: 2da2e80130a351744801103b073bd661, type: 3}
     - rid: 2124643721081258097
       type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
         actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-        sprite: {fileID: 21300000, guid: 2742f7cc8d1943c449399f347571923b, type: 3}
+        sprite: {fileID: 5716319594728238710, guid: 30bd0e68e238a2746ac06e8f9527da16, type: 3}
     - rid: 2124643721081258098
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
@@ -1394,7 +1351,7 @@ MonoBehaviour:
       type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
         actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-        sprite: {fileID: 21300000, guid: 70562f64108503147861dbc82d787ef9, type: 3}
+        sprite: {fileID: -6888621227103538543, guid: 2da2e80130a351744801103b073bd661, type: 3}
     - rid: 2124643721081258106
       type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
@@ -1549,7 +1506,7 @@ MonoBehaviour:
     - rid: 2124643721081258143
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: {fileID: 11400000, guid: 4dd2f768b5bf0b545b549292bb236880, type: 2}
+        actor: {fileID: 11400000, guid: f1e2e094931ab49479e4bf2319b9f492, type: 2}
     - rid: 2124643721081258144
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
@@ -1569,7 +1526,7 @@ MonoBehaviour:
     - rid: 2124643721081258148
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: {fileID: 11400000, guid: 4dd2f768b5bf0b545b549292bb236880, type: 2}
+        actor: {fileID: 11400000, guid: f1e2e094931ab49479e4bf2319b9f492, type: 2}
     - rid: 2124643721081258149
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
@@ -1589,7 +1546,7 @@ MonoBehaviour:
     - rid: 2124643721081258153
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: {fileID: 11400000, guid: 4dd2f768b5bf0b545b549292bb236880, type: 2}
+        actor: {fileID: 11400000, guid: f1e2e094931ab49479e4bf2319b9f492, type: 2}
     - rid: 2124643721081258155
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
@@ -1607,18 +1564,91 @@ MonoBehaviour:
       data:
         actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
         sprite: {fileID: 21300000, guid: 85e302f93093f564290df1bd57119113, type: 3}
-    - rid: 2124643721081258160
-      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
-      data:
-        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-        action: 70
-        duration: 1
     - rid: 2124643721081258162
       type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
         actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
         action: 60
         duration: 1
+    - rid: 2124643982316142592
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+        sprite: {fileID: 21300000, guid: f2ed6f852c9c1594590eea28f98518b3, type: 3}
+    - rid: 2124643982316142593
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+        action: 10
+        duration: 1
+    - rid: 2124643982316142594
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+        action: 70
+        duration: 1
+    - rid: 2124643982316142595
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        sprite: {fileID: 5716319594728238710, guid: 30bd0e68e238a2746ac06e8f9527da16, type: 3}
+    - rid: 2124643982316142596
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        action: 50
+        duration: 1
+    - rid: 2124643982316142597
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        action: 70
+        duration: 1
+    - rid: 2124643982316142598
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+        action: 60
+        duration: 1
+    - rid: 2124643982316142600
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+        sprite: {fileID: 21300000, guid: 2c87828110c96b641b4334f1af609d2c, type: 3}
+    - rid: 2124643982316142601
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        sprite: {fileID: -6888621227103538543, guid: 2da2e80130a351744801103b073bd661, type: 3}
+    - rid: 2124643982316142602
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        action: 30
+        duration: 1
+    - rid: 2124643982316142603
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        action: 60
+        duration: 1
+    - rid: 2124643982316142604
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        action: 50
+        duration: 1
+    - rid: 2124643982316142667
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+        action: 70
+        duration: 1
+    - rid: 2124643982316142668
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        sprite: {fileID: -4505030949712079976, guid: 7b946c12f8e9c9b49a06ee3348c11712, type: 3}
 --- !u!4 &1818432484
 Transform:
   m_ObjectHideFlags: 0

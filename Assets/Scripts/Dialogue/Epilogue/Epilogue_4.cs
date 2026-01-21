@@ -9,7 +9,6 @@ namespace Dialogue.Epilogue
     {
         [SerializeField] private DialogueEntryInUnityEditor[] postDialogue0;
         [SerializeField] private DialogueEntryInUnityEditor[] dialogue1;
-        [SerializeField] private DialogueEntryInUnityEditor[] postDialogue1;
         [SerializeField] private DialogueEntryInUnityEditor[] dialogue2;
         [SerializeField] private DialogueEntryInUnityEditor[] dialogue3;
         [SerializeField] private DialogueEntryInUnityEditor[] postDialogue3;
@@ -27,9 +26,9 @@ namespace Dialogue.Epilogue
 
             yield return DialogueBoxV2.Instance.Play(dialogue1.Into());
             yield return UIFadeScreenManager.Instance.FadeInDarkScreen(2f);
-            yield return DialogueBoxV2.Instance.Play(postDialogue1.Into());
             background1.SetActive(false);
             background2.SetActive(true);
+            yield return new WaitForSeconds(2f);
             yield return UIFadeScreenManager.Instance.FadeInLightScreen(1f);
 
             yield return DialogueBoxV2.Instance.Play(dialogue2.Into());
