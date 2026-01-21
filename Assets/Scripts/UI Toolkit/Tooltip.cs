@@ -62,6 +62,7 @@ namespace UI_Toolkit
             if (isTooltipVisible && tooltipBox != null)
             {
                 PositionTooltip(tooltipBox);
+                tooltipBox.SetVisible(true);
             }
         }
 
@@ -152,7 +153,6 @@ namespace UI_Toolkit
                 descriptionLabel.style.display = DisplayStyle.Flex;
             }
 
-            tooltipBox.style.display = DisplayStyle.Flex;
             isTooltipVisible = true;
         }
 
@@ -160,7 +160,7 @@ namespace UI_Toolkit
         {
             if (tooltipBox == null) return;
 
-            tooltipBox.style.display = DisplayStyle.None;
+            tooltipBox.SetVisible(false);
             isTooltipVisible = false;
         }
 
@@ -180,7 +180,6 @@ namespace UI_Toolkit
             UpdateIcon(iconLabel, text.Icon);
 
             stacksLabel.style.color = Color.blue;
-            tooltipBox.style.display = DisplayStyle.Flex;
             isTooltipVisible = true;
         }
 

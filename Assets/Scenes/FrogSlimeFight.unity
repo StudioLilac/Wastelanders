@@ -2963,7 +2963,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   instakill: 0
-  jumpToCombat: 1
+  jumpToCombat: 0
   jackie: {fileID: 1812891602}
   jackieDefaultTransform: {fileID: 1074057121}
   jackieWander1: {fileID: 893260480}
