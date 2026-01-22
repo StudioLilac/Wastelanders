@@ -29,7 +29,7 @@ public class BattleQueueIcons : DisplayableClass, IBattleQueueDisplayable
     
     [Header("Settings")]
     [SerializeField] private float expandDuration = 0.25f;
-    [SerializeField] private float fadeDuration = 0.15f;
+    [SerializeField] private float fadeDuration = 0f;
 
     private int FadeSortingOrder => CombatFadeScreenHandler.Instance.FADE_SORTING_ORDER;
     private string FadeSortingLayer => CombatFadeScreenHandler.Instance.FADE_SORTING_LAYER;
@@ -57,19 +57,20 @@ public class BattleQueueIcons : DisplayableClass, IBattleQueueDisplayable
         cardIconFader.SetLightScreen();    
         targetIconFader.SetLightScreen();  
         unseenActionFader.SetLightScreen();
-
-        yield return widthFader.FadeInDarkScreen(expandDuration);
-        
         StartCoroutine(cardIconFader.FadeInDarkScreen(fadeDuration));
         StartCoroutine(targetIconFader.FadeInDarkScreen(fadeDuration));
         StartCoroutine(unseenActionFader.FadeInDarkScreen(fadeDuration));
+
+        yield return widthFader.FadeInDarkScreen(expandDuration);
+        
     }
 
     public IEnumerator FadeOut()
     {
         StartCoroutine(unseenActionFader.FadeInLightScreen(fadeDuration));
         StartCoroutine(cardIconFader.FadeInLightScreen(fadeDuration));
-        yield return targetIconFader.FadeInLightScreen(fadeDuration);
+        StartCoroutine(targetIconFader.FadeInLightScreen(fadeDuration));
+
         yield return widthFader.FadeInLightScreen(expandDuration);
     }
 

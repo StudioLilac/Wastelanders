@@ -13,11 +13,15 @@ public class ClashingBattleQueueIcon : MonoBehaviour, IBattleQueueDisplayable
     [SerializeField]
     private BattleQueueIcons rightClashingAction = null!;
     [SerializeField] private SwordIcon swordIcon = null!;
+    [SerializeField] private LayoutWidthFader widthFader = null!;
 
     private static readonly ClashCalculator Calculator = new();
     private ActionClass leftClashing = null!;
     private ActionClass rightClashing = null!;
-    [SerializeField] private float fadeDuration = 0.15f;
+
+    [Header("Settings")]
+    [SerializeField] private float expandDuration = 0.5f;
+    [SerializeField] private float fadeDuration = 0f;
 
     // Public initializer for this icon
     public void RenderClashingIcons(ActionClass leftClashingItem,  ActionClass rightClashingItem)
@@ -63,15 +67,18 @@ public class ClashingBattleQueueIcon : MonoBehaviour, IBattleQueueDisplayable
     public IEnumerator FadeIn()
     {
         swordIcon.FadeIn(fadeDuration);
+        widthFader.SetLightScreen();
+        StartCoroutine(leftClashingAction.FadeIn());
         rightClashingAction.SetFullyOpaque();
-        yield return StartCoroutine(leftClashingAction.FadeIn());
+        yield return StartCoroutine(widthFader.FadeInDarkScreen(expandDuration));
     }
 
     public IEnumerator FadeOut()
     {
         swordIcon.FadeOut(fadeDuration);
         StartCoroutine(leftClashingAction.FadeOut());
-        yield return StartCoroutine(rightClashingAction.FadeOut());
+        StartCoroutine(rightClashingAction.FadeOut());
+        yield return StartCoroutine(widthFader.FadeInLightScreen(expandDuration));
     }
 }
 
