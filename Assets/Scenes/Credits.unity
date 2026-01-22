@@ -1839,10 +1839,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<b>Art Lead</b>
+  m_text: '
+
+    <b>Art Lead</b>
 
     Bonnie Lu
-
 
 
     <b>Technical Lead</b>
@@ -1994,7 +1995,7 @@ MonoBehaviour:
     Kimiko Ngo
 
 
-    <b>Designer
+    <b>Design
     Lead</b>
 
     Anrui Liu
