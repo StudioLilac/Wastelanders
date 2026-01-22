@@ -195,7 +195,7 @@ public abstract class PlayerClass : EntityClass
 
             ActionClass struggleCard = struggle.GetComponent<ActionClass>();
             struggleCard.Origin = this;
-            struggleCard.IsEvolved = false; // or whatever default makes sense
+            struggleCard.IsEvolved = false;
 
             hand.Add(struggle);
             struggle.transform.position = new Vector3(-100, -100, 1);
