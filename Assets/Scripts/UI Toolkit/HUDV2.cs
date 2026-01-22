@@ -40,15 +40,32 @@ namespace UI_Toolkit
                 Icon: deckInfoSprite, 
                 Title: "CARDS REMAINING",
                 Caption: GetCurrentDeckInfoText(), 
-                Body: "Everytime the deck depleats and reshuffles, your hand size decreases by one!"
+                Body: GetCurrentDeckBodyText()
                ).Invoke();
 
         private string GetCurrentDeckInfoText()
         {
             var player = new CurrentPlayer().Query();
-            return player != null
-                ? $"{player.Pool.Count}/{player.DeckSize}"
-                : "";
+            if (player) {
+                if (player.exhausted) {
+                    return "No cards left";
+                } else {
+                    return $"{player.Pool.Count}/{player.DeckSize}";
+                }
+            }
+
+            return "";
+        }
+
+        private string GetCurrentDeckBodyText() {
+            var player = new CurrentPlayer().Query();
+            if (player) {
+                if (player.exhausted) {
+                    return "Your hand size is zero. All that's left to do is struggle.";
+                }
+            }
+
+            return "Everytime the deck depletes and reshuffles, your hand size decreases by one!";
         }
 
         private void OnDeckHoverExit(MouseLeaveEvent ev) => new TooltipEvent(TextTipDisplayStyle.None).Invoke();
