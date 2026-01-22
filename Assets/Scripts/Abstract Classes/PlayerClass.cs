@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using WeaponDeckSerialization;
 
@@ -12,7 +13,7 @@ public abstract class PlayerClass : EntityClass
     public delegate void PlayerEventDelegate(PlayerClass player);
     public static event PlayerEventDelegate? playerReshuffleDeck;
 
-    public int maxHandSize = 4;
+    public int maxHandSize = 0;
     
     private float MIN_ANIMATION_SPEED = 0.5f;
     private float MAX_ANIMATION_SPEED = 1.5f;
@@ -27,6 +28,8 @@ public abstract class PlayerClass : EntityClass
     protected List<GameObject> pool = new();
 
     protected List<GameObject> discard = new();
+
+    private bool exhausted => maxHandSize == 0;
 
     public override void Start()
     {
@@ -123,7 +126,7 @@ public abstract class PlayerClass : EntityClass
             else
             {
                 Debug.LogWarning(myName + "'s Pool has no cards");
-
+                
             }
         }
     }
@@ -182,6 +185,20 @@ public abstract class PlayerClass : EntityClass
         for (int i = hand.Count; i < maxHandSize; i++)
         {
             DrawCard();
+        }
+        
+        if (exhausted) {
+            CardDatabase cardDatabase = Resources.LoadAll<CardDatabase>("").First();
+                
+            ActionClass strugglePrefab = cardDatabase.classlessCards[0];
+            GameObject struggle = Instantiate(strugglePrefab.gameObject);
+
+            ActionClass struggleCard = struggle.GetComponent<ActionClass>();
+            struggleCard.Origin = this;
+            struggleCard.IsEvolved = false; // or whatever default makes sense
+
+            hand.Add(struggle);
+            struggle.transform.position = new Vector3(-100, -100, 1);
         }
     }
 
