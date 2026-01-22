@@ -506,10 +506,10 @@ public class BeetleFight : DialogueClasses
             ives.FaceRight();
 
             yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
+            AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
             yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
             yield return StartCoroutine(FadeImage(dialogueMarshBg, 1f, true));
             yield return StartCoroutine(DialogueBoxV2.Instance.Play(postBattleDialogueEntry));
-            AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
             yield return new WaitForSeconds(1f);
 
             GameStateManager.Instance.UpdateLevelProgress(StageInformation.QUEEN_PREPARATION_STAGE);

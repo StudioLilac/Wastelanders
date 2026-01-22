@@ -26,7 +26,7 @@ public class BattleQueue : MonoBehaviour
         {
             Destroy(this); 
         }
-
+        this.Subscribe<BattleBegin>(BeginDequeue);
         this.Subscribe<ConsumeActionWrapper>(RemoveActionWrapperFromQueue);
     }
 
@@ -116,7 +116,7 @@ public class BattleQueue : MonoBehaviour
     }
 
     //Gives BattleQueue ownership of the lifetime of the Dequeue coroutine.
-    public void BeginDequeue()
+    private void BeginDequeue(BattleBegin bg)
     {
         StartCoroutine(Dequeue());
     }

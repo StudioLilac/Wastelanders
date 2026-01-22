@@ -62,7 +62,11 @@ public class AudioManager : PersistentSingleton<AudioManager>
         // E.x. MainMenu -> Level Select while also allowing audio to play on cold start
         if (sceneAudio == incomingAudio && incomingAudio.isPersisting) return;
         sceneAudio = incomingAudio;
+        StartBackgroundTrack();
+    }
 
+    public void StartBackgroundTrack()
+    {
         StartCoroutine(PlayStartAudio());
     }
 
@@ -70,6 +74,9 @@ public class AudioManager : PersistentSingleton<AudioManager>
     {
         combatMusicCoroutine = StartCoroutine(BeginCombatMusic());
     }
+
+
+
     private IEnumerator BeginCombatMusic()
     {
         yield return StartCoroutine(FadeAudioRoutine(BackgroundMusicPlayer, true, 1f));

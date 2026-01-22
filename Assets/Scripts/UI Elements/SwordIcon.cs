@@ -23,9 +23,14 @@ public class SwordIcon: MonoBehaviour
         swordsIcon.sortingOrder = CombatFadeScreenHandler.Instance.FADE_SORTING_ORDER - 1;
     }
 
-    public void OnMouseEnter() => new TooltipText(currentClashType.ToString().ToUpper(), TextTipDisplayStyle.BottomRight).Invoke();
+    public void OnMouseEnter() => new TooltipEvent(
+        TextTipDisplayStyle.Display, 
+        Title: currentClashType.ToString().ToUpper(),
+        Body: currentClashType.GetDescription(),
+        Icon: swordsIcon.sprite
+        ).Invoke();
 
-    public void OnMouseExit() => new TooltipText(currentClashType.ToString().ToUpper(), TextTipDisplayStyle.None).Invoke();
+    public void OnMouseExit() => new TooltipEvent(TextTipDisplayStyle.None).Invoke();
     
     public void SetClashState(ClashResultType result)
     {

@@ -96,5 +96,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 663e6df960324a40a83241bf244dd761, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deckInfoSprite: {fileID: 21300000, guid: 89fe2115e3171485291a36190e68633b, type: 3}
   cardTemplate: {fileID: 9197481963319205126, guid: 2e517996501674993b8fb9df38dedc1b, type: 3}
   rootDocument: {fileID: 8398607223831343151}
