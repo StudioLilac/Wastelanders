@@ -17,7 +17,7 @@ public class ClashingBattleQueueIcon : MonoBehaviour, IBattleQueueDisplayable
     private static readonly ClashCalculator Calculator = new();
     private ActionClass leftClashing = null!;
     private ActionClass rightClashing = null!;
-
+    [SerializeField] private float fadeDuration = 0.15f;
 
     // Public initializer for this icon
     public void RenderClashingIcons(ActionClass leftClashingItem,  ActionClass rightClashingItem)
@@ -59,6 +59,20 @@ public class ClashingBattleQueueIcon : MonoBehaviour, IBattleQueueDisplayable
         swordIcon.SetClashState(Calculator.CompareRange(GetRange(leftClashing), GetRange(rightClashing)));
 
     private (int, int) GetRange(ActionClass actionClass) => ((actionClass.GetRolledStats().RollFloor), (actionClass.GetRolledStats().RollCeiling));
+
+    public IEnumerator FadeIn()
+    {
+        swordIcon.FadeIn(fadeDuration);
+        rightClashingAction.SetFullyOpaque();
+        yield return StartCoroutine(leftClashingAction.FadeIn());
+    }
+
+    public IEnumerator FadeOut()
+    {
+        swordIcon.FadeOut(fadeDuration);
+        StartCoroutine(leftClashingAction.FadeOut());
+        yield return StartCoroutine(rightClashingAction.FadeOut());
+    }
 }
 
 public enum ClashResultType
