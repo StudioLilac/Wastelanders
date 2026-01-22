@@ -198,4 +198,6 @@ public abstract class PlayerClass : EntityClass
         animator.speed = 1f;
     }
 
+    protected override void OnMouseEnter() { }
+    protected override void OnMouseExit() { }
 }
