@@ -4,9 +4,12 @@ using System.Linq;
 using UI_Toolkit;
 using UI_Toolkit.UI_Elements;
 using UnityEngine;
-using static UnityEditor.Progress;
+using static BattleQueue;
 
 public record CardInserted(ActionClass ActionClass) : IEvent { };
+public record OnQueueChanged(List<ActionWrapper> Items) : IEvent { }
+public record ItemAdded(ActionWrapper Item, int Location) : IEvent;
+public record ItemRemoved(ActionWrapper Item) : IEvent;
 
 public class BattleQueue : MonoBehaviour
 {
@@ -30,9 +33,6 @@ public class BattleQueue : MonoBehaviour
             Destroy(this); 
         }
         this.Subscribe<BattleBegin>(BeginDequeue);
-        this.Subscribe<ConsumeActionWrapper>(RemoveActionWrapperFromQueue);
-        this.Subscribe<ItemAdded>(RenderItem);
-        this.Subscribe<ItemRemoved>(DequeueItem);
         this.Subscribe<BattleQueueIconClick>(DeletePlayerAction);
     }
 
@@ -43,61 +43,9 @@ public class BattleQueue : MonoBehaviour
         new CardInserted(action).Invoke();
     }
 
-    private void RenderItem(ItemAdded item)
+    public void RemoveActionWrapperFromQueue(ActionWrapper wrapper)
     {
-        ActionWrapper battlingWrapper = item.Item;
-        GameObject createdObject; 
-
-        if (battlingWrapper.IsClashing())
-        {
-            createdObject = Instantiate(clashingPrefab, new Vector3(100, 100, -10), Quaternion.identity);
-            var icon = createdObject.GetComponent<ClashingBattleQueueIcon>();
-
-            ActionClass leftClashItem = battlingWrapper.PlayerAction!;
-            ActionClass rightClashItem = battlingWrapper.EnemyAction!;
-
-            icon.RenderClashingIcons(leftClashItem, rightClashItem);
-            battlingWrapper.BindIcon(icon);
-        }
-        else
-        {
-            createdObject = Instantiate(iconPrefab, new Vector3(100, 100, -10), Quaternion.identity);
-            var icon = createdObject.GetComponent<BattleQueueIcons>();
-
-            icon.RenderBQIcon(battlingWrapper.GetTheOnlyExistingAction());
-            if (battlingWrapper.HasEnemyAction()) icon.RenderUnseenIndicator();
-
-            battlingWrapper.BindIcon(icon);
-        }
-
-        createdObject.transform.SetParent(bqContainer, false);
-        int insertIndex = item.Location;
-        if (insertIndex < battleQueueDisplayables.Count)
-        {
-            var neighbor = battleQueueDisplayables[insertIndex];
-            createdObject.transform.SetSiblingIndex(neighbor.GameObject.transform.GetSiblingIndex());
-        }
-        else
-        {
-            createdObject.transform.SetAsLastSibling();
-        }
-        battleQueueDisplayables.Insert(insertIndex, battlingWrapper.BattleIcon!);
-        battlingWrapper.BattleIcon!.DeEmphasize();
-        StartCoroutine(battlingWrapper.BattleIcon!.FadeIn());
-    }
-
-    private void DequeueItem(ItemRemoved item) => StartCoroutine(DeleteItem(item.Item.BattleIcon!));
-
-    private IEnumerator DeleteItem(IBattleQueueDisplayable item)
-    {
-        battleQueueDisplayables.Remove(item);
-        yield return StartCoroutine(item.FadeOut());
-        Destroy(item.GameObject);
-    }
-
-    private void RemoveActionWrapperFromQueue(ConsumeActionWrapper wrapper)
-    {
-        actionQueue.Remove(wrapper.Wrapper);
+        actionQueue.Remove(wrapper);
     }
 
     public void OnEnable()
@@ -194,11 +142,6 @@ public class BattleQueue : MonoBehaviour
         }
         return false;
     }
-
-    public record OnQueueChanged(List<ActionWrapper> Items) : IEvent { }
-    private record ItemAdded(ActionWrapper Item, int Location): IEvent;
-    private record ItemRemoved(ActionWrapper Item): IEvent;
-
 
     // A sorted array implementation for ActionWrapper No duplicate speed invariants inherently added for flexibility in the future.
     // However, please call CanInsertCard if you want to prevent the player from inserting cards with dupicate speeds
@@ -350,7 +293,6 @@ public class BattleQueue : MonoBehaviour
         }
     }
     
-    public record ConsumeActionWrapper(ActionWrapper Wrapper) : IEvent { }
 
     public class ActionWrapper
     {

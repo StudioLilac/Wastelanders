@@ -20,8 +20,8 @@ public class ClashingBattleQueueIcon : MonoBehaviour, IBattleQueueDisplayable
     private ActionClass rightClashing = null!;
 
     [Header("Settings")]
-    [SerializeField] private float expandDuration = 0.5f;
-    [SerializeField] private float fadeDuration = 0f;
+    private readonly float expandDuration = 0.25f;
+    private readonly float fadeDuration = 0.15f;
 
     // Public initializer for this icon
     public void RenderClashingIcons(ActionClass leftClashingItem,  ActionClass rightClashingItem)
@@ -69,7 +69,7 @@ public class ClashingBattleQueueIcon : MonoBehaviour, IBattleQueueDisplayable
         swordIcon.FadeIn(fadeDuration);
         widthFader.SetLightScreen();
         StartCoroutine(leftClashingAction.FadeIn());
-        rightClashingAction.SetFullyOpaque();
+        StartCoroutine(rightClashingAction.FadeIn());
         yield return StartCoroutine(widthFader.FadeInDarkScreen(expandDuration));
     }
 

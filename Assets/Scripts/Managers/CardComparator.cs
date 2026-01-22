@@ -55,7 +55,7 @@ public class CardComparator : MonoBehaviour
         card1.ApplyEffect();
         card2.ApplyEffect();
         yield return StartCoroutine(ClashBothEntities(card1, card2)); // for animation purposes 
-        new BattleQueue.ConsumeActionWrapper(actionWrapper).Invoke();
+        BattleQueue.BattleQueueInstance.RemoveActionWrapperFromQueue(actionWrapper);
 
         card1.RollDice();
         card2.RollDice();
@@ -158,7 +158,7 @@ public class CardComparator : MonoBehaviour
         EnableDice(actionClass.Origin);
         actionClass.ApplyEffect();
         yield return StartCoroutine(ClashBothEntities(actionClass, actionClass));
-        new BattleQueue.ConsumeActionWrapper(actionWrapper).Invoke();
+        BattleQueue.BattleQueueInstance.RemoveActionWrapperFromQueue(actionWrapper);
 
         actionClass.RollDice();
         DeactivateInfo(actionClass);

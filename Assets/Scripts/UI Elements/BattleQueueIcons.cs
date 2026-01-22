@@ -28,8 +28,8 @@ public class BattleQueueIcons : DisplayableClass, IBattleQueueDisplayable
     [SerializeField] LayoutWidthFader widthFader;
     
     [Header("Settings")]
-    [SerializeField] private float expandDuration = 0.25f;
-    [SerializeField] private float fadeDuration = 0f;
+    private readonly float expandDuration = 0.25f;
+    private readonly float fadeDuration = 0.15f;
 
     private int FadeSortingOrder => CombatFadeScreenHandler.Instance.FADE_SORTING_ORDER;
     private string FadeSortingLayer => CombatFadeScreenHandler.Instance.FADE_SORTING_LAYER;

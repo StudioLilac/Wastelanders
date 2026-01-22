@@ -244,7 +244,8 @@ MonoBehaviour:
   rightClashingAction: {fileID: 4683123950711438762}
   swordIcon: {fileID: 8333983199209184744}
   widthFader: {fileID: 7760557541141595400}
-  fadeDuration: 0
+  expandDuration: 0.25
+  fadeDuration: 0.15
 --- !u!114 &6069768141182838962
 MonoBehaviour:
   m_ObjectHideFlags: 0
