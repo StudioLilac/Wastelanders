@@ -1,9 +1,11 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CreditsManager : MonoBehaviour
 {
     public Animator animator;
+    public Image blackBg;
 
     void Start()
     {
@@ -12,7 +14,29 @@ public class CreditsManager : MonoBehaviour
 
     IEnumerator RollCredits()
     {
+        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.3f);
+        StartCoroutine(FadeInBlackBg());
         yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.99f);
         GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.MainMenu>().SceneName);
+    }
+
+    IEnumerator FadeInBlackBg()
+    {
+        float duration = 2f;
+        float elapsed = 0f;
+
+        Color startColor = blackBg.color;
+        Color endColor = startColor;
+        endColor.a = 128f / 255f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / duration;
+            blackBg.color = Color.Lerp(startColor, endColor, t);
+            yield return null;
+        }
+
+        blackBg.color = endColor;
     }
 }
