@@ -13,7 +13,7 @@ public abstract class PlayerClass : EntityClass
     public delegate void PlayerEventDelegate(PlayerClass player);
     public static event PlayerEventDelegate? playerReshuffleDeck;
 
-    public int maxHandSize = 0;
+    public int maxHandSize = 4;
     
     private float MIN_ANIMATION_SPEED = 0.5f;
     private float MAX_ANIMATION_SPEED = 1.5f;
@@ -29,7 +29,7 @@ public abstract class PlayerClass : EntityClass
 
     protected List<GameObject> discard = new();
 
-    private bool exhausted => maxHandSize == 0;
+    public bool exhausted => maxHandSize == 0;
 
     public override void Start()
     {
@@ -135,6 +135,10 @@ public abstract class PlayerClass : EntityClass
     {
         playerReshuffleDeck?.Invoke(this);
         maxHandSize--;
+
+        if (exhausted) {
+            return; // don't fill the pool anymore if the player is exhausted.
+        }
 
         while (discard.Count > 0)
         {
