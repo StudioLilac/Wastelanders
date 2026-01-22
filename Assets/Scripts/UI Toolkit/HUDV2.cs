@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using UI_Toolkit.UI_Elements;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -8,6 +9,7 @@ namespace UI_Toolkit
 {
     public class HUDV2 : MonoBehaviour
     {
+        [SerializeField] private Sprite deckInfoSprite;
         public static HUDV2 Instance { get; private set; }
         
         public VisualTreeAsset cardTemplate;
@@ -18,6 +20,7 @@ namespace UI_Toolkit
         private VisualElement infoElem;
         private Label deckInfoLabel;
 
+#nullable enable
         public void Awake()
         {
             Instance = this;
@@ -32,15 +35,23 @@ namespace UI_Toolkit
             LoadInitialValues();
         }
 
-        private void OnDeckHoverEnter(MouseEnterEvent ev)
+        private void OnDeckHoverEnter(MouseEnterEvent ev) =>
+            new TooltipEvent(TextTipDisplayStyle.Display, 
+                Icon: deckInfoSprite, 
+                Title: "CARDS REMAINING",
+                Caption: GetCurrentDeckInfoText(), 
+                Body: "Everytime the deck depleats and reshuffles, your hand size decreases by one!"
+               ).Invoke();
+
+        private string GetCurrentDeckInfoText()
         {
-            new TooltipText("Cards Remaining Until \nNext Hand Size Decrease", TextTipDisplayStyle.TopRight).Invoke();
+            var player = new CurrentPlayer().Query();
+            return player != null
+                ? $"{player.Pool.Count}/{player.DeckSize}"
+                : "";
         }
 
-        private void OnDeckHoverExit(MouseLeaveEvent ev)
-        {
-            new TooltipText("", TextTipDisplayStyle.None).Invoke();
-        }
+        private void OnDeckHoverExit(MouseLeaveEvent ev) => new TooltipEvent(TextTipDisplayStyle.None).Invoke();
 
         public void OnEnable()
         {

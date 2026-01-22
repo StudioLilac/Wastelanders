@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using System.Linq;
 using static BattleQueue;
 
+public record BattleBegin() : IEvent { }
 public class BattleBeginButton : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private Image duringSelectionSprite;
@@ -71,7 +72,7 @@ public class BattleBeginButton : MonoBehaviour, IPointerDownHandler, IPointerEnt
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (CanStartCombat) BattleQueue.BattleQueueInstance.BeginDequeue();
+        if (CanStartCombat) new BattleBegin().Invoke();
     }
 
     public void OnPointerEnter(PointerEventData eventData)

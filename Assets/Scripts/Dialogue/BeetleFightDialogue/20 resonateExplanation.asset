@@ -25,8 +25,8 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: '<i>Resonance: Upper bound of an Action''s power increases by 1 per
-      stack.'
+  - bodyText: <i>Resonance increases the upper bound of an Action's power by 1 per
+      stack.
     speakerName: Tutorial
     displayingImage: {fileID: 21300000, guid: 7af708b3e1c4e4b0497edc422888df7c, type: 3}
     sfx: 
