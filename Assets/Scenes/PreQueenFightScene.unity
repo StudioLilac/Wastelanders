@@ -5434,6 +5434,10 @@ MonoBehaviour:
   - {fileID: 2041861088}
   endOfExamImage: {fileID: 996424401}
   treeSprite: {fileID: 56201828}
+  closeTrees:
+  - {fileID: 1092837112}
+  - {fileID: 495744665}
+  - {fileID: 412694505}
   rain: {fileID: 568765745}
   jumpToCombat: 0
   instaKill: 0
@@ -6428,7 +6432,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.813333
+      value: -8.814527
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y
@@ -8304,7 +8308,7 @@ Transform:
   m_GameObject: {fileID: 1916168167}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.85, y: -0.68, z: 0}
+  m_LocalPosition: {x: 4.15, y: -0.68, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -55,8 +55,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.8647387, y: 6.4438386, z: 1}
-  m_Center: {x: -0.2406127, y: 1.8497028, z: 0}
+  m_Size: {x: 4.881758, y: 9.742259, z: 1}
+  m_Center: {x: -0.06264069, y: 0.20049214, z: 0}
 --- !u!212 &4700618330078765247
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -74,6 +74,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -122,15 +125,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 7783764551123862074}
+  icon: {fileID: 21300000, guid: 3f2a5be9c498ec3449d8ad93defff34a, type: 3}
   animator: {fileID: 1830226759925159690}
   combatInfo: {fileID: 6395893620585175647}
   boxCollider: {fileID: 977118586956487566}
-  icon: {fileID: 21300000, guid: 3f2a5be9c498ec3449d8ad93defff34a, type: 3}
+  <AnimatorController>k__BackingField: {fileID: 0}
   availableActions: []
-  dupActions: []
 --- !u!95 &1830226759925159690
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -144,6 +147,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -157,6 +161,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7783764551123862074}
     m_Modifications:
+    - target: {fileID: 230661372266811410, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
     - target: {fileID: 409415069964141907, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -1.24
@@ -164,6 +172,10 @@ PrefabInstance:
     - target: {fileID: 409415069964141907, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -1.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1550763909045383249, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
       objectReference: {fileID: 0}
     - target: {fileID: 5714486089811996398, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -220,6 +232,10 @@ PrefabInstance:
     - target: {fileID: 6373172873634443639, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 7417901496945242764, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
       objectReference: {fileID: 0}
     - target: {fileID: 7669802168277398618, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
       propertyPath: m_LocalPosition.y

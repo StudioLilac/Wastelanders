@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: 2 SoldierResults
   m_EditorClassIdentifier: 
   Entries:
-  - content: "So, Jackie, today\u2019s the big day again, you excited to hear your
-      test scores?"
-    speaker: {fileID: 11400000, guid: 8121c10b25930fa4dadfab5bd0c5fefe, type: 2}
+  - content: 'Hey, you''re Jackie right? '
+    speaker: {fileID: 11400000, guid: d5a65a5aa8d5f964fbd28b4f0ae8ecaf, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events:
@@ -23,7 +22,7 @@ MonoBehaviour:
     - rid: 3264111934402461770
     - rid: 3264111934402461769
     - rid: 3264111934402461767
-  - content: "As ready as I\u2019ll be. I\u2019ve been waiting ages for today."
+  - content: 'Yeah, that''s me. Do I know you? '
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxName: 
     picture: {fileID: 0}
@@ -32,12 +31,65 @@ MonoBehaviour:
     - rid: 3264111934402461775
     - rid: 3264111934402461771
     - rid: 3264111934402461774
-  - content: Well, you got here just in time, seems like the broadcast is starting.
-    speaker: {fileID: 11400000, guid: 8121c10b25930fa4dadfab5bd0c5fefe, type: 2}
+  - content: Nah, I'm just a fan. Heard rumours about what you did during the exam.
+    speaker: {fileID: 11400000, guid: d5a65a5aa8d5f964fbd28b4f0ae8ecaf, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events: []
-  - content: '*CHZHCKK*'
+  - content: Ah that...
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events:
+    - rid: 1207053096974024766
+  - content: To be honest, I wish that didn't happen. It took so much time away from
+      my actual exam.
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: ...
+    speaker: {fileID: 11400000, guid: d5a65a5aa8d5f964fbd28b4f0ae8ecaf, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: 'You nervous about the results? '
+    speaker: {fileID: 11400000, guid: d5a65a5aa8d5f964fbd28b4f0ae8ecaf, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: 'Yeah... I really need to pass. '
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events:
+    - rid: 1207053096974024767
+  - content: 'There''s someone that needs me to. '
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: I don't suppose they can wait?
+    speaker: {fileID: 11400000, guid: d5a65a5aa8d5f964fbd28b4f0ae8ecaf, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: 'They''ve already waited a year. '
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: 'I see. '
+    speaker: {fileID: 11400000, guid: d5a65a5aa8d5f964fbd28b4f0ae8ecaf, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: 'I wish you the best of luck then. '
+    speaker: {fileID: 11400000, guid: d5a65a5aa8d5f964fbd28b4f0ae8ecaf, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: <i>CHZHCKK
     speaker: {fileID: 11400000, guid: 474297f421f8c524e85a2e1640557075, type: 2}
     sfxName: 
     picture: {fileID: 0}
@@ -47,8 +99,19 @@ MonoBehaviour:
     sfxName: 
     picture: {fileID: 0}
     events: []
-  - content: They discovered a newfound Waste power source five times more efficient
-      than what we synthesize today!
+  - content: 'Today we honour the courage and valor of those who took the NTIES exam. '
+    speaker: {fileID: 11400000, guid: 474297f421f8c524e85a2e1640557075, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: In addition to the usual Waste Products, a very special discovery was
+      made during the exam this year!
+    speaker: {fileID: 11400000, guid: 474297f421f8c524e85a2e1640557075, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: A newfound Waste power source five times more efficient than what we
+      synthesize today!
     speaker: {fileID: 11400000, guid: 474297f421f8c524e85a2e1640557075, type: 2}
     sfxName: 
     picture: {fileID: 0}
@@ -68,45 +131,55 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: 1207053096974024766
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        sprite: {fileID: 21300000, guid: 3e1f4b61741099f41a921affe0965f9d, type: 3}
+    - rid: 1207053096974024767
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        sprite: {fileID: 21300000, guid: a9901bbfc9728634b8252622c7f3882c, type: 3}
     - rid: 3264111934402461767
       type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: {fileID: 11400000, guid: 8121c10b25930fa4dadfab5bd0c5fefe, type: 2}
-        sprite: {fileID: 21300000, guid: 01abf656002dc52488bb7a70d993c55d, type: 3}
+        actor: {fileID: 11400000, guid: d5a65a5aa8d5f964fbd28b4f0ae8ecaf, type: 2}
+        sprite: {fileID: 21300000, guid: cd4d67535c77ee1438d406e274cf2975, type: 3}
     - rid: 3264111934402461768
       type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: {fileID: 11400000, guid: 8121c10b25930fa4dadfab5bd0c5fefe, type: 2}
-        action: 40
+        actor: {fileID: 11400000, guid: d5a65a5aa8d5f964fbd28b4f0ae8ecaf, type: 2}
+        action: 50
         duration: 0
     - rid: 3264111934402461769
       type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: {fileID: 11400000, guid: 8121c10b25930fa4dadfab5bd0c5fefe, type: 2}
-        action: 10
+        actor: {fileID: 11400000, guid: d5a65a5aa8d5f964fbd28b4f0ae8ecaf, type: 2}
+        action: 30
         duration: 1
     - rid: 3264111934402461770
       type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: {fileID: 11400000, guid: 8121c10b25930fa4dadfab5bd0c5fefe, type: 2}
+        actor: {fileID: 11400000, guid: d5a65a5aa8d5f964fbd28b4f0ae8ecaf, type: 2}
         action: 60
         duration: 1
     - rid: 3264111934402461771
       type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        action: 50
+        action: 40
         duration: 0
     - rid: 3264111934402461772
       type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        sprite: {fileID: 21300000, guid: 422f3cda08073664b8a46361afe442fb, type: 3}
+        sprite: {fileID: 21300000, guid: 534aff9f6dfd6c544b0144954e8ef0b0, type: 3}
     - rid: 3264111934402461774
       type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        action: 30
+        action: 10
         duration: 1
     - rid: 3264111934402461775
       type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}

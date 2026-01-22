@@ -13,7 +13,10 @@ public class BattleBeginButton : MonoBehaviour, IPointerDownHandler, IPointerEnt
     [SerializeField] private Sprite activeState;
     [SerializeField] private Sprite activeDownState;
     [SerializeField] private Sprite defaultDownState;
+    [SerializeField] private float flashingSpeed = 5.0f;
+    private bool isHovering;
     private bool isActive;
+
     public bool CanStartCombat { private get; set; } = true;
 
     private void Awake()
@@ -24,7 +27,6 @@ public class BattleBeginButton : MonoBehaviour, IPointerDownHandler, IPointerEnt
     private void HandlePlayerActionCount(OnQueueRendered ev)
     {
         isActive = ev.Items.Count(aw => aw.HasPlayerAction()) > 0;
-        duringSelectionSprite.sprite = GetUnhoveredStateSprite();
     }
 
     private void OnEnable()
@@ -41,10 +43,31 @@ public class BattleBeginButton : MonoBehaviour, IPointerDownHandler, IPointerEnt
     {
         duringCombatSprite.enabled = gs == GameState.FIGHTING;
         duringSelectionSprite.enabled = gs == GameState.SELECTION;
+        isActive = isActive && gs == GameState.SELECTION;
+    }
+
+    private void Update()
+    {
+        if (!duringSelectionSprite.enabled) return;
+        if (isHovering) return;
+        if (isActive)
+        {
+            if (CanStartCombat)
+            {
+                float cycle = Time.time % flashingSpeed;
+                duringSelectionSprite.sprite = (cycle < flashingSpeed / 2f) ? activeState : defaultState;
+            } else
+            {
+                if (duringSelectionSprite.sprite != activeState) duringSelectionSprite.sprite = activeState;
+            }
+        }
+        else 
+        {
+            if (duringSelectionSprite.sprite != defaultState) duringSelectionSprite.sprite = defaultState;
+        }
     }
 
     private Sprite GetHoveredState() => isActive ? activeDownState: defaultDownState;
-    private Sprite GetUnhoveredStateSprite() => isActive ? activeState : defaultState;
 
     public void OnPointerDown(PointerEventData eventData)
     {
@@ -53,11 +76,14 @@ public class BattleBeginButton : MonoBehaviour, IPointerDownHandler, IPointerEnt
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        isHovering = true;
         duringSelectionSprite.sprite = GetHoveredState();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        duringSelectionSprite.sprite = GetUnhoveredStateSprite();
+        isHovering = false;
     }
+
+    public Image SelectionSprite => duringSelectionSprite;
 }

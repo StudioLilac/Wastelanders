@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Linq;
 using UnityEngine;
-using static Unity.Collections.AllocatorManager;
-using static UnityEngine.UI.Image;
 
 public class Pound : SlimeAttacks, IPlayableSlimeCard
 {
@@ -20,9 +18,8 @@ public class Pound : SlimeAttacks, IPlayableSlimeCard
         CostToAddToDeck = 1;
 
         myName = "Pound";
-        description = "I wouldn't stand still if I were you";
+        description = "I wouldn't stand still if I were you!";
         CardType = CardType.MeleeAttack;
-        Renderer renderer = GetComponent<Renderer>();
     }
 
 

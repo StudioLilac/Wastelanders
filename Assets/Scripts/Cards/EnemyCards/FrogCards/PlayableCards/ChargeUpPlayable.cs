@@ -14,7 +14,7 @@ public class ChargeUpPlayable : ActionClass, IPlayableFrogCard
         Speed = 1;
         CostToAddToDeck = 2;
 
-        description = "Block, if unstaggered, use 'Hurl' next turn";
+        description = "Block, if not staggered, use 'Hurl' next turn";
 
         myName = "Charge Up";
         CardType = CardType.Defense;

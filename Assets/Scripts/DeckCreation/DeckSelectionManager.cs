@@ -281,6 +281,7 @@ public class DeckSelectionManager : MonoBehaviour
         characterSelectionUi.SetActive(false);
         weaponSelectionUi.SetActive(true);
         deckSelectionUi.SetActive(false);
+        UnrenderDecks();
         weaponText.TextUpdate(playerData.selectedWeapons.Count.ToString() + "/2 Selected");
         foreach (Transform child in weaponSelectionUi.transform)
         {
@@ -333,8 +334,6 @@ public class DeckSelectionManager : MonoBehaviour
     //Renders the weaponDeck corresponding to (@param weaponType)
     public void RenderDecks(WeaponEditInformation weaponEditInformation)
     {
-        UnrenderDecks();
-
         WeaponType weaponType = weaponEditInformation.WeaponType;
         List<ActionClass> chosenCardList = cardDatabase.ConvertStringsToCards(weaponType, playerData.GetDeckByWeaponType(weaponType).Select(p => p.ActionClassName).ToList());
         List<ActionClass> cardsToRender = weaponEditInformation.GetCards(cardDatabase);
@@ -354,7 +353,7 @@ public class DeckSelectionManager : MonoBehaviour
         //In order to sort, the cards must be instantiated and initialized first :pensive:
         foreach (ActionClass card in cardsToRender)
         {
-            GameObject go = Instantiate(card.gameObject, new Vector3(-100, -100, 1), Quaternion.identity);
+            GameObject go = Instantiate(card.gameObject, new Vector3(-100, -100, 1), Quaternion.identity, cardArrayParent.transform);
             instantiatedCards.Add(go);
             ActionClass ac = go.GetComponent<ActionClass>();
             ActionClass? pref = chosenCardList.FirstOrDefault(action => action.GetType() == card.GetType());

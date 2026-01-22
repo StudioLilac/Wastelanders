@@ -60,6 +60,7 @@ public class PreQueenFight : DialogueClasses
 
     [SerializeField] private Image endOfExamImage;
     [SerializeField] private SpriteRenderer treeSprite;
+    [SerializeField] private List<SpriteFadeHandler> closeTrees;
     [SerializeField] private Rain rain;
 
     [SerializeField] private bool jumpToCombat;
@@ -543,11 +544,13 @@ public class PreQueenFight : DialogueClasses
             }
 
             treeSprite.gameObject.SetActive(false);
+            closeTrees.ForEach(tree => StartCoroutine(tree.FadeInLightScreen(0.8f)));
+
             CombatManager.Instance.BeginCombat();
             new BattleIntroEvent(Get<ClashIntro>()).Invoke();
             BeginQueenCombat();
             yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
-
+            yield return new WaitForSeconds(1.0f);
             AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
 
             GameStateManager.Instance.FirstTimeFinished = GameStateManager.Instance.CurrentLevelProgress < StageInformation.PRINCESS_FROG_FIGHT.LevelID;

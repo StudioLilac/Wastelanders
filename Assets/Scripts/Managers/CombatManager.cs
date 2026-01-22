@@ -111,6 +111,7 @@ public class CombatManager : MonoBehaviour
         battleQueueParent.SetActive(true);
         baseCamera.Priority = 1;
         dynamicCamera.Priority = 0;
+        PerformInCombat();
         StartCoroutine(FadeCombatBackground(false));
 
         // Might not capture newly spawned instances of cards, somehow they need to attract their evolved state and data binding. 
@@ -234,7 +235,7 @@ public class CombatManager : MonoBehaviour
         baseCamera.Priority = 1;
         dynamicCamera.Priority = 0;
         PerformOutOfCombat();
-        // Save game after each win (including wiping out a wave) 
+        // Save game after each win 
         SaveLoadSystem.Instance.SaveGame();
     }
 
@@ -250,7 +251,8 @@ public class CombatManager : MonoBehaviour
     {
         if (GameState == GameState.SELECTION || GameState == GameState.FIGHTING) return;
 
-        StartCoroutine(AudioManager.Instance.StartCombatMusic());
+
+        AudioManager.Instance.StartCombatMusic();
         GameState = GameState.SELECTION;
     }
 
@@ -378,11 +380,11 @@ public class CombatManager : MonoBehaviour
 
     private void HandleCrosshairEnemies(ActionClass.CardState previousState, ActionClass.CardState nextState)
     {
-        if (nextState == ActionClass.CardState.CLICKED_STATE && previousState == ActionClass.CardState.HOVER)
+        if (nextState == ActionClass.CardState.HOVER)
         {
             CrosshairAllEnemies();
         }
-        else if (nextState == ActionClass.CardState.HOVER && previousState == ActionClass.CardState.CLICKED_STATE)
+        else if (nextState == ActionClass.CardState.NORMAL)
         {
             UncrosshairAllEnemies();
         }
