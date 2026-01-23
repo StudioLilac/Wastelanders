@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Resonate : StatusEffect
 {
-    public const string buffName = "Resonate";
+    public const string buffName = "Resonance";
 
     public override void ApplyStacks(ActionClass.RolledStats dup)
     {
