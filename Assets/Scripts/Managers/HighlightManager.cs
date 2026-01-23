@@ -67,6 +67,8 @@ public class HighlightManager : MonoBehaviour
         }
     }
 
+    public PlayerClass GetSelectedPlayer() => selectedPlayer;
+    
     public void SetActivePlayer(PlayerClass? forcedPlayer)
     {
         if (forcedPlayer != selectedPlayer)
@@ -83,6 +85,7 @@ public class HighlightManager : MonoBehaviour
             ResetCurrentHighlightedAction();
             selectedPlayer = clickedPlayer;
             RenderHand(clickedPlayer);
+            clickedPlayer.DeHighlight();
         }
     }
 
