@@ -85,7 +85,7 @@ public class DialogueManager : MonoBehaviour
     public void AddDialogueEntryToHistory(DialogueEntry entry)
     {
         var text = new DialogueText(
-            entry.content, 
+            SanitizeText(entry.content), 
             entry.speaker?.characterName ?? "",
             entry.picture
         );
@@ -222,5 +222,16 @@ public class DialogueManager : MonoBehaviour
             AudioManager.Instance.PlaySFX(PAGE_FLIP_SOUND_EFFECT);
             wasSkipping = false;
         }
+    }
+
+    public static string? SanitizeText(string? input)
+    {
+        if (string.IsNullOrEmpty(input)) return input;
+
+        return input
+            .Replace("’", "'")
+            .Replace("‘", "'")
+            .Replace("“", "\"")
+            .Replace("”", "\"");
     }
 }
