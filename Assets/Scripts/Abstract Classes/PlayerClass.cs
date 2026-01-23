@@ -192,9 +192,13 @@ public abstract class PlayerClass : EntityClass
         }
         
         if (exhausted) {
-            CardDatabase cardDatabase = Resources.LoadAll<CardDatabase>("").First();
-                
-            ActionClass strugglePrefab = cardDatabase.classlessCards[0];
+            var strugglePrefab = new DefaultCard().Query();
+
+            if (!strugglePrefab) {
+                Debug.LogWarning(strugglePrefab + " could not be found");
+                return;
+            }
+            
             GameObject struggle = Instantiate(strugglePrefab.gameObject);
 
             ActionClass struggleCard = struggle.GetComponent<ActionClass>();
