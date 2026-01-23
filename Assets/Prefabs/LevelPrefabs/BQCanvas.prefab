@@ -121,7 +121,7 @@ MonoBehaviour:
     m_Top: 40
     m_Bottom: 0
   m_ChildAlignment: 3
-  m_Spacing: 85
+  m_Spacing: 0
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
@@ -408,6 +408,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 6234085889068335930}
   scrollRect: {fileID: 1771873056772367513}
+  bqContainer: {fileID: 7310062480428887619}
+  iconPrefab: {fileID: 3321067335889280902, guid: f9683846bad493e429dda3ece4900989, type: 3}
+  clashingPrefab: {fileID: 156142739676490864, guid: b10263b2eb9aadc41aa6c2d7606dba7a, type: 3}
+  battleQueueParent: {fileID: 7622365840802787573}
 --- !u!114 &785467685062423962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -487,7 +491,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 20, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!61 &801740980679722331
@@ -573,7 +577,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 40, y: 0}
+  m_AnchoredPosition: {x: 20, y: 0}
   m_SizeDelta: {x: 600, y: 80}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &5787107175130288255

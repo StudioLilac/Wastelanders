@@ -4,6 +4,7 @@ public class SwordIcon: MonoBehaviour
 {
     private static readonly int ClashStateHash = Animator.StringToHash("ClashState");
     [SerializeField] private SpriteRenderer swordsIcon = null!;
+    [SerializeField] private SpriteFadeHandler swordFader = null!;
     [SerializeField] private Animator swordsAnimator = null!;
     private ClashResultType currentClashType = default;
 
@@ -22,6 +23,10 @@ public class SwordIcon: MonoBehaviour
     {
         swordsIcon.sortingOrder = CombatFadeScreenHandler.Instance.FADE_SORTING_ORDER - 1;
     }
+
+    public void FadeIn(float duration) => StartCoroutine(swordFader.FadeInDarkScreen(duration));
+    public void FadeOut(float duration) => StartCoroutine(swordFader.FadeInLightScreen(duration));
+
 
     public void OnMouseEnter() => new TooltipEvent(
         TextTipDisplayStyle.Display, 

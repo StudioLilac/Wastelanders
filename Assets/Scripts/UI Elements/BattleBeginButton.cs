@@ -22,10 +22,10 @@ public class BattleBeginButton : MonoBehaviour, IPointerDownHandler, IPointerEnt
 
     private void Awake()
     {
-        this.Subscribe<OnQueueRendered>(HandlePlayerActionCount);
+        this.Subscribe<OnQueueChanged>(HandlePlayerActionCount);
     }
 
-    private void HandlePlayerActionCount(OnQueueRendered ev)
+    private void HandlePlayerActionCount(OnQueueChanged ev)
     {
         isActive = ev.Items.Count(aw => aw.HasPlayerAction()) > 0;
     }

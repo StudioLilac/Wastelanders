@@ -17,8 +17,8 @@ public class CombatCardUI : DisplayableClass
 #nullable enable
     private int FadeSortingOrder => CombatFadeScreenHandler.Instance.FADE_SORTING_ORDER;
     private string FadeSortingLayer => CombatFadeScreenHandler.Instance.FADE_SORTING_LAYER;
-    
-    void OnDestroy()
+
+    protected override void OnDestroy()
     {
         if (ActionClass != null)
         {
