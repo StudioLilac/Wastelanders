@@ -11,6 +11,8 @@ public class BattleQueueCanvas : MonoBehaviour
     [SerializeField] private RectTransform bqContainer;
     [SerializeField] private BattleQueueIcons iconPrefab;
     [SerializeField] private ClashingBattleQueueIcon clashingPrefab;
+    [SerializeField] private GameObject battleQueueParent;
+
     private List<IBattleQueueDisplayable> battleQueueDisplayables = new();
 
     void Awake()
@@ -19,6 +21,27 @@ public class BattleQueueCanvas : MonoBehaviour
         this.Subscribe<BattleBegin>(ResetScrollPosition);
         this.Subscribe<ItemAdded>(RenderItem);
         this.Subscribe<ItemRemoved>(DequeueItem);
+    }
+
+    private void OnEnable()
+    {
+        CombatManager.OnGameStateChanged += GameStateChangeHandler;
+    }
+
+    private void OnDisable()
+    {
+        CombatManager.OnGameStateChanged -= GameStateChangeHandler;
+    }
+
+    private void GameStateChangeHandler(GameState gs)
+    {
+        bool displayQueue = gs switch { 
+            GameState.SELECTION => true,
+            GameState.FIGHTING => true,
+            GameState.GAME_START => true,
+           _ => false 
+        };
+        battleQueueParent.SetActive(displayQueue);
     }
 
     private void ResetScrollPosition(BattleBegin bg)

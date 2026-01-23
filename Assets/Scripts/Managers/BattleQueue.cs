@@ -15,10 +15,6 @@ public class BattleQueue : MonoBehaviour
 {
     public static BattleQueue BattleQueueInstance; 
     private SortedArray actionQueue = new SortedArray();
-    private List<IBattleQueueDisplayable> battleQueueDisplayables = new();
-    public RectTransform bqContainer;
-    public GameObject iconPrefab;
-    public GameObject clashingPrefab;
 
 #nullable enable
 
