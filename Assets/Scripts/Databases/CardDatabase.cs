@@ -2,8 +2,8 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 using System.Linq;
+using JetBrains.Annotations;
 using WeaponDeckSerialization;
-
 
 /*
  * @author Anrui
@@ -38,6 +38,12 @@ public class CardDatabase : ScriptableObject
                 return null;
         }
     }
+    
+#nullable enable
+    public ClasslessCards? GetDefaultAction() {
+        return classlessCards.FirstOrDefault();
+    }
+#nullable disable
 
     public static List<ISubWeaponType> GetUnlockedSubFoldersFor(WeaponType weaponType)
     {
