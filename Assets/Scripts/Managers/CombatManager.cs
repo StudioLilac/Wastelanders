@@ -25,7 +25,6 @@ public class CombatManager : MonoBehaviour
     private List<EntityClass> neutralTeam = new();
 
     public GameObject handContainer;
-    public GameObject battleQueueParent;
     
     [SerializeField] private PlayerDatabase playerDatabase;
     [SerializeField] private CardDatabase cardDatabase;
@@ -112,7 +111,6 @@ public class CombatManager : MonoBehaviour
     private void PerformSelection()
     {
         Activate(handContainer);
-        battleQueueParent.SetActive(true);
         baseCamera.Priority = 1;
         dynamicCamera.Priority = 0;
         PerformInCombat();
@@ -301,7 +299,6 @@ public class CombatManager : MonoBehaviour
     private void PerformOutOfCombat()
     {
         Deactivate(handContainer);
-        battleQueueParent.SetActive(false);
 
         foreach (EntityClass entity in GrabAllEntities())
         {

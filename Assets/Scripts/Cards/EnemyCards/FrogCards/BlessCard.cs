@@ -14,7 +14,7 @@ namespace Cards.EnemyCards.FrogCards
 
             myName = "Bless";
             description =
-                $"Spend +{BLESS_COST} Resonate to play. If not staggered: Gain 1 Resonate and give all teammates a random positive buff.";
+                $"Spend +{BLESS_COST} Resonance to play. If not staggered: Gain 1 Resonance and give all teammates a random positive buff.";
 
             CostToAddToDeck = 2;
             lowerBound = upperBound = 1;
