@@ -67,8 +67,6 @@ public class HighlightManager : MonoBehaviour
         }
     }
 
-    public PlayerClass GetSelectedPlayer() => selectedPlayer;
-    
     public void SetActivePlayer(PlayerClass? forcedPlayer)
     {
         if (forcedPlayer != selectedPlayer)

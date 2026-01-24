@@ -285,7 +285,7 @@ public abstract class EntityClass : SelectClass
         Highlight();
     }
 
-    protected virtual void OnMouseExit()
+    private void OnMouseExit()
     {
         if (PauseMenuV2.IsPaused) return;
         DeHighlight();

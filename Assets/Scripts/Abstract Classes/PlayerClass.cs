@@ -199,6 +199,6 @@ public abstract class PlayerClass : EntityClass
     }
 
     protected override void OnMouseEnter() {
-        if (HighlightManager.Instance.GetSelectedPlayer() != this) base.OnMouseEnter();
+        if (new CurrentPlayer().Query() != this) base.OnMouseEnter();
     }
 }
