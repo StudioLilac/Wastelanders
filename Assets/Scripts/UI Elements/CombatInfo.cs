@@ -20,6 +20,7 @@ public class CombatInfo : MonoBehaviour
     public GameObject buffIconPrefab;
     public HealthBar healthBar;
     public GameObject crosshair;
+    [SerializeField] private bool doRotate = true;
     public TMP_Text damagePopupText;
     private float ROTATION_SPEED = 30f;
 
@@ -101,7 +102,9 @@ public class CombatInfo : MonoBehaviour
 
     public void Update()
     {
-        crosshair.transform.Rotate(Vector3.forward * ROTATION_SPEED * Time.deltaTime);
+        if (doRotate) {
+            crosshair.transform.Rotate(Vector3.forward * ROTATION_SPEED * Time.deltaTime);
+        }
     }
 
     /* 
