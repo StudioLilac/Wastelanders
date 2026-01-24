@@ -279,13 +279,13 @@ public abstract class EntityClass : SelectClass
         }
     }
 
-    public void OnMouseEnter()
+    protected virtual void OnMouseEnter()
     {
         if (PauseMenuV2.IsPaused) return;
         Highlight();
     }
 
-    public void OnMouseExit()
+    private void OnMouseExit()
     {
         if (PauseMenuV2.IsPaused) return;
         DeHighlight();

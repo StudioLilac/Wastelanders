@@ -198,4 +198,7 @@ public abstract class PlayerClass : EntityClass
         animator.speed = 1f;
     }
 
+    protected override void OnMouseEnter() {
+        if (new CurrentPlayer().Query() != this) base.OnMouseEnter();
+    }
 }
