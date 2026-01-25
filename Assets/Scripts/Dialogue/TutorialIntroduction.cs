@@ -301,7 +301,7 @@ public class TutorialIntroduction : DialogueClasses
 
         yield return new WaitUntil(() => dummiesLeft == 0);
         CombatManager.Instance.GameState = GameState.GAME_WIN;
-        AchievementManager.Instance.HandlePlayerFinishedSparring();  
+        new OnFinishSparring().Invoke();
         yield return new WaitForSeconds(1f);
     }
 

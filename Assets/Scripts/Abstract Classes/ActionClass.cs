@@ -151,8 +151,8 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
         CardIsUnstaggered();
         this.Target.TakeDamage(Origin, rolledCardStats.ActualRoll);
 
-        if (rolledCardStats.ActualRoll >= 10 && IsPlayedByPlayer()) {
-            AchievementManager.Instance.HandlePlayerHitCritical();
+        if (IsPlayedByPlayer()) {
+            new OnPlayerHit(rolledCardStats.ActualRoll).Invoke();
         }
     }
 

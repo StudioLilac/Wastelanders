@@ -1,11 +1,14 @@
 
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
 namespace Steamworks {
+
+    public record OnFinishSparring() : IEvent;
+    public record OnPlayerHit(int Damage) : IEvent;
 
     public class AchievementManager : PersistentSingleton<AchievementManager> {
 #if STEAMWORKS_NET
@@ -28,6 +31,8 @@ namespace Steamworks {
             
             this.Subscribe<PlayersWin>(OnPlayersWin);
             this.Subscribe<GameStateChanged>(HandleGameStateChanged);
+            this.Subscribe<OnPlayerHit>(HandlePlayerHitCritical);
+            this.Subscribe<OnFinishSparring>(HandlePlayerFinishedSparring);
         }
 
         private void OnEnable() {
@@ -90,11 +95,13 @@ namespace Steamworks {
             }
         }
 
-        public void HandlePlayerHitCritical() {
-            SteamManager.UnlockAchievement("CRITICAL");
+        private void HandlePlayerHitCritical(OnPlayerHit playerHitEvent) {
+            if (playerHitEvent.Damage >= 10) {
+                SteamManager.UnlockAchievement("CRITICAL");
+            }
         }
         
-        public void HandlePlayerFinishedSparring() {
+        private void HandlePlayerFinishedSparring(OnFinishSparring sparringEvent) {
             SteamManager.UnlockAchievement("DEFEAT_IVES");
         }
 
