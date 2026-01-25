@@ -208,7 +208,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
                 var combatCoroutine = StartCoroutine(BeginClashTutorial());
                 yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
                 yield return new WaitForSeconds(2.0f);
-                CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
+                CombatManager.Instance.GameState = GameState.AFTER_COMBAT;
                 StopCoroutine(combatCoroutine);
                 AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
             }
