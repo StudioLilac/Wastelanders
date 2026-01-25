@@ -61,10 +61,6 @@ public class CardComparator : MonoBehaviour
         card1.RollDice();
         card2.RollDice();
         DeactivateInfo(card1, card2);
-        
-        if ((card1.getRolledDamage() >= 10 && card1.Target is EnemyClass) || (card1.getRolledDamage() >= 10 && card2.Target is EnemyClass)) {
-            AchievementManager.Instance.HandlePlayerHitCritical();
-        }
 
         int cardOneGreater = ClashCompare(card1, card2);
 
@@ -167,10 +163,6 @@ public class CardComparator : MonoBehaviour
 
         actionClass.RollDice();
         DeactivateInfo(actionClass);
-        
-        if (actionClass.getRolledDamage() >= 10 && actionClass.Target is EnemyClass) {
-            AchievementManager.Instance.HandlePlayerHitCritical();
-        }
 
         //Hit and feel effects
         if (actionClass.CardType == CardType.Defense)

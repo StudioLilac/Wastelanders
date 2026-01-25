@@ -18,8 +18,6 @@ namespace Steamworks {
         protected override void Awake() {
             base.Awake(); // Handles singleton instance + DontDestroyOnLoad
             
-            Debug.Log("Hi im awake");
-            
             players = FindObjectsOfType<PlayerClass>();
             Debug.Log(players.Length);
 
@@ -27,7 +25,6 @@ namespace Steamworks {
 
             // Load current kill count from Steam stats on start
             SteamUserStats.GetStat("KILL_COUNT", out enemiesKilled);
-            Debug.Log($"[AchievementManager] Loaded KILL_COUNT = {enemiesKilled}");
 
             // In case player already reached milestones before starting the game, sync achievements
             CheckKillAchievements();
@@ -59,27 +56,17 @@ namespace Steamworks {
                 if (entity is TrainingDummy) {
                     return;
                 }
-                
-                // wait a second... after the new tutorial rework, this will never happen...
-                if (entity is EnemyIves) {
-                    SteamManager.UnlockAchievement("DEFEAT_IVES");
-                    return;
-                }
 
                 if (entity is QueenBeetle) {
                     SteamManager.UnlockAchievement("DEFEAT_QUEEN");
                     return;
                 }
                 enemiesKilled++;
-                Debug.Log($"[AchievementManager] Enemy killed! Total kills: {enemiesKilled}");
 
-                // Update the persistent kill count stat on Steam
                 SteamManager.UpdateStat("KILL_COUNT", enemiesKilled);
 
-                // Check if any achievements should be unlocked based on new kill count
                 CheckKillAchievements();
             } else if (entity is PlayerClass) {
-                Debug.Log("[AchievementManager] Player killed!");
                 onePlayerDead = true;
             }
         }
@@ -104,24 +91,23 @@ namespace Steamworks {
         public void HandlePlayerHitCritical() {
             SteamManager.UnlockAchievement("CRITICAL");
         }
+        
+        public void HandlePlayerFinishedSparring() {
+            SteamManager.UnlockAchievement("DEFEAT_IVES");
+        }
 
         private void OnSceneChanged(Scene arg0, Scene arg1) {
             onePlayerDead = false;
         }
 
         private void OnPlayersWin() {
-            Debug.Log("[AchievementManager] Players won");
             if (onePlayerDead) {
-                Debug.Log("[AchievementManager] Unlocking REVENGE");
                 SteamManager.UnlockAchievement("REVENGE");
             }
         }
 
         private void HandlePlayerBuffsUpdated(EntityClass player) {
-            Debug.Log("handlePlayerBuffsUpdated");
             if (player is not PlayerClass) return;
-            
-            Debug.Log($"[AchievementManager] OnPlayerBuffsUpdated: {player.name}, stacks: {player.GetBuffStacks(Resonate.buffName)}");
 
             if (player.GetBuffStacks(Resonate.buffName) >= 5) {
                 SteamManager.UnlockAchievement("THE_RESONATOR");
