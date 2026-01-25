@@ -188,13 +188,16 @@ public class BattleQueue : MonoBehaviour
         //Modifies: (@field array) as it will remove the existing wrapper from that array
         private ActionWrapper CreateClashingWrapper(ActionClass actionCard)
         {
-            foreach (ActionWrapper existingWrapper in array)
+            if (actionCard.clashable)
             {
-                if (existingWrapper.CanClashWithAction(actionCard))
+                foreach (ActionWrapper existingWrapper in array)
                 {
-                    existingWrapper.SetClashingAction(actionCard);
-                    Remove(existingWrapper);
-                    return existingWrapper;
+                    if (existingWrapper.CanClashWithAction(actionCard))
+                    {
+                        existingWrapper.SetClashingAction(actionCard);
+                        Remove(existingWrapper);
+                        return existingWrapper;
+                    }
                 }
             }
 

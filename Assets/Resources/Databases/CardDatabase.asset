@@ -44,6 +44,7 @@ MonoBehaviour:
   - {fileID: 573134866008080651, guid: c0858f6b4501d5f4bbb34fdfe5617a57, type: 3}
   - {fileID: 5450316865370057587, guid: 6ae47a0181b3a8047a103cf115dd874e, type: 3}
   - {fileID: -6137105834302938927, guid: b0ccaa8a29623c34da481ace66fc6885, type: 3}
+  - {fileID: 1120580025025803001, guid: d01a7e58b8865471c83d65d222c6c122, type: 3}
   classlessCards:
   - {fileID: 1217825094844732489, guid: 9d50f01dbdd0e8644ab65054f45283e5, type: 3}
   enemyCards:
