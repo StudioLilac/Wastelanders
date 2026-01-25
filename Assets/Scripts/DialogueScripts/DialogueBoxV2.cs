@@ -134,11 +134,12 @@ namespace DialogueScripts
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
+
         private void WithEntry(DialogueEntry entry)
         {
             if (!string.IsNullOrEmpty(entry.content))
             {
-                txtView.text = DialogueManager.SanitizeText(entry.content);
+                txtView.text = entry.content;
                 txt.SetActive(true);
             }
             else

@@ -14,43 +14,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue:
   - bodyText: "Hmm\u2026 let me come up with a plan. I know that the more dangerous
-      the Waste Monster, the higher quality the Waste Product they drop when slain. "
+      the Waste enemy, the higher quality the Waste Product they drop when slain. "
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 26c95ccd71f756349881ce655e12b5cc, type: 3}
-    sfx: 
     broadcastAnEvent: 0
   - bodyText: Should I work with a team again and try to hunt down a larger Waste
-      Monster?
+      monster?
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 26c95ccd71f756349881ce655e12b5cc, type: 3}
-    sfx: 
     broadcastAnEvent: 1
   - bodyText: 'No, I came back almost empty handed last year after I froze up and
       let the others do the fighting. '
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 70562f64108503147861dbc82d787ef9, type: 3}
-    sfx: 
     broadcastAnEvent: 1
   - bodyText: By the time I felt okay, there were basically no products left!
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 534aff9f6dfd6c544b0144954e8ef0b0, type: 3}
-    sfx: 
     broadcastAnEvent: 1
   - bodyText: "I can push myself and do this solo, that\u2019s what the past year
       of training was for."
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 26c95ccd71f756349881ce655e12b5cc, type: 3}
-    sfx: 
     broadcastAnEvent: 1
-  - bodyText: 'This way I get the full cut of the Products, and it should impress
+  - bodyText: 'This way I get the full cut of the products, and it should impress
       the examiners, I hope. '
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 1766f7fa2aec26d4b80d30e9c84bc726, type: 3}
-    sfx: 
     broadcastAnEvent: 0
   - bodyText: "Although I\u2019ll definitely have to be more sneaky and careful if
       I\u2019m hunting alone..."
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 26c95ccd71f756349881ce655e12b5cc, type: 3}
-    sfx: 
     broadcastAnEvent: 1

@@ -18,19 +18,18 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: d960aa6e94a2c924badfb0dae38bc9b4, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: The Queue is sorted by <i>Speed</i>, with the fastest Action on the
+  - bodyText: The queue is sorted by <i>Speed</i>, with the fastest Action on the
       left resolving first in a round.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: b1411cc1e1231574797f223a58264863, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: You can <i>[Hover]</i> over a queued card's icon to check its stats
-      again.
+  - bodyText: You can [Hover] over a queued card's icon to check its stats again.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 57baba5992d9e224988e93fcacf9f7eb, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: Or <i>[Click]</i> on the icon to retrieve the card back into your hand
+  - bodyText: Or [Left Click] on the icon to retrieve the card back into your hand
       in case you change your mind.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 57baba5992d9e224988e93fcacf9f7eb, type: 3}
@@ -49,13 +48,13 @@ MonoBehaviour:
     sfx: 
     broadcastAnEvent: 0
   - bodyText: A red Action in your hand means you played another Action with the
-      same <i>Speed</i> already.
+      same Speed already.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 37984fb1d201d1246a4e2a0ac7061427, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: Retrieving the conflicting Action from the queue allows you to play
-      the red Action.
+  - bodyText: 'So retrieve the conflicting Action from the queue if you want to play
+      a red Action. '
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 57baba5992d9e224988e93fcacf9f7eb, type: 3}
     sfx: 

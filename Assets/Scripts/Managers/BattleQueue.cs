@@ -6,8 +6,10 @@ using UI_Toolkit.UI_Elements;
 using UnityEngine;
 using static BattleQueue;
 
-public record CardInserted(ActionClass ActionClass) : IEvent;
-public record OnQueueChanged(List<ActionWrapper> Items) : IEvent;
+public record CardInserted(ActionClass ActionClass) : IEvent { };
+public record OnQueueChanged(List<ActionWrapper> Items) : IEvent { }
+public record ItemAdded(ActionWrapper Item, int Location) : IEvent;
+public record ItemRemoved(ActionWrapper Item) : IEvent;
 
 public class BattleQueue : MonoBehaviour
 {
@@ -146,7 +148,6 @@ public class BattleQueue : MonoBehaviour
         public void Clear()
         {
             array.Clear();
-            new OnQueueChanged(new(array)).Invoke();
         }
 
         //Returns the wrapper inserted
@@ -155,12 +156,14 @@ public class BattleQueue : MonoBehaviour
             ActionWrapper insertingWrapper = CreateClashingWrapper(actionCard);
             int location = LocationToInsertWrapper(insertingWrapper);
             array.Insert(location, insertingWrapper);
+            new ItemAdded(insertingWrapper, location).Invoke();
             new OnQueueChanged(new(array)).Invoke();
         }
 
         public void Remove(ActionWrapper wrapper)
         {
             array.Remove(wrapper);
+            new ItemRemoved(wrapper).Invoke();
             new OnQueueChanged(new(array)).Invoke();
         }
 
@@ -208,6 +211,7 @@ public class BattleQueue : MonoBehaviour
                     (existingWrapper.HasEnemyAction() && (existingWrapper.EnemyAction!.Target == entity || existingWrapper.EnemyAction!.Origin == entity)))
                 {
                     Remove(existingWrapper);
+                    existingWrapper.DestroyBoundIcon();
                 }
             }
         }
@@ -292,7 +296,7 @@ public class BattleQueue : MonoBehaviour
         public ActionClass? EnemyAction { get; private set; }
         // Only non null when this wrapper is clashing. Represents the original enemy's target that may have been redirected by the player.
         public EntityClass? OriginalEnemysTarget { get; private set; }
-        public IBattleQueueDisplayable? BattleIcon { get; set; }
+        public IBattleQueueDisplayable? BattleIcon { get; private set; }
 
 
         public int ClashingSpeed
@@ -336,6 +340,17 @@ public class BattleQueue : MonoBehaviour
             }
         }
 
+        public IBattleQueueDisplayable BindIcon(IBattleQueueDisplayable icon)
+        {
+            BattleIcon = icon;
+            return icon;
+        }
+
+        public void DestroyBoundIcon()
+        {
+            Destroy(BattleIcon?.GameObject);
+            BattleIcon = null;
+        }
 
     // Modifies: this to become a clashing wrapper.
     // Requires: That (@param clashingAction) can clash with an Action within this wrapper (Call ClashesWithAction first)

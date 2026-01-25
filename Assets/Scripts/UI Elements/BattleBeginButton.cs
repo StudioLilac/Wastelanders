@@ -30,7 +30,17 @@ public class BattleBeginButton : MonoBehaviour, IPointerDownHandler, IPointerEnt
         isActive = ev.Items.Count(aw => aw.HasPlayerAction()) > 0;
     }
 
-    public void GameStateChangeHandler(GameState gs)
+    private void OnEnable()
+    {
+        CombatManager.OnGameStateChanged += GameStateChangeHandler;
+    }
+
+    private void OnDisable()
+    {
+        CombatManager.OnGameStateChanged -= GameStateChangeHandler;
+    }
+
+    void GameStateChangeHandler(GameState gs)
     {
         duringCombatSprite.enabled = gs == GameState.FIGHTING;
         duringSelectionSprite.enabled = gs == GameState.SELECTION;

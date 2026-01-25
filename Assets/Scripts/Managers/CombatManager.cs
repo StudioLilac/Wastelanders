@@ -7,8 +7,6 @@ using Systems.Persistence;
 using WeaponDeckSerialization;
 using UI_Toolkit;
 
-public record GetGameState(): IQuery<GameState?>;
-
 public class CombatManager : MonoBehaviour
 {
     public static CombatManager Instance { get; private set; }
@@ -56,7 +54,6 @@ public class CombatManager : MonoBehaviour
         {
             Destroy(this);
         }
-        this.Answer<GetGameState, GameState?>(_ => GameState);
     }
 
     public static void ClearEvents()
@@ -420,9 +417,6 @@ public class CombatManager : MonoBehaviour
                     PerformGameStart(); //Careful, if you set the game state within these methods you can get strange behaviour
                     break;
                 case GameState.OUT_OF_COMBAT:
-                    PerformOutOfCombat();
-                    break;
-                case GameState.AFTER_COMBAT:
                     PerformOutOfCombat();
                     break;
                 default:

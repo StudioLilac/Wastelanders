@@ -358,7 +358,7 @@ public class BeetleFight : DialogueClasses
             {
                 jackie.transform.position = campLeftEntrance.position;
                 theCampWithBeetles.SetActive(true);
-                wrangledBeetle.animator.enabled = false;
+                wrangledBeetle.animator.enabled = true;
                 yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(0.6f));
                 yield return StartCoroutine(jackie.MoveToPosition(campLeftEntrance.position + new Vector3(2f, 0, 0), 0f, 1f));
                 yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieShockAtBeetleEnteringCamp.Dialogue));
@@ -382,6 +382,7 @@ public class BeetleFight : DialogueClasses
             RemoveEnemyFromScene(ambushBeetle);
             floorBg.SetActive(false);
             ives.transform.position = playerWave1CombatPosition.position + new Vector3(-4, 0, 0);
+            yield return new WaitForSeconds(1f);
             yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(2f));
         }
 
@@ -417,10 +418,9 @@ public class BeetleFight : DialogueClasses
 
             yield return new WaitForSeconds(0.2f);
             CombatManager.Instance.BeginCombat();
+            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(twoPlayerCombatTutorial.Dialogue));
             Begin2PCombatTutorial();
             waveIndicator.Show(1, 3);
-            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(twoPlayerCombatTutorial.Dialogue));
-            
             yield return new WaitUntil(() => waveComplete);
         }
 
@@ -499,7 +499,9 @@ public class BeetleFight : DialogueClasses
             yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesAnalyzeAfterExam));
 
-            CombatManager.Instance.GameState = GameState.AFTER_COMBAT;
+            CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
+            jackie.OutOfCombat();
+            ives.OutOfCombat();
             jackie.FaceLeft();
             ives.FaceRight();
 
@@ -511,7 +513,7 @@ public class BeetleFight : DialogueClasses
             yield return new WaitForSeconds(1f);
 
             GameStateManager.Instance.UpdateLevelProgress(StageInformation.QUEEN_PREPARATION_STAGE);
-            GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.PreQueenFight>().SceneName);
+            GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.SelectionScreen>().SceneName);
             yield break;
         }
     }
@@ -549,7 +551,6 @@ public class BeetleFight : DialogueClasses
     private IEnumerator TwoPlayerDialogue()
     {
         HighlightManager.Instance.EntityClicked -= EntityClicked;
-        DialogueManager.Instance.MoveBoxToTop();
         yield return new WaitUntil(() => (!DialogueManager.Instance.IsInDialogue()));
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesTutorial.Dialogue));
     }

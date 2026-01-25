@@ -30,13 +30,13 @@ MonoBehaviour:
     sfxName: 
     picture: {fileID: -2991674613422419996, guid: 1e6cf2fca7138174e8f34bd44807fdc0, type: 3}
     events: []
-  - content: They will roll their <i>Power</i> simultaneously...
+  - content: They will roll their Power simultaneously...
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxName: 
     picture: {fileID: 21300000, guid: 3fea2e94140c08246a0e502ee92d3761, type: 3}
     events: []
-  - content: "And the Action that rolls the higher <i>Power</i> will win, destroying
-      the opposing Action. \r\n\r\n"
+  - content: "And the Action that rolls the higher power will win, destroying the
+      opposing Action. \r\n\r\n"
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxName: 
     picture: {fileID: 21300000, guid: a599acaa6560c5142b54811e60ff9e4e, type: 3}
@@ -52,7 +52,8 @@ MonoBehaviour:
     sfxName: 
     picture: {fileID: 21300000, guid: 537908265661f2b44970c526d7724cfb, type: 3}
     events: []
-  - content: 'I can always change my clashing Action by retrieving it from the Queue. '
+  - content: 'I can always change my clashing Action by clicking on its icon in the
+      queue and retrieving it. '
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxName: 
     picture: {fileID: 21300000, guid: 537908265661f2b44970c526d7724cfb, type: 3}

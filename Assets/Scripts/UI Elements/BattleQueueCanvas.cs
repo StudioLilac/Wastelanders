@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using static BattleQueue;
@@ -11,18 +10,17 @@ public class BattleQueueCanvas : MonoBehaviour
     [SerializeField] private ScrollRect scrollRect;
     [SerializeField] private RectTransform bqContainer;
     [SerializeField] private BattleQueueIcons iconPrefab;
-    [SerializeField] private BattleBeginButton battleBeginButton;
     [SerializeField] private ClashingBattleQueueIcon clashingPrefab;
     [SerializeField] private GameObject battleQueueParent;
 
-#nullable enable
     private List<IBattleQueueDisplayable> battleQueueDisplayables = new();
 
     void Awake()
     {
         canvas.worldCamera = Camera.main;
         this.Subscribe<BattleBegin>(ResetScrollPosition);
-        this.Subscribe<OnQueueChanged>(HandleQueueChanged);
+        this.Subscribe<ItemAdded>(RenderItem);
+        this.Subscribe<ItemRemoved>(DequeueItem);
     }
 
     private void OnEnable()
@@ -37,14 +35,12 @@ public class BattleQueueCanvas : MonoBehaviour
 
     private void GameStateChangeHandler(GameState gs)
     {
-        bool displayQueue = gs switch
-        {
+        bool displayQueue = gs switch { 
             GameState.SELECTION => true,
             GameState.FIGHTING => true,
             GameState.GAME_START => true,
-            _ => false
+           _ => false 
         };
-        battleBeginButton.GameStateChangeHandler(gs);
         battleQueueParent.SetActive(displayQueue);
     }
 
@@ -54,36 +50,9 @@ public class BattleQueueCanvas : MonoBehaviour
         scrollRect.horizontalNormalizedPosition = 0f;
     }
 
-
-    private void HandleQueueChanged(OnQueueChanged ev)
+    private void RenderItem(ItemAdded item)
     {
-        var newData = ev.Items;
-
-        for (int i = battleQueueDisplayables.Count - 1; i >= 0; i--)
-        {
-            var displayable = battleQueueDisplayables[i];
-            bool isStillAlive = newData.Any(wrapper => wrapper.BattleIcon == displayable);
-
-            if (!isStillAlive)
-            {
-                battleQueueDisplayables.RemoveAt(i);
-                StartCoroutine(DeleteItem(displayable));
-            }
-        }
-
-        for (int i = 0; i < newData.Count; i++)
-        {
-            ActionWrapper wrapper = newData[i];
-            if (wrapper.BattleIcon == null || !battleQueueDisplayables.Contains(wrapper.BattleIcon))
-            {
-                RenderItemForWrapper(wrapper, i);
-            }
-        }
-    }
-
-    // Helper to Create Item (Extracted from your old RenderItem)
-    private void RenderItemForWrapper(ActionWrapper battlingWrapper, int insertIndex)
-    {
+        ActionWrapper battlingWrapper = item.Item;
         GameObject createdObject;
 
         if (battlingWrapper.IsClashing())
@@ -95,7 +64,7 @@ public class BattleQueueCanvas : MonoBehaviour
             ActionClass rightClashItem = battlingWrapper.EnemyAction!;
 
             icon.RenderClashingIcons(leftClashItem, rightClashItem);
-            battlingWrapper.BattleIcon = icon;
+            battlingWrapper.BindIcon(icon);
         }
         else
         {
@@ -105,10 +74,11 @@ public class BattleQueueCanvas : MonoBehaviour
             icon.RenderBQIcon(battlingWrapper.GetTheOnlyExistingAction());
             if (battlingWrapper.HasEnemyAction()) icon.RenderUnseenIndicator();
 
-            battlingWrapper.BattleIcon = icon;
+            battlingWrapper.BindIcon(icon);
         }
 
         createdObject.transform.SetParent(bqContainer, false);
+        int insertIndex = item.Location;
         if (insertIndex < battleQueueDisplayables.Count)
         {
             var neighbor = battleQueueDisplayables[insertIndex];
@@ -118,16 +88,17 @@ public class BattleQueueCanvas : MonoBehaviour
         {
             createdObject.transform.SetAsLastSibling();
         }
-        battleQueueDisplayables.Insert(insertIndex, battlingWrapper.BattleIcon);
-        battlingWrapper.BattleIcon.DeEmphasize();
-        battlingWrapper.BattleIcon.SetFullyTransparent();
-        StartCoroutine(battlingWrapper.BattleIcon.FadeIn());
+        battleQueueDisplayables.Insert(insertIndex, battlingWrapper.BattleIcon!);
+        battlingWrapper.BattleIcon!.DeEmphasize();
+        StartCoroutine(battlingWrapper.BattleIcon!.FadeIn());
     }
 
+    private void DequeueItem(ItemRemoved item) => StartCoroutine(DeleteItem(item.Item.BattleIcon!));
+
     private IEnumerator DeleteItem(IBattleQueueDisplayable item)
-    {        
-        StartCoroutine(item.FadeOut());
-        yield return new WaitForSeconds(IBattleQueueDisplayable.EXPAND_DURATION);
+    {
+        battleQueueDisplayables.Remove(item);
+        yield return StartCoroutine(item.FadeOut());
         Destroy(item.GameObject);
     }
 }

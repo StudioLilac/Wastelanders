@@ -10,5 +10,5 @@ public enum GameState
     GAME_LOSE,
     GAME_START,
     OUT_OF_COMBAT,
-    AFTER_COMBAT,
+
 }

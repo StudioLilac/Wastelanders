@@ -13,18 +13,18 @@ MonoBehaviour:
   m_Name: 18 PostBattleDialogue Latest
   m_EditorClassIdentifier: 
   Entries:
-  - content: <i>After the battle, the candidates catch their breath.
+  - content: After the battle, the candidates catch their breath.
     speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events: []
-  - content: <i>Some examiners inspect the dropped Waste Crystals, while others discuss
+  - content: Some examiners inspect the dropped Waste Crystals, while others discuss
       amongst themselves.
     speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events: []
-  - content: These beetles are unusually aggressive for raiding a fully defended
+  - content: These beetles are unprecedentedly aggressive for raiding a fully defended
       camp like this.
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxName: 

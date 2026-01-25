@@ -33,7 +33,7 @@ public class CombatCardUI : DisplayableClass
     {
         GetComponent<SpriteRenderer>().sortingLayerName = FadeSortingLayer;
         targetRenderer.sortingLayerName = FadeSortingLayer;
-        unseenEnemyActionIndicator.sortingLayerName = FadeSortingLayer;
+
 
         rangeText.GetComponent<MeshRenderer>().sortingLayerName = targetRenderer.sortingLayerName;
         rangeText.GetComponent<MeshRenderer>().sortingOrder = targetRenderer.sortingOrder;
@@ -106,7 +106,6 @@ public class CombatCardUI : DisplayableClass
 
         rangeText.GetComponent<MeshRenderer>().sortingOrder = FadeSortingOrder + 2;
         targetRenderer.GetComponent<SpriteRenderer>().sortingOrder = FadeSortingOrder + 2;
-        unseenEnemyActionIndicator.sortingOrder = FadeSortingOrder + 2;
 
         oneTimeUseBuff.sortingOrder = FadeSortingOrder + 2;
         buffIncreaseText.GetComponent<MeshRenderer>().sortingOrder = FadeSortingOrder + 2;
@@ -119,7 +118,7 @@ public class CombatCardUI : DisplayableClass
 
         rangeText.GetComponent<MeshRenderer>().sortingOrder = FadeSortingOrder - 1;
         targetRenderer.GetComponent<SpriteRenderer>().sortingOrder = FadeSortingOrder - 1;
-        unseenEnemyActionIndicator.sortingOrder = FadeSortingOrder - 2;
+
 
         oneTimeUseBuff.sortingOrder = FadeSortingOrder - 1;
         buffIncreaseText.GetComponent<MeshRenderer>().sortingOrder = FadeSortingOrder - 1;

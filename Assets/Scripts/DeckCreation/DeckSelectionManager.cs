@@ -203,7 +203,7 @@ public class DeckSelectionManager : MonoBehaviour
         currentPointsForWeapon = cardDatabase.GetPrefabInfoForDeck(playerData.GetPlayerWeaponDeck(weaponType).weaponDeck)
             .Select(it => it.ActionClass.CostToAddToDeck).Sum();
         int availablePoints = weaponPointTuple.MaxPoints - currentPointsForWeapon;
-        pointsText.TextUpdate("Available Points: <color=#FFD700>" + availablePoints.ToString() + "</color>");
+        pointsText.TextUpdate("Select Your Cards\nAvailable Points: <color=#FFD700>" + availablePoints.ToString() + "</color>");
 
         PlayerActionDeckModifiedEvent?.Invoke(availablePoints);
     }

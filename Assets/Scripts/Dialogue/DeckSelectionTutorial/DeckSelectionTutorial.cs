@@ -28,7 +28,6 @@ public class DeckSelectionTutorial : MonoBehaviour
     [SerializeField] private SpriteRenderer weaponSelectIndicator;
     [SerializeField] private SpriteRenderer editDeckIndicator;
     [SerializeField] private Image backButtonIndicator;
-    [SerializeField] private GameObject backButton;
 
     [SerializeField] private bool activateTutorial;
 
@@ -44,19 +43,27 @@ public class DeckSelectionTutorial : MonoBehaviour
         CharacterSelect.CharacterSelectedEvent -= HandleCharacterSelected;
         WeaponEdit.WeaponEditEvent -= HandleWeaponEdited;
         DeckSelectionManager.Instance.PlayerActionDeckModifiedEvent -= HandleRunOutOfPoints;
-        DeckSelectionManager.OnDeckSelectStateChanged -= HandleDeckSelectStateChanged;
     }
 
     private IEnumerator ExecuteGameStart()
     {
+        bool moveToBossfight = SceneData.Get<SceneData.BeetleFight>() == GameStateManager.Instance.PreviousScene &&
+                               GameStateManager.Instance.CurrentLevelProgress > StageInformation.QUEEN_PREPARATION_STAGE.LevelID;
+
+        if (Mathf.Approximately(GameStateManager.Instance.CurrentLevelProgress, StageInformation.QUEEN_PREPARATION_STAGE.LevelID) || moveToBossfight)
+        {
+            GameStateManager.Instance.UpdateLevelProgress(StageInformation.QUEEN_BEETLE_STAGE);
+            DeckSelectionManager.Instance.SetNextScene(SceneData.Get<SceneData.PreQueenFight>().SceneName);
+            yield break;
+        }
+
+
         bool showTutorial =
             SceneData.Get<SceneData.TutorialFight>() == GameStateManager.Instance.PreviousScene &&
             GameStateManager.Instance.CurrentLevelProgress > StageInformation.DECK_SELECTION_TUTORIAL.LevelID;
 
         if (Mathf.Approximately(GameStateManager.Instance.CurrentLevelProgress, StageInformation.DECK_SELECTION_TUTORIAL.LevelID) || showTutorial || activateTutorial)
         {
-            backButton.SetActive(false);
-            DeckSelectionManager.OnDeckSelectStateChanged += HandleDeckSelectStateChanged;
             NormalizeTutorialDecks();
 
             foreach (WeaponEdit boxCollider in weaponEditBoxCollidersToDisable)
@@ -82,11 +89,6 @@ public class DeckSelectionTutorial : MonoBehaviour
         }
     }
 
-    private void HandleDeckSelectStateChanged(DeckSelectionState newState)
-    {
-        backButton.SetActive(newState != DeckSelectionState.CharacterSelection);
-    }
-
     private void HandleCharacterSelected(PlayerDatabase.PlayerName playerName)
     {
         CharacterSelect.CharacterSelectedEvent -= HandleCharacterSelected;
@@ -110,7 +112,6 @@ public class DeckSelectionTutorial : MonoBehaviour
             {
                 boxCollider.GetComponent<BoxCollider2D>().enabled = true;
             }
-            DeckSelectionManager.OnDeckSelectStateChanged -= HandleDeckSelectStateChanged;
             editDeckIndicator.enabled = true;
             WeaponEdit.WeaponEditEvent += HandleWeaponEdited; }));
     }

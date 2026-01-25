@@ -28,8 +28,8 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: 3fea2e94140c08246a0e502ee92d3761, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: "When you're ready, <i>[Click]</i> anywhere to randomly roll your Action\u2019s
-      <i>Power</i>."
+  - bodyText: "When you're ready, [Click] anywhere to randomly roll your attack\u2019s
+      Power."
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 05aec2f8237521d4f84b7c3d335550b0, type: 3}
     sfx: 

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 1. Opening Dialogue Latest
   m_EditorClassIdentifier: 
   Entries:
-  - content: "<i>The City of New Haven \u2014 East Wall Boot Camp."
+  - content: "The City of New Haven \u2014 East Wall Boot Camp."
     speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
     sfxName: 
     picture: {fileID: 0}
@@ -35,13 +35,13 @@ MonoBehaviour:
     - rid: 5589630778170933257
     - rid: 5589630778170933258
     - rid: 5589630778170933261
-  - content: You'd think she'd wait a little longer before possibly embarrassing
-      herself again.
+  - content: "You\u2019d think she\u2019d wait a little longer before possibly embarrassing
+      herself again."
     speaker: {fileID: 11400000, guid: d5a65a5aa8d5f964fbd28b4f0ae8ecaf, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events: []
-  - content: Yeah. If it were me, I'd take it slow... Take a few years to train...
+  - content: "Yeah. If it were me, I\u2019d take it slow... Take a few years to train..."
     speaker: {fileID: 11400000, guid: b62cfbbed550e034e98fc50bf331b7c6, type: 2}
     sfxName: 
     picture: {fileID: 0}
@@ -56,7 +56,7 @@ MonoBehaviour:
     sfxName: 
     picture: {fileID: 0}
     events: []
-  - content: Did you hear that scout's report from the marshes last week?
+  - content: "Did you hear that scout\u2019s report from the marshes last week?"
     speaker: {fileID: 11400000, guid: d5a65a5aa8d5f964fbd28b4f0ae8ecaf, type: 2}
     sfxName: 
     picture: {fileID: 0}
@@ -71,8 +71,8 @@ MonoBehaviour:
     sfxName: 
     picture: {fileID: 0}
     events: []
-  - content: I'll stop you right there. See? That's exactly why I'm staying inside
-      the Wall.
+  - content: "I'll stop you right there. See? That\u2019s exactly why I\u2019m staying
+      inside the Wall."
     speaker: {fileID: 11400000, guid: b62cfbbed550e034e98fc50bf331b7c6, type: 2}
     sfxName: 
     picture: {fileID: 0}
@@ -88,7 +88,7 @@ MonoBehaviour:
     sfxName: 
     picture: {fileID: 0}
     events: []
-  - content: 'Must be ''cause she wants to live up to her mom''s legend. '
+  - content: "Must be 'cause she wants to live up to her mom\u2019s legend. "
     speaker: {fileID: 11400000, guid: b62cfbbed550e034e98fc50bf331b7c6, type: 2}
     sfxName: 
     picture: {fileID: 0}
@@ -105,7 +105,7 @@ MonoBehaviour:
     sfxName: 
     picture: {fileID: 0}
     events: []
-  - content: 'If it were my mom, that''d make me stay away from the Wasteland for
+  - content: 'If it were my Mom, that''d make me stay away from the Wasteland for
       good. '
     speaker: {fileID: 11400000, guid: b62cfbbed550e034e98fc50bf331b7c6, type: 2}
     sfxName: 
@@ -117,7 +117,7 @@ MonoBehaviour:
     sfxName: 
     picture: {fileID: 0}
     events: []
-  - content: "Hey, maybe I'll take the exam someday. Once I\u2019m ready."
+  - content: "Hey, maybe I\u2019ll take the exam someday. Once I\u2019m ready."
     speaker: {fileID: 11400000, guid: b62cfbbed550e034e98fc50bf331b7c6, type: 2}
     sfxName: 
     picture: {fileID: 0}
@@ -128,7 +128,7 @@ MonoBehaviour:
     sfxName: 
     picture: {fileID: 0}
     events: []
-  - content: Let's get back to training.
+  - content: "Let\u2019s get back to training."
     speaker: {fileID: 11400000, guid: d5a65a5aa8d5f964fbd28b4f0ae8ecaf, type: 2}
     sfxName: 
     picture: {fileID: 0}

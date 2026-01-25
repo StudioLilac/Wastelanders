@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.98, y: -1.04}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 4.24, y: 2.62}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &7428885535545971497
@@ -223,6 +223,8 @@ MonoBehaviour:
   targetIconFader: {fileID: 149039022007945561}
   unseenActionFader: {fileID: 3548142110431811648}
   widthFader: {fileID: 2510679086346056070}
+  expandDuration: 0.25
+  fadeDuration: 0.15
 --- !u!61 &861149421085281689
 BoxCollider2D:
   m_ObjectHideFlags: 0

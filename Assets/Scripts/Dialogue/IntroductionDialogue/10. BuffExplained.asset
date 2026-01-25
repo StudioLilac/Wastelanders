@@ -19,8 +19,8 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: 820631014ce088c4cb748224d5467c86, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: '<i>[Hover]</i> over the <i>Flow</i> icon underneath yourself to learn
-      more about it from the <i>Tooltip</i>. '
+  - bodyText: '[Hover] over the Flow icon underneath yourself to learn more about
+      it. '
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 820631014ce088c4cb748224d5467c86, type: 3}
     sfx: 
