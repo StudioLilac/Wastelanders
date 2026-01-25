@@ -382,7 +382,6 @@ public class BeetleFight : DialogueClasses
             RemoveEnemyFromScene(ambushBeetle);
             floorBg.SetActive(false);
             ives.transform.position = playerWave1CombatPosition.position + new Vector3(-4, 0, 0);
-            yield return new WaitForSeconds(1f);
             yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(2f));
         }
 

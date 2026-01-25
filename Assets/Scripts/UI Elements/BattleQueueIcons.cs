@@ -8,6 +8,7 @@ public interface IBattleQueueDisplayable
 {
     void Emphasize();
     void DeEmphasize();
+    void SetFullyTransparent();
     IEnumerator FadeIn();
     IEnumerator FadeOut();
     GameObject GameObject { get; }
@@ -51,12 +52,18 @@ public class BattleQueueIcons : DisplayableClass, IBattleQueueDisplayable
         unseenActionFader.SetDarkScreen();
     }
 
+    public void SetFullyTransparent()
+    {
+        widthFader.SetLightScreen();
+        cardIconFader.SetLightScreen();
+        targetIconFader.SetLightScreen();
+        unseenActionFader.SetLightScreen();
+    }
+
     public IEnumerator FadeIn()
     {
-        widthFader.SetLightScreen();       
-        cardIconFader.SetLightScreen();    
-        targetIconFader.SetLightScreen();  
-        unseenActionFader.SetLightScreen();
+        SetFullyTransparent();
+        yield return new WaitUntil(() => isActiveAndEnabled);
         StartCoroutine(cardIconFader.FadeInDarkScreen(fadeDuration));
         StartCoroutine(targetIconFader.FadeInDarkScreen(fadeDuration));
         StartCoroutine(unseenActionFader.FadeInDarkScreen(fadeDuration));
@@ -67,6 +74,7 @@ public class BattleQueueIcons : DisplayableClass, IBattleQueueDisplayable
 
     public IEnumerator FadeOut()
     {
+        yield return new WaitUntil(() => isActiveAndEnabled);
         StartCoroutine(unseenActionFader.FadeInLightScreen(fadeDuration));
         StartCoroutine(cardIconFader.FadeInLightScreen(fadeDuration));
         StartCoroutine(targetIconFader.FadeInLightScreen(fadeDuration));

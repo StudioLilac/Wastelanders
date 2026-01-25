@@ -64,10 +64,19 @@ public class ClashingBattleQueueIcon : MonoBehaviour, IBattleQueueDisplayable
 
     private (int, int) GetRange(ActionClass actionClass) => ((actionClass.GetRolledStats().RollFloor), (actionClass.GetRolledStats().RollCeiling));
 
+    public void SetFullyTransparent()
+    {
+        widthFader.SetLightScreen();
+        swordIcon.SetFullyTransparent();
+        leftClashingAction.SetFullyTransparent();
+        rightClashingAction.SetFullyTransparent();
+    }
+
     public IEnumerator FadeIn()
     {
-        swordIcon.FadeIn(fadeDuration);
-        widthFader.SetLightScreen();
+        SetFullyTransparent();
+        yield return new WaitUntil(() => isActiveAndEnabled);
+        StartCoroutine(swordIcon.FadeIn());
         StartCoroutine(leftClashingAction.FadeIn());
         StartCoroutine(rightClashingAction.FadeIn());
         yield return StartCoroutine(widthFader.FadeInDarkScreen(expandDuration));
@@ -75,7 +84,8 @@ public class ClashingBattleQueueIcon : MonoBehaviour, IBattleQueueDisplayable
 
     public IEnumerator FadeOut()
     {
-        swordIcon.FadeOut(fadeDuration);
+        yield return new WaitUntil(() => isActiveAndEnabled);
+        StartCoroutine(swordIcon.FadeOut());
         StartCoroutine(leftClashingAction.FadeOut());
         StartCoroutine(rightClashingAction.FadeOut());
         yield return StartCoroutine(widthFader.FadeInLightScreen(expandDuration));

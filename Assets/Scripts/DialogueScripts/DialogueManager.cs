@@ -232,6 +232,7 @@ public class DialogueManager : MonoBehaviour
             .Replace("’", "'")
             .Replace("‘", "'")
             .Replace("“", "\"")
-            .Replace("”", "\"");
+            .Replace("”", "\"")
+            .Replace("…", "...");
     }
 }

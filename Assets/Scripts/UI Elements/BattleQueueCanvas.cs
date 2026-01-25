@@ -4,12 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using static BattleQueue;
 
+#nullable enable
 public class BattleQueueCanvas : MonoBehaviour
 {
     [SerializeField] private Canvas canvas;
     [SerializeField] private ScrollRect scrollRect;
     [SerializeField] private RectTransform bqContainer;
     [SerializeField] private BattleQueueIcons iconPrefab;
+    [SerializeField] private BattleBeginButton battleBeginButton;
     [SerializeField] private ClashingBattleQueueIcon clashingPrefab;
     [SerializeField] private GameObject battleQueueParent;
 
@@ -41,6 +43,7 @@ public class BattleQueueCanvas : MonoBehaviour
             GameState.GAME_START => true,
            _ => false 
         };
+        battleBeginButton.GameStateChangeHandler(gs);
         battleQueueParent.SetActive(displayQueue);
     }
 
@@ -90,13 +93,15 @@ public class BattleQueueCanvas : MonoBehaviour
         }
         battleQueueDisplayables.Insert(insertIndex, battlingWrapper.BattleIcon!);
         battlingWrapper.BattleIcon!.DeEmphasize();
+        battlingWrapper.BattleIcon.SetFullyTransparent();
         StartCoroutine(battlingWrapper.BattleIcon!.FadeIn());
     }
 
-    private void DequeueItem(ItemRemoved item) => StartCoroutine(DeleteItem(item.Item.BattleIcon!));
+    private void DequeueItem(ItemRemoved item) => StartCoroutine(DeleteItem(item.Item.BattleIcon));
 
-    private IEnumerator DeleteItem(IBattleQueueDisplayable item)
+    private IEnumerator DeleteItem(IBattleQueueDisplayable? item)
     {
+        if (item == null) yield break;
         battleQueueDisplayables.Remove(item);
         yield return StartCoroutine(item.FadeOut());
         Destroy(item.GameObject);
