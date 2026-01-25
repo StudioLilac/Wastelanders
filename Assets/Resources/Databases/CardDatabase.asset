@@ -37,6 +37,7 @@ MonoBehaviour:
   - {fileID: 464988017113156087, guid: 0f9d35f67947f2241aac5a9ed31099d3, type: 3}
   - {fileID: 3083729130612046774, guid: 43abfdc4bd2a36448afda6f0a2f0571e, type: 3}
   - {fileID: 2646813261863822464, guid: 5409b61dd444e6642b0320973153a1ff, type: 3}
+  - {fileID: 2552405867145643285, guid: 2ad830e2c11c55c4092ab2dd87a38abf, type: 3}
   axeCards:
   - {fileID: 5239853134141730537, guid: 001c11b4635f18c4895fbafe03cd1759, type: 3}
   - {fileID: -5116239531436598588, guid: f0b909b4f415e8e449fa5a916ef084da, type: 3}
