@@ -46,8 +46,6 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
     protected int lowerBound;
     protected int upperBound;
     
-    // Represents whether this action can "clash" with other actions in the battle queue.
-    // Potentially useful in the future for certain card types that shouldn't clash (effects?)
     public bool clashable = true;
 
     protected RolledStats rolledCardStats = new (0, 0);
