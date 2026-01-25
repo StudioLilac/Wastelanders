@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 7. CardFieldTut
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: 'Each Action has two key stats: Power and Speed.'
+  - bodyText: 'Each Action has two key stats: <i>Power</i> and <i>Speed</i>.'
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: ef17277e1ebf2f64abf4d8a5117608a3, type: 3}
     sfx: 
@@ -33,12 +33,12 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: b1411cc1e1231574797f223a58264863, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: Higher Speed means the Action resolves earlier in the fight.
+  - bodyText: Higher <i>Speed</i> means the Action resolves earlier in the fight.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: b1411cc1e1231574797f223a58264863, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: '<i>Check the Dialogue History in the Pause Menu [Esc.] when you feel
+  - bodyText: '<i>Check the Dialogue History in the Pause Menu [Esc.] if you feel
       like you missed something!</i> '
     speakerName: Tutorial
     displayingImage: {fileID: 21300000, guid: 751635a2cbd6d43cb92d4ab186c2a350, type: 3}
