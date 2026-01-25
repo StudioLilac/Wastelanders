@@ -37,14 +37,13 @@ public class DialogueBox : MonoBehaviour
 
         SetFontStyles(line);
 
-        bodyText.text = line.BodyText;
         if (line.SpeakerName != "") {
             nameText.text = line.SpeakerName;
         } else {
             nameText.text = "Narrator";
         }
         bodyText.maxVisibleCharacters = 0;
-        bodyText.text = line.BodyText;
+        bodyText.text = DialogueManager.SanitizeText(line.BodyText);
 
         if (line.broadcastAnEvent) DialogueBoxEvent?.Invoke();
         StartDialogue();
@@ -83,12 +82,6 @@ public class DialogueBox : MonoBehaviour
         {
             bodyText.fontStyle &= ~FontStyles.Italic;
         }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
     }
 
     public void StopScrollingText()

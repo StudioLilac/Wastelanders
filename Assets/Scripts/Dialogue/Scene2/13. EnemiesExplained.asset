@@ -19,18 +19,19 @@ MonoBehaviour:
     sfxName: 
     picture: {fileID: 21300000, guid: dabf58156236ec44484ca7e77855cd3b, type: 3}
     events: []
-  - content: 'I can tell the Target and Range of the Action at the top of it''s icon. '
+  - content: 'I can tell the <i>Target</i> and <i>Power Range</i> of the Action at
+      the top of its icon. '
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxName: 
     picture: {fileID: 21300000, guid: dabf58156236ec44484ca7e77855cd3b, type: 3}
     events: []
   - content: 'Hovering over the icon or the queue icon will show more details like
-      Abilities and Speed. '
+      <i>Abilities</i> and <i>Speed</i>. '
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxName: 
     picture: {fileID: 21300000, guid: dabf58156236ec44484ca7e77855cd3b, type: 3}
     events: []
-  - content: Let's read its Action carefully then go for an Attack!
+  - content: Let's read its Action carefully then go for an attack!
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxName: 
     picture: {fileID: 21300000, guid: dabf58156236ec44484ca7e77855cd3b, type: 3}

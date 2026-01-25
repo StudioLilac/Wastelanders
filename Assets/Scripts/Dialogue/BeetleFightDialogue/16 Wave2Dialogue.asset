@@ -18,12 +18,12 @@ MonoBehaviour:
     displayingImage: {fileID: -6469218596377997877, guid: a90e130ec20cf4840b91919092d7dfe0, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: 'My Wound stacks should soften them up. '
+  - bodyText: 'My <i>Wound</i> stacks should soften them up. '
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: e3aa195cbddbdc746a9b7d4b661ecc77, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: Wound increases damage taken by +1 per stack of wound.
+  - bodyText: <i>Wound</i> increases damage taken by +1 per stack.
     speakerName: 
     displayingImage: {fileID: 21300000, guid: e3aa195cbddbdc746a9b7d4b661ecc77, type: 3}
     sfx: 
