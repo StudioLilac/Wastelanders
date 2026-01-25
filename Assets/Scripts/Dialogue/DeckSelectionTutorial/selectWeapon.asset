@@ -29,7 +29,7 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: 601769b83c413394f9dcef8bf9a4ef38, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: <i>Click on the weapon to select it and bring it into combat.</i>
+  - bodyText: <i>[Click] on the weapon to select it and bring it into combat.</i>
     speakerName: Tutorial
     displayingImage: {fileID: 21300000, guid: 601769b83c413394f9dcef8bf9a4ef38, type: 3}
     sfx: 

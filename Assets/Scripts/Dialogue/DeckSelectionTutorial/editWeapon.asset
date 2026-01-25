@@ -19,7 +19,7 @@ MonoBehaviour:
     displayingImage: {fileID: 0}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: <i>Click 'Edit Deck' to change the Action Deck of each weapon. Try
+  - bodyText: <i>[Click] 'Edit Deck' to change the Action Deck of each weapon. Try
       editing the Pistol Deck.</i>
     speakerName: Tutorial
     displayingImage: {fileID: 3733186294353185281, guid: 2ed84c06f2c10ce4b9c360304853fef4, type: 3}

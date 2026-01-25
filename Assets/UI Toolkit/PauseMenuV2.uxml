@@ -52,7 +52,7 @@
                 </ui:VisualElement>
                 <ui:VisualElement style="align-items: flex-start; margin-left: 64px; justify-content: space-between;">
                     <ui:VisualElement style="flex-direction: row; align-items: center;">
-                        <ui:VisualElement style="width: 120px; height: 120px; background-image: resource(&apos;StatusIcon/resonate&apos;);" />
+                        <ui:VisualElement style="width: 120px; height: 120px; background-image: resource(&apos;StatusIcon/resonance&apos;);" />
                         <ui:Label text="&lt;b&gt;Resonate&lt;/b&gt; - Upper bound of&#10;power increases by 1 per&#10;stack. Stacks last the&#10;entire fight." style="-unity-font: url(&quot;project://database/Assets/TextMesh%20Pro/Fonts/VT323-Regular.ttf?fileID=12800000&amp;guid=46b9139fed5cc6a42a6a5d42b82c3c7e&amp;type=3#VT323-Regular&quot;); -unity-font-definition: initial; font-size: 48px; color: rgb(255, 255, 255); padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 32px;" />
                     </ui:VisualElement>
                     <ui:VisualElement style="flex-direction: row; align-items: center; margin-top: 32px;">

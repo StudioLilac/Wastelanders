@@ -3,14 +3,19 @@ using System.Collections.Generic;
 using UI_Toolkit;
 using UnityEngine;
 using UnityEngine.UI;
-
+using static IBattleQueueDisplayable;
 public interface IBattleQueueDisplayable
 {
     void Emphasize();
     void DeEmphasize();
+    void SetFullyTransparent();
     IEnumerator FadeIn();
     IEnumerator FadeOut();
     GameObject GameObject { get; }
+
+    public const float EXPAND_DURATION = 0.25f;
+
+    public const float FADE_DURATION = 0.15f;
 }
 
 public record BattleQueueIconClick(BattleQueueIcons Icon) : IEvent { }
@@ -26,10 +31,7 @@ public class BattleQueueIcons : DisplayableClass, IBattleQueueDisplayable
     [SerializeField] SpriteFadeHandler targetIconFader;
     [SerializeField] SpriteFadeHandler unseenActionFader;
     [SerializeField] LayoutWidthFader widthFader;
-    
-    [Header("Settings")]
-    private readonly float expandDuration = 0.25f;
-    private readonly float fadeDuration = 0.15f;
+  
 
     private int FadeSortingOrder => CombatFadeScreenHandler.Instance.FADE_SORTING_ORDER;
     private string FadeSortingLayer => CombatFadeScreenHandler.Instance.FADE_SORTING_LAYER;
@@ -51,27 +53,43 @@ public class BattleQueueIcons : DisplayableClass, IBattleQueueDisplayable
         unseenActionFader.SetDarkScreen();
     }
 
+    public void SetFullyTransparent()
+    {
+        widthFader.SetLightScreen();
+        cardIconFader.SetLightScreen();
+        targetIconFader.SetLightScreen();
+        unseenActionFader.SetLightScreen();
+    }
+
     public IEnumerator FadeIn()
     {
-        widthFader.SetLightScreen();       
-        cardIconFader.SetLightScreen();    
-        targetIconFader.SetLightScreen();  
-        unseenActionFader.SetLightScreen();
-        StartCoroutine(cardIconFader.FadeInDarkScreen(fadeDuration));
-        StartCoroutine(targetIconFader.FadeInDarkScreen(fadeDuration));
-        StartCoroutine(unseenActionFader.FadeInDarkScreen(fadeDuration));
+        if (!isActiveAndEnabled)
+        {
+            SetFullyOpaque();
+            yield break;
+        }
 
-        yield return widthFader.FadeInDarkScreen(expandDuration);
-        
+        SetFullyTransparent();
+        StartCoroutine(cardIconFader.FadeInDarkScreen(FADE_DURATION));
+        StartCoroutine(targetIconFader.FadeInDarkScreen(FADE_DURATION));
+        StartCoroutine(unseenActionFader.FadeInDarkScreen(FADE_DURATION));
+
+        yield return widthFader.FadeInDarkScreen(EXPAND_DURATION);
     }
 
     public IEnumerator FadeOut()
     {
-        StartCoroutine(unseenActionFader.FadeInLightScreen(fadeDuration));
-        StartCoroutine(cardIconFader.FadeInLightScreen(fadeDuration));
-        StartCoroutine(targetIconFader.FadeInLightScreen(fadeDuration));
+        if (!isActiveAndEnabled)
+        {
+            SetFullyTransparent(); 
+            yield break;
+        }
+            
+        StartCoroutine(unseenActionFader.FadeInLightScreen(FADE_DURATION));
+        StartCoroutine(cardIconFader.FadeInLightScreen(FADE_DURATION));
+        StartCoroutine(targetIconFader.FadeInLightScreen(FADE_DURATION));
 
-        yield return widthFader.FadeInLightScreen(expandDuration);
+        yield return widthFader.FadeInLightScreen(EXPAND_DURATION);
     }
 
     public void Emphasize()
@@ -80,12 +98,15 @@ public class BattleQueueIcons : DisplayableClass, IBattleQueueDisplayable
         iconRenderer.sortingLayerName = FadeSortingLayer;
         targetRenderer.sortingOrder = FadeSortingOrder + 5;
         targetRenderer.sortingLayerName = FadeSortingLayer;
+        unseenEnemyActionIndicator.sortingOrder = FadeSortingOrder + 5;
+        unseenEnemyActionIndicator.sortingLayerName = FadeSortingLayer;
     }
 
     public void DeEmphasize()
     {
         iconRenderer.sortingOrder = FadeSortingOrder - 1;
         targetRenderer.sortingOrder = FadeSortingOrder - 1;
+        unseenEnemyActionIndicator.sortingOrder = FadeSortingOrder - 1;
     }
 
     private void OnMouseDown()
