@@ -27,32 +27,28 @@ namespace Steamworks {
             CheckKillAchievements();
             
             this.Subscribe<PlayersWin>(OnPlayersWin);
+            this.Subscribe<GameStateChanged>(HandleGameStateChanged);
         }
 
         private void OnEnable() {
             EntityClass.OnEntityDeath += HandleEntityDeath;
             SceneManager.activeSceneChanged += OnSceneChanged;
-            CombatManager.OnGameStateChanged += HandleGameStateChanged;
         }
 
         private void OnDisable() {
             EntityClass.OnEntityDeath -= HandleEntityDeath;
             SceneManager.activeSceneChanged -= OnSceneChanged;
-            CombatManager.OnGameStateChanged -= HandleGameStateChanged;
         }
 
-        private void HandleGameStateChanged(GameState state) {
-            if (state == GameState.SELECTION) {
+        private void HandleGameStateChanged(GameStateChanged stateChanged) {
+            if (stateChanged.next == GameState.SELECTION) {
                 players = CombatManager.Instance.GetPlayers();
                 
-                Debug.Log($"[AchievementManager] Players set ({players.Count}): " +
-                          string.Join(", ", players.Select(p => p.name)));
-                
                 foreach (EntityClass player in players) {
+                    player.BuffsUpdatedEvent -= HandlePlayerBuffsUpdated;
                     player.BuffsUpdatedEvent += HandlePlayerBuffsUpdated;
                 }
-            } else if (state != GameState.FIGHTING) {
-                Debug.Log($"[AchievementManager] Clearing players ({players.Count})");
+            } else if (stateChanged.next != GameState.FIGHTING) {
                 foreach (EntityClass player in players) {
                     player.BuffsUpdatedEvent -= HandlePlayerBuffsUpdated;
                 }
