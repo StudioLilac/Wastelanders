@@ -4134,7 +4134,7 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: be935693778d6004d9427d82e6ce5798, type: 3}
     broadcastAnEvent: 0
   ivesAnalyzeAfterExam:
-  - bodyText: 'We should take some shard samples for the Scientists to analyze after
+  - bodyText: 'We should take some shard samples for the scientists to analyze after
       the exam. '
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
@@ -5353,7 +5353,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 27.31147
+      value: 26.709719
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y

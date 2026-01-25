@@ -377,7 +377,7 @@ public class BeetleFight : DialogueClasses
             RemoveEnemyFromScene(ambushBeetle);
             floorBg.SetActive(false);
             ives.transform.position = playerWave1CombatPosition.position + new Vector3(-4, 0, 0);
-            yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(2f));
+            StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(2f));
         }
 
         //kill off the other entities in the scene
