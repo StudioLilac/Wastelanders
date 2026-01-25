@@ -406,7 +406,7 @@ public class CombatManager : MonoBehaviour
         set
         {
             OnGameStateChanging?.Invoke(value);
-            new GameStateChanged(gameState, value).Invoke();
+            GameState prev = gameState;
             gameState = value;
             switch (value)
             {
@@ -434,6 +434,8 @@ public class CombatManager : MonoBehaviour
                 default:
                     break;
             }
+            
+            new GameStateChanged(prev, value).Invoke();
             OnGameStateChanged?.Invoke(value);
         }
     }
