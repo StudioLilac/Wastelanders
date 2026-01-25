@@ -9,6 +9,8 @@ using UI_Toolkit;
 
 public record GetGameState(): IQuery<GameState?>;
 
+public record PlayersWin() : IEvent;
+
 public class CombatManager : MonoBehaviour
 {
     public static CombatManager Instance { get; private set; }
@@ -208,6 +210,7 @@ public class CombatManager : MonoBehaviour
         if (enemyTeam.Count == 0)
         {
             PlayersWinEvent?.Invoke();
+            new PlayersWin().Invoke();
         }
     }
 

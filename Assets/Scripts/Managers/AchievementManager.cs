@@ -1,4 +1,6 @@
 
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,40 +15,48 @@ namespace Steamworks {
         // reset whenever a scene changes.
         private bool onePlayerDead = false;
 
-        private PlayerClass[] players;
+        private List<EntityClass> players = new();
 
         protected override void Awake() {
-            base.Awake(); // Handles singleton instance + DontDestroyOnLoad
-            
-            players = FindObjectsOfType<PlayerClass>();
-            Debug.Log(players.Length);
+            base.Awake();
 
             if (!SteamManager.Initialized) return;
 
-            // Load current kill count from Steam stats on start
             SteamUserStats.GetStat("KILL_COUNT", out enemiesKilled);
 
-            // In case player already reached milestones before starting the game, sync achievements
             CheckKillAchievements();
+            
+            this.Subscribe<PlayersWin>(OnPlayersWin);
         }
 
         private void OnEnable() {
             EntityClass.OnEntityDeath += HandleEntityDeath;
             SceneManager.activeSceneChanged += OnSceneChanged;
-            CombatManager.PlayersWinEvent += OnPlayersWin;
-
-            foreach (PlayerClass player in players) {
-                player.BuffsUpdatedEvent += HandlePlayerBuffsUpdated;
-            }
+            CombatManager.OnGameStateChanged += HandleGameStateChanged;
         }
 
         private void OnDisable() {
             EntityClass.OnEntityDeath -= HandleEntityDeath;
             SceneManager.activeSceneChanged -= OnSceneChanged;
-            CombatManager.PlayersWinEvent -= OnPlayersWin;
-            
-            foreach (PlayerClass player in players) {
-                player.BuffsUpdatedEvent -= HandlePlayerBuffsUpdated;
+            CombatManager.OnGameStateChanged -= HandleGameStateChanged;
+        }
+
+        private void HandleGameStateChanged(GameState state) {
+            if (state == GameState.SELECTION) {
+                players = CombatManager.Instance.GetPlayers();
+                
+                Debug.Log($"[AchievementManager] Players set ({players.Count}): " +
+                          string.Join(", ", players.Select(p => p.name)));
+                
+                foreach (EntityClass player in players) {
+                    player.BuffsUpdatedEvent += HandlePlayerBuffsUpdated;
+                }
+            } else if (state != GameState.FIGHTING) {
+                Debug.Log($"[AchievementManager] Clearing players ({players.Count})");
+                foreach (EntityClass player in players) {
+                    player.BuffsUpdatedEvent -= HandlePlayerBuffsUpdated;
+                }
+                players.Clear();
             }
         }
 
@@ -59,7 +69,6 @@ namespace Steamworks {
 
                 if (entity is QueenBeetle) {
                     SteamManager.UnlockAchievement("DEFEAT_QUEEN");
-                    return;
                 }
                 enemiesKilled++;
 
@@ -83,9 +92,6 @@ namespace Steamworks {
             if (enemiesKilled >= 15) {
                 SteamManager.UnlockAchievement("KILLING_SPREE");
             }
-
-            // Add more milestones here
-            // if (enemiesKilled >= 10) SteamManager.UnlockAchievement("HUNTER");
         }
 
         public void HandlePlayerHitCritical() {
@@ -100,7 +106,7 @@ namespace Steamworks {
             onePlayerDead = false;
         }
 
-        private void OnPlayersWin() {
+        private void OnPlayersWin(PlayersWin playersWinEvent) {
             if (onePlayerDead) {
                 SteamManager.UnlockAchievement("REVENGE");
             }
