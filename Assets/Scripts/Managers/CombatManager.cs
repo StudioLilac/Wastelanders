@@ -8,7 +8,9 @@ using WeaponDeckSerialization;
 using UI_Toolkit;
 
 public record GetGameState(): IQuery<GameState?>;
+#nullable enable
 public record DefaultCard : IQuery<ClasslessCards?>;
+#nullable disable
 
 public class CombatManager : MonoBehaviour
 {
