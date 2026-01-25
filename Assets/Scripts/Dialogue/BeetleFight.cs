@@ -508,6 +508,7 @@ public class BeetleFight : DialogueClasses
             AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
             yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
             yield return StartCoroutine(FadeImage(dialogueMarshBg, 1f, true));
+            AudioManager.Instance.StartBackgroundTrack();
             yield return StartCoroutine(DialogueBoxV2.Instance.Play(postBattleDialogueEntry));
             yield return new WaitForSeconds(1f);
 
