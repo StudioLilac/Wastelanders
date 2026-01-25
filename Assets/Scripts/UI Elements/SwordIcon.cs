@@ -1,14 +1,17 @@
 using System.Collections;
 using UnityEngine;
+using static IBattleQueueDisplayable;
+
 #nullable enable
-public class SwordIcon : MonoBehaviour
+public class SwordIcon : MonoBehaviour, IBattleQueueDisplayable
 {
     private static readonly int ClashStateHash = Animator.StringToHash("ClashState");
     [SerializeField] private SpriteRenderer swordsIcon = null!;
     [SerializeField] private SpriteFadeHandler swordFader = null!;
     [SerializeField] private Animator swordsAnimator = null!;
     private ClashResultType currentClashType = default;
-    private readonly float fadeDuration = 0.15f;
+
+    public GameObject GameObject => gameObject;
 
     public void Awake()
     {
@@ -31,15 +34,28 @@ public class SwordIcon : MonoBehaviour
         swordFader.SetLightScreen();
     }
 
+    public void SetFullyOpaque()
+    {
+        swordFader.SetDarkScreen();
+    }
+
     public IEnumerator FadeIn()
     {
+        if (!isActiveAndEnabled)
+        {
+            SetFullyOpaque();
+            yield break;
+        }
         SetFullyTransparent();
-        yield return new WaitUntil(() => isActiveAndEnabled);
-        StartCoroutine(swordFader.FadeInDarkScreen(fadeDuration));
+        StartCoroutine(swordFader.FadeInDarkScreen(FADE_DURATION));
     }
     public IEnumerator FadeOut() {
-        yield return new WaitUntil(() => isActiveAndEnabled);
-        StartCoroutine(swordFader.FadeInLightScreen(fadeDuration)); 
+        if (!isActiveAndEnabled)
+        {
+            SetFullyTransparent();
+            yield break;
+        }
+        StartCoroutine(swordFader.FadeInLightScreen(FADE_DURATION)); 
     }
 
 

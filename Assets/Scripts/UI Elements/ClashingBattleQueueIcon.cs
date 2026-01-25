@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using static IBattleQueueDisplayable;
 
 #nullable enable
 public class ClashingBattleQueueIcon : MonoBehaviour, IBattleQueueDisplayable
@@ -19,9 +20,6 @@ public class ClashingBattleQueueIcon : MonoBehaviour, IBattleQueueDisplayable
     private ActionClass leftClashing = null!;
     private ActionClass rightClashing = null!;
 
-    [Header("Settings")]
-    private readonly float expandDuration = 0.25f;
-    private readonly float fadeDuration = 0.15f;
 
     // Public initializer for this icon
     public void RenderClashingIcons(ActionClass leftClashingItem,  ActionClass rightClashingItem)
@@ -72,23 +70,41 @@ public class ClashingBattleQueueIcon : MonoBehaviour, IBattleQueueDisplayable
         rightClashingAction.SetFullyTransparent();
     }
 
+    private void SetFullyOpaque()
+    {
+        widthFader.SetDarkScreen();
+        swordIcon.SetFullyOpaque();
+        leftClashingAction.SetFullyOpaque();
+        rightClashingAction.SetFullyOpaque();
+    }
+
     public IEnumerator FadeIn()
     {
+        if (!isActiveAndEnabled)
+        {
+            SetFullyOpaque();
+            yield break;
+        }
+
         SetFullyTransparent();
-        yield return new WaitUntil(() => isActiveAndEnabled);
         StartCoroutine(swordIcon.FadeIn());
         StartCoroutine(leftClashingAction.FadeIn());
         StartCoroutine(rightClashingAction.FadeIn());
-        yield return StartCoroutine(widthFader.FadeInDarkScreen(expandDuration));
+        yield return StartCoroutine(widthFader.FadeInDarkScreen(EXPAND_DURATION));
     }
 
     public IEnumerator FadeOut()
     {
-        yield return new WaitUntil(() => isActiveAndEnabled);
+        if (!isActiveAndEnabled) 
+        {
+            SetFullyTransparent();
+            yield break;
+        }
+
         StartCoroutine(swordIcon.FadeOut());
         StartCoroutine(leftClashingAction.FadeOut());
         StartCoroutine(rightClashingAction.FadeOut());
-        yield return StartCoroutine(widthFader.FadeInLightScreen(expandDuration));
+        yield return StartCoroutine(widthFader.FadeInLightScreen(EXPAND_DURATION));
     }
 }
 
