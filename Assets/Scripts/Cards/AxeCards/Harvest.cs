@@ -27,6 +27,7 @@ public class Harvest : AxeCards
         base.OnHit();
         int healAmount = Target.GetBuffStacks(Wound.buffName);
         Origin.Heal(healAmount);
+        Target.ReduceStacks(Wound.buffName, healAmount);
         CurrentEvolutionProgress += healAmount;
     }
 }
