@@ -64,7 +64,7 @@ public class DialogueManager : MonoBehaviour
     {
         if (activeDialogueBox.gameObject.activeInHierarchy)
         {
-            yield break;
+            yield return new WaitUntil(() => !inDialogue);
         }
 
         activeDialogueBox.gameObject.SetActive(true);
@@ -156,8 +156,6 @@ public class DialogueManager : MonoBehaviour
             SetDialogueBoxActive(pictureDialogueBox);
             pictureDialogueBox.SetLine(sentence);
         }
-
-        sentence.playSound();
     }
 
     void SetDialogueBoxActive(DialogueBox dialogueBox)
@@ -201,7 +199,7 @@ public class DialogueManager : MonoBehaviour
             {
                 DisplayNextSentence();
                 if (holdingSkip) wasSkipping = true;
-                if (singlePress) AudioManager.Instance.PlaySFX(PAGE_FLIP_SOUND_EFFECT);
+                if (singlePress) AudioManager.Instance.PlaySFX(SoundID.VN_page_flip);
             }
             else
             {
@@ -219,7 +217,7 @@ public class DialogueManager : MonoBehaviour
 
         if (wasSkipping && (skipKeyWasReleased || dialogueHasEnded))
         {
-            AudioManager.Instance.PlaySFX(PAGE_FLIP_SOUND_EFFECT);
+            AudioManager.Instance.PlaySFX(SoundID.VN_page_flip);
             wasSkipping = false;
         }
     }

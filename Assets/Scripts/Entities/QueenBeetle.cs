@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+public record HatcheryUsed() : IEvent;
 public class QueenBeetle : EnemyClass
 {
 #nullable enable
@@ -103,6 +104,7 @@ public class QueenBeetle : EnemyClass
             {
                 AttackWith(usedSpawnThisRound ? hatchery2 : hatchery, CalculateAttackTarget(targets));
                 usedSpawnThisRound = true;
+                new HatcheryUsed().Invoke();
             }
             else
             {

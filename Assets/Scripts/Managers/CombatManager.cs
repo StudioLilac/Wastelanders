@@ -42,7 +42,6 @@ public class CombatManager : MonoBehaviour
     public delegate void EntitiesWinLoseDelegate();
     public static event EntitiesWinLoseDelegate? PlayersWinEvent;
     public static event EntitiesWinLoseDelegate? EnemiesWinEvent;
-    public int FADE_SORTING_ORDER => CombatFadeScreenHandler.Instance.FADE_SORTING_ORDER;
 
 
     // Awake is called when the script instance is being loaded

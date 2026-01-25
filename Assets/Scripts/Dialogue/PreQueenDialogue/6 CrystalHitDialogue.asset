@@ -20,7 +20,7 @@ MonoBehaviour:
     broadcastAnEvent: 0
   - bodyText: <i>Jackie clenches and unclenches her fists
     speakerName: Narration
-    displayingImage: {fileID: 21300000, guid: 487226e5dae66424ea250466920a3086, type: 3}
+    displayingImage: {fileID: 0}
     sfx: 
     broadcastAnEvent: 0
   - bodyText: "Woah, I feel\u2026 stronger somehow."

@@ -7,6 +7,7 @@ public class Hatchery : ActionClass, IPlayableQueenCard
     public GameObject[] beetlePrefabs;
     private const int HATCHERY_COST = 2;
     private const string HATCHERY_ANIMATION = "IsHatchery";
+    private const string HATCHERY_SOUND = "WL_BeetleSummon";
     [SerializeField] private AnimationClip animationClip;
 
     public override void Initialize()
@@ -50,6 +51,7 @@ public class Hatchery : ActionClass, IPlayableQueenCard
 
         IPlayableEnemyCard.ApplyForeignAttackAnimation(Origin, animationClip, HATCHERY_ANIMATION); 
         Origin.AttackAnimation(HATCHERY_ANIMATION);
+        SoundID.CB_hatchery_summon.Play();
         GameObject beetle = Instantiate(beetlePrefabs[Random.Range(0, beetlePrefabs.Length)]);
         beetle.transform.SetParent(Origin.transform.parent);
         beetle.transform.transform.position = Origin.transform.position - new Vector3(0, 2, 0);

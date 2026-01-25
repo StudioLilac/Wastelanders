@@ -218,7 +218,7 @@ public class BeetleFight : DialogueClasses
             {
                 jackie.AttackAnimation(PistolCards.PISTOL_ANIMATION_NAME);
 
-                AudioManager.Instance?.PlaySFX(PistolCards.PISTOL_SOUND_FX_NAME);
+                AudioManager.Instance?.PlaySFX(SoundID.CB_gun_hit);
                 yield return StartCoroutine(frog.StaggerEntities(jackie, frog, 0.2f));
                 CombatManager.Instance.ActivateDynamicCamera();
                 sceneCamera.Priority = 0;
@@ -227,7 +227,7 @@ public class BeetleFight : DialogueClasses
                 yield return StartCoroutine(jackie.MoveToPosition(frog.transform.position, 1f, 1f));
                 StopCoroutine(frogTriesToRun);
                 jackie.AttackAnimation(StaffCards.STAFF_ANIMATION_NAME);
-                AudioManager.Instance?.PlaySFX(StaffCards.STAFF_SOUND_FX_NAME);
+                AudioManager.Instance?.PlaySFX(SoundID.CB_staff_hit);
                 yield return StartCoroutine(frog.StaggerEntities(jackie, frog, 0.3f));
                 DieInScene(frog);
                 yield return StartCoroutine(DialogueManager.Instance.StartDialogue(openingJackieQuipt));
@@ -315,7 +315,7 @@ public class BeetleFight : DialogueClasses
                 yield return StartCoroutine(jackie.MoveToPosition(jackieSecondShot.position, 0f, 1f));
                 yield return new WaitForSeconds(BRIEF_PAUSE);
                 jackie.AttackAnimation(PistolCards.PISTOL_ANIMATION_NAME);
-                AudioManager.Instance?.PlaySFX(PistolCards.PISTOL_SOUND_FX_NAME);   
+                AudioManager.Instance?.PlaySFX(SoundID.CB_gun_hit);   
                 StopCoroutine(beetleRunsIn);
                 yield return StartCoroutine(ambushBeetle.StaggerEntities(jackie, ambushBeetle, 0.3f));
                 DieInScene(ambushBeetle);

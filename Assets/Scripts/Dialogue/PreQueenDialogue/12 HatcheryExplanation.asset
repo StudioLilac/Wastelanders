@@ -10,18 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 207ddad3e1c90594ba3f48e2a5a6a796, type: 3}
-  m_Name: 10 Giving Resonance To queen
+  m_Name: 12 HatcheryExplanation
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: "What the\u2014 are the beetles transferring resonance they gain to
-      the queen?"
-    speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
+  - bodyText: 'Take care, the Queen is planning to summoning more beetles. '
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 5c42f22b680694218be05c960a2e3400, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: Seems like they are connected through the crystals, we have to make
-      sure the queen doesn't get too strong.
+  - bodyText: Maybe there's a way to interrupt it...
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    displayingImage: {fileID: 21300000, guid: 5c42f22b680694218be05c960a2e3400, type: 3}
     sfx: 
     broadcastAnEvent: 0

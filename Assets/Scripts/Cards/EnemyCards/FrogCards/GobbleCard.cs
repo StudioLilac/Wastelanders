@@ -27,7 +27,7 @@ namespace Cards.EnemyCards.FrogCards
 
         public override void OnHit()
         {
-            AudioManager.Instance.PlaySFX(Excavate.EXCAVATE_SOUND_EFFECT_NAME);
+            AudioManager.Instance.PlaySFX(SoundID.CB_excavate);
 
             if (Target is Crystals) rolledCardStats.ActualRoll = Target.Health;
             base.OnHit();

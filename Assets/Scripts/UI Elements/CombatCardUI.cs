@@ -115,7 +115,7 @@ public class CombatCardUI : DisplayableClass
 
     public void DeEmphasize()
     {
-        GetComponent<SpriteRenderer>().sortingOrder = FadeSortingOrder - 2;
+        GetComponent<SpriteRenderer>().sortingOrder = FadeSortingOrder - 3;
 
         rangeText.GetComponent<MeshRenderer>().sortingOrder = FadeSortingOrder - 1;
         targetRenderer.GetComponent<SpriteRenderer>().sortingOrder = FadeSortingOrder - 1;

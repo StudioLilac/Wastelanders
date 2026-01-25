@@ -40,7 +40,7 @@ namespace UI_Toolkit
                 Icon: deckInfoSprite, 
                 Title: "CARDS REMAINING",
                 Caption: GetCurrentDeckInfoText(), 
-                Body: "Everytime the deck depleats and reshuffles, your hand size decreases by one!"
+                Body: "Everytime the deck depletes and reshuffles, your hand size decreases by one!"
                ).Invoke();
 
         private string GetCurrentDeckInfoText()
