@@ -39,12 +39,6 @@ public class BeetleFight : DialogueClasses
     [SerializeField] private Beetle beetleDraggingCrystal;
     [SerializeField] private Crystals draggedCrystal;
 
-    [SerializeField] private Image ivesVNSprite;
-    [SerializeField] private Image jackieVNSprite;
-
-
-
-
     [SerializeField] private List<Transform> combatBeetleTransforms;
 
     [SerializeField] private ActionClass beetleAction;

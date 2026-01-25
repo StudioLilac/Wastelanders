@@ -58,6 +58,7 @@ public class PreQueenFight : DialogueClasses
     [SerializeField] private List<Beetle> queenGuardBeetles;
     [SerializeField] private List<Transform> queenGuardBeetleTransforms;
 
+    [SerializeField] private Image blackBG = null!;
     [SerializeField] private Image endOfExamImage;
     [SerializeField] private SpriteRenderer treeSprite;
     [SerializeField] private List<SpriteFadeHandler> closeTrees;
@@ -558,8 +559,9 @@ public class PreQueenFight : DialogueClasses
 
             yield return new WaitForSeconds(1.5f);
             DialogueManager.Instance.MoveBoxToBottom();
-
             yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
+
+            AudioManager.Instance.StartBackgroundTrack();
             DialogueBox.DialogueBoxEvent += FadeInBackground;
             yield return new WaitUntil(() => (!DialogueManager.Instance.IsInDialogue()));
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(PostFight.Dialogue));
@@ -572,6 +574,7 @@ public class PreQueenFight : DialogueClasses
     void FadeInBackground()
     {
         DialogueBox.DialogueBoxEvent -= FadeInBackground;
+        StartCoroutine(FadeImage(blackBG, 1f, true));
         StartCoroutine(FadeImage(endOfExamImage, 1f, true));
     }
     
