@@ -292,7 +292,7 @@ public class BattleQueue : MonoBehaviour
         public ActionClass? EnemyAction { get; private set; }
         // Only non null when this wrapper is clashing. Represents the original enemy's target that may have been redirected by the player.
         public EntityClass? OriginalEnemysTarget { get; private set; }
-        public IBattleQueueDisplayable? BattleIcon { get; private set; }
+        public IBattleQueueDisplayable? BattleIcon { get; set; }
 
 
         public int ClashingSpeed
@@ -336,7 +336,6 @@ public class BattleQueue : MonoBehaviour
             }
         }
 
-        public IBattleQueueDisplayable BindIcon(IBattleQueueDisplayable icon) => BattleIcon = icon;
 
     // Modifies: this to become a clashing wrapper.
     // Requires: That (@param clashingAction) can clash with an Action within this wrapper (Call ClashesWithAction first)

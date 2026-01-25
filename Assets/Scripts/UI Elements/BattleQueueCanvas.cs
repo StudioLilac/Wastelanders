@@ -95,7 +95,7 @@ public class BattleQueueCanvas : MonoBehaviour
             ActionClass rightClashItem = battlingWrapper.EnemyAction!;
 
             icon.RenderClashingIcons(leftClashItem, rightClashItem);
-            battlingWrapper.BindIcon(icon);
+            battlingWrapper.BattleIcon = icon;
         }
         else
         {
@@ -105,7 +105,7 @@ public class BattleQueueCanvas : MonoBehaviour
             icon.RenderBQIcon(battlingWrapper.GetTheOnlyExistingAction());
             if (battlingWrapper.HasEnemyAction()) icon.RenderUnseenIndicator();
 
-            battlingWrapper.BindIcon(icon);
+            battlingWrapper.BattleIcon = icon;
         }
 
         createdObject.transform.SetParent(bqContainer, false);
@@ -118,16 +118,14 @@ public class BattleQueueCanvas : MonoBehaviour
         {
             createdObject.transform.SetAsLastSibling();
         }
-        battleQueueDisplayables.Insert(insertIndex, battlingWrapper.BattleIcon!);
-        battlingWrapper.BattleIcon!.DeEmphasize();
+        battleQueueDisplayables.Insert(insertIndex, battlingWrapper.BattleIcon);
+        battlingWrapper.BattleIcon.DeEmphasize();
         battlingWrapper.BattleIcon.SetFullyTransparent();
-        StartCoroutine(battlingWrapper.BattleIcon!.FadeIn());
+        StartCoroutine(battlingWrapper.BattleIcon.FadeIn());
     }
 
-    private IEnumerator DeleteItem(IBattleQueueDisplayable? item)
-    {
-        if (item == null) yield break;
-        
+    private IEnumerator DeleteItem(IBattleQueueDisplayable item)
+    {        
         StartCoroutine(item.FadeOut());
         yield return new WaitForSeconds(IBattleQueueDisplayable.EXPAND_DURATION);
         Destroy(item.GameObject);
