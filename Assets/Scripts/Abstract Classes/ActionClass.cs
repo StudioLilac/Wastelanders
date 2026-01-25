@@ -1,4 +1,5 @@
 using System;
+using Steamworks;
 using Systems.Persistence;
 using UI_Toolkit;
 using UnityEngine;
@@ -149,6 +150,10 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
         Origin.UpdateFacing(diffInLocation, null);
         CardIsUnstaggered();
         this.Target.TakeDamage(Origin, rolledCardStats.ActualRoll);
+
+        if (rolledCardStats.ActualRoll >= 10 && IsPlayedByPlayer()) {
+            AchievementManager.Instance.HandlePlayerHitCritical();
+        }
     }
 
     //Only called in a clash

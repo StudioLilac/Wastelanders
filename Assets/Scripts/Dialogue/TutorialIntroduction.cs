@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
 using DialogueScripts;
+using Steamworks;
 using Systems.Persistence;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -300,6 +301,7 @@ public class TutorialIntroduction : DialogueClasses
 
         yield return new WaitUntil(() => dummiesLeft == 0);
         CombatManager.Instance.GameState = GameState.GAME_WIN;
+        AchievementManager.Instance.HandlePlayerFinishedSparring();  
         yield return new WaitForSeconds(1f);
     }
 
