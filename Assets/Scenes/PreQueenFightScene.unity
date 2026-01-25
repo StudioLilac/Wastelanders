@@ -619,6 +619,37 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 55dd1017896a4294ebc48577819d6683, type: 3}
+--- !u!1 &139584049
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 139584050}
+  m_Layer: 0
+  m_Name: BeetlePos4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &139584050
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 139584049}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.5, y: -2.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1513545304}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &149275932
 GameObject:
   m_ObjectHideFlags: 0
@@ -6244,6 +6275,7 @@ Transform:
   - {fileID: 273869857}
   - {fileID: 1896831619}
   - {fileID: 2041861088}
+  - {fileID: 139584050}
   - {fileID: 1916168168}
   - {fileID: 1600285488}
   m_Father: {fileID: 1394440205}
@@ -8860,6 +8892,22 @@ PrefabInstance:
       propertyPath: 'beetleLocations.Array.data[3]'
       value: 
       objectReference: {fileID: 1550188052}
+    - target: {fileID: 565243660519602255, guid: ffe5e716a68f6484aa03d7e79a4dc2a7, type: 3}
+      propertyPath: 'beetleReturnLocationPreset.Array.data[0]'
+      value: 
+      objectReference: {fileID: 273869857}
+    - target: {fileID: 565243660519602255, guid: ffe5e716a68f6484aa03d7e79a4dc2a7, type: 3}
+      propertyPath: 'beetleReturnLocationPreset.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1896831619}
+    - target: {fileID: 565243660519602255, guid: ffe5e716a68f6484aa03d7e79a4dc2a7, type: 3}
+      propertyPath: 'beetleReturnLocationPreset.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2041861088}
+    - target: {fileID: 565243660519602255, guid: ffe5e716a68f6484aa03d7e79a4dc2a7, type: 3}
+      propertyPath: 'beetleReturnLocationPreset.Array.data[3]'
+      value: 
+      objectReference: {fileID: 139584050}
     - target: {fileID: 2002373752629993316, guid: ffe5e716a68f6484aa03d7e79a4dc2a7, type: 3}
       propertyPath: m_Name
       value: QueenPrefab

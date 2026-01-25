@@ -12,11 +12,18 @@ public class QueenBeetle : EnemyClass
     private const int MAX_BEETLES = 4;
     [SerializeField] 
     private Beetle?[]? availability;
+    [SerializeField] private Transform[] beetleReturnLocationPreset = new Transform[MAX_BEETLES];
     private readonly Vector3[] beetleLocations = new Vector3[MAX_BEETLES];
 
     public void IntializeChildBeetles(List<Beetle> guardBeetles)
     {
         availability = new Beetle[MAX_BEETLES];
+
+        for (int i = 0; i < beetleReturnLocationPreset.Length; i++)
+        {
+            beetleLocations[i] = beetleReturnLocationPreset[i].position;
+        }
+
         for (int i = 0; i < guardBeetles.Count; ++i)
         {
             availability[i] = guardBeetles[i];

@@ -159,7 +159,6 @@ public class CardComparator : MonoBehaviour
         actionClass.ApplyEffect();
         yield return StartCoroutine(ClashBothEntities(actionClass, actionClass));
         BattleQueue.BattleQueueInstance.RemoveActionWrapperFromQueue(actionWrapper);
-
         actionClass.RollDice();
         DeactivateInfo(actionClass);
 

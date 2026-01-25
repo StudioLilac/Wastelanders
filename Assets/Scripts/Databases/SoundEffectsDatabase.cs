@@ -45,6 +45,7 @@ public enum SoundID
     CB_staff_hit = 209,
     CB_pincer_hit = 210,
     CB_hatchery_summon = 211,
+    CB_roll_dice = 212,
 
     //VN SFX
     VN_page_flip = 500,

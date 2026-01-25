@@ -241,6 +241,7 @@ public class CombatManager : MonoBehaviour
 
     private void PerformFighting()
     {
+        SoundID.CB_roll_dice.Play();
         Deactivate(handContainer);
         baseCamera.Priority = 0;
         dynamicCamera.Priority = 1;

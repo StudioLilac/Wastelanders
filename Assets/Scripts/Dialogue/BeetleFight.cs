@@ -265,6 +265,7 @@ public class BeetleFight : DialogueClasses
                 sceneCamera.Priority = 0;
                 var clashItem = new BattleQueue.ActionWrapper(jackieAction);
                 clashItem.SetClashingAction(beetleAction);
+                SoundID.CB_roll_dice.Play();
                 yield return StartCoroutine(CardComparator.Instance.ClashCards(clashItem));
                 DialogueBox.DialogueBoxEvent -= ShowCrystal; //in case some weird shit happens
             }
