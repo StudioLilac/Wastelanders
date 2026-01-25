@@ -88,12 +88,15 @@ public class BattleQueueIcons : DisplayableClass, IBattleQueueDisplayable
         iconRenderer.sortingLayerName = FadeSortingLayer;
         targetRenderer.sortingOrder = FadeSortingOrder + 5;
         targetRenderer.sortingLayerName = FadeSortingLayer;
+        unseenEnemyActionIndicator.sortingOrder = FadeSortingOrder + 5;
+        unseenEnemyActionIndicator.sortingLayerName = FadeSortingLayer;
     }
 
     public void DeEmphasize()
     {
         iconRenderer.sortingOrder = FadeSortingOrder - 1;
         targetRenderer.sortingOrder = FadeSortingOrder - 1;
+        unseenEnemyActionIndicator.sortingOrder = FadeSortingOrder - 1;
     }
 
     private void OnMouseDown()

@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using static BattleQueue;
 
-#nullable enable
 public class BattleQueueCanvas : MonoBehaviour
 {
     [SerializeField] private Canvas canvas;
@@ -15,6 +14,7 @@ public class BattleQueueCanvas : MonoBehaviour
     [SerializeField] private ClashingBattleQueueIcon clashingPrefab;
     [SerializeField] private GameObject battleQueueParent;
 
+#nullable enable
     private List<IBattleQueueDisplayable> battleQueueDisplayables = new();
 
     void Awake()

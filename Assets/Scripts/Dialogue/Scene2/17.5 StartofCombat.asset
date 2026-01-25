@@ -10,18 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a4fafe43b89343e3a7ba1235e8987c0f, type: 3}
-  m_Name: 16. EndOfClash
+  m_Name: 17.5 StartofCombat
   m_EditorClassIdentifier: 
   Entries:
-  - content: 'Now let''s run this sucker down with sheer force. '
+  - content: Guess I got the fight I wanted.
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxName: 
     picture: {fileID: 21300000, guid: 537908265661f2b44970c526d7724cfb, type: 3}
     events: []
-  - content: Let's play multiple Actions against 'em. It can't Clash all of my attacks!
+  - content: These Actions are new, I should make it a habit to see check out what
+      these guys are planning to use.
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxName: 
-    picture: {fileID: 21300000, guid: c719baaafa8cd7148806ffb41907add6, type: 3}
+    picture: {fileID: 21300000, guid: 716cc19e51b4845288dc77280ae4c6e2, type: 3}
     events: []
   references:
     version: 2
