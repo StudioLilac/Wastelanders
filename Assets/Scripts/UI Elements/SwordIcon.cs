@@ -1,12 +1,17 @@
+using System.Collections;
 using UnityEngine;
+using static IBattleQueueDisplayable;
+
 #nullable enable
-public class SwordIcon: MonoBehaviour
+public class SwordIcon : MonoBehaviour, IBattleQueueDisplayable
 {
     private static readonly int ClashStateHash = Animator.StringToHash("ClashState");
     [SerializeField] private SpriteRenderer swordsIcon = null!;
     [SerializeField] private SpriteFadeHandler swordFader = null!;
     [SerializeField] private Animator swordsAnimator = null!;
     private ClashResultType currentClashType = default;
+
+    public GameObject GameObject => gameObject;
 
     public void Awake()
     {
@@ -24,8 +29,35 @@ public class SwordIcon: MonoBehaviour
         swordsIcon.sortingOrder = CombatFadeScreenHandler.Instance.FADE_SORTING_ORDER - 1;
     }
 
-    public void FadeIn(float duration) => StartCoroutine(swordFader.FadeInDarkScreen(duration));
-    public void FadeOut(float duration) => StartCoroutine(swordFader.FadeInLightScreen(duration));
+    public void SetFullyTransparent()
+    {
+        swordFader.SetLightScreen();
+    }
+
+    public void SetFullyOpaque()
+    {
+        swordFader.SetDarkScreen();
+    }
+
+    public IEnumerator FadeIn()
+    {
+        if (!isActiveAndEnabled)
+        {
+            SetFullyOpaque();
+            yield break;
+        }
+        SetFullyTransparent();
+        StartCoroutine(swordFader.FadeInDarkScreen(FADE_DURATION));
+    }
+    public IEnumerator FadeOut() {
+        if (!isActiveAndEnabled)
+        {
+            SetFullyTransparent();
+            yield break;
+        }
+        StartCoroutine(swordFader.FadeInLightScreen(FADE_DURATION)); 
+    }
+
 
 
     public void OnMouseEnter() => new TooltipEvent(

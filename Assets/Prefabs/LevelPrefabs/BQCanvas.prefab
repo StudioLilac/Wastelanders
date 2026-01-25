@@ -410,6 +410,7 @@ MonoBehaviour:
   scrollRect: {fileID: 1771873056772367513}
   bqContainer: {fileID: 7310062480428887619}
   iconPrefab: {fileID: 3321067335889280902, guid: f9683846bad493e429dda3ece4900989, type: 3}
+  battleBeginButton: {fileID: 1933517300366859696}
   clashingPrefab: {fileID: 156142739676490864, guid: b10263b2eb9aadc41aa6c2d7606dba7a, type: 3}
   battleQueueParent: {fileID: 7622365840802787573}
 --- !u!114 &785467685062423962

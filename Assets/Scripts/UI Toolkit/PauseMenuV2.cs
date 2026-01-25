@@ -102,10 +102,21 @@ namespace UI_Toolkit
             GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.MainMenu>().SceneName);
         }
 
+
         private void OnGlsClicked()
         {
-            GameStateManager.Instance.JumpToCombat = true;
-            OnRstClicked();
+            var gameState = new GetGameState().Query();
+            var skipStory = gameState switch { 
+                GameState.GAME_START => true,
+                GameState.OUT_OF_COMBAT => true,
+                GameState.GAME_LOSE => true,
+                _ => false,
+            };
+            if (skipStory)
+            {
+                GameStateManager.Instance.JumpToCombat = true;
+                OnRstClicked();
+            }
         }
 
         private void OnDlgClicked()
