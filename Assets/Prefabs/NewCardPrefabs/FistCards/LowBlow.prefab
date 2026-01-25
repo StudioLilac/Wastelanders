@@ -122,7 +122,7 @@ MonoBehaviour:
   clashable: 1
   description: 
   IsEvolved: 0
-  icon: {fileID: 21300000, guid: fbdbcaab28794334bb84176f7e052fb5, type: 3}
+  icon: {fileID: 21300000, guid: d9687fd2c0d8a66479bee081bf3b7c93, type: 3}
   cardBack: {fileID: 21300000, guid: 832b52c38e4d56144852f606484babb9, type: 3}
   evolvedCardBack: {fileID: 21300000, guid: 756b0f0f1c0a43f438e640ac5f6cc4f8, type: 3}
   cardUI: {fileID: 7093626105232434615}
