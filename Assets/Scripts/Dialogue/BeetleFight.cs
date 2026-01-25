@@ -382,7 +382,6 @@ public class BeetleFight : DialogueClasses
             RemoveEnemyFromScene(ambushBeetle);
             floorBg.SetActive(false);
             ives.transform.position = playerWave1CombatPosition.position + new Vector3(-4, 0, 0);
-            yield return new WaitForSeconds(1f);
             yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(2f));
         }
 
@@ -513,7 +512,7 @@ public class BeetleFight : DialogueClasses
             yield return new WaitForSeconds(1f);
 
             GameStateManager.Instance.UpdateLevelProgress(StageInformation.QUEEN_PREPARATION_STAGE);
-            GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.SelectionScreen>().SceneName);
+            GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.PreQueenFight>().SceneName);
             yield break;
         }
     }
