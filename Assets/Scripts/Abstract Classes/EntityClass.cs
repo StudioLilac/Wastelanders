@@ -591,4 +591,8 @@ public abstract class EntityClass : SelectClass
     {
         initialPosition = newReturningPosition;
     }
+    
+    private void OnDestroy() {
+        BuffsUpdatedEvent = null;
+    }
 }
