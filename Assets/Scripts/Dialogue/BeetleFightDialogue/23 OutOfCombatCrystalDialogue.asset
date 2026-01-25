@@ -21,7 +21,7 @@ MonoBehaviour:
   - bodyText: Not too sure, but it seemed like the crystals on their back brightened
       up when they went near it. It must make them stronger somehow.
     speakerName: Ives
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
     sfx: 
     broadcastAnEvent: 0
   - bodyText: <i>Crystals grant the attacker a resonance stack when dropping below
@@ -30,8 +30,8 @@ MonoBehaviour:
     displayingImage: {fileID: 0}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: <i>Whatever it is, we can't let them take more.
+  - bodyText: Whatever it is, we can't let them take more.
     speakerName: Jackie
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
     sfx: 
     broadcastAnEvent: 0

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 26 Ives Analyze After Combat
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: 'We should take some shard samples for the Scientists to analyze after
+  - bodyText: 'We should take some shard samples for the scientists to analyze after
       the exam. '
     speakerName: Ives
     displayingImage: {fileID: 0}
