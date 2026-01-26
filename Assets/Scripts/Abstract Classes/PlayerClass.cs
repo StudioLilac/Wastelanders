@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using WeaponDeckSerialization;
 
@@ -27,6 +28,9 @@ public abstract class PlayerClass : EntityClass
     protected List<GameObject> pool = new();
 
     protected List<GameObject> discard = new();
+
+    private bool shuffledThisTurn = false;
+    public bool Exhausted => maxHandSize == 0;
 
     public override void Start()
     {
@@ -123,7 +127,7 @@ public abstract class PlayerClass : EntityClass
             else
             {
                 Debug.LogWarning(myName + "'s Pool has no cards");
-
+                
             }
         }
     }
@@ -131,7 +135,11 @@ public abstract class PlayerClass : EntityClass
     protected void Reshuffle()
     {
         playerReshuffleDeck?.Invoke(this);
-        maxHandSize--;
+
+        if (Exhausted) return; // don't fill the pool anymore if the player is exhausted.
+        if (!shuffledThisTurn) maxHandSize--;
+        shuffledThisTurn = true;
+
 
         while (discard.Count > 0)
         {
@@ -167,6 +175,7 @@ public abstract class PlayerClass : EntityClass
 
     public override void PerformSelection()
     {
+        shuffledThisTurn = false;
         DrawToMax();
         StartCoroutine(ResetPosition());
     }
@@ -183,6 +192,26 @@ public abstract class PlayerClass : EntityClass
         {
             DrawCard();
         }
+        
+        if (Exhausted && hand.Count < 1) {
+            AddStruggleToHand();
+        }
+    }
+
+    private void AddStruggleToHand() {
+        var strugglePrefab = new DefaultCard(this).Query();
+
+        if (!strugglePrefab) {
+            Debug.LogWarning(strugglePrefab + " could not be found");
+            return;
+        }
+            
+        ActionClass struggleCard = Instantiate(strugglePrefab);
+        struggleCard.Origin = this;
+        struggleCard.IsEvolved = false;
+
+        hand.Add(struggleCard.gameObject);
+        struggleCard.transform.position = new Vector3(-100, -100, 1);
     }
 
     public override IEnumerator MoveToPosition(Vector3 destination, float radius, float duration, Vector3? lookAtPosition = null)

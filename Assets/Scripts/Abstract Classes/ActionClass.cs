@@ -45,6 +45,8 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
 
     protected int lowerBound;
     protected int upperBound;
+    
+    public bool Clashable { get; protected set; } = true;
 
     protected RolledStats rolledCardStats = new (0, 0);
 

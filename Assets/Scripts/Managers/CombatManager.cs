@@ -7,7 +7,10 @@ using Systems.Persistence;
 using WeaponDeckSerialization;
 using UI_Toolkit;
 
-public record GetGameState(): IQuery<GameState?>;
+#nullable enable
+public record GetGameState() : IQuery<GameState?>; 
+public record DefaultCard(PlayerClass player) : IQuery<ClasslessCards?>;
+#nullable disable
 
 public class CombatManager : MonoBehaviour
 {
@@ -69,6 +72,7 @@ public class CombatManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        this.Answer<DefaultCard, ClasslessCards?>(GetDefaultAction);
         GameState = GameState.GAME_START; //Put game start code in the performGameStart method.
         screenShakeHandler = gameObject.AddComponent<ScreenShakeHandler>();
         screenShakeHandler.DynamicCamera = dynamicCamera;
@@ -446,5 +450,7 @@ public class CombatManager : MonoBehaviour
     {
         return new List<EntityClass>(neutralTeam);
     }
+    
+    private ClasslessCards? GetDefaultAction(DefaultCard q) => cardDatabase.GetDefaultAction(q.player);
 
 }
