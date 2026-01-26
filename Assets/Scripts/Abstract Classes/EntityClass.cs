@@ -384,7 +384,6 @@ public abstract class EntityClass : SelectClass
         CheckBuff(buffType);
         statusEffects[buffType].GainStacks(stacks);
         UpdateBuffs();
-        new OnBuffsUpdatedEvent(this).Invoke();
     }
 
     public void ReduceStacks(string buffType, int stacks)
@@ -393,7 +392,6 @@ public abstract class EntityClass : SelectClass
         {
             statusEffects[buffType].LoseStacks(stacks);
             UpdateBuffs();
-            new OnBuffsUpdatedEvent(this).Invoke();
         }
     }
 
@@ -559,6 +557,7 @@ public abstract class EntityClass : SelectClass
     {
         combatInfo.UpdateBuffs(statusEffects);
         BuffsUpdatedEvent?.Invoke(this);
+        new OnBuffsUpdatedEvent(this).Invoke();
     }
 
     //Please use the originalHandler to resubscribe when you are done :3

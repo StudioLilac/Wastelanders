@@ -404,7 +404,6 @@ public class CombatManager : MonoBehaviour
         set
         {
             OnGameStateChanging?.Invoke(value);
-            GameState prev = gameState;
             gameState = value;
             switch (value)
             {
