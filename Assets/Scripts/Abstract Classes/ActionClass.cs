@@ -1,4 +1,5 @@
 using System;
+using Steamworks;
 using Systems.Persistence;
 using UI_Toolkit;
 using UnityEngine;
@@ -45,6 +46,8 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
 
     protected int lowerBound;
     protected int upperBound;
+    
+    public bool Clashable { get; protected set; } = true;
 
     protected RolledStats rolledCardStats = new (0, 0);
 
@@ -149,6 +152,10 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
         Origin.UpdateFacing(diffInLocation, null);
         CardIsUnstaggered();
         this.Target.TakeDamage(Origin, rolledCardStats.ActualRoll);
+
+        if (IsPlayedByPlayer()) {
+            new OnPlayerHit(rolledCardStats.ActualRoll).Invoke();
+        }
     }
 
     //Only called in a clash

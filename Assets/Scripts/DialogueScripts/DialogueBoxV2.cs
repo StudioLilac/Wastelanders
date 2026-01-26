@@ -112,11 +112,10 @@ namespace DialogueScripts
 
         private void PlayTransitionSound(DialogueEntry entry)
         {
-            if (!string.IsNullOrEmpty(entry.sfxName) || Input.GetKey(KeyCode.RightArrow))
+            if (entry.sfxId != SoundID.None || Input.GetKey(KeyCode.RightArrow))
                 return;
 
-            const string DEFAULT_SFX_NAME = "Page Flip";
-            AudioManager.Instance.PlaySFX(DEFAULT_SFX_NAME);
+            AudioManager.Instance.PlaySFX(SoundID.VN_page_flip);
         }
 
         private void SetAutoAdvance(AutoAdvanceAfter e)
@@ -134,12 +133,11 @@ namespace DialogueScripts
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
-
         private void WithEntry(DialogueEntry entry)
         {
             if (!string.IsNullOrEmpty(entry.content))
             {
-                txtView.text = entry.content;
+                txtView.text = DialogueManager.SanitizeText(entry.content);
                 txt.SetActive(true);
             }
             else
@@ -162,9 +160,9 @@ namespace DialogueScripts
                 who.SetActive(false);
             }
 
-            if (!string.IsNullOrEmpty(entry.sfxName))
+            if (entry.sfxId != SoundID.None)
             {
-                AudioManager.Instance.PlaySFX(entry.sfxName);
+                entry.sfxId.Play();
             }
 
             if (entry.picture)

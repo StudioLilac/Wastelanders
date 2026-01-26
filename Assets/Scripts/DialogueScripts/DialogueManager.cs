@@ -64,7 +64,7 @@ public class DialogueManager : MonoBehaviour
     {
         if (activeDialogueBox.gameObject.activeInHierarchy)
         {
-            yield break;
+            yield return new WaitUntil(() => !inDialogue);
         }
 
         activeDialogueBox.gameObject.SetActive(true);
@@ -85,7 +85,7 @@ public class DialogueManager : MonoBehaviour
     public void AddDialogueEntryToHistory(DialogueEntry entry)
     {
         var text = new DialogueText(
-            entry.content, 
+            SanitizeText(entry.content), 
             entry.speaker?.characterName ?? "",
             entry.picture
         );
@@ -156,8 +156,6 @@ public class DialogueManager : MonoBehaviour
             SetDialogueBoxActive(pictureDialogueBox);
             pictureDialogueBox.SetLine(sentence);
         }
-
-        sentence.playSound();
     }
 
     void SetDialogueBoxActive(DialogueBox dialogueBox)
@@ -201,7 +199,7 @@ public class DialogueManager : MonoBehaviour
             {
                 DisplayNextSentence();
                 if (holdingSkip) wasSkipping = true;
-                if (singlePress) AudioManager.Instance.PlaySFX(PAGE_FLIP_SOUND_EFFECT);
+                if (singlePress) AudioManager.Instance.PlaySFX(SoundID.VN_page_flip);
             }
             else
             {
@@ -219,8 +217,20 @@ public class DialogueManager : MonoBehaviour
 
         if (wasSkipping && (skipKeyWasReleased || dialogueHasEnded))
         {
-            AudioManager.Instance.PlaySFX(PAGE_FLIP_SOUND_EFFECT);
+            AudioManager.Instance.PlaySFX(SoundID.VN_page_flip);
             wasSkipping = false;
         }
+    }
+
+    public static string? SanitizeText(string? input)
+    {
+        if (string.IsNullOrEmpty(input)) return input;
+
+        return input
+            .Replace("’", "'")
+            .Replace("‘", "'")
+            .Replace("“", "\"")
+            .Replace("”", "\"")
+            .Replace("…", "...");
     }
 }

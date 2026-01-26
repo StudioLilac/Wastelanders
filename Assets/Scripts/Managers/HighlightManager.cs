@@ -83,6 +83,7 @@ public class HighlightManager : MonoBehaviour
             ResetCurrentHighlightedAction();
             selectedPlayer = clickedPlayer;
             RenderHand(clickedPlayer);
+            clickedPlayer.DeHighlight();
         }
     }
 

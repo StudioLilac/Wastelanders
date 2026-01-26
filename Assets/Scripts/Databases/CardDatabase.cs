@@ -2,8 +2,8 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 using System.Linq;
+using JetBrains.Annotations;
 using WeaponDeckSerialization;
-
 
 /*
  * @author Anrui
@@ -17,6 +17,7 @@ public class CardDatabase : ScriptableObject
     public List<PistolCards> pistolCards;
     public List<FistCards> fistCards;
     public List<AxeCards> axeCards;
+    public List<ClasslessCards> classlessCards;
     public List<ActionClass> enemyCards;
     private Dictionary<string, ActionClass> cardLookup;
     public static event Action<SerializableActionClassInfo> OnInvalidCardFound;
@@ -30,12 +31,24 @@ public class CardDatabase : ScriptableObject
             case WeaponType.PISTOL: return new List<ActionClass>(pistolCards);
             case WeaponType.AXE: return new List<ActionClass>(axeCards);
             case WeaponType.FIST: return new List<ActionClass>(fistCards);
+            case WeaponType.CLASSLESS: return new List<ActionClass>(classlessCards);
             case WeaponType.ENEMY: return new List<ActionClass>(enemyCards);
             default:
                 Debug.LogWarning("Weapon Type is currently unsupported");
                 return null;
         }
     }
+    
+#nullable enable
+    public ClasslessCards? GetDefaultAction(PlayerClass player) {
+        return player switch
+        {
+            Jackie => classlessCards[0],
+            Ives => classlessCards[1],
+            _ => classlessCards.FirstOrDefault(),
+        };
+    }
+#nullable disable
 
     public static List<ISubWeaponType> GetUnlockedSubFoldersFor(WeaponType weaponType)
     {
@@ -126,6 +139,7 @@ public class CardDatabase : ScriptableObject
         PISTOL,
         FIST,
         AXE,
+        CLASSLESS,
         ENEMY
     }
 }

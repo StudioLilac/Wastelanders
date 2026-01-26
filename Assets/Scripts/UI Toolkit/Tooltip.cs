@@ -25,10 +25,10 @@ namespace UI_Toolkit
 
         public static readonly Dictionary<string, Color> TooltipColors = new Dictionary<string, Color>
         {
-            ["ACCURACY"] = Color.blue,
-            ["FLOW"] = new Color(1f, 143f/255f, 143f/255f, 1f),
-            ["WOUND"] = Color.red,
-            ["RESONATE"] = Color.magenta
+            [Accuracy.buffName.ToUpper()] = Color.blue,
+            [Flow.buffName.ToUpper()] = new Color(1f, 143f/255f, 143f/255f, 1f),
+            [Wound.buffName.ToUpper()] = Color.red,
+            [Resonate.buffName.ToUpper()] = Color.magenta
         };
 
         public void OnEnable()

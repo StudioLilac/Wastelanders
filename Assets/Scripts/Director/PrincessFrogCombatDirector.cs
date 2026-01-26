@@ -22,7 +22,7 @@ namespace Director
         {
             CombatManager.PlayersWinEvent -= PlayersWin;
             CombatManager.EnemiesWinEvent -= EnemiesWin;
-            BountyManager.Instance.ActiveBounty = null; 
+            new ClearBounty().Invoke();
         }
 
         private IEnumerator OnStart()

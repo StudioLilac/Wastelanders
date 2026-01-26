@@ -5,17 +5,25 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+public record HatcheryUsed() : IEvent;
 public class QueenBeetle : EnemyClass
 {
 #nullable enable
     private const int MAX_BEETLES = 4;
     [SerializeField] 
     private Beetle?[]? availability;
+    [SerializeField] private Transform[] beetleReturnLocationPreset = new Transform[MAX_BEETLES];
     private readonly Vector3[] beetleLocations = new Vector3[MAX_BEETLES];
 
     public void IntializeChildBeetles(List<Beetle> guardBeetles)
     {
         availability = new Beetle[MAX_BEETLES];
+
+        for (int i = 0; i < beetleReturnLocationPreset.Length; i++)
+        {
+            beetleLocations[i] = beetleReturnLocationPreset[i].position;
+        }
+
         for (int i = 0; i < guardBeetles.Count; ++i)
         {
             availability[i] = guardBeetles[i];
@@ -103,6 +111,7 @@ public class QueenBeetle : EnemyClass
             {
                 AttackWith(usedSpawnThisRound ? hatchery2 : hatchery, CalculateAttackTarget(targets));
                 usedSpawnThisRound = true;
+                new HatcheryUsed().Invoke();
             }
             else
             {

@@ -7,6 +7,13 @@ using Systems.Persistence;
 using WeaponDeckSerialization;
 using UI_Toolkit;
 
+#nullable enable
+public record GetGameState() : IQuery<GameState?>; 
+public record DefaultCard(PlayerClass player) : IQuery<ClasslessCards?>;
+#nullable disable
+
+public record PlayersWin() : IEvent;
+
 public class CombatManager : MonoBehaviour
 {
     public static CombatManager Instance { get; private set; }
@@ -22,7 +29,6 @@ public class CombatManager : MonoBehaviour
     private List<EntityClass> neutralTeam = new();
 
     public GameObject handContainer;
-    public GameObject battleQueueParent;
     
     [SerializeField] private PlayerDatabase playerDatabase;
     [SerializeField] private CardDatabase cardDatabase;
@@ -41,7 +47,6 @@ public class CombatManager : MonoBehaviour
     public delegate void EntitiesWinLoseDelegate();
     public static event EntitiesWinLoseDelegate? PlayersWinEvent;
     public static event EntitiesWinLoseDelegate? EnemiesWinEvent;
-    public int FADE_SORTING_ORDER => CombatFadeScreenHandler.Instance.FADE_SORTING_ORDER;
 
 
     // Awake is called when the script instance is being loaded
@@ -55,6 +60,7 @@ public class CombatManager : MonoBehaviour
         {
             Destroy(this);
         }
+        this.Answer<GetGameState, GameState?>(_ => GameState);
     }
 
     public static void ClearEvents()
@@ -68,6 +74,7 @@ public class CombatManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        this.Answer<DefaultCard, ClasslessCards?>(GetDefaultAction);
         GameState = GameState.GAME_START; //Put game start code in the performGameStart method.
         screenShakeHandler = gameObject.AddComponent<ScreenShakeHandler>();
         screenShakeHandler.DynamicCamera = dynamicCamera;
@@ -108,7 +115,6 @@ public class CombatManager : MonoBehaviour
     private void PerformSelection()
     {
         Activate(handContainer);
-        battleQueueParent.SetActive(true);
         baseCamera.Priority = 1;
         dynamicCamera.Priority = 0;
         PerformInCombat();
@@ -207,6 +213,7 @@ public class CombatManager : MonoBehaviour
         if (enemyTeam.Count == 0)
         {
             PlayersWinEvent?.Invoke();
+            new PlayersWin().Invoke();
         }
     }
 
@@ -241,6 +248,7 @@ public class CombatManager : MonoBehaviour
 
     private void PerformFighting()
     {
+        SoundID.CB_roll_dice.Play();
         Deactivate(handContainer);
         baseCamera.Priority = 0;
         dynamicCamera.Priority = 1;
@@ -297,7 +305,6 @@ public class CombatManager : MonoBehaviour
     private void PerformOutOfCombat()
     {
         Deactivate(handContainer);
-        battleQueueParent.SetActive(false);
 
         foreach (EntityClass entity in GrabAllEntities())
         {
@@ -422,9 +429,13 @@ public class CombatManager : MonoBehaviour
                 case GameState.OUT_OF_COMBAT:
                     PerformOutOfCombat();
                     break;
+                case GameState.AFTER_COMBAT:
+                    PerformOutOfCombat();
+                    break;
                 default:
                     break;
             }
+            
             OnGameStateChanged?.Invoke(value);
         }
     }
@@ -443,5 +454,7 @@ public class CombatManager : MonoBehaviour
     {
         return new List<EntityClass>(neutralTeam);
     }
+    
+    private ClasslessCards? GetDefaultAction(DefaultCard q) => cardDatabase.GetDefaultAction(q.player);
 
 }

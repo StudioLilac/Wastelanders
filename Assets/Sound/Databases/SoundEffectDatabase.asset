@@ -12,16 +12,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec76c1d3908c84a44bfeaa17bdcb6d7d, type: 3}
   m_Name: SoundEffectDatabase
   m_EditorClassIdentifier: 
-  clipList:
-  - {fileID: 8300000, guid: 2216874157ed9cc4896ac3a1f1f4daac, type: 3}
-  - {fileID: 8300000, guid: cfb74fd109b01e3448d41d0253dc4fac, type: 3}
-  - {fileID: 8300000, guid: c0611b065b7a9734a8e3b41ec002f365, type: 3}
-  - {fileID: 8300000, guid: b318d24ada2dc8644bc88180013d6f71, type: 3}
-  - {fileID: 8300000, guid: fc0ec51c395bb5342977af0ce5a5b57a, type: 3}
-  - {fileID: 8300000, guid: ddb3ed20f82ae794b85c8108634f43a1, type: 3}
-  - {fileID: 8300000, guid: 27cd69ddb25466947b74bece3f1f7cd0, type: 3}
-  - {fileID: 8300000, guid: 07bea8d0685a41647a04158a508ec485, type: 3}
-  - {fileID: 8300000, guid: 1cf5a61decaf1d6458c0769bf50f4d4e, type: 3}
-  - {fileID: 8300000, guid: 90fc164dbd72a2041a7eaca8d637ac70, type: 3}
-  - {fileID: 8300000, guid: 6f6f784b4102f264880a9c9d24589b73, type: 3}
-  - {fileID: 8300000, guid: a82aa91f6ad375b4d8fb2d07b64e90af, type: 3}
+  soundConfigs:
+  - id: 0
+    clip: {fileID: 0}
+  - id: 200
+    clip: {fileID: 8300000, guid: 2216874157ed9cc4896ac3a1f1f4daac, type: 3}
+  - id: 201
+    clip: {fileID: 8300000, guid: cfb74fd109b01e3448d41d0253dc4fac, type: 3}
+  - id: 202
+    clip: {fileID: 8300000, guid: c0611b065b7a9734a8e3b41ec002f365, type: 3}
+  - id: 203
+    clip: {fileID: 8300000, guid: b318d24ada2dc8644bc88180013d6f71, type: 3}
+  - id: 204
+    clip: {fileID: 8300000, guid: fc0ec51c395bb5342977af0ce5a5b57a, type: 3}
+  - id: 205
+    clip: {fileID: 8300000, guid: ddb3ed20f82ae794b85c8108634f43a1, type: 3}
+  - id: 206
+    clip: {fileID: 8300000, guid: 27cd69ddb25466947b74bece3f1f7cd0, type: 3}
+  - id: 210
+    clip: {fileID: 8300000, guid: 07bea8d0685a41647a04158a508ec485, type: 3}
+  - id: 207
+    clip: {fileID: 8300000, guid: 1cf5a61decaf1d6458c0769bf50f4d4e, type: 3}
+  - id: 211
+    clip: {fileID: 8300000, guid: 7a11af21fd2a4104c803a4a9d0790b44, type: 3}
+  - id: 208
+    clip: {fileID: 8300000, guid: 90fc164dbd72a2041a7eaca8d637ac70, type: 3}
+  - id: 209
+    clip: {fileID: 8300000, guid: 6f6f784b4102f264880a9c9d24589b73, type: 3}
+  - id: 500
+    clip: {fileID: 8300000, guid: a82aa91f6ad375b4d8fb2d07b64e90af, type: 3}
+  - id: 212
+    clip: {fileID: 8300000, guid: 5aaa0a74508bd8846976ddab48053080, type: 3}

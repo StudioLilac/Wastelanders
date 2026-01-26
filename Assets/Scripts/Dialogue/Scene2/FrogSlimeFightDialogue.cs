@@ -70,17 +70,15 @@ public class FrogSlimeFightDialogue : DialogueClasses
     [SerializeField] private DialogueEntryWrapper explainClashing;
     [SerializeField] private DialogueEntryWrapper duringClashing;
     [SerializeField] private DialogueEntryWrapper afterClashing;
-
-
     [SerializeField] private DialogueEntryWrapper afterFirstCombat;
+
+    [SerializeField] private DialogueEntryWrapper startOfSecondCombat;
     [SerializeField] private DialogueEntryWrapper defensiveCardsTutorial;   
     // After the frog enters the scene
     [SerializeField] private List<DialogueText> andNowWeWait;
     [SerializeField] private List<DialogueText> jackiePreMissedShot;
     [SerializeField] private List<DialogueText> jackiePostMissedShot;
     [SerializeField] private List<DialogueText> jackiePreCombat;
-    //Combat Dialogue
-    [SerializeField] private List<DialogueText> startOfCombatDialogue;
     // After the frog is defeated
     [SerializeField] private List<DialogueText> afterCombatDialogue;
     [SerializeField] private List<DialogueText> crystalExtraction;
@@ -210,7 +208,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
                 var combatCoroutine = StartCoroutine(BeginClashTutorial());
                 yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
                 yield return new WaitForSeconds(2.0f);
-                CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
+                CombatManager.Instance.GameState = GameState.AFTER_COMBAT;
                 StopCoroutine(combatCoroutine);
                 AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
             }
@@ -266,7 +264,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
                 jackie.gameObject.transform.position = treeHidingPositionJackie.position + new Vector3(1f, 0, 0);
                 jackie.animator.enabled = true;
                 jackie.AttackAnimation(PistolCards.PISTOL_ANIMATION_NAME);
-                AudioManager.Instance?.PlaySFX(PistolCards.PISTOL_SOUND_FX_NAME);
+                AudioManager.Instance?.PlaySFX(SoundID.CB_gun_hit);
 
                 yield return StartCoroutine(MakeFrogJump(frog, 1f));
                 yield return StartCoroutine(frog.MoveToPosition(frogConfrontPosition.position, 0f, 1.2f,
@@ -321,13 +319,14 @@ public class FrogSlimeFightDialogue : DialogueClasses
         CombatManager.PlayersWinEvent += PlayersWin;
         CombatManager.EnemiesWinEvent += EnemiesWin;
         EntityClass.OnEntityDeath += EnsureFrogDeath;
-        DisplayableClass.OnShowCard += ExplainDefense;
 
         CombatManager.Instance.BeginCombat();
         
         //Starting Combat
         yield return new WaitForSeconds(1f);
-        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(startOfCombatDialogue));
+        yield return StartCoroutine(DialogueBoxV2.Instance.Play(startOfSecondCombat));
+        DisplayableClass.OnShowCard += ExplainDefense;
+
         if (instakill)
         {
             jackie.AddStacks(Accuracy.buffName, 900);

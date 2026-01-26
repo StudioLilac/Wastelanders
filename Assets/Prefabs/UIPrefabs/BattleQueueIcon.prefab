@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7063415365489698013}
   - component: {fileID: 7428885535545971497}
+  - component: {fileID: 3548142110431811648}
   m_Layer: 0
   m_Name: Unseen Action Indicator
   m_TagString: Untagged
@@ -33,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 1.98, y: -1.04}
   m_SizeDelta: {x: 4.24, y: 2.62}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &7428885535545971497
@@ -91,6 +92,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3548142110431811648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2081028581147232968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a6c2131294871b4499a5ce3cb16734e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 7428885535545971497}
 --- !u!1 &7504458634070143618
 GameObject:
   m_ObjectHideFlags: 0
@@ -104,6 +118,8 @@ GameObject:
   - component: {fileID: 3321067335889280902}
   - component: {fileID: 861149421085281689}
   - component: {fileID: 5287030420846796515}
+  - component: {fileID: 2510679086346056070}
+  - component: {fileID: 6864141925310799239}
   m_Layer: 0
   m_Name: BattleQueueIcon
   m_TagString: Untagged
@@ -202,6 +218,11 @@ MonoBehaviour:
   myTransform: {fileID: 0}
   unseenEnemyActionIndicator: {fileID: 7428885535545971497}
   targetRenderer: {fileID: 3749448518257924005}
+  iconRenderer: {fileID: 4957739105179700310}
+  cardIconFader: {fileID: 6864141925310799239}
+  targetIconFader: {fileID: 149039022007945561}
+  unseenActionFader: {fileID: 3548142110431811648}
+  widthFader: {fileID: 2510679086346056070}
 --- !u!61 &861149421085281689
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -263,11 +284,38 @@ MonoBehaviour:
   m_IgnoreLayout: 0
   m_MinWidth: -1
   m_MinHeight: -1
-  m_PreferredWidth: -1
+  m_PreferredWidth: 85
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &2510679086346056070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7504458634070143618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a37f2a31cce2ac44a1eaf69359c8ec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layoutElement: {fileID: 5287030420846796515}
+  fullWidth: 85
+--- !u!114 &6864141925310799239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7504458634070143618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a6c2131294871b4499a5ce3cb16734e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 4957739105179700310}
 --- !u!1 &7741579712016471510
 GameObject:
   m_ObjectHideFlags: 0
@@ -278,6 +326,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6337858063004834930}
   - component: {fileID: 3749448518257924005}
+  - component: {fileID: 149039022007945561}
   m_Layer: 0
   m_Name: Target
   m_TagString: Untagged
@@ -359,3 +408,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &149039022007945561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7741579712016471510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a6c2131294871b4499a5ce3cb16734e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 3749448518257924005}

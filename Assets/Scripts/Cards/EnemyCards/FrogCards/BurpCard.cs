@@ -13,7 +13,7 @@ namespace Cards.EnemyCards.FrogCards
             base.Initialize();
 
             myName = "Burp";
-            description = $"Spend +{BURP_COST} Resonate to play. On Hit: Gain 1 Resonate and spawn a random monster.";
+            description = $"Spend +{BURP_COST} Resonance to play. On Hit: Gain 1 Resonance and spawn a random monster.";
 
             CostToAddToDeck = 2;
             lowerBound = upperBound = 1;

@@ -21,7 +21,7 @@ public abstract class StaffCards : ActionClass
     }
     public override void OnHit()
     {
-        AudioManager.Instance?.PlaySFX(STAFF_SOUND_FX_NAME);
+        AudioManager.Instance?.PlaySFX(SoundID.CB_staff_hit);
         base.OnHit();
     }
 }

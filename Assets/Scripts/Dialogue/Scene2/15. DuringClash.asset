@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: 15. DuringClash
   m_EditorClassIdentifier: 
   Entries:
-  - content: When two Actions Clash during combat, they take place at the speed of
-      the faster one.
+  - content: When two Actions Clash during combat, they take place at the <i>Speed</i>
+      of the faster one.
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxName: 
     picture: {fileID: 21300000, guid: b1411cc1e1231574797f223a58264863, type: 3}
     events: []
-  - content: Both Actions roll their Power at the same time.
+  - content: Both Actions roll their <i>Power</i> at the same time.
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxName: 
     picture: {fileID: 21300000, guid: a599acaa6560c5142b54811e60ff9e4e, type: 3}

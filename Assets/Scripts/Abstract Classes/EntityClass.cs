@@ -10,6 +10,7 @@ using static StatusEffect;
 using UnityEditor.Animations;
 #endif
 
+public record OnBuffsUpdatedEvent(EntityClass WhoAmI) : IEvent;
 public abstract class EntityClass : SelectClass
 {
     public const string STAGGERED_ANIMATION_NAME = "IsStaggered";
@@ -279,13 +280,13 @@ public abstract class EntityClass : SelectClass
         }
     }
 
-    public void OnMouseEnter()
+    protected virtual void OnMouseEnter()
     {
         if (PauseMenuV2.IsPaused) return;
         Highlight();
     }
 
-    public void OnMouseExit()
+    private void OnMouseExit()
     {
         if (PauseMenuV2.IsPaused) return;
         DeHighlight();
@@ -504,7 +505,7 @@ public abstract class EntityClass : SelectClass
         Vector3 largeTransform = transform.position;
         largeTransform.z = FadeSortingOrder - 1 + ZOffset(spriteRenderer.bounds.min.y);
         transform.position = largeTransform;
-        spriteRenderer.sortingOrder = FadeSortingOrder - 3;
+        spriteRenderer.sortingOrder = FadeSortingOrder - 10;
         combatInfo.DeEmphasize();
     }
 
@@ -556,6 +557,7 @@ public abstract class EntityClass : SelectClass
     {
         combatInfo.UpdateBuffs(statusEffects);
         BuffsUpdatedEvent?.Invoke(this);
+        new OnBuffsUpdatedEvent(this).Invoke();
     }
 
     //Please use the originalHandler to resubscribe when you are done :3

@@ -9,7 +9,7 @@ public abstract class DisplayableClass : SelectClass
 {
 #nullable enable
     public ActionClass? ActionClass { get; protected set; }   
-    [SerializeField] protected SpriteRenderer? unseenEnemyActionIndicator;
+    [SerializeField] protected SpriteRenderer unseenEnemyActionIndicator = null!;
     protected bool targetHighlighted = false;
     private bool grewLarger;
     

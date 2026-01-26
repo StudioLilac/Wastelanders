@@ -39,12 +39,6 @@ public class BeetleFight : DialogueClasses
     [SerializeField] private Beetle beetleDraggingCrystal;
     [SerializeField] private Crystals draggedCrystal;
 
-    [SerializeField] private Image ivesVNSprite;
-    [SerializeField] private Image jackieVNSprite;
-
-
-
-
     [SerializeField] private List<Transform> combatBeetleTransforms;
 
     [SerializeField] private ActionClass beetleAction;
@@ -218,7 +212,7 @@ public class BeetleFight : DialogueClasses
             {
                 jackie.AttackAnimation(PistolCards.PISTOL_ANIMATION_NAME);
 
-                AudioManager.Instance?.PlaySFX(PistolCards.PISTOL_SOUND_FX_NAME);
+                AudioManager.Instance?.PlaySFX(SoundID.CB_gun_hit);
                 yield return StartCoroutine(frog.StaggerEntities(jackie, frog, 0.2f));
                 CombatManager.Instance.ActivateDynamicCamera();
                 sceneCamera.Priority = 0;
@@ -227,7 +221,7 @@ public class BeetleFight : DialogueClasses
                 yield return StartCoroutine(jackie.MoveToPosition(frog.transform.position, 1f, 1f));
                 StopCoroutine(frogTriesToRun);
                 jackie.AttackAnimation(StaffCards.STAFF_ANIMATION_NAME);
-                AudioManager.Instance?.PlaySFX(StaffCards.STAFF_SOUND_FX_NAME);
+                AudioManager.Instance?.PlaySFX(SoundID.CB_staff_hit);
                 yield return StartCoroutine(frog.StaggerEntities(jackie, frog, 0.3f));
                 DieInScene(frog);
                 yield return StartCoroutine(DialogueManager.Instance.StartDialogue(openingJackieQuipt));
@@ -265,6 +259,7 @@ public class BeetleFight : DialogueClasses
                 sceneCamera.Priority = 0;
                 var clashItem = new BattleQueue.ActionWrapper(jackieAction);
                 clashItem.SetClashingAction(beetleAction);
+                SoundID.CB_roll_dice.Play();
                 yield return StartCoroutine(CardComparator.Instance.ClashCards(clashItem));
                 DialogueBox.DialogueBoxEvent -= ShowCrystal; //in case some weird shit happens
             }
@@ -315,7 +310,7 @@ public class BeetleFight : DialogueClasses
                 yield return StartCoroutine(jackie.MoveToPosition(jackieSecondShot.position, 0f, 1f));
                 yield return new WaitForSeconds(BRIEF_PAUSE);
                 jackie.AttackAnimation(PistolCards.PISTOL_ANIMATION_NAME);
-                AudioManager.Instance?.PlaySFX(PistolCards.PISTOL_SOUND_FX_NAME);   
+                AudioManager.Instance?.PlaySFX(SoundID.CB_gun_hit);   
                 StopCoroutine(beetleRunsIn);
                 yield return StartCoroutine(ambushBeetle.StaggerEntities(jackie, ambushBeetle, 0.3f));
                 DieInScene(ambushBeetle);
@@ -358,7 +353,7 @@ public class BeetleFight : DialogueClasses
             {
                 jackie.transform.position = campLeftEntrance.position;
                 theCampWithBeetles.SetActive(true);
-                wrangledBeetle.animator.enabled = true;
+                wrangledBeetle.animator.enabled = false;
                 yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(0.6f));
                 yield return StartCoroutine(jackie.MoveToPosition(campLeftEntrance.position + new Vector3(2f, 0, 0), 0f, 1f));
                 yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieShockAtBeetleEnteringCamp.Dialogue));
@@ -382,8 +377,7 @@ public class BeetleFight : DialogueClasses
             RemoveEnemyFromScene(ambushBeetle);
             floorBg.SetActive(false);
             ives.transform.position = playerWave1CombatPosition.position + new Vector3(-4, 0, 0);
-            yield return new WaitForSeconds(1f);
-            yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(2f));
+            StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(2f));
         }
 
         //kill off the other entities in the scene
@@ -418,9 +412,10 @@ public class BeetleFight : DialogueClasses
 
             yield return new WaitForSeconds(0.2f);
             CombatManager.Instance.BeginCombat();
-            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(twoPlayerCombatTutorial.Dialogue));
             Begin2PCombatTutorial();
             waveIndicator.Show(1, 3);
+            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(twoPlayerCombatTutorial.Dialogue));
+            
             yield return new WaitUntil(() => waveComplete);
         }
 
@@ -499,9 +494,7 @@ public class BeetleFight : DialogueClasses
             yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesAnalyzeAfterExam));
 
-            CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
-            jackie.OutOfCombat();
-            ives.OutOfCombat();
+            CombatManager.Instance.GameState = GameState.AFTER_COMBAT;
             jackie.FaceLeft();
             ives.FaceRight();
 
@@ -509,11 +502,12 @@ public class BeetleFight : DialogueClasses
             AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
             yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
             yield return StartCoroutine(FadeImage(dialogueMarshBg, 1f, true));
+            AudioManager.Instance.StartBackgroundTrack();
             yield return StartCoroutine(DialogueBoxV2.Instance.Play(postBattleDialogueEntry));
             yield return new WaitForSeconds(1f);
 
             GameStateManager.Instance.UpdateLevelProgress(StageInformation.QUEEN_PREPARATION_STAGE);
-            GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.SelectionScreen>().SceneName);
+            GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.PreQueenFight>().SceneName);
             yield break;
         }
     }
@@ -551,6 +545,7 @@ public class BeetleFight : DialogueClasses
     private IEnumerator TwoPlayerDialogue()
     {
         HighlightManager.Instance.EntityClicked -= EntityClicked;
+        DialogueManager.Instance.MoveBoxToTop();
         yield return new WaitUntil(() => (!DialogueManager.Instance.IsInDialogue()));
         yield return StartCoroutine(DialogueManager.Instance.StartDialogue(ivesTutorial.Dialogue));
     }

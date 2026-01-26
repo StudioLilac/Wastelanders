@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using static IBattleQueueDisplayable;
 
 #nullable enable
 public class ClashingBattleQueueIcon : MonoBehaviour, IBattleQueueDisplayable
@@ -13,6 +14,7 @@ public class ClashingBattleQueueIcon : MonoBehaviour, IBattleQueueDisplayable
     [SerializeField]
     private BattleQueueIcons rightClashingAction = null!;
     [SerializeField] private SwordIcon swordIcon = null!;
+    [SerializeField] private LayoutWidthFader widthFader = null!;
 
     private static readonly ClashCalculator Calculator = new();
     private ActionClass leftClashing = null!;
@@ -59,6 +61,51 @@ public class ClashingBattleQueueIcon : MonoBehaviour, IBattleQueueDisplayable
         swordIcon.SetClashState(Calculator.CompareRange(GetRange(leftClashing), GetRange(rightClashing)));
 
     private (int, int) GetRange(ActionClass actionClass) => ((actionClass.GetRolledStats().RollFloor), (actionClass.GetRolledStats().RollCeiling));
+
+    public void SetFullyTransparent()
+    {
+        widthFader.SetLightScreen();
+        swordIcon.SetFullyTransparent();
+        leftClashingAction.SetFullyTransparent();
+        rightClashingAction.SetFullyTransparent();
+    }
+
+    private void SetFullyOpaque()
+    {
+        widthFader.SetDarkScreen();
+        swordIcon.SetFullyOpaque();
+        leftClashingAction.SetFullyOpaque();
+        rightClashingAction.SetFullyOpaque();
+    }
+
+    public IEnumerator FadeIn()
+    {
+        if (!isActiveAndEnabled)
+        {
+            SetFullyOpaque();
+            yield break;
+        }
+
+        SetFullyTransparent();
+        StartCoroutine(swordIcon.FadeIn());
+        StartCoroutine(leftClashingAction.FadeIn());
+        StartCoroutine(rightClashingAction.FadeIn());
+        yield return StartCoroutine(widthFader.FadeInDarkScreen(EXPAND_DURATION));
+    }
+
+    public IEnumerator FadeOut()
+    {
+        if (!isActiveAndEnabled) 
+        {
+            SetFullyTransparent();
+            yield break;
+        }
+
+        StartCoroutine(swordIcon.FadeOut());
+        StartCoroutine(leftClashingAction.FadeOut());
+        StartCoroutine(rightClashingAction.FadeOut());
+        yield return StartCoroutine(widthFader.FadeInLightScreen(EXPAND_DURATION));
+    }
 }
 
 public enum ClashResultType
