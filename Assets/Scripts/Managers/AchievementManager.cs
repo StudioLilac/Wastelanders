@@ -18,8 +18,6 @@ namespace Steamworks {
         // reset whenever a scene changes.
         private bool onePlayerDead = false;
 
-        private List<EntityClass> players = new();
-
         protected override void Awake() {
             base.Awake();
 
