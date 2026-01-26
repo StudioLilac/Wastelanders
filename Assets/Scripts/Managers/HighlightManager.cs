@@ -7,6 +7,7 @@ using UnityEngine;
 public record CurrentPlayer() : IQuery<PlayerClass?>;
 public class HighlightManager : MonoBehaviour 
 {
+    private const float CURRENT_PLAYER_CROSSHAIR_SLOWDOWN_FACTOR = 0.5f;
     public static HighlightManager Instance { get; private set; } = null!;
     private EntityClass? currentHighlightedEnemyEntity = null;
     private ActionClass? currentHighlightedAction = null;
@@ -77,7 +78,7 @@ public class HighlightManager : MonoBehaviour
         selectedPlayer = forcedPlayer;
         if (forcedPlayer != null) RenderHand(forcedPlayer);
         
-        selectedPlayer?.CrossHair(0.2f);
+        selectedPlayer?.CrossHair(CURRENT_PLAYER_CROSSHAIR_SLOWDOWN_FACTOR);
     }
     private void HandlePlayerClick(PlayerClass clickedPlayer)
     {
@@ -89,7 +90,7 @@ public class HighlightManager : MonoBehaviour
             selectedPlayer = clickedPlayer;
             RenderHand(clickedPlayer);
             
-            selectedPlayer?.CrossHair(0.2f);
+            selectedPlayer?.CrossHair(CURRENT_PLAYER_CROSSHAIR_SLOWDOWN_FACTOR);
         }
     }
 

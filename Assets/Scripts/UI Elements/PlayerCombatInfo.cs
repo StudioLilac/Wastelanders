@@ -8,7 +8,6 @@ namespace UI_Elements {
         public override void Update() {}
 
         public override void ActivateCrosshair(float speed = 1) {
-            Debug.Log(speed);
             base.ActivateCrosshair(speed);
             animator.speed = speed;
         }
