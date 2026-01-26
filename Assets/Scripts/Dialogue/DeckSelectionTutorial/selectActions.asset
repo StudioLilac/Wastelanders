@@ -16,29 +16,24 @@ MonoBehaviour:
   - bodyText: I only have the stamina to use a couple of Actions. I should choose
       them wisely.
     speakerName: Jackie
-    displayingImage: {fileID: 0}
-    sfx: 
+    displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
     broadcastAnEvent: 0
   - bodyText: <i>Each individual character has their own weapon proficiencies that
       can grow as they gain experience.</i>
     speakerName: Tutorial
     displayingImage: {fileID: 0}
-    sfx: 
     broadcastAnEvent: 0
   - bodyText: <i>Weapon Proficiency determines how many Actions from a weapon a character
       can select.</i>
     speakerName: Tutorial
     displayingImage: {fileID: 0}
-    sfx: 
     broadcastAnEvent: 0
   - bodyText: <i>The coin icon represents the cost to add this Action to the deck.</i>
     speakerName: Tutorial
     displayingImage: {fileID: 21300000, guid: a9b93558fad3077429dd2674a34563e9, type: 3}
-    sfx: 
     broadcastAnEvent: 0
   - bodyText: '<i>Try picking Actions with wide varieties of Speed! This avoids speed
       conflicts in battle. '
     speakerName: Tutorial
     displayingImage: {fileID: 21300000, guid: b1411cc1e1231574797f223a58264863, type: 3}
-    sfx: 
     broadcastAnEvent: 0

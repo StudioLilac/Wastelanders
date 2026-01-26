@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95c77db4989fc7d49a699ce7afdbb956, type: 3}
+  m_Name: ActorDatabase
+  m_EditorClassIdentifier: 
+  Jackie: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+  Ives: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+  Narration: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
+  Broadcast: {fileID: 11400000, guid: 474297f421f8c524e85a2e1640557075, type: 2}
+  Loudspeaker: {fileID: 11400000, guid: bcbbdf73c3064764492351164f82d3a2, type: 2}
+  Tutorial: {fileID: 11400000, guid: b64e232132ef228439856328530fa3c8, type: 2}
+  Event: {fileID: 11400000, guid: 4fef3aeb65460fd498ab9efe9bac8625, type: 2}

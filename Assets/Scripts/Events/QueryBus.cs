@@ -37,6 +37,7 @@ public static class QueryBus
 
         if (handler == null)
         {
+            Debug.LogWarning("No handler found for query: " + typeof(TQuery));
             return default;
         }
 

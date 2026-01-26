@@ -831,7 +831,7 @@ MonoBehaviour:
   txt: {fileID: 3533872528902881567}
   who: {fileID: 120644800469564911}
   img: {fileID: 4973583615778877089}
-  eventProfile: {fileID: 11400000, guid: 4fef3aeb65460fd498ab9efe9bac8625, type: 2}
+  actorDatabase: {fileID: 11400000, guid: be53e8381153aca419b2e0c52914caf8, type: 2}
   typewriterRate: 50
 --- !u!1 &7556958568510389986
 GameObject:
