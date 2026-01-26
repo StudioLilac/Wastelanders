@@ -9,7 +9,7 @@ public class LowBlow : FistCards
         lowerBound = 3;
         upperBound = 3;
         Speed = 5;
-        clashable = false;
+        Clashable = false;
 
         myName = "Low Blow";
         description = "This attack doesn't clash with enemy actions.";

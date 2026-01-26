@@ -185,7 +185,7 @@ public class BattleQueue : MonoBehaviour
         //Modifies: (@field array) as it will remove the existing wrapper from that array
         private ActionWrapper CreateClashingWrapper(ActionClass actionCard)
         {
-            if (actionCard.clashable)
+            if (actionCard.Clashable)
             {
                 foreach (ActionWrapper existingWrapper in array)
                 {
@@ -326,7 +326,7 @@ public class BattleQueue : MonoBehaviour
         {
             if (IsClashing()) return false;
 
-            if ((PlayerAction && !PlayerAction.clashable) || (EnemyAction && !EnemyAction.clashable)) return false;
+            if ((PlayerAction && !PlayerAction.Clashable) || (EnemyAction && !EnemyAction.Clashable)) return false;
 
             // If the PlayerAction's speed is greater than the enemy Action's speed it can redirect the enemy's attack and clash. Enemies cannot redirect player attacks. 
             bool playerWrapperClashesWithEnemyAction = PlayerAction != null && (PlayerAction.Origin == clashingAction.Target || PlayerAction.Speed >= clashingAction.Speed) && PlayerAction.Target == clashingAction.Origin;

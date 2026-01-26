@@ -9,7 +9,7 @@ public class Struggle : ClasslessCards
         lowerBound = 1;
         upperBound = 1;
         Speed = 1;
-        clashable = false;
+        Clashable = false;
 
         myName = "Struggle";
         description = "You flail about as you are exhausted...";

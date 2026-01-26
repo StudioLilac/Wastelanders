@@ -29,7 +29,7 @@ public abstract class PlayerClass : EntityClass
 
     protected List<GameObject> discard = new();
 
-    public bool exhausted => maxHandSize == 0;
+    public bool Exhausted => maxHandSize == 0;
 
     public override void Start()
     {
@@ -136,7 +136,7 @@ public abstract class PlayerClass : EntityClass
         playerReshuffleDeck?.Invoke(this);
         maxHandSize--;
 
-        if (exhausted) {
+        if (Exhausted) {
             return; // don't fill the pool anymore if the player is exhausted.
         }
 
@@ -191,7 +191,7 @@ public abstract class PlayerClass : EntityClass
             DrawCard();
         }
         
-        if (exhausted) {
+        if (Exhausted) {
             AddStruggleToHand();
         }
     }

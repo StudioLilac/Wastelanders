@@ -47,7 +47,7 @@ namespace UI_Toolkit
         {
             var player = new CurrentPlayer().Query();
             if (player) {
-                if (player.exhausted) {
+                if (player.Exhausted) {
                     return "No cards left";
                 } else {
                     return $"{player.Pool.Count}/{player.DeckSize}";
@@ -60,7 +60,7 @@ namespace UI_Toolkit
         private string GetCurrentDeckBodyText() {
             var player = new CurrentPlayer().Query();
             if (player) {
-                if (player.exhausted) {
+                if (player.Exhausted) {
                     return "Your hand size is zero. All that's left to do is struggle.";
                 }
             }
