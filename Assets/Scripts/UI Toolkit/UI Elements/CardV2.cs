@@ -50,7 +50,7 @@ namespace UI_Toolkit.UI_Elements
 
             var back = this.Q<VisualElement>("img-card-back");
             back.ClearClassList();
-            back.AddToClassList($"card-back-{ac switch { AxeCards => "a", FistCards => "f", PistolCards => "p", StaffCards => "s", _ => "e" }}");
+            back.AddToClassList($"card-back-{ac switch { AxeCards => "a", FistCards => "f", PistolCards => "p", StaffCards => "s", ClasslessCards => "c", _ => "e" }}");
         }
 
         public void BindActionClassCardState(ActionClass ac)

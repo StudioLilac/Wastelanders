@@ -40,8 +40,15 @@ public class CardDatabase : ScriptableObject
     }
     
 #nullable enable
-    public ClasslessCards? GetDefaultAction() {
-        return classlessCards.FirstOrDefault();
+    public ClasslessCards? GetDefaultAction(PlayerClass player) {
+        switch (player) {
+            case Jackie:
+                return classlessCards[0];
+            case Ives:
+                return classlessCards[1];
+            default:
+                return classlessCards.FirstOrDefault();
+        }
     }
 #nullable disable
 

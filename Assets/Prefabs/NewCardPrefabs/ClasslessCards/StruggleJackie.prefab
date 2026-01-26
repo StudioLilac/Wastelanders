@@ -19,7 +19,7 @@ PrefabInstance:
     - target: {fileID: 1866809560200078547, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 63a9433d7884bbe42a0b84c28832c3a4, type: 3}
+      objectReference: {fileID: 21300000, guid: 4f934c8ca44fe1d4f928ed67db9bb080, type: 3}
     - target: {fileID: 1866809560200078547, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -46,7 +46,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7256956916184963317, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_Name
-      value: Struggle
+      value: StruggleJackie
       objectReference: {fileID: 0}
     - target: {fileID: 8284128080877360369, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -121,7 +121,7 @@ MonoBehaviour:
     Part4: 1457734184
   description: 
   IsEvolved: 0
-  icon: {fileID: 21300000, guid: 63a9433d7884bbe42a0b84c28832c3a4, type: 3}
+  icon: {fileID: 21300000, guid: 4f934c8ca44fe1d4f928ed67db9bb080, type: 3}
   cardBack: {fileID: 21300000, guid: 832b52c38e4d56144852f606484babb9, type: 3}
   evolvedCardBack: {fileID: 21300000, guid: 756b0f0f1c0a43f438e640ac5f6cc4f8, type: 3}
   cardUI: {fileID: 7093626105232434615}

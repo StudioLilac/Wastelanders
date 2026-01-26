@@ -197,7 +197,7 @@ public abstract class PlayerClass : EntityClass
     }
 
     private void AddStruggleToHand() {
-        var strugglePrefab = new DefaultCard().Query();
+        var strugglePrefab = new DefaultCard(this).Query();
 
         if (!strugglePrefab) {
             Debug.LogWarning(strugglePrefab + " could not be found");

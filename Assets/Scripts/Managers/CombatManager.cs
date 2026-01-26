@@ -9,7 +9,7 @@ using UI_Toolkit;
 
 public record GetGameState(): IQuery<GameState?>;
 #nullable enable
-public record DefaultCard : IQuery<ClasslessCards?>;
+public record DefaultCard(PlayerClass player) : IQuery<ClasslessCards?>;
 #nullable disable
 
 public class CombatManager : MonoBehaviour
@@ -451,6 +451,6 @@ public class CombatManager : MonoBehaviour
         return new List<EntityClass>(neutralTeam);
     }
     
-    private ClasslessCards? GetDefaultAction(DefaultCard q) => cardDatabase.GetDefaultAction();
+    private ClasslessCards? GetDefaultAction(DefaultCard q) => cardDatabase.GetDefaultAction(q.player);
 
 }
