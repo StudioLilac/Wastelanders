@@ -191,7 +191,7 @@ public abstract class PlayerClass : EntityClass
             DrawCard();
         }
         
-        if (Exhausted) {
+        if (Exhausted && hand.Count < 1) {
             AddStruggleToHand();
         }
     }
