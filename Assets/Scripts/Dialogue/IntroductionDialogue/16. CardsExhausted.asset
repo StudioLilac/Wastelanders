@@ -16,31 +16,25 @@ MonoBehaviour:
   - bodyText: Here's my final tip.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
-    sfx: 
     broadcastAnEvent: 0
   - bodyText: Careful about burning yourself out during a fight.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
-    sfx: 
     broadcastAnEvent: 0
   - bodyText: You can play as many Actions as you want on your turn.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 26e9e78366004814eb04d15ac70b48af, type: 3}
-    sfx: 
     broadcastAnEvent: 0
   - bodyText: But each time your deck is exhausted and reshuffles...
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 26e9e78366004814eb04d15ac70b48af, type: 3}
-    sfx: 
     broadcastAnEvent: 0
   - bodyText: 'Your maximum hand size will be decreased by one for the rest of the
       fight! '
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 26e9e78366004814eb04d15ac70b48af, type: 3}
-    sfx: 
     broadcastAnEvent: 0
   - bodyText: 'So make every Action count to avoid exhausting yourself too quickly! '
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
-    sfx: 
     broadcastAnEvent: 0
