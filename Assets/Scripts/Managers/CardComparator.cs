@@ -86,7 +86,7 @@ public class CardComparator : MonoBehaviour
             {
                 card1.CardIsUnstaggered();
                 card2.CardIsUnstaggered();
-                AudioManager.Instance.PlaySFX(CLASH_TIE_SOUND_FX_NAME);
+                AudioManager.Instance.PlaySFX(SoundID.CB_clash_tie);
 
             } else if (cardOneGreater < 0) //Card2 wins clash
             {
@@ -159,7 +159,6 @@ public class CardComparator : MonoBehaviour
         actionClass.ApplyEffect();
         yield return StartCoroutine(ClashBothEntities(actionClass, actionClass));
         BattleQueue.BattleQueueInstance.RemoveActionWrapperFromQueue(actionWrapper);
-
         actionClass.RollDice();
         DeactivateInfo(actionClass);
 

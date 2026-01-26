@@ -49,7 +49,7 @@ public class Fragment : ActionClass, IPlayableQueenCard
 
     private void OnProjectileHit()
     {
-        AudioManager.Instance.PlaySFX(FRAGMENT_SOUND_EFFECT_NAME);
+        AudioManager.Instance.PlaySFX(SoundID.CB_queen_hit);
         base.OnHit();
     }
 }

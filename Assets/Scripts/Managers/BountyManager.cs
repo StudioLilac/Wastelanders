@@ -7,6 +7,8 @@ using BountySystem;
 using LevelSelectInformation;
 using System.Collections;
 
+public record ClearBounty(): IEvent;
+
 #nullable enable
 // A class that persists the current bounty information during level selecting
 public class BountyManager : PersistentSingleton<BountyManager>, IBind<BountyStateData>
@@ -30,6 +32,15 @@ public class BountyManager : PersistentSingleton<BountyManager>, IBind<BountySta
         }
     }
 
+    protected override void Awake()
+    {
+        base.Awake();
+        this.Subscribe<ClearBounty>(_ => {
+            ActiveBounty = null;
+            SelectedBountyInformation = null;
+        });
+    }
+
 
     public BountyInformation? SelectedBountyInformation { get; set; } = null;
 
@@ -46,8 +57,6 @@ public class BountyManager : PersistentSingleton<BountyManager>, IBind<BountySta
     public void NotifyWin()
     {
         if (ActiveBounty != null) ContractStateData?.SetChallengeComplete(ActiveBounty);
-        ActiveBounty = null;
-        SelectedBountyInformation = null;
     }
 
     public void GoToEpilogueScene(EpilogueSceneData scene)

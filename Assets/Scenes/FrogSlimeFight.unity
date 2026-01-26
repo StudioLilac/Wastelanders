@@ -705,10 +705,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 596087403}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 2100, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &189897196
 MonoBehaviour:
@@ -1547,9 +1547,9 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -3000,24 +3000,24 @@ MonoBehaviour:
   - content: "<i>After a day's worth of traveling, the Candidates arrive at The Western
       Marsh, this year\u2019s exam destination.</i>"
     speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: <i>They spend the night setting up base camp. Tension fills the camp,
       and Candidates are restless throughout the night.</i>
     speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: <i>Finally, the morning of the exam arrives.</i>
     speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   testBegins:
   - content: Good morning, Candidates. As you all know...
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 5589630762363650048
@@ -3026,44 +3026,44 @@ MonoBehaviour:
     - rid: 5589630762363650050
   - content: This exam will emulate a real NITES Wasteland expedition.
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 5589630762363650057
   - content: The purpose of these expeditions are to extract as much valuable Waste
       Products that cultivate inside mutated creatures as we can.
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: 'These Products are essential to combat the spread of the Waste as they
       help us produce weapons and energy. '
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: 'As such, this exam will test your ability to exploit and extract as
       many valuable Waste Products from the local flora and fauna as you can. '
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: 'The examiners will be discreetly evaluating you, and will not interfere
       with the exam unless there is a serious emergency. '
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: You have until noon tomorrow to collect as many valuable Waste Products
       as you can.
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 5589630762363650058
   - content: Good luck, your time starts now.
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 5589630802696863808
@@ -3071,56 +3071,46 @@ MonoBehaviour:
   - bodyText: Hmm, what's my plan...
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
-    sfx: 
     broadcastAnEvent: 0
   - bodyText: Killing more dangerous Waste Creatures drop better Waste Products.
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
-    sfx: 
     broadcastAnEvent: 0
   - bodyText: Should I work with a team again to hunt down a larger Waste Creature?
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
-    sfx: 
     broadcastAnEvent: 1
   - bodyText: 'No, I came back almost empty-handed last year after I froze up and
       let others do the fighting. '
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 537908265661f2b44970c526d7724cfb, type: 3}
-    sfx: 
     broadcastAnEvent: 1
   - bodyText: By the time I felt okay, there were basically no products left!
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 487226e5dae66424ea250466920a3086, type: 3}
-    sfx: 
     broadcastAnEvent: 1
   - bodyText: "I can do this solo, that\u2019s what the past year of training was
       for."
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
-    sfx: 
     broadcastAnEvent: 1
   - bodyText: 'This way I get the full cut of the products, and it should impress
       the examiners, I hope. '
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: c719baaafa8cd7148806ffb41907add6, type: 3}
-    sfx: 
     broadcastAnEvent: 0
   - bodyText: "Although I\u2019ll have to be sneaky and careful if I\u2019m hunting
       alone..."
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 487226e5dae66424ea250466920a3086, type: 3}
-    sfx: 
     broadcastAnEvent: 0
   - bodyText: <i>Squelch
     speakerName: Slime
     displayingImage: {fileID: 21300000, guid: 174956c54b12b0d419353cc1a44153ca, type: 3}
-    sfx: 
     broadcastAnEvent: 1
   - bodyText: Whoops. Maybe I gotta be more sneaky and more careful.
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
-    sfx: 
     broadcastAnEvent: 0
   explainEnemyAttacks: {fileID: 11400000, guid: bd119768af500824888c7433c16c4b43, type: 2}
   explainClashing: {fileID: 11400000, guid: fbf4a51513cbf2d40b41e0d798bda07a, type: 2}
@@ -3133,76 +3123,63 @@ MonoBehaviour:
   - bodyText: 'And now, we wait. '
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
-    sfx: 
     broadcastAnEvent: 0
   jackiePreMissedShot:
   - bodyText: "Well, it\u2019s not the strongest monster, but I\u2019ve got to start
       collecting Waste Products. I can't fall behind."
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 537908265661f2b44970c526d7724cfb, type: 3}
-    sfx: 
     broadcastAnEvent: 0
   - bodyText: <i>Jackie steadies her breathing and takes aim.
     speakerName: Narration
     displayingImage: {fileID: 0}
-    sfx: 
     broadcastAnEvent: 0
   jackiePostMissedShot:
   - bodyText: Crap, I missed. Guess I'll take it down by force.
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 537908265661f2b44970c526d7724cfb, type: 3}
-    sfx: 
     broadcastAnEvent: 0
   jackiePreCombat:
   - bodyText: 'Well... the more the merrier. '
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 537908265661f2b44970c526d7724cfb, type: 3}
-    sfx: 
     broadcastAnEvent: 0
   afterCombatDialogue:
   - bodyText: Whew, glad that's over and done with.
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
-    sfx: 
     broadcastAnEvent: 0
   - bodyText: "Let\u2019s see what Waste Products these monsters had in them."
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: c719baaafa8cd7148806ffb41907add6, type: 3}
-    sfx: 
     broadcastAnEvent: 0
   crystalExtraction:
   - bodyText: 'Ew, alright. No wonder it was hacking up so much spit. '
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 537908265661f2b44970c526d7724cfb, type: 3}
-    sfx: 
     broadcastAnEvent: 0
   - bodyText: 'I wonder how this crystal got in here? '
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
-    sfx: 
     broadcastAnEvent: 0
   - bodyText: Heh, looks pretty valuable though. Not a bad start.
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: c719baaafa8cd7148806ffb41907add6, type: 3}
-    sfx: 
     broadcastAnEvent: 0
   - bodyText: Off to the next target!
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: c719baaafa8cd7148806ffb41907add6, type: 3}
-    sfx: 
     broadcastAnEvent: 0
   beetleEntrance:
   - bodyText: KCCRRKR?
     speakerName: ???
     displayingImage: {fileID: 21300000, guid: 320fd4765facdcb488b31229396fad33, type: 3}
-    sfx: 
     broadcastAnEvent: 0
   gameLoseDialogue:
   - bodyText: Tsk, I better get away and recover. Maybe changing up my weapon techniques
       will help?
     speakerName: Jackie
     displayingImage: {fileID: 0}
-    sfx: 
     broadcastAnEvent: 0
   references:
     version: 2
@@ -4460,7 +4437,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.3026466
+      value: -5.568993
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y

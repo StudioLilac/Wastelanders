@@ -139,10 +139,10 @@ public class AudioManager : PersistentSingleton<AudioManager>
         BackgroundMusicPlayer.loop = true;
     }
 
-    public void PlaySFX(string effect)
+    public void PlaySFX(SoundID effect)
     {
         RandomizePitch();
-        SFXSoundsPlayer.PlayOneShot(soundEffectsDatabase.GetClipByName(effect));
+        SFXSoundsPlayer.PlayOneShot(soundEffectsDatabase.GetClipByID(effect));
     }
 
     private void RandomizePitch()

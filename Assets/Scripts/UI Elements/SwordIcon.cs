@@ -10,7 +10,7 @@ public class SwordIcon : MonoBehaviour, IBattleQueueDisplayable
     [SerializeField] private SpriteFadeHandler swordFader = null!;
     [SerializeField] private Animator swordsAnimator = null!;
     private ClashResultType currentClashType = default;
-
+    private bool isActive = true;
     public GameObject GameObject => gameObject;
 
     public void Awake()
@@ -49,7 +49,9 @@ public class SwordIcon : MonoBehaviour, IBattleQueueDisplayable
         SetFullyTransparent();
         StartCoroutine(swordFader.FadeInDarkScreen(FADE_DURATION));
     }
-    public IEnumerator FadeOut() {
+    public IEnumerator FadeOut() 
+    {
+        isActive = false;
         if (!isActiveAndEnabled)
         {
             SetFullyTransparent();
@@ -60,12 +62,16 @@ public class SwordIcon : MonoBehaviour, IBattleQueueDisplayable
 
 
 
-    public void OnMouseEnter() => new TooltipEvent(
-        TextTipDisplayStyle.Display, 
-        Title: currentClashType.ToString().ToUpper(),
-        Body: currentClashType.GetDescription(),
-        Icon: swordsIcon.sprite
+    public void OnMouseEnter()
+    {
+        if (!isActive) return;
+        new TooltipEvent(
+            TextTipDisplayStyle.Display,
+            Title: currentClashType.ToString().ToUpper(),
+            Body: currentClashType.GetDescription(),
+            Icon: swordsIcon.sprite
         ).Invoke();
+    }
 
     public void OnMouseExit() => new TooltipEvent(TextTipDisplayStyle.None).Invoke();
     

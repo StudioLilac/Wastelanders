@@ -31,7 +31,8 @@ public class BattleQueueIcons : DisplayableClass, IBattleQueueDisplayable
     [SerializeField] SpriteFadeHandler targetIconFader;
     [SerializeField] SpriteFadeHandler unseenActionFader;
     [SerializeField] LayoutWidthFader widthFader;
-  
+
+    private bool isActive = true;
 
     private int FadeSortingOrder => CombatFadeScreenHandler.Instance.FADE_SORTING_ORDER;
     private string FadeSortingLayer => CombatFadeScreenHandler.Instance.FADE_SORTING_LAYER;
@@ -79,6 +80,7 @@ public class BattleQueueIcons : DisplayableClass, IBattleQueueDisplayable
 
     public IEnumerator FadeOut()
     {
+        isActive = false;
         if (!isActiveAndEnabled)
         {
             SetFullyTransparent(); 
@@ -111,7 +113,7 @@ public class BattleQueueIcons : DisplayableClass, IBattleQueueDisplayable
 
     private void OnMouseDown()
     {
-        if (ActionClass.Origin is PlayerClass && CombatManager.Instance.CanHighlight())
+        if (ActionClass.Origin is PlayerClass && CombatManager.Instance.CanHighlight() && isActive)
         {
             new BattleQueueIconClick(this).Invoke();
             DeHighlightTarget();
