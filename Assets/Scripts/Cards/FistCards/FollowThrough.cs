@@ -80,7 +80,7 @@ public class FollowThrough : FistCards
 
     public override void OnHit()
     {
-        AudioManager.Instance?.PlaySFX(FIST_SOUND_FX_NAME);
+        AudioManager.Instance?.PlaySFX(SoundID.CB_fist_hit);
         Vector3 diffInLocation = Target.myTransform.position - Origin.myTransform.position;
         Origin.UpdateFacing(diffInLocation, null);
         if (!originalCopy)

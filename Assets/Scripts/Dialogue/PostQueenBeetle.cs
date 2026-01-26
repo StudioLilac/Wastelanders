@@ -21,8 +21,6 @@ public class PostQueenBeetle : DialogueClasses
     [SerializeField] private Transform mainCameraIvesTalk;
 
     [SerializeField] Sprite jackieSmileImage;
-    [SerializeField] Image ivesImage;
-    [SerializeField] Image jackieImage;
     [SerializeField] private UIFadeHandler hugBackground;
     [SerializeField] private UIFadeHandler backgroundScrim;
 
@@ -87,6 +85,10 @@ public class PostQueenBeetle : DialogueClasses
 
         yield return new WaitForSeconds(2.5f);
         yield return StartCoroutine(DialogueBoxV2.Instance.Play(jackieFinal));
+
+        yield return new WaitForSeconds(1.0f);
+        yield return StartCoroutine(hugBackground.FadeInLightScreen(2.5f));
+
 
         GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.Credits>().SceneName);    
     }

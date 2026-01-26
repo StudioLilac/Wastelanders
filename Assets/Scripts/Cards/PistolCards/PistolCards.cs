@@ -28,7 +28,7 @@ public abstract class PistolCards : ActionClass
     }
     public override void OnHit()
     {
-        AudioManager.Instance?.PlaySFX(PISTOL_SOUND_FX_NAME);
+        AudioManager.Instance?.PlaySFX(SoundID.CB_gun_hit);
         base.OnHit();
     }
 }

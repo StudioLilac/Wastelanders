@@ -58,6 +58,7 @@ public class PreQueenFight : DialogueClasses
     [SerializeField] private List<Beetle> queenGuardBeetles;
     [SerializeField] private List<Transform> queenGuardBeetleTransforms;
 
+    [SerializeField] private Image blackBG = null!;
     [SerializeField] private Image endOfExamImage;
     [SerializeField] private SpriteRenderer treeSprite;
     [SerializeField] private List<SpriteFadeHandler> closeTrees;
@@ -66,7 +67,6 @@ public class PreQueenFight : DialogueClasses
     [SerializeField] private bool jumpToCombat;
     [SerializeField] private bool instaKill;
     private DefaultSceneBuilder defaultSceneBuilder;
-
 
 
 
@@ -80,6 +80,7 @@ public class PreQueenFight : DialogueClasses
     [SerializeField] private DialogueWrapper LastBitDialogue;
     [SerializeField] private DialogueWrapper PostFight;
     [SerializeField] private DialogueWrapper BeetleGainedBuff;
+    [SerializeField] private DialogueWrapper hatcheryExplanation;
     [SerializeField] private DialogueWrapper gameLoseDialogue;
 
     private const float BRIEF_PAUSE = 0.2f; // For use after an animation to make it visually seem smoother
@@ -223,11 +224,11 @@ public class PreQueenFight : DialogueClasses
 
 
                 planOneJackie.AttackAnimation(StaffCards.STAFF_ANIMATION_NAME);
-                AudioManager.Instance?.PlaySFX(StaffCards.STAFF_SOUND_FX_NAME);
+                SoundID.CB_staff_hit.Play();
                 Coroutine runBeetle = StartCoroutine(worker1.StaggerEntities(planOneJackie, worker2, 0.3f));
                 yield return new WaitForSeconds(0.2f);
                 planOneIves.AttackAnimation(FistCards.FIST_ANIMATION_NAME);
-                AudioManager.Instance?.PlaySFX(FistCards.FIST_SOUND_FX_NAME);
+                SoundID.CB_fist_hit.Play();
                 yield return StartCoroutine(worker2.StaggerEntities(planOneIves, worker1, 0.3f));
                 yield return runBeetle;
                 DieInScene(worker1);
@@ -238,7 +239,7 @@ public class PreQueenFight : DialogueClasses
                 yield return StartCoroutine(planOneJackie.MoveToPosition(jackieShotPosition.position, 0f, 0.5f));
                 StopCoroutine(beetleTriesToRun);
                 planOneJackie.AttackAnimation(PistolCards.PISTOL_ANIMATION_NAME);
-                AudioManager.Instance?.PlaySFX(PistolCards.PISTOL_SOUND_FX_NAME);
+                SoundID.CB_gun_hit.Play();
                 yield return StartCoroutine(scout1.StaggerEntities(planOneJackie, scout1, 0.3f));
                 DieInScene(scout1);
                 entitiesInPlanOne.Remove(scout1);
@@ -323,17 +324,17 @@ public class PreQueenFight : DialogueClasses
 
 
                 planTwoJackie.AttackAnimation(StaffCards.STAFF_ANIMATION_NAME);
-                AudioManager.Instance?.PlaySFX(StaffCards.STAFF_SOUND_FX_NAME);
+                SoundID.CB_staff_hit.Play();
                 Coroutine runBeetle = StartCoroutine(drone2.StaggerEntities(planTwoJackie, drone2, 0.3f));
                 yield return new WaitForSeconds(0.2f);
                 planTwoIves.AttackAnimation(AxeCards.AXE_ANIMATION_NAME);
-                AudioManager.Instance?.PlaySFX(AxeCards.AXE_SOUND_FX_NAME);
+                SoundID.CB_axe_cut.Play();
                 yield return StartCoroutine(drone1.StaggerEntities(planTwoIves, drone1, 0.3f));
                 yield return runBeetle;
                 DieInScene(drone1);
                 DieInScene(drone2);
 
-
+                yield return dialogueCoroutine;
                 yield return new WaitForSeconds(0.8f);
 
                 planTwoIves.animator.enabled = false;
@@ -404,16 +405,16 @@ public class PreQueenFight : DialogueClasses
                 StartCoroutine(ives.ResetPosition());
                 yield return StartCoroutine(jackie.ResetPosition()); //Jackie Runs into the scene
                 yield return new WaitForSeconds(MEDIUM_PAUSE);
-                Coroutine jackieClash = StartCoroutine(NoCombatClash(jackie, campBeetles[3], false, StaffCards.STAFF_SOUND_FX_NAME));
+                Coroutine jackieClash = StartCoroutine(NoCombatClash(jackie, campBeetles[3], false, SoundID.CB_staff_hit));
 
                 yield return new WaitForSeconds(BRIEF_PAUSE);
-                yield return StartCoroutine(NoCombatClash(ives, campBeetles[0], false, FistCards.FIST_SOUND_FX_NAME));
+                yield return StartCoroutine(NoCombatClash(ives, campBeetles[0], false, SoundID.CB_fist_hit));
 
                 yield return new WaitForSeconds(BRIEF_PAUSE);
-                StartCoroutine(NoCombatClash(ives, campBeetles[2], false, FistCards.FIST_SOUND_FX_NAME));
+                StartCoroutine(NoCombatClash(ives, campBeetles[2], false, SoundID.CB_fist_hit));
 
                 yield return new WaitForSeconds(BRIEF_PAUSE);
-                yield return StartCoroutine(NoCombatClash(jackie, campBeetles[1], false,StaffCards.STAFF_SOUND_FX_NAME));
+                yield return StartCoroutine(NoCombatClash(jackie, campBeetles[1], false, SoundID.CB_staff_hit));
 
                 yield return new WaitForSeconds(MEDIUM_PAUSE);
                 treeOverlay.sortingLayerName = oldLayer;
@@ -449,7 +450,7 @@ public class PreQueenFight : DialogueClasses
                 yield return StartCoroutine(jackie.MoveToPosition(middleBigCrystal.transform.position, 2f, 0.5f));
 
                 jackie.AttackAnimation(StaffCards.STAFF_ANIMATION_NAME);
-                AudioManager.Instance?.PlaySFX(StaffCards.STAFF_SOUND_FX_NAME);
+                AudioManager.Instance?.PlaySFX(SoundID.CB_staff_hit);
                 jackie.AddStacks(Resonate.buffName, 1);
 
 
@@ -558,8 +559,9 @@ public class PreQueenFight : DialogueClasses
 
             yield return new WaitForSeconds(1.5f);
             DialogueManager.Instance.MoveBoxToBottom();
-
             yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
+
+            AudioManager.Instance.StartBackgroundTrack();
             DialogueBox.DialogueBoxEvent += FadeInBackground;
             yield return new WaitUntil(() => (!DialogueManager.Instance.IsInDialogue()));
             yield return StartCoroutine(DialogueManager.Instance.StartDialogue(PostFight.Dialogue));
@@ -572,6 +574,7 @@ public class PreQueenFight : DialogueClasses
     void FadeInBackground()
     {
         DialogueBox.DialogueBoxEvent -= FadeInBackground;
+        StartCoroutine(FadeImage(blackBG, 1f, true));
         StartCoroutine(FadeImage(endOfExamImage, 1f, true));
     }
     
@@ -580,6 +583,19 @@ public class PreQueenFight : DialogueClasses
         CombatManager.PlayersWinEvent += PlayersWin;
         CombatManager.EnemiesWinEvent += EnemiesWin;
         Beetle.OnGainBuffs += ExplainBeetleBuff;
+        this.Subscribe<HatcheryUsed>(ExplainHatchery);
+    }
+
+    void ExplainHatchery(HatcheryUsed e)
+    {
+        this.UnSubscribe<HatcheryUsed>(ExplainHatchery);
+        StartCoroutine(ExplainHatcheryCoroutine());
+    }
+
+    private IEnumerator ExplainHatcheryCoroutine()
+    {
+        yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
+        StartCoroutine(DialogueManager.Instance.StartDialogue(hatcheryExplanation.Dialogue));
     }
 
     private void ExplainBeetleBuff(string buffType, int stacks, Beetle beetle)
@@ -592,6 +608,7 @@ public class PreQueenFight : DialogueClasses
         if (buffType == Resonate.buffName && stacks > 0)
         {
             yield return new WaitUntil(() => CombatManager.Instance.GameState != GameState.FIGHTING);
+            yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
             Beetle.OnGainBuffs -= ExplainBeetleBuff;
             StartCoroutine(DialogueManager.Instance.StartDialogue(BeetleGainedBuff.Dialogue));
         }
@@ -620,7 +637,7 @@ public class PreQueenFight : DialogueClasses
 
     // "clashes" both entities, without rolling dice. bool parameter decides who gets staggered
     // this is stolen from card comparator (code duplication!) if there is a better way of doing this pls lmk
-    private IEnumerator NoCombatClash(EntityClass e1, EntityClass e2, bool e1GetsHit, string soundEffectName = "")
+    private IEnumerator NoCombatClash(EntityClass e1, EntityClass e2, bool e1GetsHit, SoundID soundEffectName = SoundID.None)
     {
         EntityClass origin = e1;
         EntityClass target = e2;
@@ -637,7 +654,7 @@ public class PreQueenFight : DialogueClasses
         if (!e1GetsHit)
         {
             e1.AttackAnimation("IsMelee");
-            if (soundEffectName != "") AudioManager.Instance?.PlaySFX(soundEffectName);
+            if (soundEffectName != SoundID.None) soundEffectName.Play();
             yield return StartCoroutine(e2.StaggerEntities(e1, e2, 0.3f));
             e2.RemoveEntityFromCombat();
             yield return StartCoroutine(e2.Die());

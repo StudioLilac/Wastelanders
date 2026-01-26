@@ -15,7 +15,7 @@ public abstract class FistCards : ActionClass
 
     public override void OnHit()
     {
-        AudioManager.Instance?.PlaySFX(FIST_SOUND_FX_NAME);
+        AudioManager.Instance?.PlaySFX(SoundID.CB_fist_hit);
         Origin.AttackAnimation(FIST_ANIMATION_NAME);
         base.OnHit();
     }

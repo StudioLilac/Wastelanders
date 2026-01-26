@@ -33,7 +33,7 @@ public abstract class FrogAttacks : ActionClass
             StartCoroutine(HandleProjectile());
         } else
         {
-            AudioManager.Instance.PlaySFX(SPIT_SOUND_EFFECT_NAME); // temp sound effect.
+            AudioManager.Instance.PlaySFX(SoundID.CB_frog_hit); // temp sound effect.
             base.OnHit();
         }
     }
@@ -49,7 +49,7 @@ public abstract class FrogAttacks : ActionClass
     }
     protected virtual void OnProjectileHit()
     {
-        AudioManager.Instance.PlaySFX(SPIT_SOUND_EFFECT_NAME);
+        AudioManager.Instance.PlaySFX(SoundID.CB_frog_hit);
         base.OnHit();
     }
 }

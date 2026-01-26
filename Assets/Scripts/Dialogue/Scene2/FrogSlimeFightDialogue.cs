@@ -264,7 +264,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
                 jackie.gameObject.transform.position = treeHidingPositionJackie.position + new Vector3(1f, 0, 0);
                 jackie.animator.enabled = true;
                 jackie.AttackAnimation(PistolCards.PISTOL_ANIMATION_NAME);
-                AudioManager.Instance?.PlaySFX(PistolCards.PISTOL_SOUND_FX_NAME);
+                AudioManager.Instance?.PlaySFX(SoundID.CB_gun_hit);
 
                 yield return StartCoroutine(MakeFrogJump(frog, 1f));
                 yield return StartCoroutine(frog.MoveToPosition(frogConfrontPosition.position, 0f, 1.2f,

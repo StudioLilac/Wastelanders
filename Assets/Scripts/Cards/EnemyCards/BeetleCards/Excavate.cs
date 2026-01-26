@@ -39,7 +39,7 @@ public class Excavate : BeetleAttacks, IPlayableBeetleCard
     // does 2x damage if target is crystal
     public override void OnHit()
     {
-        AudioManager.Instance.PlaySFX(EXCAVATE_SOUND_EFFECT_NAME);
+        AudioManager.Instance.PlaySFX(SoundID.CB_excavate);
  
         if (Target is Crystals) rolledCardStats.ActualRoll = 2 * rolledCardStats.ActualRoll;
         base.OnHit();
