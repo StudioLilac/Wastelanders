@@ -12,6 +12,8 @@ public record GetGameState() : IQuery<GameState?>;
 public record DefaultCard(PlayerClass player) : IQuery<ClasslessCards?>;
 #nullable disable
 
+public record PlayersWin() : IEvent;
+
 public class CombatManager : MonoBehaviour
 {
     public static CombatManager Instance { get; private set; }
@@ -211,6 +213,7 @@ public class CombatManager : MonoBehaviour
         if (enemyTeam.Count == 0)
         {
             PlayersWinEvent?.Invoke();
+            new PlayersWin().Invoke();
         }
     }
 
@@ -432,6 +435,7 @@ public class CombatManager : MonoBehaviour
                 default:
                     break;
             }
+            
             OnGameStateChanged?.Invoke(value);
         }
     }

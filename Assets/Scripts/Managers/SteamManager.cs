@@ -191,7 +191,7 @@ namespace Steamworks {
             }
 
             SteamUserStats.StoreStats();
-            Debug.Log($"Achievement unlocked: {achievementId}");
+            Debug.Log($"[Steam] Achievement unlocked: {achievementId}");
         }
 
         public static void UpdateStat(string statName, int value) {

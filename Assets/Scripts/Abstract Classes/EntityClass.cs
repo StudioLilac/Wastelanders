@@ -10,6 +10,7 @@ using static StatusEffect;
 using UnityEditor.Animations;
 #endif
 
+public record OnBuffsUpdatedEvent(EntityClass WhoAmI) : IEvent;
 public abstract class EntityClass : SelectClass
 {
     public const string STAGGERED_ANIMATION_NAME = "IsStaggered";
@@ -556,6 +557,7 @@ public abstract class EntityClass : SelectClass
     {
         combatInfo.UpdateBuffs(statusEffects);
         BuffsUpdatedEvent?.Invoke(this);
+        new OnBuffsUpdatedEvent(this).Invoke();
     }
 
     //Please use the originalHandler to resubscribe when you are done :3
