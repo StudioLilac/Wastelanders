@@ -7,8 +7,8 @@ using Systems.Persistence;
 using WeaponDeckSerialization;
 using UI_Toolkit;
 
-public record GetGameState(): IQuery<GameState?>;
 #nullable enable
+public record GetGameState() : IQuery<GameState?>; 
 public record DefaultCard(PlayerClass player) : IQuery<ClasslessCards?>;
 #nullable disable
 

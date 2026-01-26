@@ -13,7 +13,7 @@ public class Harvest : AxeCards
         Speed = 1;
 
         myName = "Harvest";
-        description = "On hit, consume all wound stacks and heal that much.";
+        description = "On hit, heal +1 for each wound stack on the target.";
         evolutionCriteria = "Heal 10.";
         evolutionDescription = "Wound isn't consumed on-hit.";
         MaxEvolutionProgress = 10;
@@ -27,7 +27,6 @@ public class Harvest : AxeCards
         base.OnHit();
         int healAmount = Target.GetBuffStacks(Wound.buffName);
         Origin.Heal(healAmount);
-        Target.ReduceStacks(Wound.buffName, healAmount);
         CurrentEvolutionProgress += healAmount;
     }
 }

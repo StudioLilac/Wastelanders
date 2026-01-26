@@ -29,6 +29,7 @@ public abstract class PlayerClass : EntityClass
 
     protected List<GameObject> discard = new();
 
+    private bool shuffledThisTurn = false;
     public bool Exhausted => maxHandSize == 0;
 
     public override void Start()
@@ -134,11 +135,11 @@ public abstract class PlayerClass : EntityClass
     protected void Reshuffle()
     {
         playerReshuffleDeck?.Invoke(this);
-        maxHandSize--;
 
-        if (Exhausted) {
-            return; // don't fill the pool anymore if the player is exhausted.
-        }
+        if (Exhausted) return; // don't fill the pool anymore if the player is exhausted.
+        if (!shuffledThisTurn) maxHandSize--;
+        shuffledThisTurn = true;
+
 
         while (discard.Count > 0)
         {
@@ -174,6 +175,7 @@ public abstract class PlayerClass : EntityClass
 
     public override void PerformSelection()
     {
+        shuffledThisTurn = false;
         DrawToMax();
         StartCoroutine(ResetPosition());
     }
