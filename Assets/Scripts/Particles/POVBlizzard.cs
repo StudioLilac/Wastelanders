@@ -45,7 +45,7 @@ namespace Particles {
         private ParticleSystem.SizeOverLifetimeModule sizeModule;
         private ParticleSystem.RotationOverLifetimeModule rotationModule;
         private ParticleSystem.ColorOverLifetimeModule colorModule;
-        private ParticleSystem.ShapeModule shapeModule;
+        private ParticleSystem.ShapeModule shapeModuleBlizzard;
 
         private float driftTimer;
 
@@ -71,7 +71,7 @@ namespace Particles {
             sizeModule = mainParticleSystem.sizeOverLifetime;
             rotationModule = mainParticleSystem.rotationOverLifetime;
             colorModule = mainParticleSystem.colorOverLifetime;
-            shapeModule = mainParticleSystem.shape;
+            shapeModuleBlizzard = mainParticleSystem.shape;
 
             // ───────── MAIN ─────────
             mainModule.startSize = new ParticleSystem.MinMaxCurve(
@@ -85,10 +85,10 @@ namespace Particles {
             mainModule.startLifetime = depthRange / intoCameraSpeed;
 
             // ───────── SHAPE (DEPTH SPAWN) ─────────
-            shapeModule.enabled = true;
-            shapeModule.shapeType = ParticleSystemShapeType.Box;
-            shapeModule.scale = new Vector3(20f, 12f, depthRange);
-            shapeModule.position = new Vector3(0f, 0f, -depthRange * 0.5f);
+            shapeModuleBlizzard.enabled = true;
+            shapeModuleBlizzard.shapeType = ParticleSystemShapeType.Box;
+            shapeModuleBlizzard.scale = new Vector3(20f, 12f, depthRange);
+            shapeModuleBlizzard.position = new Vector3(0f, 0f, -depthRange * 0.5f);
 
             // ───────── VELOCITY ─────────
             velocityModule.z = intoCameraSpeed;
