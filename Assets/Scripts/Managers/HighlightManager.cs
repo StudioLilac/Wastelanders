@@ -71,25 +71,25 @@ public class HighlightManager : MonoBehaviour
     {
         if (forcedPlayer != selectedPlayer)
         {
-            selectedPlayer?.DeHighlight();
+            selectedPlayer?.UnCrossHair();
             ResetCurrentHighlightedAction();
         }
         selectedPlayer = forcedPlayer;
         if (forcedPlayer != null) RenderHand(forcedPlayer);
         
-        selectedPlayer?.Highlight();
+        selectedPlayer?.CrossHair();
     }
     private void HandlePlayerClick(PlayerClass clickedPlayer)
     {
         if (clickedPlayer != selectedPlayer)
         {
-            selectedPlayer?.DeHighlight();
+            selectedPlayer?.UnCrossHair();
             
             ResetCurrentHighlightedAction();
             selectedPlayer = clickedPlayer;
             RenderHand(clickedPlayer);
             
-            selectedPlayer?.Highlight();
+            selectedPlayer?.CrossHair();
         }
     }
 
