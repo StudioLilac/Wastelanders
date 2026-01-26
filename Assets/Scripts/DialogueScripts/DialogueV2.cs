@@ -36,7 +36,7 @@ namespace DialogueScripts
     }
 
     public record DialogueEntry(
-        string? content,
+        string content,
         ActorProfile? speaker,
         SoundID sfxId,
         Sprite? picture,

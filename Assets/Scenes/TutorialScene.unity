@@ -163,9 +163,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 859eeee2fa593c14088e2718e2fb837f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bqContainer: {fileID: 713468929346325044}
-  iconPrefab: {fileID: 7504458634070143618, guid: f9683846bad493e429dda3ece4900989, type: 3}
-  clashingPrefab: {fileID: 5469894721144988013, guid: b10263b2eb9aadc41aa6c2d7606dba7a, type: 3}
 --- !u!1 &153882424
 GameObject:
   m_ObjectHideFlags: 0
@@ -450,14 +447,8 @@ MonoBehaviour:
   baseCamera: {fileID: 537786514}
   dynamicCamera: {fileID: 1542478170}
   handContainer: {fileID: 2102825247}
-  battleQueueParent: {fileID: 370424664}
   playerDatabase: {fileID: 11400000, guid: 8727bc367ba518d4496483da96ba1cf0, type: 2}
   cardDatabase: {fileID: 11400000, guid: 4ee9950b3d655254fb0def1cd879db6a, type: 2}
---- !u!1 &370424664 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7622365840802787573, guid: 0ce0ee3d06315164a88fea5184a490b6, type: 3}
-  m_PrefabInstance: {fileID: 1931448501099863814}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &418624938
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2260,7 +2251,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.133852
+      value: -10.131903
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2885,10 +2876,7 @@ MonoBehaviour:
   cardAbilitiesTutorial: {fileID: 11400000, guid: 30053b1be0d3cda44a2fd061e9472d1a, type: 2}
   clashingOutcomeTutorial: {fileID: 11400000, guid: 942d2fbb5b637c440a3cc0e6f26c0805, type: 2}
   clashingStrategyTutorial: {fileID: 11400000, guid: 9e61a457e8191be4d8f55aeaac5aa904, type: 2}
-  cardsExhaustedTutorial: {fileID: 11400000, guid: feb4de5b8e1861040af496de2b492462, type: 2}
-  ivesIsDefeated: {fileID: 11400000, guid: 9197dc84cf94ee44db4a70d04c3af5ce, type: 2}
-  jackieBeatTheDummies: {fileID: 11400000, guid: 00e2d869642255f4cafd6fbddf9d5df4, type: 2}
-  endingTutorialDialogue: {fileID: 11400000, guid: 71bc8b72e567a434fb451296dad29b2f, type: 2}
+  cardsExhaustedTutorial: {fileID: 11400000, guid: ce091b6262a176d4aa8ab564c09689de, type: 2}
   endOfTutorialV2: {fileID: 11400000, guid: 3efc7e8f04c11334ba52043dcbdf8bf6, type: 2}
   gameLoseDialogue: {fileID: 11400000, guid: 71aa9a544d4b56045a1b4ee4cb6b4f0d, type: 2}
   jumpToCombat: 0
@@ -2998,11 +2986,6 @@ RectTransform:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 297780659286361273, guid: ffdf6c0e873fb734ca3cd40ff3507571, type: 3}
   m_PrefabInstance: {fileID: 2102825245}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &713468929346325044 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 7310062480428887619, guid: 0ce0ee3d06315164a88fea5184a490b6, type: 3}
-  m_PrefabInstance: {fileID: 1931448501099863814}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1931448501099863814
 PrefabInstance:
