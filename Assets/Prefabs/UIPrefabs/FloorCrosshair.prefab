@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7054822229635162144}
   - component: {fileID: -6111598818340554650}
-  - component: {fileID: 5085964437297862046}
   - component: {fileID: 3443342217473377994}
   m_Layer: 0
   m_Name: FloorCrosshair
@@ -89,22 +88,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!111 &5085964437297862046
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1659748562456849422}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Animation: {fileID: 7400000, guid: ba0c85681046e4647a157f969ec07635, type: 2}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_UpdateMode: 0
-  m_CullingType: 0
 --- !u!95 &3443342217473377994
 Animator:
   serializedVersion: 7
