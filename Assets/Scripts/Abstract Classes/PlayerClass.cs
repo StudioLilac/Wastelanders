@@ -192,22 +192,24 @@ public abstract class PlayerClass : EntityClass
         }
         
         if (exhausted) {
-            var strugglePrefab = new DefaultCard().Query();
-
-            if (!strugglePrefab) {
-                Debug.LogWarning(strugglePrefab + " could not be found");
-                return;
-            }
-            
-            GameObject struggle = Instantiate(strugglePrefab.gameObject);
-
-            ActionClass struggleCard = struggle.GetComponent<ActionClass>();
-            struggleCard.Origin = this;
-            struggleCard.IsEvolved = false; // or whatever default makes sense
-
-            hand.Add(struggle);
-            struggle.transform.position = new Vector3(-100, -100, 1);
+            AddStruggleToHand();
         }
+    }
+
+    private void AddStruggleToHand() {
+        var strugglePrefab = new DefaultCard().Query();
+
+        if (!strugglePrefab) {
+            Debug.LogWarning(strugglePrefab + " could not be found");
+            return;
+        }
+            
+        ActionClass struggleCard = Instantiate(strugglePrefab);
+        struggleCard.Origin = this;
+        struggleCard.IsEvolved = false;
+
+        hand.Add(struggleCard.gameObject);
+        struggleCard.transform.position = new Vector3(-100, -100, 1);
     }
 
     public override IEnumerator MoveToPosition(Vector3 destination, float radius, float duration, Vector3? lookAtPosition = null)
