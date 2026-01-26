@@ -291,10 +291,10 @@ public abstract class EntityClass : SelectClass
         DeHighlight();
     }
 
-    public void CrossHair()
+    public void CrossHair(float speed = 1)
     {
         crosshairStaysActive = true;
-        Highlight();
+        Highlight(speed);
     }
 
     public void UnCrossHair()
@@ -303,11 +303,11 @@ public abstract class EntityClass : SelectClass
         DeHighlight();
     }
 
-    public void Highlight()
+    public void Highlight(float speed = 1)
     {
         if (CombatManager.Instance.CanHighlight())
         {
-            combatInfo.ActivateCrosshair();
+            combatInfo.ActivateCrosshair(speed);
         }
     }
 

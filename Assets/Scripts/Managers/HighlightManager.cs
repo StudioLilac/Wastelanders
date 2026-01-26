@@ -77,7 +77,7 @@ public class HighlightManager : MonoBehaviour
         selectedPlayer = forcedPlayer;
         if (forcedPlayer != null) RenderHand(forcedPlayer);
         
-        selectedPlayer?.CrossHair();
+        selectedPlayer?.CrossHair(0.2f);
     }
     private void HandlePlayerClick(PlayerClass clickedPlayer)
     {
@@ -89,7 +89,7 @@ public class HighlightManager : MonoBehaviour
             selectedPlayer = clickedPlayer;
             RenderHand(clickedPlayer);
             
-            selectedPlayer?.CrossHair();
+            selectedPlayer?.CrossHair(0.2f);
         }
     }
 
