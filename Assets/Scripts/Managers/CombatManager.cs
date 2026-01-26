@@ -11,8 +11,6 @@ public record GetGameState(): IQuery<GameState?>;
 
 public record PlayersWin() : IEvent;
 
-public record GameStateChanged(GameState prev, GameState next) : IEvent;
-
 public class CombatManager : MonoBehaviour
 {
     public static CombatManager Instance { get; private set; }
@@ -435,7 +433,6 @@ public class CombatManager : MonoBehaviour
                     break;
             }
             
-            new GameStateChanged(prev, value).Invoke();
             OnGameStateChanged?.Invoke(value);
         }
     }

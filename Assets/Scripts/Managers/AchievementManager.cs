@@ -30,9 +30,9 @@ namespace Steamworks {
             CheckKillAchievements();
             
             this.Subscribe<PlayersWin>(OnPlayersWin);
-            this.Subscribe<GameStateChanged>(HandleGameStateChanged);
             this.Subscribe<OnPlayerHit>(HandlePlayerHitCritical);
             this.Subscribe<OnFinishSparring>(HandlePlayerFinishedSparring);
+            this.Subscribe<OnBuffsUpdatedEvent>(HandleOnBuffsUpdated);
         }
 
         private void OnEnable() {
@@ -43,22 +43,6 @@ namespace Steamworks {
         private void OnDisable() {
             EntityClass.OnEntityDeath -= HandleEntityDeath;
             SceneManager.activeSceneChanged -= OnSceneChanged;
-        }
-
-        private void HandleGameStateChanged(GameStateChanged stateChanged) {
-            if (stateChanged.next == GameState.SELECTION) {
-                players = CombatManager.Instance.GetPlayers();
-                
-                foreach (EntityClass player in players) {
-                    player.BuffsUpdatedEvent -= HandlePlayerBuffsUpdated;
-                    player.BuffsUpdatedEvent += HandlePlayerBuffsUpdated;
-                }
-            } else if (stateChanged.next != GameState.FIGHTING) {
-                foreach (EntityClass player in players) {
-                    player.BuffsUpdatedEvent -= HandlePlayerBuffsUpdated;
-                }
-                players.Clear();
-            }
         }
 
         private void HandleEntityDeath(EntityClass entity) {
@@ -115,10 +99,10 @@ namespace Steamworks {
             }
         }
 
-        private void HandlePlayerBuffsUpdated(EntityClass player) {
-            if (player is not PlayerClass) return;
+        private void HandleOnBuffsUpdated(OnBuffsUpdatedEvent buffsUpdatedEvent) {
+            if (buffsUpdatedEvent.WhoAmI is not PlayerClass) return;
 
-            if (player.GetBuffStacks(Resonate.buffName) >= 5) {
+            if (buffsUpdatedEvent.WhoAmI.GetBuffStacks(Resonate.buffName) >= 5) {
                 SteamManager.UnlockAchievement("THE_RESONATOR");
             }
         }

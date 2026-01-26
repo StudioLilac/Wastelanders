@@ -10,6 +10,7 @@ using static StatusEffect;
 using UnityEditor.Animations;
 #endif
 
+public record OnBuffsUpdatedEvent(EntityClass WhoAmI) : IEvent;
 public abstract class EntityClass : SelectClass
 {
     public const string STAGGERED_ANIMATION_NAME = "IsStaggered";
@@ -383,6 +384,7 @@ public abstract class EntityClass : SelectClass
         CheckBuff(buffType);
         statusEffects[buffType].GainStacks(stacks);
         UpdateBuffs();
+        new OnBuffsUpdatedEvent(this).Invoke();
     }
 
     public void ReduceStacks(string buffType, int stacks)
@@ -391,6 +393,7 @@ public abstract class EntityClass : SelectClass
         {
             statusEffects[buffType].LoseStacks(stacks);
             UpdateBuffs();
+            new OnBuffsUpdatedEvent(this).Invoke();
         }
     }
 
@@ -590,9 +593,5 @@ public abstract class EntityClass : SelectClass
     public void SetReturnPosition(Vector3 newReturningPosition)
     {
         initialPosition = newReturningPosition;
-    }
-    
-    private void OnDestroy() {
-        BuffsUpdatedEvent = null;
     }
 }
