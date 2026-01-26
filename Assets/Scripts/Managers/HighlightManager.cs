@@ -71,19 +71,25 @@ public class HighlightManager : MonoBehaviour
     {
         if (forcedPlayer != selectedPlayer)
         {
+            selectedPlayer?.DeHighlight();
             ResetCurrentHighlightedAction();
         }
         selectedPlayer = forcedPlayer;
         if (forcedPlayer != null) RenderHand(forcedPlayer);
+        
+        selectedPlayer?.Highlight();
     }
     private void HandlePlayerClick(PlayerClass clickedPlayer)
     {
         if (clickedPlayer != selectedPlayer)
         {
+            selectedPlayer?.DeHighlight();
+            
             ResetCurrentHighlightedAction();
             selectedPlayer = clickedPlayer;
             RenderHand(clickedPlayer);
-            clickedPlayer.DeHighlight();
+            
+            selectedPlayer?.Highlight();
         }
     }
 
