@@ -15,7 +15,7 @@ MonoBehaviour:
   Entries:
   - content: Thought I'd find you here.
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 1207052918024306759
@@ -24,80 +24,87 @@ MonoBehaviour:
     - rid: 1207052918024306772
   - content: Ives!
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 1207052918024306760
+    - rid: 1207053248668106817
+    - rid: 1207053248668106818
+    - rid: 1207053248668106816
   - content: "Mornin\u2019 Jackie. I trust that you have everything prepared? "
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 1207052918024306761
   - content: "Just a heads up, I\u2019ll be one of the examiners joining the expedition."
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: "You\u2019ll be coming with us? You better be watching when I pass this
       exam with flying colors."
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: "Hah, don\u2019t worry, I won\u2019t be the only one watching you leave
       everyone in the dust."
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 1207053248668106820
   - content: 'Just remember that the exam is going to simulate a real NITES expedition
       into the Wasteland. '
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 1207053248668106821
   - content: 'There have been casualties before. '
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 1207053248668106822
   - content: "Yes, I know. I\u2019m ready."
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 1207052918024306763
-  - content: Still, let's go over the fundamentals again.
+  - content: Though, let's go over the fundamentals again.
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 1207052918024306764
   - content: As a warm up.
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 1207052918024306765
   - content: 'Haha, sure kid. There''s always room to improve the fundamentals. '
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 1207053248668106823
   - content: Just make sure not to overexert yourself.
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: Come help me set up this dummy then, would you?
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: 
     speaker: {fileID: 11400000, guid: 4fef3aeb65460fd498ab9efe9bac8625, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 1207052918024306767
@@ -109,7 +116,7 @@ MonoBehaviour:
       type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
         actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-        sprite: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+        sprite: {fileID: 21300000, guid: 85e302f93093f564290df1bd57119113, type: 3}
     - rid: 1207052918024306760
       type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
@@ -165,3 +172,40 @@ MonoBehaviour:
         actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
         action: 60
         duration: 0
+    - rid: 1207053248668106816
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 41a291ebbfe3c8744898031b27f37a87, type: 2}
+        sprite: {fileID: 21300000, guid: 4ce556a6e6b89ee45afc94b2e2fb4b6c, type: 3}
+    - rid: 1207053248668106817
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 41a291ebbfe3c8744898031b27f37a87, type: 2}
+        action: 10
+        duration: 0
+    - rid: 1207053248668106818
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 41a291ebbfe3c8744898031b27f37a87, type: 2}
+        action: 80
+        duration: 2
+    - rid: 1207053248668106820
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+        sprite: {fileID: 21300000, guid: 85e302f93093f564290df1bd57119113, type: 3}
+    - rid: 1207053248668106821
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+        sprite: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    - rid: 1207053248668106822
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+        sprite: {fileID: 21300000, guid: 9c0fa92a7d9ea9547a72fa5d6fdbb220, type: 3}
+    - rid: 1207053248668106823
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+        sprite: {fileID: 21300000, guid: 85e302f93093f564290df1bd57119113, type: 3}

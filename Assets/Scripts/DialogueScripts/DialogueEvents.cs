@@ -41,6 +41,7 @@ namespace DialogueScripts
         SetOffscreenRight = 50,
         FadeIn = 60,
         FadeOut = 70,
+        FlashFade = 80,
     }
 
     /// Change the vertical positioning of the dialogue box. 
