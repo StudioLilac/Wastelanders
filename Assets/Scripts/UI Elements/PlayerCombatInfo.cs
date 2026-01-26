@@ -9,7 +9,7 @@ namespace UI_Elements {
 
         public override void ActivateCrosshair(float speed = 1) {
             base.ActivateCrosshair(speed);
-            animator.speed = speed;
+            animator.speed = Mathf.Min(speed, animator.speed);
         }
 
         public override void DeactivateCrosshair() {
