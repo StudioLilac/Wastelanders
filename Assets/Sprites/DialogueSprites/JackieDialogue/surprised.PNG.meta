@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: f36679e62ce05814981fee3db47d8276
+guid: b63c17736cfaced4aa71e946a51034ad
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1356695409746937646
-    second: jackie_pout_recoloured_0
+      213: -6146375626484895344
+    second: surprised_0
+  - first:
+      213: 2326814261735535604
+    second: surprised_1
+  - first:
+      213: -7356081551286392681
+    second: surprised_2
+  - first:
+      213: -3819781321525519729
+    second: surprised_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +46,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -46,7 +55,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -100,13 +109,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: jackie_pout_recoloured_0
+      name: surprised_0
       rect:
         serializedVersion: 2
-        x: 515
-        y: 0
-        width: 1755
-        height: 2724
+        x: 925
+        y: 2216
+        width: 89
+        height: 225
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +124,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2d871a186bc0c2de0800000000000000
-      internalID: -1356695409746937646
+      spriteID: 091bf3fbeefa3baa0800000000000000
+      internalID: -6146375626484895344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: surprised_1
+      rect:
+        serializedVersion: 2
+        x: 1018
+        y: 2253
+        width: 84
+        height: 225
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f33f093e318a4020800000000000000
+      internalID: 2326814261735535604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: surprised_2
+      rect:
+        serializedVersion: 2
+        x: 975
+        y: 2137
+        width: 55
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79825c4adc2f9e990800000000000000
+      internalID: -7356081551286392681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: surprised_3
+      rect:
+        serializedVersion: 2
+        x: 1060
+        y: 2173
+        width: 55
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8a9cca40296dfac0800000000000000
+      internalID: -3819781321525519729
       vertices: []
       indices: 
       edges: []
@@ -125,7 +200,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +210,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      jackie_pout_recoloured_0: -1356695409746937646
+      surprised_0: -6146375626484895344
+      surprised_1: 2326814261735535604
+      surprised_2: -7356081551286392681
+      surprised_3: -3819781321525519729
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
