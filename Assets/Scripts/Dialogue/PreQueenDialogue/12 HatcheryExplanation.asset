@@ -15,11 +15,9 @@ MonoBehaviour:
   dialogue:
   - bodyText: 'Take care, the Queen is planning to summoning more beetles. '
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 5c42f22b680694218be05c960a2e3400, type: 3}
-    sfx: 
+    displayingImage: {fileID: 21300000, guid: 4dbe5c4f3a05e8e45a6f2d97abc7824a, type: 3}
     broadcastAnEvent: 0
   - bodyText: Maybe there's a way to interrupt it...
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 5c42f22b680694218be05c960a2e3400, type: 3}
-    sfx: 
+    displayingImage: {fileID: 21300000, guid: 4dbe5c4f3a05e8e45a6f2d97abc7824a, type: 3}
     broadcastAnEvent: 0

@@ -15,7 +15,7 @@ MonoBehaviour:
   Entries:
   - content: 'Hey, you''re Jackie right? '
     speaker: {fileID: 11400000, guid: d5a65a5aa8d5f964fbd28b4f0ae8ecaf, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 3264111934402461768
@@ -24,7 +24,7 @@ MonoBehaviour:
     - rid: 3264111934402461767
   - content: 'Yeah, that''s me. Do I know you? '
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 3264111934402461772
@@ -33,99 +33,98 @@ MonoBehaviour:
     - rid: 3264111934402461774
   - content: Nah, I'm just a fan. Heard rumours about what you did during the exam.
     speaker: {fileID: 11400000, guid: d5a65a5aa8d5f964fbd28b4f0ae8ecaf, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: Ah that...
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 1207053096974024766
   - content: To be honest, I wish that didn't happen. It took so much time away from
       my actual exam.
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: ...
     speaker: {fileID: 11400000, guid: d5a65a5aa8d5f964fbd28b4f0ae8ecaf, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: 'You nervous about the results? '
     speaker: {fileID: 11400000, guid: d5a65a5aa8d5f964fbd28b4f0ae8ecaf, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: 'Yeah... I really need to pass. '
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
-    events:
-    - rid: 1207053096974024767
+    events: []
   - content: 'There''s someone that needs me to. '
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: I don't suppose they can wait?
     speaker: {fileID: 11400000, guid: d5a65a5aa8d5f964fbd28b4f0ae8ecaf, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: 'They''ve already waited a year. '
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: 'I see. '
     speaker: {fileID: 11400000, guid: d5a65a5aa8d5f964fbd28b4f0ae8ecaf, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: 'I wish you the best of luck then. '
     speaker: {fileID: 11400000, guid: d5a65a5aa8d5f964fbd28b4f0ae8ecaf, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: <i>CHZHCKK
     speaker: {fileID: 11400000, guid: 474297f421f8c524e85a2e1640557075, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: Good morning citizens of New Haven City.
     speaker: {fileID: 11400000, guid: 474297f421f8c524e85a2e1640557075, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: 'Today we honour the courage and valor of those who took the NTIES exam. '
     speaker: {fileID: 11400000, guid: 474297f421f8c524e85a2e1640557075, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: In addition to the usual Waste Products, a very special discovery was
       made during the exam this year!
     speaker: {fileID: 11400000, guid: 474297f421f8c524e85a2e1640557075, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: A newfound Waste power source five times more efficient than what we
       synthesize today!
     speaker: {fileID: 11400000, guid: 474297f421f8c524e85a2e1640557075, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: This great achievement means a safer city! Celebrate these heroes you
       get the chance.
     speaker: {fileID: 11400000, guid: 474297f421f8c524e85a2e1640557075, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: Nevertheless, this broadcast will announce the score of the NITES exam
       candidates in energy units collected, and whether they passed.
     speaker: {fileID: 11400000, guid: 474297f421f8c524e85a2e1640557075, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   references:
@@ -135,12 +134,7 @@ MonoBehaviour:
       type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        sprite: {fileID: 21300000, guid: 3e1f4b61741099f41a921affe0965f9d, type: 3}
-    - rid: 1207053096974024767
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
-      data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        sprite: {fileID: 21300000, guid: a9901bbfc9728634b8252622c7f3882c, type: 3}
+        sprite: {fileID: 21300000, guid: df71feced233e4383b3c3903e719e156, type: 3}
     - rid: 3264111934402461767
       type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
@@ -174,7 +168,7 @@ MonoBehaviour:
       type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        sprite: {fileID: 21300000, guid: 534aff9f6dfd6c544b0144954e8ef0b0, type: 3}
+        sprite: {fileID: 21300000, guid: e37d4fbf07c214c868939546f702fa2b, type: 3}
     - rid: 3264111934402461774
       type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
