@@ -42,12 +42,13 @@ public class DialogueText
                {
             "jackie" => database.Jackie,
             "ives" => database.Ives,
+            "ailin" => database.Ailin,
             "narration" => database.Narration,
             "broadcast" => database.Broadcast,
             "loudspeaker" => database.Loudspeaker,
             "tutorial" => database.Tutorial,
             "???" => database.Unkown,
-             _ => null,
+            _ => null,
         };
     }
 }

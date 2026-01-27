@@ -6,6 +6,7 @@ public class ActorDatabase : ScriptableObject
 {
     public ActorProfile Jackie;
     public ActorProfile Ives;
+    public ActorProfile Ailin;
     public ActorProfile Narration;
     public ActorProfile Broadcast;
     public ActorProfile Loudspeaker;

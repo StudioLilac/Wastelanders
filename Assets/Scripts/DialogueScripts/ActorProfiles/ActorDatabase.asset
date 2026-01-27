@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Jackie: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
   Ives: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+  Ailin: {fileID: 11400000, guid: 8ea1ccd6a87516a42b4a830ac3f980a1, type: 2}
   Narration: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
   Broadcast: {fileID: 11400000, guid: 474297f421f8c524e85a2e1640557075, type: 2}
   Loudspeaker: {fileID: 11400000, guid: bcbbdf73c3064764492351164f82d3a2, type: 2}

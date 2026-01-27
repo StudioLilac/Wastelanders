@@ -1,3 +1,4 @@
+using DialogueScripts;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,33 +8,55 @@ namespace Dialogue.PreBounty {
         [SerializeField] private DialogueWrapper ailinDialogue;
         [SerializeField] private new Camera camera;
         [SerializeField] private List<Transform> keyframes;
-        [SerializeField] private List<float> zoomValues; // ⬅ Add this
+        [SerializeField] private List<float> zoomValues;
         [SerializeField] private float panDuration = 1.5f;
-        
+        [SerializeField] private UIFadeHandler fader;
+        [SerializeField] private CanvasGroupFadeHandler comingSoon;
+
         private int keyframeIndex;
         private Coroutine panCoroutine;
         
-        private void Start() {
+        private IEnumerator Start()
+        {
+            this.Subscribe<CustomEvent>(HandleDialogueEvent);
             keyframeIndex = 0;
-            StartCoroutine(PlayScene());
+            comingSoon.SetLightScreen();
+            fader.SetDarkScreen();
+            yield return new WaitForSeconds(1.0f);
+            StartCoroutine(fader.FadeInLightScreen(2.0f));
+            yield return new WaitForSeconds(1.0f);
+            yield return DialogueBoxV2.Instance.Play(ailinDialogue);
+            yield return fader.FadeInDarkScreen(1f);
+            yield return new WaitForSeconds(1.0f);
+            yield return comingSoon.FadeInDarkScreen(1f);
+            yield return new WaitForSeconds(4f);
+            yield return comingSoon.FadeInLightScreen(1f);
+            GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.MainMenu>().SceneName);
         }
 
-        private void OnEnable() {
-            DialogueBox.DialogueBoxEvent += HandleDialogueEvent;
+
+        private float cycleScaling = 2f;
+        private float bobbingAmount = 4f; 
+        private float timer = 0;
+        private float verticalOffset = 0;
+
+        void Update()
+        {
+            float previousOffset = verticalOffset;
+            float waveslice = Mathf.Sin(cycleScaling * timer);
+            timer += Time.deltaTime;
+            if (timer > Mathf.PI * 2)
+            {
+                timer = timer - (Mathf.PI * 2);
+            }
+
+            verticalOffset = waveslice * bobbingAmount;
+            float translateChange = verticalOffset - previousOffset;
+            comingSoon.transform.position = new Vector3(comingSoon.transform.position.x,
+            comingSoon.transform.position.y + translateChange, comingSoon.transform.position.z);
         }
 
-        private void OnDisable() {
-            DialogueBox.DialogueBoxEvent -= HandleDialogueEvent;
-        }
-
-        private IEnumerator PlayScene() {
-            UIFadeScreenManager.Instance.SetDarkScreen();
-            yield return UIFadeScreenManager.Instance.FadeInLightScreen(2f);
-            yield return DialogueManager.Instance.StartDialogue(ailinDialogue.Dialogue);
-            yield return UIFadeScreenManager.Instance.FadeInDarkScreen(3f);
-        }
-
-        private void HandleDialogueEvent() {
+        private void HandleDialogueEvent(CustomEvent evt) {
             if (keyframeIndex >= keyframes.Count)
                 return;
 

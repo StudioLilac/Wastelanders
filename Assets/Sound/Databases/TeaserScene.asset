@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a670f5b60f9ade045bd8e0301eecbe93, type: 3}
-  m_Name: PrincessFrog
+  m_Name: TeaserScene
   m_EditorClassIdentifier: 
-  backgroundMusicPrimary: {fileID: 8300000, guid: 8b6db91d68cf8cb4e8cc86f3dd5b035c, type: 3}
+  backgroundMusicPrimary: {fileID: 8300000, guid: f7d78169f4dbd734eae797926ecffca2, type: 3}
   backgroundMusicIntro: {fileID: 0}
-  combatMusicPrimary: {fileID: 8300000, guid: f7d78169f4dbd734eae797926ecffca2, type: 3}
+  combatMusicPrimary: {fileID: 0}
   combatMusicIntro: {fileID: 0}
-  backgroundMusicDeath: {fileID: 8300000, guid: ad2a470944acfc048b53294c89a0945e, type: 3}
+  backgroundMusicDeath: {fileID: 0}
   isPersisting: 0
