@@ -104,13 +104,13 @@ public class HighlightManager : MonoBehaviour
     {
         if (selectedPlayer == null)
         {
-            PopUpNotificationManager.Instance.DisplayWarning(PopupType.SelectPlayerFirst);
+            PopUpNotificationManager.Instance.DisplayWarning(new PopupType.SelectPlayerFirst());
             return;
         }
 
         if (currentHighlightedAction == null)
         {
-            PopUpNotificationManager.Instance.DisplayWarning(PopupType.SelectActionFirst);
+            PopUpNotificationManager.Instance.DisplayWarning(new PopupType.SelectActionFirst());
             return;
         }
 
