@@ -222,9 +222,9 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public static string? SanitizeText(string? input)
+    public static string SanitizeText(string? input)
     {
-        if (string.IsNullOrEmpty(input)) return input;
+        if (string.IsNullOrEmpty(input)) return "";
 
         return input
             .Replace("’", "'")

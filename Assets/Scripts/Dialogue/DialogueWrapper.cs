@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DialogueScripts;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewDialogue", menuName = "Dialogue/DialogueWrapper", order = 1)]
@@ -13,5 +15,10 @@ public class DialogueWrapper : ScriptableObject
     public DialogueWrapper(List<DialogueText> dialogue)
     {
         this.dialogue = dialogue;
+    }
+
+    public static implicit operator DialogueEntry[](DialogueWrapper text)
+    {
+        return text.Dialogue.Select(dt => dt.Into()).ToArray();
     }
 }

@@ -1,3 +1,4 @@
+using DialogueScripts;
 using LevelSelectInformation;
 using System;
 using System.Collections;
@@ -74,7 +75,7 @@ public class DeckSelectionTutorial : MonoBehaviour
             }
             // Wait for fade screen to come in
             yield return new WaitForSeconds(1f);
-            yield return StartCoroutine(StartDialogueWithNextEvent(selectYourCharacter.Dialogue, () => {
+            yield return StartCoroutine(StartDialogueWithNextEvent(selectYourCharacter, () => {
                 playerSelectIndicator.enabled = true;
                 jackieSelect.GetComponent<BoxCollider2D>().enabled = true;
                 CharacterSelect.CharacterSelectedEvent += HandleCharacterSelected; 
@@ -92,7 +93,7 @@ public class DeckSelectionTutorial : MonoBehaviour
         CharacterSelect.CharacterSelectedEvent -= HandleCharacterSelected;
         playerSelectIndicator.enabled = false;
         weaponSelectBoxCollidersToDisable.ForEach(ws => ws.GetComponent<PolygonCollider2D>().enabled = false);
-        StartCoroutine(StartDialogueWithNextEvent(selectYourWeapon.Dialogue, () =>
+        StartCoroutine(StartDialogueWithNextEvent(selectYourWeapon, () =>
         {
             weaponSelectIndicator.enabled = true;
             weaponSelectBoxCollidersToDisable.ForEach(ws => ws.GetComponent<PolygonCollider2D>().enabled = true);
@@ -105,7 +106,7 @@ public class DeckSelectionTutorial : MonoBehaviour
         if (type != CardDatabase.WeaponType.PISTOL) return;
         weaponSelectIndicator.enabled = false;
         WeaponSelect.WeaponSelectEvent -= HandleWeaponSelected;
-        StartCoroutine(StartDialogueWithNextEvent(editYourWeapon.Dialogue, () => {
+        StartCoroutine(StartDialogueWithNextEvent(editYourWeapon, () => {
             foreach (WeaponEdit boxCollider in weaponEditBoxCollidersToDisable)
             {
                 boxCollider.GetComponent<BoxCollider2D>().enabled = true;
@@ -122,7 +123,7 @@ public class DeckSelectionTutorial : MonoBehaviour
         WeaponEdit.WeaponEditEvent -= HandleWeaponEdited;
         GameStateManager.Instance.UpdateLevelProgress(StageInformation.FROG_SLIME_STAGE);
         DeckSelectionManager.Instance.SetNextScene(SceneData.Get<SceneData.FrogSlimeFight>().SceneName);
-        StartCoroutine(StartDialogueWithNextEvent(selectYourActions.Dialogue, () => { DeckSelectionManager.Instance.PlayerActionDeckModifiedEvent += HandleRunOutOfPoints; }));
+        StartCoroutine(StartDialogueWithNextEvent(selectYourActions, () => { DeckSelectionManager.Instance.PlayerActionDeckModifiedEvent += HandleRunOutOfPoints; }));
     }
     private void HandleRunOutOfPoints(int points)
     {
@@ -130,14 +131,15 @@ public class DeckSelectionTutorial : MonoBehaviour
         {
             DeckSelectionManager.Instance.PlayerActionDeckModifiedEvent -= HandleRunOutOfPoints;
             backButtonIndicator.enabled = true;
-            StartCoroutine(DialogueManager.Instance.StartDialogue(backButtonTutorial.Dialogue));
+            StartCoroutine(DialogueBoxV2.Instance.Play(backButtonTutorial));
         }
     }
 
     //Completely removes the PISTOL weaponDeck from jackie
     private void NormalizeTutorialDecks()
     {
-        playerDatabase.JackieData.selectedWeapons.Remove(CardDatabase.WeaponType.PISTOL);
+        playerDatabase.JackieData.selectedWeapons.Clear();
+        playerDatabase.JackieData.selectedWeapons.Add(CardDatabase.WeaponType.STAFF);
         SerializableWeaponListEntry pistolDeck = playerDatabase.JackieData.GetPlayerWeaponDeck(CardDatabase.WeaponType.PISTOL);
         pistolDeck.weaponDeck = new List<SerializableActionClassInfo>
         {
@@ -148,10 +150,9 @@ public class DeckSelectionTutorial : MonoBehaviour
 
 
     //Helper to wait until dialogue is done, then start @param dialogue, then run a callback like setting up a new event. 
-    private IEnumerator StartDialogueWithNextEvent(List<DialogueText> dialogue, Action callbackToRun)
+    private IEnumerator StartDialogueWithNextEvent(DialogueWrapper dialogue, Action callbackToRun)
     {
-        yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
-        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(dialogue));
+        yield return StartCoroutine(DialogueBoxV2.Instance.Play(dialogue));
         callbackToRun();
     }
 
