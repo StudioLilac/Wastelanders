@@ -72,24 +72,18 @@ public class BattleQueue : MonoBehaviour
         }
     }
 
-    public bool CanInsertPlayerCard(ActionClass actionClass) {
-        return actionQueue.IsUniqueSpeed(actionClass) == null;
-    }
 
-    /// <summary>
-    /// Tries to insert the given ActionClass. On speed conflict, shake the conflicting icon.
-    /// Does not add the ActionClass to the BQ.
-    /// 
-    /// Returns: true if the ActionClass can be inserted, false if there is a speed conflict
-    /// </summary>
-    public bool TryInsertPlayerCard(ActionClass actionClass) {
+    // Checks whether action class is a valid card to insert into the battle queue.
+    public PopupType ValidatePlayerInsertion(ActionClass actionClass)
+    {
         ActionWrapper? clashingWrapper = actionQueue.IsUniqueSpeed(actionClass);
-        if (clashingWrapper == null) {
-            return true;
+
+        if (clashingWrapper != null)
+        {
+            return new PopupType.SpeedConflict(clashingWrapper.BattleIcon);
         }
-        
-        StartCoroutine(clashingWrapper.BattleIcon?.ShakePlayerAction());
-        return false;
+
+        return new PopupType.None();
     }
 
     //Remove all cards with (@param entity) as the target and origin

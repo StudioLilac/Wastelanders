@@ -77,7 +77,7 @@ namespace UI_Toolkit.UI_Elements
         }
 
         private void OnPointerDown(PointerDownEvent eventData) {
-            if (actionClass.TryPlayableByPlayer(out PopupType popupType) == false)
+            if (actionClass.IsPlayableByPlayer(out PopupType popupType) == false)
             {
                 PopUpNotificationManager.Instance.DisplayWarning(popupType);
                 return;
