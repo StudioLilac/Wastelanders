@@ -38,7 +38,7 @@ public class LevelSelectManager : MonoBehaviour
             new DialogueText("Some levels may be locked until you complete previous levels.", tutorialName, null),
             new DialogueText("Good luck and have fun!", tutorialName, null),
         }));
-        princessFrogFightButton.Unlock(animate: true);
+        //princessFrogFightButton.Unlock(animate: true);
         levelSelectCanvas.interactable = true;
         levelSelectCanvas.blocksRaycasts = true;
         yield return null;
