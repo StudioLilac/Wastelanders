@@ -30,34 +30,30 @@ public class ScreenShakeHandler : MonoBehaviour
             return;
         }
 
+        var virtualCameraNoise = activeCamera.GetCinemachineComponent<Cinemachine.CinemachineBasicMultiChannelPerlin>();
+        if (virtualCameraNoise == null) return;
+
         if (percentageMax < 0.25f)
         {
-            StartCoroutine(ShakeCamera(percentageMax, activeCamera));
+            StartCoroutine(ShakeCamera(percentageMax, virtualCameraNoise));
             StartCoroutine(ZoomEffect(-percentageMax, activeCamera));
         }
         else if (percentageMax < 0.75f)
         {
-            StartCoroutine(ShakeCamera(percentageMax, activeCamera));
+            StartCoroutine(ShakeCamera(percentageMax, virtualCameraNoise));
             StartCoroutine(ZoomEffect(-percentageMax, activeCamera));
         }
         else
         {
-            StartCoroutine(ShakeCamera(percentageMax, activeCamera));
+            StartCoroutine(ShakeCamera(percentageMax, virtualCameraNoise));
             StartCoroutine(ZoomEffect(-percentageMax, activeCamera));
             StartCoroutine(TiltEffect(percentageMax, activeCamera));
         }
     }
 
     //(@param percentageMax) is a float [0, 1]
-    private IEnumerator ShakeCamera(float percentageMax, CinemachineVirtualCamera activeCamera)
+    private IEnumerator ShakeCamera(float percentageMax, CinemachineBasicMultiChannelPerlin virtualCameraNoise)
     {
-        CinemachineBasicMultiChannelPerlin? virtualCameraNoise = activeCamera.GetCinemachineComponent<Cinemachine.CinemachineBasicMultiChannelPerlin>();
-        if (virtualCameraNoise == null)
-        {
-            Debug.LogError("The active camera does not have a CinemachineBasicMultiChannelPerlin component.");
-            yield break;
-        }
-
         float time = Mathf.Min(0.3f, percentageMax);
         float shakeAmplitude = 1f + percentageMax / 2f;
         float shakeFrequency = 1f + percentageMax * 3f / 4f;
@@ -72,7 +68,7 @@ public class ScreenShakeHandler : MonoBehaviour
     private IEnumerator ZoomEffect(float percentageMax, CinemachineVirtualCamera activeCamera)
     {
         float startFOV = activeCamera.m_Lens.OrthographicSize;
-        float endFOV = startFOV - percentageMax;
+        float endFOV = startFOV - (percentageMax / 1.5f);
         yield return StartCoroutine(ZoomCamera(startFOV, endFOV, activeCamera));
         yield return new WaitForSeconds(0.4f);
         yield return StartCoroutine(ZoomCamera(endFOV, startFOV, activeCamera));
