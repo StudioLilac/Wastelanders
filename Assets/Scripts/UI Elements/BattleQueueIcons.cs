@@ -11,8 +11,7 @@ public interface IBattleQueueDisplayable
     void SetFullyTransparent();
     IEnumerator FadeIn();
     IEnumerator FadeOut();
-    
-    IEnumerator ShakePlayerAction();
+    void ShakePlayerAction();
     GameObject GameObject { get; }
 
     public const float EXPAND_DURATION = 0.25f;
@@ -96,7 +95,12 @@ public class BattleQueueIcons : DisplayableClass, IBattleQueueDisplayable
         yield return widthFader.FadeInLightScreen(EXPAND_DURATION);
     }
 
-    public IEnumerator ShakePlayerAction() {
+    public void ShakePlayerAction()
+    {
+        StartCoroutine(Shake());
+    }
+
+    private IEnumerator Shake() {
         if (isShaking) yield break;
         
         isShaking = true;

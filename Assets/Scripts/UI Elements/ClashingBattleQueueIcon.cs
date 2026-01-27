@@ -107,8 +107,11 @@ public class ClashingBattleQueueIcon : MonoBehaviour, IBattleQueueDisplayable
         yield return StartCoroutine(widthFader.FadeInLightScreen(EXPAND_DURATION));
     }
 
-    public IEnumerator ShakePlayerAction() {
-        yield return StartCoroutine(leftClashingAction.ShakePlayerAction());
+
+
+    public void ShakePlayerAction()
+    {
+        leftClashingAction.ShakePlayerAction();
     }
 }
 

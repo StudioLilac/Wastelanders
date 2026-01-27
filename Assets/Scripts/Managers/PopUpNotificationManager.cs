@@ -28,7 +28,7 @@ public class PopUpNotificationManager : MonoBehaviour
     {
         string HandleConflict(PopupType.SpeedConflict data)
         {
-            StartCoroutine(data.DuplicatedItem.ShakePlayerAction());
+            data.DuplicatedItem.ShakePlayerAction();
             return "Same Speed Selected!";
         }
 
