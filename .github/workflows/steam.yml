@@ -68,8 +68,8 @@ jobs:
           path: build/StandaloneWindows64
       - name: Rename Windows executable
         run: |
-          mv build/StandaloneWindows64/StandaloneWindows64.exe build/StandaloneWindows64/WastelandersGame.exe
-          mv build/StandaloneWindows64/StandaloneWindows64_Data build/StandaloneWindows64/WastelandersGame_Data
+          mv build/StandaloneWindows64/StandaloneWindows64.exe build/StandaloneWindows64/Wastelanders.exe
+          mv build/StandaloneWindows64/StandaloneWindows64_Data build/StandaloneWindows64/Wastelanders_Data
 
       - name: Download StandaloneOSX Artifact
         uses: actions/download-artifact@v4
@@ -78,7 +78,7 @@ jobs:
           path: build/StandaloneOSX
       - name: Rename MacOS executable
         run: |
-          mv build/StandaloneOSX/StandaloneOSX.app build/StandaloneOSX/WastelandersGame.app
+          mv build/StandaloneOSX/StandaloneOSX.app build/StandaloneOSX/Wastelanders.app
 
       - name: Download StandaloneLinux64 Artifact
         uses: actions/download-artifact@v4
@@ -91,8 +91,8 @@ jobs:
       - name: Rename Linux executable
         run: |
           chmod +x build/StandaloneLinux64/StandaloneLinux64
-          mv build/StandaloneLinux64/StandaloneLinux64 build/StandaloneLinux64/WastelandersGame
-          mv build/StandaloneLinux64/StandaloneLinux64_Data build/StandaloneLinux64/WastelandersGame_Data
+          mv build/StandaloneLinux64/StandaloneLinux64 build/StandaloneLinux64/Wastelanders
+          mv build/StandaloneLinux64/StandaloneLinux64_Data build/StandaloneLinux64/Wastelanders_Data
 
       - name: List build directory
         run: |
