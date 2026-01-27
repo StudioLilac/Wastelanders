@@ -45,9 +45,15 @@ namespace DialogueScripts
             this.Subscribe<VerticalLayoutChange>(SetVerticalLayout);
             this.Answer<GetActorDatabase, ActorDatabase?>(_ => actorDatabase);
 
-            canvas.sortingOrder = UISortOrder.DialogueBox.GetOrder();
+            ChangeDialogueBoxOrder(UISortOrder.DialogueBox.GetOrder());
             boxLayout.gameObject.SetActive(false);
         }
+
+        public void ChangeDialogueBoxOrder(int order)
+        {
+            canvas.sortingOrder = order;
+        }
+
 
         public IEnumerator Play(DialogueEntry[] entries)
         {

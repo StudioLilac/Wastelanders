@@ -27,7 +27,8 @@ namespace DialogueScripts
     public class ActorAction : DialogueEvents, IEvent
     {
         public ActorProfile? actor;
-        public CharacterActions action = CharacterActions.SetLeft;
+        public CharacterActions action = 
+            CharacterActions.SetLeft;
         public float duration = 1.0f;
         public override void Execute() => this.Invoke();
     }
@@ -42,6 +43,8 @@ namespace DialogueScripts
         FadeIn = 60,
         FadeOut = 70,
         FlashFade = 80,
+        FaceRight = 90,
+        FaceLeft = 100
     }
 
     /// Change the vertical positioning of the dialogue box. 
@@ -61,6 +64,11 @@ namespace DialogueScripts
     public class AutoAdvanceAfter : DialogueEvents, IEvent
     {
         public float Time = 0.5f;
+        public override void Execute() => this.Invoke();
+    }
+    public class CustomEvent: DialogueEvents, IEvent
+    {
+        public string EventName = string.Empty;
         public override void Execute() => this.Invoke();
     }
 }
