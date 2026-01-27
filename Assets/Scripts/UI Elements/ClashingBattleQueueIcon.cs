@@ -106,6 +106,10 @@ public class ClashingBattleQueueIcon : MonoBehaviour, IBattleQueueDisplayable
         StartCoroutine(rightClashingAction.FadeOut());
         yield return StartCoroutine(widthFader.FadeInLightScreen(EXPAND_DURATION));
     }
+
+    public IEnumerator ShakePlayerAction() {
+        yield return StartCoroutine(leftClashingAction.ShakePlayerAction());
+    }
 }
 
 public enum ClashResultType

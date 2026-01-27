@@ -72,9 +72,24 @@ public class BattleQueue : MonoBehaviour
         }
     }
 
-    public bool CanInsertPlayerCard(ActionClass actionClass)
-    {
-        return actionQueue.IsUniqueSpeed(actionClass);
+    public bool CanInsertPlayerCard(ActionClass actionClass) {
+        return actionQueue.IsUniqueSpeed(actionClass) == null;
+    }
+
+    /// <summary>
+    /// Tries to insert the given ActionClass. On speed conflict, shake the conflicting icon.
+    /// Does not add the ActionClass to the BQ.
+    /// 
+    /// Returns: true if the ActionClass can be inserted, false if there is a speed conflict
+    /// </summary>
+    public bool TryInsertPlayerCard(ActionClass actionClass) {
+        ActionWrapper? clashingWrapper = actionQueue.IsUniqueSpeed(actionClass);
+        if (clashingWrapper == null) {
+            return true;
+        }
+        
+        StartCoroutine(clashingWrapper.BattleIcon?.ShakePlayerAction());
+        return false;
     }
 
     //Remove all cards with (@param entity) as the target and origin
@@ -165,8 +180,8 @@ public class BattleQueue : MonoBehaviour
         }
 
 
-        // Returns false if the player cannot insert a card into the queue due to duplicate speed.
-        public bool IsUniqueSpeed(ActionClass actionCard)
+        // Returns the ActionWrapper covering the speed if the player cannot insert a card into the queue due to duplicate speed. Otherwise, returns null.
+        public ActionWrapper? IsUniqueSpeed(ActionClass actionCard)
         {
             foreach (ActionWrapper existingWrapper in array)
             {
@@ -174,10 +189,10 @@ public class BattleQueue : MonoBehaviour
                     existingWrapper.PlayerAction!.Origin is PlayerClass &&  // Restrict overlap to only apply to players, otherwise spawnables suck.
                     actionCard.Speed == existingWrapper.PlayerAction!.Speed)
                 {
-                    return false;
+                    return existingWrapper;
                 }
             }
-            return true;
+            return null;
         }
 
         //Searches for the first Empty Wrapper that can clash with (@param actionCard), making a new one if none exists

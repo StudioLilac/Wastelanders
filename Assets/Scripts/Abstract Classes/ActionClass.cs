@@ -166,9 +166,15 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
 
     public virtual bool IsPlayableByPlayer(out PopupType popupType)
     {
-        bool canInsert = BattleQueue.BattleQueueInstance.CanInsertPlayerCard(this);
-        popupType = canInsert ? PopupType.None : PopupType.SameSpeed;
-        return canInsert;
+        bool tryInsert = BattleQueue.BattleQueueInstance.CanInsertPlayerCard(this);
+        popupType = tryInsert ? PopupType.None : PopupType.SameSpeed;
+        return tryInsert;
+    }
+
+    public bool TryPlayableByPlayer(out PopupType popupType) {
+        bool tryInsert = BattleQueue.BattleQueueInstance.TryInsertPlayerCard(this);
+        popupType = tryInsert ? PopupType.None : PopupType.SameSpeed;
+        return tryInsert;
     }
 
     public bool IsPlayedByPlayer()

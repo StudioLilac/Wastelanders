@@ -60,7 +60,9 @@ public class SwordIcon : MonoBehaviour, IBattleQueueDisplayable
         StartCoroutine(swordFader.FadeInLightScreen(FADE_DURATION)); 
     }
 
-
+    public IEnumerator ShakePlayerAction() {
+        yield return null;
+    }
 
     public void OnMouseEnter()
     {

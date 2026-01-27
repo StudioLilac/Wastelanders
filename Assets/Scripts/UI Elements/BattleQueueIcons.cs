@@ -11,6 +11,8 @@ public interface IBattleQueueDisplayable
     void SetFullyTransparent();
     IEnumerator FadeIn();
     IEnumerator FadeOut();
+    
+    IEnumerator ShakePlayerAction();
     GameObject GameObject { get; }
 
     public const float EXPAND_DURATION = 0.25f;
@@ -33,7 +35,7 @@ public class BattleQueueIcons : DisplayableClass, IBattleQueueDisplayable
     [SerializeField] LayoutWidthFader widthFader;
 
     private bool isActive = true;
-
+    private bool isShaking = false;
     private int FadeSortingOrder => CombatFadeScreenHandler.Instance.FADE_SORTING_ORDER;
     private string FadeSortingLayer => CombatFadeScreenHandler.Instance.FADE_SORTING_LAYER;
 
@@ -94,6 +96,35 @@ public class BattleQueueIcons : DisplayableClass, IBattleQueueDisplayable
         yield return widthFader.FadeInLightScreen(EXPAND_DURATION);
     }
 
+    public IEnumerator ShakePlayerAction() {
+        if (isShaking) yield break;
+        
+        isShaking = true;
+        if (!isActiveAndEnabled)
+            yield break;
+    
+        Vector3 originalPosition = iconRenderer.transform.localPosition;
+        float elapsed = 0f;
+        float duration = 0.5f;
+        float amplitude = 10f;
+        float frequency = 20f;
+    
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / duration;
+        
+            float x = amplitude * Mathf.Sin(frequency * elapsed) * (1f - t);
+        
+            iconRenderer.transform.localPosition = originalPosition + new Vector3(x, 0f, 0f);
+        
+            yield return null;
+        }
+    
+        iconRenderer.transform.localPosition = originalPosition;
+        isShaking = false;
+    }
+    
     public void Emphasize()
     {
         iconRenderer.sortingOrder = FadeSortingOrder + 4;
