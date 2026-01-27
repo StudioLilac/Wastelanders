@@ -20,7 +20,7 @@ MonoBehaviour:
   - bodyText: It's nothing Ives, I just made an observation and the plan naturally
       formed.
     speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 10ec818d4088de44a83a5405137230e4, type: 3}
+    displayingImage: {fileID: 21300000, guid: c719baaafa8cd7148806ffb41907add6, type: 3}
     broadcastAnEvent: 0
   - bodyText: Although I am curious, you have any guesses as to how these beetles
       are connected to these crystals?
@@ -34,10 +34,10 @@ MonoBehaviour:
     broadcastAnEvent: 0
   - bodyText: Or even reproduce.
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
+    displayingImage: {fileID: 21300000, guid: 8dca0cf7dcae9ae4c831743a3edfdbbc, type: 3}
     broadcastAnEvent: 0
-  - bodyText: "Ah, in that case, I\u2019ll start destroying the crystals close to
-      us! That\u2019ll stop 'em from coming back."
+  - bodyText: "In that case, I\u2019ll start destroying the crystals close to us!
+      That\u2019ll stop 'em from coming back."
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
     broadcastAnEvent: 0

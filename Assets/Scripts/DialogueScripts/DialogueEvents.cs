@@ -52,6 +52,9 @@ namespace DialogueScripts
     {
         public Layout Layout = Layout.Lower;
         public override void Execute() => this.Invoke();
+
+        public static void MoveBoxV2ToTop() => new VerticalLayoutChange { Layout = Layout.Upper }.Invoke();
+        public static void MoveBoxV2ToBottom() => new VerticalLayoutChange { Layout = Layout.Lower }.Invoke();
     }
 
     public enum Layout

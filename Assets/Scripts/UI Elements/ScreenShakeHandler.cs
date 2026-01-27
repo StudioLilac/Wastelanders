@@ -3,6 +3,9 @@ using System.Collections;
 using Systems.Persistence;
 using UnityEngine;
 
+#nullable enable
+public record ShakeScreen(float Intensity) : IEvent;
+public record GetActiveCamera(): IQuery<CinemachineVirtualCamera?>;
 public class ScreenShakeHandler : MonoBehaviour
 {
     public static bool IsScreenShakeEnabled
@@ -11,41 +14,53 @@ public class ScreenShakeHandler : MonoBehaviour
         set => SaveLoadSystem.Instance.GetUserPreferences().screenShakePreference.IsScreenShakeEnabled = value;
     }
 
-    private CinemachineVirtualCamera dynamicCamera;
-
-    public CinemachineVirtualCamera DynamicCamera
+    private void Awake()
     {
-        get { return dynamicCamera; }
-        set { dynamicCamera = value; }
+        this.Subscribe<ShakeScreen>(evt => AttackCameraEffect(evt.Intensity));
     }
-    public void AttackCameraEffect(float percentageMax)
+
+    private void AttackCameraEffect(float percentageMax)
     {
         if (!IsScreenShakeEnabled) return;
+
+        var activeCamera = new GetActiveCamera().Query();
+        if (activeCamera == null)
+        {
+            Debug.LogError("No active Cinemachine virtual camera provided.");
+            return;
+        }
+
         if (percentageMax < 0.25f)
         {
-            StartCoroutine(ShakeCamera(percentageMax));
-            StartCoroutine(ZoomEffect(-percentageMax));
+            StartCoroutine(ShakeCamera(percentageMax, activeCamera));
+            StartCoroutine(ZoomEffect(-percentageMax, activeCamera));
         }
         else if (percentageMax < 0.75f)
         {
-            StartCoroutine(ShakeCamera(percentageMax));
-            StartCoroutine(ZoomEffect(-percentageMax));
+            StartCoroutine(ShakeCamera(percentageMax, activeCamera));
+            StartCoroutine(ZoomEffect(-percentageMax, activeCamera));
         }
         else
         {
-            StartCoroutine(ShakeCamera(percentageMax));
-            StartCoroutine(ZoomEffect(-percentageMax));
-            StartCoroutine(TiltEffect(percentageMax));
+            StartCoroutine(ShakeCamera(percentageMax, activeCamera));
+            StartCoroutine(ZoomEffect(-percentageMax, activeCamera));
+            StartCoroutine(TiltEffect(percentageMax, activeCamera));
         }
     }
 
     //(@param percentageMax) is a float [0, 1]
-    private IEnumerator ShakeCamera(float percentageMax)
+    private IEnumerator ShakeCamera(float percentageMax, CinemachineVirtualCamera activeCamera)
     {
+        CinemachineBasicMultiChannelPerlin? virtualCameraNoise = activeCamera.GetCinemachineComponent<Cinemachine.CinemachineBasicMultiChannelPerlin>();
+        if (virtualCameraNoise == null)
+        {
+            Debug.LogError("The active camera does not have a CinemachineBasicMultiChannelPerlin component.");
+            yield break;
+        }
+
         float time = Mathf.Min(0.3f, percentageMax);
         float shakeAmplitude = 1f + percentageMax / 2f;
         float shakeFrequency = 1f + percentageMax * 3f / 4f;
-        CinemachineBasicMultiChannelPerlin virtualCameraNoise = DynamicCamera.GetCinemachineComponent<Cinemachine.CinemachineBasicMultiChannelPerlin>();
         virtualCameraNoise.m_AmplitudeGain = shakeAmplitude;
         virtualCameraNoise.m_FrequencyGain = shakeFrequency;
         yield return new WaitForSeconds(time + percentageMax / 20f);
@@ -54,31 +69,31 @@ public class ScreenShakeHandler : MonoBehaviour
     }
 
     //(@param percentageMax) is a float [0, 1]
-    private IEnumerator ZoomEffect(float percentageMax)
+    private IEnumerator ZoomEffect(float percentageMax, CinemachineVirtualCamera activeCamera)
     {
-        float startFOV = DynamicCamera.m_Lens.OrthographicSize;
+        float startFOV = activeCamera.m_Lens.OrthographicSize;
         float endFOV = startFOV - percentageMax;
-        yield return StartCoroutine(ZoomCamera(startFOV, endFOV));
+        yield return StartCoroutine(ZoomCamera(startFOV, endFOV, activeCamera));
         yield return new WaitForSeconds(0.4f);
-        yield return StartCoroutine(ZoomCamera(endFOV, startFOV));
+        yield return StartCoroutine(ZoomCamera(endFOV, startFOV, activeCamera));
     }
 
-    private IEnumerator ZoomCamera(float startFOV, float endFOV)
+    private IEnumerator ZoomCamera(float startFOV, float endFOV, CinemachineVirtualCamera activeCamera)
     {
         float elapsed = 0f;
         float duration = 0.5f;
 
         while (elapsed < duration)
         {
-            DynamicCamera.m_Lens.OrthographicSize = Mathf.Lerp(startFOV, endFOV, elapsed / duration);
+            activeCamera.m_Lens.OrthographicSize = Mathf.Lerp(startFOV, endFOV, elapsed / duration);
             elapsed += Time.deltaTime;
             yield return null;
         }
 
-        DynamicCamera.m_Lens.OrthographicSize = endFOV;
+        activeCamera.m_Lens.OrthographicSize = endFOV;
     }
 
-    private IEnumerator TiltEffect(float tilt)
+    private IEnumerator TiltEffect(float tilt, CinemachineVirtualCamera activeCamera)
     {
         yield break;
     }

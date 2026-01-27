@@ -11,4 +11,5 @@ public class ActorDatabase : ScriptableObject
     public ActorProfile Loudspeaker;
     public ActorProfile Tutorial;
     public ActorProfile Event;
+    public ActorProfile Unkown;
 }

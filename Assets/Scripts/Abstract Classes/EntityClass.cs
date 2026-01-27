@@ -131,7 +131,7 @@ public abstract class EntityClass : SelectClass
     //Requires: Entities are not dead
     private IEnumerator PlayHitAnimation(EntityClass origin, EntityClass target, float percentageDone)
     {
-        CombatManager.Instance.AttackCameraEffect(percentageDone);
+        new ShakeScreen(Intensity: percentageDone).Invoke();
         yield return StartCoroutine(StaggerEntities(origin, target, percentageDone));
     }
 

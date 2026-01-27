@@ -116,7 +116,6 @@ public class BeetleFight : DialogueClasses
         Beetle.OnGainBuffs -= ExplainResonate;
 
         CombatManager.ClearEvents();
-        DialogueBox.ClearDialogueEvents();
     }
     protected override void GameStateChange(GameState gameState)
     {
@@ -229,14 +228,14 @@ public class BeetleFight : DialogueClasses
 
             // BEETLE AMBUSH!!
             {
-                void ShowCrystal()
+                void ShowCrystal(CustomEvent evt)
                 {
                     jackie.FaceRight();
                     jackie.animator.enabled = false;
                     jackie.GetComponent<SpriteRenderer>().sprite = jackieCrystalSprite;
-                    DialogueBox.DialogueBoxEvent -= ShowCrystal;
+                    this.UnSubscribe<CustomEvent>(ShowCrystal);
                 }
-                DialogueBox.DialogueBoxEvent += ShowCrystal;
+                this.Subscribe<CustomEvent>(ShowCrystal);
                 yield return new WaitForSeconds(BRIEF_PAUSE);
                 yield return StartCoroutine(jackie.MoveToPosition(frog.transform.position, 1.2f, 1f));
                 sceneCamera.transform.position = CombatManager.Instance.dynamicCamera.transform.position;
@@ -261,7 +260,6 @@ public class BeetleFight : DialogueClasses
                 clashItem.SetClashingAction(beetleAction);
                 SoundID.CB_roll_dice.Play();
                 yield return StartCoroutine(CardComparator.Instance.ClashCards(clashItem));
-                DialogueBox.DialogueBoxEvent -= ShowCrystal; //in case some weird shit happens
             }
 
             //Jackie Chases the beetle and we fade
@@ -544,9 +542,9 @@ public class BeetleFight : DialogueClasses
     {
         HighlightManager.Instance.EntityClicked -= EntityClicked;
         yield return new WaitUntil(() => (!DialogueBoxV2.Instance.IsActive));
-        new VerticalLayoutChange() { Layout = Layout.Upper }.Invoke();
+        VerticalLayoutChange.MoveBoxV2ToTop();
         yield return StartCoroutine(DialogueBoxV2.Instance.Play(ivesTutorial));
-        new VerticalLayoutChange() { Layout = Layout.Lower }.Invoke();
+        VerticalLayoutChange.MoveBoxV2ToBottom();
     }
 
 

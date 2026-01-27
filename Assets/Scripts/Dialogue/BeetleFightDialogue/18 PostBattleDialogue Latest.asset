@@ -15,19 +15,19 @@ MonoBehaviour:
   Entries:
   - content: <i>After the battle, the candidates catch their breath.
     speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: <i>Some examiners inspect the dropped Waste Crystals, while others discuss
       amongst themselves.
     speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: These beetles are unusually aggressive for raiding a fully defended
       camp like this.
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 5589630801237245952
@@ -37,25 +37,23 @@ MonoBehaviour:
   - content: "And they weren\u2019t dumb either. They fought with a surprising amount
       of coordination."
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
-    events:
-    - rid: 5589630801237245957
+    events: []
   - content: Taking these Waste Products like their life depends on it.
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
-    events:
-    - rid: 5589630801237245963
+    events: []
   - content: Just where could they have come from?
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: I encountered a beetle nest earlier today by tracking down one of them
       down.
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 5589630801237245958
@@ -64,12 +62,12 @@ MonoBehaviour:
     - rid: 5589630801237245960
   - content: Oh? Do you remember how to get back there?
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: Yeah, I made a mental note of it.
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 5589630801237245964
@@ -77,30 +75,32 @@ MonoBehaviour:
       it could spell trouble for the city\u2019s collection of Products if they multiplied
       further."
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
-    events: []
-  - content: All the examiners agree that it would be best to deal with the beetles
+    events:
+    - rid: 1207053248668106835
+  - content: The examiners have agreed that it would be best to deal with the beetles
       now before they become an even larger problem.
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: "Everyone, rest and recuperate for now. We\u2019ll come up with a plan
       of attack to neutralize the beetle swarm."
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 1207053248668106836
   - content: <i>Seems like this expedition has become more than just an exam...
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 5589630801237245966
   - content: 
     speaker: {fileID: 11400000, guid: 4fef3aeb65460fd498ab9efe9bac8625, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 5589630801237245967
@@ -110,6 +110,16 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: 1207053248668106835
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+        sprite: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    - rid: 1207053248668106836
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+        sprite: {fileID: 21300000, guid: 85e302f93093f564290df1bd57119113, type: 3}
     - rid: 5589630801237245952
       type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
@@ -129,11 +139,6 @@ MonoBehaviour:
         action: 60
         duration: 1
     - rid: 5589630801237245955
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
-      data:
-        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-        sprite: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
-    - rid: 5589630801237245957
       type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
         actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
@@ -161,11 +166,6 @@ MonoBehaviour:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         action: 60
         duration: 0
-    - rid: 5589630801237245963
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
-      data:
-        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-        sprite: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     - rid: 5589630801237245964
       type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
@@ -175,7 +175,7 @@ MonoBehaviour:
       type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        sprite: {fileID: 21300000, guid: 70562f64108503147861dbc82d787ef9, type: 3}
+        sprite: {fileID: 21300000, guid: ab39e10615e745749b0263748d40a833, type: 3}
     - rid: 5589630801237245967
       type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
