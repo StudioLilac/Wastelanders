@@ -1554,7 +1554,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 697530316340953098, guid: 4ebd1ee5e5e34ea418076d78ba66dbf7, type: 3}
       propertyPath: m_text
-      value: 4. THE QUEENS NEST
+      value: 4. THE QUEEN'S NEST
       objectReference: {fileID: 0}
     - target: {fileID: 6258826207863482620, guid: 4ebd1ee5e5e34ea418076d78ba66dbf7, type: 3}
       propertyPath: m_LocalPosition.x
