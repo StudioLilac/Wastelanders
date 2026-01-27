@@ -55,7 +55,7 @@ public class CardComparator : MonoBehaviour
         card1.ApplyEffect();
         card2.ApplyEffect();
         yield return StartCoroutine(ClashBothEntities(card1, card2)); // for animation purposes 
-        new BattleQueue.ConsumeActionWrapper(actionWrapper).Invoke();
+        BattleQueue.BattleQueueInstance.RemoveActionWrapperFromQueue(actionWrapper);
 
         card1.RollDice();
         card2.RollDice();
@@ -86,7 +86,7 @@ public class CardComparator : MonoBehaviour
             {
                 card1.CardIsUnstaggered();
                 card2.CardIsUnstaggered();
-                AudioManager.Instance.PlaySFX(CLASH_TIE_SOUND_FX_NAME);
+                AudioManager.Instance.PlaySFX(SoundID.CB_clash_tie);
 
             } else if (cardOneGreater < 0) //Card2 wins clash
             {
@@ -158,8 +158,7 @@ public class CardComparator : MonoBehaviour
         EnableDice(actionClass.Origin);
         actionClass.ApplyEffect();
         yield return StartCoroutine(ClashBothEntities(actionClass, actionClass));
-        new BattleQueue.ConsumeActionWrapper(actionWrapper).Invoke();
-
+        BattleQueue.BattleQueueInstance.RemoveActionWrapperFromQueue(actionWrapper);
         actionClass.RollDice();
         DeactivateInfo(actionClass);
 

@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using UI_Toolkit.UI_Elements;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -8,6 +9,7 @@ namespace UI_Toolkit
 {
     public class HUDV2 : MonoBehaviour
     {
+        [SerializeField] private Sprite deckInfoSprite;
         public static HUDV2 Instance { get; private set; }
         
         public VisualTreeAsset cardTemplate;
@@ -16,7 +18,9 @@ namespace UI_Toolkit
         private VisualElement rootElem;
         private VisualElement handElem;
         private VisualElement infoElem;
+        private Label deckInfoLabel;
 
+#nullable enable
         public void Awake()
         {
             Instance = this;
@@ -24,14 +28,47 @@ namespace UI_Toolkit
             handElem = rootElem.Q<VisualElement>("layout-hand-container");
             infoElem = rootElem.Q<VisualElement>("layout-info-container");
             rootDocument.panelSettings.sortingOrder = UISortOrder.Hudv2.GetOrder();
-
+            deckInfoLabel = rootElem.Q<Label>("txt-deck-info");
+            deckInfoLabel.RegisterCallback<MouseEnterEvent>(OnDeckHoverEnter);
+            deckInfoLabel.RegisterCallback<MouseLeaveEvent>(OnDeckHoverExit);
+            
             LoadInitialValues();
         }
-        
-        public void SpawnCardPlayEffect(ActionClass actionClass, Vector3 worldPosition)
+
+        private void OnDeckHoverEnter(MouseEnterEvent ev) =>
+            new TooltipEvent(TextTipDisplayStyle.Display, 
+                Icon: deckInfoSprite, 
+                Title: "CARDS REMAINING",
+                Caption: GetCurrentDeckInfoText(), 
+                Body: GetCurrentDeckBodyText()
+               ).Invoke();
+
+        private string GetCurrentDeckInfoText()
         {
-            UI_Elements.CardPlayEffect.SpawnAt(rootElem, cardTemplate, actionClass, worldPosition);
+            var player = new CurrentPlayer().Query();
+            if (player) {
+                if (player.Exhausted) {
+                    return "No cards left";
+                } else {
+                    return $"{player.Pool.Count}/{player.DeckSize}";
+                }
+            }
+
+            return "";
         }
+
+        private string GetCurrentDeckBodyText() {
+            var player = new CurrentPlayer().Query();
+            if (player) {
+                if (player.Exhausted) {
+                    return "Your hand size is zero. All that's left to do is struggle.";
+                }
+            }
+
+            return "Everytime the deck depletes and reshuffles, your hand size decreases by one!";
+        }
+
+        private void OnDeckHoverExit(MouseLeaveEvent ev) => new TooltipEvent(TextTipDisplayStyle.None).Invoke();
 
         public void OnEnable()
         {
@@ -91,6 +128,7 @@ namespace UI_Toolkit
 
         private void OnUpdateHand(PlayerClass player)
         {
+            deckInfoLabel.text = player.Pool.Count.ToString();
             handElem.Clear();
 
             foreach (var ac in player.Hand.Select(go => go.GetComponent<ActionClass>()).Where(ac => ac))
@@ -105,6 +143,11 @@ namespace UI_Toolkit
                 handElem.Add(cardLayout);
                 ac.SetCanPlay(ac.IsPlayableByPlayer(out _));
             }
+        }
+
+        public void SetDeckInfoVisibility(bool visible)
+        {
+            deckInfoLabel.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
         }
     }
 }

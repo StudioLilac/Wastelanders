@@ -16,14 +16,13 @@ public class RightHook : FistCards
     // Start is called before the first frame update
     public override void Initialize()
     {
-        lowerBound = 1;
+        lowerBound = 2;
         upperBound = 4;
         Speed = 4;
 
         myName = "Right Hook";
-        description = "If this card is unstaggered, use 'Haymaker'.";
+        description = "If this card is not staggered, use 'Haymaker'.";
         CardType = CardType.MeleeAttack;
-        Renderer renderer = GetComponent<Renderer>();
         base.Initialize();
     }
 

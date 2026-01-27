@@ -21,7 +21,7 @@ public abstract class SlimeAttacks : ActionClass
 
     public override void OnHit()
     {
-        AudioManager.Instance.PlaySFX(SLIME_SOUND_EFFECT_NAME);
+        AudioManager.Instance.PlaySFX(SoundID.CB_slime_hit);
         base.OnHit();
     }
 

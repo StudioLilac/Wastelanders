@@ -6,10 +6,10 @@ using UnityEngine;
 [System.Serializable]
 public class DialogueText
 {
-    [SerializeField] private string bodyText;
-    [SerializeField] private string speakerName;
-    [SerializeField] private Sprite displayingImage;
-    [SerializeField] private string sfx;
+#nullable enable
+    [SerializeField] private string bodyText = null!;
+    [SerializeField] private string speakerName = null!;
+    [SerializeField] private Sprite? displayingImage;
 
     private bool italics;
     private bool bold;
@@ -22,18 +22,34 @@ public class DialogueText
 
     public string BodyText {  get { return bodyText; } set {  bodyText = value; } }
     public string SpeakerName { get {  return speakerName; } set {  speakerName = value; } }
-    public Sprite DisplayingImage { get { return displayingImage; } set { displayingImage = value; } }
+    public Sprite? DisplayingImage { get { return displayingImage; } set { displayingImage = value; } }
 
-    public DialogueText(string bodyText, string speakerName, Sprite givenImage, string sfx = null)
+    public DialogueText(string bodyText, string speakerName, Sprite? givenImage, string? sfx = null)
     {
         this.bodyText = bodyText;
         this.speakerName = speakerName;
         this.displayingImage = givenImage;
     }
 
-    public void playSound() {
-        if (sfx != null && sfx != "") {
-            AudioManager.Instance.PlaySFX(sfx);
-        }
+    public DialogueEntry Into() => new (content: bodyText, speaker: GetSpeakerProfile(speakerName), picture: displayingImage, events: (broadcastAnEvent) ? new() { new CustomEvent() } : new(), sfxId: default);
+
+    private static ActorProfile? GetSpeakerProfile(string speakerName)
+    {
+        ActorDatabase? database = new GetActorDatabase().Query();
+        if (database == null) return null;
+
+        return speakerName.Trim().ToLower() switch
+               {
+            "jackie" => database.Jackie,
+            "ives" => database.Ives,
+            "ailin" => database.Ailin,
+            "narration" => database.Narration,
+            "broadcast" => database.Broadcast,
+            "loudspeaker" => database.Loudspeaker,
+            "tutorial" => database.Tutorial,
+            "???" => database.Unkown,
+            _ => null,
+        };
     }
 }
+

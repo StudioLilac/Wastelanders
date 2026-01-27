@@ -16,18 +16,22 @@ MonoBehaviour:
   - bodyText: EEEEEEKKEKEEEEKE
     speakerName: ???
     displayingImage: {fileID: 0}
+    sfx: 
     broadcastAnEvent: 0
-  - bodyText: (Confusion and fear spreads among the candidates as they turn to face
-      the source of the sound.)
-    speakerName: 
+  - bodyText: <i>Confusion and fear spreads among the candidates as they turn to
+      face the source of the sound.
+    speakerName: Narration
     displayingImage: {fileID: 0}
+    sfx: 
     broadcastAnEvent: 0
-  - bodyText: (The crystals begin to crack at the screech...)
-    speakerName: 
+  - bodyText: <i>The crystals begin to crack at the screech...
+    speakerName: Narration
     displayingImage: {fileID: 0}
+    sfx: 
     broadcastAnEvent: 0
-  - bodyText: (Across the nest, beetles emerge from cracked crystals and start attacking
-      the NITES.)
-    speakerName: 
+  - bodyText: <i>Across the nest, beetles emerge from cracked crystals and start
+      attacking the NITES.
+    speakerName: Narration
     displayingImage: {fileID: 0}
+    sfx: 
     broadcastAnEvent: 0

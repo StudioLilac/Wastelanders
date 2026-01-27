@@ -18,7 +18,7 @@ public class Fling : BeetleAttacks, IPlayableBeetleCard
         
         Speed = 3;
 
-        description = "If this card hits an opponent, gain +1 resonate.";
+        description = "If this card hits an opponent, gain +1 resonance.";
 
         myName = "Fling";
         CardType = CardType.RangedAttack;
@@ -48,7 +48,7 @@ public class Fling : BeetleAttacks, IPlayableBeetleCard
         {
             Origin.AddStacks(Resonate.buffName, 1);
         }
-        AudioManager.Instance.PlaySFX(Fragment.FRAGMENT_SOUND_EFFECT_NAME);
+        AudioManager.Instance.PlaySFX(SoundID.CB_queen_hit);
         base.OnHit();
     }
 }

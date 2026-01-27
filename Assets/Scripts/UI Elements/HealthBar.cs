@@ -42,6 +42,6 @@ public class HealthBar : MonoBehaviour
     }
     public void DeEmphasize()
     {
-        healthCanvas.sortingOrder = FadeSortingOrder - 2;
+        healthCanvas.sortingOrder = FadeSortingOrder - 5;
     }
 }

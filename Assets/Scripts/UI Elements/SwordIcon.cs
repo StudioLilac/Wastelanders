@@ -1,11 +1,17 @@
+using System.Collections;
 using UnityEngine;
+using static IBattleQueueDisplayable;
+
 #nullable enable
-public class SwordIcon: MonoBehaviour
+public class SwordIcon : MonoBehaviour, IBattleQueueDisplayable
 {
     private static readonly int ClashStateHash = Animator.StringToHash("ClashState");
     [SerializeField] private SpriteRenderer swordsIcon = null!;
+    [SerializeField] private SpriteFadeHandler swordFader = null!;
     [SerializeField] private Animator swordsAnimator = null!;
     private ClashResultType currentClashType = default;
+    private bool isActive = true;
+    public GameObject GameObject => gameObject;
 
     public void Awake()
     {
@@ -23,9 +29,51 @@ public class SwordIcon: MonoBehaviour
         swordsIcon.sortingOrder = CombatFadeScreenHandler.Instance.FADE_SORTING_ORDER - 1;
     }
 
-    public void OnMouseEnter() => new TooltipText(currentClashType.ToString().ToUpper(), true).Invoke();
+    public void SetFullyTransparent()
+    {
+        swordFader.SetLightScreen();
+    }
 
-    public void OnMouseExit() => new TooltipText(currentClashType.ToString().ToUpper(), false).Invoke();
+    public void SetFullyOpaque()
+    {
+        swordFader.SetDarkScreen();
+    }
+
+    public IEnumerator FadeIn()
+    {
+        if (!isActiveAndEnabled)
+        {
+            SetFullyOpaque();
+            yield break;
+        }
+        SetFullyTransparent();
+        StartCoroutine(swordFader.FadeInDarkScreen(FADE_DURATION));
+    }
+    public IEnumerator FadeOut() 
+    {
+        isActive = false;
+        if (!isActiveAndEnabled)
+        {
+            SetFullyTransparent();
+            yield break;
+        }
+        StartCoroutine(swordFader.FadeInLightScreen(FADE_DURATION)); 
+    }
+
+    public void ShakePlayerAction() { }
+
+    public void OnMouseEnter()
+    {
+        if (!isActive) return;
+        new TooltipEvent(
+            TextTipDisplayStyle.Display,
+            Title: currentClashType.ToString().ToUpper(),
+            Body: currentClashType.GetDescription(),
+            Icon: swordsIcon.sprite
+        ).Invoke();
+    }
+
+    public void OnMouseExit() => new TooltipEvent(TextTipDisplayStyle.None).Invoke();
     
     public void SetClashState(ClashResultType result)
     {

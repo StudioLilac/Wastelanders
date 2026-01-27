@@ -52,6 +52,9 @@ namespace Systems.Persistence
         protected override void Awake()
         {
             base.Awake();
+
+            if (invalid) return; // Invalidate this singleton immediately to prevent rest of Awake() from executing
+            
             if (SteamManager.Initialized) {
                 dataService = new SteamCloudDataService(new JSonSerializer());
                 Debug.Log("[SaveLoadSystem] Using Steam Cloud for saves.");

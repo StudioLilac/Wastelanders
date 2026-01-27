@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: 10 Giving Resonance To queen
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: What the- are the beetles transferring resonance to the queen?
+  - bodyText: "What the\u2014 are the beetles transferring resonance they gain to
+      the queen?"
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
     broadcastAnEvent: 0
   - bodyText: Seems like they are connected through the crystals, we have to make
       sure the queen doesn't get too strong.
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
     broadcastAnEvent: 0

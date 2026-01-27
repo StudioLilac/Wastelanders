@@ -13,86 +13,97 @@ MonoBehaviour:
   m_Name: 3 BroadcastResults
   m_EditorClassIdentifier: 
   Entries:
-  - content: Alec with a score of 1500 U. in Waste products collected.
+  - content: Chloe with a score of 200 U. in Waste products collected.
     speaker: {fileID: 11400000, guid: 474297f421f8c524e85a2e1640557075, type: 2}
-    sfxName: 
-    picture: {fileID: 0}
-    events: []
-  - content: Pass.
-    speaker: {fileID: 11400000, guid: 474297f421f8c524e85a2e1640557075, type: 2}
-    sfxName: 
-    picture: {fileID: 0}
-    events: []
-  - content: Chloe with a score of 500 U.
-    speaker: {fileID: 11400000, guid: 474297f421f8c524e85a2e1640557075, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: Fail.
     speaker: {fileID: 11400000, guid: 474297f421f8c524e85a2e1640557075, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
-  - content: 'Andrew with a score of 1200 U. Pass. '
+  - content: Alec with a score of 1500 U.
     speaker: {fileID: 11400000, guid: 474297f421f8c524e85a2e1640557075, type: 2}
-    sfxName: 
-    picture: {fileID: 0}
-    events: []
-  - content: 'Jill with a score of 900 U. Fail. '
-    speaker: {fileID: 11400000, guid: 474297f421f8c524e85a2e1640557075, type: 2}
-    sfxName: 
-    picture: {fileID: 0}
-    events: []
-  - content: "Shoot, as much as 900 was a fail this year. Excluding the crystal,
-      I think I only secured just about that much, I hope it was enough to push me
-      over\u2026 "
-    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-    sfxName: 
-    picture: {fileID: 0}
-    events:
-    - rid: 3264111934402461776
-  - content: "Jacqueline Page with a score of\u2026"
-    speaker: {fileID: 11400000, guid: 474297f421f8c524e85a2e1640557075, type: 2}
-    sfxName: 
-    picture: {fileID: 0}
-    events: []
-  - content: 150000 U. in Waste products collected.
-    speaker: {fileID: 11400000, guid: 474297f421f8c524e85a2e1640557075, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: Pass.
     speaker: {fileID: 11400000, guid: 474297f421f8c524e85a2e1640557075, type: 2}
-    sfxName: 
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  - content: 'Andrew with a score of 1200 U. Pass. '
+    speaker: {fileID: 11400000, guid: 474297f421f8c524e85a2e1640557075, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  - content: 'Jill with a score of 900 U. Fail. '
+    speaker: {fileID: 11400000, guid: 474297f421f8c524e85a2e1640557075, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  - content: <i>Shoot, as much as 900 was a fail this year?
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 1207053248668106840
+  - content: <i>Besides the strange crystal from the frog, the other stuff I collected
+      is only worth about that much....
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  - content: "<i>Please, be enough to push me over\u2026 "
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  - content: "Jacqueline Page with a score of\u2026"
+    speaker: {fileID: 11400000, guid: 474297f421f8c524e85a2e1640557075, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  - content: 150000 U. in Waste products collected.
+    speaker: {fileID: 11400000, guid: 474297f421f8c524e85a2e1640557075, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  - content: Pass.
+    speaker: {fileID: 11400000, guid: 474297f421f8c524e85a2e1640557075, type: 2}
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: W H A T.
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 3264111934402461777
-  - content: Murmurs begin spreading through the crowd as both Soldiers and NITES
+    - rid: 1207053248668106844
+    - rid: 1207053248668106842
+    - rid: 1207053248668106846
+  - content: Murmurs begin spreading through the crowd as both soldiers and NITES
       alike hear the unimaginable score.
     speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
-  - content: "Hah, Incredible, Jackie! I think it\u2019s the highest score that anyone
-      has ever achieved in the NITES exam."
-    speaker: {fileID: 11400000, guid: 8121c10b25930fa4dadfab5bd0c5fefe, type: 2}
-    sfxName: 
+  - content: Incredible, I think that's the highest score that anyone has ever achieved.
+    speaker: {fileID: 11400000, guid: d5a65a5aa8d5f964fbd28b4f0ae8ecaf, type: 2}
+    sfxId: 0
     picture: {fileID: 0}
     events: []
-  - content: "Wow, T-thank you, I can\u2019t believe it."
+  - content: "Wow, I can\u2019t believe it."
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 3264111934402461778
   - content: 
     speaker: {fileID: 11400000, guid: 4fef3aeb65460fd498ab9efe9bac8625, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 3264111934402461779
@@ -100,16 +111,33 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 3264111934402461776
+    - rid: 1207053248668106840
       type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        sprite: {fileID: 21300000, guid: 534aff9f6dfd6c544b0144954e8ef0b0, type: 3}
+        sprite: {fileID: 21300000, guid: df71feced233e4383b3c3903e719e156, type: 3}
+    - rid: 1207053248668106842
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 41a291ebbfe3c8744898031b27f37a87, type: 2}
+        action: 80
+        duration: 1
+    - rid: 1207053248668106844
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 41a291ebbfe3c8744898031b27f37a87, type: 2}
+        sprite: {fileID: 21300000, guid: b63c17736cfaced4aa71e946a51034ad, type: 3}
+    - rid: 1207053248668106846
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 41a291ebbfe3c8744898031b27f37a87, type: 2}
+        action: 10
+        duration: 0
     - rid: 3264111934402461777
       type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        sprite: {fileID: 21300000, guid: e37d4fbf07c214c868939546f702fa2b, type: 3}
+        sprite: {fileID: 21300000, guid: 462c06589b475044c9378fb0ab45345c, type: 3}
     - rid: 3264111934402461778
       type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
@@ -124,6 +152,6 @@ MonoBehaviour:
     - rid: 3264111934402461780
       type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: {fileID: 11400000, guid: 8121c10b25930fa4dadfab5bd0c5fefe, type: 2}
+        actor: {fileID: 11400000, guid: d5a65a5aa8d5f964fbd28b4f0ae8ecaf, type: 2}
         action: 70
         duration: 1

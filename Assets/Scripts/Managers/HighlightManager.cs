@@ -2,11 +2,13 @@ using System;
 using UI_Toolkit;
 using UnityEngine;
 
-public class HighlightManager : MonoBehaviour // later all entity highlighter
-{
 
-    public static HighlightManager Instance { get; private set; }
 #nullable enable
+public record CurrentPlayer() : IQuery<PlayerClass?>;
+public class HighlightManager : MonoBehaviour 
+{
+    private const float CURRENT_PLAYER_CROSSHAIR_SLOWDOWN_FACTOR = 0.35f;
+    public static HighlightManager Instance { get; private set; } = null!;
     private EntityClass? currentHighlightedEnemyEntity = null;
     private ActionClass? currentHighlightedAction = null;
     private PlayerClass? selectedPlayer = null;
@@ -30,8 +32,11 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
             Destroy(this);
         }
     }
+
+
     private void Start()
     {
+        this.Answer<CurrentPlayer, PlayerClass?>(GetCurrentPlayer);
         CombatManager.OnGameStateChanged += ResetSelection;
         EntityClass.OnEntityClicked += OnEntityClicked;
         ActionClass.CardClickedEvent += OnActionClicked;
@@ -67,18 +72,25 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
     {
         if (forcedPlayer != selectedPlayer)
         {
+            selectedPlayer?.UnCrossHair();
             ResetCurrentHighlightedAction();
         }
         selectedPlayer = forcedPlayer;
         if (forcedPlayer != null) RenderHand(forcedPlayer);
+        
+        selectedPlayer?.CrossHair(CURRENT_PLAYER_CROSSHAIR_SLOWDOWN_FACTOR);
     }
     private void HandlePlayerClick(PlayerClass clickedPlayer)
     {
         if (clickedPlayer != selectedPlayer)
         {
+            selectedPlayer?.UnCrossHair();
+            
             ResetCurrentHighlightedAction();
             selectedPlayer = clickedPlayer;
             RenderHand(clickedPlayer);
+            
+            selectedPlayer?.CrossHair(CURRENT_PLAYER_CROSSHAIR_SLOWDOWN_FACTOR);
         }
     }
 
@@ -92,13 +104,13 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
     {
         if (selectedPlayer == null)
         {
-            PopUpNotificationManager.Instance.DisplayWarning(PopupType.SelectPlayerFirst);
+            PopUpNotificationManager.Instance.DisplayWarning(new PopupType.SelectPlayerFirst());
             return;
         }
 
         if (currentHighlightedAction == null)
         {
-            PopUpNotificationManager.Instance.DisplayWarning(PopupType.SelectActionFirst);
+            PopUpNotificationManager.Instance.DisplayWarning(new PopupType.SelectActionFirst());
             return;
         }
 
@@ -129,21 +141,6 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
         BattleQueue.BattleQueueInstance.AddAction(currentHighlightedAction);
         PlayerManuallyInsertedAction?.Invoke(currentHighlightedAction);
         selectedPlayer!.HandleUseCard(currentHighlightedAction);
-        
-        if (currentHighlightedEnemyEntity) {
-            Vector2 mouseScreenPos = Input.mousePosition;
-            float scale = HUDV2.Instance?.rootDocument?.rootVisualElement?.panel.scaledPixelsPerPoint ?? 1f;
-            Vector2 panelPos = new Vector2(
-                mouseScreenPos.x / scale,
-                (Screen.height - mouseScreenPos.y) / scale
-            );
-            UI_Toolkit.UI_Elements.CardPlayEffect.SpawnAtPanelPosition(
-                HUDV2.Instance?.rootDocument?.rootVisualElement,
-                HUDV2.Instance?.cardTemplate,
-                currentHighlightedAction,
-                panelPos
-            );
-        }
 
         currentHighlightedEnemyEntity!.DeHighlight();
         currentHighlightedAction.ForceNormalState();
@@ -227,6 +224,6 @@ public class HighlightManager : MonoBehaviour // later all entity highlighter
         selectedPlayer = player; 
         RenderHand(player);
     }
-
+    private PlayerClass? GetCurrentPlayer(CurrentPlayer q) => selectedPlayer;
     private static void RenderHand(PlayerClass player) => OnUpdateHand?.Invoke(player);
 }

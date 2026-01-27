@@ -16,12 +16,10 @@ MonoBehaviour:
   - bodyText: Awesome. Now I gotta think. Which Actions should I prepare for the
       exam?
     speakerName: Jackie
-    displayingImage: {fileID: 0}
-    sfx: 
+    displayingImage: {fileID: 21300000, guid: 10ec818d4088de44a83a5405137230e4, type: 3}
     broadcastAnEvent: 0
-  - bodyText: <i>Click 'Edit Deck' to change the Action Deck of each weapon. Try
+  - bodyText: <i>[Click] 'Edit Deck' to change the Action Deck of each weapon. Try
       editing the Pistol Deck.</i>
     speakerName: Tutorial
-    displayingImage: {fileID: 0}
-    sfx: 
+    displayingImage: {fileID: 21300000, guid: e817f6487b8664c44818a98ed61a5376, type: 3}
     broadcastAnEvent: 0

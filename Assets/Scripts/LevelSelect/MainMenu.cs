@@ -30,12 +30,14 @@ public class MainMenu : MonoBehaviour {
 #if UNITY_WEBGL
         quitButton.gameObject.SetActive(false);
 #endif
-        bountyButton.SetActive(GameStateManager.Instance.CurrentLevelProgress >= BountyInformation.PRINCESS_FROG_BOUNTY.LevelID);
+        // bountyButton.SetActive(GameStateManager.Instance.CurrentLevelProgress >= BountyInformation.PRINCESS_FROG_BOUNTY.LevelID);
+        bountyButton.SetActive(false); // Locks this button until part 2 is ready.
     }
 
-
-    private readonly float cycleScaling = 2f; // Higher the number, the faster one phase is 
-    private readonly float bobbingAmount = 0.1f; //Amplitude
+    [SerializeField]
+    private float cycleScaling = 2f; // Higher the number, the faster one phase is 
+    [SerializeField]
+    private float bobbingAmount = 500f; //Amplitude
     private float timer = 0;
     private float verticalOffset = 0;
 

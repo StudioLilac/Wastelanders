@@ -1,4 +1,5 @@
 using System;
+using Steamworks;
 using Systems.Persistence;
 using UI_Toolkit;
 using UnityEngine;
@@ -45,6 +46,8 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
 
     protected int lowerBound;
     protected int upperBound;
+    
+    public bool Clashable { get; protected set; } = true;
 
     protected RolledStats rolledCardStats = new (0, 0);
 
@@ -149,6 +152,10 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
         Origin.UpdateFacing(diffInLocation, null);
         CardIsUnstaggered();
         this.Target.TakeDamage(Origin, rolledCardStats.ActualRoll);
+
+        if (IsPlayedByPlayer()) {
+            new OnPlayerHit(rolledCardStats.ActualRoll).Invoke();
+        }
     }
 
     //Only called in a clash
@@ -159,9 +166,8 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
 
     public virtual bool IsPlayableByPlayer(out PopupType popupType)
     {
-        bool canInsert = BattleQueue.BattleQueueInstance.CanInsertPlayerCard(this);
-        popupType = canInsert ? PopupType.None : PopupType.SameSpeed;
-        return canInsert;
+        popupType = BattleQueue.BattleQueueInstance.ValidatePlayerInsertion(this);
+        return popupType is PopupType.None;
     }
 
     public bool IsPlayedByPlayer()

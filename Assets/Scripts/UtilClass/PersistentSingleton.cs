@@ -12,6 +12,7 @@ public class PersistentSingleton<T> : MonoBehaviour where T : Component
     public static T Current => instance;
 
     protected static T instance;
+    protected bool invalid = false;
 
     public static T Instance
     {
@@ -57,6 +58,7 @@ public class PersistentSingleton<T> : MonoBehaviour where T : Component
             if (this != instance)
             {
                 Destroy(this.gameObject);
+                invalid = true;
             }
         }
     }

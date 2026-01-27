@@ -13,26 +13,22 @@ MonoBehaviour:
   m_Name: 6 CrystalHitDialogue
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: CRACK!
-    speakerName: 
+  - bodyText: <i>CRACK!
+    speakerName: Narration
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  - bodyText: '(clenches and unclenches her fists) '
-    speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 487226e5dae66424ea250466920a3086, type: 3}
+  - bodyText: <i>Jackie clenches and unclenches her fists.
+    speakerName: Narration
+    displayingImage: {fileID: 0}
     broadcastAnEvent: 0
   - bodyText: "Woah, I feel\u2026 stronger somehow."
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 487226e5dae66424ea250466920a3086, type: 3}
     broadcastAnEvent: 0
-  - bodyText: '[Crystals grant the attacker a resonate stack when dropping below
-      10, 5, 0 hp]'
-    speakerName: Ives
+  - bodyText: <i>Crystals grant the attacker a resonance stack when dropping to or
+      below 10, 5, 0 hp.
+    speakerName: Tutorial
     displayingImage: {fileID: 21300000, guid: 1d59623b22cafd84cb32164685717017, type: 3}
-    broadcastAnEvent: 0
-  - bodyText: '[Attacking crystals as players can grant you resonance as well.]'
-    speakerName: 
-    displayingImage: {fileID: 21300000, guid: 7af708b3e1c4e4b0497edc422888df7c, type: 3}
     broadcastAnEvent: 0
   - bodyText: Hey Jackie, would you mind keeping the noise down? You might attract
       more bugs.

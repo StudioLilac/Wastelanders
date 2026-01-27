@@ -17,16 +17,13 @@ MonoBehaviour:
       ahead of us. We are set out to leave in 30 minutes.
     speakerName: Loudspeaker
     displayingImage: {fileID: 0}
-    sfx: 
     broadcastAnEvent: 0
   - bodyText: "Alright, this shouldn\u2019t take too long. Let\u2019s grab my weapons
       and go!"
     speakerName: Jackie
-    displayingImage: {fileID: 0}
-    sfx: 
+    displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
     broadcastAnEvent: 0
-  - bodyText: <i>Click on Jackie to edit her loadout.
+  - bodyText: <i>[Click] on Jackie to edit her loadout.</i>
     speakerName: Tutorial
-    displayingImage: {fileID: 21300000, guid: edf85a48aa90dc84dbbffa358ce1c5ec, type: 3}
-    sfx: 
+    displayingImage: {fileID: 21300000, guid: 533123fa3ba718e48a85372396fd1a64, type: 3}
     broadcastAnEvent: 0

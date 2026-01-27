@@ -46,6 +46,11 @@ public class LevelSelect : MonoBehaviour
         OpenScene(SceneData.Get<SceneData.LevelSelect>().SceneName);
     }
 
+    public void CreditsScene() 
+    {
+        OpenScene(SceneData.Get<SceneData.Credits>().SceneName);
+    }
+
     public void ContractScene()
     {
         OpenScene(SceneData.Get<SceneData.ContractSelect>().SceneName);
@@ -55,6 +60,7 @@ public class LevelSelect : MonoBehaviour
     {
         OpenScene(SceneData.Get<SceneData.Epilogue>().SceneName);
     }
+    
     
     public void PreBounty0()
     {

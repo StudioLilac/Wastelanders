@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using static IBattleQueueDisplayable;
 
 #nullable enable
 public class ClashingBattleQueueIcon : MonoBehaviour, IBattleQueueDisplayable
@@ -13,6 +14,7 @@ public class ClashingBattleQueueIcon : MonoBehaviour, IBattleQueueDisplayable
     [SerializeField]
     private BattleQueueIcons rightClashingAction = null!;
     [SerializeField] private SwordIcon swordIcon = null!;
+    [SerializeField] private LayoutWidthFader widthFader = null!;
 
     private static readonly ClashCalculator Calculator = new();
     private ActionClass leftClashing = null!;
@@ -24,6 +26,7 @@ public class ClashingBattleQueueIcon : MonoBehaviour, IBattleQueueDisplayable
     {
         leftClashingAction.RenderBQIcon(leftClashingItem);
         rightClashingAction.RenderBQIcon(rightClashingItem);
+        rightClashingAction.RenderUnseenIndicator(); // Right clashing action is conventionally the enemy action
 
         leftClashing = leftClashingItem;
         rightClashing = rightClashingItem;
@@ -58,26 +61,91 @@ public class ClashingBattleQueueIcon : MonoBehaviour, IBattleQueueDisplayable
         swordIcon.SetClashState(Calculator.CompareRange(GetRange(leftClashing), GetRange(rightClashing)));
 
     private (int, int) GetRange(ActionClass actionClass) => ((actionClass.GetRolledStats().RollFloor), (actionClass.GetRolledStats().RollCeiling));
+
+    public void SetFullyTransparent()
+    {
+        widthFader.SetLightScreen();
+        swordIcon.SetFullyTransparent();
+        leftClashingAction.SetFullyTransparent();
+        rightClashingAction.SetFullyTransparent();
+    }
+
+    private void SetFullyOpaque()
+    {
+        widthFader.SetDarkScreen();
+        swordIcon.SetFullyOpaque();
+        leftClashingAction.SetFullyOpaque();
+        rightClashingAction.SetFullyOpaque();
+    }
+
+    public IEnumerator FadeIn()
+    {
+        if (!isActiveAndEnabled)
+        {
+            SetFullyOpaque();
+            yield break;
+        }
+
+        SetFullyTransparent();
+        StartCoroutine(swordIcon.FadeIn());
+        StartCoroutine(leftClashingAction.FadeIn());
+        StartCoroutine(rightClashingAction.FadeIn());
+        yield return StartCoroutine(widthFader.FadeInDarkScreen(EXPAND_DURATION));
+    }
+
+    public IEnumerator FadeOut()
+    {
+        if (!isActiveAndEnabled) 
+        {
+            SetFullyTransparent();
+            yield break;
+        }
+
+        StartCoroutine(swordIcon.FadeOut());
+        StartCoroutine(leftClashingAction.FadeOut());
+        StartCoroutine(rightClashingAction.FadeOut());
+        yield return StartCoroutine(widthFader.FadeInLightScreen(EXPAND_DURATION));
+    }
+
+
+
+    public void ShakePlayerAction()
+    {
+        leftClashingAction.ShakePlayerAction();
+    }
 }
 
 public enum ClashResultType
 {
     None = 0,
     Dominating = 1,
-    Favored = 2,
+    Favourable = 2,
     Even = 3,
-    Unfavored = 4,
-    Futile = 5
+    Unfavourable = 4,
+    Hopeless = 5
+}
+
+public static class ClashResultExtensions
+{
+    public static string GetDescription(this ClashResultType clashResultType) => clashResultType switch
+    {
+        ClashResultType.Dominating => "You are overwhelmingly likely to win this clash.",
+        ClashResultType.Favourable => "You have a strong chance of winning this clash.",
+        ClashResultType.Even => "Both sides have an equal chance of winning this clash.",
+        ClashResultType.Unfavourable => "You are unlikely to win this clash.",
+        ClashResultType.Hopeless => "You are overwhelmingly unlikely to win this clash.",
+        _ => "No clash data available."
+    };
 }
 
 public class ClashCalculator
 {
     private readonly List<ClashBracket> _brackets = new()
     {
-        new ClashBracket(0.2f, ClashResultType.Futile),
-        new ClashBracket(0.4f, ClashResultType.Unfavored),
+        new ClashBracket(0.2f, ClashResultType.Hopeless),
+        new ClashBracket(0.4f, ClashResultType.Unfavourable),
         new ClashBracket(0.6f, ClashResultType.Even),
-        new ClashBracket(0.8f, ClashResultType.Favored), 
+        new ClashBracket(0.8f, ClashResultType.Favourable), 
         new ClashBracket(1.0f, ClashResultType.Dominating)
     };
 

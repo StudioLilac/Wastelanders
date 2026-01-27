@@ -14,7 +14,7 @@ namespace Cards.EnemyCards.FrogCards
 
             myName = "Bless";
             description =
-                $"Spend +{BLESS_COST} Resonate to play. If not staggered: Gain 1 Resonate and give all teammates a random positive buff.";
+                $"Spend +{BLESS_COST} Resonance to play. If not staggered: Gain 1 Resonance and give all teammates a random positive buff.";
 
             CostToAddToDeck = 2;
             lowerBound = upperBound = 1;
@@ -37,7 +37,7 @@ namespace Cards.EnemyCards.FrogCards
             bool isPlayable = base.IsPlayableByPlayer(out popupType);
             bool enoughStacks = Origin.GetBuffStacks(Resonate.buffName) >= BLESS_COST;
 
-            popupType = enoughStacks ? popupType : PopupType.InsufficientResources;
+            popupType = enoughStacks ? popupType : new PopupType.InsufficientResources(Origin.GetBuffStacks(Resonate.buffName), BLESS_COST);
 
             return isPlayable && enoughStacks;
         }

@@ -18,18 +18,18 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: 57baba5992d9e224988e93fcacf9f7eb, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: "You can\u2019t play two Actions that share the same Speed."
+  - bodyText: "You can\u2019t play two Actions that share the same <i>Speed</i>."
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: b1411cc1e1231574797f223a58264863, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: If a card turns red, that means another Action with the same Speed
+  - bodyText: If a card turns red, that means another Action with the same <i>Speed</i>
       is already queued.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 37984fb1d201d1246a4e2a0ac7061427, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: Once you're confident in your setup, press 'Begin' to start combat.
+  - bodyText: Once you're confident in your setup, press <i>Begin</i> to start combat.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 012935b81d93368468e2669b1e3d145f, type: 3}
     sfx: 

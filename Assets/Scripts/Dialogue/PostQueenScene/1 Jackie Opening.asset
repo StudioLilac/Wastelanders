@@ -13,12 +13,22 @@ MonoBehaviour:
   m_Name: 1 Jackie Opening
   m_EditorClassIdentifier: 
   Entries:
-  - content: New Haven City, East Wall Boot Camp - 1 week after the NITES exam.
+  - content: '<i>New Haven City: East Wall Boot Camp - 1 week after the NITES exam.'
     speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
     sfxName: 
     picture: {fileID: 0}
     events: []
-  - content: Shoot, I better get going. The broadcast is starting soon.
+  - content: <i>Ugh, the broadcast is starting soon.
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: '<i>Was how much I collected enough? What if I fail again? '
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxName: 
+    picture: {fileID: 0}
+    events: []
+  - content: <i>I guess... there's only one way to find out.
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxName: 
     picture: {fileID: 0}
