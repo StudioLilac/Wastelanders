@@ -30,7 +30,8 @@ public class MainMenu : MonoBehaviour {
 #if UNITY_WEBGL
         quitButton.gameObject.SetActive(false);
 #endif
-        bountyButton.SetActive(GameStateManager.Instance.CurrentLevelProgress >= BountyInformation.PRINCESS_FROG_BOUNTY.LevelID);
+        // bountyButton.SetActive(GameStateManager.Instance.CurrentLevelProgress >= BountyInformation.PRINCESS_FROG_BOUNTY.LevelID);
+        bountyButton.SetActive(false); // Locks this button until part 2 is ready.
     }
 
     [SerializeField]
