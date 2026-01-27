@@ -1,3 +1,4 @@
+using DialogueScripts;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -62,10 +63,9 @@ public class GameOver : MonoBehaviour
         AudioManager.Instance.PlayDeath();
         yield return StartCoroutine(uiFadeScreen.FadeInDarkScreen(1.5f));
         StartCoroutine(FadeCoroutine(true, FADE_IN_TIME));
-        DialogueManager.Instance.MoveBoxToBottom();
-        DialogueManager.Instance.ChangeDialogueBoxOrder(UISortOrder.GameOverText.GetOrder());
-        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(dialogue.Dialogue));
-        DialogueManager.Instance.ChangeDialogueBoxOrder(UISortOrder.DialogueBox.GetOrder());
+        DialogueBoxV2.Instance.ChangeDialogueBoxOrder(UISortOrder.GameOverDialogue.GetOrder());
+        yield return StartCoroutine(DialogueBoxV2.Instance.Play(dialogue));
+        DialogueBoxV2.Instance.ChangeDialogueBoxOrder(UISortOrder.DialogueBox.GetOrder());
     }
 
 

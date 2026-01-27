@@ -101,14 +101,16 @@ namespace DialogueScripts
             activeMoveRoutine = null;
         }
 
-        public void FaceLeft()
+        public DialogueActor FaceLeft()
         {
             bodyRenderer.transform.localScale = new Vector3(1, 1, 1);
+            return this;
         }
 
-        public void FaceRight()
+        public DialogueActor FaceRight()
         {
             bodyRenderer.transform.localScale = new Vector3(-1, 1, 1);
+            return this;
         }
     }
 }

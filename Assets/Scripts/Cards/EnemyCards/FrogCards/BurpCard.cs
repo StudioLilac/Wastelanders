@@ -37,7 +37,7 @@ namespace Cards.EnemyCards.FrogCards
             bool isPlayable = base.IsPlayableByPlayer(out popupType);
             bool enoughStacks = Origin.GetBuffStacks(Resonate.buffName) >= BURP_COST;
 
-            popupType = enoughStacks ? popupType : PopupType.InsufficientResources;
+            popupType = enoughStacks ? popupType : new PopupType.InsufficientResources(Origin.GetBuffStacks(Resonate.buffName), BURP_COST);
 
             return isPlayable && enoughStacks;
         }

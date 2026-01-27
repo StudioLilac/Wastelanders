@@ -12,6 +12,7 @@ public enum UISortOrder
     CombatIntro,
     GameOverScrim,
     GameOverText,
+    GameOverDialogue,
     PauseMenu,
     FadeScreen
 }

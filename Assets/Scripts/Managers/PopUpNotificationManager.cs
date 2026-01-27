@@ -26,11 +26,15 @@ public class PopUpNotificationManager : MonoBehaviour
 
     public void DisplayWarning(PopupType popupType)
     {
+        string HandleConflict(PopupType.SpeedConflict data)
+        {
+            data.DuplicatedItem.ShakePlayerAction();
+            return "Same Speed Selected!";
+        }
+
         string message = popupType switch
         {
-            PopupType.SameSpeed => "Same Speed Selected!",
-            PopupType.EnemyKilled => "Enemy Killed!",
-            PopupType.DeckReshuffled => "Deck Reshuffled!",
+            PopupType.SpeedConflict data => HandleConflict(data),
             PopupType.SelectActionFirst => "Select an Action first!",
             PopupType.SelectPlayerFirst => "Select a Player first!",
             PopupType.InsufficientResources => "Insufficient resources!",

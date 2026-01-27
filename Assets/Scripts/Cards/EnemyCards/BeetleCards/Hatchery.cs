@@ -38,9 +38,10 @@ public class Hatchery : ActionClass, IPlayableQueenCard
     public override bool IsPlayableByPlayer(out PopupType popupType)
     {
         bool isPlayable = base.IsPlayableByPlayer(out popupType);
-        bool enoughStacks = Origin.GetBuffStacks(Resonate.buffName) >= HATCHERY_COST;
+        int stackCount = Origin.GetBuffStacks(Resonate.buffName);
+        bool enoughStacks = stackCount >= HATCHERY_COST;
 
-        popupType = enoughStacks ? popupType : PopupType.InsufficientResources;
+        popupType = enoughStacks ? popupType : new PopupType.InsufficientResources(stackCount, HATCHERY_COST);
 
         return isPlayable && enoughStacks;
     }

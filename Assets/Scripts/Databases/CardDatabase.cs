@@ -135,12 +135,12 @@ public class CardDatabase : ScriptableObject
 
     public enum WeaponType
     {
-        STAFF,
-        PISTOL,
-        FIST,
-        AXE,
-        CLASSLESS,
-        ENEMY
+        STAFF = 0,
+        PISTOL = 1,
+        FIST = 2,
+        AXE = 3,
+        ENEMY = 4,
+        CLASSLESS = 5,
     }
 }
 

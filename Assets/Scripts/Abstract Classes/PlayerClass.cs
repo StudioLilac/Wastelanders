@@ -93,14 +93,16 @@ public abstract class PlayerClass : EntityClass
 
     public override void DestroyDeck()
     {
-        List<GameObject> toDestroy = new List<GameObject>(pool);
+        var toDestroy = Pool;
+        toDestroy.AddRange(Hand);
+        toDestroy.AddRange(discard);
         foreach (GameObject actionClass in toDestroy)
         {
-            pool.Remove(actionClass);
-            hand.Remove(actionClass);
-            discard.Remove(actionClass);
             Destroy(actionClass);
         }
+        hand.Clear();
+        discard.Clear();
+        pool.Clear();
     }
 
     protected abstract void GrabDeck();
