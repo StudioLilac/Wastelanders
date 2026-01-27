@@ -20,7 +20,6 @@ public class CombatInfo : MonoBehaviour
     public GameObject buffIconPrefab;
     public HealthBar healthBar;
     public GameObject crosshair;
-    [SerializeField] private bool doRotate = true;
     public TMP_Text damagePopupText;
     private float ROTATION_SPEED = 30f;
 
@@ -100,11 +99,9 @@ public class CombatInfo : MonoBehaviour
         damagePopupText.gameObject.SetActive(false);
     }
 
-    public void Update()
+    public virtual void Update()
     {
-        if (doRotate) {
-            crosshair.transform.Rotate(Vector3.forward * ROTATION_SPEED * Time.deltaTime);
-        }
+        crosshair.transform.Rotate(Vector3.forward * ROTATION_SPEED * Time.deltaTime);
     }
 
     /* 
@@ -217,7 +214,7 @@ public class CombatInfo : MonoBehaviour
         healthBar.gameObject.SetActive(false);
     }
 
-    public void ActivateCrosshair()
+    public virtual void ActivateCrosshair(float speed = 1)
     {
         if (!crosshair.activeSelf)
         {
@@ -225,7 +222,7 @@ public class CombatInfo : MonoBehaviour
         }
     }
 
-    public void DeactivateCrosshair()
+    public virtual void DeactivateCrosshair()
     {
         if (crosshair.activeSelf)
         {
