@@ -31,21 +31,23 @@ public class DialogueText
         this.displayingImage = givenImage;
     }
 
-    public DialogueEntry Into() => new (content: bodyText, speaker: GetSpeakerProfile(speakerName), picture: displayingImage, events: new(), sfxId: default);
+    public DialogueEntry Into() => new (content: bodyText, speaker: GetSpeakerProfile(speakerName), picture: displayingImage, events: (broadcastAnEvent) ? new() { new CustomEvent() } : new(), sfxId: default);
 
     private static ActorProfile? GetSpeakerProfile(string speakerName)
     {
-        var database = new GetActorDatabase().Query();
+        ActorDatabase? database = new GetActorDatabase().Query();
         if (database == null) return null;
 
         return speakerName.Trim().ToLower() switch
                {
             "jackie" => database.Jackie,
             "ives" => database.Ives,
+            "ailin" => database.Ailin,
             "narration" => database.Narration,
             "broadcast" => database.Broadcast,
             "loudspeaker" => database.Loudspeaker,
             "tutorial" => database.Tutorial,
+            "???" => database.Unkown,
             _ => null,
         };
     }

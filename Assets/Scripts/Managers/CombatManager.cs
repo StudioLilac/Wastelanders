@@ -22,8 +22,6 @@ public class CombatManager : MonoBehaviour
 
     public CinemachineVirtualCamera baseCamera;
     public CinemachineVirtualCamera dynamicCamera;
-    private ScreenShakeHandler screenShakeHandler;
-
     private List<EntityClass> playerTeam = new();
     private List<EntityClass> enemyTeam = new();
     private List<EntityClass> neutralTeam = new();
@@ -74,11 +72,11 @@ public class CombatManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this.Answer<DefaultCard, ClasslessCards?>(GetDefaultAction);
         GameState = GameState.GAME_START; //Put game start code in the performGameStart method.
-        screenShakeHandler = gameObject.AddComponent<ScreenShakeHandler>();
-        screenShakeHandler.DynamicCamera = dynamicCamera;
+        gameObject.AddComponent<ScreenShakeHandler>();
         ActionClass.CardStateChange += HandleCrosshairEnemies;
+        this.Answer<DefaultCard, ClasslessCards?>(GetDefaultAction);
+        this.Answer<GetActiveCamera, CinemachineVirtualCamera?>(_ => (dynamicCamera.Priority > baseCamera.Priority) ? dynamicCamera : baseCamera);
     }
 
     private void OnDestroy()
@@ -274,11 +272,6 @@ public class CombatManager : MonoBehaviour
     {
         baseCamera.Priority = 1;
         dynamicCamera.Priority = 0;
-    }
-
-    public void AttackCameraEffect(float percentageMax)
-    {
-        screenShakeHandler.AttackCameraEffect(percentageMax);
     }
 
     private void PerformGameStart()

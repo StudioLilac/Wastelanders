@@ -6,6 +6,7 @@ public class CreditsManager : MonoBehaviour
 {
     public Animator animator;
     public Image blackBg;
+    public UIFadeHandler fadeHandler;
 
     void Start()
     {
@@ -16,8 +17,9 @@ public class CreditsManager : MonoBehaviour
     {
         yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.3f);
         StartCoroutine(FadeInBlackBg());
-        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.99f);
-        GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.MainMenu>().SceneName);
+        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.95f);
+        yield return StartCoroutine(fadeHandler.FadeInDarkScreen(2f));
+        GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.PreBounty0>().SceneName);
     }
 
     IEnumerator FadeInBlackBg()

@@ -13,47 +13,39 @@ MonoBehaviour:
   m_Name: 9 PostFightDialogue
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: Everyone is exhausted, but the battle is won. Many candidates are injured
-      but none dead.
+  - bodyText: <i>Everyone is exhausted, but the battle is won. Many candidates are
+      injured but none dead.
     speakerName: Narration
     displayingImage: {fileID: 0}
-    sfx: 
     broadcastAnEvent: 0
-  - bodyText: The examiners discuss amongst themselves and come to a verdict.
+  - bodyText: <i>The examiners discuss amongst themselves and come to a verdict.
     speakerName: Narration
     displayingImage: {fileID: 0}
-    sfx: 
     broadcastAnEvent: 0
   - bodyText: 'Attention examinees, this marks the end of quite an unprecedented
       exam.  '
     speakerName: Ives
     displayingImage: {fileID: 0}
-    sfx: 
     broadcastAnEvent: 1
   - bodyText: "I\u2019d like to congratulate you all for fighting so valiantly to
       neutralize this unknown threat.  "
     speakerName: Ives
     displayingImage: {fileID: 0}
-    sfx: 
     broadcastAnEvent: 0
   - bodyText: We examiners have seen the exceptional skills that you have all displayed
       during this battle.
     speakerName: Ives
     displayingImage: {fileID: 0}
-    sfx: 
     broadcastAnEvent: 0
   - bodyText: 'So look forward to the examination results in a couple days. '
     speakerName: Ives
     displayingImage: {fileID: 0}
-    sfx: 
     broadcastAnEvent: 0
   - bodyText: 'For now, we''ll return to camp and wait for reinforcements to arrive. '
     speakerName: Ives
     displayingImage: {fileID: 0}
-    sfx: 
     broadcastAnEvent: 0
   - bodyText: I'm gonna need a breather...
     speakerName: Ives
     displayingImage: {fileID: 0}
-    sfx: 
     broadcastAnEvent: 0

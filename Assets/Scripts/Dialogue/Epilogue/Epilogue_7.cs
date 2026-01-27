@@ -14,7 +14,6 @@ public class Epilogue_7 : MonoBehaviour
     [SerializeField] private SpriteRenderer[] blackScreen; // Used for a black screen, keeping dialogue visible
     [SerializeField] private SpriteRenderer[] wakeUpBackground;
     [SerializeField] private SpriteRenderer[] reversedCaveBackground;
-    [SerializeField] private ScreenShakeHandler screenShakeHandler;
     [SerializeField] private CinemachineVirtualCamera dynamicCamera;
     [SerializeField] private DialogueEntryInUnityEditor[] preFightDialogue;
     [SerializeField] private DialogueEntryInUnityEditor[] defaultBackgroundDialogue;
@@ -26,10 +25,14 @@ public class Epilogue_7 : MonoBehaviour
     [SerializeField] private DialogueEntryInUnityEditor[] postKadeFadeDialogue;
     [SerializeField] private DialogueEntryInUnityEditor[] kadeAndOthersDialogue;
     [SerializeField] private DialogueEntryInUnityEditor[] everyoneDialogue;
+#nullable enable
+
+    private void Awake()
+    {
+        this.Answer<GetActiveCamera, CinemachineVirtualCamera?>(evt => dynamicCamera);}
 
     private IEnumerator Start()
     {
-        screenShakeHandler.DynamicCamera = dynamicCamera; // Suboptimal
         UIFadeScreenManager.Instance.SetDarkScreen();
         yield return UIFadeScreenManager.Instance.FadeInLightScreen(2f);
         yield return new WaitForSeconds(1f);
@@ -37,7 +40,7 @@ public class Epilogue_7 : MonoBehaviour
         // TODO: Boulder audio and roaring
         yield return DialogueBoxV2.Instance.Play(defaultBackgroundDialogue.Into());
         // TODO: Shake and roar
-        screenShakeHandler.AttackCameraEffect(0.8f);
+        new ShakeScreen(Intensity: 0.8f).Invoke();
         
         // [Fade into Dead Creature background with Jackie and creature]
         yield return FadeOutSpriteRenderers(2, defaultBackground);

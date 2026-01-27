@@ -16,5 +16,5 @@ MonoBehaviour:
   - bodyText: That Beetle had so many crystals growing out of it. It's gotta be worth
       a fortune!
     speakerName: Jackie
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 487226e5dae66424ea250466920a3086, type: 3}
     broadcastAnEvent: 0

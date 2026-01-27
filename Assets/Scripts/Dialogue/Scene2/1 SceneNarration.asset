@@ -14,19 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue:
   - bodyText: "<i>After a day's worth of traveling, the Candidates arrive at The
-      Western Marsh, this year\u2019s exam destination."
-    speakerName: Narration
+      Western Marsh, this year\u2019s exam destination.</i>"
+    speakerName: 
     displayingImage: {fileID: 0}
-    sfx: 
     broadcastAnEvent: 0
-  - bodyText: <i>They spend the night setting up base camp. Tension fills the camp,
-      and Candidates are restless throughout the night.
-    speakerName: Narration
+  - bodyText: "<i>After a day's worth of traveling, the Candidates arrive at The
+      Western Marsh, this year\u2019s exam destination.</i>"
+    speakerName: 
     displayingImage: {fileID: 0}
-    sfx: 
-    broadcastAnEvent: 0
-  - bodyText: <i>Finally, the morning of the exam arrives.
-    speakerName: Narration
-    displayingImage: {fileID: 0}
-    sfx: 
     broadcastAnEvent: 0

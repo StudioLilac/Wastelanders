@@ -15,22 +15,22 @@ MonoBehaviour:
   Entries:
   - content: Hah, thats what you get for messing with something you can't handle.
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-    sfxName: 
-    picture: {fileID: 21300000, guid: c719baaafa8cd7148806ffb41907add6, type: 3}
+    sfxId: 0
+    picture: {fileID: 21300000, guid: 10ec818d4088de44a83a5405137230e4, type: 3}
     events: []
   - content: Hold on, I still need to collect Waste Products.
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 21300000, guid: 537908265661f2b44970c526d7724cfb, type: 3}
     events: []
   - content: Oh well, a lame ol' Slime isn't worth much anyway.
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 21300000, guid: 537908265661f2b44970c526d7724cfb, type: 3}
     events: []
   - content: But there might be more interesting creatures over there...
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 21300000, guid: 537908265661f2b44970c526d7724cfb, type: 3}
     events: []
   references:
