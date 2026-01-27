@@ -62,9 +62,9 @@ public class FrogSlimeFightDialogue : DialogueClasses
     [SerializeField] private Sprite frogDeathSprite;
     [SerializeField] private Sprite jackieHoldingCrystalSprite;
 
-    [SerializeField] private DialogueEntryInUnityEditor[] startingNarration;
-    [SerializeField] private DialogueEntryInUnityEditor[] testBegins;
-    [SerializeField] private List<DialogueText> jackieStrategyPlan;
+    [SerializeField] private DialogueEntryWrapper startingNarration;
+    [SerializeField] private DialogueEntryInUnityEditor[] testBegins; // Hard to swap into dialogue entry wrapper due to serialization.
+    [SerializeField] private DialogueEntryWrapper jackieStrategyPlan;
 
     [SerializeField] private DialogueEntryWrapper explainEnemyAttacks;
     [SerializeField] private DialogueEntryWrapper explainClashing;
@@ -108,7 +108,6 @@ public class FrogSlimeFightDialogue : DialogueClasses
         CombatManager.ClearEvents();
         DialogueBox.ClearDialogueEvents();
         EntityClass.OnEntityDeath -= EnsureFrogDeath;
-        DialogueBox.DialogueBoxEvent -= OnDialogueBoxEvent;
         HighlightManager.Instance.PlayerManuallyInsertedAction -= OnPlayerPlayClashingCard;
         DisplayableClass.OnShowCard -= ExplainDefense;
     }
@@ -149,7 +148,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
             yield return new WaitForSeconds(1f);
             yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(1.0f));
             //Narrate the scene
-            yield return StartCoroutine(DialogueBoxV2.Instance.Play(startingNarration.Into()));
+            yield return StartCoroutine(DialogueBoxV2.Instance.Play(startingNarration));
             yield return new WaitForSeconds(BRIEF_PAUSE);
 
             //Ives Talks to the examinees
@@ -179,7 +178,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
             //Jackie Wanders around
             {
                 Coroutine jackieWander = StartCoroutine(HaveJackieWander());
-                yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackieStrategyPlan));
+                yield return StartCoroutine(DialogueBoxV2.Instance.Play(jackieStrategyPlan));
                 yield return jackieWander;
             }
 
@@ -248,14 +247,14 @@ public class FrogSlimeFightDialogue : DialogueClasses
                 baseCamera.transform.position = secondFightBaseCameraPosition.position;
 
 
-                yield return StartCoroutine(DialogueManager.Instance.StartDialogue(andNowWeWait));
+                yield return StartCoroutine(DialogueBoxV2.Instance.Play(andNowWeWait.Into()));
 
                 // Frog walks in
                 StartCoroutine(frog.MoveToPosition(frogInitialWalkIn.position, 0f, 2f));
                 yield return new WaitForSeconds(1.8f);
                 yield return StartCoroutine(MoveObjectInRotationDirection(jackie.gameObject, 0.25f, 0.3f));
                 yield return new WaitForSeconds(BRIEF_PAUSE);
-                yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackiePreMissedShot));
+                yield return StartCoroutine(DialogueBoxV2.Instance.Play(jackiePreMissedShot.Into()));
 
                 //Jackie Misses and frog runs away with jackie chasing it
 
@@ -269,7 +268,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
                 yield return StartCoroutine(MakeFrogJump(frog, 1f));
                 yield return StartCoroutine(frog.MoveToPosition(frogConfrontPosition.position, 0f, 1.2f,
                     outOfScreen.position));
-                yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackiePostMissedShot));
+                yield return StartCoroutine(DialogueBoxV2.Instance.Play(jackiePostMissedShot.Into()));
 
                 closeUpCamera.Priority = 0;
                 StartCoroutine(jackie.MoveToPosition(frogConfrontPosition.position, 2f, 2f));
@@ -285,7 +284,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
             jackieSprite.sortingLayerName = jackieSpriteLayerName;
             jackieSprite.sortingOrder = jackieSpriteSortingOrder;
             mainBrain.m_DefaultBlend = oldStyle;
-            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(jackiePreCombat));
+            yield return StartCoroutine(DialogueBoxV2.Instance.Play(jackiePreCombat.Into()));
         }
         else
         {
@@ -314,7 +313,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
         yield return StartCoroutine(frog.ResetPosition());
         jackie.InCombat();
         frog.Targetable(); frog.InCombat(); frog2.Targetable(); frog2.InCombat(); slimeStack.Targetable(); slimeStack.InCombat();
-        yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
+        yield return new WaitUntil(() => !DialogueBoxV2.Instance.IsActive);
 
         CombatManager.PlayersWinEvent += PlayersWin;
         CombatManager.EnemiesWinEvent += EnemiesWin;
@@ -339,7 +338,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
 
         //After Combat
         AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
-        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(afterCombatDialogue));
+        yield return StartCoroutine(DialogueBoxV2.Instance.Play(afterCombatDialogue.Into()));
         yield return new WaitForSeconds(BRIEF_PAUSE);
         CombatManager.Instance.ActivateDynamicCamera();
         yield return StartCoroutine(jackie.MoveToPosition(lastKilledFrog.transform.position, 1.5f, 1.7f));
@@ -355,7 +354,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
         yield return new WaitForSeconds(MEDIUM_PAUSE);
         jackie.transform.rotation = Quaternion.identity;
         yield return new WaitForSeconds(BRIEF_PAUSE);
-        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(crystalExtraction));
+        yield return StartCoroutine(DialogueBoxV2.Instance.Play(crystalExtraction.Into()));
 
         //Jackie moves off screen
         closeUpCamera.Priority = 2;
@@ -365,7 +364,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
         yield return StartCoroutine(jackie.MoveToPosition(jackie.transform.position + new Vector3(12f, -1f, 0), 0f, 1.5f));
         yield return new WaitForSeconds(MEDIUM_PAUSE);
 
-        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(beetleEntrance));
+        yield return StartCoroutine(DialogueBoxV2.Instance.Play(beetleEntrance.Into()));
         yield return new WaitForSeconds(BRIEF_PAUSE);
         //Beetle is spawned in and follows Jackie
         Vector3 bottomLeft = mainCamera.ViewportToWorldPoint(new Vector3(0, 0.3f, mainCamera.nearClipPlane));
@@ -394,13 +393,13 @@ public class FrogSlimeFightDialogue : DialogueClasses
         }
     }
     private int numberOfBroadcasts = 0;
-    private void OnDialogueBoxEvent()
+    private void OnDialogueBoxEvent(CustomEvent ev)
     {
         ++numberOfBroadcasts;
     }
     IEnumerator HaveJackieWander()
     {
-        DialogueBox.DialogueBoxEvent += OnDialogueBoxEvent;
+        this.Subscribe<CustomEvent>(OnDialogueBoxEvent);
         //Jackie wanders up
         yield return new WaitUntil(() => numberOfBroadcasts >= 1);
         yield return StartCoroutine(jackie.MoveToPosition(jackieWander1.position, 0f, 1.2f));
@@ -439,7 +438,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
         yield return new WaitUntil(() => numberOfBroadcasts >= 5);
         StopCoroutine(thirdWalk);
         jackie.FaceRight();
-        DialogueBox.DialogueBoxEvent -= OnDialogueBoxEvent;
+        this.UnSubscribe<CustomEvent>(OnDialogueBoxEvent);
     }
 
 
@@ -461,7 +460,6 @@ public class FrogSlimeFightDialogue : DialogueClasses
 
     private IEnumerator OnPlayerClashingWithSlime()
     {
-        DialogueManager.Instance.MoveBoxToBottom();
         CardComparator.Instance.playersAreRollingDiceEvent -= OnPlayerClashingWithSlime;
         yield return StartCoroutine(DialogueBoxV2.Instance.Play(duringClashing));
     }
@@ -469,7 +467,6 @@ public class FrogSlimeFightDialogue : DialogueClasses
 
     private IEnumerator StartDialogueWithNextEvent(DialogueEntryWrapper dialogue, Action callbackToRun)
     {
-        yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
         yield return StartCoroutine(DialogueBoxV2.Instance.Play(dialogue));
         callbackToRun();
     }

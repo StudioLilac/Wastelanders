@@ -1,8 +1,9 @@
+using DialogueScripts;
 using LevelSelectInformation;
+using Particles;
 using SceneBuilder;
 using System.Collections;
 using System.Collections.Generic;
-using Particles;
 using UnityEngine;
 using UnityEngine.UI;
 using static BattleIntroEnum;
@@ -97,10 +98,8 @@ public class PreQueenFight : DialogueClasses
 
     private void OnDestroy()
     {
-        DialogueBox.ClearDialogueEvents();
         CombatManager.ClearEvents();
         Beetle.OnGainBuffs -= ExplainBeetleBuff;
-        DialogueBox.DialogueBoxEvent -= FadeInBackground;
     }
 
     private IEnumerator ExecuteGameStart()
@@ -172,16 +171,16 @@ public class PreQueenFight : DialogueClasses
         
         if (!GameStateManager.Instance.JumpToCombat && !jumpToCombat)
         {   
-            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(initialPlanByJackie.Dialogue));
+            yield return StartCoroutine(DialogueBoxV2.Instance.Play(initialPlanByJackie));
 
             //Activate First Plan
             {
                 int broadcasts = 0;
-                void DialogueBoxListener()
+                void DialogueBoxListener(CustomEvent ev)
                 {
                     ++broadcasts;
                 }
-                DialogueBox.DialogueBoxEvent += DialogueBoxListener;
+                this.Subscribe<CustomEvent>(DialogueBoxListener);
 
                 List<Coroutine> coroutines = new List<Coroutine>();
 
@@ -189,10 +188,9 @@ public class PreQueenFight : DialogueClasses
                 {
                     Coroutine coroutine = StartCoroutine(FadeSprite(entity.gameObject.GetComponent<SpriteRenderer>(), 0f, 1f, 0.8f));
                     coroutines.Add(coroutine);
-
                 }
 
-                Coroutine dialogueCoroutine = StartCoroutine(DialogueManager.Instance.StartDialogue(planOneDialogue.Dialogue));
+                Coroutine dialogueCoroutine = StartCoroutine(DialogueBoxV2.Instance.Play(planOneDialogue));
                 // Wait for all coroutines to finish
                 foreach (var cor in coroutines)
                 {
@@ -217,7 +215,7 @@ public class PreQueenFight : DialogueClasses
                 yield return StartCoroutine(planOneIves.MoveToPosition(worker2.transform.position, 1.5f, 0.8f));
                 yield return jackieRun;
 
-                DialogueBox.DialogueBoxEvent -= DialogueBoxListener;
+                this.UnSubscribe<CustomEvent>(DialogueBoxListener);
 
 
                 yield return new WaitForSeconds(0.2f);
@@ -279,11 +277,11 @@ public class PreQueenFight : DialogueClasses
                 beetlePile3.animator.enabled = false;
 
                 int broadcasts = 0;
-                void DialogueBoxListener()
+                void DialogueBoxListener(CustomEvent ev)
                 {
                     ++broadcasts;
                 }
-                DialogueBox.DialogueBoxEvent += DialogueBoxListener;
+                this.Subscribe<CustomEvent>(DialogueBoxListener);
 
                 List<Coroutine> coroutines = new List<Coroutine>();
 
@@ -294,7 +292,7 @@ public class PreQueenFight : DialogueClasses
 
                 }
 
-                Coroutine dialogueCoroutine = StartCoroutine(DialogueManager.Instance.StartDialogue(planTwoDialogue.Dialogue));
+                Coroutine dialogueCoroutine = StartCoroutine(DialogueBoxV2.Instance.Play(planTwoDialogue));
                 // Wait for all coroutines to finish
                 foreach (var cor in coroutines)
                 {
@@ -317,7 +315,7 @@ public class PreQueenFight : DialogueClasses
                 yield return StartCoroutine(planTwoJackie.MoveToPosition(drone2.transform.position, 1.5f, 0.8f));
                 yield return jackieRun;
 
-                DialogueBox.DialogueBoxEvent -= DialogueBoxListener;
+                this.UnSubscribe<CustomEvent>(DialogueBoxListener);
 
 
                 yield return new WaitForSeconds(0.2f);
@@ -388,10 +386,8 @@ public class PreQueenFight : DialogueClasses
                 }
                 coroutines.Clear();
 
-
-                DialogueManager.Instance.MoveBoxToTop();
-
-                yield return StartCoroutine(DialogueManager.Instance.StartDialogue(planThreeDialogue.Dialogue));
+                VerticalLayoutChange.MoveBoxV2ToTop();
+                yield return StartCoroutine(DialogueBoxV2.Instance.Play(planThreeDialogue));
                 yield return StartCoroutine(CombatManager.Instance.FadeInLightScreen(0.5f));
                 
                 rain.SetIntensity(1);
@@ -446,18 +442,19 @@ public class PreQueenFight : DialogueClasses
                 {
                     crystal.DeEmphasize();
                 }
-                yield return StartCoroutine(DialogueManager.Instance.StartDialogue(AfterBeetleFightDialogue.Dialogue));
+                yield return StartCoroutine(DialogueBoxV2.Instance.Play(AfterBeetleFightDialogue));
                 yield return StartCoroutine(jackie.MoveToPosition(middleBigCrystal.transform.position, 2f, 0.5f));
 
                 jackie.AttackAnimation(StaffCards.STAFF_ANIMATION_NAME);
                 AudioManager.Instance?.PlaySFX(SoundID.CB_staff_hit);
                 jackie.AddStacks(Resonate.buffName, 1);
+                new ShakeScreen(Intensity: 0.6f).Invoke();
 
 
-                DialogueManager.Instance.MoveBoxToBottom();
+                VerticalLayoutChange.MoveBoxV2ToBottom();
                 yield return new WaitForSeconds(BRIEF_PAUSE);
 
-                yield return StartCoroutine(DialogueManager.Instance.StartDialogue(CrystalHitDialogue.Dialogue));
+                yield return StartCoroutine(DialogueBoxV2.Instance.Play(CrystalHitDialogue));
             }
         }
         else
@@ -495,8 +492,9 @@ public class PreQueenFight : DialogueClasses
             {
                 crystals.Remove(bigCrystals[i]);
             }
-            //Shake here TODO
-            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(PreQueenFightDialogue.Dialogue));
+            new ShakeScreen(Intensity: 0.6f).Invoke();
+            SoundID.CB_hatchery_summon.Play();
+            yield return StartCoroutine(DialogueBoxV2.Instance.Play(PreQueenFightDialogue));
         }
 
         {
@@ -517,7 +515,7 @@ public class PreQueenFight : DialogueClasses
                 StartCoroutine(queenGuardBeetles[i].MoveToPosition(queenGuardBeetleTransforms[i].position, 0f, 1.5f));
             }
             yield return StartCoroutine(theQueen.MoveToPosition(queenTransform.position, 0f, 1.5f));
-            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(LastBitDialogue.Dialogue));
+            yield return StartCoroutine(DialogueBoxV2.Instance.Play(LastBitDialogue));
             
             jackie.DeEmphasize();
             ives.DeEmphasize();
@@ -558,22 +556,22 @@ public class PreQueenFight : DialogueClasses
             GameStateManager.Instance.UpdateLevelProgress(StageInformation.PRINCESS_FROG_FIGHT);
 
             yield return new WaitForSeconds(1.5f);
-            DialogueManager.Instance.MoveBoxToBottom();
+            VerticalLayoutChange.MoveBoxV2ToBottom();
             yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
 
             AudioManager.Instance.StartBackgroundTrack();
-            DialogueBox.DialogueBoxEvent += FadeInBackground;
-            yield return new WaitUntil(() => (!DialogueManager.Instance.IsInDialogue()));
-            yield return StartCoroutine(DialogueManager.Instance.StartDialogue(PostFight.Dialogue));
+
+            this.Subscribe<CustomEvent>(FadeInBackground);
+            yield return StartCoroutine(DialogueBoxV2.Instance.Play(PostFight));
 
             GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.PostQueenFight>().SceneName);
         }
         
     }
 
-    void FadeInBackground()
+    void FadeInBackground(CustomEvent evt)
     {
-        DialogueBox.DialogueBoxEvent -= FadeInBackground;
+        this.UnSubscribe<CustomEvent>(FadeInBackground);
         StartCoroutine(FadeImage(blackBG, 1f, true));
         StartCoroutine(FadeImage(endOfExamImage, 1f, true));
     }
@@ -589,13 +587,7 @@ public class PreQueenFight : DialogueClasses
     void ExplainHatchery(HatcheryUsed e)
     {
         this.UnSubscribe<HatcheryUsed>(ExplainHatchery);
-        StartCoroutine(ExplainHatcheryCoroutine());
-    }
-
-    private IEnumerator ExplainHatcheryCoroutine()
-    {
-        yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
-        StartCoroutine(DialogueManager.Instance.StartDialogue(hatcheryExplanation.Dialogue));
+        StartCoroutine(DialogueBoxV2.Instance.Play(hatcheryExplanation));
     }
 
     private void ExplainBeetleBuff(string buffType, int stacks, Beetle beetle)
@@ -608,9 +600,8 @@ public class PreQueenFight : DialogueClasses
         if (buffType == Resonate.buffName && stacks > 0)
         {
             yield return new WaitUntil(() => CombatManager.Instance.GameState != GameState.FIGHTING);
-            yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
             Beetle.OnGainBuffs -= ExplainBeetleBuff;
-            StartCoroutine(DialogueManager.Instance.StartDialogue(BeetleGainedBuff.Dialogue));
+            StartCoroutine(DialogueBoxV2.Instance.Play(BeetleGainedBuff.Dialogue.Into()));
         }
     }
 

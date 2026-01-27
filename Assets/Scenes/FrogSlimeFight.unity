@@ -2996,24 +2996,7 @@ MonoBehaviour:
   - {fileID: 1424525371}
   frogDeathSprite: {fileID: 21300000, guid: 87829d35cc4de8b4db02b857e0431956, type: 3}
   jackieHoldingCrystalSprite: {fileID: 21300000, guid: 39aee1878ca221043839f79d83a21ecd, type: 3}
-  startingNarration:
-  - content: "<i>After a day's worth of traveling, the Candidates arrive at The Western
-      Marsh, this year\u2019s exam destination.</i>"
-    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
-    sfxId: 0
-    picture: {fileID: 0}
-    events: []
-  - content: <i>They spend the night setting up base camp. Tension fills the camp,
-      and Candidates are restless throughout the night.</i>
-    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
-    sfxId: 0
-    picture: {fileID: 0}
-    events: []
-  - content: <i>Finally, the morning of the exam arrives.</i>
-    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
-    sfxId: 0
-    picture: {fileID: 0}
-    events: []
+  startingNarration: {fileID: 11400000, guid: 8b81d7d0850fd654eac7a68004150a4a, type: 2}
   testBegins:
   - content: Good morning, Candidates. As you all know...
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
@@ -3028,8 +3011,7 @@ MonoBehaviour:
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events:
-    - rid: 5589630762363650057
+    events: []
   - content: The purpose of these expeditions are to extract as much valuable Waste
       Products that cultivate inside mutated creatures as we can.
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
@@ -3047,7 +3029,9 @@ MonoBehaviour:
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 1207053248668106832
+    - rid: 1207053248668106833
   - content: 'The examiners will be discreetly evaluating you, and will not interfere
       with the exam unless there is a serious emergency. '
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
@@ -3065,53 +3049,14 @@ MonoBehaviour:
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxId: 0
     picture: {fileID: 0}
+    events: []
+  - content: 
+    speaker: {fileID: 11400000, guid: 4fef3aeb65460fd498ab9efe9bac8625, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
     events:
     - rid: 5589630802696863808
-  jackieStrategyPlan:
-  - bodyText: Hmm, what's my plan...
-    speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
-    broadcastAnEvent: 0
-  - bodyText: Killing more dangerous Waste Creatures drop better Waste Products.
-    speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
-    broadcastAnEvent: 0
-  - bodyText: Should I work with a team again to hunt down a larger Waste Creature?
-    speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
-    broadcastAnEvent: 1
-  - bodyText: 'No, I came back almost empty-handed last year after I froze up and
-      let others do the fighting. '
-    speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 537908265661f2b44970c526d7724cfb, type: 3}
-    broadcastAnEvent: 1
-  - bodyText: By the time I felt okay, there were basically no products left!
-    speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 487226e5dae66424ea250466920a3086, type: 3}
-    broadcastAnEvent: 1
-  - bodyText: "I can do this solo, that\u2019s what the past year of training was
-      for."
-    speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
-    broadcastAnEvent: 1
-  - bodyText: 'This way I get the full cut of the products, and it should impress
-      the examiners, I hope. '
-    speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: c719baaafa8cd7148806ffb41907add6, type: 3}
-    broadcastAnEvent: 0
-  - bodyText: "Although I\u2019ll have to be sneaky and careful if I\u2019m hunting
-      alone..."
-    speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 487226e5dae66424ea250466920a3086, type: 3}
-    broadcastAnEvent: 0
-  - bodyText: <i>Squelch
-    speakerName: Slime
-    displayingImage: {fileID: 21300000, guid: 174956c54b12b0d419353cc1a44153ca, type: 3}
-    broadcastAnEvent: 1
-  - bodyText: Whoops. Maybe I gotta be more sneaky and more careful.
-    speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
-    broadcastAnEvent: 0
+  jackieStrategyPlan: {fileID: 11400000, guid: 7ee51636c386c554aafe526c498e951d, type: 2}
   explainEnemyAttacks: {fileID: 11400000, guid: bd119768af500824888c7433c16c4b43, type: 2}
   explainClashing: {fileID: 11400000, guid: fbf4a51513cbf2d40b41e0d798bda07a, type: 2}
   duringClashing: {fileID: 11400000, guid: 3c3d75708099ea94588e98cc21104637, type: 2}
@@ -3122,7 +3067,7 @@ MonoBehaviour:
   andNowWeWait:
   - bodyText: 'And now, we wait. '
     speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
+    displayingImage: {fileID: 21300000, guid: 487226e5dae66424ea250466920a3086, type: 3}
     broadcastAnEvent: 0
   jackiePreMissedShot:
   - bodyText: "Well, it\u2019s not the strongest monster, but I\u2019ve got to start
@@ -3156,7 +3101,7 @@ MonoBehaviour:
   crystalExtraction:
   - bodyText: 'Ew, alright. No wonder it was hacking up so much spit. '
     speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 537908265661f2b44970c526d7724cfb, type: 3}
+    displayingImage: {fileID: 21300000, guid: 88a7e4552c1afa641acadc54e9b6cbac, type: 3}
     broadcastAnEvent: 0
   - bodyText: 'I wonder how this crystal got in here? '
     speakerName: Jackie
@@ -3179,11 +3124,22 @@ MonoBehaviour:
   - bodyText: Tsk, I better get away and recover. Maybe changing up my weapon techniques
       will help?
     speakerName: Jackie
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 88a7e4552c1afa641acadc54e9b6cbac, type: 3}
     broadcastAnEvent: 0
   references:
     version: 2
     RefIds:
+    - rid: 1207053248668106832
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+        action: 100
+        duration: 0
+    - rid: 1207053248668106833
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+        sprite: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     - rid: 5589630762363650048
       type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
@@ -3203,11 +3159,6 @@ MonoBehaviour:
         action: 60
         duration: 1
     - rid: 5589630762363650053
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
-      data:
-        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-        sprite: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
-    - rid: 5589630762363650057
       type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
         actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
@@ -4437,7 +4388,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.568993
+      value: -5.301107
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y

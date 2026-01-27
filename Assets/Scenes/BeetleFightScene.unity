@@ -4035,13 +4035,13 @@ MonoBehaviour:
   - bodyText: That Beetle had so many crystals growing out of it. It's gotta be worth
       a fortune!
     speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 10ec818d4088de44a83a5405137230e4, type: 3}
+    displayingImage: {fileID: 21300000, guid: 487226e5dae66424ea250466920a3086, type: 3}
     broadcastAnEvent: 0
   jackieLostAgainstBeetle:
   - bodyText: That Beetle snatched the crystal right out of my hand. I gotta grab
       that back!
     speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 88a7e4552c1afa641acadc54e9b6cbac, type: 3}
+    displayingImage: {fileID: 21300000, guid: 537908265661f2b44970c526d7724cfb, type: 3}
     broadcastAnEvent: 0
   p2jackieWonAgainstBeetle:
   - bodyText: Alright! Let's see what we have here...
@@ -4057,23 +4057,23 @@ MonoBehaviour:
   - bodyText: "Huff, huff. You\u2019re not getting away that easily. I could keep
       chasing you for days."
     speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 88a7e4552c1afa641acadc54e9b6cbac, type: 3}
+    displayingImage: {fileID: 21300000, guid: 537908265661f2b44970c526d7724cfb, type: 3}
     broadcastAnEvent: 0
   jackieBeetleCamp: {fileID: 11400000, guid: e1042be5eb85c4416ad37e200410a003, type: 2}
   jackieConcernedAboutBeetles:
   - bodyText: "Seems like the beetles are stockpiling every crystal they can gather
       here\u2026 But for what? "
     speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 534aff9f6dfd6c544b0144954e8ef0b0, type: 3}
+    displayingImage: {fileID: 21300000, guid: 487226e5dae66424ea250466920a3086, type: 3}
     broadcastAnEvent: 0
   - bodyText: "Tsk, probably better if I go back and let the examiners know. Whatever
       they are doing with those crystals, it can\u2019t be good."
     speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 26c95ccd71f756349881ce655e12b5cc, type: 3}
+    displayingImage: {fileID: 21300000, guid: 537908265661f2b44970c526d7724cfb, type: 3}
     broadcastAnEvent: 0
   - bodyText: 'At least I got the crystal back. '
     speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 1766f7fa2aec26d4b80d30e9c84bc726, type: 3}
+    displayingImage: {fileID: 21300000, guid: 10ec818d4088de44a83a5405137230e4, type: 3}
     broadcastAnEvent: 0
   narratorCamp: {fileID: 11400000, guid: b05322c39a1d34cbda01da3bf4866321, type: 2}
   jackieShockAtBeetleEnteringCamp: {fileID: 11400000, guid: 05e3a509d00569541aee34f1bbe8b638, type: 2}
@@ -4100,7 +4100,7 @@ MonoBehaviour:
   - bodyText: Not too sure, but it seemed like the crystals on their back brightened
       up when they went near it. It must make them stronger somehow.
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
     broadcastAnEvent: 0
   - bodyText: Crystals give +1 Resonate to the atacker who reduces its health below
       each third of its max health
@@ -4118,31 +4118,31 @@ MonoBehaviour:
   jackieFeelsStronger:
   - bodyText: Woah, what's this feeling? I feel stronger after hitting the crystal.
     speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
+    displayingImage: {fileID: 21300000, guid: c719baaafa8cd7148806ffb41907add6, type: 3}
     broadcastAnEvent: 0
   - bodyText: It's as if I can feel the fatigue from the fight leaving me.
     speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
+    displayingImage: {fileID: 21300000, guid: c719baaafa8cd7148806ffb41907add6, type: 3}
     broadcastAnEvent: 0
   ivesFeelsStronger:
   - bodyText: Wow, I feel stronger after hitting that crystal.
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: be935693778d6004d9427d82e6ce5798, type: 3}
+    displayingImage: {fileID: 21300000, guid: aa0aa5f31f271e442b4643bcb838d32a, type: 3}
     broadcastAnEvent: 0
   - bodyText: I can feel the fatigue from the fight leaving me.
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: be935693778d6004d9427d82e6ce5798, type: 3}
+    displayingImage: {fileID: 21300000, guid: aa0aa5f31f271e442b4643bcb838d32a, type: 3}
     broadcastAnEvent: 0
   ivesAnalyzeAfterExam:
   - bodyText: 'We should take some shard samples for the scientists to analyze after
       the exam. '
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
+    displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
     broadcastAnEvent: 0
   - bodyText: For now, let's store the fragments in a safe place where the beetles
       can't find.
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: ade9660133ca00a499bfa3ad449b87bd, type: 3}
+    displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
     broadcastAnEvent: 0
   waveIndicator: {fileID: 2143686314}
 --- !u!1 &1277541862
@@ -5353,7 +5353,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 26.709719
+      value: 27.108894
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y

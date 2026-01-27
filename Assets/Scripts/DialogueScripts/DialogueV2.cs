@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Steamworks;
 using UnityEngine;
 
@@ -48,6 +49,11 @@ namespace DialogueScripts
         public static DialogueEntry[] Into(this DialogueEntryInUnityEditor[] entries)
         {
             return Array.ConvertAll(entries, e => e.Into());
+        }
+
+        public static DialogueEntry[] Into(this List<DialogueText> wrapper)
+        {
+            return wrapper.Select(w => w.Into()).ToArray();
         }
     }
 }

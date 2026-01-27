@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UI_Toolkit;
 using Unity.VisualScripting;
@@ -25,10 +26,10 @@ namespace DialogueScripts
 
         [SerializeField] private int typewriterRate = 50;
         public static DialogueBoxV2 Instance { get; private set; } = null!;
-        public bool IsActive => boxLayout.gameObject.activeInHierarchy;
-
+        public bool IsActive => isProcessingQueue;
         private AutoAdvanceAfter? autoAdvanceAfter;
-
+        private readonly Queue<DialogueBatch> _dialogueQueue = new();
+        private bool isProcessingQueue = false;
 
         private void Awake()
         {
@@ -39,32 +40,67 @@ namespace DialogueScripts
             else
             {
                 Destroy(gameObject);
+                return;
             }
 
             this.Subscribe<AutoAdvanceAfter>(SetAutoAdvance);
             this.Subscribe<VerticalLayoutChange>(SetVerticalLayout);
             this.Answer<GetActorDatabase, ActorDatabase?>(_ => actorDatabase);
 
-            canvas.sortingOrder = UISortOrder.DialogueBox.GetOrder();
+            ChangeDialogueBoxOrder(UISortOrder.DialogueBox.GetOrder());
             boxLayout.gameObject.SetActive(false);
+        }
+
+        public void ChangeDialogueBoxOrder(int order)
+        {
+            canvas.sortingOrder = order;
         }
 
         public IEnumerator Play(DialogueEntry[] entries)
         {
-            yield return new WaitUntil(() => !IsActive);
-            boxLayout.gameObject.SetActive(true);
+            var batch = new DialogueBatch(entries);
 
+            _dialogueQueue.Enqueue(batch);
+
+            if (!isProcessingQueue)
+            {
+                StartCoroutine(ProcessQueue());
+            }
+
+            yield return new WaitUntil(() => batch.IsFinished);
+        }
+
+        private IEnumerator ProcessQueue()
+        {
+            isProcessingQueue = true;
+
+            while (_dialogueQueue.Count > 0)
+            {
+                var currentBatch = _dialogueQueue.Peek();
+
+                boxLayout.gameObject.SetActive(true);
+                yield return RunDialogueRoutine(currentBatch.Entries);
+                boxLayout.gameObject.SetActive(false);
+                currentBatch.IsFinished = true;
+
+                _dialogueQueue.Dequeue();
+            }
+
+            isProcessingQueue = false;
+        }
+
+        private IEnumerator RunDialogueRoutine(DialogueEntry[] entries)
+        {
             foreach (var entry in entries)
             {
                 if (SkipEntry(entry)) continue;
+
                 WithEntry(entry);
                 yield return TypewriteText();
                 yield return WaitForContinuation();
                 PlayTransitionSound(entry);
                 yield return null;
             }
-
-            boxLayout.gameObject.SetActive(false);
         }
 
         private bool SkipEntry(DialogueEntry entry)
@@ -185,5 +221,11 @@ namespace DialogueScripts
         }
 
         private static bool HasInput() => !PauseMenuV2.IsPaused && (Input.GetKey(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Space));
+        private class DialogueBatch
+        {
+            public DialogueEntry[] Entries { get; }
+            public bool IsFinished { get; set; } = false;
+            public DialogueBatch(DialogueEntry[] entries) => Entries = entries;
+        }
     }
 }

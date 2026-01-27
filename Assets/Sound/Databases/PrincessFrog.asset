@@ -17,3 +17,4 @@ MonoBehaviour:
   combatMusicPrimary: {fileID: 8300000, guid: f7d78169f4dbd734eae797926ecffca2, type: 3}
   combatMusicIntro: {fileID: 0}
   backgroundMusicDeath: {fileID: 8300000, guid: ad2a470944acfc048b53294c89a0945e, type: 3}
+  isPersisting: 0

@@ -15,7 +15,7 @@ MonoBehaviour:
   dialogue:
   - bodyText: What happened here, Ives?
     speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
+    displayingImage: {fileID: 21300000, guid: 43e042f11549db840ae55c806d824b58, type: 3}
     broadcastAnEvent: 0
   - bodyText: Good timing Jackie, we could use your help right about now.
     speakerName: Ives

@@ -15,5 +15,5 @@ MonoBehaviour:
   dialogue:
   - bodyText: Hey! Come back here!
     speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 534aff9f6dfd6c544b0144954e8ef0b0, type: 3}
+    displayingImage: {fileID: 21300000, guid: 487226e5dae66424ea250466920a3086, type: 3}
     broadcastAnEvent: 0
