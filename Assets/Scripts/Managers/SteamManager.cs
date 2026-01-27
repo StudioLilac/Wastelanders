@@ -117,7 +117,7 @@ namespace Steamworks {
             // [*] Your App ID is not completely set up, i.e. in Release State: Unavailable, or it's missing default packages.
             // Valve's documentation for this is located here:
             // https://partner.steamgames.com/doc/sdk/api#initialization_and_shutdown
-            m_bInitialized = SteamAPI.Init();
+            m_bInitialized = false;
 
             if (m_bInitialized) {
                 Debug.Log("Steam initialized! Username: " + SteamFriends.GetPersonaName());
