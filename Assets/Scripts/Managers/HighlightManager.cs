@@ -7,7 +7,7 @@ using UnityEngine;
 public record CurrentPlayer() : IQuery<PlayerClass?>;
 public class HighlightManager : MonoBehaviour 
 {
-    private const float CURRENT_PLAYER_CROSSHAIR_SLOWDOWN_FACTOR = 0.5f;
+    private const float CURRENT_PLAYER_CROSSHAIR_SLOWDOWN_FACTOR = 0.35f;
     public static HighlightManager Instance { get; private set; } = null!;
     private EntityClass? currentHighlightedEnemyEntity = null;
     private ActionClass? currentHighlightedAction = null;
