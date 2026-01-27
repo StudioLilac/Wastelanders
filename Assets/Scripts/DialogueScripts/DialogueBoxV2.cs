@@ -8,22 +8,24 @@ using UnityEngine.UI;
 
 namespace DialogueScripts
 {
+#nullable enable
+    public record GetActorDatabase() : IQuery<ActorDatabase?>;
     public class DialogueBoxV2 : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI txtView;
-        [SerializeField] private TextMeshProUGUI whoView;
-        [SerializeField] private Image imgView;
-        [SerializeField] private RectTransform boxLayout;
-        [SerializeField] private Canvas canvas;
+        [SerializeField] private TextMeshProUGUI txtView = null!;
+        [SerializeField] private TextMeshProUGUI whoView = null!;
+        [SerializeField] private Image imgView = null!;
+        [SerializeField] private RectTransform boxLayout = null!;
+        [SerializeField] private Canvas canvas = null!;
 
-        [SerializeField] private GameObject txt;
-        [SerializeField] private GameObject who;
-        [SerializeField] private GameObject img;
-        [SerializeField] private ActorProfile eventProfile;
+        [SerializeField] private GameObject txt = null!;
+        [SerializeField] private GameObject who = null!;
+        [SerializeField] private GameObject img = null!;
+        [SerializeField] private ActorDatabase actorDatabase = null!;
 
         [SerializeField] private int typewriterRate = 50;
-        public static DialogueBoxV2 Instance { get; private set; }
-#nullable enable
+        public static DialogueBoxV2 Instance { get; private set; } = null!;
+        public bool IsActive => boxLayout.gameObject.activeInHierarchy;
 
         private AutoAdvanceAfter? autoAdvanceAfter;
 
@@ -41,14 +43,16 @@ namespace DialogueScripts
 
             this.Subscribe<AutoAdvanceAfter>(SetAutoAdvance);
             this.Subscribe<VerticalLayoutChange>(SetVerticalLayout);
+            this.Answer<GetActorDatabase, ActorDatabase?>(_ => actorDatabase);
 
             canvas.sortingOrder = UISortOrder.DialogueBox.GetOrder();
-            gameObject.SetActive(false);
+            boxLayout.gameObject.SetActive(false);
         }
 
         public IEnumerator Play(DialogueEntry[] entries)
         {
-            gameObject.SetActive(true);
+            yield return new WaitUntil(() => !IsActive);
+            boxLayout.gameObject.SetActive(true);
 
             foreach (var entry in entries)
             {
@@ -60,12 +64,12 @@ namespace DialogueScripts
                 yield return null;
             }
 
-            gameObject.SetActive(false);
+            boxLayout.gameObject.SetActive(false);
         }
 
         private bool SkipEntry(DialogueEntry entry)
         {
-            if (entry.speaker == eventProfile)
+            if (entry.speaker == actorDatabase.Event)
             {
                 entry.events.ForEach(it => it.Execute());
                 return true;
@@ -115,7 +119,7 @@ namespace DialogueScripts
             if (entry.sfxId != SoundID.None || Input.GetKey(KeyCode.RightArrow))
                 return;
 
-            AudioManager.Instance.PlaySFX(SoundID.VN_page_flip);
+            SoundID.VN_page_flip.Play();
         }
 
         private void SetAutoAdvance(AutoAdvanceAfter e)

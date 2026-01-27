@@ -54,6 +54,18 @@ namespace DialogueScripts
             return this;
         }
 
+        public DialogueActor FlashActor(float duration)
+        {
+            StartCoroutine(FlashActorRoutine(duration));
+            return this;
+        }
+
+        private IEnumerator FlashActorRoutine(float duration)
+        {
+            yield return StartCoroutine(fadeHandler.FadeInDarkScreen(duration / 2));
+            yield return StartCoroutine(fadeHandler.FadeInLightScreen(duration / 2));
+        }
+
         public DialogueActor MoveTo(Vector3 targetWorldPosition, float duration)
         {
             if (targetWorldPosition.x > transform.position.x)

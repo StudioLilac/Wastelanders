@@ -60,12 +60,7 @@ public class TutorialIntroduction : DialogueClasses
     [SerializeField] private DialogueWrapper cardAbilitiesTutorial;
     [SerializeField] private DialogueWrapper clashingOutcomeTutorial;
     [SerializeField] private DialogueWrapper clashingStrategyTutorial;
-    [SerializeField] private DialogueWrapper cardsExhaustedTutorial;
-
-    //After Ives is defeated
-    [SerializeField] private DialogueWrapper ivesIsDefeated;
-    [SerializeField] private DialogueWrapper jackieBeatTheDummies;
-    [SerializeField] private DialogueWrapper endingTutorialDialogue;
+    [SerializeField] private DialogueEntryWrapper cardsExhaustedTutorial;
     [SerializeField] private DialogueEntryWrapper endOfTutorialV2;
 
     [SerializeField] private DialogueWrapper gameLoseDialogue;
@@ -296,8 +291,7 @@ public class TutorialIntroduction : DialogueClasses
         EntityClass.OnEntityDeath += OnDummyDies;
         dummiesLeft = groupDummySpawnPos.Count;
         HUDV2.Instance.SetDeckInfoVisibility(true);
-        DialogueManager.Instance.MoveBoxToBottom();
-        StartCoroutine(DialogueManager.Instance.StartDialogue(cardsExhaustedTutorial.Dialogue));
+        StartCoroutine(DialogueBoxV2.Instance.Play(cardsExhaustedTutorial));
 
         yield return new WaitUntil(() => dummiesLeft == 0);
         CombatManager.Instance.GameState = GameState.GAME_WIN;
