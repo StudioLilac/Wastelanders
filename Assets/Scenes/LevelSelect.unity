@@ -1248,7 +1248,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8769258020987959747, guid: 4ebd1ee5e5e34ea418076d78ba66dbf7, type: 3}
       propertyPath: <Level>k__BackingField
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8769258020987959747, guid: 4ebd1ee5e5e34ea418076d78ba66dbf7, type: 3}
       propertyPath: floatingNotificationPrefab
