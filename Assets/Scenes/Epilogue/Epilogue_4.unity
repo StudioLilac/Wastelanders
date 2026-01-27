@@ -507,7 +507,7 @@ MonoBehaviour:
   postDialogue0:
   - content: 
     speaker: {fileID: 11400000, guid: 4fef3aeb65460fd498ab9efe9bac8625, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258047
@@ -521,137 +521,137 @@ MonoBehaviour:
     - rid: 2124643982316142597
   dialogue1:
   - content: Ives?
-    speaker: {fileID: 11400000, guid: 91e7c860c0040a24eaaf9819f99b3d4b, type: 2}
-    sfxName: 
+    speaker: {fileID: 11400000, guid: 8ea1ccd6a87516a42b4a830ac3f980a1, type: 2}
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258052
   - content: Headquarters placed your daughter under my watch. Odd way to say you
       need a babysitter, don't you think?
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258053
     - rid: 2124643721081258141
   - content: What? I don't know what you're-
-    speaker: {fileID: 11400000, guid: 91e7c860c0040a24eaaf9819f99b3d4b, type: 2}
-    sfxName: 
+    speaker: {fileID: 11400000, guid: 8ea1ccd6a87516a42b4a830ac3f980a1, type: 2}
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258142
   - content: <i>Deception.</i>
     speaker: {fileID: 11400000, guid: f1e2e094931ab49479e4bf2319b9f492, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258143
   - content: Save it, Ailin. What's going on? First Jay goes missing, now you're
       flaking on me.
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258144
   - content: <i>Ailin's gaze falters.</i>
     speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258145
   - content: The team's going out to find Jay, first thing tomorrow.
-    speaker: {fileID: 11400000, guid: 91e7c860c0040a24eaaf9819f99b3d4b, type: 2}
-    sfxName: 
+    speaker: {fileID: 11400000, guid: 8ea1ccd6a87516a42b4a830ac3f980a1, type: 2}
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258146
   - content: What? Without me?
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258147
   - content: I need you here for Jackie.
-    speaker: {fileID: 11400000, guid: 91e7c860c0040a24eaaf9819f99b3d4b, type: 2}
-    sfxName: 
+    speaker: {fileID: 11400000, guid: 8ea1ccd6a87516a42b4a830ac3f980a1, type: 2}
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258157
   - content: <i>Worthless.</i>
     speaker: {fileID: 11400000, guid: f1e2e094931ab49479e4bf2319b9f492, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258148
   - content: Someone-<i>anyone</i>-else could do that! Let me come, Ailin! Jay is
       my comrade too.
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258149
   - content: Do you not believe in me, after all we've been through?
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: Of course I do... That's why I need you here!
-    speaker: {fileID: 11400000, guid: 91e7c860c0040a24eaaf9819f99b3d4b, type: 2}
-    sfxName: 
+    speaker: {fileID: 11400000, guid: 8ea1ccd6a87516a42b4a830ac3f980a1, type: 2}
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258150
   - content: If anything happens to us out there... If we don't make it back... Jackie
       will need you.
-    speaker: {fileID: 11400000, guid: 91e7c860c0040a24eaaf9819f99b3d4b, type: 2}
-    sfxName: 
+    speaker: {fileID: 11400000, guid: 8ea1ccd6a87516a42b4a830ac3f980a1, type: 2}
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: You're the only one I trust with her, Ives.
-    speaker: {fileID: 11400000, guid: 91e7c860c0040a24eaaf9819f99b3d4b, type: 2}
-    sfxName: 
+    speaker: {fileID: 11400000, guid: 8ea1ccd6a87516a42b4a830ac3f980a1, type: 2}
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: ...
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258151
   - content: What about <i>you</i>? You're her mother.
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: "I know, but... I\u2019m the one who sent Jay out there. I have to find
       him. Please, Ives. Please just do this for me."
-    speaker: {fileID: 11400000, guid: 91e7c860c0040a24eaaf9819f99b3d4b, type: 2}
-    sfxName: 
+    speaker: {fileID: 11400000, guid: 8ea1ccd6a87516a42b4a830ac3f980a1, type: 2}
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258152
   - content: <i>Pathetic.</i>
     speaker: {fileID: 11400000, guid: f1e2e094931ab49479e4bf2319b9f492, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258153
   - content: "...You\u2019d better come back. I won\u2019t play babysitter forever."
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258155
   - content: 
     speaker: {fileID: 11400000, guid: 4fef3aeb65460fd498ab9efe9bac8625, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643982316142667
   dialogue2:
   - content: "Sir, her heart rate is stabilizing. But her arm, it\u2019s still\u2026"
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258069
@@ -660,7 +660,7 @@ MonoBehaviour:
     - rid: 2124643982316142603
   - content: "I understand. But for now, there\u2019s not much else we can do."
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258070
@@ -669,19 +669,19 @@ MonoBehaviour:
   - content: "Her natural Amplitude levels are subsid\xADing, which should help curb
       the spread. As long as her \r\nvitals are stable, she should wake up soon."
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: 
     speaker: {fileID: 11400000, guid: 4fef3aeb65460fd498ab9efe9bac8625, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643982316142604
   dialogue3:
   - content: Cam...?
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258071
@@ -689,21 +689,21 @@ MonoBehaviour:
   - content: "Ah! Ives, thank goodness. You\u2019re awake. Your infection was...
       it got pretty bad."
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258073
   - content: "We\u2019re back at the base. This is Dr. Weise, he\u2019s been overseeing
       your recovery."
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258074
   - content: "Commander Ives. I\u2019m Dr. Aleksander Weise. A relief to see you
       conscious."
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258075
@@ -712,7 +712,7 @@ MonoBehaviour:
     - rid: 2124643982316142668
   - content: "...Where\u2019s Jackie?"
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258077
@@ -720,7 +720,7 @@ MonoBehaviour:
   - content: "She\u2019s safe. Still in the Tundra. She wouldn\u2019t leave your
       side until we had you on the WRV."
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258079
@@ -728,40 +728,40 @@ MonoBehaviour:
   - content: "She\u2019s... There was a look in her eyes, Ives. She\u2019s determined
       to stay."
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: "Good. ...How long until I\u2019m cleared? I need to get back out there."
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258081
     - rid: 2124643721081258082
   - content: Uh...
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258083
     - rid: 2124643721081258084
   - content: "I\u2019m afraid that won\u2019t be possible, Commander."
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258085
     - rid: 2124643721081258086
   - content: And why is that?
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258087
   - content: Although your condition has stabilized, the Waste vectors in your system
       exhibited... an unfortunate reaction.
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258088
@@ -770,44 +770,44 @@ MonoBehaviour:
       energy to a specific unique <i>Frequency</i> signature before they are able
       to expend it for themselves.
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: When the waste binds to biology, it feeds on this transformed energy
       to replicate itself.
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: Thus it is imperative to neutralize it with the Anti-Waste serum before
       it becomes pervasive.
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: The way the Serum does this is by taking advantage of a major property
       of the Waste.
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: The Waste is naturally inclined to bind with objects of higher energy
       frequencies.
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: And so the Anti-Waste Serum is synthesized using special materials to
       have a very high frequency, higher than any natural biology found on earth.
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258090
   - content: As a result, when you receive the serum, the Waste binds to the serum
       instead of the body.
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258091
@@ -815,43 +815,43 @@ MonoBehaviour:
       and replicate, we also ensure the energy signatures of the Serum have very
       low <i>Amplitude</i>.
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: However, something in the Tundra compromised the serum, causing its
       amplitude to spike.
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: Instead of neutralizing the Waste vectors, the injection acted as a
       catalyst for its spread instead.
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: The vector has spread through your entire system. To an extent where
       it is no longer feasible to purge.
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258092
   - content: "I\u2019m afraid the infection is permanent."
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258093
   - content: ...How bad is it?
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258094
   - content: "It\u2019s not terminal."
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258095
@@ -859,86 +859,86 @@ MonoBehaviour:
   - content: But when the Waste consumes Amplitude, it increases the <i>Frequency</i>
       of the transformer energy as a byproduct.
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258097
   - content: "This will disrupt your body\u2019s natural ability to utilize energy,
       and cause major complications."
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: While we can manage the symptoms with suppressants and infusions, you
       will grow weaker.
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: Any significant physical exertion, especially in the field, will increase
       the amount of energy your body transforms.
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: And will drastically accelerate the Waste's spread.
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: ...
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258098
   - content: "I\u2019m gonna be out there as long as I can. I have to be there for
       Jackie."
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: ...
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258099
   - content: "Put me on the next re-supply transport. That\u2019s an order, Doctor."
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258100
   - content: ...
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258101
   - content: "Ives, you can\u2019t-"
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258102
     - rid: 2124643721081258103
   - content: As you wish, Commander. I will prepare a regimen of our strongest suppressants.
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258104
     - rid: 2124643721081258105
   - content: "Reichel? A word in my lab, when you\u2019re ready."
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   postDialogue3:
   - content: 
     speaker: {fileID: 11400000, guid: 4fef3aeb65460fd498ab9efe9bac8625, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258106
@@ -946,7 +946,7 @@ MonoBehaviour:
   dialogue4:
   - content: "Ives... I\u2019m so sorry..."
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258108
@@ -954,33 +954,33 @@ MonoBehaviour:
   - content: "Don\u2019t you start pitying me, kid. We both know this had nothing
       to do with you."
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258110
     - rid: 2124643721081258111
   - content: But it was my invention that failed to protect us... failed you.
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258112
   - content: Hey, I knew the risks. All of us did.
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258113
   - content: Far as I see it, your invention got the NITES further than anyone else
       ever has. One step closer to Ailin. One step closer to the truth.
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: "But I should\u2019ve known about the reaction, about the Frog. If only
       I knew more..."
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258114
@@ -988,21 +988,21 @@ MonoBehaviour:
   - content: "Hah, I\u2019m sure if you had known, we wouldn\u2019t have been able
       to step out that morning."
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258116
     - rid: 2124643721081258117
   - content: ...
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258118
   - content: "Listen, I get it. That terrible feeling of \u2018what could\u2019 if
       you had <b>just known</b>..."
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258123
@@ -1010,146 +1010,146 @@ MonoBehaviour:
   - content: "But you didn\u2019t. No one did. Hell, if there was someone who knew,
       I\u2019d like to have some words with them."
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258122
   - content: So no one, especially not you, can blame you for not knowing.
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: "But it\u2019s my job as a Scientist to know! My whole life has been
       spent pursuing the Waste to help people... and for what... to end up hurting
       those closest to me?"
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258125
     - rid: 2124643721081258126
   - content: ...
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258127
     - rid: 2124643721081258128
   - content: Cam. I need you to understand something.
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258138
   - content: "I know you feel like shit right now. Like you\u2019re not enough."
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: "I\u2019ve been there, kid. Walked that line to the end and back."
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258122
   - content: But you know where that damn feeling of inadequacy comes from?
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258122
   - content: "From an expectation that you\u2019ve set for <i>yourself.</i>"
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: Of what it looks like to be some ideal scientist or NITES or whatever.
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: "So when those expectations aren\u2019t met, that person you think you
       should be calls you worthless."
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: But the you that everyone else sees is not the same as that one in your
       head.
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258129
   - content: "No one\u2019s blaming you. I don\u2019t blame you. And I never will."
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: "The only person who\u2019s blaming you is yourself."
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258130
   - content: "So make peace with yourself. What\u2019s done is done."
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: "Accept that it\u2019s okay to not quite be where you want to be right
       now."
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: "Because if you keep focusing on where you\u2019ve tripped up, you\u2019ll
       never fully trust yourself to stand straight and walk forward again."
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: To become that person you truly want to be.
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258131
   - content: Got it?
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events: []
   - content: Cam stays silent for a while, and eventually just nods.
     speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258132
   - content: So, what are you going to do now?
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258133
     - rid: 2124643721081258134
   - content: "I\u2019m going to get some answers. I promise."
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258136
     - rid: 2124643721081258137
   - content: Damn straight you are.
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258158
     - rid: 2124643721081258159
   - content: Thank you, Ives.
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-    sfxName: 
+    sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258139
@@ -1173,7 +1173,7 @@ MonoBehaviour:
     - rid: 2124643721081258052
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: {fileID: 11400000, guid: 91e7c860c0040a24eaaf9819f99b3d4b, type: 2}
+        actor: {fileID: 11400000, guid: 8ea1ccd6a87516a42b4a830ac3f980a1, type: 2}
     - rid: 2124643721081258053
       type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
@@ -1502,7 +1502,7 @@ MonoBehaviour:
     - rid: 2124643721081258142
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: {fileID: 11400000, guid: 91e7c860c0040a24eaaf9819f99b3d4b, type: 2}
+        actor: {fileID: 11400000, guid: 8ea1ccd6a87516a42b4a830ac3f980a1, type: 2}
     - rid: 2124643721081258143
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
@@ -1518,7 +1518,7 @@ MonoBehaviour:
     - rid: 2124643721081258146
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: {fileID: 11400000, guid: 91e7c860c0040a24eaaf9819f99b3d4b, type: 2}
+        actor: {fileID: 11400000, guid: 8ea1ccd6a87516a42b4a830ac3f980a1, type: 2}
     - rid: 2124643721081258147
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
@@ -1534,7 +1534,7 @@ MonoBehaviour:
     - rid: 2124643721081258150
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: {fileID: 11400000, guid: 91e7c860c0040a24eaaf9819f99b3d4b, type: 2}
+        actor: {fileID: 11400000, guid: 8ea1ccd6a87516a42b4a830ac3f980a1, type: 2}
     - rid: 2124643721081258151
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
@@ -1542,7 +1542,7 @@ MonoBehaviour:
     - rid: 2124643721081258152
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: {fileID: 11400000, guid: 91e7c860c0040a24eaaf9819f99b3d4b, type: 2}
+        actor: {fileID: 11400000, guid: 8ea1ccd6a87516a42b4a830ac3f980a1, type: 2}
     - rid: 2124643721081258153
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
@@ -1554,7 +1554,7 @@ MonoBehaviour:
     - rid: 2124643721081258157
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
-        actor: {fileID: 11400000, guid: 91e7c860c0040a24eaaf9819f99b3d4b, type: 2}
+        actor: {fileID: 11400000, guid: 8ea1ccd6a87516a42b4a830ac3f980a1, type: 2}
     - rid: 2124643721081258158
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
