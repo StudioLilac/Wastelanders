@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: ab39e10615e745749b0263748d40a833
+guid: 43e042f11549db840ae55c806d824b58
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7960016903367883483
-    second: jackieneutral_0
+      213: -3354612928456490338
+    second: jackiesurprised2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: jackieneutral_0
+      name: jackiesurprised2_0
       rect:
         serializedVersion: 2
-        x: 273
+        x: 0
         y: 0
-        width: 2036
-        height: 2791
+        width: 1836
+        height: 2218
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bdaf85b1339a77e60800000000000000
-      internalID: 7960016903367883483
+      spriteID: e920b68a0550271d0800000000000000
+      internalID: -3354612928456490338
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      jackieneutral_0: 7960016903367883483
+      jackiesurprised2_0: -3354612928456490338
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

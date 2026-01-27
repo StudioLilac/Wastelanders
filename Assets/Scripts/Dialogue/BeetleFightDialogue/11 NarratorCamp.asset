@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 11 NarratorCamp
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: (Jackie quickly retraces her steps as the sky mourns the setting sun,
-      noting down her path.)
-    speakerName: 
+  - bodyText: <i>Jackie quickly retraces her steps as the sky mourns the setting
+      sun, noting down her path.
+    speakerName: Narration
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0

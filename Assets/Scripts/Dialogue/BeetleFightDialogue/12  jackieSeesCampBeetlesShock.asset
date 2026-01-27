@@ -15,5 +15,5 @@ MonoBehaviour:
   dialogue:
   - bodyText: Oh no! The camp!
     speakerName: Jackie
-    displayingImage: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
+    displayingImage: {fileID: 21300000, guid: e114edf9e9a7d5345982b98e47056fa5, type: 3}
     broadcastAnEvent: 0
