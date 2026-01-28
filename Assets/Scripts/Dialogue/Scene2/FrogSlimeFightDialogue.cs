@@ -334,6 +334,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
         yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
         ReviveJackie();
+        GameStateManager.Instance.UpdateLevelProgress(StageInformation.BEETLE_STAGE);
         yield return new WaitForSeconds(MEDIUM_PAUSE);
 
         //After Combat
@@ -378,8 +379,6 @@ public class FrogSlimeFightDialogue : DialogueClasses
         yield return new WaitForSeconds(2f);
         yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
 
-        // TODO: Maybe we want to move this till AFTER the player defeats the single frog?
-        GameStateManager.Instance.UpdateLevelProgress(StageInformation.BEETLE_STAGE);
         GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.BeetleFight>().SceneName);
     }
     // In case players decide to bring spawnable enemies and they are the last ones alive.
