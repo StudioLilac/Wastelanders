@@ -454,6 +454,7 @@ public class BeetleFight : DialogueClasses
 
         //End of Scene
         {
+            GameStateManager.Instance.UpdateLevelProgress(StageInformation.QUEEN_PREPARATION_STAGE);
             waveIndicator.Hide();
             yield return new WaitForSeconds(2);
             if (ives.IsDead)
@@ -502,7 +503,6 @@ public class BeetleFight : DialogueClasses
             yield return StartCoroutine(DialogueBoxV2.Instance.Play(postBattleDialogueEntry));
             yield return new WaitForSeconds(1f);
 
-            GameStateManager.Instance.UpdateLevelProgress(StageInformation.QUEEN_PREPARATION_STAGE);
             GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.PreQueenFight>().SceneName);
             yield break;
         }
