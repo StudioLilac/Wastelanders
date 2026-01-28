@@ -64,6 +64,8 @@ public class PreQueenFight : DialogueClasses
     [SerializeField] private SpriteRenderer treeSprite;
     [SerializeField] private List<SpriteFadeHandler> closeTrees;
     [SerializeField] private Rain rain;
+    [SerializeField] private Transform jackiePlan3Position;
+    [SerializeField] private Transform ivesPlan3Position;
 
     [SerializeField] private bool jumpToCombat;
     [SerializeField] private bool instaKill;
@@ -398,8 +400,9 @@ public class PreQueenFight : DialogueClasses
                 treeOverlay.sortingLayerName = jackieSprite.sortingLayerName;
                 treeOverlay.sortingOrder = jackieSprite.sortingOrder + 1;
 
-                StartCoroutine(ives.ResetPosition());
-                yield return StartCoroutine(jackie.ResetPosition()); //Jackie Runs into the scene
+                StartCoroutine(jackie.MoveToPosition(jackiePlan3Position.position, 0f, 1f));
+                yield return StartCoroutine(ives.MoveToPosition(ivesPlan3Position.position, 0f, 1f));
+                
                 yield return new WaitForSeconds(MEDIUM_PAUSE);
                 Coroutine jackieClash = StartCoroutine(NoCombatClash(jackie, campBeetles[3], false, SoundID.CB_staff_hit));
 
