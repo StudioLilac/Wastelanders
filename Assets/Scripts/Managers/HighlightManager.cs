@@ -209,7 +209,11 @@ public class HighlightManager : MonoBehaviour
                 }
 
             }
-        } 
+        }
+
+        if (gameState != GameState.SELECTION) {
+            selectedPlayer?.UnCrossHair();
+        }
     }
 
     // Note that there should only be one instance per round in which selectedPlayer is null, hence the non-assertion. (initial player selection) 
