@@ -225,8 +225,9 @@ public class HighlightManager : MonoBehaviour
             throw new Exception("This method was called from an invalid location or there is a logic conundrum in OnEntityClicked");
         }
 
-        selectedPlayer = player; 
-        RenderHand(player);
+        if (selectedPlayer == player) {
+            RenderHand(player);
+        }
     }
     private PlayerClass? GetCurrentPlayer(CurrentPlayer q) => selectedPlayer;
     private static void RenderHand(PlayerClass player) => OnUpdateHand?.Invoke(player);
