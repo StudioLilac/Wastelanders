@@ -378,6 +378,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
         yield return new WaitForSeconds(2f);
         yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
 
+        // TODO: Maybe we want to move this till AFTER the player defeats the single frog?
         GameStateManager.Instance.UpdateLevelProgress(StageInformation.BEETLE_STAGE);
         GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.BeetleFight>().SceneName);
     }
