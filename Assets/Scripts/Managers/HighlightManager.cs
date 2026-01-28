@@ -216,15 +216,9 @@ public class HighlightManager : MonoBehaviour
         }
     }
 
-    // Note that there should only be one instance per round in which selectedPlayer is null, hence the non-assertion. (initial player selection) 
     // Auto shifts to relevant player
     public void RenderHandIfAppropriate(PlayerClass player)
     {
-        if (player == null)
-        {
-            throw new Exception("This method was called from an invalid location or there is a logic conundrum in OnEntityClicked");
-        }
-
         if (selectedPlayer == player) {
             RenderHand(player);
         }
