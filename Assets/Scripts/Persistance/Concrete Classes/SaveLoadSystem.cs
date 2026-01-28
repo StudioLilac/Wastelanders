@@ -183,6 +183,7 @@ namespace Systems.Persistence
             {
                 Name = PREFERENCES_FILE_NAME,
                 audioPreferences = new AudioPreferences(),
+                screenShakePreference = new ScreenShakePreference(),
             };
         }
         
