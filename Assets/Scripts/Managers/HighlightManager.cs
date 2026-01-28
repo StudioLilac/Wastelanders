@@ -209,20 +209,19 @@ public class HighlightManager : MonoBehaviour
                 }
 
             }
-        } 
+        }
+
+        if (gameState != GameState.SELECTION) {
+            selectedPlayer?.UnCrossHair();
+        }
     }
 
-    // Note that there should only be one instance per round in which selectedPlayer is null, hence the non-assertion. (initial player selection) 
     // Auto shifts to relevant player
     public void RenderHandIfAppropriate(PlayerClass player)
     {
-        if (player == null)
-        {
-            throw new Exception("This method was called from an invalid location or there is a logic conundrum in OnEntityClicked");
+        if (selectedPlayer == player) {
+            RenderHand(player);
         }
-
-        selectedPlayer = player; 
-        RenderHand(player);
     }
     private PlayerClass? GetCurrentPlayer(CurrentPlayer q) => selectedPlayer;
     private static void RenderHand(PlayerClass player) => OnUpdateHand?.Invoke(player);
