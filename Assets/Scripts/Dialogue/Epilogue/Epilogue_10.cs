@@ -23,6 +23,9 @@ namespace Dialogue.Epilogue
         [SerializeField] private DialogueEntryInUnityEditor[] preBonfireDialogue;
         [SerializeField] private DialogueEntryInUnityEditor[] postVisionDialogue;
         [SerializeField] private DialogueEntryInUnityEditor[] postBonfireDialogue;
+        [SerializeField] private DialogueEntryInUnityEditor[] momStoryFlashbackDialogue;
+        [SerializeField] private DialogueEntryInUnityEditor[] weiseDialogue;
+        [SerializeField] private DialogueEntryInUnityEditor[] preBattleDialogue;
 
 
         private IEnumerator Start()
@@ -44,7 +47,14 @@ namespace Dialogue.Epilogue
 
             background2.SetActive(true);
             yield return FadeInBG(tundraWithNoise);
-            DisableBonfireFlicker();
+
+            yield return DialogueBoxV2.Instance.Play(momStoryFlashbackDialogue.Into());
+            yield return FadeOutBG(tundraWithNoise);
+            background2.SetActive(false);
+
+            yield return DialogueBoxV2.Instance.Play(weiseDialogue.Into());
+            yield return UIFadeScreenManager.Instance.FadeInDarkScreen(2f);
+            background1.SetActive(false);
 
             
         }
