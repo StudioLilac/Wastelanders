@@ -11,18 +11,20 @@ public abstract class SceneData : Enum<SceneData>
     // All Prefabs placed in this array will be instantiated in that scene on start
     public virtual MonoBehaviour[] RequiredPrefabs(SceneInitializerPrefabs prefabs) => Array.Empty<MonoBehaviour>();
 
-    public class SplashScreen : SceneData {
+    public class SplashScreen : SceneData
+    {
         public override string SceneName => "SplashScreen";
         public override SceneAudio GetAudio(AudioDatabase database) => database.MainMenu;
-        
+
         public override MonoBehaviour[] RequiredPrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
             { prefabs.audioManager, prefabs.uiFadeScreenManager };
     }
-    
-    public class SplashScreenWebGL : SceneData {
+
+    public class SplashScreenWebGL : SceneData
+    {
         public override string SceneName => "SplashScreenWebGL";
         public override SceneAudio GetAudio(AudioDatabase database) => database.MainMenu;
-        
+
         public override MonoBehaviour[] RequiredPrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
             { prefabs.audioManager, prefabs.uiFadeScreenManager };
     }
@@ -154,6 +156,18 @@ public abstract class SceneData : Enum<SceneData>
     {
         public override string SceneName => "Epilogue_7";
 
+        public override SceneAudio GetAudio(AudioDatabase database) => database.Empty;
+
+        public override MonoBehaviour[] RequiredPrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
+        {
+            prefabs.audioManager,
+            prefabs.pauseMenuV2,
+            prefabs.dialogueManager,
+            prefabs.uiFadeScreenManager,
+            prefabs.dialogueBoxV2
+        };
+    }
+
     public class Epilogue_10 : SceneData
     {
         public override string SceneName => "Epilogue_10";
@@ -162,29 +176,16 @@ public abstract class SceneData : Enum<SceneData>
 
         public override MonoBehaviour[] RequiredPrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
         {
-            prefabs.audioManager,
-            prefabs.pauseMenuV2,
-            prefabs.dialogueManager,
-            prefabs.uiFadeScreenManager,
-            prefabs.dialogueBoxV2
+        prefabs.audioManager,
+        prefabs.pauseMenuV2,
+        prefabs.dialogueManager,
+        prefabs.uiFadeScreenManager,
+        prefabs.dialogueBoxV2
         };
     }
 
-    public class PreBounty0 : SceneData {
-        public override string SceneName => "PreBounty_0";
-        public override SceneAudio GetAudio(AudioDatabase database) => database.Empty;
-
-        public override MonoBehaviour[] RequiredPrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
-        {
-            prefabs.audioManager,
-            prefabs.pauseMenuV2,
-            prefabs.dialogueManager,
-            prefabs.uiFadeScreenManager,
-            prefabs.dialogueBoxV2
-        };
-    }
-
-    public class PreBounty0 : SceneData {
+    public class PreBounty0 : SceneData
+    {
         public override string SceneName => "PreBounty_0";
         public override SceneAudio GetAudio(AudioDatabase database) => database.TeaserScene;
 
