@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using DialogueScripts;
 using TMPro;
@@ -6,18 +7,23 @@ using UnityEngine.UI;
 
 namespace Dialogue.Epilogue
 {
-    public class Epilogue_10 : MonoBehaviour
+    public class Epilogue_10 : DialogueClasses
     {
         private static Color PURPLE = new Color(210f / 255f, 175f / 255f, 1f, 1f);
         private static Color TRANSPARENT_PURPLE = new Color(210f / 255f, 175f / 255f, 1f, 0f);
 
         [SerializeField] private GameObject background1;
         [SerializeField] private GameObject background2;
+        [SerializeField] private GameObject world;
+        [SerializeField] private GameObject sceneBuilder;
 
         [SerializeField] private Image purpleFlash;
         [SerializeField] private Image tundraWithNoise;
         [SerializeField] private Image caveFlickerLayer;
         private bool shouldFlicker = false;
+
+        [SerializeField] private Jackie jackie;
+        [SerializeField] private EnemyIves ives;
 
         [SerializeField] private DialogueEntryInUnityEditor[] jayOpeningDialogue;
         [SerializeField] private DialogueEntryInUnityEditor[] preBonfireDialogue;
@@ -25,11 +31,73 @@ namespace Dialogue.Epilogue
         [SerializeField] private DialogueEntryInUnityEditor[] postBonfireDialogue;
         [SerializeField] private DialogueEntryInUnityEditor[] momStoryFlashbackDialogue;
         [SerializeField] private DialogueEntryInUnityEditor[] weiseDialogue;
-        [SerializeField] private DialogueEntryInUnityEditor[] preBattleDialogue;
+        [SerializeField] private DialogueEntryInUnityEditor[] spottedPFrogDialogue;
+        [SerializeField] private DialogueEntryInUnityEditor[] battleStartDialogue;
 
-
-        private IEnumerator Start()
+        private void Update()
         {
+            if (!shouldFlicker) { return; }
+            caveFlickerLayer.color = new Color(1f, 1f, 1f, 0.5f + 0.5f * Mathf.Sin(Time.time));
+        }
+
+        private IEnumerator PurpleFlash()
+        {
+            float elapsedTime = 0f;
+            float fadeInDuration = 0.2f;
+            float fadeOutDuration = 2f;
+            while (elapsedTime < fadeInDuration)
+            {
+                elapsedTime += Time.deltaTime;
+                float fraction = elapsedTime / fadeInDuration;
+                fraction = Mathf.Clamp01(fraction);
+                // Using Lerp is fine here as we calculate fraction every frame
+                purpleFlash.color = Color.Lerp(TRANSPARENT_PURPLE, PURPLE, fraction);
+                yield return null;
+            }
+            elapsedTime = 0f;
+            while (elapsedTime < fadeOutDuration)
+            {
+                elapsedTime += Time.deltaTime;
+                float fraction = elapsedTime / fadeOutDuration;
+                fraction = Mathf.Clamp01(fraction);
+                purpleFlash.color = Color.Lerp(PURPLE, TRANSPARENT_PURPLE, fraction);
+                yield return null;
+            }
+            // Deals with floating point errors
+            purpleFlash.color = TRANSPARENT_PURPLE;
+        }
+
+        private IEnumerator FadeInBG(Image bgImage)
+        {
+            float fadeTime = 0.8f;
+            for (var t = 0f; t < fadeTime; t += Time.deltaTime)
+            {
+                bgImage.color = new Color(1f, 1f, 1f, t / fadeTime);
+                yield return null;
+            }
+        }
+
+        private IEnumerator FadeOutBG(Image bgImage)
+        {
+            float fadeTime = 0.8f;
+            for (var t = 0f; t < fadeTime; t += Time.deltaTime)
+            {
+                bgImage.color = new Color(1f, 1f, 1f, fadeTime - t / fadeTime);
+                yield return null;
+            }
+        }
+
+        protected override void GameStateChange(GameState gameState)
+        {
+            if (gameState == GameState.GAME_START)
+            {
+                StartCoroutine(ExecuteSceneStart());
+            }
+        }
+
+        private IEnumerator ExecuteSceneStart()
+        {
+            CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
             purpleFlash.color = Color.black;
             caveFlickerLayer.color = new Color(1f, 1f, 1f, 0f);
             yield return DialogueBoxV2.Instance.Play(jayOpeningDialogue.Into());
@@ -54,59 +122,18 @@ namespace Dialogue.Epilogue
 
             yield return DialogueBoxV2.Instance.Play(weiseDialogue.Into());
             yield return UIFadeScreenManager.Instance.FadeInDarkScreen(2f);
+
             background1.SetActive(false);
-
-            
-        }
-
-        private void Update()
-        {
-            if (!shouldFlicker) { return; }
-            caveFlickerLayer.color = new Color(1f, 1f, 1f, 0.5f + 0.5f * Mathf.Sin(Time.time));
-        }
-
-        private IEnumerator PurpleFlash()
-        {
-            float elapsedTime = 0f;
-            float duration = 0.5f;
-            // Lerps from transparent to alpha 1 in [0, duration/2] and the opposite in [duration/2, duration]
-            while (elapsedTime < duration)
-            {
-                elapsedTime += Time.deltaTime;
-                float fraction = 1f - (2f / duration) * Mathf.Abs(elapsedTime - duration / 2f);
-                fraction = Mathf.Clamp01(fraction);
-                // Using Lerp is fine here as we calculate fraction every frame
-                purpleFlash.color = Color.Lerp(TRANSPARENT_PURPLE, PURPLE, fraction);
-                yield return null;
-            }
-            // Deals with floating point errors
             purpleFlash.color = TRANSPARENT_PURPLE;
-        }
+            yield return UIFadeScreenManager.Instance.FadeInLightScreen(2f);
+            yield return DialogueBoxV2.Instance.Play(spottedPFrogDialogue.Into());
+            StartCoroutine(jackie.MoveToPosition(new Vector3(2.75f, 0.4f, jackie.transform.position.z), 0f, 2f));
 
-        private void DisableBonfireFlicker()
-        {
-            shouldFlicker = false;
-            caveFlickerLayer.color = new Color(1f, 1f, 1f, 0f);
-        }
-
-        private IEnumerator FadeInBG(Image bgImage)
-        {
-            float fadeTime = 0.8f;
-            for (var t = 0f; t < fadeTime; t += Time.deltaTime)
-            {
-                bgImage.color = new Color(1f, 1f, 1f, t / fadeTime);
-                yield return null;
-            }
-        }
-
-        private IEnumerator FadeOutBG(Image bgImage)
-        {
-            float fadeTime = 0.8f;
-            for (var t = 0f; t < fadeTime; t += Time.deltaTime)
-            {
-                bgImage.color = new Color(1f, 1f, 1f, fadeTime - t / fadeTime);
-                yield return null;
-            }
+            yield return new WaitForSeconds(2);
+            ives.AttackAnimation("IsPunching");
+            yield return StartCoroutine(jackie.StaggerEntities(ives, jackie, 0.4f));
+            yield return DialogueBoxV2.Instance.Play(battleStartDialogue.Into());
+            yield return UIFadeScreenManager.Instance.FadeInDarkScreen(2f);
         }
     }
 }
