@@ -23,8 +23,8 @@ public static class EventBus
     public static void Raise<T>(T anEvent) where T : IEvent
     {
 #if UNITY_EDITOR
-        if (Listeners<T>.bindings.Count == 0) 
-                Debug.LogWarning($"[EventBus] Event of type {typeof(T).Name} was raised, but no listeners are registered.");
+      //if (Listeners<T>.bindings.Count == 0) 
+      //          Debug.LogWarning($"[EventBus] Event of type {typeof(T).Name} was raised, but no listeners are registered.");
 #endif
 
         Listeners<T>.bindings.ToList().ForEach(action => action(anEvent));

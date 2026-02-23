@@ -49,7 +49,7 @@ public class CalmTheMind : StaffCards
         if (e.NewState != GameState.FIGHTING)
         {
             this.UnSubscribe<GameStateChanged>(ResetHandler);
-            this.Subscribe<DequeueEvent>(GiveStack);
+            this.UnSubscribe<DequeueEvent>(GiveStack);
         }
     }
 }
