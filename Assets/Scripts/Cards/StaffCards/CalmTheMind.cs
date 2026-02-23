@@ -1,14 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Linq;
-using UnityEngine;
-using static Unity.Collections.AllocatorManager;
-using static UnityEngine.UI.Image;
 
 public class CalmTheMind : StaffCards
 {
-    int stacksConsumed = 0;
-    // Start is called before the first frame update
     public override void Initialize()
     {
         lowerBound = 2;
@@ -17,29 +12,44 @@ public class CalmTheMind : StaffCards
         Speed = 5;
         
         myName = "Calm The Mind";
-        description = "Block, then gain Flow equal to 2 + Flow consumed.";
+        description = "Block, then gain 1 Flow before each attack this turn.";
         
         base.Initialize();
         CardType = CardType.Defense;
     }
 
-    public override void ApplyEffect()
-    {
-        stacksConsumed = Origin.GetBuffStacks(Flow.buffName);
-        base.ApplyEffect();
-    }
-
     public override void CardIsUnstaggered()
     {
         base.CardIsUnstaggered();
-        Origin.AddStacks(Flow.buffName, 2 + stacksConsumed);
-        stacksConsumed = 0;
+        ActivateEffect();
     }
 
     public override void OnCardStagger()
     {
         base.OnCardStagger();
-        Origin.AddStacks(Flow.buffName, 2 + stacksConsumed);
-        stacksConsumed = 0;
+        ActivateEffect();
+    }
+
+    private void ActivateEffect()
+    {
+        this.Subscribe<DequeueEvent>(GiveStack);
+        this.Subscribe<GameStateChanged>(ResetHandler);
+    }
+
+    private void GiveStack(DequeueEvent e)
+    {
+        if (e.Wrapper.PlayerAction != null && e.Wrapper.PlayerAction.Origin == Origin)
+        {
+            Origin.AddStacks(Flow.buffName, 1);
+        }
+    }
+
+    private void ResetHandler(GameStateChanged e)
+    {
+        if (e.NewState != GameState.FIGHTING)
+        {
+            this.UnSubscribe<GameStateChanged>(ResetHandler);
+            this.Subscribe<DequeueEvent>(GiveStack);
+        }
     }
 }
