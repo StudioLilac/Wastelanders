@@ -8,10 +8,12 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour {
     [SerializeField] private GameObject wastelandersText;
+    [SerializeField] private TextMeshProUGUI versionText;
+    [SerializeField] private TextMeshProUGUI statusText;
 
     [SerializeField] private Button quitButton;
     [SerializeField] private GameObject bountyButton;
-    
+
     public void QuitGame()
     {
 #if UNITY_EDITOR
@@ -32,7 +34,33 @@ public class MainMenu : MonoBehaviour {
 #endif
         // bountyButton.SetActive(GameStateManager.Instance.CurrentLevelProgress >= BountyInformation.PRINCESS_FROG_BOUNTY.LevelID);
         bountyButton.SetActive(false); // Locks this button until part 2 is ready.
+        versionText.text = $"v{Application.version}";
+        UpdateStatusUI();
     }
+
+    private void UpdateStatusUI()
+    {
+        var currentSaveStatus = new GetSaveSystemStatus().Query();
+        switch (currentSaveStatus)
+        {
+            case SaveSystemStatus.Ok:
+                statusText.text = "";
+                break;
+            case SaveSystemStatus.GameDataError:
+                statusText.text = "Current Status: GameData read issue. Restart Required.";
+                statusText.color = Color.red;
+                break;
+            case SaveSystemStatus.PreferencesError:
+                statusText.text = "Current Status: Preferences read issue. Restart Required.";
+                statusText.color = Color.red;
+                break;
+            case SaveSystemStatus.CriticalError:
+                statusText.text = "Current Status: Critical save system failure. Restart Required.";
+                statusText.color = Color.red;
+                break;
+        }
+    }
+
 
     [SerializeField]
     private float cycleScaling = 2f; // Higher the number, the faster one phase is 
