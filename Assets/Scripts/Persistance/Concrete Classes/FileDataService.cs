@@ -42,7 +42,7 @@ namespace Systems.Persistence
 
             if (!File.Exists(fileLocation))
             {
-                throw new IOException($"File '{name}.{fileExtension}' does not exist in this file");
+                throw new FileNotFoundException($"File '{name}.{fileExtension}' does not exist in this file");
             }
 
             return serializer.Deserialize<T>(File.ReadAllText(fileLocation));;
