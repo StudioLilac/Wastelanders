@@ -43,19 +43,11 @@ public class MainMenu : MonoBehaviour {
         var currentSaveStatus = new GetSaveSystemStatus().Query();
         switch (currentSaveStatus)
         {
-            case SaveSystemStatus.Ok:
+            case SaveStatus.Ok:
                 statusText.text = "";
                 break;
-            case SaveSystemStatus.GameDataError:
-                statusText.text = "Current Status: GameData read issue. Restart Required.";
-                statusText.color = Color.red;
-                break;
-            case SaveSystemStatus.PreferencesError:
-                statusText.text = "Current Status: Preferences read issue. Restart Required.";
-                statusText.color = Color.red;
-                break;
-            case SaveSystemStatus.CriticalError:
-                statusText.text = "Current Status: Critical save system failure. Restart Required.";
+            case SaveStatus.Error error:
+                statusText.text = $"Current Status: {error.Message}. Restart Required.";
                 statusText.color = Color.red;
                 break;
         }

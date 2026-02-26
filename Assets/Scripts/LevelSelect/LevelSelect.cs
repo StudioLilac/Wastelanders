@@ -80,9 +80,9 @@ public class LevelSelect : MonoBehaviour
 
     void FadeLevelIn(string levelName)
     {
-        if (new GetSaveSystemStatus().Query() != SaveSystemStatus.Ok)
+        if (new GetSaveSystemStatus().Query() is SaveStatus.Error)
         {
-            new DisplayWarning(new PopupType.CustomPopup("Wow, I'm glad I added this fallback. The current save file has issues right now. \n Could you please try restarting the game?")).Invoke();
+            new DisplayWarning(new PopupType.CustomPopup("Wow, I'm glad I added this fallback. The current save file has issues right now. \n Could you please try restarting the game or notifying the devs?")).Invoke();
             return;
         }
         GameStateManager.Instance.LoadScene(levelName);
