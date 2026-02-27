@@ -59,7 +59,7 @@ namespace Systems.Persistence
             _ => new SaveStatus.Ok() 
         };
 
-        IDataService dataService;
+        IDataService dataService = null!;
 
         protected override void Awake()
         {
