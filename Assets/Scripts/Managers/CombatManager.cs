@@ -10,6 +10,7 @@ using UI_Toolkit;
 #nullable enable
 public record GetGameState() : IQuery<GameState?>; 
 public record DefaultCard(PlayerClass player) : IQuery<ClasslessCards?>;
+public record GameStateChanged(GameState OldState, GameState NewState): IEvent;
 #nullable disable
 
 public record PlayersWin() : IEvent;
@@ -400,6 +401,7 @@ public class CombatManager : MonoBehaviour
         get => gameState;
         set
         {
+            var oldState = gameState;
             OnGameStateChanging?.Invoke(value);
             gameState = value;
             switch (value)
@@ -428,7 +430,7 @@ public class CombatManager : MonoBehaviour
                 default:
                     break;
             }
-            
+            new GameStateChanged(oldState, value).Invoke();
             OnGameStateChanged?.Invoke(value);
         }
     }
