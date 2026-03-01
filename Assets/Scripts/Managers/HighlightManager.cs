@@ -5,6 +5,7 @@ using UnityEngine;
 
 #nullable enable
 public record CurrentPlayer() : IQuery<PlayerClass?>;
+public record UpdateHand() : IEvent;
 public class HighlightManager : MonoBehaviour 
 {
     private const float CURRENT_PLAYER_CROSSHAIR_SLOWDOWN_FACTOR = 0.35f;
@@ -37,6 +38,7 @@ public class HighlightManager : MonoBehaviour
     private void Start()
     {
         this.Answer<CurrentPlayer, PlayerClass?>(GetCurrentPlayer);
+        this.Subscribe<UpdateHand>(RenderAppropriateHand);
         CombatManager.OnGameStateChanged += ResetSelection;
         EntityClass.OnEntityClicked += OnEntityClicked;
         ActionClass.CardClickedEvent += OnActionClicked;
@@ -216,13 +218,11 @@ public class HighlightManager : MonoBehaviour
         }
     }
 
-    // Auto shifts to relevant player
-    public void RenderHandIfAppropriate(PlayerClass player)
+    private void RenderAppropriateHand(UpdateHand ev)
     {
-        if (selectedPlayer == player) {
-            RenderHand(player);
-        }
+        if (selectedPlayer != null) RenderHand(selectedPlayer);
     }
+
     private PlayerClass? GetCurrentPlayer(CurrentPlayer q) => selectedPlayer;
     private static void RenderHand(PlayerClass player) => OnUpdateHand?.Invoke(player);
 }
