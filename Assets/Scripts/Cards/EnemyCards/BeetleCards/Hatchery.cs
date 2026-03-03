@@ -14,7 +14,7 @@ public class Hatchery : ActionClass, IPlayableQueenCard
     {
         base.Initialize();
         lowerBound = 2;
-        upperBound = 4;
+        upperBound = 2;
         
         Speed = 1;
         

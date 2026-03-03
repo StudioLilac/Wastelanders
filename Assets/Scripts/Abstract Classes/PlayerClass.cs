@@ -163,7 +163,7 @@ public abstract class PlayerClass : EntityClass
         hand.Remove(used);
         discard.Add(used);
         used.transform.position = new Vector3(500, 500, 1); // spirit the action away; Note: this works because if the action is readded to the deck, the RenderHand() method effectively spirits it back.
-        HighlightManager.Instance.RenderHandIfAppropriate(this);
+        new UpdateHand().Invoke();
     }
 
 
@@ -172,7 +172,7 @@ public abstract class PlayerClass : EntityClass
     {
         hand.Add(card.gameObject);
         discard.Remove(card.gameObject);
-        HighlightManager.Instance.RenderHandIfAppropriate(this);
+        new UpdateHand().Invoke();
     }
 
     public override void PerformSelection()

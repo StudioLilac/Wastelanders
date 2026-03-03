@@ -1,7 +1,7 @@
 
 using UnityEngine;
 
-
+public record DisplayWarning(PopupType PopupType): IEvent;
 public class PopUpNotificationManager : MonoBehaviour
 {
     public static PopUpNotificationManager Instance { get; private set; }
@@ -22,6 +22,7 @@ public class PopUpNotificationManager : MonoBehaviour
         }
 
         canvas.sortingOrder = UISortOrder.WarningPopup.GetOrder();
+        this.Subscribe<DisplayWarning>(ev => DisplayWarning(ev.PopupType));
     }
 
     public void DisplayWarning(PopupType popupType)
@@ -39,6 +40,7 @@ public class PopUpNotificationManager : MonoBehaviour
             PopupType.SelectPlayerFirst => "Select a Player first!",
             PopupType.InsufficientResources => "Insufficient resources!",
             PopupType.ContentLocked => "Content Locked!",
+            PopupType.CustomPopup data => data.Content,
             _ => string.Empty
         };
 
