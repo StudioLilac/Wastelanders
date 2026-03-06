@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -243,6 +244,15 @@ namespace Systems.Persistence
         {
             Debug.Log($"Loading user preferences: {PREFERENCES_FILE_NAME}");
             userPreferences = Versioning.MigratePreferences(dataService.Load<UserPreferences>(PREFERENCES_FILE_NAME));
+        }
+
+        public void InitializeForTesting(IDataService mockDataService)
+        {
+            this.dataService = mockDataService;
+
+            LoadGame();
+            LoadPreferences();
+            LoadAllInformation();
         }
     }
     public abstract record SaveStatus
