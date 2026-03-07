@@ -62,6 +62,9 @@ namespace Systems.Persistence
 
         IDataService dataService = null!;
 
+        public void Initialize(IDataService mockDataService) => this.dataService = mockDataService;
+
+
         protected override void Awake()
         {
             base.Awake();
@@ -70,18 +73,18 @@ namespace Systems.Persistence
 
             this.Answer<GetSaveSystemStatus, SaveStatus?>(_ => Status);
 
-            if (SteamManager.Initialized)
-            {
-                dataService = new SteamCloudDataService(new JSonSerializer());
-                Debug.Log("[SaveLoadSystem] Using Steam Cloud for saves.");
-            }
-            else
-            {
-                dataService = new FileDataService(new JSonSerializer());
-                Debug.Log("[SaveLoadSystem] Steam Manager not initialized, using local file for saves.");
-            }
+            dataService ??= SteamManager.Initialized
+                ? new SteamCloudDataService(new JSonSerializer())
+                : new FileDataService(new JSonSerializer());
+
+            Debug.Log($"[{nameof(SaveLoadSystem)}] Initialized with {dataService.GetType().Name}.");
             defaultCardDatabase = Resources.LoadAll<CardDatabase>("").First();
             defaultPlayerDatabase = Resources.LoadAll<PlayerDatabase>("").First(); // Could consider loading by name for better performance
+            LoadAllInformation();
+        }
+
+        private void LoadAllInformation()
+        {
             try
             {
                 LoadGame();
@@ -115,12 +118,6 @@ namespace Systems.Persistence
                 preferencesStatus = new SaveStatus.Error($"Preferences could not be loaded: {e.Message}");
                 NewUserPreferences();
             }
-
-            LoadAllInformation();
-        }
-
-        private void LoadAllInformation()
-        {
             LoadPlayerInformation();
             LoadGameStateInformation();
             LoadBountyStateInformation();
@@ -244,15 +241,6 @@ namespace Systems.Persistence
         {
             Debug.Log($"Loading user preferences: {PREFERENCES_FILE_NAME}");
             userPreferences = Versioning.MigratePreferences(dataService.Load<UserPreferences>(PREFERENCES_FILE_NAME));
-        }
-
-        public void InitializeForTesting(IDataService mockDataService)
-        {
-            this.dataService = mockDataService;
-
-            LoadGame();
-            LoadPreferences();
-            LoadAllInformation();
         }
     }
     public abstract record SaveStatus

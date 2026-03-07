@@ -22,6 +22,7 @@ namespace Systems.Persistence.Tests
             }
             Directory.CreateDirectory(testDirectory);
             systemGameObject = new GameObject("SaveLoadSystem_Test");
+            systemGameObject.SetActive(false);
             saveLoadSystem = systemGameObject.AddComponent<SaveLoadSystem>();
         }
 
@@ -45,7 +46,8 @@ namespace Systems.Persistence.Tests
             var testSerializer = new JSonSerializer();
             var sandboxService = new FileDataService(testSerializer, testDirectory);
 
-            saveLoadSystem.InitializeForTesting(sandboxService);
+            saveLoadSystem.Initialize(sandboxService);
+            systemGameObject.SetActive(true);
 
             yield return null;
 
