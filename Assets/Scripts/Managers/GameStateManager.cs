@@ -1,6 +1,7 @@
 using LevelSelectInformation;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using Systems.Persistence;
 using UnityEngine;
@@ -9,7 +10,7 @@ using UnityEngine.SceneManagement;
 //Singleton Class that keeps track of values representing general Game states
 public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<GameStateData>
 {
-    public static readonly bool IS_DEVELOPMENT = true;
+    public static readonly bool IS_DEVELOPMENT = false;
 
     public SceneData PreviousScene { get; private set; } = SceneData.Get<SceneData.MainMenu>();
 
@@ -46,16 +47,30 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
         set => Data.CurrentLevelProgress = value;
     }
 
+    private HashSet<string> seenEnemyActions; // Private backing field for perf
+    
+
+    public bool HasSeenEnemyAction(ActionClass a) {
+        if (seenEnemyActions == null) seenEnemyActions = Data.SeenEnemyActions.ToHashSet(); // Bind is not always called
+        return seenEnemyActions.Contains(a.GetName());
+    }
+    
+    public void AddEnemyActionToSeen(ActionClass a) {
+        if (Data.SeenEnemyActions.Contains(a.GetName())) return;
+        Data.SeenEnemyActions.Add(a.GetName());
+        seenEnemyActions.Add(a.GetName());
+    }
+    
     public void Restart()
     {
         Scene activeScene = SceneManager.GetActiveScene();
         LoadScene(activeScene.name);
     }
 
-    public void Bind(GameStateData bindedData)
-    {
+    public void Bind(GameStateData bindedData) {
         this.Data = bindedData;
         this.Data.Id = bindedData.Id;
+        seenEnemyActions = bindedData.SeenEnemyActions.ToHashSet();
     }
 
     public void LoadScene(string scene)
@@ -64,19 +79,26 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
         StartCoroutine(FadeAndLoadScene(scene));
     }
 
+    private bool isFadingOut = false;
     private IEnumerator FadeAndLoadScene(string scene)
     {
-        yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInDarkScreen(0.6f));
-        yield return new WaitForSeconds(0.2f);
-        SaveLoadSystem.Instance.SaveGame();
-        SceneManager.LoadScene(scene);
-        yield return new WaitForEndOfFrame();
-        yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(0.6f));
+        if (!isFadingOut)
+        {
+            isFadingOut = true;
+            yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInDarkScreen(0.3f));
+            yield return new WaitForSeconds(0.1f);
+            SaveLoadSystem.Instance.SaveGame();
+            SceneManager.LoadScene(scene);
+            isFadingOut = false;
+            yield return new WaitForEndOfFrame();
+            yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(0.5f));
+        }
     }
 
     public const string SORTING_LAYER_TOP = "Top";
 
     /*
+     *
      * TEMPORARY FLAGS
      */
 
@@ -102,8 +124,8 @@ public class GameStateData : ISaveable
      * The associated values for this should be from [LevelSelectInformation.levelId]
      */
     [field: SerializeField] public float CurrentLevelProgress { get; set; } = 0f;
-
-
+    [field: SerializeField] public List<string> SeenEnemyActions { get; set; } = new List<string>(); // Must be List<T>, HashSet<T> not serializable
+    
     public override string ToString()
     {
         var items = new List<string>

@@ -5,7 +5,6 @@ using UnityEngine;
 public abstract class AxeCards : ActionClass
 {
     public const string AXE_ANIMATION_NAME = "IsAxing";
-    public const string AXE_SOUND_FX_NAME = "Axe Cut";
     public override sealed void Start()
     {
         //No initialization code here
@@ -22,7 +21,7 @@ public abstract class AxeCards : ActionClass
     }
     public override void OnHit()
     {
-        AudioManager.Instance.PlaySFX(AXE_SOUND_FX_NAME);
+        AudioManager.Instance.PlaySFX(SoundID.CB_axe_cut);
         if (Origin.HasAnimationParameter(AXE_ANIMATION_NAME))
         {
             Origin.AttackAnimation(AXE_ANIMATION_NAME); 

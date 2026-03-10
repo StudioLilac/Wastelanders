@@ -16,5 +16,5 @@ MonoBehaviour:
   - bodyText: "Whew, alright. That\u2019s a good start. Let\u2019s see what I can
       extract."
     speakerName: Jackie
-    displayingImage: {fileID: 0}
+    displayingImage: {fileID: 21300000, guid: 10ec818d4088de44a83a5405137230e4, type: 3}
     broadcastAnEvent: 0

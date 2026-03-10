@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4fafe43b89343e3a7ba1235e8987c0f, type: 3}
+  m_Name: 3.5 JackieStrategyV2
+  m_EditorClassIdentifier: 
+  Entries:
+  - content: Hmm, what's my plan...
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxId: 0
+    picture: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
+    events: []
+  - content: Killing more dangerous Waste Creatures drop better Waste Products.
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxId: 0
+    picture: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
+    events: []
+  - content: Should I work with a team again to hunt down a larger Waste Creature?
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxId: 0
+    picture: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
+    events:
+    - rid: 1207053248668106824
+  - content: 'No, I came back almost empty-handed last year after I froze up and
+      let others do the fighting. '
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxId: 0
+    picture: {fileID: 21300000, guid: 487226e5dae66424ea250466920a3086, type: 3}
+    events:
+    - rid: 1207053248668106825
+  - content: By the time I felt okay, there were basically no products left!
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxId: 0
+    picture: {fileID: 21300000, guid: 537908265661f2b44970c526d7724cfb, type: 3}
+    events:
+    - rid: 1207053248668106826
+  - content: "I can do this solo, that\u2019s what the past year of training was
+      for."
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxId: 0
+    picture: {fileID: 21300000, guid: 487226e5dae66424ea250466920a3086, type: 3}
+    events:
+    - rid: 1207053248668106827
+  - content: 'This way I get the full cut of the products, and it should impress
+      the examiners, I hope. '
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxId: 0
+    picture: {fileID: 21300000, guid: 10ec818d4088de44a83a5405137230e4, type: 3}
+    events: []
+  - content: "Although I\u2019ll have to be sneaky and careful if I\u2019m hunting
+      alone..."
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxId: 0
+    picture: {fileID: 21300000, guid: 487226e5dae66424ea250466920a3086, type: 3}
+    events: []
+  - content: <i>Squelch
+    speaker: {fileID: 11400000, guid: 3947e3a3291f4ff408639af6bfccf26e, type: 2}
+    sfxId: 0
+    picture: {fileID: 21300000, guid: 174956c54b12b0d419353cc1a44153ca, type: 3}
+    events:
+    - rid: 1207053248668106828
+  - content: Whoops. Maybe I gotta be more sneaky and more careful.
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxId: 0
+    picture: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
+    events: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 1207053248668106824
+      type: {class: CustomEvent, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        EventName: 
+    - rid: 1207053248668106825
+      type: {class: CustomEvent, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        EventName: 
+    - rid: 1207053248668106826
+      type: {class: CustomEvent, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        EventName: 
+    - rid: 1207053248668106827
+      type: {class: CustomEvent, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        EventName: 
+    - rid: 1207053248668106828
+      type: {class: CustomEvent, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        EventName: 

@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 207ddad3e1c90594ba3f48e2a5a6a796, type: 3}
+  m_Name: 8.5 DuplicateSpeed
+  m_EditorClassIdentifier: 
+  dialogue:
+  - bodyText: Each round, you can queue up as many Actions as you'd like. However...
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 57baba5992d9e224988e93fcacf9f7eb, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: "You can\u2019t play two Actions that share the same <i>Speed</i>."
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: b1411cc1e1231574797f223a58264863, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: If a card turns red, that means another Action with the same <i>Speed</i>
+      is already queued.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 37984fb1d201d1246a4e2a0ac7061427, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: Once you're confident in your setup, press <i>Begin</i> to start combat.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 012935b81d93368468e2669b1e3d145f, type: 3}
+    sfx: 
+    broadcastAnEvent: 0

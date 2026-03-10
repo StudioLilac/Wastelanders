@@ -9,14 +9,12 @@ namespace WeaponDeckSerialization
     public class WeaponProficiency
     {
         [field: SerializeField] public CardDatabase.WeaponType WeaponType { get; set; }
-        [field: SerializeField] public int CurrentPoints { get; set; }
 
         [field: SerializeField] public int MaxPoints { get; set; }
 
-        public WeaponProficiency(CardDatabase.WeaponType weaponType, int currentPoints, int maxPoints)
+        public WeaponProficiency(CardDatabase.WeaponType weaponType, int maxPoints)
         {
             WeaponType = weaponType;
-            CurrentPoints = currentPoints;
             MaxPoints = maxPoints;
         }
     }

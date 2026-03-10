@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UI_Toolkit;
 using Unity.VisualScripting;
@@ -8,25 +9,27 @@ using UnityEngine.UI;
 
 namespace DialogueScripts
 {
+#nullable enable
+    public record GetActorDatabase() : IQuery<ActorDatabase?>;
     public class DialogueBoxV2 : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI txtView;
-        [SerializeField] private TextMeshProUGUI whoView;
-        [SerializeField] private Image imgView;
-        [SerializeField] private RectTransform boxLayout;
-        [SerializeField] private Canvas canvas;
+        [SerializeField] private TextMeshProUGUI txtView = null!;
+        [SerializeField] private TextMeshProUGUI whoView = null!;
+        [SerializeField] private Image imgView = null!;
+        [SerializeField] private RectTransform boxLayout = null!;
+        [SerializeField] private Canvas canvas = null!;
 
-        [SerializeField] private GameObject txt;
-        [SerializeField] private GameObject who;
-        [SerializeField] private GameObject img;
-        [SerializeField] private ActorProfile eventProfile;
+        [SerializeField] private GameObject txt = null!;
+        [SerializeField] private GameObject who = null!;
+        [SerializeField] private GameObject img = null!;
+        [SerializeField] private ActorDatabase actorDatabase = null!;
 
         [SerializeField] private int typewriterRate = 50;
-        public static DialogueBoxV2 Instance { get; private set; }
-#nullable enable
-
+        public static DialogueBoxV2 Instance { get; private set; } = null!;
+        public bool IsActive => isProcessingQueue;
         private AutoAdvanceAfter? autoAdvanceAfter;
-
+        private readonly Queue<DialogueBatch> _dialogueQueue = new();
+        private bool isProcessingQueue = false;
 
         private void Awake()
         {
@@ -37,35 +40,72 @@ namespace DialogueScripts
             else
             {
                 Destroy(gameObject);
+                return;
             }
 
             this.Subscribe<AutoAdvanceAfter>(SetAutoAdvance);
             this.Subscribe<VerticalLayoutChange>(SetVerticalLayout);
+            this.Answer<GetActorDatabase, ActorDatabase?>(_ => actorDatabase);
 
-            canvas.sortingOrder = UISortOrder.DialogueBox.GetOrder();
-            gameObject.SetActive(false);
+            ChangeDialogueBoxOrder(UISortOrder.DialogueBox.GetOrder());
+            boxLayout.gameObject.SetActive(false);
+        }
+
+        public void ChangeDialogueBoxOrder(int order)
+        {
+            canvas.sortingOrder = order;
         }
 
         public IEnumerator Play(DialogueEntry[] entries)
         {
-            gameObject.SetActive(true);
+            var batch = new DialogueBatch(entries);
 
+            _dialogueQueue.Enqueue(batch);
+
+            if (!isProcessingQueue)
+            {
+                StartCoroutine(ProcessQueue());
+            }
+
+            yield return new WaitUntil(() => batch.IsFinished);
+        }
+
+        private IEnumerator ProcessQueue()
+        {
+            isProcessingQueue = true;
+
+            while (_dialogueQueue.Count > 0)
+            {
+                var currentBatch = _dialogueQueue.Peek();
+
+                boxLayout.gameObject.SetActive(true);
+                yield return RunDialogueRoutine(currentBatch.Entries);
+                boxLayout.gameObject.SetActive(false);
+                currentBatch.IsFinished = true;
+
+                _dialogueQueue.Dequeue();
+            }
+
+            isProcessingQueue = false;
+        }
+
+        private IEnumerator RunDialogueRoutine(DialogueEntry[] entries)
+        {
             foreach (var entry in entries)
             {
                 if (SkipEntry(entry)) continue;
+
                 WithEntry(entry);
                 yield return TypewriteText();
                 yield return WaitForContinuation();
                 PlayTransitionSound(entry);
                 yield return null;
             }
-
-            gameObject.SetActive(false);
         }
 
         private bool SkipEntry(DialogueEntry entry)
         {
-            if (entry.speaker == eventProfile)
+            if (entry.speaker == actorDatabase.Event)
             {
                 entry.events.ForEach(it => it.Execute());
                 return true;
@@ -112,11 +152,10 @@ namespace DialogueScripts
 
         private void PlayTransitionSound(DialogueEntry entry)
         {
-            if (!string.IsNullOrEmpty(entry.sfxName) || Input.GetKey(KeyCode.RightArrow))
+            if (entry.sfxId != SoundID.None || Input.GetKey(KeyCode.RightArrow))
                 return;
 
-            const string DEFAULT_SFX_NAME = "Page Flip";
-            AudioManager.Instance.PlaySFX(DEFAULT_SFX_NAME);
+            SoundID.VN_page_flip.Play();
         }
 
         private void SetAutoAdvance(AutoAdvanceAfter e)
@@ -134,12 +173,11 @@ namespace DialogueScripts
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
-
         private void WithEntry(DialogueEntry entry)
         {
             if (!string.IsNullOrEmpty(entry.content))
             {
-                txtView.text = entry.content;
+                txtView.text = DialogueManager.SanitizeText(entry.content);
                 txt.SetActive(true);
             }
             else
@@ -162,9 +200,9 @@ namespace DialogueScripts
                 who.SetActive(false);
             }
 
-            if (!string.IsNullOrEmpty(entry.sfxName))
+            if (entry.sfxId != SoundID.None)
             {
-                AudioManager.Instance.PlaySFX(entry.sfxName);
+                entry.sfxId.Play();
             }
 
             if (entry.picture)
@@ -183,5 +221,11 @@ namespace DialogueScripts
         }
 
         private static bool HasInput() => !PauseMenuV2.IsPaused && (Input.GetKey(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Space));
+        private class DialogueBatch
+        {
+            public DialogueEntry[] Entries { get; }
+            public bool IsFinished { get; set; } = false;
+            public DialogueBatch(DialogueEntry[] entries) => Entries = entries;
+        }
     }
 }

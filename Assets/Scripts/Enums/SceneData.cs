@@ -33,7 +33,7 @@ public abstract class SceneData : Enum<SceneData>
         public override SceneAudio GetAudio(AudioDatabase database) => database.MainMenu;
 
         public override MonoBehaviour[] RequiredPrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
-            { prefabs.audioManager, prefabs.uiFadeScreenManager, prefabs.pauseMenuV2 };
+            { prefabs.audioManager, prefabs.uiFadeScreenManager, prefabs.pauseMenuV2, prefabs.popupManager };
     }
 
     public class SelectionScreen : SceneData
@@ -42,7 +42,7 @@ public abstract class SceneData : Enum<SceneData>
         public override SceneAudio GetAudio(AudioDatabase database) => database.MainMenu;
 
         public override MonoBehaviour[] RequiredPrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
-            { prefabs.audioManager, prefabs.uiFadeScreenManager, prefabs.pauseMenuV2, prefabs.dialogueManager, prefabs.deckSelectV2 };
+            { prefabs.audioManager, prefabs.uiFadeScreenManager, prefabs.pauseMenuV2, prefabs.dialogueManager, prefabs.deckSelectV2, prefabs.dialogueBoxV2 };
     }
 
     public class LevelSelect : SceneData
@@ -135,12 +135,43 @@ public abstract class SceneData : Enum<SceneData>
             { prefabs.audioManager, prefabs.uiFadeScreenManager, prefabs.pauseMenuV2 };
     }
 
-    public class PreBounty0 : SceneData {
-        public override string SceneName => "PreBounty_0";
+    public class Epilogue_6 : SceneData
+    {
+        public override string SceneName => "Epilogue_6";
+
         public override SceneAudio GetAudio(AudioDatabase database) => database.Empty;
 
         public override MonoBehaviour[] RequiredPrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
-            { prefabs.audioManager, prefabs.uiFadeScreenManager, prefabs.pauseMenuV2, prefabs.dialogueManager };
+        {
+            prefabs.audioManager,
+            prefabs.pauseMenuV2,
+            prefabs.dialogueManager,
+            prefabs.uiFadeScreenManager,
+            prefabs.dialogueBoxV2
+        };
+    }
+    public class Epilogue_7 : SceneData
+    {
+        public override string SceneName => "Epilogue_7";
+
+        public override SceneAudio GetAudio(AudioDatabase database) => database.Empty;
+
+        public override MonoBehaviour[] RequiredPrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
+        {
+            prefabs.audioManager,
+            prefabs.pauseMenuV2,
+            prefabs.dialogueManager,
+            prefabs.uiFadeScreenManager,
+            prefabs.dialogueBoxV2
+        };
+    }
+
+    public class PreBounty0 : SceneData {
+        public override string SceneName => "PreBounty_0";
+        public override SceneAudio GetAudio(AudioDatabase database) => database.TeaserScene;
+
+        public override MonoBehaviour[] RequiredPrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
+            { prefabs.audioManager, prefabs.uiFadeScreenManager, prefabs.pauseMenuV2, prefabs.dialogueManager, prefabs.dialogueBoxV2};
     }
 
     public class PreBounty_1 : SceneData
@@ -167,7 +198,7 @@ public abstract class SceneData : Enum<SceneData>
             prefabs.dialogueBoxV2
         };
     }
-
+    
     public class Epilogue5 : SceneData {
         public override string SceneName => "Epilogue_5";
         
@@ -182,8 +213,24 @@ public abstract class SceneData : Enum<SceneData>
             prefabs.dialogueBoxV2
         };
     }
-    
-    
+        
+
+    public class Epilogue_8 : SceneData
+    {
+        public override string SceneName => "Epilogue_8";
+        
+        public override SceneAudio GetAudio(AudioDatabase database) => database.Empty;
+
+        public override MonoBehaviour[] RequiredPrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
+        {
+            prefabs.audioManager,
+            prefabs.pauseMenuV2,
+            prefabs.dialogueManager,
+            prefabs.uiFadeScreenManager,
+            prefabs.dialogueBoxV2
+        };
+    }
+
     private static readonly Dictionary<string, SceneData> _sceneLookup = new();
 
     static SceneData()

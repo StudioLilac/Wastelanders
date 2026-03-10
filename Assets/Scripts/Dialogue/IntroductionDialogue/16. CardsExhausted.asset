@@ -13,34 +13,28 @@ MonoBehaviour:
   m_Name: 16. CardsExhausted
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: Now, pay attention to this.
+  - bodyText: Here's my final tip.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
-    sfx: 
     broadcastAnEvent: 0
-  - bodyText: See that indicator next to your hand? That shows how many Actions are
-      left in your deck.
+  - bodyText: Careful about burning yourself out during a fight.
+    speakerName: Ives
+    displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: You can play as many Actions as you want on your turn.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 26e9e78366004814eb04d15ac70b48af, type: 3}
-    sfx: 
     broadcastAnEvent: 0
-  - bodyText: 'When you run out, your deck reshuffles. However... '
+  - bodyText: But each time your deck is exhausted and reshuffles...
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
-    sfx: 
+    displayingImage: {fileID: 21300000, guid: 26e9e78366004814eb04d15ac70b48af, type: 3}
     broadcastAnEvent: 0
-  - bodyText: 'Your maximum hand size will be decreased for the rest of the fight! '
+  - bodyText: 'Your maximum hand size will be decreased by one for the rest of the
+      fight! '
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
-    sfx: 
+    displayingImage: {fileID: 21300000, guid: 26e9e78366004814eb04d15ac70b48af, type: 3}
     broadcastAnEvent: 0
-  - bodyText: So, stay sharp and make every Action count.
+  - bodyText: 'So make every Action count to avoid exhausting yourself too quickly! '
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
-    sfx: 
-    broadcastAnEvent: 0
-  - bodyText: 'Let''s continue. '
-    speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
-    sfx: 
+    displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
     broadcastAnEvent: 0

@@ -23,7 +23,7 @@ public class Pincer : BeetleAttacks
 
     public override void OnHit()
     {
-        AudioManager.Instance.PlaySFX(PINCER_SOUND_EFFECT_NAME);
+        AudioManager.Instance.PlaySFX(SoundID.CB_pincer_hit);
         base.OnHit();
     }
 

@@ -53,6 +53,9 @@ namespace DialogueScripts
                 CharacterActions.SetOffscreenRight => actor.MoveTo(offScreenRight.position, mc.duration),
                 CharacterActions.FadeIn => actor.FadeActor(true, mc.duration),
                 CharacterActions.FadeOut => actor.FadeActor(false, mc.duration),
+                CharacterActions.FlashFade => actor.FlashActor(mc.duration),
+                CharacterActions.FaceLeft => actor.FaceLeft(),
+                CharacterActions.FaceRight => actor.FaceRight(),
                 _ => throw new ArgumentOutOfRangeException(nameof(mc.action), mc.action, "Unhandled CharacterAction")
             };
         }

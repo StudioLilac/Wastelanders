@@ -13,13 +13,15 @@ MonoBehaviour:
   m_Name: 26 Ives Analyze After Combat
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: 'We should take some shard samples for the Scientists to analyze after
+  - bodyText: 'We should take some shard samples for the scientists to analyze after
       the exam. '
     speakerName: Ives
     displayingImage: {fileID: 0}
+    sfx: 
     broadcastAnEvent: 0
-  - bodyText: " For now, let\u2019s store the fragments in a safe place where the
-      beetles can't find them. "
+  - bodyText: "Let\u2019s store the fragments in a safe place where the beetles can't
+      find them for now. "
     speakerName: Ives
     displayingImage: {fileID: 0}
+    sfx: 
     broadcastAnEvent: 0

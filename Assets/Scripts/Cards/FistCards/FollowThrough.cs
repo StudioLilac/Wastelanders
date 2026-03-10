@@ -23,7 +23,7 @@ public class FollowThrough : FistCards
 
         CardType = CardType.MeleeAttack;
         myName = "Follow Through";
-        description = "If unstaggered, make this attack against the target again everytime they are hit this turn.";
+        description = "If not staggered, make this attack against the target again everytime they are hit this turn.";
         lowerBound = 1;
         upperBound = 2;
         Speed = 5;
@@ -80,7 +80,7 @@ public class FollowThrough : FistCards
 
     public override void OnHit()
     {
-        AudioManager.Instance?.PlaySFX(FIST_SOUND_FX_NAME);
+        AudioManager.Instance?.PlaySFX(SoundID.CB_fist_hit);
         Vector3 diffInLocation = Target.myTransform.position - Origin.myTransform.position;
         Origin.UpdateFacing(diffInLocation, null);
         if (!originalCopy)

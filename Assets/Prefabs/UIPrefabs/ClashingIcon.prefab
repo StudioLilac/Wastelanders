@@ -10,6 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5114960397026057154}
   - component: {fileID: 4889160484734648282}
+  - component: {fileID: 6621047302733197497}
+  - component: {fileID: 8333983199209184744}
+  - component: {fileID: 759350918299921543}
+  - component: {fileID: 3797770121309104328}
   m_Layer: 0
   m_Name: iron-swords-clash
   m_TagString: Untagged
@@ -26,8 +30,8 @@ Transform:
   m_GameObject: {fileID: 3593403167292888625}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -2}
+  m_LocalScale: {x: 1.6, y: 1.6, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3924897954443488120}
@@ -49,6 +53,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -73,7 +80,7 @@ SpriteRenderer:
   m_SortingLayerID: 2146528631
   m_SortingLayer: 1
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: b0d27b9163eb2554996f368bd5b8d4e2, type: 3}
+  m_Sprite: {fileID: 6086161494087061736, guid: a44ebe779babd6b4f8cdd7bc07f544ae, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -84,6 +91,102 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &6621047302733197497
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3593403167292888625}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: efab7e9b342b63242853a4720e94637f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8333983199209184744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3593403167292888625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95641b3ffe0016d4da0f509fe0052a6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  swordsIcon: {fileID: 4889160484734648282}
+  swordFader: {fileID: 3797770121309104328}
+  swordsAnimator: {fileID: 6621047302733197497}
+--- !u!61 &759350918299921543
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3593403167292888625}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 32, y: 30}
+    newSize: {x: 3.84, y: 2.72}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 32, y: 30}
+  m_EdgeRadius: 0
+--- !u!114 &3797770121309104328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3593403167292888625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a6c2131294871b4499a5ce3cb16734e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 4889160484734648282}
 --- !u!1 &5469894721144988013
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,7 +198,7 @@ GameObject:
   - component: {fileID: 3924897954443488120}
   - component: {fileID: 156142739676490864}
   - component: {fileID: 6069768141182838962}
-  - component: {fileID: 6975542206900849034}
+  - component: {fileID: 7760557541141595400}
   m_Layer: 0
   m_Name: ClashingIcon
   m_TagString: Untagged
@@ -139,7 +242,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftClashingAction: {fileID: 7174745963015938159}
   rightClashingAction: {fileID: 4683123950711438762}
-  swordsIcon: {fileID: 4889160484734648282}
+  swordIcon: {fileID: 8333983199209184744}
+  widthFader: {fileID: 7760557541141595400}
+  expandDuration: 0.25
+  fadeDuration: 0.15
 --- !u!114 &6069768141182838962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,12 +261,12 @@ MonoBehaviour:
   m_IgnoreLayout: 0
   m_MinWidth: -1
   m_MinHeight: -1
-  m_PreferredWidth: -1
+  m_PreferredWidth: 170
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
---- !u!114 &6975542206900849034
+--- !u!114 &7760557541141595400
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -169,23 +275,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5469894721144988013}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Script: {fileID: 11500000, guid: 5a37f2a31cce2ac44a1eaf69359c8ec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 4
-  m_Spacing: 85
-  m_ChildForceExpandWidth: 0
-  m_ChildForceExpandHeight: 0
-  m_ChildControlWidth: 1
-  m_ChildControlHeight: 1
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
+  layoutElement: {fileID: 6069768141182838962}
+  fullWidth: 170
 --- !u!1001 &5586465018233159657
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -204,23 +298,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5765255277305682968, guid: f9683846bad493e429dda3ece4900989, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5765255277305682968, guid: f9683846bad493e429dda3ece4900989, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5765255277305682968, guid: f9683846bad493e429dda3ece4900989, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5765255277305682968, guid: f9683846bad493e429dda3ece4900989, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5765255277305682968, guid: f9683846bad493e429dda3ece4900989, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5765255277305682968, guid: f9683846bad493e429dda3ece4900989, type: 3}
       propertyPath: m_SizeDelta.y
@@ -256,7 +350,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5765255277305682968, guid: f9683846bad493e429dda3ece4900989, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -42
       objectReference: {fileID: 0}
     - target: {fileID: 5765255277305682968, guid: f9683846bad493e429dda3ece4900989, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -307,6 +401,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3924897954443488120}
     m_Modifications:
+    - target: {fileID: 5287030420846796515, guid: f9683846bad493e429dda3ece4900989, type: 3}
+      propertyPath: m_PreferredWidth
+      value: 85
+      objectReference: {fileID: 0}
     - target: {fileID: 5765255277305682968, guid: f9683846bad493e429dda3ece4900989, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -317,23 +415,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5765255277305682968, guid: f9683846bad493e429dda3ece4900989, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5765255277305682968, guid: f9683846bad493e429dda3ece4900989, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5765255277305682968, guid: f9683846bad493e429dda3ece4900989, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5765255277305682968, guid: f9683846bad493e429dda3ece4900989, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5765255277305682968, guid: f9683846bad493e429dda3ece4900989, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5765255277305682968, guid: f9683846bad493e429dda3ece4900989, type: 3}
       propertyPath: m_SizeDelta.y
@@ -369,7 +467,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5765255277305682968, guid: f9683846bad493e429dda3ece4900989, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 42
       objectReference: {fileID: 0}
     - target: {fileID: 5765255277305682968, guid: f9683846bad493e429dda3ece4900989, type: 3}
       propertyPath: m_AnchoredPosition.y

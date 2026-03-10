@@ -3,9 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UI_Toolkit;
 using UnityEngine;
-using static Cinemachine.CinemachineTargetGroup;
-using static UnityEngine.GraphicsBuffer;
-using static UnityEngine.UI.Image;
+
 
 public class CardComparator : MonoBehaviour
 {
@@ -47,21 +45,23 @@ public class CardComparator : MonoBehaviour
     /*
      * Clashes two cards together handling logic calls and activating the Combat Info
      */
-    public IEnumerator ClashCards(ActionClass card1, ActionClass card2)
+    public IEnumerator ClashCards(BattleQueue.ActionWrapper actionWrapper)
     {
-        int cardOneGreater;
+        ActionClass card1 = actionWrapper.PlayerAction!;
+        ActionClass card2 = actionWrapper.EnemyAction!;
         CombatManager.Instance.SetCameraCenter(card1.Origin);
         ActivateInfo(card1, card2);
         EnableDice(card1.Origin, card1.Target);
         card1.ApplyEffect();
         card2.ApplyEffect();
         yield return StartCoroutine(ClashBothEntities(card1, card2)); // for animation purposes 
+        BattleQueue.BattleQueueInstance.RemoveActionWrapperFromQueue(actionWrapper);
 
         card1.RollDice();
         card2.RollDice();
         DeactivateInfo(card1, card2);
 
-        cardOneGreater = ClashCompare(card1, card2);
+        int cardOneGreater = ClashCompare(card1, card2);
 
         if (cardOneGreater < 0)
         {
@@ -86,7 +86,7 @@ public class CardComparator : MonoBehaviour
             {
                 card1.CardIsUnstaggered();
                 card2.CardIsUnstaggered();
-                AudioManager.Instance.PlaySFX(CLASH_TIE_SOUND_FX_NAME);
+                AudioManager.Instance.PlaySFX(SoundID.CB_clash_tie);
 
             } else if (cardOneGreater < 0) //Card2 wins clash
             {
@@ -150,14 +150,15 @@ public class CardComparator : MonoBehaviour
         return cardOneGreater;
     }
 
-    public IEnumerator OneSidedAttack(ActionClass actionClass)
+    public IEnumerator OneSidedAttack(BattleQueue.ActionWrapper actionWrapper)
     {
-        //Setup the Scene
+        ActionClass actionClass = actionWrapper.GetTheOnlyExistingAction();
         CombatManager.Instance.SetCameraCenter(actionClass.Origin);
         ActivateInfo(actionClass);
         EnableDice(actionClass.Origin);
         actionClass.ApplyEffect();
         yield return StartCoroutine(ClashBothEntities(actionClass, actionClass));
+        BattleQueue.BattleQueueInstance.RemoveActionWrapperFromQueue(actionWrapper);
         actionClass.RollDice();
         DeactivateInfo(actionClass);
 

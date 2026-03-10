@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using WeaponDeckSerialization;
 
 public abstract class PlayerClass : EntityClass
 {
-    protected List<InstantiableActionClassInfo> cardPrefabs; //Empty after intialization
+    protected List<InstantiableActionClassInfo> cardPrefabs; 
+
 #nullable enable
 
     public delegate void PlayerEventDelegate(PlayerClass player);
@@ -15,7 +17,7 @@ public abstract class PlayerClass : EntityClass
     
     private float MIN_ANIMATION_SPEED = 0.5f;
     private float MAX_ANIMATION_SPEED = 1.5f;
-
+    public int DeckSize => cardPrefabs.Count;
     public List<GameObject> Hand => new(hand);
     public List<GameObject> Pool => new(pool);
 
@@ -27,6 +29,9 @@ public abstract class PlayerClass : EntityClass
 
     protected List<GameObject> discard = new();
 
+    private bool shuffledThisTurn = false;
+    public bool Exhausted => maxHandSize == 0;
+
     public override void Start()
     {
         if (Team == EntityTeam.NoTeam) Team = EntityTeam.PlayerTeam;
@@ -35,15 +40,17 @@ public abstract class PlayerClass : EntityClass
         InstantiatePool();
     }
 
-    protected void InstantiatePool()
+    public void InstantiatePool()
     {
-        while (cardPrefabs.Count > 0)
+        var availableCards = new List<InstantiableActionClassInfo>(cardPrefabs);
+
+        while (availableCards.Count > 0)
         {
-            int idx = UnityEngine.Random.Range(0, cardPrefabs.Count);
-            GameObject toAdd = InstantiateCardPrefab(cardPrefabs[idx]);
+            int idx = UnityEngine.Random.Range(0, availableCards.Count);
+            GameObject toAdd = InstantiateCardPrefab(availableCards[idx]);
             pool.Add(toAdd);
             toAdd.transform.position = new Vector3(-100, -100, 1);
-            cardPrefabs.RemoveAt(idx);
+            availableCards.RemoveAt(idx);
         }
     }
 
@@ -86,14 +93,16 @@ public abstract class PlayerClass : EntityClass
 
     public override void DestroyDeck()
     {
-        List<GameObject> toDestroy = new List<GameObject>(pool);
+        var toDestroy = Pool;
+        toDestroy.AddRange(Hand);
+        toDestroy.AddRange(discard);
         foreach (GameObject actionClass in toDestroy)
         {
-            pool.Remove(actionClass);
-            hand.Remove(actionClass);
-            discard.Remove(actionClass);
             Destroy(actionClass);
         }
+        hand.Clear();
+        discard.Clear();
+        pool.Clear();
     }
 
     protected abstract void GrabDeck();
@@ -120,7 +129,7 @@ public abstract class PlayerClass : EntityClass
             else
             {
                 Debug.LogWarning(myName + "'s Pool has no cards");
-
+                
             }
         }
     }
@@ -128,7 +137,11 @@ public abstract class PlayerClass : EntityClass
     protected void Reshuffle()
     {
         playerReshuffleDeck?.Invoke(this);
-        maxHandSize--;
+
+        if (Exhausted) return; // don't fill the pool anymore if the player is exhausted.
+        if (!shuffledThisTurn) maxHandSize--;
+        shuffledThisTurn = true;
+
 
         while (discard.Count > 0)
         {
@@ -150,7 +163,7 @@ public abstract class PlayerClass : EntityClass
         hand.Remove(used);
         discard.Add(used);
         used.transform.position = new Vector3(500, 500, 1); // spirit the action away; Note: this works because if the action is readded to the deck, the RenderHand() method effectively spirits it back.
-        HighlightManager.Instance.RenderHandIfAppropriate(this);
+        new UpdateHand().Invoke();
     }
 
 
@@ -159,11 +172,12 @@ public abstract class PlayerClass : EntityClass
     {
         hand.Add(card.gameObject);
         discard.Remove(card.gameObject);
-        HighlightManager.Instance.RenderHandIfAppropriate(this);
+        new UpdateHand().Invoke();
     }
 
     public override void PerformSelection()
     {
+        shuffledThisTurn = false;
         DrawToMax();
         StartCoroutine(ResetPosition());
     }
@@ -180,6 +194,26 @@ public abstract class PlayerClass : EntityClass
         {
             DrawCard();
         }
+        
+        if (Exhausted && hand.Count < 1) {
+            AddStruggleToHand();
+        }
+    }
+
+    private void AddStruggleToHand() {
+        var strugglePrefab = new DefaultCard(this).Query();
+
+        if (!strugglePrefab) {
+            Debug.LogWarning(strugglePrefab + " could not be found");
+            return;
+        }
+            
+        ActionClass struggleCard = Instantiate(strugglePrefab);
+        struggleCard.Origin = this;
+        struggleCard.IsEvolved = false;
+
+        hand.Add(struggleCard.gameObject);
+        struggleCard.transform.position = new Vector3(-100, -100, 1);
     }
 
     public override IEnumerator MoveToPosition(Vector3 destination, float radius, float duration, Vector3? lookAtPosition = null)
@@ -195,4 +229,7 @@ public abstract class PlayerClass : EntityClass
         animator.speed = 1f;
     }
 
+    protected override void OnMouseEnter() {
+        if (new CurrentPlayer().Query() != this) base.OnMouseEnter();
+    }
 }

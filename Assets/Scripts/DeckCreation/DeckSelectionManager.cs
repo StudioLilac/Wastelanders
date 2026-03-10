@@ -1,14 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using static CardDatabase;
-using UnityEngine.SceneManagement;
 using System.Linq;
 using Systems.Persistence;
-using WeaponDeckSerialization;
-using UnityEditor;
-using System;
 using TMPro;
+using UnityEditor;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using WeaponDeckSerialization;
+using static CardDatabase;
+using static PlayerDatabase;
 
 public class DeckSelectionManager : MonoBehaviour
 {
@@ -20,25 +22,27 @@ public class DeckSelectionManager : MonoBehaviour
     [SerializeField] private PlayerDatabase playerDatabase;
     [SerializeField] private TMP_Text cardTitleTextField;
     [SerializeField] private TMP_Text cardDescriptorTextField;
+    [SerializeField] private TMP_Text chooseDecksTextField;
     [SerializeField] private Transform enemyEditParent;
     [SerializeField] private GameObject enemyEditButtonPrefab;
 
     [Serializable]
-    private struct CharacterSpritePair
+    private struct CharacterIndicatorData
     {
         public PlayerDatabase.PlayerName playerName;
         public Sprite sprite;
+        public string displayName;
     }
 
-    [SerializeField] private SpriteRenderer selectedCharacterIndicator;
-    [SerializeField] private CharacterSpritePair[] characterSpriteIndicators; // Used for the top right corner selected character indicater
+    [SerializeField] private Image selectedCharacterIndicator;
+    [SerializeField] private CharacterIndicatorData[] characterSpriteIndicators; // Used for the top right corner selected character indicater
 
     private PlayerDatabase.PlayerData playerData;
     private WeaponType weaponType;
+    private int currentPointsForWeapon;
     public WeaponAmount weaponText;
     public PointsAmount pointsText;
     public BuffExplainer buffExplainer;
-    private bool isFadingOut = false;
     public static DeckSelectionManager Instance { get; private set; }
 #nullable enable
     public delegate void PlayerActionDeckDelegate(int points);
@@ -130,27 +134,20 @@ public class DeckSelectionManager : MonoBehaviour
         }
         else if (DeckSelectionState == DeckSelectionState.CharacterSelection)
         {
-            // Save user Data here
-            StartCoroutine(ExitDeckSelection());
+            ExitDeckSelection();
         }
     }
 
     public void OnHomeButtonClicked()
     {
-        StartCoroutine(ExitDeckSelection());
+        ExitDeckSelection();
     }
 
-    private IEnumerator ExitDeckSelection()
+    private void ExitDeckSelection()
     {
-        if (!isFadingOut)
-        {
-            isFadingOut = true;
-            SaveLoadSystem.Instance.SaveGame();
-            //EditorUtility.SetDirty(playerDatabase); // For easily resetting the default weaponDeck of playerDatabase
-            yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInDarkScreen(0.6f));
-            GameStateManager.Instance.LoadScene(nextScene);
-            isFadingOut = false;
-        }
+        SaveLoadSystem.Instance.SaveGame();
+        //EditorUtility.SetDirty(playerDatabase); // For easily resetting the default weaponDeck of playerDatabase
+        GameStateManager.Instance.LoadScene(nextScene);
     }
     public void SetNextScene(string newScene)
     {
@@ -161,7 +158,9 @@ public class DeckSelectionManager : MonoBehaviour
     {
         playerData = playerDatabase.GetDataByPlayerName(playerName);
         DeckSelectionState = DeckSelectionState.WeaponSelection;
-        selectedCharacterIndicator.sprite = characterSpriteIndicators.First((s) => s.playerName == playerName).sprite;
+        var characterData = characterSpriteIndicators.First((s) => s.playerName == playerName);
+        selectedCharacterIndicator.sprite = characterData.sprite;
+        chooseDecksTextField.text = "Choose " + characterData.displayName + "'s Decks";
         selectedCharacterIndicator.gameObject.SetActive(true);
     }
 
@@ -201,8 +200,10 @@ public class DeckSelectionManager : MonoBehaviour
 
     private void OnUpdateDeck(WeaponProficiency weaponPointTuple)
     {
-        int availablePoints = weaponPointTuple.MaxPoints - weaponPointTuple.CurrentPoints;
-        pointsText.TextUpdate("Select Your Cards\nAvailable Points: <color=#FFD700>" + availablePoints.ToString() + "</color>");
+        currentPointsForWeapon = cardDatabase.GetPrefabInfoForDeck(playerData.GetPlayerWeaponDeck(weaponType).weaponDeck)
+            .Select(it => it.ActionClass.CostToAddToDeck).Sum();
+        int availablePoints = weaponPointTuple.MaxPoints - currentPointsForWeapon;
+        pointsText.TextUpdate("Available Points: <color=#FFD700>" + availablePoints.ToString() + "</color>");
 
         PlayerActionDeckModifiedEvent?.Invoke(availablePoints);
     }
@@ -215,7 +216,7 @@ public class DeckSelectionManager : MonoBehaviour
 
         if (!performChecks || DeckContainsCard(ac))
         {
-            weaponPointTuple.CurrentPoints -= ac.CostToAddToDeck;
+            currentPointsForWeapon -= ac.CostToAddToDeck;
             ac.SetSelectedForDeck(false);
             var actionFound = playerWeaponDeck.weaponDeck.FirstOrDefault(action => action.ActionClassName == ac.GetType().Name);
             playerWeaponDeck.weaponDeck.Remove(actionFound);
@@ -229,9 +230,9 @@ public class DeckSelectionManager : MonoBehaviour
         WeaponProficiency weaponPointTuple = playerData.GetProficiencyPointsTuple(weaponType);
 
         // Do we have sufficient points? If so, are we trying to add the evolved form? If so, is the evolution progress sufficient?
-        if ((!performChecks || weaponPointTuple.CurrentPoints + ac.CostToAddToDeck <= weaponPointTuple.MaxPoints) && (!ac.IsFlipped || (ac.IsFlipped && ac.CanEvolve())))
+        if ((!performChecks || currentPointsForWeapon + ac.CostToAddToDeck <= weaponPointTuple.MaxPoints) && (!ac.IsFlipped || (ac.IsFlipped && ac.CanEvolve())))
         {
-            weaponPointTuple.CurrentPoints += ac.CostToAddToDeck;
+            currentPointsForWeapon += ac.CostToAddToDeck;
             ac.SetSelectedForDeck(true);
             playerWeaponDeck.weaponDeck.Add(new(ac.GetType().Name, ac.IsFlipped && ac.CanEvolve()));
             OnUpdateDeck(weaponPointTuple);
@@ -285,6 +286,7 @@ public class DeckSelectionManager : MonoBehaviour
         characterSelectionUi.SetActive(false);
         weaponSelectionUi.SetActive(true);
         deckSelectionUi.SetActive(false);
+        UnrenderDecks();
         weaponText.TextUpdate(playerData.selectedWeapons.Count.ToString() + "/2 Selected");
         foreach (Transform child in weaponSelectionUi.transform)
         {
@@ -337,8 +339,6 @@ public class DeckSelectionManager : MonoBehaviour
     //Renders the weaponDeck corresponding to (@param weaponType)
     public void RenderDecks(WeaponEditInformation weaponEditInformation)
     {
-        UnrenderDecks();
-
         WeaponType weaponType = weaponEditInformation.WeaponType;
         List<ActionClass> chosenCardList = cardDatabase.ConvertStringsToCards(weaponType, playerData.GetDeckByWeaponType(weaponType).Select(p => p.ActionClassName).ToList());
         List<ActionClass> cardsToRender = weaponEditInformation.GetCards(cardDatabase);
@@ -358,7 +358,7 @@ public class DeckSelectionManager : MonoBehaviour
         //In order to sort, the cards must be instantiated and initialized first :pensive:
         foreach (ActionClass card in cardsToRender)
         {
-            GameObject go = Instantiate(card.gameObject, new Vector3(-100, -100, 1), Quaternion.identity);
+            GameObject go = Instantiate(card.gameObject, new Vector3(-100, -100, 1), Quaternion.identity, cardArrayParent.transform);
             instantiatedCards.Add(go);
             ActionClass ac = go.GetComponent<ActionClass>();
             ActionClass? pref = chosenCardList.FirstOrDefault(action => action.GetType() == card.GetType());
@@ -371,7 +371,7 @@ public class DeckSelectionManager : MonoBehaviour
         }
 
         SaveLoadSystem.Instance.LoadCardEvolutionProgress();
-        OnRenderDecks?.Invoke(cols, instantiatedCards.Select(card => card.GetComponent<ActionClass>()).OrderBy(card => card.GetComponent<ActionClass>().Speed).ToList());
+        OnRenderDecks?.Invoke(cols, instantiatedCards.Select(card => card.GetComponent<ActionClass>()).OrderBy(card => card.Speed).ToList());
     }
 
     private void UnrenderDecks()

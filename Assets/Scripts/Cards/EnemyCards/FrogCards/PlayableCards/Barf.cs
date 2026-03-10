@@ -16,7 +16,7 @@ public class Barf : FrogAttacks, IPlayablePrincessFrogCard
         CostToAddToDeck = 2;
 
         myName = "Barf";
-        description = "On kill, gain 2 Resonate.";
+        description = "On kill, gain 2 Resonance.";
         frogAttackAnimationName = PRINCESS_FROG_ATTACK_NAME;
     }
 

@@ -34,6 +34,7 @@ namespace Managers {
 
             this.Subscribe<DisplayableHoveredEvent>(HandleOnHovered);
             this.Subscribe<DisplayableUnhoveredEvent>(HandleOnUnhovered);
+            this.Subscribe<BattleQueueIconClick>(HandleOnUnhovered);
         }
 
         private void HandleOnHovered(DisplayableHoveredEvent evt) {
@@ -42,9 +43,9 @@ namespace Managers {
             DrawArrow(ac.Origin.transform, ac.Target.transform, isClashing);
         }
 
-        private void HandleOnUnhovered(DisplayableUnhoveredEvent evt) {
-            ClearArrow();
-        }
+        private void HandleOnUnhovered(BattleQueueIconClick evt) => ClearArrow();
+
+        private void HandleOnUnhovered(DisplayableUnhoveredEvent evt) => ClearArrow();
 
         GameObject CreateChevron() {
             GameObject chevron = Instantiate(chevronPrefab, worldSpaceCanvas.transform);

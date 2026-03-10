@@ -62,6 +62,12 @@ public abstract class FadeHandlerBase : MonoBehaviour
         float clampedTargetAlpha = Mathf.Clamp01(targetAlpha);
         float effectiveDuration = Mathf.Max(duration, 0f);
 
+        if (!isActiveAndEnabled)
+        {
+            SetAlpha(clampedTargetAlpha);
+            return;
+        }
+
         StopCurrentFadeAnimation();
         _animationCoroutine = StartCoroutine(AnimateFade(CurrentAlpha, clampedTargetAlpha, effectiveDuration));
     }

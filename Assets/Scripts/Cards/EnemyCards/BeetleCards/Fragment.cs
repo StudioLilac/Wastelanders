@@ -19,7 +19,7 @@ public class Fragment : ActionClass, IPlayableQueenCard
         
         Speed = 5;
 
-        description = "If this attack hits an opponent, gain +1 resonate";
+        description = "If this attack hits an opponent, gain +1 resonance.";
 
         myName = "Fragment";
         CardType = CardType.RangedAttack;
@@ -49,7 +49,7 @@ public class Fragment : ActionClass, IPlayableQueenCard
 
     private void OnProjectileHit()
     {
-        AudioManager.Instance.PlaySFX(FRAGMENT_SOUND_EFFECT_NAME);
+        AudioManager.Instance.PlaySFX(SoundID.CB_queen_hit);
         base.OnHit();
     }
 }

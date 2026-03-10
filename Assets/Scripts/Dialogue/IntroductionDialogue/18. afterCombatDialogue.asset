@@ -25,7 +25,7 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: Alright, thanks for the spar Ives, I'll see you soon.
+  - bodyText: Alright, thanks for the help Ives, I'll see you soon.
     speakerName: Jackie
     displayingImage: {fileID: 21300000, guid: 422f3cda08073664b8a46361afe442fb, type: 3}
     sfx: 

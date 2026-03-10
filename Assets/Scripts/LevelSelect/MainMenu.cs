@@ -8,10 +8,12 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour {
     [SerializeField] private GameObject wastelandersText;
+    [SerializeField] private TextMeshProUGUI versionText;
+    [SerializeField] private TextMeshProUGUI statusText;
 
     [SerializeField] private Button quitButton;
     [SerializeField] private GameObject bountyButton;
-    
+
     public void QuitGame()
     {
 #if UNITY_EDITOR
@@ -30,12 +32,32 @@ public class MainMenu : MonoBehaviour {
 #if UNITY_WEBGL
         quitButton.gameObject.SetActive(false);
 #endif
-        bountyButton.SetActive(GameStateManager.Instance.CurrentLevelProgress >= BountyInformation.PRINCESS_FROG_BOUNTY.LevelID);
+        // bountyButton.SetActive(GameStateManager.Instance.CurrentLevelProgress >= BountyInformation.PRINCESS_FROG_BOUNTY.LevelID);
+        bountyButton.SetActive(false); // Locks this button until part 2 is ready.
+        versionText.text = $"v{Application.version}";
+        UpdateStatusUI();
+    }
+
+    private void UpdateStatusUI()
+    {
+        var currentSaveStatus = new GetSaveSystemStatus().Query();
+        switch (currentSaveStatus)
+        {
+            case SaveStatus.Ok:
+                statusText.text = "";
+                break;
+            case SaveStatus.Error error:
+                statusText.text = $"Current Status: {error.Message}. Restart Required.";
+                statusText.color = Color.red;
+                break;
+        }
     }
 
 
-    private readonly float cycleScaling = 2f; // Higher the number, the faster one phase is 
-    private readonly float bobbingAmount = 0.1f; //Amplitude
+    [SerializeField]
+    private float cycleScaling = 2f; // Higher the number, the faster one phase is 
+    [SerializeField]
+    private float bobbingAmount = 500f; //Amplitude
     private float timer = 0;
     private float verticalOffset = 0;
 

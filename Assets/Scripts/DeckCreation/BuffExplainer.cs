@@ -39,11 +39,11 @@ public class BuffExplainer : MonoBehaviour
         [field: SerializeField] public string ExplanationTitle { get; private set; } = "";
         [field: SerializeField] public string ExplanationText { get; private set; } = "";
 
-        public static readonly WeaponExplanation STAFF_EXPLANATION = new(weaponType: WeaponType.STAFF, explanationTitle: "FLOW", explanationText: "The next attack gains +1 to its upper and lower bounds for each stack of flow. Then consume all flow.");
-        public static readonly WeaponExplanation PISTOL_EXPLANATION = new(weaponType: WeaponType.PISTOL, explanationTitle: "ACCURACY", explanationText: "Lower bound of power increases by 1 per stack. On taking damage, stacks are halved (rounded down).");
-        public static readonly WeaponExplanation AXE_EXPLANATION = new(weaponType: WeaponType.AXE, explanationTitle: "WOUND", explanationText: "Damage taken increases by 1 per stack. Stacks are halved after each round (rounded down).");
+        public static readonly WeaponExplanation STAFF_EXPLANATION = new(weaponType: WeaponType.STAFF, explanationTitle: Flow.buffName.ToUpper(), explanationText: "The next Action's Power gains +1 to its upper and lower bound for every stack of Flow. Then consume all Flow.");
+        public static readonly WeaponExplanation PISTOL_EXPLANATION = new(weaponType: WeaponType.PISTOL, explanationTitle: Accuracy.buffName.ToUpper(), explanationText: "Lower bound of an Action's Power increases by 1 per stack. On taking damage, stacks are halved (rounded down).");
+        public static readonly WeaponExplanation AXE_EXPLANATION = new(weaponType: WeaponType.AXE, explanationTitle: Wound.buffName.ToUpper(), explanationText: "Damage taken by an Action increases by 1 per stack. Stacks are halved after each round (rounded down).");
         public static readonly WeaponExplanation FIST_EXPLANATION = new(weaponType: WeaponType.FIST, explanationTitle: "FIST", explanationText: "Makes several small but impactful attacks.");
-        public static readonly WeaponExplanation RESONATE_EXPLANATION = new(weaponType: WeaponType.ENEMY, explanationTitle: "RESONATE", explanationText: "Upper bound of power increases by 1 per stack.");
+        public static readonly WeaponExplanation RESONATE_EXPLANATION = new(weaponType: WeaponType.ENEMY, explanationTitle: Resonate.buffName.ToUpper(), explanationText: "Upper bound of an Action's power increases by 1 per stack.");
         public static readonly List<WeaponExplanation> Values = new() { STAFF_EXPLANATION, PISTOL_EXPLANATION, AXE_EXPLANATION, FIST_EXPLANATION, RESONATE_EXPLANATION };
         WeaponExplanation(WeaponType weaponType, string explanationTitle, string explanationText)
         {

@@ -1,0 +1,145 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4fafe43b89343e3a7ba1235e8987c0f, type: 3}
+  m_Name: 18 EndOfTutorial
+  m_EditorClassIdentifier: 
+  Entries:
+  - content: 'Good hittin''. Could hardly tell you were the same gal as last year. '
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 1207052918024306901
+    - rid: 1207052918024306903
+    - rid: 1207052918024306904
+    - rid: 1207052918024306905
+  - content: 'Well, I learned from the best after all. '
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 1207052918024306902
+    - rid: 1207052918024306906
+    - rid: 1207052918024306907
+    - rid: 1207052918024306908
+  - content: Thanks Ives, I feel much better about the exam now.
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 1207052918024306909
+  - content: All NITES candidates, please make your way to the armory and gear up.
+      The NITES exam will begin shortly.
+    speaker: {fileID: 11400000, guid: 474297f421f8c524e85a2e1640557075, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  - content: "That\u2019s all the time we\u2019ve got then. "
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 1207053248668106814
+  - content: Alright, thanks for the help Ives, I'll see you soon.
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  - content: "See you out on the field, Jackie. You\u2019ve got this."
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 1207052918024306910
+    - rid: 1207053248668106815
+  - content: 
+    speaker: {fileID: 11400000, guid: 4fef3aeb65460fd498ab9efe9bac8625, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 1207052918024306911
+  references:
+    version: 2
+    RefIds:
+    - rid: 1207052918024306901
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+        sprite: {fileID: 21300000, guid: 85e302f93093f564290df1bd57119113, type: 3}
+    - rid: 1207052918024306902
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        sprite: {fileID: 21300000, guid: 534aff9f6dfd6c544b0144954e8ef0b0, type: 3}
+    - rid: 1207052918024306903
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+        action: 50
+        duration: 0
+    - rid: 1207052918024306904
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+        action: 30
+        duration: 1
+    - rid: 1207052918024306905
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+        action: 60
+        duration: 0
+    - rid: 1207052918024306906
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        action: 40
+        duration: 0
+    - rid: 1207052918024306907
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        action: 10
+        duration: 1
+    - rid: 1207052918024306908
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        action: 60
+        duration: 0
+    - rid: 1207052918024306909
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        sprite: {fileID: 21300000, guid: 422f3cda08073664b8a46361afe442fb, type: 3}
+    - rid: 1207052918024306910
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        action: 50
+        duration: 2
+    - rid: 1207052918024306911
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+        action: 70
+        duration: 1
+    - rid: 1207053248668106814
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+        sprite: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    - rid: 1207053248668106815
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+        sprite: {fileID: 21300000, guid: 85e302f93093f564290df1bd57119113, type: 3}

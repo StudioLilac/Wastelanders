@@ -18,6 +18,30 @@ public class PlayerDatabase : ScriptableObject, IBind<PlayerInformation>
 
     public SerializableGuid Id { get; set; }
 
+    private void OnEnable()
+    {
+        CardDatabase.OnInvalidCardFound += HandleInvalidCardDetected;
+    }
+
+    private void OnDisable()
+    {
+        CardDatabase.OnInvalidCardFound -= HandleInvalidCardDetected;
+    }
+
+    private void HandleInvalidCardDetected(SerializableActionClassInfo invalidTuple)
+    {
+        string badCardName = invalidTuple.ActionClassName;
+        Debug.LogWarning($"[PlayerDatabase] Received cleanup request for: {badCardName}. Scrubbing data...");
+
+        int removedJackie = JackieData.PurgeCardByName(badCardName);
+        int removedIves = IvesData.PurgeCardByName(badCardName);
+
+        if (removedJackie + removedIves > 0)
+        {
+            Debug.Log($"[PlayerDatabase] Cleanup Complete. Removed {removedJackie + removedIves} instances of '{badCardName}' to prevent crashes.");
+        }
+    }
+
     public PlayerData GetDataByPlayerName(PlayerName player)
     {
         return player switch
@@ -51,11 +75,11 @@ public class PlayerDatabase : ScriptableObject, IBind<PlayerInformation>
             (
             name: typeof(Jackie).Name,
             playerWeaponProficiency: new() {
-                new WeaponProficiency(WeaponType.PISTOL, 12, 12),
-                new WeaponProficiency(WeaponType.STAFF, 12, 12),
-                new WeaponProficiency(WeaponType.AXE, 0, 10),
-                new WeaponProficiency(WeaponType.FIST, 0, 10),
-                new WeaponProficiency(WeaponType.ENEMY, 0, 10)
+                new WeaponProficiency(WeaponType.PISTOL,  12),
+                new WeaponProficiency(WeaponType.STAFF,  12),
+                new WeaponProficiency(WeaponType.AXE, 10),
+                new WeaponProficiency(WeaponType.FIST, 10),
+                new WeaponProficiency(WeaponType.ENEMY, 10)
             },
             selectedWeapons: new() { WeaponType.STAFF, WeaponType.PISTOL },
             playerDeck: new()
@@ -86,11 +110,11 @@ public class PlayerDatabase : ScriptableObject, IBind<PlayerInformation>
         public static readonly PlayerData IVES_DEFAULT = new(
             name: typeof(Ives).Name,
             playerWeaponProficiency: new() {
-                new WeaponProficiency(WeaponType.PISTOL, 0, 10),
-                new WeaponProficiency(WeaponType.STAFF, 0, 10),
-                new WeaponProficiency(WeaponType.AXE, 12, 12),
-                new WeaponProficiency(WeaponType.FIST, 12, 12),
-                new WeaponProficiency(WeaponType.ENEMY, 0, 10)
+                new WeaponProficiency(WeaponType.PISTOL, 10),
+                new WeaponProficiency(WeaponType.STAFF, 10),
+                new WeaponProficiency(WeaponType.AXE, 12),
+                new WeaponProficiency(WeaponType.FIST,  12),
+                new WeaponProficiency(WeaponType.ENEMY,  10)
             },
             selectedWeapons: new() { WeaponType.AXE, WeaponType.FIST },
             playerDeck: new()
@@ -100,7 +124,7 @@ public class PlayerDatabase : ScriptableObject, IBind<PlayerInformation>
                     WeaponType.AXE,
                     new() 
                     { 
-                        new(typeof(Execute).Name), new(typeof(SharpenedDefence).Name),
+                        new(typeof(Execute).Name), new(typeof(RazorGuard).Name),
                         new(typeof(Cleave).Name), new(typeof(Decimate).Name),
                         new(typeof(Mutilate).Name), new(typeof(Whirl).Name)
                     }
@@ -149,7 +173,7 @@ public class PlayerDatabase : ScriptableObject, IBind<PlayerInformation>
             var proficiencyPointsTuple = playerWeaponProficiency.FirstOrDefault(entry => entry.WeaponType == weaponType);
             if (proficiencyPointsTuple == null)
             {
-                proficiencyPointsTuple = new WeaponProficiency(weaponType, 0, 0);
+                proficiencyPointsTuple = new WeaponProficiency(weaponType, 0);
                 playerWeaponProficiency.Add(proficiencyPointsTuple);
             }
             return proficiencyPointsTuple;
@@ -179,11 +203,24 @@ public class PlayerDatabase : ScriptableObject, IBind<PlayerInformation>
             {
                 if (entry.weapon == weaponType)
                 {
-                    return entry.weaponDeck;
+                    return new(entry.weaponDeck);
                 }
             }
 
             return new List<SerializableActionClassInfo>();
+        }
+
+        public int PurgeCardByName(string targetCardName)
+        {
+            int totalRemoved = 0;
+
+            foreach (var weaponEntry in playerDeck)
+            {
+                int count = weaponEntry.weaponDeck.RemoveAll(card => card.ActionClassName == targetCardName);
+                totalRemoved += count;
+            }
+
+            return totalRemoved;
         }
     }
 

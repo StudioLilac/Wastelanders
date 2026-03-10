@@ -15,7 +15,13 @@ MonoBehaviour:
   dialogue:
   - bodyText: A word of advice.
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
+    sfx: 
+    broadcastAnEvent: 0
+  - bodyText: 'You can tell roughly how well a card will clash by looking at the
+      colour of the clash icon. '
+    speakerName: Ives
+    displayingImage: {fileID: -1904840248, guid: df302ada84288344a89677c5b17a3c72, type: 3}
     sfx: 
     broadcastAnEvent: 0
   - bodyText: Although winning Clashes can turn a fight in your favor... knowing

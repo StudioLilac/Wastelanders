@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Steamworks;
 using UnityEngine;
 
@@ -22,23 +23,23 @@ namespace DialogueScripts
     {
         [SerializeField] [TextArea(1, 5)] private string content = null!;
         [SerializeField] internal ActorProfile speaker = null!;
-        [SerializeField] private string sfxName = null!;
+        [SerializeField] private SoundID sfxId = default!;
         [SerializeField] private Sprite picture = null!;
         [SerializeReference] internal List<DialogueEvents> events = null!;
 
         public DialogueEntry Into() => new(
             content: content,
             speaker: speaker,
-            sfxName: sfxName,
+            sfxId: sfxId,
             picture: picture,
             events: events
         );
     }
 
     public record DialogueEntry(
-        string? content,
+        string content,
         ActorProfile? speaker,
-        string? sfxName,
+        SoundID sfxId,
         Sprite? picture,
         List<DialogueEvents> events
         );
@@ -48,6 +49,11 @@ namespace DialogueScripts
         public static DialogueEntry[] Into(this DialogueEntryInUnityEditor[] entries)
         {
             return Array.ConvertAll(entries, e => e.Into());
+        }
+
+        public static DialogueEntry[] Into(this List<DialogueText> wrapper)
+        {
+            return wrapper.Select(w => w.Into()).ToArray();
         }
     }
 }

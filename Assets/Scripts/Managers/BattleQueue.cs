@@ -1,14 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using UI_Toolkit;
+using UI_Toolkit.UI_Elements;
 using UnityEngine;
+using static BattleQueue;
+
+public record CardInserted(ActionClass ActionClass) : IEvent;
+public record OnQueueChanged(List<ActionWrapper> Items) : IEvent;
+public record DequeueEvent(ActionWrapper Wrapper): IEvent;
 
 public class BattleQueue : MonoBehaviour
 {
     public static BattleQueue BattleQueueInstance; 
     private SortedArray actionQueue = new SortedArray();
-    public RectTransform bqContainer;
-    public GameObject iconPrefab;
-    public GameObject clashingPrefab;
 
 #nullable enable
 
@@ -22,13 +27,20 @@ public class BattleQueue : MonoBehaviour
         {
             Destroy(this); 
         }
+        this.Subscribe<BattleBegin>(BeginDequeue);
+        this.Subscribe<BattleQueueIconClick>(DeletePlayerAction);
     }
 
     public void AddAction(ActionClass action)
     {
         action.OnQueue();
         actionQueue.Insert(action);
-        RenderBQ();
+        new CardInserted(action).Invoke();
+    }
+
+    public void RemoveActionWrapperFromQueue(ActionWrapper wrapper)
+    {
+        actionQueue.Remove(wrapper);
     }
 
     public void OnEnable()
@@ -49,18 +61,30 @@ public class BattleQueue : MonoBehaviour
     }
 
     // Retrieves the deletedCard from the action queue and gives it back to the player who played it.
-    public void DeletePlayerAction(ActionClass deletedCard)
+    private void DeletePlayerAction(BattleQueueIconClick ev)
     {
-        deletedCard.OnRetrieveFromQueue();
-        actionQueue.RemoveWrapperWithActionClass(deletedCard);
-        RenderBQ();
-        PlayerClass player = (PlayerClass) deletedCard.Origin;
-        player.ReaddCard(deletedCard);
+        ActionClass? deletedCard = ev.Icon.ActionClass;
+        if (deletedCard is not null && deletedCard.IsPlayedByPlayer())
+        {
+            deletedCard.OnRetrieveFromQueue();
+            actionQueue.RemoveWrapperWithActionClass(deletedCard);
+            PlayerClass player = (PlayerClass)deletedCard.Origin;
+            player.ReaddCard(deletedCard);
+        }
     }
 
-    public bool CanInsertPlayerCard(ActionClass actionClass)
+
+    // Checks whether action class is a valid card to insert into the battle queue.
+    public PopupType ValidatePlayerInsertion(ActionClass actionClass)
     {
-        return actionQueue.IsUniqueSpeed(actionClass);
+        ActionWrapper? clashingWrapper = actionQueue.IsUniqueSpeed(actionClass);
+
+        if (clashingWrapper != null)
+        {
+            return new PopupType.SpeedConflict(clashingWrapper.BattleIcon);
+        }
+
+        return new PopupType.None();
     }
 
     //Remove all cards with (@param entity) as the target and origin
@@ -69,39 +93,9 @@ public class BattleQueue : MonoBehaviour
         actionQueue.RemoveAllInstancesOfEntity(entity);
     }
 
-    /*  Renders the cards in List<GameObject> bq to the screen, as children of the bqContainer.
-    */
-    private void RenderBQ()
-    {
-        List<ActionWrapper> queue = actionQueue.GetList();
-
-        foreach (Transform child in bqContainer.transform)
-        {
-            Destroy(child.gameObject);
-        }
-
-        for (int i = 0; i < queue.Count; i++)
-        {
-            ActionWrapper battlingWrapper = queue[i];
-
-            if (battlingWrapper.IsClashing())
-            {
-                GameObject clashingRenderedCopy = Instantiate(clashingPrefab, new Vector3(100, 100, -10), Quaternion.identity);
-                ActionClass leftClashItem = battlingWrapper.PlayerAction!;
-                ActionClass rightClashItem = battlingWrapper.EnemyAction!;
-                clashingRenderedCopy.GetComponent<ClashingBattleQueueIcon>().renderClashingIcons(leftClashItem, rightClashItem);
-                clashingRenderedCopy.transform.SetParent(bqContainer, false);
-            } else
-            {
-                GameObject renderedCopy = Instantiate(iconPrefab, new Vector3(100, 100, -10), Quaternion.identity);
-                renderedCopy.transform.SetParent(bqContainer, false);
-                renderedCopy.GetComponent<BattleQueueIcons>().RenderBQIcon(battlingWrapper.GetTheOnlyExistingAction());
-            }
-        }
-    }
 
     //Gives BattleQueue ownership of the lifetime of the Dequeue coroutine.
-    public void BeginDequeue()
+    private void BeginDequeue(BattleBegin bg)
     {
         StartCoroutine(Dequeue());
     }
@@ -111,22 +105,23 @@ public class BattleQueue : MonoBehaviour
     private IEnumerator Dequeue()
     {
         List<ActionWrapper> array = actionQueue.GetList();
-        if (!(array.Count == 0))
+        if (array.Count != 0)
         {
             CombatManager.Instance.GameState = GameState.FIGHTING;
         }
-        while (!(array.Count == 0))
+        while (array.Count != 0)
         {
             ActionWrapper actionWrapper = array[0];
+            actionWrapper.BattleIcon?.Emphasize();
+            new DequeueEvent(actionWrapper).Invoke();
+
             if (actionWrapper.IsClashing())
             {
-                yield return StartCoroutine(CardComparator.Instance.ClashCards(actionWrapper.PlayerAction!, actionWrapper.EnemyAction!));
+                yield return StartCoroutine(CardComparator.Instance.ClashCards(actionWrapper));
             } else
             {
-                yield return StartCoroutine(CardComparator.Instance.OneSidedAttack(actionWrapper.GetTheOnlyExistingAction()));
+                yield return StartCoroutine(CardComparator.Instance.OneSidedAttack(actionWrapper));
             }
-            array.Remove(actionWrapper); // this utilises the default method for lists 
-            RenderBQ();
         }
         if (CombatManager.Instance.GameState == GameState.FIGHTING)
         {
@@ -162,15 +157,27 @@ public class BattleQueue : MonoBehaviour
         public void Clear()
         {
             array.Clear();
+            new OnQueueChanged(new(array)).Invoke();
         }
+
+        //Returns the wrapper inserted
         public void Insert(ActionClass actionCard)
         {
             ActionWrapper insertingWrapper = CreateClashingWrapper(actionCard);
-            array.Insert(LocationToInsertWrapper(insertingWrapper), insertingWrapper);
+            int location = LocationToInsertWrapper(insertingWrapper);
+            array.Insert(location, insertingWrapper);
+            new OnQueueChanged(new(array)).Invoke();
         }
 
-        // Returns false if the player cannot insert a card into the queue due to duplicate speed.
-        public bool IsUniqueSpeed(ActionClass actionCard)
+        public void Remove(ActionWrapper wrapper)
+        {
+            array.Remove(wrapper);
+            new OnQueueChanged(new(array)).Invoke();
+        }
+
+
+        // Returns the ActionWrapper covering the speed if the player cannot insert a card into the queue due to duplicate speed. Otherwise, returns null.
+        public ActionWrapper? IsUniqueSpeed(ActionClass actionCard)
         {
             foreach (ActionWrapper existingWrapper in array)
             {
@@ -178,10 +185,10 @@ public class BattleQueue : MonoBehaviour
                     existingWrapper.PlayerAction!.Origin is PlayerClass &&  // Restrict overlap to only apply to players, otherwise spawnables suck.
                     actionCard.Speed == existingWrapper.PlayerAction!.Speed)
                 {
-                    return false;
+                    return existingWrapper;
                 }
             }
-            return true;
+            return null;
         }
 
         //Searches for the first Empty Wrapper that can clash with (@param actionCard), making a new one if none exists
@@ -189,13 +196,16 @@ public class BattleQueue : MonoBehaviour
         //Modifies: (@field array) as it will remove the existing wrapper from that array
         private ActionWrapper CreateClashingWrapper(ActionClass actionCard)
         {
-            foreach (ActionWrapper existingWrapper in array)
+            if (actionCard.Clashable)
             {
-                if (existingWrapper.CanClashWithAction(actionCard))
+                foreach (ActionWrapper existingWrapper in array)
                 {
-                    existingWrapper.SetClashingAction(actionCard);
-                    array.Remove(existingWrapper);
-                    return existingWrapper;
+                    if (existingWrapper.CanClashWithAction(actionCard))
+                    {
+                        existingWrapper.SetClashingAction(actionCard);
+                        Remove(existingWrapper);
+                        return existingWrapper;
+                    }
                 }
             }
 
@@ -211,7 +221,7 @@ public class BattleQueue : MonoBehaviour
                 if ((existingWrapper.HasPlayerAction() && (existingWrapper.PlayerAction!.Origin == entity || existingWrapper.PlayerAction!.Target == entity)) || 
                     (existingWrapper.HasEnemyAction() && (existingWrapper.EnemyAction!.Target == entity || existingWrapper.EnemyAction!.Origin == entity)))
                 {
-                    array.RemoveAt(i);
+                    Remove(existingWrapper);
                 }
             }
         }
@@ -224,7 +234,7 @@ public class BattleQueue : MonoBehaviour
             {
                 if (existingWrapper.PlayerAction == removedCard || existingWrapper.EnemyAction == removedCard)
                 {
-                    array.Remove(existingWrapper);
+                    Remove(existingWrapper);
                     if (existingWrapper.IsClashing())
                     {
                         // Restores the targetting of the enemy card if the card was retrieved by the player
@@ -288,13 +298,15 @@ public class BattleQueue : MonoBehaviour
             return array;
         }
     }
+    
 
-    internal class ActionWrapper
+    public class ActionWrapper
     {
         public ActionClass? PlayerAction { get; private set; } 
         public ActionClass? EnemyAction { get; private set; }
         // Only non null when this wrapper is clashing. Represents the original enemy's target that may have been redirected by the player.
         public EntityClass? OriginalEnemysTarget { get; private set; }
+        public IBattleQueueDisplayable? BattleIcon { get; set; }
 
 
         public int ClashingSpeed
@@ -306,6 +318,7 @@ public class BattleQueue : MonoBehaviour
                 return Mathf.Max(playerSpeed, enemySpeed);
             }
         }
+
 
         //ActionWrapper can only be instantiated with one ActionClass 
         public ActionWrapper(ActionClass insertedAction)
@@ -324,6 +337,8 @@ public class BattleQueue : MonoBehaviour
         {
             if (IsClashing()) return false;
 
+            if ((PlayerAction && !PlayerAction.Clashable) || (EnemyAction && !EnemyAction.Clashable)) return false;
+
             // If the PlayerAction's speed is greater than the enemy Action's speed it can redirect the enemy's attack and clash. Enemies cannot redirect player attacks. 
             bool playerWrapperClashesWithEnemyAction = PlayerAction != null && (PlayerAction.Origin == clashingAction.Target || PlayerAction.Speed >= clashingAction.Speed) && PlayerAction.Target == clashingAction.Origin;
             bool enemyWrapperClashesWithPlayerAction = EnemyAction != null && EnemyAction.Origin == clashingAction.Target && (EnemyAction.Target == clashingAction.Origin || clashingAction.Speed >= EnemyAction.Speed);
@@ -337,9 +352,10 @@ public class BattleQueue : MonoBehaviour
             }
         }
 
-        // Modifies: this to become a clashing wrapper.
-        // Requires: That (@param clashingAction) can clash with an Action within this wrapper (Call ClashesWithAction first)
-        public void SetClashingAction(ActionClass clashingAction)
+
+    // Modifies: this to become a clashing wrapper.
+    // Requires: That (@param clashingAction) can clash with an Action within this wrapper (Call ClashesWithAction first)
+    public void SetClashingAction(ActionClass clashingAction)
         {
             if (!CanClashWithAction(clashingAction))
             {

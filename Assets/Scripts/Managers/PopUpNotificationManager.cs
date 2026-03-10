@@ -1,7 +1,7 @@
 
 using UnityEngine;
 
-
+public record DisplayWarning(PopupType PopupType): IEvent;
 public class PopUpNotificationManager : MonoBehaviour
 {
     public static PopUpNotificationManager Instance { get; private set; }
@@ -22,19 +22,25 @@ public class PopUpNotificationManager : MonoBehaviour
         }
 
         canvas.sortingOrder = UISortOrder.WarningPopup.GetOrder();
+        this.Subscribe<DisplayWarning>(ev => DisplayWarning(ev.PopupType));
     }
 
     public void DisplayWarning(PopupType popupType)
     {
+        string HandleConflict(PopupType.SpeedConflict data)
+        {
+            data.DuplicatedItem.ShakePlayerAction();
+            return "Same Speed Selected!";
+        }
+
         string message = popupType switch
         {
-            PopupType.SameSpeed => "Same Speed Selected!",
-            PopupType.EnemyKilled => "Enemy Killed!",
-            PopupType.DeckReshuffled => "Deck Reshuffled!",
+            PopupType.SpeedConflict data => HandleConflict(data),
             PopupType.SelectActionFirst => "Select an Action first!",
             PopupType.SelectPlayerFirst => "Select a Player first!",
             PopupType.InsufficientResources => "Insufficient resources!",
             PopupType.ContentLocked => "Content Locked!",
+            PopupType.CustomPopup data => data.Content,
             _ => string.Empty
         };
 

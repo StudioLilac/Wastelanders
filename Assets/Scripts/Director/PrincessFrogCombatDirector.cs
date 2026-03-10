@@ -22,6 +22,7 @@ namespace Director
         {
             CombatManager.PlayersWinEvent -= PlayersWin;
             CombatManager.EnemiesWinEvent -= EnemiesWin;
+            new ClearBounty().Invoke();
         }
 
         private IEnumerator OnStart()

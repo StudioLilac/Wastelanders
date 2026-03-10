@@ -16,55 +16,42 @@ MonoBehaviour:
   - bodyText: Combat works the same as before, but now the enemy has more than one
       target.
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
-    sfx: 
+    displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
     broadcastAnEvent: 0
   - bodyText: "You can redirect an enemy\u2019s attack to yourself by clashing with
-      it"
+      it."
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
-    sfx: 
+    displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
     broadcastAnEvent: 0
   - bodyText: But <i>only if</i> your Action is faster than theirs.
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
-    sfx: 
+    displayingImage: {fileID: 21300000, guid: b1411cc1e1231574797f223a58264863, type: 3}
     broadcastAnEvent: 0
-  - bodyText: If no Clash forms, your Action was too slow to pull the attack toward
-      you.
+  - bodyText: If no Clash forms, your Action was too slow to redirect the attack
+      towards you.
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
-    sfx: 
+    displayingImage: {fileID: -2991674613422419996, guid: 1e6cf2fca7138174e8f34bd44807fdc0, type: 3}
     broadcastAnEvent: 0
   - bodyText: 'But that <i>could</i> allow you to get an unopposed attack in. Guaranteeing
       that it hits. '
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
-    sfx: 
+    displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
     broadcastAnEvent: 0
   - bodyText: "And remember, we still can\u2019t play Actions with overlapping Speeds."
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
-    sfx: 
+    displayingImage: {fileID: 21300000, guid: b1411cc1e1231574797f223a58264863, type: 3}
     broadcastAnEvent: 0
   - bodyText: "In a crowded fight, stepping into each other\u2019s timing can be
       fatal."
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
-    sfx: 
+    displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
     broadcastAnEvent: 0
-  - bodyText: "But once you get the hang of it, we can cover each other\u2019s weaknesses."
+  - bodyText: 'But once you get the hang of it, we can make openings more effectively
+      than fighting alone. '
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
-    sfx: 
-    broadcastAnEvent: 0
-  - bodyText: 'And make openings more effectively than fighting alone. '
-    speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
-    sfx: 
+    displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
     broadcastAnEvent: 0
   - bodyText: "Alright Jackie, let\u2019s crush these bugs!"
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
-    sfx: 
+    displayingImage: {fileID: 21300000, guid: 8dca0cf7dcae9ae4c831743a3edfdbbc, type: 3}
     broadcastAnEvent: 0

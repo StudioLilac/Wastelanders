@@ -1,44 +1,65 @@
 
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 namespace Steamworks {
+
+    public record OnFinishSparring() : IEvent;
+    public record OnPlayerHit(int Damage) : IEvent;
 
     public class AchievementManager : PersistentSingleton<AchievementManager> {
 #if STEAMWORKS_NET
         private int enemiesKilled = 0;
 
+        // boolean flag to track whether one player has died in the current combat.
+        // reset whenever a scene changes.
+        private bool onePlayerDead = false;
+
         protected override void Awake() {
-            base.Awake(); // Handles singleton instance + DontDestroyOnLoad
+            base.Awake();
 
             if (!SteamManager.Initialized) return;
 
-            // Load current kill count from Steam stats on start
             SteamUserStats.GetStat("KILL_COUNT", out enemiesKilled);
-            Debug.Log($"[AchievementManager] Loaded KILL_COUNT = {enemiesKilled}");
 
-            // In case player already reached milestones before starting the game, sync achievements
             CheckKillAchievements();
+            
+            this.Subscribe<PlayersWin>(OnPlayersWin);
+            this.Subscribe<OnPlayerHit>(HandlePlayerHitCritical);
+            this.Subscribe<OnFinishSparring>(HandlePlayerFinishedSparring);
+            this.Subscribe<OnBuffsUpdatedEvent>(HandleOnBuffsUpdated);
         }
 
         private void OnEnable() {
             EntityClass.OnEntityDeath += HandleEntityDeath;
+            SceneManager.activeSceneChanged += OnSceneChanged;
         }
 
         private void OnDisable() {
             EntityClass.OnEntityDeath -= HandleEntityDeath;
+            SceneManager.activeSceneChanged -= OnSceneChanged;
         }
 
         private void HandleEntityDeath(EntityClass entity) {
             if (entity is EnemyClass) {
-                enemiesKilled++;
-                Debug.Log($"[AchievementManager] Enemy killed! Total kills: {enemiesKilled}");
+                // blacklist certain types of enemies here.
+                if (entity is TrainingDummy) {
+                    return;
+                }
 
-                // Update the persistent kill count stat on Steam
+                if (entity is QueenBeetle) {
+                    SteamManager.UnlockAchievement("DEFEAT_QUEEN");
+                }
+                enemiesKilled++;
+
                 SteamManager.UpdateStat("KILL_COUNT", enemiesKilled);
 
-                // Check if any achievements should be unlocked based on new kill count
                 CheckKillAchievements();
+            } else if (entity is PlayerClass) {
+                onePlayerDead = true;
             }
         }
 
@@ -51,9 +72,39 @@ namespace Steamworks {
                 SteamManager.UnlockAchievement("WARMING_UP");
             }
 
-            // Add more milestones here
-            // if (enemiesKilled >= 10) SteamManager.UnlockAchievement("HUNTER");
+            if (enemiesKilled >= 15) {
+                SteamManager.UnlockAchievement("KILLING_SPREE");
+            }
         }
+
+        private void HandlePlayerHitCritical(OnPlayerHit playerHitEvent) {
+            if (playerHitEvent.Damage >= 10) {
+                SteamManager.UnlockAchievement("CRITICAL");
+            }
+        }
+        
+        private void HandlePlayerFinishedSparring(OnFinishSparring sparringEvent) {
+            SteamManager.UnlockAchievement("DEFEAT_IVES");
+        }
+
+        private void OnSceneChanged(Scene arg0, Scene arg1) {
+            onePlayerDead = false;
+        }
+
+        private void OnPlayersWin(PlayersWin playersWinEvent) {
+            if (onePlayerDead) {
+                SteamManager.UnlockAchievement("REVENGE");
+            }
+        }
+
+        private void HandleOnBuffsUpdated(OnBuffsUpdatedEvent buffsUpdatedEvent) {
+            if (buffsUpdatedEvent.WhoAmI is not PlayerClass) return;
+
+            if (buffsUpdatedEvent.WhoAmI.GetBuffStacks(Resonate.buffName) >= 5) {
+                SteamManager.UnlockAchievement("THE_RESONATOR");
+            }
+        }
+        
 #endif // STEAMWORKS_NET
     }
 }

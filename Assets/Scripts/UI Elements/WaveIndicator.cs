@@ -5,11 +5,13 @@ namespace UI_Elements
 {
     public class WaveIndicator : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI text;
+        [SerializeField] private TextMeshProUGUI currentWave;
+        [SerializeField] private TextMeshProUGUI totalWaves;
 
         public void Show(int cur, int max)
         {
-            text.text = $"{cur}/{max}";
+            currentWave.text = cur.ToString();
+            totalWaves.text = max.ToString();
             gameObject.SetActive(true);
         }
 

@@ -18,7 +18,7 @@ namespace Director
 
         private IEnumerator StartSequence()
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitUntil(() => splashAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.99f);
         }
         
         public void OnSplashAnimationEnd()
@@ -31,7 +31,7 @@ namespace Director
             yield return new WaitForSeconds(1f);
             yield return UIFadeScreenManager.Instance.FadeInDarkScreen(1f);
             yield return new WaitForSeconds(0.5f);
-            SceneManager.LoadScene(Get<SceneData.MainMenu>().SceneName);
+            GameStateManager.Instance.LoadScene(Get<SceneData.MainMenu>().SceneName);
         }
     }
 }

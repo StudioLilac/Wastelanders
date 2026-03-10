@@ -36,6 +36,7 @@ public class AudioManager : PersistentSingleton<AudioManager>
     private SceneAudio sceneAudio = null!;
     // We need this reference for serialization purposes
     private AudioPreferences audioPreferences = null!;
+    Coroutine? combatMusicCoroutine;
 
     protected override void Awake()
     {
@@ -61,11 +62,22 @@ public class AudioManager : PersistentSingleton<AudioManager>
         // E.x. MainMenu -> Level Select while also allowing audio to play on cold start
         if (sceneAudio == incomingAudio && incomingAudio.isPersisting) return;
         sceneAudio = incomingAudio;
+        StartBackgroundTrack();
+    }
 
+    public void StartBackgroundTrack()
+    {
         StartCoroutine(PlayStartAudio());
     }
 
-    public IEnumerator StartCombatMusic()
+    public void StartCombatMusic()
+    {
+        combatMusicCoroutine = StartCoroutine(BeginCombatMusic());
+    }
+
+
+
+    private IEnumerator BeginCombatMusic()
     {
         yield return StartCoroutine(FadeAudioRoutine(BackgroundMusicPlayer, true, 1f));
 
@@ -110,6 +122,7 @@ public class AudioManager : PersistentSingleton<AudioManager>
 
     public void FadeOutCurrentBackgroundTrack(float duration)
     {
+        StopCoroutine(combatMusicCoroutine);
         StartCoroutine(FadeAudioRoutine(BackgroundMusicPlayer, true, duration));
     }
 
@@ -126,10 +139,10 @@ public class AudioManager : PersistentSingleton<AudioManager>
         BackgroundMusicPlayer.loop = true;
     }
 
-    public void PlaySFX(string effect)
+    public void PlaySFX(SoundID effect)
     {
         RandomizePitch();
-        SFXSoundsPlayer.PlayOneShot(soundEffectsDatabase.GetClipByName(effect));
+        SFXSoundsPlayer.PlayOneShot(soundEffectsDatabase.GetClipByID(effect));
     }
 
     private void RandomizePitch()

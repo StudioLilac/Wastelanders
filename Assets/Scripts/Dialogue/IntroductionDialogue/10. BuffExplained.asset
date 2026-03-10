@@ -13,41 +13,21 @@ MonoBehaviour:
   m_Name: 10. BuffExplained
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: "Good. Now let\u2019s talk about Action Abilities."
-    speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
-    sfx: 
-    broadcastAnEvent: 0
-  - bodyText: Every Action has one. You can read it by hovering over the Action.
-    speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
-    sfx: 
-    broadcastAnEvent: 0
-  - bodyText: "While using a staff, you\u2019ll often see the term <i>Flow</i>."
+  - bodyText: "While using a staff, you\u2019ll often see the buff <i>Flow</i> being
+      mentioned."
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 820631014ce088c4cb748224d5467c86, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: "Flow is a buff that boosts your next attack \u2014 it adds +1 to both
-      the minimum and maximum Power of your next Action."
+  - bodyText: '<i>[Hover]</i> over the <i>Flow</i> icon underneath yourself to learn
+      more about it from the <i>Tooltip</i>. '
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 820631014ce088c4cb748224d5467c86, type: 3}
     sfx: 
     broadcastAnEvent: 0
-  - bodyText: After that attack, Flow disappears.
+  - bodyText: Each weapon has its own unique mechanic. Learn them to create some
+      devastating synergies in battle.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 820631014ce088c4cb748224d5467c86, type: 3}
-    sfx: 
-    broadcastAnEvent: 0
-  - bodyText: "Each weapon type has its own unique mechanic like this. Learn them,
-      and you\u2019ll create some devastating synergies in battle."
-    speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 820631014ce088c4cb748224d5467c86, type: 3}
-    sfx: 
-    broadcastAnEvent: 0
-  - bodyText: (If you ever forget what Flow does, press [Tab]/[Esc] to open the Glossary
-      or Dialogue History.)
-    speakerName: Tutorial
-    displayingImage: {fileID: 21300000, guid: 751635a2cbd6d43cb92d4ab186c2a350, type: 3}
     sfx: 
     broadcastAnEvent: 0

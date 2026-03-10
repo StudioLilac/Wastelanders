@@ -1,15 +1,10 @@
 using LevelSelectInformation;
 using System.Collections;
+using Systems.Persistence;
 using UnityEngine;
 
 public class LevelSelect : MonoBehaviour
 {
-    protected void Awake()
-    {
-        UIFadeScreenManager.Instance.SetDarkScreen();
-        StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(1f));
-    }
-
     public void OnEnable()
     {
         StageInformation.StageInformationEvent += OpenScene;
@@ -23,13 +18,13 @@ public class LevelSelect : MonoBehaviour
 
     protected void OpenScene(string s)
     {
-        StartCoroutine(FadeLevelIn(s));
+        FadeLevelIn(s);
     }
 
     private void OpenBountyByTypeName(BountyInformation bountyInformation)
     {
         BountyManager.Instance.SelectedBountyInformation = bountyInformation;
-        StartCoroutine(FadeLevelIn(SceneData.Get<SceneData.ContractSelect>().SceneName));
+        FadeLevelIn(SceneData.Get<SceneData.ContractSelect>().SceneName);
     }
 
     public void DeckSelect()
@@ -52,6 +47,11 @@ public class LevelSelect : MonoBehaviour
         OpenScene(SceneData.Get<SceneData.LevelSelect>().SceneName);
     }
 
+    public void CreditsScene() 
+    {
+        OpenScene(SceneData.Get<SceneData.Credits>().SceneName);
+    }
+
     public void ContractScene()
     {
         OpenScene(SceneData.Get<SceneData.ContractSelect>().SceneName);
@@ -61,6 +61,7 @@ public class LevelSelect : MonoBehaviour
     {
         OpenScene(SceneData.Get<SceneData.Epilogue>().SceneName);
     }
+    
     
     public void PreBounty0()
     {
@@ -77,9 +78,13 @@ public class LevelSelect : MonoBehaviour
         OpenBountyByTypeName(BountyInformation.PRINCESS_FROG_BOUNTY);
     }
 
-    IEnumerator FadeLevelIn(string levelName)
+    void FadeLevelIn(string levelName)
     {
-        yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInDarkScreen(0.6f));
+        if (new GetSaveSystemStatus().Query() is SaveStatus.Error)
+        {
+            new DisplayWarning(new PopupType.CustomPopup("Wow, I'm glad I added this fallback. The current save file has issues right now. \n Could you please try restarting the game or notifying the devs?")).Invoke();
+            return;
+        }
         GameStateManager.Instance.LoadScene(levelName);
     }
 }

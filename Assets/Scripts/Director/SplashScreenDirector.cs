@@ -38,7 +38,7 @@ namespace Director
             yield return new WaitForSeconds(1f);
             yield return UIFadeScreenManager.Instance.FadeInDarkScreen(1f);
             yield return new WaitForSeconds(0.5f);
-            SceneManager.LoadScene(Get<SceneData.MainMenu>().SceneName);
+            GameStateManager.Instance.LoadScene(Get<SceneData.MainMenu>().SceneName);
         }
     }
 }

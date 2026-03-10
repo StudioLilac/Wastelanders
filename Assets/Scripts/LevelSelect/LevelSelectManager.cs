@@ -24,28 +24,25 @@ public class LevelSelectManager : MonoBehaviour
 
     IEnumerator UnlockedDialogue()
     {
-        Debug.Log("Unlock Dialogue");
         levelSelectCanvas.interactable = false;
         levelSelectCanvas.blocksRaycasts = false;
-        string tutorialName = "Tutorial";
+        string tutorialName = "Studio Lilac";
         yield return new WaitForSeconds(2f);
         yield return StartCoroutine(DialogueManager
             .Instance
             .StartDialogue(new List<DialogueText>
         {
+            new DialogueText("Hiii, thanks for playing through Wastelanders Prologue.", tutorialName, null),
             new DialogueText("Welcome to the level select screen!", tutorialName, null),
-            new DialogueText("You can select a level to play by clicking on the buttons below.", tutorialName, null),
-            new DialogueText("Some levels may be locked until you complete previous levels.", tutorialName, null),
-            new DialogueText("Good luck and have fun!", tutorialName, null),
+            new DialogueText("You can select a level to replay by clicking on the buttons.", tutorialName, null),
+            new DialogueText("We're hoping on finishing up Wastelanders Season 1 in the Spring so more content is coming soon!", tutorialName, null),
+            new DialogueText("Get excited for a big new story, 8 new levels, and some fun unlockable enemy cards!", tutorialName, null),
+            new DialogueText("Thanks for playing, and leave a review for us so we know you had fun!!! (We'll personally read every one of them out to the team.)", tutorialName, null),
+            new DialogueText("Keep in touch, Studio Lilac.", tutorialName, null),
         }));
         princessFrogFightButton.Unlock(animate: true);
         levelSelectCanvas.interactable = true;
         levelSelectCanvas.blocksRaycasts = true;
         yield return null;
-    }
-
-    public void Update()
-    {
-
     }
 }

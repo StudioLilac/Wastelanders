@@ -16,17 +16,14 @@ MonoBehaviour:
   - bodyText: Attention all Candidates!
     speakerName: Loudspeaker
     displayingImage: {fileID: 0}
-    sfx: 
     broadcastAnEvent: 0
   - bodyText: Please arrive at the East Wall Gate Checkpoint for head count. The
       Wasteland departure will commence in 5 minutes.
     speakerName: Loudspeaker
     displayingImage: {fileID: 0}
-    sfx: 
     broadcastAnEvent: 0
   - bodyText: <i>Once satisfied with your deck, continue pressing back to confirm
       your selection and exit deck creation.
     speakerName: Tutorial
-    displayingImage: {fileID: 21300000, guid: a44207e4ea7323546ba01bf9ee2d657b, type: 3}
-    sfx: 
+    displayingImage: {fileID: 21300000, guid: 2dc62f0a28cbcd7469361ff102bb50d6, type: 3}
     broadcastAnEvent: 0

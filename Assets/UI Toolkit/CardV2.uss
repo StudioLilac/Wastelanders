@@ -6,7 +6,7 @@
 }
 
 #img-highlight {
-    display: none;
+    visibility: hidden;
 }
 
 .card-back-a {
@@ -29,6 +29,10 @@
     background-image: url('project://database/Assets/Sprites/card-v2/bg-card-staff.png?fileID=2800000&guid=f367ffc6fc84e43afa49ea0a944c82d7&type=3#bg-card-staff');
 }
 
+.card-back-c {
+    background-image: url('project://database/Assets/Sprites/card-v2/bg-card-classless.png?fileID=2800000&guid=f69997e112901764e9df8c2111fe6c58&type=3#bg-card-classless');
+}
+
 .card-state-0:hover #layout-container {
     translate: 0 -80px;
 }
@@ -38,7 +42,7 @@
 }
 
 .card-state-2 #img-highlight {
-    display: flex;
+    visibility: visible;
 }
 
 .card-state-2 #layout-container {

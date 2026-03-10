@@ -48,6 +48,9 @@ MonoBehaviour:
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: bf9e3999a86e64bdfa8c585747949aa3, type: 3}
   m_SortingOrder: 0
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 1920
+  m_WorldSpaceHeight: 1080
 --- !u!1 &6521479406524231162
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,5 +96,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 663e6df960324a40a83241bf244dd761, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deckInfoSprite: {fileID: 21300000, guid: 89fe2115e3171485291a36190e68633b, type: 3}
   cardTemplate: {fileID: 9197481963319205126, guid: 2e517996501674993b8fb9df38dedc1b, type: 3}
   rootDocument: {fileID: 8398607223831343151}

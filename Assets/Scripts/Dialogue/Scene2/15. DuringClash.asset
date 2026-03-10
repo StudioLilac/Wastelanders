@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4fafe43b89343e3a7ba1235e8987c0f, type: 3}
+  m_Name: 15. DuringClash
+  m_EditorClassIdentifier: 
+  Entries:
+  - content: When two Actions Clash during combat, they take place at the <i>Speed</i>
+      of the faster one.
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxName: 
+    picture: {fileID: 21300000, guid: b1411cc1e1231574797f223a58264863, type: 3}
+    events: []
+  - content: Both Actions roll their <i>Power</i> at the same time.
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxName: 
+    picture: {fileID: 21300000, guid: a599acaa6560c5142b54811e60ff9e4e, type: 3}
+    events: []
+  - content: Whoever rolls higher wins the exchange, dealing their full Power to
+      the loser.
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxName: 
+    picture: {fileID: 21300000, guid: a599acaa6560c5142b54811e60ff9e4e, type: 3}
+    events: []
+  - content: "The loser\u2019s attack is <i>staggered</i>, dealing nothing in return.
+      It may even fail to trigger its abilities."
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxName: 
+    picture: {fileID: 21300000, guid: a599acaa6560c5142b54811e60ff9e4e, type: 3}
+    events: []
+  - content: 'I can see how likely I''ll win depending on the colour of the Clash
+      icon. '
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxName: 
+    picture: {fileID: -8086993822859997525, guid: a30c9c37aff832d4e9ffc5f0c7949d7b, type: 3}
+    events: []
+  - content: Gold means I have a great chance of winning, purple means I won't.
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxName: 
+    picture: {fileID: 21300000, guid: 5336a0c0d48eafd48914b09050d2a66c, type: 3}
+    events: []
+  - content: Now take this!
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxName: 
+    picture: {fileID: 21300000, guid: 537908265661f2b44970c526d7724cfb, type: 3}
+    events: []
+  references:
+    version: 2
+    RefIds: []

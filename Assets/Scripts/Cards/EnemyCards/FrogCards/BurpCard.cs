@@ -13,7 +13,7 @@ namespace Cards.EnemyCards.FrogCards
             base.Initialize();
 
             myName = "Burp";
-            description = $"Spend +{BURP_COST} Resonate to play. On Hit: Gain 1 Resonate and spawn a random monster.";
+            description = $"Spend +{BURP_COST} Resonance to play. On Hit: Gain 1 Resonance and spawn a random monster.";
 
             CostToAddToDeck = 2;
             lowerBound = upperBound = 1;
@@ -37,7 +37,7 @@ namespace Cards.EnemyCards.FrogCards
             bool isPlayable = base.IsPlayableByPlayer(out popupType);
             bool enoughStacks = Origin.GetBuffStacks(Resonate.buffName) >= BURP_COST;
 
-            popupType = enoughStacks ? popupType : PopupType.InsufficientResources;
+            popupType = enoughStacks ? popupType : new PopupType.InsufficientResources(Origin.GetBuffStacks(Resonate.buffName), BURP_COST);
 
             return isPlayable && enoughStacks;
         }
