@@ -67,6 +67,7 @@ namespace Dialogue.PreBounty
             yield return new WaitForSeconds(2f);
             yield return DialogueBoxV2.Instance.Play(dialogue7.Into());
             yield return new WaitForSeconds(0.5f);
+            AudioManager.Instance.PlaySFX(SoundID.VN_video_call_hangup);
 
             for (var t = 0.5f; t > 0f; t -= Time.deltaTime)
             {
