@@ -26,6 +26,8 @@ namespace UI_Toolkit
         // Retained legacy cruft for compat.
         public static bool IsPaused;
         public static event Action DidPause;
+        
+        private float autoRollCurrentRotation;
 
         public void Awake()
         {
@@ -43,12 +45,23 @@ namespace UI_Toolkit
             LoadInitialValues();
             SetState(State.Unpaused);
         }
+        
+        
 
         public void Update()
         {
-            if (!Input.GetKeyDown(KeyCode.Escape) && !Input.GetKeyDown(KeyCode.Tab)) return;
-            if (state != State.Unpaused) DoStart();
-            else DoPause();
+            if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Tab))
+            {
+                if (state != State.Unpaused) DoStart();
+                else DoPause();
+            }
+    
+            if (autoRollToggle.value)
+            {
+                autoRollCurrentRotation += 90f * Time.unscaledDeltaTime;
+                autoRollToggle.Q(className: "unity-toggle__input").style.rotate = 
+                    new StyleRotate(new Rotate(autoRollCurrentRotation));
+            }
         }
 
         private void DoPause()

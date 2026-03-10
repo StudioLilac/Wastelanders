@@ -27,6 +27,8 @@ namespace Managers {
         public void SetAutoRoll(bool value) {
             CardComparator.autoRoll = value;
             userPreferences.AutoRollEnabled = value;
+            
+            SaveLoadSystem.Instance.SavePreferences(); 
         }
 
         public void SetScreenShakeEnabled(bool value) {
