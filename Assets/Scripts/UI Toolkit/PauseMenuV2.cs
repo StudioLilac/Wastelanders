@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Managers;
 using Systems.Persistence;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -136,32 +137,32 @@ namespace UI_Toolkit
         }
         
         private static void OnAutoRollChanged(bool value) {
-            CardComparator.autoRoll = value;
+            PreferencesManager.Instance.SetAutoRoll(value);
         }
 
         private static void OnMusChanged(float value)
         {
-            AudioManager.Instance.SetMusicVolume(value);
+            PreferencesManager.Instance.SetMusicVolume(value);
         }
 
         private static void OnSfxChanged(float value)
         {
-            AudioManager.Instance.SetSFXVolume(value);
+            PreferencesManager.Instance.SetSFXVolume(value);
         }
 
         private static void OnMusChecked(bool state)
         {
-            AudioManager.Instance.SetMusicMuted(state);
+            PreferencesManager.Instance.SetMusicMuted(state);
         }
 
         private static void OnSfxChecked(bool state)
         {
-            AudioManager.Instance.SetSFXMuted(state);
+            PreferencesManager.Instance.SetSFXMuted(state);
         }
 
         private static void OnVfxChecked(bool value)
         {
-            ScreenShakeHandler.IsScreenShakeEnabled = value;
+            PreferencesManager.Instance.SetScreenShakeEnabled(value);
         }
         
         private void RegisterCallbacks()
