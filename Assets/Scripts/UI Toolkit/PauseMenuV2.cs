@@ -18,6 +18,8 @@ namespace UI_Toolkit
         private VisualElement pauseMenuPanel;
         private Button pauseIconButton;
 
+        private Toggle autoRollToggle;
+
         private State state;
 
         // Retained legacy cruft for compat.
@@ -31,6 +33,7 @@ namespace UI_Toolkit
             glossary = rootElem.Q<VisualElement>("glossary");
             pauseMenuPanel = rootElem.Q<VisualElement>("pause-menu-panel");
             pauseIconButton = rootDocument.rootVisualElement.Q<Button>("pause-icon-button");
+            autoRollToggle = rootDocument.rootVisualElement.Q<Toggle>("auto-roll-toggle");
             rootDocument.panelSettings.sortingOrder = UISortOrder.PauseMenu.GetOrder();
 
             pauseIconButton.clicked += DoPause;
@@ -102,7 +105,6 @@ namespace UI_Toolkit
             GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.MainMenu>().SceneName);
         }
 
-
         private void OnGlsClicked()
         {
             var gameState = new GetGameState().Query();
@@ -132,6 +134,10 @@ namespace UI_Toolkit
         {
             SetState(State.PauseMenuPanel);
         }
+        
+        private static void OnAutoRollChanged(bool value) {
+            CardComparator.autoRoll = value;
+        }
 
         private static void OnMusChanged(float value)
         {
@@ -157,7 +163,7 @@ namespace UI_Toolkit
         {
             ScreenShakeHandler.IsScreenShakeEnabled = value;
         }
-
+        
         private void RegisterCallbacks()
         {
             pauseMenuPanel.Q<Button>("button-rsm").clicked += OnRsmClicked;
@@ -171,6 +177,8 @@ namespace UI_Toolkit
             dialogue.Q<Button>("button-cls").clicked += OnClsClicked;
             glossary.Q<Button>("button-cls").clicked += OnClsClicked;
 
+            autoRollToggle.RegisterValueChangedCallback(e => OnAutoRollChanged(e.newValue));
+
             pauseMenuPanel.Q<Slider>("slider-mus").RegisterValueChangedCallback(e => OnMusChanged(e.newValue));
             pauseMenuPanel.Q<Slider>("slider-sfx").RegisterValueChangedCallback(e => OnSfxChanged(e.newValue));
             pauseMenuPanel.Q<Toggle>("toggle-mus").RegisterValueChangedCallback(e => OnMusChecked(e.newValue));
@@ -178,14 +186,16 @@ namespace UI_Toolkit
             pauseMenuPanel.Q<Toggle>("toggle-vfx").RegisterValueChangedCallback(e => OnVfxChecked(e.newValue));
         }
 
-        private void LoadInitialValues()
-        {
-            AudioPreferences a = SaveLoadSystem.Instance.GetUserPreferences().audioPreferences;
+        private void LoadInitialValues() {
+            UserPreferences preferences = SaveLoadSystem.Instance.GetUserPreferences();
+            AudioPreferences a = preferences.audioPreferences;
             pauseMenuPanel.Q<Slider>("slider-mus").value = a.BackgroundMusicVolume;
             pauseMenuPanel.Q<Slider>("slider-sfx").value = a.SFXVolume;
             pauseMenuPanel.Q<Toggle>("toggle-mus").value = a.MusicMuted;
             pauseMenuPanel.Q<Toggle>("toggle-sfx").value = a.SFXMuted;
             pauseMenuPanel.Q<Toggle>("toggle-vfx").value = ScreenShakeHandler.IsScreenShakeEnabled;
+
+            autoRollToggle.value = preferences.AutoRollEnabled;
         }
 
         private enum State
