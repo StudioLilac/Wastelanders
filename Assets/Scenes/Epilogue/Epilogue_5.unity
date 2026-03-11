@@ -1200,9 +1200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkingDialogue:
-  - content: "Ah, Reichel. Thank you for joining me. I need your assistance. There
-      may still be a path to helping Commander Ives... but I\u2019m sure you have
-      questions first."
+  - content: 'Ah, Reichel. Thank you for joining me. I need your assistance. '
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -1210,8 +1208,14 @@ MonoBehaviour:
     - rid: 1894806212798054491
     - rid: 1894806212798054492
     - rid: 1894806212798054493
-    - rid: 1894806212798054494
     - rid: 1894806212798054495
+    - rid: 1894806212798054494
+  - content: "There may still be a path to helping Commander Ives... but I\u2019m
+      sure you have questions first."
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
   - content: "Yes, it\u2019s about the serums. You told Ives her serum was \"compromised.\""
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     sfxId: 0
@@ -1219,9 +1223,8 @@ MonoBehaviour:
     events:
     - rid: 1894806212798054483
     - rid: 1894806212798054484
-    - rid: 1894806212798054485
-    - rid: 1894806212798054486
     - rid: 1894806212798054487
+    - rid: 1894806212798054486
   - content: An unfortunate reaction to an unknown catalyst in the field, yes.
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
@@ -1229,8 +1232,8 @@ MonoBehaviour:
     events:
     - rid: 1894806212798054498
     - rid: 1894806212798054499
-  - content: 'But how is that possible? The serums are individually inspected and
-      sealed to prevent any possible contact contamination. '
+  - content: 'But how is that possible? Each serum is sealed and inspected to prevent
+      the possibility of contact contamination. '
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -1266,29 +1269,39 @@ MonoBehaviour:
     picture: {fileID: 0}
     events:
     - rid: 1894806212798054508
-  - content: Similar frequencies...? The serums already have a frequency greater
-      than anything found on Earth. What could possibly be in the Tundra that matched
-      those frequencies and released that much energy?
+  - content: 'Right, but if I recall... the frequency of the serum is magnitudes
+      greater than anything found on Earth. '
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 1894806212798054510
     - rid: 1894806212798054509
-  - content: The crystals...
+  - content: Nothing natural should resonate with it. What could possibly have had
+      a similar frequency in the Tundra...
+    speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  - content: The crystals.
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 1894806212798054511
-  - content: "They release massive amounts of energy when broken, and their frequencies
-      are among the highest we\u2019ve discovered. If their frequencies are similar
-      to the serum, they could resonate almost perfectly..."
+  - content: 'They''re alien to Earth and release a massive amount of energy when
+      broken. '
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 1894806212798054512
+  - content: If their frequencies are similar to the serum, they could resonate almost
+      perfectly when broken and transfer that energy to...
+    speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
   - content: 'Excellent deduction, you are correct. The signatures of the serum are
       almost identical to those found in the crystals. '
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
@@ -1297,15 +1310,15 @@ MonoBehaviour:
     events:
     - rid: 1894806212798054520
     - rid: 1894806212798054521
-  - content: But this is no coincidence, for the raw components of the serum are
-      also not natural to Earth to begin with.
+  - content: But this is no coincidence, for both the crystals and the raw components
+      of the serum have the same origin. The meteors that brought the Waste.
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 1894806212798054522
-  - content: They were extracted from the organic materials that came bound to the
-      Waste when it arrived on Earth.
+  - content: 'The Waste came bounded to a form of alien organic matter. That matter
+      is what we use to synthesize the Serums. '
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -1318,22 +1331,26 @@ MonoBehaviour:
     picture: {fileID: 0}
     events:
     - rid: 1894806212798054524
-  - content: However, the crystals also arrived in tandem, and so it should be no
-      surprise that they share such similar frequencies.
+  - content: The crystals seem to be a structured form of this organic matter, so
+      it is no surprise that they share similar properties.
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 1894806212798054525
-  - content: "Damnation, but if you knew that the frequencies of the crystal are
-      so similar to the serum, why didn\u2019t you say something? Ives wouldn\u2019t
-      be in this position if we knew. "
+  - content: "Dammit, but if you knew that the frequencies of the crystal are so
+      similar to the serum, why didn\u2019t you say something?"
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 1894806212798054526
     - rid: 1894806212798054528
+  - content: "Ives wouldn\u2019t be in this position if we knew. "
+    speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
   - content: '... Please, follow me to my lab. '
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
@@ -1356,19 +1373,12 @@ MonoBehaviour:
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events:
-    - rid: 1894806212798054549
-    - rid: 1894806212798054551
-    - rid: 1894806212798054553
-    - rid: 1894806212798054550
-    - rid: 1894806212798054552
-    - rid: 1894806212798054554
+    events: []
   - content: 'The first incursion into the Tundra, a scouting mission. '
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events:
-    - rid: 1894806212798054555
+    events: []
   - content: 'The higher-ups claimed all personnel were killed or missing. '
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
@@ -1378,10 +1388,9 @@ MonoBehaviour:
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events:
-    - rid: 1894806212798054557
+    events: []
   labDialogue:
-  - content: 'These tanks... Are they creatures... or people? '
+  - content: 'These tanks... Are these creatures... or people? '
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -1390,7 +1399,6 @@ MonoBehaviour:
     - rid: 1894806212798054559
     - rid: 1894806212798054564
     - rid: 1894806212798054565
-    - rid: 1894806212798054560
     - rid: 1894806212798054561
     - rid: 1894806212798054562
   - content: "These were the scouts rescued from the mission. But, perhaps the answer
@@ -1401,47 +1409,61 @@ MonoBehaviour:
     events:
     - rid: 1894806212798054576
     - rid: 1894806212798054577
+    - rid: 1014197489180082240
+    - rid: 1014197489180082238
+    - rid: 1014197489180082239
   - content: Are you familiar with the theory of Harmonics?
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 1894806212798054578
-  - content: The theory explaining the origins of the Waste creatures?
+  - content: 'Yes, it explains how the Waste mutates living things into Waste creatures. '
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 1894806212798054580
     - rid: 1894806212798054579
-  - content: Yes, when the Waste first infects a creature, it creates strong frequency
-      dissonance.
+  - content: Correct, after infection, the Waste slowly increases the frequency of
+      the creature. Issues typically arise as the body falls into dissonance.
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 1894806212798054581
     - rid: 1894806212798054582
-  - content: But if the host survives... the frequencies eventually reharmonize.
+  - content: But if the host survives... the frequencies eventually stabilizes. It
+      reharmonizes.
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events: []
-  - content: Harmonics are like octaves on a scale. The frequencies become stable
-      at specific intervals, and the creature grows stronger, gaining new abilities.
+  - content: 'Like octaves on a scale, frequencies become stable at specific intervals. '
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 1894806212798054583
     - rid: 1894806212798054584
-  - content: The open question was, could humans do the same?
+  - content: At each octave, the creature grows stronger, gaining new abilities.
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events: []
-  - content: But that was deemed impossible, our frequencies are too high, and amplitude
-      too low.
+  - content: 'These octaves, or Harmonics, are different for every creature, and
+      so the open question was... '
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  - content: Could humans reach them too?
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  - content: But that was deemed impossible! Our frequencies are too complex to modulate
+      with the Waste.
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -1455,8 +1477,8 @@ MonoBehaviour:
     picture: {fileID: 0}
     events:
     - rid: 1894806212798054588
-  - content: Correct. I see you have gone over the readings. Under normal circumstances,
-      that would be the sole outcome. But the key component is <i>time</i>.
+  - content: Correct. Under normal circumstances, that would be the outcome. But
+      the key component is <i>time</i>.
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -1468,8 +1490,7 @@ MonoBehaviour:
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events:
-    - rid: 1894806212798054591
+    events: []
   - content: ...The injections. They could be used to reach the Second Harmonic.
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     sfxId: 0
@@ -1491,8 +1512,8 @@ MonoBehaviour:
     events:
     - rid: 1894806212798054595
     - rid: 1894806212798054596
-  - content: Their energies and the Waste however, were uncontrolled and could not
-      remain in a stable state.
+  - content: Their frequencies however were untuned, and could not remain in a stable
+      state.
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -1605,9 +1626,14 @@ MonoBehaviour:
     events:
     - rid: 1894806212798054617
     - rid: 1894806212798054618
-  - content: Enduring a slow, withering decay of mind and body that her field excursion
-      will only accelerate. The only hope she has is this research. To stabilize
-      her at the Second Harmonic. A contingency.
+  - content: 'Enduring a slow, withering decay of mind and body that her field excursion
+      will only accelerate. '
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  - content: The only hope she has is this research. To stabilize her at the Second
+      Harmonic. A contingency.
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -1651,15 +1677,19 @@ MonoBehaviour:
     picture: {fileID: 0}
     events:
     - rid: 1894806212798054627
-  - content: Good. I want to save all of them. In that, we are aligned. I need your
-      expertise in frequency modulation. Your gloves are the key to finding the precise
-      stabilization point.
+  - content: 'Good. I want to save all of them. In that, we are aligned. '
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 1894806212798054628
     - rid: 1894806212798054629
+  - content: I need your expertise in frequency modulation. Your gloves are the key
+      to finding the precise stabilization point.
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
   - content: ...And if I say no?
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     sfxId: 0
@@ -1668,15 +1698,20 @@ MonoBehaviour:
     - rid: 1894806212798054630
     - rid: 1894806212798054631
   - content: "Then I continue alone. And Ives\u2019 time... runs out. Think it through.
-      We have some time. In the meantime, I\u2019ll be heading back to the Tundra.
-      To prevent... further complications."
+      We have some time. "
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 1894806212798054632
     - rid: 1894806212798054633
-  - content: "(Weise turns to leave. Cam\u2019s voice stops him.)"
+  - content: "In the meantime, I\u2019ll be heading back to the Tundra. To prevent...
+      further complications."
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  - content: "<i>Weise turns to leave. Cam\u2019s voice stops him."
     speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -1697,8 +1732,15 @@ MonoBehaviour:
     - rid: 1894806212798054637
     - rid: 1894806212798054638
   - content: "I\u2019ll help you. But if Ives is hurt any further, if you let anything
-      happen to her on that mission... I will expose every last tank in this room.
-      I\u2019ll burn this whole lab to the <i>ground</i>."
+      happen to her on that mission..."
+    speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 1894806212798054639
+    - rid: 1894806212798054640
+  - content: "I will expose every last tank in this room. I\u2019ll burn this whole
+      lab to the <i>ground</i>."
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -1719,8 +1761,14 @@ MonoBehaviour:
     events:
     - rid: 1894806212798054643
   - content: "But know this, Reichel. If you destroy this lab, you won\u2019t just
-      be jeopardizing my life\u2019s work, you will be putting all their lives on
-      the line as well. And Ives\u2019 blood will be on your hands."
+      be jeopardizing my life\u2019s work..."
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 1894806212798054644
+  - content: "You will be putting all <i>their</i> lives on the line as well. And
+      Ives\u2019 blood will be on your hands."
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -1732,6 +1780,24 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: 1014197489180082238
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        action: 50
+        duration: 0
+    - rid: 1014197489180082239
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        action: 30
+        duration: 1
+    - rid: 1014197489180082240
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        action: 60
+        duration: 0
     - rid: 1894806212798054483
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
@@ -1741,24 +1807,18 @@ MonoBehaviour:
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
         sprite: {fileID: 21300000, guid: 2c87828110c96b641b4334f1af609d2c, type: 3}
-    - rid: 1894806212798054485
-      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
-      data:
-        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-        action: 70
-        duration: 0
     - rid: 1894806212798054486
       type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
         action: 20
-        duration: 1
+        duration: 1.5
     - rid: 1894806212798054487
       type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
         action: 60
-        duration: 1
+        duration: 0
     - rid: 1894806212798054491
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
@@ -1779,13 +1839,13 @@ MonoBehaviour:
       data:
         actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
         action: 30
-        duration: 1
+        duration: 2
     - rid: 1894806212798054495
       type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
         actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
         action: 60
-        duration: 1
+        duration: 0
     - rid: 1894806212798054498
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
@@ -1930,49 +1990,6 @@ MonoBehaviour:
       type: {class: AutoAdvanceAfter, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
         Time: 1
-    - rid: 1894806212798054549
-      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
-      data:
-        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-    - rid: 1894806212798054550
-      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
-      data:
-        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-        action: 30
-        duration: 1
-    - rid: 1894806212798054551
-      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
-      data:
-        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-        action: 50
-        duration: 0
-    - rid: 1894806212798054552
-      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
-      data:
-        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-        action: 60
-        duration: 1
-    - rid: 1894806212798054553
-      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
-      data:
-        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-        action: 70
-        duration: 0
-    - rid: 1894806212798054554
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
-      data:
-        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-        sprite: {fileID: -6888621227103538543, guid: 2da2e80130a351744801103b073bd661, type: 3}
-    - rid: 1894806212798054555
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
-      data:
-        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-        sprite: {fileID: 5716319594728238710, guid: 30bd0e68e238a2746ac06e8f9527da16, type: 3}
-    - rid: 1894806212798054557
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
-      data:
-        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-        sprite: {fileID: -6888621227103538543, guid: 2da2e80130a351744801103b073bd661, type: 3}
     - rid: 1894806212798054558
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
@@ -1982,12 +1999,6 @@ MonoBehaviour:
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
         sprite: {fileID: 21300000, guid: 2c87828110c96b641b4334f1af609d2c, type: 3}
-    - rid: 1894806212798054560
-      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
-      data:
-        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-        action: 70
-        duration: 0
     - rid: 1894806212798054561
       type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
@@ -1999,7 +2010,7 @@ MonoBehaviour:
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
         action: 60
-        duration: 1
+        duration: 0
     - rid: 1894806212798054564
       type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
@@ -2072,11 +2083,6 @@ MonoBehaviour:
       data:
         actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     - rid: 1894806212798054590
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
-      data:
-        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-        sprite: {fileID: -4505030949712079976, guid: 7b946c12f8e9c9b49a06ee3348c11712, type: 3}
-    - rid: 1894806212798054591
       type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
         actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
