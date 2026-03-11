@@ -1065,7 +1065,7 @@ MonoBehaviour:
       those frequencies and released that much energy?
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     sfxId: 0
-    picture: {fileID: 0}
+    picture: {fileID: 21300000, guid: db44253f429a20c419e48d0a34881773, type: 3}
     events:
     - rid: 1894806212798054510
     - rid: 1894806212798054509
@@ -1134,7 +1134,7 @@ MonoBehaviour:
       type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-        sprite: {fileID: 21300000, guid: aadcfd8fa0ac14d3a9e5f3aceb35d573, type: 3}
+        sprite: {fileID: 21300000, guid: 2c87828110c96b641b4334f1af609d2c, type: 3}
     - rid: 1894806212798054485
       type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
@@ -1215,7 +1215,7 @@ MonoBehaviour:
       type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-        sprite: {fileID: 21300000, guid: bb9ae7cf80059497696790453875d6dd, type: 3}
+        sprite: {fileID: 21300000, guid: f2ed6f852c9c1594590eea28f98518b3, type: 3}
     - rid: 1894806212798054506
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
