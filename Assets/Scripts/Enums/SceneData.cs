@@ -215,7 +215,7 @@ public abstract class SceneData : Enum<SceneData>
         };
     }
     
-    public class Epilogue5 : SceneData {
+    public class Epilogue_5 : SceneData {
         public override string SceneName => "Epilogue_5";
         
         public override SceneAudio GetAudio(AudioDatabase database) => database.Empty;
