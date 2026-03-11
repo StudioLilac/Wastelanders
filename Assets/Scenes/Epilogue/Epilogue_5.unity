@@ -330,7 +330,7 @@ Transform:
   m_GameObject: {fileID: 638988697}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3, y: 0, z: 0}
+  m_LocalPosition: {x: -2.75, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1083,46 +1083,67 @@ MonoBehaviour:
     picture: {fileID: 0}
     events:
     - rid: 1894806212798054512
+  - content: 'Excellent deduction, you are correct. The signatures of the serum are
+      almost identical to those found in the crystals. '
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 1894806212798054520
+    - rid: 1894806212798054521
+  - content: But this is no coincidence, for the raw components of the serum are
+      also not natural to Earth to begin with.
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 1894806212798054522
+  - content: They were extracted from the organic materials that came bound to the
+      Waste when it arrived on Earth.
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 1894806212798054523
+  - content: After removing its amplitude, it acts as the perfect vector to contain
+      the Waste once more.
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 1894806212798054524
+  - content: However, the crystals also arrived in tandem, and so it should be no
+      surprise that they share such similar frequencies.
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 1894806212798054525
+  - content: "Damnation, but if you knew that the frequencies of the crystal are
+      so similar to the serum, why didn\u2019t you say something? Ives wouldn\u2019t
+      be in this position if we knew. "
+    speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 1894806212798054526
+    - rid: 1894806212798054528
+  - content: '... Please, follow me to my lab. '
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 1894806212798054529
+    - rid: 1894806212798054530
   - content: 
     speaker: {fileID: 0}
     sfxId: 0
     picture: {fileID: 0}
-    events: []
-  - content: 
-    speaker: {fileID: 0}
-    sfxId: 0
-    picture: {fileID: 0}
-    events: []
-  - content: 
-    speaker: {fileID: 0}
-    sfxId: 0
-    picture: {fileID: 0}
-    events: []
-  - content: 
-    speaker: {fileID: 0}
-    sfxId: 0
-    picture: {fileID: 0}
-    events: []
-  - content: 
-    speaker: {fileID: 0}
-    sfxId: 0
-    picture: {fileID: 0}
-    events: []
-  - content: 
-    speaker: {fileID: 0}
-    sfxId: 0
-    picture: {fileID: 0}
-    events: []
-  - content: 
-    speaker: {fileID: 0}
-    sfxId: 0
-    picture: {fileID: 0}
-    events: []
-  - content: 
-    speaker: {fileID: 0}
-    sfxId: 0
-    picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 1894806212798054531
+    - rid: 1894806212798054532
+    - rid: 1894806212798054533
+    - rid: 1894806212798054534
   references:
     version: 2
     RefIds:
@@ -1249,6 +1270,77 @@ MonoBehaviour:
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
         sprite: {fileID: 21300000, guid: 2c87828110c96b641b4334f1af609d2c, type: 3}
+    - rid: 1894806212798054520
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+    - rid: 1894806212798054521
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        sprite: {fileID: -4505030949712079976, guid: 7b946c12f8e9c9b49a06ee3348c11712, type: 3}
+    - rid: 1894806212798054522
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        sprite: {fileID: 5716319594728238710, guid: 30bd0e68e238a2746ac06e8f9527da16, type: 3}
+    - rid: 1894806212798054523
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        sprite: {fileID: -4505030949712079976, guid: 7b946c12f8e9c9b49a06ee3348c11712, type: 3}
+    - rid: 1894806212798054524
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        sprite: {fileID: 5716319594728238710, guid: 30bd0e68e238a2746ac06e8f9527da16, type: 3}
+    - rid: 1894806212798054525
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        sprite: {fileID: -6888621227103538543, guid: 2da2e80130a351744801103b073bd661, type: 3}
+    - rid: 1894806212798054526
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+    - rid: 1894806212798054528
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+        sprite: {fileID: 21300000, guid: 657f6fc9a6bebe642b2b933432af3e8b, type: 3}
+    - rid: 1894806212798054529
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+    - rid: 1894806212798054530
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        sprite: {fileID: 5716319594728238710, guid: 30bd0e68e238a2746ac06e8f9527da16, type: 3}
+    - rid: 1894806212798054531
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        action: 50
+        duration: 1
+    - rid: 1894806212798054532
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+        action: 50
+        duration: 1
+    - rid: 1894806212798054533
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        action: 70
+        duration: 1
+    - rid: 1894806212798054534
+      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+        action: 70
+        duration: 1
 --- !u!4 &1559697842
 Transform:
   m_ObjectHideFlags: 0
