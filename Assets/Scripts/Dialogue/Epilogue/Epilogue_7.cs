@@ -37,9 +37,7 @@ public class Epilogue_7 : MonoBehaviour
         yield return UIFadeScreenManager.Instance.FadeInLightScreen(2f);
         yield return new WaitForSeconds(1f);
         yield return DialogueBoxV2.Instance.Play(preFightDialogue.Into());
-        // TODO: Boulder audio and roaring
         yield return DialogueBoxV2.Instance.Play(defaultBackgroundDialogue.Into());
-        // TODO: Shake and roar
         new ShakeScreen(Intensity: 0.8f).Invoke();
         
         // [Fade into Dead Creature background with Jackie and creature]
@@ -56,7 +54,6 @@ public class Epilogue_7 : MonoBehaviour
         blackingOutSr2.gameObject.SetActive(false);
         yield return new WaitForSeconds(1f); // Small delay between black screen and next dialogue
         
-        // TODO: Sound of a bone popping in place
         yield return DialogueBoxV2.Instance.Play(bonePopping.Into());
         yield return FadeOutSpriteRenderers(2, blackScreen);
         yield return new WaitForSeconds(1f);

@@ -2263,7 +2263,7 @@ MonoBehaviour:
     - rid: 7033667370497081615
   - content: "Damn, I can\u2019t reach her. I\u2019ll try Ives."
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-    sfxId: 0
+    sfxId: 520
     picture: {fileID: 0}
     events:
     - rid: 7033667370497081616
@@ -2271,7 +2271,7 @@ MonoBehaviour:
   dialogue6:
   - content: Hey, kiddo. How are things?
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxId: 0
+    sfxId: 518
     picture: {fileID: 0}
     events:
     - rid: 7033667370497081623
@@ -2822,7 +2822,7 @@ MonoBehaviour:
       type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-        sprite: {fileID: 21300000, guid: 7506e07004c52b347ac19f6a023d4bf9, type: 3}
+        sprite: {fileID: 21300000, guid: ed8bca1f9a8b245ec8889ee74f7785dc, type: 3}
     - rid: 7033667370497081609
       type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
@@ -2893,7 +2893,7 @@ MonoBehaviour:
       type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-        sprite: {fileID: 21300000, guid: 2c87828110c96b641b4334f1af609d2c, type: 3}
+        sprite: {fileID: 21300000, guid: aadcfd8fa0ac14d3a9e5f3aceb35d573, type: 3}
     - rid: 7033667370497081626
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
@@ -2911,7 +2911,7 @@ MonoBehaviour:
       type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-        sprite: {fileID: 21300000, guid: f2ed6f852c9c1594590eea28f98518b3, type: 3}
+        sprite: {fileID: 21300000, guid: bb9ae7cf80059497696790453875d6dd, type: 3}
     - rid: 7033667370497081630
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
@@ -2941,7 +2941,7 @@ MonoBehaviour:
       type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-        sprite: {fileID: 21300000, guid: 2c87828110c96b641b4334f1af609d2c, type: 3}
+        sprite: {fileID: 21300000, guid: aadcfd8fa0ac14d3a9e5f3aceb35d573, type: 3}
     - rid: 7033667370497081636
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
@@ -2954,7 +2954,7 @@ MonoBehaviour:
       type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-        sprite: {fileID: 21300000, guid: f2ed6f852c9c1594590eea28f98518b3, type: 3}
+        sprite: {fileID: 21300000, guid: bb9ae7cf80059497696790453875d6dd, type: 3}
     - rid: 7033667370497081639
       type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
@@ -2977,7 +2977,7 @@ MonoBehaviour:
       type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-        sprite: {fileID: 21300000, guid: 7506e07004c52b347ac19f6a023d4bf9, type: 3}
+        sprite: {fileID: 21300000, guid: ed8bca1f9a8b245ec8889ee74f7785dc, type: 3}
     - rid: 7033667370497081645
       type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
       data:
