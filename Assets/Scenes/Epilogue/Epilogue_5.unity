@@ -1718,7 +1718,7 @@ MonoBehaviour:
     picture: {fileID: 0}
     events:
     - rid: 1894806212798054643
-  - content: "But know this, Reichal. If you destroy this lab, you won\u2019t just
+  - content: "But know this, Reichel. If you destroy this lab, you won\u2019t just
       be jeopardizing my life\u2019s work, you will be putting all their lives on
       the line as well. And Ives\u2019 blood will be on your hands."
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
