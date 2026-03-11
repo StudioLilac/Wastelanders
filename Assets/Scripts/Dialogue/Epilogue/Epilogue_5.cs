@@ -25,6 +25,7 @@ namespace Dialogue.Epilogue {
             labBg.gameObject.SetActive(true);
             yield return labFadeHandler.FadeInDarkScreen(2f);
             yield return DialogueBoxV2.Instance.Play(labDialogue.Into());
+            yield return UIFadeScreenManager.Instance.FadeInDarkScreen(2f);
         }
     }
 }
