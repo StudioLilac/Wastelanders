@@ -311,12 +311,12 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 527022734}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1864064444}
+  m_Father: {fileID: 1120733076}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -394,7 +394,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &553508811
 RectTransform:
   m_ObjectHideFlags: 0
@@ -412,7 +412,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 92.4057, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &553508812
 MonoBehaviour:
@@ -763,12 +763,12 @@ GameObject:
   - component: {fileID: 1120733074}
   - component: {fileID: 1120733073}
   m_Layer: 5
-  m_Name: Lab Vignette
+  m_Name: Overlay Layer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1120733073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -798,10 +798,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -844,6 +844,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 527022735}
   - {fileID: 553508811}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1825,10 +1826,12 @@ MonoBehaviour:
   pathetic: {fileID: 1047218185}
   background1: {fileID: 1929293450}
   background2: {fileID: 2045826667}
-  vignette: {fileID: 1120733072}
+  vignette: {fileID: 553508810}
   scrimAlpha: {fileID: 527022736}
   vignetteAlpha: {fileID: 553508816}
   vignetteScale: {fileID: 553508815}
+  backgroundBeeping: {fileID: 8300000, guid: 98ef4bd75caab4e82be89cbaa791c10e, type: 3}
+  labAmbiance: {fileID: 8300000, guid: 6fa07adeb1eff4228bba77f794d79675, type: 3}
   references:
     version: 2
     RefIds:
@@ -2326,7 +2329,6 @@ RectTransform:
   - {fileID: 1047218181}
   - {fileID: 57273603}
   - {fileID: 1280079861}
-  - {fileID: 527022735}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

@@ -28,17 +28,24 @@ namespace Dialogue.Epilogue
         [SerializeField] private UIFadeHandler vignetteAlpha;
         [SerializeField] private ScalingLerpHandler vignetteScale;
 
+        [SerializeField] private AudioClip backgroundBeeping;
+        [SerializeField] private AudioClip labAmbiance;
 
-        private IEnumerator Start()
+        private void Awake()
         {
             this.Subscribe<CustomEvent>(IvesInternalTextDisplay);
             scrimAlpha.SetDarkScreen();
+        }
+
+        private IEnumerator Start()
+        {
             yield return DialogueBoxV2.Instance.Play(postDialogue0.Into());
             yield return scrimAlpha.FadeInLightScreen(2f);
             yield return new WaitForSeconds(1f);
 
             yield return DialogueBoxV2.Instance.Play(dialogue1.Into());
             yield return new WaitForSeconds(1f);
+            AudioManager.Instance.FadeOutCurrentBackgroundTrack(1f);
             yield return scrimAlpha.FadeInDarkScreen(1f);
             background1.SetActive(false);
             background2.SetActive(true);
@@ -46,6 +53,8 @@ namespace Dialogue.Epilogue
             deception.gameObject.SetActive(false);
             worthless.gameObject.SetActive(false);
             pathetic.gameObject.SetActive(false);
+            AudioManager.Instance.PlayBackgroundMusic(backgroundBeeping, true);
+
             yield return new WaitForSeconds(1f);
             yield return scrimAlpha.FadeInLightScreen(1f);
             var breathingCoroutine = StartCoroutine(PlayWakeUpSequence());
@@ -57,20 +66,16 @@ namespace Dialogue.Epilogue
             yield return vignetteAlpha.FadeToAlpha(0.5f, 1f);
             yield return new WaitForSeconds(1f);
 
-            this.Subscribe<CustomEvent>(CustomEventHandler); 
-            void CustomEventHandler(CustomEvent e)
-            {
-                if (e.EventName != "panic") return;
-                this.UnSubscribe<CustomEvent>(CustomEventHandler);
-            }
-
             yield return DialogueBoxV2.Instance.Play(dialogue3.Into());
-            yield return new WaitForSeconds(1.5f); //TODO: Play louder heartbeat sfx here. 
+            yield return _panicCoroutine; //TODO: Play louder heartbeat sfx here. 
+            yield return new WaitForSeconds(1f);
             yield return DialogueBoxV2.Instance.Play(wasteInfectionSymptoms);
 
 
             yield return DialogueBoxV2.Instance.Play(postDialogue3.Into());
+            AudioManager.Instance.FadeOutCurrentBackgroundTrack(1f);
             yield return new WaitForSeconds(2f);
+            AudioManager.Instance.PlayBackgroundMusic(labAmbiance, true);
             yield return DialogueBoxV2.Instance.Play(dialogue4.Into());
             
             yield return UIFadeScreenManager.Instance.FadeInDarkScreen(2f);
@@ -78,6 +83,7 @@ namespace Dialogue.Epilogue
         }
 
         private Coroutine _panicCoroutine;
+        private Coroutine _infiniteBreath;
         void IvesInternalTextDisplay(CustomEvent e)
         {
             if (e.EventName == "deception") deception.Play();
@@ -87,9 +93,11 @@ namespace Dialogue.Epilogue
             else if (e.EventName == "resolve") Resolve();
         }
 
+
         void Resolve()
         {
             StopCoroutine(_panicCoroutine);
+            StopCoroutine(_infiniteBreath);
             StartCoroutine(vignetteScale.FadeToAlpha(0f, 5f));
             StartCoroutine(vignetteAlpha.FadeToAlpha(0.5f, 5f));
 
@@ -105,8 +113,8 @@ namespace Dialogue.Epilogue
         IEnumerator PanicSequence()
         {
             yield return new WaitForSeconds(1f);
-            StartCoroutine(vignetteScale.FadeToAlpha(.05f, 1.5f));
-            yield return StartCoroutine(vignetteAlpha.FadeToAlpha(1f, 1.5f));
+            StartCoroutine(vignetteScale.FadeToAlpha(.15f, 1f));
+            yield return StartCoroutine(vignetteAlpha.FadeToAlpha(1f, 1f));
 
 
             deception.gameObject.SetActive(true);
@@ -119,6 +127,11 @@ namespace Dialogue.Epilogue
             yield return new WaitForSeconds(.2f);
             pathetic.Play();
 
+            _infiniteBreath = StartCoroutine(InfiniteBreath());
+        }
+
+        IEnumerator InfiniteBreath()
+        {
             float inhaleDuration = 0.8f;
             float exhaleDuration = 1.2f;
             while (true)
