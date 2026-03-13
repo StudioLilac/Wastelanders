@@ -16,6 +16,9 @@ namespace Dialogue.Epilogue
         [SerializeField] private DialogueEntryInUnityEditor[] postDialogue3;
         [SerializeField] private DialogueEntryInUnityEditor[] dialogue4;
 
+        [SerializeField] private TypewriterHelper deception;
+        [SerializeField] private TypewriterHelper worthless;
+        [SerializeField] private TypewriterHelper pathetic;
 
         [SerializeField] private GameObject background1;
         [SerializeField] private GameObject background2;
@@ -28,6 +31,7 @@ namespace Dialogue.Epilogue
 
         private IEnumerator Start()
         {
+            this.Subscribe<CustomEvent>(IvesInternalTextDisplay);
             scrimAlpha.SetDarkScreen();
             yield return DialogueBoxV2.Instance.Play(postDialogue0.Into());
             yield return scrimAlpha.FadeInLightScreen(2f);
@@ -39,6 +43,9 @@ namespace Dialogue.Epilogue
             background1.SetActive(false);
             background2.SetActive(true);
             vignette.SetActive(true);
+            deception.gameObject.SetActive(false);
+            worthless.gameObject.SetActive(false);
+            pathetic.gameObject.SetActive(false);
             yield return new WaitForSeconds(1f);
             yield return scrimAlpha.FadeInLightScreen(1f);
             var breathingCoroutine = StartCoroutine(PlayWakeUpSequence());
@@ -50,15 +57,16 @@ namespace Dialogue.Epilogue
             yield return vignetteAlpha.FadeToAlpha(0.5f, 1f);
             yield return new WaitForSeconds(1f);
 
-            this.Subscribe<CustomEvent>(CustomEventHandler);
+            this.Subscribe<CustomEvent>(CustomEventHandler); 
             void CustomEventHandler(CustomEvent e)
             {
+                if (e.EventName != "panic") return;
                 this.UnSubscribe<CustomEvent>(CustomEventHandler);
-                breathingCoroutine = StartCoroutine(PanicSequence());
             }
 
             yield return DialogueBoxV2.Instance.Play(dialogue3.Into());
             yield return new WaitForSeconds(1.5f); //TODO: Play louder heartbeat sfx here. 
+            yield return DialogueBoxV2.Instance.Play(wasteInfectionSymptoms);
 
 
             yield return DialogueBoxV2.Instance.Play(postDialogue3.Into());
@@ -69,23 +77,56 @@ namespace Dialogue.Epilogue
 
         }
 
-        
+        private Coroutine _panicCoroutine;
+        void IvesInternalTextDisplay(CustomEvent e)
+        {
+            if (e.EventName == "deception") deception.Play();
+            else if (e.EventName == "worthless") worthless.Play();
+            else if (e.EventName == "pathetic") pathetic.Play();
+            else if (e.EventName == "panic") _panicCoroutine = StartCoroutine(PanicSequence()); // I'm afraid the infection is permanent line. 
+            else if (e.EventName == "resolve") Resolve();
+        }
+
+        void Resolve()
+        {
+            StopCoroutine(_panicCoroutine);
+            StartCoroutine(vignetteScale.FadeToAlpha(0f, 5f));
+            StartCoroutine(vignetteAlpha.FadeToAlpha(0.5f, 5f));
+
+            deception.eraseCharsPerSecond = 30f;
+            worthless.eraseCharsPerSecond = 30f;
+            pathetic.eraseCharsPerSecond = 30f;
+
+            deception.Erase();
+            worthless.Erase();
+            pathetic.Erase();
+        }
+
         IEnumerator PanicSequence()
         {
+            yield return new WaitForSeconds(1f);
+            StartCoroutine(vignetteScale.FadeToAlpha(.05f, 1.5f));
+            yield return StartCoroutine(vignetteAlpha.FadeToAlpha(1f, 1.5f));
 
-            StartCoroutine(vignetteScale.FadeToAlpha(.1f, 1f));
-            yield return StartCoroutine(vignetteAlpha.FadeToAlpha(1f, 1f));
 
+            deception.gameObject.SetActive(true);
+            worthless.gameObject.SetActive(true);
+            pathetic.gameObject.SetActive(true);
 
-            float inhaleDuration = 2.0f;
-            float exhaleDuration = 2.5f;
+            deception.Play();
+            yield return new WaitForSeconds(.2f);
+            worthless.Play();
+            yield return new WaitForSeconds(.2f);
+            pathetic.Play();
+
+            float inhaleDuration = 0.8f;
+            float exhaleDuration = 1.2f;
             while (true)
             {
-                yield return vignetteScale.FadeToAlpha(0.1f, inhaleDuration);
+                yield return vignetteScale.FadeToAlpha(0.05f, inhaleDuration);
                 yield return new WaitForSeconds(0.2f);
-                yield return vignetteScale.FadeToAlpha(0.2f, exhaleDuration);
+                yield return vignetteScale.FadeToAlpha(0.15f, exhaleDuration);
                 yield return new WaitForSeconds(0.4f);
-
             }
         }
 
