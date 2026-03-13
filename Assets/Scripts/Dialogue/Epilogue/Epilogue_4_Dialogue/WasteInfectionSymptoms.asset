@@ -1,0 +1,130 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4fafe43b89343e3a7ba1235e8987c0f, type: 3}
+  m_Name: WasteInfectionSymptoms
+  m_EditorClassIdentifier: 
+  Entries:
+  - content: ...How bad is it?
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  - content: "It\u2019s not terminal."
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 1014197516907839559
+  - content: But a major complication of a Waste infection is that your body's natural
+      <i>Frequency</i> will increase and shift out of phase.
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  - content: "This will disrupt your body\u2019s natural communication systems and
+      ability to utilize energy efficiently."
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 1014197516907839560
+  - content: While we can manage the symptoms with suppressants and infusions, you
+      will grow weaker.
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  - content: Any significant physical exertion, especially in the field, will increase
+      the amount of energy your body produces.
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  - content: And will drastically accelerate the Waste's spread.
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  - content: ...
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  - content: "I\u2019m gonna be out there as long as I can. I have to be there for
+      Jackie."
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  - content: ...
+    speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  - content: "Put me on the next re-supply transport. That\u2019s an order, Doctor."
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: -2
+  - content: ...
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  - content: "Ives, you can\u2019t-"
+    speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 1014197516907839561
+    - rid: 1014197516907839562
+  - content: As you wish, Commander. I will prepare a regimen of our strongest suppressants.
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 1014197516907839563
+  - content: "Reichel? A word in my lab, when you\u2019re ready."
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 1014197516907839559
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        sprite: {fileID: -6888621227103538543, guid: 2da2e80130a351744801103b073bd661, type: 3}
+    - rid: 1014197516907839560
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        sprite: {fileID: 5716319594728238710, guid: 30bd0e68e238a2746ac06e8f9527da16, type: 3}
+    - rid: 1014197516907839561
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+        sprite: {fileID: 21300000, guid: 2c87828110c96b641b4334f1af609d2c, type: 3}
+    - rid: 1014197516907839562
+      type: {class: AutoAdvanceAfter, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        Time: 0.5
+    - rid: 1014197516907839563
+      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        sprite: {fileID: -6888621227103538543, guid: 2da2e80130a351744801103b073bd661, type: 3}
