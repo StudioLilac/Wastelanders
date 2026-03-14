@@ -10,10 +10,10 @@ namespace Systems.Persistence
         string dataPath;
         string fileExtension;
 
-        public FileDataService(ISerializer serializer)
+        public FileDataService(ISerializer serializer, string overridePath = null)
         {
             // Application.persistentDataPath = C:\Users\YOUR_USER_NAME\AppData\LocalLow\S2dio\WastelandersGame
-            this.dataPath = Application.persistentDataPath;
+            this.dataPath = string.IsNullOrEmpty(overridePath) ? Application.persistentDataPath : overridePath;
             this.fileExtension = "json";
             this.serializer = serializer;
         }
