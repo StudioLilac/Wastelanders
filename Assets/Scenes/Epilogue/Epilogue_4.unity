@@ -1558,8 +1558,8 @@ MonoBehaviour:
     sfxId: 0
     picture: {fileID: 0}
     events: []
-  - content: 'However for the serums to works, it is imperative they remain devoid
-      <i>Amplitude</i>. Otherwise... '
+  - content: 'However for the serums to work, it is imperative they remain devoid
+      of <i>Amplitude</i>. Otherwise... '
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}

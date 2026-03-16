@@ -134,6 +134,13 @@ public class AudioManager : PersistentSingleton<AudioManager>
         StartCoroutine(FadeAudioRoutine(BackgroundMusicPlayer, true, duration));
     }
 
+    public void FadeInBackgroundTrack(float duration, AudioClip? audioclip, bool loop)
+    {
+        BackgroundMusicPlayer.volume = 0f;
+        PlayBackgroundMusic(audioclip, loop);
+        StartCoroutine(FadeAudioRoutine(BackgroundMusicPlayer, false, duration));
+    }
+
     protected IEnumerator PlayStartAudio()
     {
         PlayBackgroundMusic(sceneAudio.backgroundMusicIntro, false);
@@ -141,7 +148,7 @@ public class AudioManager : PersistentSingleton<AudioManager>
         PlayBackgroundMusic(sceneAudio.backgroundMusicPrimary, true);
     }
 
-    public void PlayBackgroundMusic(AudioClip? audioclip, bool loop)
+    protected void PlayBackgroundMusic(AudioClip? audioclip, bool loop)
     {
         BackgroundMusicPlayer.clip = audioclip;
         BackgroundMusicPlayer.Play();

@@ -53,7 +53,7 @@ namespace Dialogue.Epilogue
             deception.gameObject.SetActive(false);
             worthless.gameObject.SetActive(false);
             pathetic.gameObject.SetActive(false);
-            AudioManager.Instance.PlayBackgroundMusic(backgroundBeeping, true);
+            AudioManager.Instance.FadeInBackgroundTrack(2f, backgroundBeeping, true);
 
             yield return new WaitForSeconds(1f);
             yield return scrimAlpha.FadeInLightScreen(1f);
@@ -75,7 +75,7 @@ namespace Dialogue.Epilogue
             yield return DialogueBoxV2.Instance.Play(postDialogue3.Into());
             AudioManager.Instance.FadeOutCurrentBackgroundTrack(1f);
             yield return new WaitForSeconds(2f);
-            AudioManager.Instance.PlayBackgroundMusic(labAmbiance, true);
+            AudioManager.Instance.FadeInBackgroundTrack(2f, labAmbiance, true);
             yield return DialogueBoxV2.Instance.Play(dialogue4.Into());
             
             yield return UIFadeScreenManager.Instance.FadeInDarkScreen(2f);
@@ -90,7 +90,7 @@ namespace Dialogue.Epilogue
             else if (e.EventName == "worthless") worthless.Play();
             else if (e.EventName == "pathetic") pathetic.Play();
             else if (e.EventName == "panic") _panicCoroutine = StartCoroutine(PanicSequence()); // I'm afraid the infection is permanent line. 
-            else if (e.EventName == "resolve") Resolve();
+            else if (e.EventName == "resolve") Resolve(); // I have to be out there for Jackie line. 
         }
 
 
