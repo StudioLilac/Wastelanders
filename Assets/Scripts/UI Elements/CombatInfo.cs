@@ -204,6 +204,11 @@ public class CombatInfo : MonoBehaviour
         diceRollText.GetComponent<TextMeshPro>().text = null;
     }
 
+    public void PassOut()
+    {
+        healthBar.SetText("X");
+    }
+
     public void EnableHealthBar()
     {
         healthBar.gameObject.SetActive(true);

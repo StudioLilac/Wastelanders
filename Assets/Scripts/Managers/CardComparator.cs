@@ -194,6 +194,7 @@ public class CardComparator : MonoBehaviour
     public static readonly float X_BUFFER = 0.8f;
     private IEnumerator ClashBothEntities(ActionClass card1, ActionClass card2)
     {
+        bool oneSidedEnemyAttack = card1 == card2 && !card1.IsPlayedByPlayer();
         EntityClass origin = card1.Origin;
         EntityClass target = card1.Target;
         EmphasizeClashers(origin, target);
@@ -207,17 +208,16 @@ public class CardComparator : MonoBehaviour
                         (card2.CardType == CardType.RangedAttack || card2.CardType == CardType.Defense) ? X_BUFFER * 3 : X_BUFFER; //Calculates how far away clashers should be when striking
         
         Coroutine playerMove = StartCoroutine(origin?.MoveToPosition(HorizontalProjector(centeredDistance, origin.myTransform.position, xBuffer), bufferedRadius, duration, centeredDistance));
-        Coroutine enemyMove = StartCoroutine(target?.MoveToPosition(HorizontalProjector(centeredDistance, target.myTransform.position, xBuffer), bufferedRadius, duration, centeredDistance));
-
+        if (!target.IsDead) 
+            yield return StartCoroutine(target?.MoveToPosition(HorizontalProjector(centeredDistance, target.myTransform.position, xBuffer), bufferedRadius, duration, centeredDistance));
         yield return playerMove;
-        yield return enemyMove;
 
         if (playersAreRollingDiceEvent != null)
         {
             yield return StartCoroutine(playersAreRollingDiceEvent.Invoke());
             yield return new WaitUntil(() => Input.GetMouseButtonDown(0) && !PauseMenuV2.IsPaused); //Necessary to not immediately roll the dice
         }
-        yield return new WaitUntil(() => Input.GetMouseButtonDown(0) && !PauseMenuV2.IsPaused);
+        if (!oneSidedEnemyAttack) yield return new WaitUntil(() => Input.GetMouseButtonDown(0) && !PauseMenuV2.IsPaused);
     }
 
 

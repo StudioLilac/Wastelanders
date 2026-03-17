@@ -10,11 +10,12 @@ namespace Entities
     {
         public int StartingHealth { get; set; } = 50;
         public int NumberOfAttacks { get; set; } = 2;
+        public BlessBuffTarget EncounterBlessTarget { get; set; } = BlessBuffTarget.Random;
         public List<GameObject> BlessCards { get; private set; } = new();
         public List<GameObject> HurlCards { get; private set; } = new();
         public List<GameObject> BurpCards { get; private set; } = new();
-        public List<GameObject> Spawnables { get; private set; } = new();
         public List<GameObject> GobbleCards { get; private set; } = new();
+        public List<EnemyClass> OwnedMinions { get; set; } = new();
         public AttackDeciderDelegate AttackDecider { private get; set; } = 
             (int enemyCount) => 
                 Random.Range(0f, 1f) > enemyCount switch
@@ -35,7 +36,7 @@ namespace Entities
 
             myName = "Princess Frog";
             Health = MaxHealth = StartingHealth;
-            AddStacks(Resonate.buffName, 8);
+            AddStacks(Resonate.buffName, 7);
         }
 
         public override void InstantiateDeck()
@@ -55,11 +56,11 @@ namespace Entities
                     GameObject toAdd = Instantiate(availableActions[i]);
                     ActionClass addedClass = toAdd.GetComponent<ActionClass>();
                     addedClass.Origin = this;
-                    if (addedClass is BurpCard burpCard)
+                    if (addedClass is BlessCard blessCard)
                     {
-                        burpCard.SerializedSpawnableEnemies.Clear();
-                        burpCard.SerializedSpawnableEnemies.AddRange(Spawnables);
-                    } 
+                        blessCard.TargetBuff = EncounterBlessTarget;
+                        blessCard.Initialize();
+                    }
 
                     if (actionMapping.TryGetValue(i, out var targetList))
                     {
@@ -84,33 +85,45 @@ namespace Entities
             EntityTookDamage -= HandleDamage;
         }
 
+        private List<EnemyClass> GetStaggeredMinions()
+        {
+            return OwnedMinions.Where(m => m.IsDead).ToList();
+        }
+
         public override void AddAttack(List<EntityClass> targets)
         {
             var opponents = targets.Where(entity => entity.Team == EntityTeam.PlayerTeam).ToList();
             var neutral = targets.Where(entity => entity.Team == EntityTeam.NeutralTeam).ToList();
 
-            // Variables that potentially change as the princess frog makes its attack sequentially
-            int potentialEnemyCount = CombatManager.Instance.GetEnemies().Count; // Note that princess frog counts itself
+            List<EnemyClass> availableDeadMinions = GetStaggeredMinions();
+            int activeMinionCount = OwnedMinions.Count - availableDeadMinions.Count + 1;
             int gobblePotentialStacks = 0;
 
             for (int i = 0; i < NumberOfAttacks; i++)
             {
-                bool shouldPlayBurp = AttackDecider(potentialEnemyCount);
+                bool canBurp = availableDeadMinions.Count > 0;
+                bool shouldPlayBurp = canBurp && AttackDecider(activeMinionCount);
                 int currentStacks = GetBuffStacks(Resonate.buffName);
+
+                EntityClass burpTarget = null;
+                if (shouldPlayBurp)
+                {
+                    int targetIndex = Random.Range(0, availableDeadMinions.Count);
+                    burpTarget = availableDeadMinions[targetIndex];
+                    availableDeadMinions.RemoveAt(targetIndex);
+                    activeMinionCount++;
+                }
 
                 switch (currentStacks)
                 {
                     case >= 7:
-                        AttackWith(shouldPlayBurp ? BurpCards[i] : BlessCards[i], CalculateAttackTarget(opponents));
-                        if (shouldPlayBurp) ++potentialEnemyCount; // Increase potential enemy count so we do not over spawn.
+                    case >= 2 and <= 6:
+                        if (shouldPlayBurp) AttackWith(BurpCards[i], burpTarget);
+                        else                AttackWith(BlessCards[i], CalculateAttackTarget(opponents));
                         break;
                     case var _ when neutral.Count > 0 && (gobblePotentialStacks + currentStacks) <= 6:
                         AttackWith(GobbleCards[i], CalculateAttackTarget(neutral));
                         gobblePotentialStacks += 3; //Pretends gobble succeeds and makes furthur decisions from there. 
-                        break;
-                    case >= 2 and <= 6:
-                        AttackWith(shouldPlayBurp ? BurpCards[i] : BlessCards[i], CalculateAttackTarget(opponents));
-                        if (shouldPlayBurp) ++potentialEnemyCount;
                         break;
                     case 1:
                         AttackWith(BlessCards[i], CalculateAttackTarget(neutral));

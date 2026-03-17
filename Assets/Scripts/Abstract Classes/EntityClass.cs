@@ -50,6 +50,7 @@ public abstract class EntityClass : SelectClass
     public CombatInfo combatInfo;
     [SerializeField] 
     protected BoxCollider boxCollider;
+    [SerializeField] private Sprite passOutSprite;
 
 #nullable enable
     private Vector3 damageSourceDirection = default;
@@ -73,16 +74,19 @@ public abstract class EntityClass : SelectClass
 
     private EntityMovementHandler entityMovement = null!;
 
-    public virtual void Start()
+    public virtual void Awake()
     {
         entityMovement = this.AddComponent<EntityMovementHandler>();
         initialPosition = myTransform.position;
+        DeathHandler = Die;
+    }
 
+    public virtual void Start()
+    {
         DeEmphasize();
         DisableDice();
         AssignTeam();
         GetComponent<SpriteRenderer>().sortingLayerName = FadeSortingLayer;
-        DeathHandler = Die;
 
         OnEntitySpawn?.Invoke(this);
     }
@@ -182,6 +186,53 @@ public abstract class EntityClass : SelectClass
 
         yield return StartCoroutine(MoveToPosition(myTransform.position + new Vector3(runDistance, 0, 0), 0, 0.8f));
         this.gameObject.SetActive(false);
+    }
+
+    public IEnumerator PassOut()
+    {
+        BattleQueue.BattleQueueInstance.RemoveAllInstancesOfEntity(this);
+        UnTargetable();
+        combatInfo.PassOut();
+        float distanceToTravel = Vector3.Distance(myTransform.position, initialPosition);
+        float unitsPerSecond = 12f;
+        float calculatedDuration = distanceToTravel / unitsPerSecond;
+        float minDuration = 0.15f;
+        float maxDuration = 1.0f;
+        float finalDuration = Mathf.Clamp(calculatedDuration, minDuration, maxDuration);
+        yield return StartCoroutine(MoveToPosition(initialPosition, 0f, finalDuration));
+        yield return new WaitForSeconds(0.1f);
+
+        if (passOutSprite != null)
+        {
+            SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+            spriteRenderer.sprite = passOutSprite;
+            animator.speed = 0f;
+        } else if (HasAnimationParameter("IsStaggered"))
+        {
+            animator.SetBool("IsStaggered", true);
+            yield return new WaitForSeconds(0.1f);
+            animator.speed = 0f;
+        }
+
+
+        transform.rotation = Quaternion.Euler(0, 0, -25f);
+    }
+
+    public void Revive()
+    {
+        IsDead = false;
+
+        transform.rotation = Quaternion.identity;
+        animator.speed = 1f;
+        if (HasAnimationParameter("IsStaggered"))
+        {
+            animator.SetBool("IsStaggered", false);
+        }
+        
+
+        Targetable();
+        AssignTeam();
+        OnEntitySpawn?.Invoke(this);
     }
 
     public void FaceRight()

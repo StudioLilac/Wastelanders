@@ -9,14 +9,13 @@ namespace Cards.EnemyCards.FrogCards
 
         [SerializeField] private AnimationClip animationClip;
 
-        [Header("Card Specialization")]
-        [SerializeField] private BlessBuffTarget targetBuff;
-        
+        public BlessBuffTarget TargetBuff { get; set; } = BlessBuffTarget.Random;
+
         public override void Initialize()
         {
             base.Initialize();
-            myName = $"Bless ({targetBuff})";
-            description = $"Spend +{BLESS_COST} Resonance to play. If not staggered: Refund resonance spent and give all teammates 1 {targetBuff.GetBuffDescription()}.";
+            myName = $"Bless ({TargetBuff})";
+            description = $"Spend {BLESS_COST} Resonance to play. If not staggered, refund resonance and give all teammates 1 {TargetBuff.GetBuffDescription()}.";
 
             CostToAddToDeck = 2;
             lowerBound = upperBound = 1;
@@ -51,7 +50,7 @@ namespace Cards.EnemyCards.FrogCards
             Origin.AddStacks(Resonate.buffName, BLESS_COST);
 
             var teamMates = Origin.Team.GetTeamMates();
-            string buffToApply = targetBuff.GetBuff();
+            string buffToApply = TargetBuff.GetBuff();
 
             foreach (var enemy in teamMates)
             {
