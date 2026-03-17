@@ -48,7 +48,7 @@ public class CombatInfo : MonoBehaviour
 
     void RemoveCardFromTarget(EntityClass entity)
     {
-        List<ActionClass> removedActions = combatCards.Where(card => card.Target == entity).ToList();
+        List<ActionClass> removedActions = combatCards.Where(card => card.Target == entity || card.Origin == entity).ToList();
         foreach (ActionClass action in removedActions)
         {
             DeactivateCombatSprite(action);

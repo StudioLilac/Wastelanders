@@ -206,16 +206,15 @@ public abstract class EntityClass : SelectClass
         {
             SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
             spriteRenderer.sprite = passOutSprite;
-            animator.speed = 0f;
-        } else if (HasAnimationParameter("IsStaggered"))
+        } else if (HasAnimationParameter(STAGGERED_ANIMATION_NAME))
         {
-            animator.SetBool("IsStaggered", true);
+            animator.SetBool(STAGGERED_ANIMATION_NAME, true);
             yield return new WaitForSeconds(0.1f);
-            animator.speed = 0f;
         }
 
-
-        transform.rotation = Quaternion.Euler(0, 0, -25f);
+        animator.enabled = false;
+        float randomZRotation = UnityEngine.Random.Range(-30f, -15f);
+        transform.rotation = Quaternion.Euler(0, 0, randomZRotation);
     }
 
     public void Revive()
@@ -223,13 +222,12 @@ public abstract class EntityClass : SelectClass
         IsDead = false;
 
         transform.rotation = Quaternion.identity;
-        animator.speed = 1f;
-        if (HasAnimationParameter("IsStaggered"))
+        animator.enabled = true;
+        if (HasAnimationParameter(STAGGERED_ANIMATION_NAME))
         {
-            animator.SetBool("IsStaggered", false);
+            animator.SetBool(STAGGERED_ANIMATION_NAME, false);
         }
         
-
         Targetable();
         AssignTeam();
         OnEntitySpawn?.Invoke(this);

@@ -14,8 +14,8 @@ namespace Cards.EnemyCards.FrogCards
         public override void Initialize()
         {
             base.Initialize();
-            myName = $"Bless ({TargetBuff})";
-            description = $"Spend {BLESS_COST} Resonance to play. If not staggered, refund resonance and give all teammates 1 {TargetBuff.GetBuffDescription()}.";
+            myName = $"Bless";
+            description = $"Spend {BLESS_COST} Resonance to play. If not staggered, give all teammates 1 {TargetBuff.GetBuffDescription()}.";
 
             CostToAddToDeck = 2;
             lowerBound = upperBound = 1;
@@ -47,7 +47,6 @@ namespace Cards.EnemyCards.FrogCards
         {
             IPlayableEnemyCard.ApplyForeignAttackAnimation(Origin, animationClip, BLESS_ANIMATION);
             Origin.AttackAnimation(BLESS_ANIMATION);
-            Origin.AddStacks(Resonate.buffName, BLESS_COST);
 
             var teamMates = Origin.Team.GetTeamMates();
             string buffToApply = TargetBuff.GetBuff();
@@ -88,6 +87,6 @@ namespace Cards.EnemyCards.FrogCards
             BlessBuffTarget.Resonate => Resonate.buffName,
             BlessBuffTarget.Random => new[] { Accuracy.buffName, Flow.buffName, Resonate.buffName }[Random.Range(0, 3)],
             _ => string.Empty
-        };
+        };        
     }
 }

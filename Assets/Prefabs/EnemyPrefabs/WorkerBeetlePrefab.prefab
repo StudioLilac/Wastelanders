@@ -151,6 +151,7 @@ MonoBehaviour:
   animator: {fileID: 3552047448212555760}
   combatInfo: {fileID: 9191087331242654797}
   boxCollider: {fileID: 5069809743003330988}
+  passOutSprite: {fileID: 1076600818, guid: 12fe901254dfc0e4da5af1be8e8ae893, type: 3}
   <AnimatorController>k__BackingField: {fileID: 9100000, guid: 7a88fcda89e904244aa576e1dcbf73ee, type: 2}
   availableActions:
   - {fileID: 2376898879351982445, guid: 7090f976358e24551b91b2b219740e7b, type: 3}
@@ -162,9 +163,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 617082415006753302}
     m_Modifications:
+    - target: {fileID: 230661372266811410, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
     - target: {fileID: 607299130714548600, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.38
+      objectReference: {fileID: 0}
+    - target: {fileID: 1550763909045383249, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
       objectReference: {fileID: 0}
     - target: {fileID: 2884873149614193822, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -221,6 +230,10 @@ PrefabInstance:
     - target: {fileID: 6373172873634443639, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0.77
+      objectReference: {fileID: 0}
+    - target: {fileID: 7417901496945242764, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
       objectReference: {fileID: 0}
     - target: {fileID: 7669802168277398618, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
       propertyPath: m_LocalPosition.y

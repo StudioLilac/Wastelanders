@@ -13,7 +13,7 @@ namespace Cards.EnemyCards.FrogCards
             base.Initialize();
 
             myName = "Burp";
-            description = $"Spend +{BURP_COST} Resonance to play. On ally hit, refund resonance and heal ally rolled power + resonance stacks instead.";
+            description = $"Spend +{BURP_COST} Resonance to play. On ally hit, refund resonance spent and heal ally rolled power + resonance stacks instead.";
 
             CostToAddToDeck = 2;
             lowerBound = upperBound = 1;

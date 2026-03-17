@@ -116,23 +116,23 @@ namespace Entities
 
                 switch (currentStacks)
                 {
-                    case >= 7:
-                    case >= 2 and <= 6:
+                    case >= 6:
                         if (shouldPlayBurp) AttackWith(BurpCards[i], burpTarget);
                         else                AttackWith(BlessCards[i], CalculateAttackTarget(opponents));
                         break;
-                    case var _ when neutral.Count > 0 && (gobblePotentialStacks + currentStacks) <= 6:
+                    case var _ when neutral.Count > 0 && (gobblePotentialStacks + currentStacks) < 6:
                         AttackWith(GobbleCards[i], CalculateAttackTarget(neutral));
                         gobblePotentialStacks += 3; //Pretends gobble succeeds and makes furthur decisions from there. 
                         break;
-                    case 1:
-                        AttackWith(BlessCards[i], CalculateAttackTarget(neutral));
+                    case >= 2:
+                        if (shouldPlayBurp) AttackWith(BurpCards[i], burpTarget);
+                        else AttackWith(BlessCards[i], CalculateAttackTarget(opponents));
                         break;
-                    case 0:
-                        AttackWith(HurlCards[i], CalculateAttackTarget(neutral));
+                    case 1:
+                        AttackWith(BlessCards[i], CalculateAttackTarget(opponents));
                         break;
                     default:
-                        AttackWith(HurlCards[i], CalculateAttackTarget(neutral));
+                        AttackWith(HurlCards[i], CalculateAttackTarget(opponents));
                         break;
                 }
 

@@ -69,8 +69,8 @@ namespace SceneBuilder
 
         private BlessBuffTarget DetermineBlessTarget() => bounty?.ContractSet switch {
                 null => BlessBuffTarget.Resonate,
-                var set when set.Contains(EnemySpawningContracts.FROG_SPAWN) => BlessBuffTarget.Accuracy,
-                var set when set.Contains(EnemySpawningContracts.SLIME_SPAWN) => BlessBuffTarget.Flow,
+                var set when set.Contains(EnemySpawningContracts.FROG_SPAWN) => BlessBuffTarget.Flow,
+                var set when set.Contains(EnemySpawningContracts.SLIME_SPAWN) => BlessBuffTarget.Accuracy,
                 _ => BlessBuffTarget.Resonate
         };
 
