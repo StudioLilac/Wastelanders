@@ -12,7 +12,7 @@ public class Brace : FistCards
     {
         lowerBound = 3;
         upperBound = 3;
-        Speed = 3;
+        Speed = 5;
 
         myName = "Brace";
         description = "Block, then block the next one sided attack currently targeting this character.";
