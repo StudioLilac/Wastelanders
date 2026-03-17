@@ -9,7 +9,7 @@ public class PreBounty1 : MonoBehaviour
     [SerializeField] private GameObject ives;
 
     [SerializeField] private Transform ivesTarget;
-    [SerializeField] private SpriteRenderer blackScreen;
+    [SerializeField] private SpriteFadeHandler blackScreen;
 
     [SerializeField] private DialogueEntryWrapper Preamble;
     [SerializeField] private DialogueEntryWrapper JackieReminiscingDialogue;
@@ -25,7 +25,7 @@ public class PreBounty1 : MonoBehaviour
     public IEnumerator StartScene()
     {
         yield return DialogueBoxV2.Instance.Play(Preamble);
-        yield return FadeOutSpriteRenderer(2f, blackScreen);
+        yield return blackScreen.FadeToAlpha(0, 2f);
         yield return DialogueBoxV2.Instance.Play(JackieReminiscingDialogue);
 
         yield return DialogueSceneUtils.MoveCharacterToTarget(ives, ivesTarget, ivesMoveSpeed);
@@ -35,17 +35,5 @@ public class PreBounty1 : MonoBehaviour
         yield return DialogueBoxV2.Instance.Play(BountyBoardDialogue);
 
         yield return UIFadeScreenManager.Instance.FadeInDarkScreen(1f);
-    }
-
-    private IEnumerator FadeOutSpriteRenderer(float time, SpriteRenderer sr)
-    {
-        float curTime = 0;
-        while (curTime < time)
-        {
-            curTime += Time.deltaTime;
-            sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1 - curTime / time);
-            yield return null;
-        }
-        sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 0);
     }
 }

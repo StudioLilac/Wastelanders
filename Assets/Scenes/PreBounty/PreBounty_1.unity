@@ -537,6 +537,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1006889383}
   - component: {fileID: 1006889384}
+  - component: {fileID: 1006889385}
   m_Layer: 0
   m_Name: Black
   m_TagString: Untagged
@@ -614,6 +615,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1006889385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1006889382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a6c2131294871b4499a5ce3cb16734e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 1006889384}
 --- !u!1 &1312421349
 GameObject:
   m_ObjectHideFlags: 0
@@ -1088,7 +1102,7 @@ MonoBehaviour:
   jackie: {fileID: 50785708}
   ives: {fileID: 551469452}
   ivesTarget: {fileID: 1538394867}
-  blackScreen: {fileID: 1006889384}
+  blackScreen: {fileID: 1006889385}
   Preamble: {fileID: 11400000, guid: fec3b66ce02fd41159328daec9fbd87b, type: 2}
   JackieReminiscingDialogue: {fileID: 11400000, guid: d6a99f45f46c140c3abdaf84def654de, type: 2}
   BountyBoardDialogue: {fileID: 11400000, guid: 1d75992fc80d545f8979d67a464c2f01, type: 2}
