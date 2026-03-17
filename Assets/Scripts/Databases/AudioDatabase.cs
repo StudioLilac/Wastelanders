@@ -22,6 +22,7 @@ public class AudioDatabase : ScriptableObject
     public SceneAudio TeaserScene;
 
     [Header("Epilogue Scenes")]
+    public SceneAudio Epilogue4;
     public SceneAudio Epilogue6;
     public SceneAudio Epilogue7;
     public SceneAudio Epilogue8;

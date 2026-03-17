@@ -116,14 +116,17 @@ namespace DialogueScripts
 
         private IEnumerator TypewriteText()
         {
+            txtView.ForceMeshUpdate();
+            int totalVisibleCharacters = txtView.textInfo.characterCount;
             txtView.maxVisibleCharacters = 0;
+
             float elapsed = 0f;
 
-            while (txtView.maxVisibleCharacters < txtView.text.Length)
+            while (txtView.maxVisibleCharacters < totalVisibleCharacters)
             {
                 if (HasInput())
                 {
-                    txtView.maxVisibleCharacters = txtView.text.Length;
+                    txtView.maxVisibleCharacters = totalVisibleCharacters;
                     yield break;
                 }
 
