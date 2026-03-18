@@ -78,5 +78,6 @@
     </ui:VisualElement>
     <ui:VisualElement name="top-left-icons" style="flex-grow: 1; flex-direction: row; position: absolute; left: 24px; top: 24px;">
         <ui:Toggle name="auto-roll-toggle" value="false" style="width: 64px; height: 64px; background-image: url(&quot;project://database/Assets/Sprites/UISprites/HUD/autoroll_icon.png?fileID=2800000&amp;guid=4b3ae8749f5e19246be2d67a244404a1&amp;type=3#autoroll_icon&quot;);" />
+        <ui:Toggle name="2x-speed-toggle" value="false" style="width: 64px; height: 64px; background-image: url(&quot;project://database/Assets/Sprites/UISprites/HUD/2x_icon.png?fileID=2800000&amp;guid=5d503bd9c24e82342968b999e8bc9403&amp;type=3#2x_icon&quot;);" />
     </ui:VisualElement>
 </ui:UXML>

@@ -30,6 +30,12 @@ namespace Managers {
             
             SaveLoadSystem.Instance.SavePreferences(); 
         }
+        
+        public void SetDoubleSpeed(bool value) {
+            userPreferences.DoubleSpeedEnabled = value;
+            
+            SaveLoadSystem.Instance.SavePreferences(); 
+        }
 
         public void SetScreenShakeEnabled(bool value) {
             ScreenShakeHandler.IsScreenShakeEnabled = value;

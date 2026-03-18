@@ -20,6 +20,7 @@ namespace UI_Toolkit
         private Button pauseIconButton;
 
         private Toggle autoRollToggle;
+        private Toggle doubleSpeedToggle;
 
         private State state;
 
@@ -37,6 +38,7 @@ namespace UI_Toolkit
             pauseMenuPanel = rootElem.Q<VisualElement>("pause-menu-panel");
             pauseIconButton = rootDocument.rootVisualElement.Q<Button>("pause-icon-button");
             autoRollToggle = rootDocument.rootVisualElement.Q<Toggle>("auto-roll-toggle");
+            doubleSpeedToggle = rootDocument.rootVisualElement.Q<Toggle>("2x-speed-toggle");
             rootDocument.panelSettings.sortingOrder = UISortOrder.PauseMenu.GetOrder();
 
             pauseIconButton.clicked += DoPause;
@@ -152,6 +154,10 @@ namespace UI_Toolkit
         private static void OnAutoRollChanged(bool value) {
             PreferencesManager.Instance.SetAutoRoll(value);
         }
+        
+        private static void OnDoubleSpeedChanged(bool value) {
+            PreferencesManager.Instance.SetDoubleSpeed(value);
+        }
 
         private static void OnMusChanged(float value)
         {
@@ -192,6 +198,7 @@ namespace UI_Toolkit
             glossary.Q<Button>("button-cls").clicked += OnClsClicked;
 
             autoRollToggle.RegisterValueChangedCallback(e => OnAutoRollChanged(e.newValue));
+            doubleSpeedToggle.RegisterValueChangedCallback(e => OnDoubleSpeedChanged(e.newValue));
 
             pauseMenuPanel.Q<Slider>("slider-mus").RegisterValueChangedCallback(e => OnMusChanged(e.newValue));
             pauseMenuPanel.Q<Slider>("slider-sfx").RegisterValueChangedCallback(e => OnSfxChanged(e.newValue));
@@ -210,6 +217,7 @@ namespace UI_Toolkit
             pauseMenuPanel.Q<Toggle>("toggle-vfx").value = ScreenShakeHandler.IsScreenShakeEnabled;
 
             autoRollToggle.value = preferences.AutoRollEnabled;
+            doubleSpeedToggle.value = preferences.DoubleSpeedEnabled;
         }
 
         private enum State

@@ -26,6 +26,7 @@ namespace Systems.Persistence
         public AudioPreferences audioPreferences;
         public ScreenShakePreference screenShakePreference;
         public bool AutoRollEnabled;
+        public bool DoubleSpeedEnabled;
 
         public string SaveName => Name;
     }
