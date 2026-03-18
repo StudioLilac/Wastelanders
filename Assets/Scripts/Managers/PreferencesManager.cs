@@ -55,5 +55,13 @@ namespace Managers {
             userPreferences.audioPreferences.MusicMuted = muted;
             AudioManager.Instance.SetMusicMuted(muted);
         }
+
+        public float GetMusicVolume() {
+            return userPreferences.audioPreferences.BackgroundMusicVolume;
+        }
+        
+        public float GetSFXVolume() {
+            return userPreferences.audioPreferences.SFXVolume;
+        }
     }
 }

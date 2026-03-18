@@ -1,4 +1,5 @@
 using System.Collections;
+using Managers;
 using Systems.Persistence;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -92,8 +93,8 @@ public class AudioManager : PersistentSingleton<AudioManager>
         float startVolume = audioSource.volume;
 
         float targetMaxVolume = (audioSource == SFXSoundsPlayer)
-            ? audioPreferences.SFXVolume
-            : audioPreferences.BackgroundMusicVolume;
+            ? PreferencesManager.Instance.GetSFXVolume()
+            : PreferencesManager.Instance.GetMusicVolume();
 
         float endVolume = isFadingOut ? 0f : targetMaxVolume;
         float time = 0f;
