@@ -76,7 +76,7 @@ public abstract class EntityClass : SelectClass
 
     public virtual void Awake()
     {
-        entityMovement = this.AddComponent<EntityMovementHandler>();
+        entityMovement = this.gameObject.AddComponent<EntityMovementHandler>();
         initialPosition = myTransform.position;
         DeathHandler = Die;
     }
