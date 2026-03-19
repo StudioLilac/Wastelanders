@@ -16,6 +16,8 @@ public class CardComparator : MonoBehaviour
 
     public delegate IEnumerator ClashersAreReadyToRoll();
     public event ClashersAreReadyToRoll? playersAreRollingDiceEvent;
+    
+    public static bool autoRoll = false;
 
     // Awake is called when the script instance is being loaded
     void Awake()
@@ -215,9 +217,15 @@ public class CardComparator : MonoBehaviour
         if (playersAreRollingDiceEvent != null)
         {
             yield return StartCoroutine(playersAreRollingDiceEvent.Invoke());
-            yield return new WaitUntil(() => Input.GetMouseButtonDown(0) && !PauseMenuV2.IsPaused); //Necessary to not immediately roll the dice
+            
+            if (!autoRoll) {
+                yield return new WaitUntil(() => Input.GetMouseButtonDown(0) && !PauseMenuV2.IsPaused);
+            }
         }
-        if (!oneSidedEnemyAttack) yield return new WaitUntil(() => Input.GetMouseButtonDown(0) && !PauseMenuV2.IsPaused);
+        
+        if (!autoRoll) {
+            yield return new WaitUntil(() => Input.GetMouseButtonDown(0) && !PauseMenuV2.IsPaused);
+        }
     }
 
 
