@@ -69,11 +69,11 @@ MonoBehaviour:
     - rid: -2
       type: {class: , ns: , asm: }
     - rid: 1207053248668106829
-      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     - rid: 1207053248668106830
-      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
         action: 10
