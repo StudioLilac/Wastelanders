@@ -32,6 +32,7 @@ MonoBehaviour:
     events:
     - rid: 314095765763391692
     - rid: 314095765763391691
+    - rid: 849616224567951433
   - content: How?
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     sfxId: 0
@@ -114,3 +115,9 @@ MonoBehaviour:
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    - rid: 849616224567951433
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+        action: 60
+        duration: 1

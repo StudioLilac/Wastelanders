@@ -53,6 +53,7 @@ public class Epilogue_9 : MonoBehaviour
         yield return DialogueBoxV2.Instance.Play(TundraWeiss);
         
         // TODO: Ping sound effect
+        yield return new WaitForSeconds(0.5f);
         yield return purpleFlash.FadeInDarkScreen(0.5f);
         yield return purpleFlash.FadeInLightScreen(0.5f);
 

@@ -38,6 +38,13 @@ MonoBehaviour:
     - rid: 314095765763391684
     - rid: 314095765763391683
     - rid: 314095765763391685
+  - content: 
+    speaker: {fileID: 11400000, guid: 4fef3aeb65460fd498ab9efe9bac8625, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 849616224567951425
+    - rid: 849616224567951432
   references:
     version: 2
     RefIds:
@@ -82,7 +89,7 @@ MonoBehaviour:
       data:
         actor: {fileID: 11400000, guid: 0c67bccb77acb478ca9abb7f55cabc38, type: 2}
         action: 20
-        duration: 1
+        duration: 0
     - rid: 314095765763391684
       type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:
@@ -94,4 +101,16 @@ MonoBehaviour:
       data:
         actor: {fileID: 11400000, guid: 0c67bccb77acb478ca9abb7f55cabc38, type: 2}
         action: 60
+        duration: 1
+    - rid: 849616224567951425
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 0c67bccb77acb478ca9abb7f55cabc38, type: 2}
+        action: 70
+        duration: 1
+    - rid: 849616224567951432
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+        action: 10
         duration: 1

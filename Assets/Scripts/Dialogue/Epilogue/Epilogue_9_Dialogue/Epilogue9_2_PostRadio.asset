@@ -41,7 +41,7 @@ MonoBehaviour:
     picture: {fileID: 0}
     events:
     - rid: 314095765763391559
-  - content: 'A couple hours pass, with no hint of a reply. '
+  - content: <i>A couple hours pass, with no hint of a reply.</i>
     speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -234,8 +234,8 @@ MonoBehaviour:
     picture: {fileID: 0}
     events:
     - rid: 314095765763391595
-  - content: Jackie feels her throat tightening as she struggles to find the right
-      words to say.
+  - content: <i>Jackie feels her throat tightening as she struggles to find the right
+      words to say.</i>
     speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -388,9 +388,14 @@ MonoBehaviour:
     picture: {fileID: 0}
     events:
     - rid: 314095765763391616
-    - rid: 314095765763391617
-    - rid: 314095765763391618
-    - rid: 314095765763391619
+  - content: 
+    speaker: {fileID: 11400000, guid: 4fef3aeb65460fd498ab9efe9bac8625, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 849616224567951426
+    - rid: 849616224567951427
+    - rid: 849616224567951428
   references:
     version: 2
     RefIds:
@@ -676,27 +681,27 @@ MonoBehaviour:
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-    - rid: 314095765763391617
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        action: 70
-        duration: 1
-    - rid: 314095765763391618
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
-        action: 70
-        duration: 1
-    - rid: 314095765763391619
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
-        action: 70
-        duration: 1
     - rid: 314095765763391700
       type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
         action: 70
         duration: 0
+    - rid: 849616224567951426
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        action: 70
+        duration: 1
+    - rid: 849616224567951427
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
+        action: 70
+        duration: 1
+    - rid: 849616224567951428
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+        action: 70
+        duration: 1
