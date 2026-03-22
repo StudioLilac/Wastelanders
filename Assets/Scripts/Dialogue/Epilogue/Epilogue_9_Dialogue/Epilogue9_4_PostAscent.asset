@@ -1,0 +1,155 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4fafe43b89343e3a7ba1235e8987c0f, type: 3}
+  m_Name: Epilogue9_4_PostAscent
+  m_EditorClassIdentifier: 
+  Entries:
+  - content: "We're here, the coordinates for Delta\u2019s last signal."
+    speaker: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 314095765763391621
+    - rid: 314095765763391638
+    - rid: 314095765763391622
+    - rid: 314095765763391623
+    - rid: 314095765763391637
+  - content: <i>*whistles*</i> Looks like our luck has run out. Just like they said,
+      solid rock.
+    speaker: {fileID: 11400000, guid: ba10bd187431a442890fc8138cfaa1e2, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  - content: Ari... what do you mean?
+    speaker: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 314095765763391624
+    - rid: 314095765763391630
+  - content: "I mean\u2026 look at it. Smooth as butter, solid as ice."
+    speaker: {fileID: 11400000, guid: ba10bd187431a442890fc8138cfaa1e2, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 314095765763391628
+  - content: ...Ari. Put your hand down... There's no wall there.
+    speaker: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 314095765763391629
+  - content: Ha... Good joke, boss. It's right there!
+    speaker: {fileID: 11400000, guid: ba10bd187431a442890fc8138cfaa1e2, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 314095765763391632
+  - content: "<i>Confusion spreads through the group. Half the scouts are nodding
+      with Ari, staring at a wall that doesn't exist. The other half\u2014stunned.</i>"
+    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 314095765763391634
+  - content: I'll go on ahead for now, just stay behind me.
+    speaker: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 314095765763391633
+  - content: <i>Jay steps forward, appearing to phase through solid stone.</i>
+    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 314095765763391635
+  - content: See? It's safe! Come on!
+    speaker: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 314095765763391636
+    - rid: 314095765763391649
+  references:
+    version: 2
+    RefIds:
+    - rid: 314095765763391621
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
+    - rid: 314095765763391622
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
+        action: 60
+        duration: 1
+    - rid: 314095765763391623
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
+        sprite: {fileID: 21300000, guid: 1098f92cacec4420bb78f9b84117de33, type: 3}
+    - rid: 314095765763391624
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
+    - rid: 314095765763391628
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: ba10bd187431a442890fc8138cfaa1e2, type: 2}
+    - rid: 314095765763391629
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
+    - rid: 314095765763391630
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
+        sprite: {fileID: 21300000, guid: 1098f92cacec4420bb78f9b84117de33, type: 3}
+    - rid: 314095765763391632
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: ba10bd187431a442890fc8138cfaa1e2, type: 2}
+    - rid: 314095765763391633
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
+    - rid: 314095765763391634
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
+    - rid: 314095765763391635
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
+    - rid: 314095765763391636
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
+    - rid: 314095765763391637
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
+        action: 10
+        duration: 1
+    - rid: 314095765763391638
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
+        action: 40
+        duration: 0
+    - rid: 314095765763391649
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
+        action: 70
+        duration: 1

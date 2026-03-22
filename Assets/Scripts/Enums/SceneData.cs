@@ -246,6 +246,22 @@ public abstract class SceneData : Enum<SceneData>
         };
     }
 
+    public class Epilogue_9 : SceneData
+    {
+        public override string SceneName => "Epilogue_9";
+
+        public override SceneAudio GetAudio(AudioDatabase database) => database.Epilogue8;
+
+        public override MonoBehaviour[] RequiredPrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
+        {
+            prefabs.audioManager,
+            prefabs.pauseMenuV2,
+            prefabs.dialogueManager,
+            prefabs.uiFadeScreenManager,
+            prefabs.dialogueBoxV2
+        };
+    }
+
     private static readonly Dictionary<string, SceneData> _sceneLookup = new();
 
     static SceneData()
