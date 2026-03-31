@@ -208,7 +208,7 @@ namespace UI_Toolkit
             pauseMenuPanel.Q<Toggle>("toggle-vfx").value = ScreenShakeHandler.IsScreenShakeEnabled;
 
             autoRollToggle.value = preferences.AutoRollEnabled;
-            doubleSpeedToggle.value = preferences.DoubleSpeedEnabled;
+            doubleSpeedToggle.value = false;
         }
 
         private enum State
