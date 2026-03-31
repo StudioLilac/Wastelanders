@@ -147,7 +147,7 @@ namespace UI_Toolkit
         }
         
         private static void OnDoubleSpeedChanged(bool value) {
-            //  combatmanager call
+            CombatManager.Instance.SetDoubleSpeed(value);
         }
 
         private static void OnMusChanged(float value)

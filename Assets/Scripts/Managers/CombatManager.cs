@@ -32,7 +32,8 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private PlayerDatabase playerDatabase;
     [SerializeField] private CardDatabase cardDatabase;
 
-
+    public bool IsDoubleSpeedEnabled { get; private set; }
+    
     public List<InstantiableActionClassInfo> GetDeck(PlayerDatabase.PlayerName playerName)
     {
         return cardDatabase.GetPrefabInfoForDeck(playerDatabase.GetDeckByPlayerName(playerName));
@@ -395,6 +396,15 @@ public class CombatManager : MonoBehaviour
     {
         return (!PauseMenuV2.IsPaused) && GameState == GameState.SELECTION;
     }
+    
+    public void SetDoubleSpeed(bool enabled) {
+        IsDoubleSpeedEnabled = enabled;
+        
+        if (GameState == GameState.SELECTION || GameState == GameState.FIGHTING) {
+            Time.timeScale = enabled ? 2f : 1f;
+        }
+    }
+    
 
     public GameState GameState
     {
@@ -404,6 +414,11 @@ public class CombatManager : MonoBehaviour
             var oldState = gameState;
             OnGameStateChanging?.Invoke(value);
             gameState = value;
+            if (value == GameState.SELECTION || value == GameState.FIGHTING) {
+                Time.timeScale = IsDoubleSpeedEnabled ? 2f : 1f;
+            } else {
+                Time.timeScale = 1f;
+            }
             switch (value)
             {
                 case GameState.SELECTION:
@@ -413,6 +428,7 @@ public class CombatManager : MonoBehaviour
                     PerformFighting();
                     break;
                 case GameState.GAME_WIN:
+                    Time.timeScale = 1f;
                     PerformWin();
                     break;
                 case GameState.GAME_LOSE:
