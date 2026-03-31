@@ -32,7 +32,7 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private PlayerDatabase playerDatabase;
     [SerializeField] private CardDatabase cardDatabase;
 
-    public bool IsDoubleSpeedEnabled { get; private set; }
+    private bool IsDoubleSpeedEnabled { get; set; }
     
     public List<InstantiableActionClassInfo> GetDeck(PlayerDatabase.PlayerName playerName)
     {
