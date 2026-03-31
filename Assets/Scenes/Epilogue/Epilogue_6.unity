@@ -850,389 +850,389 @@ MonoBehaviour:
     version: 2
     RefIds:
     - rid: 2403555690236084296
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
         sprite: {fileID: 21300000, guid: 2c87828110c96b641b4334f1af609d2c, type: 3}
     - rid: 2403555690236084297
-      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
         action: 50
         duration: 0
     - rid: 2403555690236084298
-      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
         action: 70
         duration: 0
     - rid: 2403555690236084299
-      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
         action: 30
         duration: 1
     - rid: 2403555690236084300
-      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
         action: 60
         duration: 0.5
     - rid: 2403555690236084301
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         sprite: {fileID: 21300000, guid: 422f3cda08073664b8a46361afe442fb, type: 3}
     - rid: 2403555690236084302
-      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         action: 70
         duration: 1
     - rid: 2403555690236084303
-      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         action: 10
         duration: 1
     - rid: 2403555690236084304
-      type: {class: ActorAction, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         action: 60
         duration: 0.5
     - rid: 2403555690236084305
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
         sprite: {fileID: 21300000, guid: 7506e07004c52b347ac19f6a023d4bf9, type: 3}
     - rid: 2403555690236084306
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         sprite: {fileID: 21300000, guid: 534aff9f6dfd6c544b0144954e8ef0b0, type: 3}
     - rid: 2403555690236084307
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
         sprite: {fileID: 21300000, guid: 657f6fc9a6bebe642b2b933432af3e8b, type: 3}
     - rid: 2403555690236084308
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         sprite: {fileID: 21300000, guid: 422f3cda08073664b8a46361afe442fb, type: 3}
     - rid: 2403555690236084309
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         sprite: {fileID: 21300000, guid: 534aff9f6dfd6c544b0144954e8ef0b0, type: 3}
     - rid: 2403555690236084310
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
         sprite: {fileID: 21300000, guid: 2c87828110c96b641b4334f1af609d2c, type: 3}
     - rid: 2403555690236084311
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         sprite: {fileID: 21300000, guid: a9901bbfc9728634b8252622c7f3882c, type: 3}
     - rid: 2403555690236084312
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
         sprite: {fileID: 21300000, guid: 657f6fc9a6bebe642b2b933432af3e8b, type: 3}
     - rid: 2403555690236084315
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
         sprite: {fileID: 21300000, guid: f2ed6f852c9c1594590eea28f98518b3, type: 3}
     - rid: 2403555690236084316
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         sprite: {fileID: 21300000, guid: a9901bbfc9728634b8252622c7f3882c, type: 3}
     - rid: 2403555690236084317
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
         sprite: {fileID: 21300000, guid: 2c87828110c96b641b4334f1af609d2c, type: 3}
     - rid: 2403555690236084318
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         sprite: {fileID: 21300000, guid: 534aff9f6dfd6c544b0144954e8ef0b0, type: 3}
     - rid: 2403555690236084319
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
         sprite: {fileID: 21300000, guid: f2ed6f852c9c1594590eea28f98518b3, type: 3}
     - rid: 2403555690236084320
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         sprite: {fileID: 21300000, guid: e37d4fbf07c214c868939546f702fa2b, type: 3}
     - rid: 2403555690236084321
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
         sprite: {fileID: 21300000, guid: 2c87828110c96b641b4334f1af609d2c, type: 3}
     - rid: 2403555690236084322
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         sprite: {fileID: 21300000, guid: e37d4fbf07c214c868939546f702fa2b, type: 3}
     - rid: 2403555690236084323
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
         sprite: {fileID: 21300000, guid: 2c87828110c96b641b4334f1af609d2c, type: 3}
     - rid: 2403555690236084324
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         sprite: {fileID: 21300000, guid: 70562f64108503147861dbc82d787ef9, type: 3}
     - rid: 2403555690236084325
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
         sprite: {fileID: 21300000, guid: 2c87828110c96b641b4334f1af609d2c, type: 3}
     - rid: 2403555690236084326
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         sprite: {fileID: 21300000, guid: a9901bbfc9728634b8252622c7f3882c, type: 3}
     - rid: 2403555690236084327
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         sprite: {fileID: 21300000, guid: 534aff9f6dfd6c544b0144954e8ef0b0, type: 3}
     - rid: 2403555690236084328
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
         sprite: {fileID: 21300000, guid: 2c87828110c96b641b4334f1af609d2c, type: 3}
     - rid: 2403555690236084329
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         sprite: {fileID: 21300000, guid: a9901bbfc9728634b8252622c7f3882c, type: 3}
     - rid: 2403555690236084330
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         sprite: {fileID: 21300000, guid: 3e1f4b61741099f41a921affe0965f9d, type: 3}
     - rid: 2403555690236084331
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
         sprite: {fileID: 21300000, guid: 2c87828110c96b641b4334f1af609d2c, type: 3}
     - rid: 2403555690236084332
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         sprite: {fileID: 21300000, guid: 3e1f4b61741099f41a921affe0965f9d, type: 3}
     - rid: 2403555690236084333
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         sprite: {fileID: 21300000, guid: a9901bbfc9728634b8252622c7f3882c, type: 3}
     - rid: 2403555690236084334
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         sprite: {fileID: 21300000, guid: 70562f64108503147861dbc82d787ef9, type: 3}
     - rid: 2403555690236084335
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
         sprite: {fileID: 21300000, guid: 2c87828110c96b641b4334f1af609d2c, type: 3}
     - rid: 2403555690236084336
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         sprite: {fileID: 21300000, guid: e37d4fbf07c214c868939546f702fa2b, type: 3}
     - rid: 2403555690236084337
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         sprite: {fileID: 21300000, guid: a9901bbfc9728634b8252622c7f3882c, type: 3}
     - rid: 2403555690236084338
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
         sprite: {fileID: 21300000, guid: f2ed6f852c9c1594590eea28f98518b3, type: 3}
     - rid: 2403555690236084339
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
         sprite: {fileID: 21300000, guid: 2c87828110c96b641b4334f1af609d2c, type: 3}
     - rid: 2403555690236084340
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
         sprite: {fileID: 21300000, guid: f2ed6f852c9c1594590eea28f98518b3, type: 3}
     - rid: 2403555690236084341
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
         sprite: {fileID: 21300000, guid: 2c87828110c96b641b4334f1af609d2c, type: 3}
     - rid: 2403555690236084342
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         sprite: {fileID: 21300000, guid: 3e1f4b61741099f41a921affe0965f9d, type: 3}
     - rid: 2403555690236084343
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
         sprite: {fileID: 21300000, guid: f2ed6f852c9c1594590eea28f98518b3, type: 3}
     - rid: 2403555690236084344
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
         sprite: {fileID: 21300000, guid: 2c87828110c96b641b4334f1af609d2c, type: 3}
     - rid: 2403555690236084345
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
         sprite: {fileID: 21300000, guid: f2ed6f852c9c1594590eea28f98518b3, type: 3}
     - rid: 2403555690236084346
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
         sprite: {fileID: 21300000, guid: 657f6fc9a6bebe642b2b933432af3e8b, type: 3}
     - rid: 2403555690236084347
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         sprite: {fileID: 21300000, guid: a9901bbfc9728634b8252622c7f3882c, type: 3}
     - rid: 2403555690236084348
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
         sprite: {fileID: 21300000, guid: 2c87828110c96b641b4334f1af609d2c, type: 3}
     - rid: 2403555690236084349
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         sprite: {fileID: 21300000, guid: 534aff9f6dfd6c544b0144954e8ef0b0, type: 3}
     - rid: 2403555690236084350
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         sprite: {fileID: 21300000, guid: a9901bbfc9728634b8252622c7f3882c, type: 3}
     - rid: 2403555690236084351
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
         sprite: {fileID: 21300000, guid: f2ed6f852c9c1594590eea28f98518b3, type: 3}
     - rid: 2403555690236084353
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         sprite: {fileID: 21300000, guid: 70562f64108503147861dbc82d787ef9, type: 3}
     - rid: 2403555690236084354
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         sprite: {fileID: 21300000, guid: 534aff9f6dfd6c544b0144954e8ef0b0, type: 3}
     - rid: 2403555690236084355
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         sprite: {fileID: 21300000, guid: a9901bbfc9728634b8252622c7f3882c, type: 3}
     - rid: 2403555690236084356
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
         sprite: {fileID: 21300000, guid: f2ed6f852c9c1594590eea28f98518b3, type: 3}
     - rid: 2403555690236084357
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         sprite: {fileID: 21300000, guid: df71feced233e4383b3c3903e719e156, type: 3}
     - rid: 2403555690236084358
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         sprite: {fileID: 21300000, guid: a9901bbfc9728634b8252622c7f3882c, type: 3}
     - rid: 2403555690236084359
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
         sprite: {fileID: 21300000, guid: 657f6fc9a6bebe642b2b933432af3e8b, type: 3}
     - rid: 2403555690236084360
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
         sprite: {fileID: 21300000, guid: 2c87828110c96b641b4334f1af609d2c, type: 3}
     - rid: 2403555690236084361
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         sprite: {fileID: 21300000, guid: 70562f64108503147861dbc82d787ef9, type: 3}
     - rid: 2403555690236084362
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
         sprite: {fileID: 21300000, guid: 2c87828110c96b641b4334f1af609d2c, type: 3}
     - rid: 2403555690236084363
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         sprite: {fileID: 21300000, guid: df71feced233e4383b3c3903e719e156, type: 3}
     - rid: 2403555690236084364
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
         sprite: {fileID: 21300000, guid: 2c87828110c96b641b4334f1af609d2c, type: 3}
     - rid: 2403555690236084365
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
         sprite: {fileID: 21300000, guid: f2ed6f852c9c1594590eea28f98518b3, type: 3}
     - rid: 2403555690236084366
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         sprite: {fileID: 21300000, guid: 70562f64108503147861dbc82d787ef9, type: 3}
     - rid: 2403555690236084367
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
         sprite: {fileID: 21300000, guid: 2c87828110c96b641b4334f1af609d2c, type: 3}
     - rid: 2403555690236084368
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         sprite: {fileID: 21300000, guid: 422f3cda08073664b8a46361afe442fb, type: 3}
     - rid: 2403555690236084370
-      type: {class: AutoAdvanceAfter, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: AutoAdvanceAfter, ns: DialogueScripts, asm: MainGame}
       data:
         Time: 0.5
     - rid: 2403555690236084371
-      type: {class: AutoAdvanceAfter, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: AutoAdvanceAfter, ns: DialogueScripts, asm: MainGame}
       data:
         Time: 0.3
     - rid: 4550414889271427152
-      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     - rid: 4550414889271427153
-      type: {class: SpriteChange, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         sprite: {fileID: 21300000, guid: 422f3cda08073664b8a46361afe442fb, type: 3}
     - rid: 4550414889271427155
-      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     - rid: 4550414889271427156
-      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
     - rid: 4550414889271427157
-      type: {class: SetSpeaker, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
 --- !u!1001 &2111161021
