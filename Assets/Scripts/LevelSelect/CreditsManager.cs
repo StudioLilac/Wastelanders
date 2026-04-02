@@ -7,6 +7,9 @@ public class CreditsManager : MonoBehaviour
     public Animator animator;
     public Image blackBg;
     public UIFadeHandler fadeHandler;
+    public bool fastForward;
+    public float speedNormal = 1f;
+    public float speedFast = 10f;
 
     void Start()
     {
@@ -40,5 +43,10 @@ public class CreditsManager : MonoBehaviour
         }
 
         blackBg.color = endColor;
+    }
+
+    void Update() {
+        fastForward = Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.RightArrow);
+        animator.speed = fastForward ? speedFast : speedNormal;
     }
 }
