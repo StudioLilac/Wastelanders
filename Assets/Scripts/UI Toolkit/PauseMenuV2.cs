@@ -147,7 +147,7 @@ namespace UI_Toolkit
         }
         
         private static void OnDoubleSpeedChanged(bool value) {
-            CombatManager.Instance.SetDoubleSpeed(value);
+            new DoubleSpeedChangedEvent(value).Invoke();
         }
 
         private static void OnMusChanged(float value)
@@ -246,4 +246,6 @@ namespace UI_Toolkit
             }
         }
     }
+
+    public record DoubleSpeedChangedEvent(bool enabled) : IEvent;
 }
