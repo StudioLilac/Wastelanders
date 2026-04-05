@@ -21,6 +21,8 @@ namespace UI_Toolkit
 
         private Toggle autoRollToggle;
         private Toggle doubleSpeedToggle;
+        private Button dialogueLogButton;
+        private Button skipDialogueButton;
 
         private State state;
 
@@ -37,6 +39,9 @@ namespace UI_Toolkit
             pauseIconButton = rootDocument.rootVisualElement.Q<Button>("pause-icon-button");
             autoRollToggle = rootDocument.rootVisualElement.Q<Toggle>("auto-roll-toggle");
             doubleSpeedToggle = rootDocument.rootVisualElement.Q<Toggle>("2x-speed-toggle");
+            dialogueLogButton = rootDocument.rootVisualElement.Q<Button>("log-button");
+            skipDialogueButton = rootDocument.rootVisualElement.Q<Button>("skip-dialogue-button");
+            
             rootDocument.panelSettings.sortingOrder = UISortOrder.PauseMenu.GetOrder();
 
             pauseIconButton.clicked += DoPause;
@@ -190,6 +195,7 @@ namespace UI_Toolkit
 
             autoRollToggle.RegisterValueChangedCallback(e => OnAutoRollChanged(e.newValue));
             doubleSpeedToggle.RegisterValueChangedCallback(e => OnDoubleSpeedChanged(e.newValue));
+            dialogueLogButton.clicked += OnDlgClicked;
 
             pauseMenuPanel.Q<Slider>("slider-mus").RegisterValueChangedCallback(e => OnMusChanged(e.newValue));
             pauseMenuPanel.Q<Slider>("slider-sfx").RegisterValueChangedCallback(e => OnSfxChanged(e.newValue));
