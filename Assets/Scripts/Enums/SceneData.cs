@@ -87,6 +87,9 @@ public abstract class SceneData : Enum<SceneData>
 
         public override MonoBehaviour[] RequiredPrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
             { prefabs.audioManager, prefabs.uiFadeScreenManager, prefabs.pauseMenuV2 };
+        
+        public override UIContext UIContextOnEntry => UIContext.Custom;
+        public override UIContextCustomFlags UIContextFlagsOnEntry => UIContextCustomFlags.SkipDialogue;
     }
 
     public class TutorialFight : SceneData
