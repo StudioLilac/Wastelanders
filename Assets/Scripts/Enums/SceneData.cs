@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Context;
 using UnityEngine;
 
 #nullable enable
@@ -11,12 +12,18 @@ public abstract class SceneData : Enum<SceneData>
     // All Prefabs placed in this array will be instantiated in that scene on start
     public virtual MonoBehaviour[] RequiredPrefabs(SceneInitializerPrefabs prefabs) => Array.Empty<MonoBehaviour>();
 
+    // Default values. Override per-scene if necessary.
+    public virtual UIContext UIContextOnEntry => UIContext.Dialogue;
+    public virtual UIContextCustomFlags UIContextFlagsOnEntry => UIContextCustomFlags.None;
+
     public class SplashScreen : SceneData {
         public override string SceneName => "SplashScreen";
         public override SceneAudio GetAudio(AudioDatabase database) => database.MainMenu;
         
         public override MonoBehaviour[] RequiredPrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
             { prefabs.audioManager, prefabs.uiFadeScreenManager };
+        
+        public override UIContext UIContextOnEntry => UIContext.None;
     }
     
     public class SplashScreenWebGL : SceneData {
@@ -25,6 +32,8 @@ public abstract class SceneData : Enum<SceneData>
         
         public override MonoBehaviour[] RequiredPrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
             { prefabs.audioManager, prefabs.uiFadeScreenManager };
+        
+        public override UIContext UIContextOnEntry => UIContext.None;
     }
 
     public class MainMenu : SceneData
@@ -34,6 +43,8 @@ public abstract class SceneData : Enum<SceneData>
 
         public override MonoBehaviour[] RequiredPrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
             { prefabs.audioManager, prefabs.uiFadeScreenManager, prefabs.pauseMenuV2, prefabs.popupManager };
+        
+        public override UIContext UIContextOnEntry => UIContext.None;
     }
 
     public class SelectionScreen : SceneData
@@ -43,6 +54,9 @@ public abstract class SceneData : Enum<SceneData>
 
         public override MonoBehaviour[] RequiredPrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
             { prefabs.audioManager, prefabs.uiFadeScreenManager, prefabs.pauseMenuV2, prefabs.dialogueManager, prefabs.deckSelectV2, prefabs.dialogueBoxV2 };
+        
+        public override UIContext UIContextOnEntry => UIContext.Custom;
+        public override UIContextCustomFlags UIContextFlagsOnEntry => UIContextCustomFlags.DialogueLog;
     }
 
     public class LevelSelect : SceneData
@@ -52,6 +66,9 @@ public abstract class SceneData : Enum<SceneData>
 
         public override MonoBehaviour[] RequiredPrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
             { prefabs.audioManager, prefabs.uiFadeScreenManager, prefabs.pauseMenuV2, prefabs.dialogueManager, prefabs.popupManager };
+        
+        public override UIContext UIContextOnEntry => UIContext.Custom;
+        public override UIContextCustomFlags UIContextFlagsOnEntry => UIContextCustomFlags.DialogueLog;
     }
 
     public class ContractSelect : SceneData

@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
+using Context;
 using DialogueScripts;
 using Managers;
 using UI_Toolkit;
@@ -23,14 +24,17 @@ public class SceneInitializer : MonoBehaviour
             return;
         }
         Instance = this;
+        
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        SceneData sceneData = SceneData.FromSceneName(currentSceneName);
 
-        InitializeManagersForScene();
+        InitializeManagersForScene(sceneData);
+        InitializeUIContext(sceneData);
     }
 
-    private void InitializeManagersForScene()
+    private void InitializeManagersForScene(SceneData sceneData)
     {
-        string currentSceneName = SceneManager.GetActiveScene().name;
-        var requiredManagers = SceneData.FromSceneName(currentSceneName).RequiredPrefabs(initializablePrefabs);
+        var requiredManagers = sceneData.RequiredPrefabs(initializablePrefabs);
         managersParent = new GameObject("[SceneInitialized]");
         
         foreach (var managerPrefab in requiredManagers)
@@ -43,6 +47,13 @@ public class SceneInitializer : MonoBehaviour
             }
             InstantiatePrefab(managerPrefab);
         }
+    }
+
+    private void InitializeUIContext(SceneData sceneData) {
+        UIContext context = sceneData.UIContextOnEntry;
+        UIContextCustomFlags flags = sceneData.UIContextFlagsOnEntry;
+        
+        UIContextManager.Set(context, flags);
     }
 
     public T InstantiatePrefab<T>(T prefab) where T : MonoBehaviour
