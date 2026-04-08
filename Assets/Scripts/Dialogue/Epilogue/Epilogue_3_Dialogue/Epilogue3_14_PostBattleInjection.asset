@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Epilogue3_14_PostBattleInjection
   m_EditorClassIdentifier: 
   Entries:
-  - content: Ready? Take a deep breath
+  - content: Ready? Take a deep breath.
     speaker: {fileID: 11400000, guid: a43544c7607a84bad870a2ff50a662f5, type: 2}
     sfxId: 0
     picture: {fileID: 0}
