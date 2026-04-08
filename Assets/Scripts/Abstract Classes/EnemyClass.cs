@@ -20,8 +20,9 @@ public abstract class EnemyClass : EntityClass
     // Default Attack weight for all opponents gives equal chance for all oppoenents to be picked
     public AttackTargetDelegate TargetingWeights{ get; set; } = delegate { return 100; };
 
-    public virtual void Awake()
+    public override void Awake()
     {
+        base.Awake();
         if (Team == EntityTeam.NoTeam) Team = EntityTeam.EnemyTeam;
     }
     public override void Start()

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4029360066181026997}
   - component: {fileID: 1011641279369870752}
   m_Layer: 0
-  m_Name: PrincessFrogBless
+  m_Name: PrincessFrogBlessResonance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,13 +76,17 @@ MonoBehaviour:
     Part2: 1232252036
     Part3: 448303496
     Part4: 1424057810
+  description: 
+  IsEvolved: 0
   icon: {fileID: 21300000, guid: 02a7e04bb189642038f3da2a9764308f, type: 3}
   cardBack: {fileID: 21300000, guid: 8ac8a46b814e1b14f89b3829e430de25, type: 3}
+  evolvedCardBack: {fileID: 0}
   cardUI: {fileID: 0}
   data:
     <ActionClassName>k__BackingField: 
     <CurrentProgress>k__BackingField: 0
-  spitPrefab: {fileID: 0}
+  animationClip: {fileID: 0}
+  targetBuff: 2
 --- !u!212 &1011641279369870752
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -100,6 +104,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
