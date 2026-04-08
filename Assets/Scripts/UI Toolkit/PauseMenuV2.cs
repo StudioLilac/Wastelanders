@@ -150,16 +150,20 @@ namespace UI_Toolkit
 
         private void OnDlgClicked()
         {
-            SetState(State.Dialogue);
-            var scroll = dialogue.Q<ScrollView>("scroll-dlg");
-            StartCoroutine(DoScrollToBottomWithDelay(scroll));
-            scroll.Clear();
-            foreach (var it in CreateLabels()) scroll.Add(it);
+            if (state != State.Dialogue) {
+                SetState(State.Dialogue);
+                var scroll = dialogue.Q<ScrollView>("scroll-dlg");
+                StartCoroutine(DoScrollToBottomWithDelay(scroll));
+                scroll.Clear();
+                foreach (var it in CreateLabels()) scroll.Add(it);
+            } else {
+                DoStart();
+            }
         }
 
         private void OnClsClicked()
         {
-            SetState(State.PauseMenuPanel);
+            DoStart();
         }
         
         private static void OnAutoRollChanged(bool value) {
@@ -202,7 +206,6 @@ namespace UI_Toolkit
             pauseMenuPanel.Q<Button>("button-dck").clicked += OnDckClicked;
             pauseMenuPanel.Q<Button>("button-lvl").clicked += OnLvlClicked;
             pauseMenuPanel.Q<Button>("button-gls").clicked += OnGlsClicked;
-            pauseMenuPanel.Q<Button>("button-dlg").clicked += OnDlgClicked;
             pauseMenuPanel.Q<Button>("button-mnu").clicked += OnMnuClicked;
 
             dialogue.Q<Button>("button-cls").clicked += OnClsClicked;

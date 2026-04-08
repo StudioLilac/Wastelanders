@@ -26,10 +26,6 @@
                     <ui:VisualElement style="height: 120px; width: 120px; background-image: url(&quot;project://database/Assets/Sprites/pause-menu-v2/ic-glossary.png?fileID=2800000&amp;guid=ce77eb358f2d54544adbd71c03209471&amp;type=3#ic-glossary&quot;);" />
                     <ui:Label text="Skip Dialogue" style="-unity-font: url(&quot;project://database/Assets/TextMesh%20Pro/Fonts/VT323-Regular.ttf?fileID=12800000&amp;guid=46b9139fed5cc6a42a6a5d42b82c3c7e&amp;type=3#VT323-Regular&quot;); -unity-font-definition: initial; color: rgb(203, 108, 230); font-size: 72px; margin-left: 32px;" />
                 </ui:Button>
-                <ui:Button name="button-dlg" class="button" style="align-items: center; flex-direction: row; margin-top: 64px;">
-                    <ui:VisualElement style="height: 120px; width: 120px; background-image: url(&quot;project://database/Assets/Sprites/pause-menu-v2/ic-dialogue.png?fileID=2800000&amp;guid=751635a2cbd6d43cb92d4ab186c2a350&amp;type=3#ic-dialogue&quot;);" />
-                    <ui:Label text="Dialogue History" style="-unity-font: url(&quot;project://database/Assets/TextMesh%20Pro/Fonts/VT323-Regular.ttf?fileID=12800000&amp;guid=46b9139fed5cc6a42a6a5d42b82c3c7e&amp;type=3#VT323-Regular&quot;); -unity-font-definition: initial; color: rgb(203, 108, 230); font-size: 72px; margin-left: 32px;" />
-                </ui:Button>
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="glossary" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; align-items: center; justify-content: center; display: none;">
