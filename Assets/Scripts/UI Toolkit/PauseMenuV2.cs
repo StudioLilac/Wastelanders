@@ -91,7 +91,7 @@ namespace UI_Toolkit
 
         private void HandleUIContextChanged(UIContextChangedEvent e) {
             var flags = e.context switch {
-                UIContext.Combat   => UIContextCustomFlags.AutoRoll | UIContextCustomFlags.DoubleSpeed,
+                UIContext.Combat   => UIContextCustomFlags.DialogueLog | UIContextCustomFlags.AutoRoll | UIContextCustomFlags.DoubleSpeed,
                 UIContext.Dialogue => UIContextCustomFlags.DialogueLog | UIContextCustomFlags.SkipDialogue,
                 UIContext.Custom   => e.flags,
                 _                  => UIContextCustomFlags.None,

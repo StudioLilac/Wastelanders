@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Context;
 using Systems.Persistence;
 using WeaponDeckSerialization;
 using UI_Toolkit;
@@ -263,6 +264,8 @@ public class CombatManager : MonoBehaviour
 
         AudioManager.Instance.StartCombatMusic();
         GameState = GameState.SELECTION;
+        
+        UIContextManager.Set(UIContext.Combat);
     }
 
     public void ActivateDynamicCamera()
@@ -308,6 +311,8 @@ public class CombatManager : MonoBehaviour
             entity.OutOfCombat();
             entity.UnTargetable();
         }
+        
+        UIContextManager.Set(UIContext.Dialogue);
     }
 
     private void PerformInCombat()
