@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Context;
 using Managers;
 using Systems.Persistence;
 using UnityEngine;
@@ -48,11 +49,11 @@ namespace UI_Toolkit
 
             RegisterCallbacks();
             LoadInitialValues();
+            
+            this.Subscribe<UIContextChangedEvent>(HandleUIContextChanged);
             SetState(State.Unpaused);
         }
         
-        
-
         public void Update()
         {
             if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Tab))
@@ -86,6 +87,20 @@ namespace UI_Toolkit
             glossary.style.display = to == State.Glossary ? DisplayStyle.Flex : DisplayStyle.None;
             pauseMenuPanel.style.display = to == State.PauseMenuPanel ? DisplayStyle.Flex : DisplayStyle.None;
             pauseIconButton.style.display = to == State.Unpaused ? DisplayStyle.Flex : DisplayStyle.None;
+        }
+
+        private void HandleUIContextChanged(UIContextChangedEvent e) {
+            var flags = e.context switch {
+                UIContext.Combat   => UIContextCustomFlags.AutoRoll | UIContextCustomFlags.DoubleSpeed,
+                UIContext.Dialogue => UIContextCustomFlags.DialogueLog | UIContextCustomFlags.SkipDialogue,
+                UIContext.Custom   => e.flags,
+                _                  => UIContextCustomFlags.None,
+            };
+
+            autoRollToggle.Display(flags.HasFlag(UIContextCustomFlags.AutoRoll));
+            doubleSpeedToggle.Display(flags.HasFlag(UIContextCustomFlags.DoubleSpeed));
+            dialogueLogButton.Display(flags.HasFlag(UIContextCustomFlags.DialogueLog));
+            skipDialogueButton.Display(flags.HasFlag(UIContextCustomFlags.SkipDialogue));
         }
 
         private void OnRsmClicked()
@@ -254,4 +269,10 @@ namespace UI_Toolkit
     }
 
     public record DoubleSpeedChangedEvent(bool enabled) : IEvent;
+}
+
+public static class VisualElementExtensions {
+    public static void Display(this VisualElement el, bool visible) {
+        el.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
+    }
 }
