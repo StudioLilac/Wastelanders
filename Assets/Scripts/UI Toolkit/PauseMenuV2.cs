@@ -93,7 +93,7 @@ namespace UI_Toolkit
             var flags = e.context switch {
                 UIContext.Combat   => UIContextCustomFlags.DialogueLog | UIContextCustomFlags.AutoRoll | UIContextCustomFlags.DoubleSpeed,
                 UIContext.Dialogue => UIContextCustomFlags.DialogueLog | UIContextCustomFlags.SkipDialogue,
-                UIContext.Custom   => e.flags,
+                UIContext.Custom data  => data.Flags,
                 _                  => UIContextCustomFlags.None,
             };
 

@@ -1,16 +1,20 @@
 using System;
 
 namespace Context {
-    public enum UIContext { None, Combat, Dialogue, Custom }
+    public abstract record UIContext()
+    {
+        public record None : UIContext;
+        public record Combat : UIContext;
+        public record Dialogue : UIContext;
+        public record Custom(UIContextCustomFlags Flags) : UIContext;
+    }
 
     public static class UIContextManager {
-        public static UIContext Current { get; private set; } = UIContext.None;
-        public static UIContextCustomFlags UIContextCustomFlags { get; private set; }
+        public static UIContext Current { get; private set; } = new UIContext.None();
 
-        public static void Set(UIContext context, UIContextCustomFlags flags = default) {
+        public static void Set(UIContext context) {
             Current = context;
-            UIContextCustomFlags = flags;
-            new UIContextChangedEvent(context, flags).Invoke();
+            new UIContextChangedEvent(context).Invoke();
         }
     }
 
@@ -22,5 +26,5 @@ namespace Context {
         SkipDialogue = 8,
     }
 
-    public record UIContextChangedEvent(UIContext context, UIContextCustomFlags flags) : IEvent;
+    public record UIContextChangedEvent(UIContext context) : IEvent;
 }
