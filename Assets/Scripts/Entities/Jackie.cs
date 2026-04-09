@@ -8,7 +8,7 @@ public class Jackie : PlayerClass
     public override void Start()
     {
         myName = "Jackie";
-        MaxHealth = 30;
+        MaxHealth = 35;
         Health = MaxHealth;
         base.Start();
     }
