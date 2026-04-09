@@ -192,6 +192,7 @@ public abstract class EntityClass : SelectClass
     {
         BattleQueue.BattleQueueInstance.RemoveAllInstancesOfEntity(this);
         UnTargetable();
+        statusEffects.Clear();
         combatInfo.PassOut();
         float distanceToTravel = Vector3.Distance(myTransform.position, initialPosition);
         float unitsPerSecond = 12f;
