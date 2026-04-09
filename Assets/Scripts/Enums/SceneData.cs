@@ -172,7 +172,7 @@ public abstract class SceneData : Enum<SceneData>
     {
         public override string SceneName => "Epilogue_3";
 
-        public override SceneAudio GetAudio(AudioDatabase database) => database.Epilogue4;
+        public override SceneAudio GetAudio(AudioDatabase database) => database.Epilogue3;
 
         public override MonoBehaviour[] RequiredPrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
         {

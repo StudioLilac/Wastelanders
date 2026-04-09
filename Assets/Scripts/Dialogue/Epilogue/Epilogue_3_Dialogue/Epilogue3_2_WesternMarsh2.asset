@@ -16,14 +16,24 @@ MonoBehaviour:
   - content: Klackackakkc
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     sfxId: 0
-    picture: {fileID: 0}
+    picture: {fileID: -281033359, guid: 335d96736e4cff146a854540bbe2b3e8, type: 3}
     events:
     - rid: 6570561757010722878
     - rid: 6570561757010722881
     - rid: 6570561757010722882
+  - content: <i>Shock and murmurs ripple through the faces of the experienced warriors.</i>
+    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 314095995325513835
   references:
     version: 2
     RefIds:
+    - rid: 314095995325513835
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
     - rid: 6570561757010722878
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
@@ -32,8 +42,8 @@ MonoBehaviour:
       type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-        action: 60
-        duration: 1
+        action: 70
+        duration: 0
     - rid: 6570561757010722882
       type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:
