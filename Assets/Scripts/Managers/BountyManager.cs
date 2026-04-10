@@ -45,7 +45,7 @@ public class BountyManager : PersistentSingleton<BountyManager>, IBind<BountySta
         if (invalid) return;
 
         this.Answer<GetBountyProgress, int?>(_ => ContractStateData.GetNumCompletedBounties());
-        this.Subscribe<BountyInformationEvent>(e => SelectedBountyInformation = e.bountyType);
+        this.Subscribe<BountyInformationEvent>(e => SelectedBountyInformation = e.BountyType);
         this.Subscribe<ClearBounty>(_ => 
         {
             ActiveBounty = null;

@@ -22,10 +22,11 @@ namespace LevelSelectInformation
     {
         string Title { get; }
         float LevelID { get; }
+        Level? SelectableLevel { get; }
+        bool LevelEnabled { get; }
         void UponSelectedEvent();
         bool UnlockCriteriaMet();
-        Level? SelectableLevel { get; }
-        public bool LevelEnabled { get; }
+        string UnlockRequirementsText();
 
         static readonly Dictionary<Level, ILevelSelectInformation> LEVEL_INFORMATION;
         static ILevelSelectInformation()
@@ -48,6 +49,7 @@ namespace LevelSelectInformation
         public virtual string Title => string.Empty;
         public virtual bool LevelEnabled => true;
         public virtual bool UnlockCriteriaMet() => LevelID <= GameStateManager.Instance.CurrentLevelProgress;
+        public virtual string UnlockRequirementsText() => $"Complete previous levels to unlock.";
 
         public class Tutorial : StageInformation
         {
@@ -95,6 +97,11 @@ namespace LevelSelectInformation
             public override bool LevelEnabled => GameStateManager.SEASON_1_ACTIVE;
             public override Level? SelectableLevel => Level.PrincessFrogFight;
             public override bool UnlockCriteriaMet() => LevelID <= GameStateManager.Instance.CurrentLevelProgress && GameStateManager.SEASON_1_ACTIVE;
+            public override string UnlockRequirementsText() => true switch
+            {
+                !GameStateManager.SEASON_1_ACTIVE => "Coming Soon!",
+                _ => $"Complete previous levels to unlock."
+            };
         }
 
         public class IvesFinale : StageInformation
@@ -104,7 +111,13 @@ namespace LevelSelectInformation
             public override float LevelID => 5f;
             public override bool LevelEnabled => GameStateManager.SEASON_1_ACTIVE;
             public override Level? SelectableLevel => Level.IvesFinale;
-            public override bool UnlockCriteriaMet() => LevelID <= GameStateManager.Instance.CurrentLevelProgress && new GetBountyProgress().Query() == 6 && GameStateManager.SEASON_1_ACTIVE;
+            public override bool UnlockCriteriaMet() => LevelID <= GameStateManager.Instance.CurrentLevelProgress && new GetBountyProgress().Query() >= 6 && GameStateManager.SEASON_1_ACTIVE;
+            public override string UnlockRequirementsText() => true switch
+            {
+                !GameStateManager.SEASON_1_ACTIVE => "Coming Soon!",
+                _ when new GetBountyProgress().Query() < 6 => "Complete all bounties to unlock.",
+                _ => $"Complete previous levels to unlock."
+            };
         }
 
         public class Season2 : StageInformation
@@ -121,7 +134,7 @@ namespace LevelSelectInformation
         public static IEnumerable<StageInformation> Stages => Values;
     }
 
-    public record BountyInformationEvent(BountyInformation bountyType) : IEvent;
+    public record BountyInformationEvent(BountyInformation BountyType) : IEvent;
 
     // Represents the information needed to load a specific bounty stage during level select
     public abstract class BountyInformation : Enum<BountyInformation>, ILevelSelectInformation
@@ -132,7 +145,7 @@ namespace LevelSelectInformation
         public virtual string Title => string.Empty;
         public virtual bool LevelEnabled => true;
         public virtual bool UnlockCriteriaMet() => LevelID <= GameStateManager.Instance.CurrentLevelProgress;
-
+        public virtual string UnlockRequirementsText() => $"Complete previous levels to unlock.";
         public class PrincessFrogBounty : BountyInformation
         {
             public override IEnumerable<IBounties> BountyCollection => PrincessFrogBounties.Values;
@@ -140,6 +153,12 @@ namespace LevelSelectInformation
             public override Level? SelectableLevel => Level.PrincessFrogBounty;
             public override bool LevelEnabled => GameStateManager.SEASON_1_ACTIVE;
             public override string Title => "BOUNTY BOARD";
+            public override bool UnlockCriteriaMet() => LevelID <= GameStateManager.Instance.CurrentLevelProgress && GameStateManager.SEASON_1_ACTIVE;
+            public override string UnlockRequirementsText() => true switch
+            {
+                !GameStateManager.SEASON_1_ACTIVE => "Coming Soon!",
+                _ => $"Complete previous levels to unlock."
+            };
         }
         public void UponSelectedEvent() => new BountyInformationEvent(this).Invoke();
 

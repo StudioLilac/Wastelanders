@@ -36,7 +36,7 @@ public class LevelSelectButton : MonoBehaviour, IPointerClickHandler
     {
         if (!button.enabled)
         {
-            PopUpNotificationManager.Instance.DisplayWarning(new PopupType.ContentLocked());
+            PopUpNotificationManager.Instance.DisplayWarning(new PopupType.CustomPopup(LevelInformation?.UnlockRequirementsText() ?? "Content Locked!"));
         }
     }
 

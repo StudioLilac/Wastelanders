@@ -57,13 +57,13 @@ public class MainMenu : MonoBehaviour {
 #if UNITY_WEBGL
         quitButton.gameObject.SetActive(false);
 #endif
-        bountyButton.SetActive(GameStateManager.Instance.CurrentLevelProgress >= Get<PrincessFrogBounty>().LevelID && GameStateManager.SEASON_1_ACTIVE);
+        bountyButton.SetActive(Get<PrincessFrogBounty>().UnlockCriteriaMet());
         //bountyButton.SetActive(false); // Locks this button until part 2 is ready.
         versionText.text = $"v{Application.version}";
         UpdateStatusUI();
         ApplyBGConfig();
         StartCoroutine(TransitionBackground());
-        startAttention.ConfigureAttention(GameStateManager.SEASON_1_ACTIVE && Get<PrincessFrogBounty>().UnlockCriteriaMet());
+        startAttention.ConfigureAttention(StageInformation.Get<StageInformation.PrincessFrogFight>().UnlockCriteriaMet());
     }
 
     private IEnumerator TransitionBackground()
