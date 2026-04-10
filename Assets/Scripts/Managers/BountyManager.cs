@@ -16,20 +16,20 @@ public class BountyManager : PersistentSingleton<BountyManager>, IBind<BountySta
 {
     [field: SerializeField] public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
 
-    private BountyStateData? data;
+    private BountyStateData? _data;
 
-    public BountyStateData ContractStateData
+    private BountyStateData ContractStateData
     {
         get
         {
             // This can be null when this manager is created after SaveLoadManager is created. For example, when you start the game in certain scenes.
-            if (data == null) SaveLoadSystem.Instance.LoadBountyStateInformation();
+            if (_data == null) SaveLoadSystem.Instance.LoadBountyStateInformation();
 
-            return data!;
+            return _data!;
         }
         set
         {
-            data = value;
+            _data = value;
         }
     }
 

@@ -20,7 +20,7 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
     [field: SerializeField] public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
     private GameStateData _data;
 
-    public GameStateData Data 
+    private GameStateData Data 
     {
         get
         {
@@ -47,7 +47,7 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
     public float CurrentLevelProgress
     {
         get { return (IS_DEVELOPMENT) ? DEV_MODE_PROGRESSION : Data.CurrentLevelProgress; }
-        set => Data.CurrentLevelProgress = value;
+        private set => Data.CurrentLevelProgress = value;
     }
 
     private HashSet<string> seenEnemyActions; // Private backing field for perf
