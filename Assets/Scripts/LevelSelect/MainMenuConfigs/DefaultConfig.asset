@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: DefaultConfig
   m_EditorClassIdentifier: 
   backgroundImage: {fileID: 21300000, guid: b39259fca3201424aa3e4f1cba4382b1, type: 3}
-  overlayOpacity: 0
+  overlayOpacity: 255
   width: 2048
   height: 1152

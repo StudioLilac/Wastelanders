@@ -1,5 +1,6 @@
-using System.Collections;
 using LevelSelectInformation;
+using System.Collections;
+using System.Linq;
 using Systems.Persistence;
 using TMPro;
 using UnityEngine;
@@ -12,6 +13,7 @@ public class MainMenu : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI versionText;
     [SerializeField] private TextMeshProUGUI statusText;
 
+    [SerializeField] private Button startButton;
     [SerializeField] private Button quitButton;
     [SerializeField] private GameObject bountyButton;
     [SerializeField] private MainMenuConfigHolder configHolder;
@@ -20,6 +22,8 @@ public class MainMenu : MonoBehaviour {
     [SerializeField] private UIFadeHandler backgroundTransition;
     [SerializeField] private Image backgroundTransitionImage;
     [SerializeField] private RectTransform backgroundTransitionTransform;
+    [SerializeField] private AttentionSeeker startAttention;
+
 
 #nullable enable
     public void QuitGame()
@@ -35,6 +39,19 @@ public class MainMenu : MonoBehaviour {
         Application.Quit();
     }
 
+    private void Awake()
+    {
+        startButton.onClick.AddListener(OnStartClick);
+    }
+
+    void OnStartClick()
+    {
+        StageInformation stage = StageInformation.Stages.LastOrDefault(s => s.UnlockCriteriaMet())
+                              ?? StageInformation.Get<StageInformation.Tutorial>();
+
+        GameStateManager.Instance.LoadScene(stage.SceneName);
+    }
+
     private void Start()
     {
 #if UNITY_WEBGL
@@ -44,8 +61,9 @@ public class MainMenu : MonoBehaviour {
         //bountyButton.SetActive(false); // Locks this button until part 2 is ready.
         versionText.text = $"v{Application.version}";
         UpdateStatusUI();
-        ApplyConfig();
+        ApplyBGConfig();
         StartCoroutine(TransitionBackground());
+        startAttention.ConfigureAttention(GameStateManager.SEASON_1_ACTIVE && Get<PrincessFrogBounty>().UnlockCriteriaMet());
     }
 
     private IEnumerator TransitionBackground()
@@ -67,7 +85,8 @@ public class MainMenu : MonoBehaviour {
         yield break;
     }
 
-    private void ApplyConfig()
+
+    private void ApplyBGConfig()
     {
         MainMenuConfig config = configHolder.GetConfig();
         background.sprite = config.backgroundImage;

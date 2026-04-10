@@ -31,11 +31,6 @@ public class LevelSelect : MonoBehaviour
         OpenScene(SceneData.Get<SceneData.MainMenu>().SceneName);
     }
 
-    public void Tutorial()
-    {
-        OpenScene(SceneData.Get<SceneData.TutorialFight>().SceneName);
-    }
-
     public void LevelSelectScene()
     {
         OpenScene(SceneData.Get<SceneData.LevelSelect>().SceneName);

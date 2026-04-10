@@ -23,13 +23,14 @@ namespace LevelSelectInformation
         string Title { get; }
         float LevelID { get; }
         void UponSelectedEvent();
+        bool UnlockCriteriaMet();
         Level? SelectableLevel { get; }
         public bool LevelEnabled { get; }
 
         static readonly Dictionary<Level, ILevelSelectInformation> LEVEL_INFORMATION;
         static ILevelSelectInformation()
         {
-            LEVEL_INFORMATION = StageInformation.AllStages.Cast<ILevelSelectInformation>()
+            LEVEL_INFORMATION = StageInformation.Stages.Cast<ILevelSelectInformation>()
                 .Concat(BountyInformation.Bounties)
                 .Where(v => v.SelectableLevel.HasValue)
                 .ToDictionary(v => v.SelectableLevel!.Value);
@@ -46,6 +47,7 @@ namespace LevelSelectInformation
         public virtual Level? SelectableLevel => null;
         public virtual string Title => string.Empty;
         public virtual bool LevelEnabled => true;
+        public virtual bool UnlockCriteriaMet() => LevelID <= GameStateManager.Instance.CurrentLevelProgress;
 
         public class Tutorial : StageInformation
         {
@@ -101,10 +103,21 @@ namespace LevelSelectInformation
             public override float LevelID => 5f;
             public override bool LevelEnabled => GameStateManager.SEASON_1_ACTIVE;
             public override Level? SelectableLevel => Level.IvesFinale;
+            public override bool UnlockCriteriaMet() => LevelID <= GameStateManager.Instance.CurrentLevelProgress && new GetBountyProgress().Query() == 6;
         }
+
+        public class Season2 : StageInformation
+        {
+            public override string Title => string.Empty;
+            public override string SceneName => SceneData.Get<SceneData.PrincessFrogBounty>().SceneName;
+            public override float LevelID => 6f;
+            public override bool LevelEnabled => false;
+            public override bool UnlockCriteriaMet() => LevelID <= GameStateManager.Instance.CurrentLevelProgress;
+        }
+
         public void UponSelectedEvent() => new StageInformationEvent(SceneName).Invoke();
         public static StageInformation Get<T>() where T : StageInformation => ParseFromType(typeof(T));
-        public static IEnumerable<StageInformation> AllStages => Values;
+        public static IEnumerable<StageInformation> Stages => Values;
     }
 
     public record BountyInformationEvent(BountyInformation bountyType) : IEvent;
@@ -117,6 +130,7 @@ namespace LevelSelectInformation
         public virtual Level? SelectableLevel => null;
         public virtual string Title => string.Empty;
         public virtual bool LevelEnabled => true;
+        public virtual bool UnlockCriteriaMet() => LevelID <= GameStateManager.Instance.CurrentLevelProgress;
 
         public class PrincessFrogBounty : BountyInformation
         {

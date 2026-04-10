@@ -47,7 +47,7 @@ public class LevelSelectButton : MonoBehaviour, IPointerClickHandler
 
     private void Initialize()
     {
-        if (LevelInformation?.LevelID > GameStateManager.Instance.CurrentLevelProgress) Lock();
+        if (LevelInformation?.UnlockCriteriaMet() == false) Lock();
         else if (LevelInformation?.LevelEnabled == false) ComingSoon();
         else Unlock(animate: false);
     }

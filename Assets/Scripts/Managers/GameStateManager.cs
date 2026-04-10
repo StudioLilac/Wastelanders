@@ -38,7 +38,7 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
         }
     }
 
-    public void UpdateLevelProgress(ILevelSelectInformation level)
+    public void UpdateLevelProgress(StageInformation level)
     {
         CurrentLevelProgress = Mathf.Max(CurrentLevelProgress, level.LevelID);
     }
