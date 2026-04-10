@@ -9,7 +9,6 @@ using System.Collections;
 
 
 public record ClearBounty(): IEvent;
-public record GetBountyProgress() : IQuery<int?>;
 
 #nullable enable
 // A class that persists the current bounty information during level selecting
@@ -44,7 +43,6 @@ public class BountyManager : PersistentSingleton<BountyManager>, IBind<BountySta
         base.Awake();
         if (invalid) return;
 
-        this.Answer<GetBountyProgress, int?>(_ => ContractStateData.GetNumCompletedBounties());
         this.Subscribe<BountyInformationEvent>(e => SelectedBountyInformation = e.BountyType);
         this.Subscribe<ClearBounty>(_ => 
         {
@@ -53,7 +51,7 @@ public class BountyManager : PersistentSingleton<BountyManager>, IBind<BountySta
         });
     }
 
-
+    public int GetBountyProgress() => ContractStateData.GetNumCompletedBounties();
     public bool IsBountyCompleted(IBounties? bounty)
     {
         if (bounty == null) return false;

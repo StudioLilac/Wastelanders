@@ -82,7 +82,6 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
         if (shouldFade)
         {
             StartCoroutine(FadeAndLoadScene(scene));
-
         } else {
             SaveLoadSystem.Instance.SaveGame();
             SceneManager.LoadScene(scene);

@@ -25,7 +25,7 @@ public struct MainMenuConfigHolder
     public readonly MainMenuConfig GetConfig()
     {
         float? levelProgress = GameStateManager.Instance.CurrentLevelProgress;
-        int? bountyProgress = new GetBountyProgress().Query();
+        int? bountyProgress = BountyManager.Instance.GetBountyProgress();
 
         if (levelProgress == null || bountyProgress == null)
             Debug.LogError("Level progress or bounty progress is null. Returning starting background.");

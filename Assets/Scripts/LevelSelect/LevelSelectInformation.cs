@@ -111,11 +111,14 @@ namespace LevelSelectInformation
             public override float LevelID => 5f;
             public override bool LevelEnabled => GameStateManager.SEASON_1_ACTIVE;
             public override Level? SelectableLevel => Level.IvesFinale;
-            public override bool UnlockCriteriaMet() => LevelID <= GameStateManager.Instance.CurrentLevelProgress && new GetBountyProgress().Query() >= 6 && GameStateManager.SEASON_1_ACTIVE;
+            public override bool UnlockCriteriaMet() => 
+                LevelID <= GameStateManager.Instance.CurrentLevelProgress && 
+                BountyManager.Instance.GetBountyProgress() >= 6 && 
+                GameStateManager.SEASON_1_ACTIVE;
             public override string UnlockRequirementsText() => true switch
             {
                 !GameStateManager.SEASON_1_ACTIVE => "Coming Soon!",
-                _ when new GetBountyProgress().Query() < 6 => "Complete all bounties to unlock.",
+                _ when BountyManager.Instance.GetBountyProgress() < 6 => "Complete all bounties to unlock.",
                 _ => $"Complete previous levels to unlock."
             };
         }
