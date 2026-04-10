@@ -78,7 +78,7 @@ public class MainMenu : MonoBehaviour {
             backgroundTransitionImage.sprite = config.backgroundImage;
             backgroundTransitionTransform.sizeDelta = new Vector2(config.width, config.height);
             backgroundTransition.SetDarkScreen();
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1f);
 
             StartCoroutine(backgroundTransition.FadeInLightScreen(2f));
         }
