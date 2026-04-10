@@ -2505,6 +2505,13 @@ MonoBehaviour:
   statusText: {fileID: 208557690}
   quitButton: {fileID: 17794742}
   bountyButton: {fileID: 615688562}
+  configHolder:
+    startingBackground: {fileID: 11400000, guid: d1bb7507290d19f4b99cd27e4ed5661c, type: 2}
+    season1Background: {fileID: 11400000, guid: 8ee64b6360dcdcb44aa33f0ce967492e, type: 2}
+    season1AltBackground: {fileID: 11400000, guid: 0b622dc0b5b43c94ebb220634a79367b, type: 2}
+    season2Background: {fileID: 11400000, guid: 63f9f13007b7c4348b545c0927097363, type: 2}
+  background: {fileID: 133532333}
+  backgroundTransform: {fileID: 133532332}
   cycleScaling: 2
   bobbingAmount: 8
 --- !u!1 &2015769949
