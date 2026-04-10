@@ -14,6 +14,7 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
 {
     public static readonly bool IS_DEVELOPMENT = true;
     public const bool SEASON_1_ACTIVE = true;
+    private const float DEV_MODE_PROGRESSION = 999f;
 
     public SceneData PreviousScene { get; private set; } = SceneData.Get<SceneData.MainMenu>();
 
@@ -52,7 +53,7 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
 
     public float CurrentLevelProgress
     {
-        get { return (IS_DEVELOPMENT) ? 999f : Data.CurrentLevelProgress; }
+        get { return (IS_DEVELOPMENT) ? DEV_MODE_PROGRESSION : Data.CurrentLevelProgress; }
         set => Data.CurrentLevelProgress = value;
     }
 
