@@ -10,7 +10,7 @@ using UnityEngine.SceneManagement;
 //Singleton Class that keeps track of values representing general Game states
 public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<GameStateData>
 {
-    public static readonly bool IS_DEVELOPMENT = true;
+    public static readonly bool IS_DEVELOPMENT = false;
     public const bool SEASON_1_ACTIVE = false;
     private const float DEV_MODE_PROGRESSION = 999f;
 
@@ -40,6 +40,7 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
 
     public void UpdateLevelProgress(StageInformation level)
     {
+        if (IS_DEVELOPMENT) return;
         CurrentLevelProgress = Mathf.Max(CurrentLevelProgress, level.LevelID);
     }
 
@@ -150,12 +151,15 @@ public class GameStateData : ISaveable
         {
             "Id: " + Id,
             "Hexcode: " + RuntimeHelpers.GetHashCode(this),
-            "Current player level progress: " + CurrentLevelProgress
+            "Current player level progress: " + CurrentLevelProgress,
+            "Seen Enemy Actions: " + string.Join(";", SeenEnemyActions),
+            "Seen One Time Events: " + string.Join(";", SeenOneTimeEvents),
         };
         return string.Join(",", items);
     }
 }
 
+[System.Serializable]
 public enum OneTimeEvents 
 {
     None = 0,
