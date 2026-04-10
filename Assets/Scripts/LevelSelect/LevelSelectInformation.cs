@@ -1,6 +1,7 @@
 using BountySystem;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 #nullable enable
 namespace LevelSelectInformation
@@ -19,9 +20,11 @@ namespace LevelSelectInformation
 
     public interface ILevelSelectInformation
     {
+        string Title { get; }
         float LevelID { get; }
         void UponSelectedEvent();
         Level? SelectableLevel { get; }
+        public bool LevelEnabled { get; }
 
         static readonly Dictionary<Level, ILevelSelectInformation> LEVEL_INFORMATION;
         static ILevelSelectInformation()
@@ -41,9 +44,12 @@ namespace LevelSelectInformation
         public abstract string SceneName { get; }
         public abstract float LevelID { get; }
         public virtual Level? SelectableLevel => null;
+        public virtual string Title => string.Empty;
+        public virtual bool LevelEnabled => true;
 
         public class Tutorial : StageInformation
         {
+            public override string Title => "1. TUTORIAL";
             public override string SceneName => SceneData.Get<SceneData.TutorialFight>().SceneName;
             public override float LevelID => 0f;
             public override Level? SelectableLevel => Level.Tutorial;
@@ -57,6 +63,7 @@ namespace LevelSelectInformation
 
         public class FrogSlime : StageInformation
         {
+            public override string Title => "2. THE EXAM BEGINS!";
             public override string SceneName => SceneData.Get<SceneData.FrogSlimeFight>().SceneName;
             public override float LevelID => 1f;
             public override Level? SelectableLevel => Level.FrogSlimeFight;
@@ -64,19 +71,15 @@ namespace LevelSelectInformation
 
         public class Beetle : StageInformation
         {
+            public override string Title => "3. HOARDERS";
             public override string SceneName => SceneData.Get<SceneData.BeetleFight>().SceneName;
             public override float LevelID => 2f;
             public override Level? SelectableLevel => Level.BeetleFight;
         }
 
-        public class QueenPreparation : StageInformation
-        {
-            public override string SceneName => SceneData.Get<SceneData.SelectionScreen>().SceneName;
-            public override float LevelID => 2.5f;
-        }
-
         public class QueenBeetle : StageInformation
         {
+            public override string Title => "4. CRYSTALLIZATION";
             public override string SceneName => SceneData.Get<SceneData.PreQueenFight>().SceneName;
             public override float LevelID => 3f;
             public override Level? SelectableLevel => Level.QueenFight;
@@ -84,15 +87,19 @@ namespace LevelSelectInformation
 
         public class PrincessFrogFight : StageInformation
         {
+            public override string Title => "EX 1. CORONATION";
             public override string SceneName => SceneData.Get<SceneData.PrincessFrogBounty>().SceneName;
             public override float LevelID => 4f;
+            public override bool LevelEnabled => GameStateManager.SEASON_1_ACTIVE;
             public override Level? SelectableLevel => Level.PrincessFrogFight;
         }
 
         public class IvesFinale : StageInformation
         {
+            public override string Title => "EX 2. SUCCESSION";
             public override string SceneName => SceneData.Get<SceneData.PrincessFrogBounty>().SceneName;
             public override float LevelID => 5f;
+            public override bool LevelEnabled => GameStateManager.SEASON_1_ACTIVE;
             public override Level? SelectableLevel => Level.IvesFinale;
         }
         public void UponSelectedEvent() => new StageInformationEvent(SceneName).Invoke();
@@ -108,12 +115,16 @@ namespace LevelSelectInformation
         public abstract IEnumerable<IBounties> BountyCollection { get; }
         public abstract float LevelID { get; }
         public virtual Level? SelectableLevel => null;
+        public virtual string Title => string.Empty;
+        public virtual bool LevelEnabled => true;
 
         public class PrincessFrogBounty : BountyInformation
         {
             public override IEnumerable<IBounties> BountyCollection => PrincessFrogBounties.Values;
             public override float LevelID => 4.5f;
             public override Level? SelectableLevel => Level.PrincessFrogBounty;
+            public override bool LevelEnabled => GameStateManager.SEASON_1_ACTIVE;
+            public override string Title => "BOUNTY BOARD";
         }
         public void UponSelectedEvent() => new BountyInformationEvent(this).Invoke();
 

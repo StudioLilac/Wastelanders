@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Season1ConfigEnd
   m_EditorClassIdentifier: 
   backgroundImage: {fileID: 1799700834968509144, guid: ecd93c0a3babdb445b8291e20f8de301, type: 3}
-  overlayOpacity: 50
+  overlayOpacity: 30
   width: 2100
   height: 1080

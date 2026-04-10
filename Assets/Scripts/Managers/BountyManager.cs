@@ -36,13 +36,14 @@ public class BountyManager : PersistentSingleton<BountyManager>, IBind<BountySta
 
     // All ActiveBounty should be contained within BountyInformation's Bounty Collection
     public IBounties? ActiveBounty { get; set; } = null;
-    public BountyInformation? SelectedBountyInformation { get; set; } = null;
+    public BountyInformation? SelectedBountyInformation { get; private set; } = null;
 
 
     protected override void Awake()
     {
         base.Awake();
         this.Answer<GetBountyProgress, int?>(_ => ContractStateData.GetNumCompletedBounties());
+        this.Subscribe<BountyInformationEvent>(e => SelectedBountyInformation = e.bountyType);
         this.Subscribe<ClearBounty>(_ => 
         {
             ActiveBounty = null;

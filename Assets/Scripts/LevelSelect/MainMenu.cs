@@ -37,7 +37,7 @@ public class MainMenu : MonoBehaviour {
 #if UNITY_WEBGL
         quitButton.gameObject.SetActive(false);
 #endif
-        bountyButton.SetActive(GameStateManager.Instance.CurrentLevelProgress >= Get<PrincessFrogBounty>().LevelID);
+        bountyButton.SetActive(GameStateManager.Instance.CurrentLevelProgress >= Get<PrincessFrogBounty>().LevelID && GameStateManager.SEASON_1_ACTIVE);
         //bountyButton.SetActive(false); // Locks this button until part 2 is ready.
         versionText.text = $"v{Application.version}";
         UpdateStatusUI();
@@ -48,7 +48,7 @@ public class MainMenu : MonoBehaviour {
     {
         MainMenuConfig config = configHolder.GetConfig();
         background.sprite = config.backgroundImage;
-        background.color = new Color(1, 1, 1, config.overlayOpacity);
+        background.color = new Color(1, 1, 1, config.overlayOpacity / 255f);
         backgroundTransform.sizeDelta = new Vector2(config.width, config.height);
     }
 

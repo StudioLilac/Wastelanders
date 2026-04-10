@@ -9,18 +9,12 @@ public class LevelSelect : MonoBehaviour
     public void Awake()
     {
         this.Subscribe<StageInformationEvent> (e => OpenScene(e.SceneName));
-        this.Subscribe<BountyInformationEvent>(e => OpenBountyByTypeName(e.bountyType));
+        this.Subscribe<BountyInformationEvent>(e => OpenScene(SceneData.Get<SceneData.ContractSelect>().SceneName));
     }
 
     public void PrincessFrogBounties()
     {
-        OpenBountyByTypeName(Get<PrincessFrogBounty>());
-    }
-
-    private void OpenBountyByTypeName(BountyInformation bountyInformation)
-    {
-        BountyManager.Instance.SelectedBountyInformation = bountyInformation;
-        FadeLevelIn(SceneData.Get<SceneData.ContractSelect>().SceneName);
+        new BountyInformationEvent(Get<PrincessFrogBounty>()).Invoke();
     }
 
     protected void OpenScene(string s)

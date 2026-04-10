@@ -13,35 +13,36 @@ public record GetLevelProgress() : IQuery<float?>;
 public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<GameStateData>
 {
     public static readonly bool IS_DEVELOPMENT = true;
+    public const bool SEASON_1_ACTIVE = true;
 
     public SceneData PreviousScene { get; private set; } = SceneData.Get<SceneData.MainMenu>();
 
     //Fields for persistence
     [field: SerializeField] public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
-    private GameStateData data;
+    private GameStateData _data;
 
     public GameStateData Data 
     {
         get
         {
             // Data should only be nullable during development where you can open a scene from any place
-            if (data == null)
+            if (_data == null)
             {
                 SaveLoadSystem.Instance.LoadGameStateInformation();
             }
 
-            return data;
+            return _data;
         }
         set
         {
-            data = value;
+            _data = value;
         }
     }
 
     protected override void Awake()
     {
         base.Awake();
-        this.Answer<GetLevelProgress, float?>(_ => data.CurrentLevelProgress);
+        this.Answer<GetLevelProgress, float?>(_ => CurrentLevelProgress);
     }
 
     public void UpdateLevelProgress(ILevelSelectInformation level)
