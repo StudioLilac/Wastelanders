@@ -94,6 +94,7 @@ namespace LevelSelectInformation
             public override float LevelID => 4f;
             public override bool LevelEnabled => GameStateManager.SEASON_1_ACTIVE;
             public override Level? SelectableLevel => Level.PrincessFrogFight;
+            public override bool UnlockCriteriaMet() => LevelID <= GameStateManager.Instance.CurrentLevelProgress && GameStateManager.SEASON_1_ACTIVE;
         }
 
         public class IvesFinale : StageInformation
@@ -103,7 +104,7 @@ namespace LevelSelectInformation
             public override float LevelID => 5f;
             public override bool LevelEnabled => GameStateManager.SEASON_1_ACTIVE;
             public override Level? SelectableLevel => Level.IvesFinale;
-            public override bool UnlockCriteriaMet() => LevelID <= GameStateManager.Instance.CurrentLevelProgress && new GetBountyProgress().Query() == 6;
+            public override bool UnlockCriteriaMet() => LevelID <= GameStateManager.Instance.CurrentLevelProgress && new GetBountyProgress().Query() == 6 && GameStateManager.SEASON_1_ACTIVE;
         }
 
         public class Season2 : StageInformation
@@ -112,7 +113,7 @@ namespace LevelSelectInformation
             public override string SceneName => SceneData.Get<SceneData.PrincessFrogBounty>().SceneName;
             public override float LevelID => 6f;
             public override bool LevelEnabled => false;
-            public override bool UnlockCriteriaMet() => LevelID <= GameStateManager.Instance.CurrentLevelProgress;
+            public override bool UnlockCriteriaMet() => LevelID <= GameStateManager.Instance.CurrentLevelProgress && GameStateManager.SEASON_1_ACTIVE;
         }
 
         public void UponSelectedEvent() => new StageInformationEvent(SceneName).Invoke();
