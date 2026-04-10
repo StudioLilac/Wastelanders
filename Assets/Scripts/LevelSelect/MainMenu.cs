@@ -17,6 +17,9 @@ public class MainMenu : MonoBehaviour {
     [SerializeField] private MainMenuConfigHolder configHolder;
     [SerializeField] private Image background;
     [SerializeField] private RectTransform backgroundTransform;
+    [SerializeField] private UIFadeHandler backgroundTransition;
+    [SerializeField] private Image backgroundTransitionImage;
+    [SerializeField] private RectTransform backgroundTransitionTransform;
 
 #nullable enable
     public void QuitGame()
@@ -42,6 +45,26 @@ public class MainMenu : MonoBehaviour {
         versionText.text = $"v{Application.version}";
         UpdateStatusUI();
         ApplyConfig();
+        StartCoroutine(TransitionBackground());
+    }
+
+    private IEnumerator TransitionBackground()
+    {
+        if (GameStateManager.Instance.PreviousScene == SceneData.Get<SceneData.PreBounty0>())
+        {
+            MainMenuConfig config = configHolder.season1Background;
+            background.sprite = config.backgroundImage;
+            background.color = new Color(1, 1, 1, config.overlayOpacity / 255f);
+            backgroundTransform.sizeDelta = new Vector2(config.width, config.height);
+
+            backgroundTransitionImage.sprite = config.backgroundImage;
+            backgroundTransitionTransform.sizeDelta = new Vector2(config.width, config.height);
+            backgroundTransition.SetDarkScreen();
+            yield return new WaitForSeconds(2f);
+
+            StartCoroutine(backgroundTransition.FadeInLightScreen(2f));
+        }
+        yield break;
     }
 
     private void ApplyConfig()

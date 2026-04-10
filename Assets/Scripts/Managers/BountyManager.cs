@@ -42,6 +42,8 @@ public class BountyManager : PersistentSingleton<BountyManager>, IBind<BountySta
     protected override void Awake()
     {
         base.Awake();
+        if (invalid) return;
+
         this.Answer<GetBountyProgress, int?>(_ => ContractStateData.GetNumCompletedBounties());
         this.Subscribe<BountyInformationEvent>(e => SelectedBountyInformation = e.bountyType);
         this.Subscribe<ClearBounty>(_ => 

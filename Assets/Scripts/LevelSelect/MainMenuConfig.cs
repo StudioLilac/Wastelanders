@@ -24,7 +24,7 @@ public struct MainMenuConfigHolder
 
     public readonly MainMenuConfig GetConfig()
     {
-        float? levelProgress = new GetLevelProgress().Query();
+        float? levelProgress = GameStateManager.Instance.CurrentLevelProgress;
         int? bountyProgress = new GetBountyProgress().Query();
 
         if (levelProgress == null || bountyProgress == null)

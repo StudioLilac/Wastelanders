@@ -7,13 +7,11 @@ using Systems.Persistence;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public record GetLevelProgress() : IQuery<float?>;
-
 //Singleton Class that keeps track of values representing general Game states
 public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<GameStateData>
 {
     public static readonly bool IS_DEVELOPMENT = true;
-    public const bool SEASON_1_ACTIVE = true;
+    public const bool SEASON_1_ACTIVE = false;
     private const float DEV_MODE_PROGRESSION = 999f;
 
     public SceneData PreviousScene { get; private set; } = SceneData.Get<SceneData.MainMenu>();
@@ -38,12 +36,6 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
         {
             _data = value;
         }
-    }
-
-    protected override void Awake()
-    {
-        base.Awake();
-        this.Answer<GetLevelProgress, float?>(_ => CurrentLevelProgress);
     }
 
     public void UpdateLevelProgress(ILevelSelectInformation level)
@@ -83,10 +75,17 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
         seenEnemyActions = bindedData.SeenEnemyActions.ToHashSet();
     }
 
-    public void LoadScene(string scene)
+    public void LoadScene(string scene, bool shouldFade = true)
     {
         PreviousScene = SceneData.FromSceneName(SceneManager.GetActiveScene().name);
-        StartCoroutine(FadeAndLoadScene(scene));
+        if (shouldFade)
+        {
+            StartCoroutine(FadeAndLoadScene(scene));
+
+        } else {
+            SaveLoadSystem.Instance.SaveGame();
+            SceneManager.LoadScene(scene);
+        }
     }
 
     public bool RecordFirstTimeEvent(OneTimeEvents eventId)
