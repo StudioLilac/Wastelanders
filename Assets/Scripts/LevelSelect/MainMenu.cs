@@ -13,7 +13,11 @@ public class MainMenu : MonoBehaviour {
 
     [SerializeField] private Button quitButton;
     [SerializeField] private GameObject bountyButton;
+    [SerializeField] private MainMenuConfigHolder configHolder;
+    [SerializeField] private Image background;
+    [SerializeField] private RectTransform backgroundTransform;
 
+#nullable enable
     public void QuitGame()
     {
 #if UNITY_EDITOR
@@ -36,6 +40,15 @@ public class MainMenu : MonoBehaviour {
         //bountyButton.SetActive(false); // Locks this button until part 2 is ready.
         versionText.text = $"v{Application.version}";
         UpdateStatusUI();
+        ApplyConfig();
+    }
+
+    private void ApplyConfig()
+    {
+        MainMenuConfig config = configHolder.GetConfig();
+        background.sprite = config.backgroundImage;
+        background.color = new Color(1, 1, 1, config.overlayOpacity);
+        backgroundTransform.sizeDelta = new Vector2(config.width, config.height);
     }
 
     private void UpdateStatusUI()
@@ -76,3 +89,4 @@ public class MainMenu : MonoBehaviour {
             wastelandersText.transform.position.y + translateChange, wastelandersText.transform.position.z);
     }
 }
+
