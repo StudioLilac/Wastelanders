@@ -2,23 +2,19 @@ using LevelSelectInformation;
 using System.Collections;
 using Systems.Persistence;
 using UnityEngine;
+using static LevelSelectInformation.BountyInformation;
 
 public class LevelSelect : MonoBehaviour
 {
-    public void OnEnable()
+    public void Awake()
     {
-        StageInformation.StageInformationEvent += OpenScene;
-        BountyInformation.BountyInformationEvent += OpenBountyByTypeName;
-    }
-    public void OnDisable()
-    {
-        StageInformation.StageInformationEvent -= OpenScene;
-        BountyInformation.BountyInformationEvent -= OpenBountyByTypeName;
+        this.Subscribe<StageInformationEvent> (e => OpenScene(e.SceneName));
+        this.Subscribe<BountyInformationEvent>(e => OpenBountyByTypeName(e.bountyType));
     }
 
-    protected void OpenScene(string s)
+    public void PrincessFrogBounties()
     {
-        FadeLevelIn(s);
+        OpenBountyByTypeName(Get<PrincessFrogBounty>());
     }
 
     private void OpenBountyByTypeName(BountyInformation bountyInformation)
@@ -27,6 +23,10 @@ public class LevelSelect : MonoBehaviour
         FadeLevelIn(SceneData.Get<SceneData.ContractSelect>().SceneName);
     }
 
+    protected void OpenScene(string s)
+    {
+        FadeLevelIn(s);
+    }
     public void DeckSelect()
     {
         OpenScene(SceneData.Get<SceneData.SelectionScreen>().SceneName);
@@ -71,11 +71,6 @@ public class LevelSelect : MonoBehaviour
     public void PreBounty2()
     {
         OpenScene(SceneData.Get<SceneData.PreBounty2>().SceneName);
-    }
-
-    public void PrincessFrogBounties()
-    {
-        OpenBountyByTypeName(BountyInformation.PRINCESS_FROG_BOUNTY);
     }
 
     void FadeLevelIn(string levelName)

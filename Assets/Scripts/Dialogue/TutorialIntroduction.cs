@@ -212,7 +212,7 @@ public class TutorialIntroduction : DialogueClasses
         StartCoroutine(CombatManager.Instance.FadeInDarkScreen(3f));
         yield return StartCoroutine(jackie.MoveToPosition(jackieEndPosition.position, 0, 4f));
 
-        GameStateManager.Instance.UpdateLevelProgress(StageInformation.DECK_SELECTION_TUTORIAL);
+        GameStateManager.Instance.UpdateLevelProgress(StageInformation.Get<StageInformation.DeckSelectionTutorial>());
         GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.SelectionScreen>().SceneName);
         yield break;
     }

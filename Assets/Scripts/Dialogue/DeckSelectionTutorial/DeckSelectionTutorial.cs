@@ -52,9 +52,9 @@ public class DeckSelectionTutorial : MonoBehaviour
     {
         bool showTutorial =
             SceneData.Get<SceneData.TutorialFight>() == GameStateManager.Instance.PreviousScene &&
-            GameStateManager.Instance.CurrentLevelProgress > StageInformation.DECK_SELECTION_TUTORIAL.LevelID;
+            GameStateManager.Instance.CurrentLevelProgress > StageInformation.Get<StageInformation.DeckSelectionTutorial>().LevelID;
 
-        if (Mathf.Approximately(GameStateManager.Instance.CurrentLevelProgress, StageInformation.DECK_SELECTION_TUTORIAL.LevelID) || showTutorial || activateTutorial)
+        if (Mathf.Approximately(GameStateManager.Instance.CurrentLevelProgress, StageInformation.Get<StageInformation.DeckSelectionTutorial>().LevelID) || showTutorial || activateTutorial)
         {
             backButton.SetActive(false);
             DeckSelectionManager.OnDeckSelectStateChanged += HandleDeckSelectStateChanged;
@@ -121,7 +121,7 @@ public class DeckSelectionTutorial : MonoBehaviour
         if (weaponEditInformation.WeaponType != CardDatabase.WeaponType.PISTOL) return;
         editDeckIndicator.enabled = false;
         WeaponEdit.WeaponEditEvent -= HandleWeaponEdited;
-        GameStateManager.Instance.UpdateLevelProgress(StageInformation.FROG_SLIME_STAGE);
+        GameStateManager.Instance.UpdateLevelProgress(StageInformation.Get<StageInformation.FrogSlime>());
         DeckSelectionManager.Instance.SetNextScene(SceneData.Get<SceneData.FrogSlimeFight>().SceneName);
         StartCoroutine(StartDialogueWithNextEvent(selectYourActions, () => { DeckSelectionManager.Instance.PlayerActionDeckModifiedEvent += HandleRunOutOfPoints; }));
     }

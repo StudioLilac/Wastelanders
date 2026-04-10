@@ -454,7 +454,7 @@ public class BeetleFight : DialogueClasses
 
         //End of Scene
         {
-            GameStateManager.Instance.UpdateLevelProgress(StageInformation.QUEEN_BEETLE_STAGE);
+            GameStateManager.Instance.UpdateLevelProgress(StageInformation.Get<StageInformation.QueenBeetle>());
             waveIndicator.Hide();
             yield return new WaitForSeconds(2);
             if (ives.IsDead)

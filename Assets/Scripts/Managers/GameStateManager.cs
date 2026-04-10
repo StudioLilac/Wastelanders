@@ -7,6 +7,8 @@ using Systems.Persistence;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+public record GetLevelProgress() : IQuery<float?>;
+
 //Singleton Class that keeps track of values representing general Game states
 public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<GameStateData>
 {
@@ -34,6 +36,12 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
         {
             data = value;
         }
+    }
+
+    protected override void Awake()
+    {
+        base.Awake();
+        this.Answer<GetLevelProgress, float?>(_ => data.CurrentLevelProgress);
     }
 
     public void UpdateLevelProgress(ILevelSelectInformation level)
@@ -79,6 +87,17 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
         StartCoroutine(FadeAndLoadScene(scene));
     }
 
+    public bool RecordFirstTimeEvent(OneTimeEvents eventId)
+    {
+        if (!Data.SeenOneTimeEvents.Contains(eventId))
+        {
+            Data.SeenOneTimeEvents.Add(eventId);
+            return true;
+        }
+        return false;
+    }
+
+
     private bool isFadingOut = false;
     private IEnumerator FadeAndLoadScene(string scene)
     {
@@ -108,9 +127,6 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
      * Dialogue classes should reset this value when read, such that it does not cause unexpected behaviour in upcoming scenes
      */
     public bool JumpToCombat = false;
-
-    // Check for level select whether player finished the game first time to display bounty dialogue
-    public bool FirstTimeFinished = false;
 }
 
 
@@ -125,7 +141,8 @@ public class GameStateData : ISaveable
      */
     [field: SerializeField] public float CurrentLevelProgress { get; set; } = 0f;
     [field: SerializeField] public List<string> SeenEnemyActions { get; set; } = new List<string>(); // Must be List<T>, HashSet<T> not serializable
-    
+    [field: SerializeField] public List<OneTimeEvents> SeenOneTimeEvents { get; set; } = new List<OneTimeEvents>();
+
     public override string ToString()
     {
         var items = new List<string>
@@ -136,4 +153,10 @@ public class GameStateData : ISaveable
         };
         return string.Join(",", items);
     }
+}
+
+public enum OneTimeEvents 
+{
+    None = 0,
+    ExplainBounties = 10,
 }

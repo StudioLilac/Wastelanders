@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static LevelSelectInformation.BountyInformation;
 
 public class MainMenu : MonoBehaviour {
     [SerializeField] private GameObject wastelandersText;
@@ -36,7 +37,7 @@ public class MainMenu : MonoBehaviour {
 #if UNITY_WEBGL
         quitButton.gameObject.SetActive(false);
 #endif
-        bountyButton.SetActive(GameStateManager.Instance.CurrentLevelProgress >= BountyInformation.PRINCESS_FROG_BOUNTY.LevelID);
+        bountyButton.SetActive(GameStateManager.Instance.CurrentLevelProgress >= Get<PrincessFrogBounty>().LevelID);
         //bountyButton.SetActive(false); // Locks this button until part 2 is ready.
         versionText.text = $"v{Application.version}";
         UpdateStatusUI();

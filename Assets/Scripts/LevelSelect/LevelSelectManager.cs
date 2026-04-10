@@ -1,3 +1,4 @@
+using LevelSelectInformation;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,9 +16,8 @@ public class LevelSelectManager : MonoBehaviour
 
     public void Start()
     {
-        if (GameStateManager.Instance.FirstTimeFinished) {
+        if (GameStateManager.Instance.CurrentLevelProgress >= StageInformation.Get<StageInformation.PrincessFrogFight>().LevelID && GameStateManager.Instance.RecordFirstTimeEvent(OneTimeEvents.ExplainBounties)) {
             princessFrogFightButton.Lock();
-            GameStateManager.Instance.FirstTimeFinished = false;
             StartCoroutine(UnlockedDialogue());
         }
     }

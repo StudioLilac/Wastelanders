@@ -7,7 +7,9 @@ using BountySystem;
 using LevelSelectInformation;
 using System.Collections;
 
+
 public record ClearBounty(): IEvent;
+public record GetBountyProgress() : IQuery<int?>;
 
 #nullable enable
 // A class that persists the current bounty information during level selecting
@@ -32,20 +34,22 @@ public class BountyManager : PersistentSingleton<BountyManager>, IBind<BountySta
         }
     }
 
+    // All ActiveBounty should be contained within BountyInformation's Bounty Collection
+    public IBounties? ActiveBounty { get; set; } = null;
+    public BountyInformation? SelectedBountyInformation { get; set; } = null;
+
+
     protected override void Awake()
     {
         base.Awake();
-        this.Subscribe<ClearBounty>(_ => {
+        this.Answer<GetBountyProgress, int?>(_ => ContractStateData.GetNumCompletedBounties());
+        this.Subscribe<ClearBounty>(_ => 
+        {
             ActiveBounty = null;
             SelectedBountyInformation = null;
         });
     }
 
-
-    public BountyInformation? SelectedBountyInformation { get; set; } = null;
-
-    // All ActiveBounty should be contained within BountyInformation's Bounty Collection
-    public IBounties? ActiveBounty { get; set; } = null;
 
     public bool IsBountyCompleted(IBounties? bounty)
     {
@@ -98,6 +102,11 @@ public class BountyStateData : ISaveable
         ChallengeCompletionState? challengeCompletionState = BountyCompletionData.Find(data => data.BountyName == bounty.BountyName);
 
         return challengeCompletionState?.Completed ?? false;
+    }
+
+    public int GetNumCompletedBounties()
+    {
+        return BountyCompletionData.Count(data => data.Completed);
     }
 
     public BountyStateData()

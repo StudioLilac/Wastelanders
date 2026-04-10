@@ -1,5 +1,7 @@
+using Entities;
 using LevelSelectInformation;
 using UnityEngine;
+using static LevelSelectInformation.StageInformation;
 
 [System.Serializable]
 [CreateAssetMenu(fileName = "MainMenuConfig", menuName = "Scriptable Objects/MainMenuConfig")]
@@ -11,8 +13,6 @@ public class MainMenuConfig : ScriptableObject
     public float height;
 }
 
-public record GetLevelProgress(): IQuery<float>;
-public record GetBountyProgress(): IQuery<float>;
 
 [System.Serializable]
 public struct MainMenuConfigHolder
@@ -24,15 +24,18 @@ public struct MainMenuConfigHolder
 
     public readonly MainMenuConfig GetConfig()
     {
-        float levelProgress = new GetLevelProgress().Query();
-        float bountyProgress = new GetBountyProgress().Query();
+        float? levelProgress = new GetLevelProgress().Query();
+        int? bountyProgress = new GetBountyProgress().Query();
 
+        if (levelProgress == null || bountyProgress == null)
+            Debug.LogError("Level progress or bounty progress is null. Returning starting background.");
+        
         return true switch
         {
-            _ when levelProgress < StageInformation.PRINCESS_FROG_FIGHT.LevelID => startingBackground,
-            _ when levelProgress <= StageInformation.IVES_FINALE_FIGHT.LevelID && bountyProgress < 3 => season1Background,
-            _ when levelProgress <= StageInformation.IVES_FINALE_FIGHT.LevelID => season1AltBackground,
-            _ when levelProgress > StageInformation.IVES_FINALE_FIGHT.LevelID => season2Background,
+            _ when levelProgress < Get<PrincessFrogFight>().LevelID => startingBackground,
+            _ when levelProgress <= Get<IvesFinale>().LevelID && bountyProgress < 3 => season1Background,
+            _ when levelProgress <= Get<IvesFinale>().LevelID => season1AltBackground,
+            _ when levelProgress > Get<IvesFinale>().LevelID => season2Background,
             _ => startingBackground
         };
     }
