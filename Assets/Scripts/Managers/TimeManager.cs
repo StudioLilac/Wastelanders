@@ -1,5 +1,7 @@
+using System;
 using UI_Toolkit;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Managers {
     public class TimeManager : PersistentSingleton<TimeManager> {
@@ -18,6 +20,7 @@ namespace Managers {
             this.Subscribe<PauseStateChangedEvent>(HandlePauseStateChanged);
             this.Subscribe<DoubleSpeedChangedEvent>(HandleDoubleSpeedChanged);
             this.Subscribe<GameStateChanged>(HandleGameStateChanged);
+            SceneManager.sceneLoaded += HandleSceneLoaded;
         }
 
         private void HandlePauseStateChanged(PauseStateChangedEvent e) {
@@ -51,6 +54,15 @@ namespace Managers {
                     Time.timeScale = targetScale;
                 }
             }
+        }
+        
+        private void HandleSceneLoaded(Scene scene, LoadSceneMode mode) {
+            lastUnpausedTimeScale = DEFAULT_TIME_SCALE;
+            Time.timeScale = DEFAULT_TIME_SCALE;
+        }
+
+        private void OnDestroy() {
+            SceneManager.sceneLoaded -= HandleSceneLoaded;
         }
     }
     
