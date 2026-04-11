@@ -265,7 +265,7 @@ public class CombatManager : MonoBehaviour
         AudioManager.Instance.StartCombatMusic();
         GameState = GameState.SELECTION;
         
-        UIContextManager.Set(new UIContext.Combat());
+        new UIContextChangedEvent(new UIContext.Combat()).Invoke();
     }
 
     public void ActivateDynamicCamera()
@@ -312,7 +312,7 @@ public class CombatManager : MonoBehaviour
             entity.UnTargetable();
         }
         
-        UIContextManager.Set(new UIContext.Dialogue());
+        new UIContextChangedEvent(new UIContext.Dialogue()).Invoke();
     }
 
     private void PerformInCombat()

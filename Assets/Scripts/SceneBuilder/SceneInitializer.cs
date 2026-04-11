@@ -51,7 +51,7 @@ public class SceneInitializer : MonoBehaviour
 
     private void InitializeUIContext(SceneData sceneData) {
         UIContext context = sceneData.UIContextOnEntry;
-        UIContextManager.Set(context);
+        new UIContextChangedEvent(context).Invoke();
     }
 
     public T InstantiatePrefab<T>(T prefab) where T : MonoBehaviour

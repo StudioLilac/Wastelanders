@@ -9,15 +9,6 @@ namespace Context {
         public record Custom(UIContextCustomFlags Flags) : UIContext;
     }
 
-    public static class UIContextManager {
-        public static UIContext Current { get; private set; } = new UIContext.None();
-
-        public static void Set(UIContext context) {
-            Current = context;
-            new UIContextChangedEvent(context).Invoke();
-        }
-    }
-
     [Flags] public enum UIContextCustomFlags {
         None = 0,
         AutoRoll = 1,
