@@ -27,6 +27,7 @@ namespace UI_Toolkit
         private Button skipDialogueButton;
 
         private State state;
+        private State previousState;
 
         // Retained legacy cruft for compat.
         public static bool IsPaused;
@@ -81,6 +82,7 @@ namespace UI_Toolkit
         private void SetState(State to)
         {
             IsPaused = inputBlockCanvas.enabled = to != State.Unpaused;
+            previousState = state;
             state = to;
 
             rootElem.style.display = to != State.Unpaused ? DisplayStyle.Flex : DisplayStyle.None;
@@ -158,13 +160,13 @@ namespace UI_Toolkit
                 scroll.Clear();
                 foreach (var it in CreateLabels()) scroll.Add(it);
             } else {
-                DoStart();
+                SetState(previousState);
             }
         }
 
         private void OnClsClicked()
         {
-            DoStart();
+            SetState(previousState);
         }
         
         private static void OnAutoRollChanged(bool value) {
