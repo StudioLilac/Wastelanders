@@ -13,42 +13,43 @@ MonoBehaviour:
   m_Name: PreBounty1_1_Reminiscing
   m_EditorClassIdentifier: 
   Entries:
-  - content: "(That was the only time I\u2019ve seen Mama so worried.)"
-    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-    sfxId: 0
-    picture: {fileID: 0}
-    events:
-    - rid: 314095657258319935
-    - rid: 314095657258319953
-    - rid: 314095657258319955
-    - rid: 314095657258319956
-  - content: (What secrets do you hide, Tundra?)
-    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-    sfxId: 0
-    picture: {fileID: 0}
-    events:
-    - rid: 314095657258319937
-    - rid: 314095657258319954
-  - content: <i>The Tundra reopens for research expeditions after NITES disappearances
-      years ago! Scientists hypothesize that it is a meteor crash site! Qualified
-      expedition members wanted, contact the head office for more details.</i>
+  - content: <i>A decade after the unresolved NITES disappearances, the Tundra reopens
+      for active research expeditions.</i>
     speaker: {fileID: 11400000, guid: a9924d74021fb49d796b34e9cd8d18a3, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 314095657258319938
-    - rid: 314095657258319957
+  - content: <i>Leading scientific experts now theorize the volatile region was ground
+      zero for a massive meteor strike. </i>
+    speaker: {fileID: 11400000, guid: a9924d74021fb49d796b34e9cd8d18a3, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 314095657258319938
+  - content: <i>Qualified personnel proficient in Waste Crystal extractions instructed
+      to contact the head office for immediate details.</i>
+    speaker: {fileID: 11400000, guid: a9924d74021fb49d796b34e9cd8d18a3, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 314095657258319938
+  - content: 'Finally... it worked. '
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 314095657258319953
+    - rid: 314095657258319955
+    - rid: 314095657258319956
+  - content: 'All the research and convincing I did. They actually listened. '
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
   references:
     version: 2
     RefIds:
-    - rid: 314095657258319935
-      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-    - rid: 314095657258319937
-      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     - rid: 314095657258319938
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
@@ -57,12 +58,7 @@ MonoBehaviour:
       type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        sprite: {fileID: 21300000, guid: 770d4db9512d0574d8ee612067a1a3e2, type: 3}
-    - rid: 314095657258319954
-      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        sprite: {fileID: 21300000, guid: 70562f64108503147861dbc82d787ef9, type: 3}
+        sprite: {fileID: 21300000, guid: e37d4fbf07c214c868939546f702fa2b, type: 3}
     - rid: 314095657258319955
       type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:
@@ -75,9 +71,3 @@ MonoBehaviour:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         action: 60
         duration: 1
-    - rid: 314095657258319957
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        action: 70
-        duration: 0
