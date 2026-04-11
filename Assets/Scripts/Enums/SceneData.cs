@@ -167,6 +167,22 @@ public abstract class SceneData : Enum<SceneData>
             prefabs.dialogueBoxV2
         };
     }
+
+    public class Epilogue_3 : SceneData
+    {
+        public override string SceneName => "Epilogue_3";
+
+        public override SceneAudio GetAudio(AudioDatabase database) => database.Epilogue3;
+
+        public override MonoBehaviour[] RequiredPrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
+        {
+            prefabs.audioManager,
+            prefabs.pauseMenuV2,
+            prefabs.dialogueManager,
+            prefabs.uiFadeScreenManager,
+            prefabs.dialogueBoxV2
+        };
+    }
     
     public class Epilogue_4 : SceneData
     {
