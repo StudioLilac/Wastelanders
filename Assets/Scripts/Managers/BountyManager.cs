@@ -7,6 +7,7 @@ using BountySystem;
 using LevelSelectInformation;
 using System.Collections;
 
+
 public record ClearBounty(): IEvent;
 
 #nullable enable
@@ -15,38 +16,42 @@ public class BountyManager : PersistentSingleton<BountyManager>, IBind<BountySta
 {
     [field: SerializeField] public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
 
-    private BountyStateData? data;
+    private BountyStateData? _data;
 
-    public BountyStateData ContractStateData
+    private BountyStateData ContractStateData
     {
         get
         {
             // This can be null when this manager is created after SaveLoadManager is created. For example, when you start the game in certain scenes.
-            if (data == null) SaveLoadSystem.Instance.LoadBountyStateInformation();
+            if (_data == null) SaveLoadSystem.Instance.LoadBountyStateInformation();
 
-            return data!;
+            return _data!;
         }
         set
         {
-            data = value;
+            _data = value;
         }
     }
+
+    // All ActiveBounty should be contained within BountyInformation's Bounty Collection
+    public IBounties? ActiveBounty { get; set; } = null;
+    public BountyInformation? SelectedBountyInformation { get; private set; } = null;
+
 
     protected override void Awake()
     {
         base.Awake();
-        this.Subscribe<ClearBounty>(_ => {
+        if (invalid) return;
+
+        this.Subscribe<BountyInformationEvent>(e => SelectedBountyInformation = e.BountyType);
+        this.Subscribe<ClearBounty>(_ => 
+        {
             ActiveBounty = null;
             SelectedBountyInformation = null;
         });
     }
 
-
-    public BountyInformation? SelectedBountyInformation { get; set; } = null;
-
-    // All ActiveBounty should be contained within BountyInformation's Bounty Collection
-    public IBounties? ActiveBounty { get; set; } = null;
-
+    public int GetBountyProgress() => ContractStateData.GetNumCompletedBounties();
     public bool IsBountyCompleted(IBounties? bounty)
     {
         if (bounty == null) return false;
@@ -98,6 +103,11 @@ public class BountyStateData : ISaveable
         ChallengeCompletionState? challengeCompletionState = BountyCompletionData.Find(data => data.BountyName == bounty.BountyName);
 
         return challengeCompletionState?.Completed ?? false;
+    }
+
+    public int GetNumCompletedBounties()
+    {
+        return BountyCompletionData.Count(data => data.Completed);
     }
 
     public BountyStateData()

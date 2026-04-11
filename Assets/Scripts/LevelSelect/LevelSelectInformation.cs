@@ -1,12 +1,12 @@
 using BountySystem;
-using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
+#nullable enable
 namespace LevelSelectInformation
 {
-    // For use in the editor as a serialized placeholder for a level, that is then mapped to an actual static object.  
+    // For use in the editor as a serialized placeholder for a level, that is then mapped to an actual static object.
     public enum Level
     {
         Tutorial,
@@ -20,72 +20,152 @@ namespace LevelSelectInformation
 
     public interface ILevelSelectInformation
     {
-        public float LevelID { get; set; }
+        string Title { get; }
+        float LevelID { get; }
+        Level? SelectableLevel { get; }
+        bool LevelEnabled { get; }
+        void UponSelectedEvent();
+        bool UnlockCriteriaMet();
+        string UnlockRequirementsText();
 
-        public void UponSelectedEvent();
-
-        // Please update me if you add any new entries in the Level enum
-        public static readonly Dictionary<Level, ILevelSelectInformation> LEVEL_INFORMATION = new()
+        static readonly Dictionary<Level, ILevelSelectInformation> LEVEL_INFORMATION;
+        static ILevelSelectInformation()
         {
-            { Level.Tutorial, StageInformation.TUTORIAL_STAGE },
-            { Level.FrogSlimeFight, StageInformation.FROG_SLIME_STAGE },
-            { Level.BeetleFight, StageInformation.BEETLE_STAGE },
-            { Level.QueenFight, StageInformation.QUEEN_BEETLE_STAGE },
-            { Level.PrincessFrogFight, StageInformation.PRINCESS_FROG_FIGHT },
-            { Level.PrincessFrogBounty, BountyInformation.PRINCESS_FROG_BOUNTY },
-            { Level.IvesFinale, StageInformation.IVES_FINALE_FIGHT },
-        };
+            LEVEL_INFORMATION = StageInformation.Stages.Cast<ILevelSelectInformation>()
+                .Concat(BountyInformation.Bounties)
+                .Where(v => v.SelectableLevel.HasValue)
+                .ToDictionary(v => v.SelectableLevel!.Value);
+        }
     }
 
-    // Represents the information needed to load a specfic stage during level select
-    public class StageInformation : ILevelSelectInformation
+    public record StageInformationEvent(string SceneName) : IEvent;
+
+    // Represents the information needed to load a specific stage during level select
+    public abstract class StageInformation : Enum<StageInformation>, ILevelSelectInformation
     {
-        public static readonly StageInformation TUTORIAL_STAGE = new(sceneName: SceneData.Get<SceneData.TutorialFight>().SceneName, levelId: 0);
-        public static readonly StageInformation DECK_SELECTION_TUTORIAL = new(sceneName: SceneData.Get<SceneData.SelectionScreen>().SceneName, levelId: 0.5f);
-        public static readonly StageInformation FROG_SLIME_STAGE = new(sceneName: SceneData.Get<SceneData.FrogSlimeFight>().SceneName, levelId: 1f);
-        public static readonly StageInformation BEETLE_STAGE = new(sceneName: SceneData.Get<SceneData.BeetleFight>().SceneName, levelId: 2f);
-        public static readonly StageInformation QUEEN_PREPARATION_STAGE = new(sceneName: SceneData.Get<SceneData.SelectionScreen>().SceneName, levelId: 2.5f);
-        public static readonly StageInformation QUEEN_BEETLE_STAGE = new(sceneName: SceneData.Get<SceneData.PreQueenFight>().SceneName, levelId: 3f);
-        public static readonly StageInformation PRINCESS_FROG_FIGHT = new(sceneName: SceneData.Get<SceneData.PrincessFrogBounty>().SceneName, levelId: 4f);
-        public static readonly StageInformation IVES_FINALE_FIGHT = new(sceneName: SceneData.Get<SceneData.PrincessFrogBounty>().SceneName, levelId: 5f);
-        public string SceneName { get; set; }
-        public float LevelID { get; set; }
+        public abstract string SceneName { get; }
+        public abstract float LevelID { get; }
+        public virtual Level? SelectableLevel => null;
+        public virtual string Title => string.Empty;
+        public virtual bool LevelEnabled => true;
+        public virtual bool UnlockCriteriaMet() => LevelID <= GameStateManager.Instance.CurrentLevelProgress;
+        public virtual string UnlockRequirementsText() => $"Complete previous levels to unlock.";
 
-        public delegate void StageInformationDelegate(string sceneName);
-        public static event StageInformationDelegate StageInformationEvent;
-
-        public StageInformation(string sceneName, float levelId)
+        public class Tutorial : StageInformation
         {
-            SceneName = sceneName;
-            LevelID = levelId;
+            public override string Title => "1. TUTORIAL";
+            public override string SceneName => SceneData.Get<SceneData.TutorialFight>().SceneName;
+            public override float LevelID => 0f;
+            public override Level? SelectableLevel => Level.Tutorial;
         }
 
-        public void UponSelectedEvent()
+        public class DeckSelectionTutorial : StageInformation
         {
-            StageInformationEvent?.Invoke(SceneName);
+            public override string SceneName => SceneData.Get<SceneData.SelectionScreen>().SceneName;
+            public override float LevelID => 0.5f;
         }
+
+        public class FrogSlime : StageInformation
+        {
+            public override string Title => "2. THE EXAM BEGINS!";
+            public override string SceneName => SceneData.Get<SceneData.FrogSlimeFight>().SceneName;
+            public override float LevelID => 1f;
+            public override Level? SelectableLevel => Level.FrogSlimeFight;
+        }
+
+        public class Beetle : StageInformation
+        {
+            public override string Title => "3. HOARDERS";
+            public override string SceneName => SceneData.Get<SceneData.BeetleFight>().SceneName;
+            public override float LevelID => 2f;
+            public override Level? SelectableLevel => Level.BeetleFight;
+        }
+
+        public class QueenBeetle : StageInformation
+        {
+            public override string Title => "4. CRYSTALLIZATION";
+            public override string SceneName => SceneData.Get<SceneData.PreQueenFight>().SceneName;
+            public override float LevelID => 3f;
+            public override Level? SelectableLevel => Level.QueenFight;
+        }
+
+        public class PrincessFrogFight : StageInformation
+        {
+            public override string Title => "EX 1. CORONATION";
+            public override string SceneName => SceneData.Get<SceneData.PrincessFrogBounty>().SceneName;
+            public override float LevelID => 4f;
+            public override bool LevelEnabled => GameStateManager.SEASON_1_ACTIVE;
+            public override Level? SelectableLevel => Level.PrincessFrogFight;
+            public override bool UnlockCriteriaMet() => LevelID <= GameStateManager.Instance.CurrentLevelProgress && GameStateManager.SEASON_1_ACTIVE;
+            public override string UnlockRequirementsText() => true switch
+            {
+                !GameStateManager.SEASON_1_ACTIVE => "Coming Soon!",
+                _ => $"Complete previous levels to unlock."
+            };
+        }
+
+        public class IvesFinale : StageInformation
+        {
+            public override string Title => "EX 2. SUCCESSION";
+            public override string SceneName => SceneData.Get<SceneData.PrincessFrogBounty>().SceneName;
+            public override float LevelID => 5f;
+            public override bool LevelEnabled => GameStateManager.SEASON_1_ACTIVE;
+            public override Level? SelectableLevel => Level.IvesFinale;
+            public override bool UnlockCriteriaMet() => 
+                LevelID <= GameStateManager.Instance.CurrentLevelProgress && 
+                BountyManager.Instance.GetBountyProgress() >= 6 && 
+                GameStateManager.SEASON_1_ACTIVE;
+            public override string UnlockRequirementsText() => true switch
+            {
+                !GameStateManager.SEASON_1_ACTIVE => "Coming Soon!",
+                _ when BountyManager.Instance.GetBountyProgress() < 6 => "Complete all bounties to unlock.",
+                _ => $"Complete previous levels to unlock."
+            };
+        }
+
+        public class Season2 : StageInformation
+        {
+            public override string Title => string.Empty;
+            public override string SceneName => SceneData.Get<SceneData.PrincessFrogBounty>().SceneName;
+            public override float LevelID => 6f;
+            public override bool LevelEnabled => false;
+            public override bool UnlockCriteriaMet() => LevelID <= GameStateManager.Instance.CurrentLevelProgress && GameStateManager.SEASON_1_ACTIVE;
+        }
+
+        public void UponSelectedEvent() => new StageInformationEvent(SceneName).Invoke();
+        public static StageInformation Get<T>() where T : StageInformation => ParseFromType(typeof(T));
+        public static IEnumerable<StageInformation> Stages => Values;
     }
+
+    public record BountyInformationEvent(BountyInformation BountyType) : IEvent;
 
     // Represents the information needed to load a specific bounty stage during level select
-    public class BountyInformation : ILevelSelectInformation
+    public abstract class BountyInformation : Enum<BountyInformation>, ILevelSelectInformation
     {
-        public static readonly BountyInformation PRINCESS_FROG_BOUNTY = new(PrincessFrogBounties.Values, levelId: 4.5f);
-        public IEnumerable<IBounties> BountyCollection { get; set; }
-        //Bounties are encoded with .5f level id ending
-        public float LevelID { get; set; }
-
-        public delegate void BountyInformationDelegate(BountyInformation BountyType);
-        public static event BountyInformationDelegate BountyInformationEvent;
-
-        public BountyInformation(IEnumerable<IBounties> bounties, float levelId)
+        public abstract IEnumerable<IBounties> BountyCollection { get; }
+        public abstract float LevelID { get; }
+        public virtual Level? SelectableLevel => null;
+        public virtual string Title => string.Empty;
+        public virtual bool LevelEnabled => true;
+        public virtual bool UnlockCriteriaMet() => LevelID <= GameStateManager.Instance.CurrentLevelProgress;
+        public virtual string UnlockRequirementsText() => $"Complete previous levels to unlock.";
+        public class PrincessFrogBounty : BountyInformation
         {
-            LevelID = levelId;
-            BountyCollection = bounties;
+            public override IEnumerable<IBounties> BountyCollection => PrincessFrogBounties.Values;
+            public override float LevelID => 4.5f;
+            public override Level? SelectableLevel => Level.PrincessFrogBounty;
+            public override bool LevelEnabled => GameStateManager.SEASON_1_ACTIVE;
+            public override string Title => "BOUNTY BOARD";
+            public override bool UnlockCriteriaMet() => LevelID <= GameStateManager.Instance.CurrentLevelProgress && GameStateManager.SEASON_1_ACTIVE;
+            public override string UnlockRequirementsText() => true switch
+            {
+                !GameStateManager.SEASON_1_ACTIVE => "Coming Soon!",
+                _ => $"Complete previous levels to unlock."
+            };
         }
+        public void UponSelectedEvent() => new BountyInformationEvent(this).Invoke();
 
-        public void UponSelectedEvent()
-        {
-            BountyInformationEvent?.Invoke(this);
-        }
+        public static BountyInformation Get<T>() where T : BountyInformation => ParseFromType(typeof(T));
+        public static IEnumerable<BountyInformation> Bounties => Values;
     }
 }

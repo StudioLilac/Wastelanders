@@ -19,7 +19,7 @@ public class AudioDatabase : ScriptableObject
     public SceneAudio PreQueenFight;
     public SceneAudio PostQueenFight;
     public SceneAudio PrincessFrogBounty;
-    public SceneAudio TeaserScene;
+    public SceneAudio Tundra;
 
     [Header("Epilogue Scenes")]
     public SceneAudio Epilogue3;
