@@ -67,14 +67,14 @@ namespace UI_Toolkit
         private void DoPause()
         {
             SetState(State.PauseMenuPanel);
-            Time.timeScale = 0;
+            new PauseStateChangedEvent(true).Invoke();
             DidPause?.Invoke();
         }
 
         private void DoStart()
         {
             SetState(State.Unpaused);
-            Time.timeScale = 1;
+            new PauseStateChangedEvent(false).Invoke();
             SaveLoadSystem.Instance.SavePreferences();
         }
 

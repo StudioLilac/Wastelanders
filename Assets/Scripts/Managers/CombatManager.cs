@@ -62,7 +62,6 @@ public class CombatManager : MonoBehaviour
             Destroy(this);
         }
         this.Answer<GetGameState, GameState?>(_ => GameState);
-        this.Subscribe<DoubleSpeedChangedEvent>(SetDoubleSpeed);
     }
 
     public static void ClearEvents()
@@ -402,15 +401,6 @@ public class CombatManager : MonoBehaviour
     {
         return (!PauseMenuV2.IsPaused) && GameState == GameState.SELECTION;
     }
-    
-    private void SetDoubleSpeed(DoubleSpeedChangedEvent e) {
-        IsDoubleSpeedEnabled = e.enabled;
-        
-        if (GameState == GameState.SELECTION || GameState == GameState.FIGHTING) {
-            Time.timeScale = e.enabled ? 2f : 1f;
-        }
-    }
-    
 
     public GameState GameState
     {
@@ -420,11 +410,6 @@ public class CombatManager : MonoBehaviour
             var oldState = gameState;
             OnGameStateChanging?.Invoke(value);
             gameState = value;
-            if (value == GameState.SELECTION || value == GameState.FIGHTING) {
-                Time.timeScale = IsDoubleSpeedEnabled ? 2f : 1f;
-            } else {
-                Time.timeScale = 1f;
-            }
             switch (value)
             {
                 case GameState.SELECTION:
