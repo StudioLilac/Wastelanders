@@ -134,7 +134,7 @@ MonoBehaviour:
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         action: 10
-        duration: 1
+        duration: 0
     - rid: 314095995325513793
       type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:

@@ -16,7 +16,7 @@ namespace Dialogue.PreBounty
             yield return new WaitForSeconds(1f);
             yield return DialogueBoxV2.Instance.Play(dialogue.Into());
             yield return UIFadeScreenManager.Instance.FadeInDarkScreen(2f);
-            GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.PreBounty2>().SceneName);
+            GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.Epilogue_3>().SceneName);
         }
     }
 }
