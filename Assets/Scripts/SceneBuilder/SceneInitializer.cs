@@ -79,4 +79,5 @@ public class SceneInitializerPrefabs
     public ArrowIndicatorManager arrowIndicatorManager = null!;
     public Tooltip tooltip = null!;
     public BountyManager bountyManager = null!;
+    public TimeManager timeManager = null!;
 }
