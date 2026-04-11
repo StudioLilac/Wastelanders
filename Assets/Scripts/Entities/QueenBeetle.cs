@@ -21,7 +21,10 @@ public class QueenBeetle : EnemyClass
 
         for (int i = 0; i < beetleReturnLocationPreset.Length; i++)
         {
-            beetleLocations[i] = beetleReturnLocationPreset[i].position;
+            if (beetleReturnLocationPreset[i] != null)
+            {
+                beetleLocations[i] = beetleReturnLocationPreset[i].position;
+            }
         }
 
         for (int i = 0; i < guardBeetles.Count; ++i)

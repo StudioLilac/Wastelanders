@@ -26,6 +26,7 @@ namespace SceneBuilder
 
 #nullable enable
         private IBounties? bounty = null;
+        private readonly List<EnemyClass> currentMinions = new();
 
         protected override void Build()
         {
@@ -65,6 +66,13 @@ namespace SceneBuilder
 
             return list;
         }
+
+        private BlessBuffTarget DetermineBlessTarget() => bounty?.ContractSet switch {
+                null => BlessBuffTarget.Resonate,
+                var set when set.Contains(EnemySpawningContracts.FROG_SPAWN) => BlessBuffTarget.Flow,
+                var set when set.Contains(EnemySpawningContracts.SLIME_SPAWN) => BlessBuffTarget.Accuracy,
+                _ => BlessBuffTarget.Resonate
+        };
 
         private GameObject[] DeterminePlayers()
         {
@@ -116,10 +124,7 @@ namespace SceneBuilder
         //These adjustments are made one frame before Start runs on princess frog.
         private void AdjustPrincessFrog(PrincessFrog princessFrog)
         {
-            princessFrog.Spawnables.Clear();
-            princessFrog.Spawnables.AddRange(DetermineBurpSpawnable());
-
-            //Bounty is null during regular fights 
+            princessFrog.EncounterBlessTarget = DetermineBlessTarget();
             if (bounty == null) return;
 
             if (bounty.ContractSet.Contains(PrincessFrogContracts.ADDITIONAL_ATTACK))
@@ -189,20 +194,29 @@ namespace SceneBuilder
 
             if (entity is PrincessFrog princessFrog)
             {
+                princessFrog.OwnedMinions = currentMinions;
                 AdjustPrincessFrog(princessFrog);
             } 
             else if (entity is QueenBeetle queen)
             {
                 queen.IntializeChildBeetles(new());
+                SetupStaggerOverride(queen);
             }
             else if (entity is EnemyClass enemyClass)
             {
                 AdjustEnemyClass(enemyClass);
+                SetupStaggerOverride(enemyClass);
             }
             else if (entity is PlayerClass playerClass)
             {
                 AdjustPlayerClass(playerClass);
             }
+        }
+
+        private void SetupStaggerOverride(EnemyClass minion)
+        {
+            currentMinions.Add(minion);
+            minion.DeathHandler = minion.PassOut;
         }
 
         private void UpdateEnemyLayout()
@@ -231,7 +245,7 @@ namespace SceneBuilder
         private void HandleEntityChange(EntityClass entity)
         {
             UpdatePlayerLayout();
-            UpdateEnemyLayout();
+            //UpdateEnemyLayout();
         }
 
         private Vector3[] PositionsFrom(Vector2 centerCoordinate, int count)

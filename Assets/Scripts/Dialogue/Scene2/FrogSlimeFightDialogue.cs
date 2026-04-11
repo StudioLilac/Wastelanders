@@ -334,7 +334,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
         yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
         ReviveJackie();
-        GameStateManager.Instance.UpdateLevelProgress(StageInformation.BEETLE_STAGE);
+        GameStateManager.Instance.UpdateLevelProgress(StageInformation.Get<StageInformation.Beetle>());
         yield return new WaitForSeconds(MEDIUM_PAUSE);
 
         //After Combat

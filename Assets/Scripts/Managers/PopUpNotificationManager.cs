@@ -39,7 +39,6 @@ public class PopUpNotificationManager : MonoBehaviour
             PopupType.SelectActionFirst => "Select an Action first!",
             PopupType.SelectPlayerFirst => "Select a Player first!",
             PopupType.InsufficientResources => "Insufficient resources!",
-            PopupType.ContentLocked => "Content Locked!",
             PopupType.CustomPopup data => data.Content,
             _ => string.Empty
         };

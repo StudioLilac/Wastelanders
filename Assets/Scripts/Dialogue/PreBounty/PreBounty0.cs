@@ -13,6 +13,8 @@ namespace Dialogue.PreBounty {
         [SerializeField] private UIFadeHandler fader;
         [SerializeField] private CanvasGroupFadeHandler comingSoon;
 
+        [SerializeField] private UIFadeHandler wastelandBackground;
+
         private int keyframeIndex;
         private Coroutine panCoroutine;
         
@@ -26,12 +28,9 @@ namespace Dialogue.PreBounty {
             StartCoroutine(fader.FadeInLightScreen(2.0f));
             yield return new WaitForSeconds(1.0f);
             yield return DialogueBoxV2.Instance.Play(ailinDialogue);
-            yield return fader.FadeInDarkScreen(1f);
             yield return new WaitForSeconds(1.0f);
-            yield return comingSoon.FadeInDarkScreen(1f);
-            yield return new WaitForSeconds(4f);
-            yield return comingSoon.FadeInLightScreen(1f);
-            GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.MainMenu>().SceneName);
+
+            GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.MainMenu>().SceneName, shouldFade: false);
         }
 
 
@@ -57,14 +56,20 @@ namespace Dialogue.PreBounty {
         }
 
         private void HandleDialogueEvent(CustomEvent evt) {
+            StartCoroutine(wastelandBackground.FadeInDarkScreen(0.5f));
+        }
+
+        void HandleCameraPanEvent()
+        {
             if (keyframeIndex >= keyframes.Count)
                 return;
 
             if (panCoroutine != null)
                 StopCoroutine(panCoroutine);
-            
+
             panCoroutine = StartCoroutine(PanCameraToKeyframe(keyframes[keyframeIndex], zoomValues[keyframeIndex]));
             keyframeIndex++;
+
         }
 
         private IEnumerator PanCameraToKeyframe(Transform keyframe, float targetZoom)

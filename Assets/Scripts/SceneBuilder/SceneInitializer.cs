@@ -78,4 +78,5 @@ public class SceneInitializerPrefabs
     public DialogueBoxV2 dialogueBoxV2 = null!;
     public ArrowIndicatorManager arrowIndicatorManager = null!;
     public Tooltip tooltip = null!;
+    public BountyManager bountyManager = null!;
 }
