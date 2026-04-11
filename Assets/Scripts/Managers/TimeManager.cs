@@ -12,6 +12,8 @@ namespace Managers {
         private float timeScale;
 
         private float lastUnpausedTimeScale = 1f;
+        
+        public bool IsDoubleSpeed => isDoubleSpeed;
 
         protected override void Awake() {
             base.Awake();
@@ -56,6 +58,7 @@ namespace Managers {
             }
         }
         
+        // I set the speed back to normal here because if we are in double speed mode, we don't get a GameStateEvent to reset us properly.
         private void HandleSceneLoaded(Scene scene, LoadSceneMode mode) {
             lastUnpausedTimeScale = DEFAULT_TIME_SCALE;
             Time.timeScale = DEFAULT_TIME_SCALE;
