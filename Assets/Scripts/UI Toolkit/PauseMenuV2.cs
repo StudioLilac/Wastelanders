@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Context;
 using Managers;
 using Systems.Persistence;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -272,6 +273,7 @@ namespace UI_Toolkit
     }
 
     public record DoubleSpeedChangedEvent(bool enabled) : IEvent;
+    public record PauseStateChangedEvent(bool paused) : IEvent;
 }
 
 public static class VisualElementExtensions {
