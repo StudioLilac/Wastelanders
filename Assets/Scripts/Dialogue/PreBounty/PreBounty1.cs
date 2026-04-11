@@ -24,6 +24,8 @@ public class PreBounty1 : MonoBehaviour
 
     public IEnumerator StartScene()
     {
+        UIFadeScreenManager.Instance.SetDarkScreen();
+        yield return UIFadeScreenManager.Instance.FadeInLightScreen(1f);
         yield return DialogueBoxV2.Instance.Play(Preamble);
         yield return blackScreen.FadeToAlpha(0, 2f);
         yield return DialogueBoxV2.Instance.Play(JackieReminiscingDialogue);
@@ -35,5 +37,6 @@ public class PreBounty1 : MonoBehaviour
         yield return DialogueBoxV2.Instance.Play(BountyBoardDialogue);
 
         yield return UIFadeScreenManager.Instance.FadeInDarkScreen(1f);
+        GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.PreBounty2>().SceneName);
     }
 }

@@ -120,6 +120,7 @@ MonoBehaviour:
     - rid: 7570221363656654919
     - rid: 7570221363656654920
     - rid: 7570221363656654921
+    - rid: 7570221363656654957
   references:
     version: 2
     RefIds:
@@ -265,3 +266,9 @@ MonoBehaviour:
         actor: {fileID: 11400000, guid: 41a291ebbfe3c8744898031b27f37a87, type: 2}
         action: 80
         duration: 4
+    - rid: 7570221363656654957
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 41a291ebbfe3c8744898031b27f37a87, type: 2}
+        action: 70
+        duration: 0.5
