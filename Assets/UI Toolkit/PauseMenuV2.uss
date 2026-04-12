@@ -99,11 +99,53 @@
 }
 
 #auto-roll-toggle .unity-toggle__input {
-    width: 64px;
-    height: 64px;
-    background-image: url("project://database/Assets/Sprites/UISprites/HUD/autoroll_icon.png?fileID=2800000&guid=4b3ae8749f5e19246be2d67a244404a1&type=3#autoroll_icon");
+    background-image: url("project://database/Assets/Sprites/UISprites/HUD/Autoroll.png?fileID=2800000&guid=5a69238af6b2c5d479285c11ea6cbc42&type=3#Autoroll");
 }
 
 #auto-roll-toggle:hover .unity-toggle__input {
-    opacity: 0.7;
+    background-image: url("project://database/Assets/Sprites/UISprites/HUD/Autoroll%20-%20Hover%20Down.png?fileID=2800000&guid=02d322928fc942945ac6e6d54adb7f33&type=3#Autoroll - Hover Down");
+}
+
+#auto-roll-toggle:checked .unity-toggle__input {
+    background-image: url("project://database/Assets/Sprites/UISprites/HUD/Autoroll%20-%20Selected.png?fileID=2800000&guid=18b1a900f6b59d44ba79b35bba02216c&type=3#Autoroll - Selected");
+}
+
+#2x-speed-toggle .unity-toggle__checkmark {
+    display: none;
+}
+
+#2x-speed-toggle .unity-toggle__input {
+    background-image: url("project://database/Assets/Sprites/UISprites/HUD/2x%20Spd.png?fileID=2800000&guid=1f8727a4e46b7cc4280962d242fd10ec&type=3#2x Spd");
+}
+
+#2x-speed-toggle:hover .unity-toggle__input {
+    background-image: url("project://database/Assets/Sprites/UISprites/HUD/2x%20Spd%20-%20Hover%20Down.png?fileID=2800000&guid=735857579b6a81842bf10c677f4e0e27&type=3#2x Spd - Hover Down");
+}
+
+#2x-speed-toggle:checked .unity-toggle__input {
+    background-image: url("project://database/Assets/Sprites/UISprites/HUD/2x%20Spd%20-%20Selected.png?fileID=2800000&guid=b91ec6a851a5df24ba739e8288304a7a&type=3#2x Spd - Selected");
+}
+
+#skip-dialogue-button {
+    background-image: url("project://database/Assets/Sprites/UISprites/HUD/Skip.png?fileID=2800000&guid=4a3e2957d797619439c6576f91bf1445&type=3#Skip");
+}
+
+#skip-dialogue-button:hover {
+    background-image: url("project://database/Assets/Sprites/UISprites/HUD/Skip%20-%20Hover%20Down.png?fileID=2800000&guid=5b2b205e4c7a3c54f857f550a8d57c1b&type=3#Skip - Hover Down");
+}
+
+#skip-dialogue-button:active {
+    background-image: url("project://database/Assets/Sprites/UISprites/HUD/Skip%20-%20Selected.png?fileID=2800000&guid=19d177e73271751428db2afe7428aee2&type=3#Skip - Selected");
+}
+
+#log-button {
+    background-image: url("project://database/Assets/Sprites/UISprites/HUD/Log.png?fileID=2800000&guid=c0878658c7e61224982c993218663a22&type=3#Log");
+}
+
+#log-button:hover {
+    background-image: url("project://database/Assets/Sprites/UISprites/HUD/Log%20-%20Hover%20Down.png?fileID=2800000&guid=a5c0f45a9d27cdd46bfb11d5a26dade8&type=3#Log - Hover Down");
+}
+
+#log-button:active {
+    background-image: url("project://database/Assets/Sprites/UISprites/HUD/Log%20-%20Selected.png?fileID=2800000&guid=10707dc8cbfae9049a02336094e6d5a1&type=3#Log - Selected");
 }

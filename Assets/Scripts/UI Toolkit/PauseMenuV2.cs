@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Context;
 using Managers;
 using Systems.Persistence;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -20,14 +22,16 @@ namespace UI_Toolkit
         private Button pauseIconButton;
 
         private Toggle autoRollToggle;
+        private Toggle doubleSpeedToggle;
+        private Button dialogueLogButton;
+        private Button skipDialogueButton;
 
         private State state;
+        private State previousState;
 
         // Retained legacy cruft for compat.
         public static bool IsPaused;
         public static event Action DidPause;
-        
-        private float autoRollCurrentRotation;
 
         public void Awake()
         {
@@ -37,17 +41,21 @@ namespace UI_Toolkit
             pauseMenuPanel = rootElem.Q<VisualElement>("pause-menu-panel");
             pauseIconButton = rootDocument.rootVisualElement.Q<Button>("pause-icon-button");
             autoRollToggle = rootDocument.rootVisualElement.Q<Toggle>("auto-roll-toggle");
+            doubleSpeedToggle = rootDocument.rootVisualElement.Q<Toggle>("2x-speed-toggle");
+            dialogueLogButton = rootDocument.rootVisualElement.Q<Button>("log-button");
+            skipDialogueButton = rootDocument.rootVisualElement.Q<Button>("skip-dialogue-button");
+            
             rootDocument.panelSettings.sortingOrder = UISortOrder.PauseMenu.GetOrder();
 
             pauseIconButton.clicked += DoPause;
 
             RegisterCallbacks();
             LoadInitialValues();
+            
+            this.Subscribe<UIContextChangedEvent>(HandleUIContextChanged);
             SetState(State.Unpaused);
         }
         
-        
-
         public void Update()
         {
             if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Tab))
@@ -55,32 +63,26 @@ namespace UI_Toolkit
                 if (state != State.Unpaused) DoStart();
                 else DoPause();
             }
-    
-            if (autoRollToggle.value)
-            {
-                autoRollCurrentRotation += 90f * Time.unscaledDeltaTime;
-                autoRollToggle.Q(className: "unity-toggle__input").style.rotate = 
-                    new StyleRotate(new Rotate(autoRollCurrentRotation));
-            }
         }
 
         private void DoPause()
         {
             SetState(State.PauseMenuPanel);
-            Time.timeScale = 0;
+            new PauseStateChangedEvent(true).Invoke();
             DidPause?.Invoke();
         }
 
         private void DoStart()
         {
             SetState(State.Unpaused);
-            Time.timeScale = 1;
+            new PauseStateChangedEvent(false).Invoke();
             SaveLoadSystem.Instance.SavePreferences();
         }
 
         private void SetState(State to)
         {
             IsPaused = inputBlockCanvas.enabled = to != State.Unpaused;
+            previousState = state;
             state = to;
 
             rootElem.style.display = to != State.Unpaused ? DisplayStyle.Flex : DisplayStyle.None;
@@ -88,6 +90,20 @@ namespace UI_Toolkit
             glossary.style.display = to == State.Glossary ? DisplayStyle.Flex : DisplayStyle.None;
             pauseMenuPanel.style.display = to == State.PauseMenuPanel ? DisplayStyle.Flex : DisplayStyle.None;
             pauseIconButton.style.display = to == State.Unpaused ? DisplayStyle.Flex : DisplayStyle.None;
+        }
+
+        private void HandleUIContextChanged(UIContextChangedEvent e) {
+            var flags = e.context switch {
+                UIContext.Combat   => UIContextCustomFlags.DialogueLog | UIContextCustomFlags.AutoRoll | UIContextCustomFlags.DoubleSpeed,
+                UIContext.Dialogue => UIContextCustomFlags.DialogueLog | UIContextCustomFlags.SkipDialogue,
+                UIContext.Custom data  => data.Flags,
+                _                  => UIContextCustomFlags.None,
+            };
+
+            autoRollToggle.Display(flags.HasFlag(UIContextCustomFlags.AutoRoll));
+            doubleSpeedToggle.Display(flags.HasFlag(UIContextCustomFlags.DoubleSpeed));
+            dialogueLogButton.Display(flags.HasFlag(UIContextCustomFlags.DialogueLog));
+            skipDialogueButton.Display(flags.HasFlag(UIContextCustomFlags.SkipDialogue));
         }
 
         private void OnRsmClicked()
@@ -137,20 +153,28 @@ namespace UI_Toolkit
 
         private void OnDlgClicked()
         {
-            SetState(State.Dialogue);
-            var scroll = dialogue.Q<ScrollView>("scroll-dlg");
-            StartCoroutine(DoScrollToBottomWithDelay(scroll));
-            scroll.Clear();
-            foreach (var it in CreateLabels()) scroll.Add(it);
+            if (state != State.Dialogue) {
+                SetState(State.Dialogue);
+                var scroll = dialogue.Q<ScrollView>("scroll-dlg");
+                StartCoroutine(DoScrollToBottomWithDelay(scroll));
+                scroll.Clear();
+                foreach (var it in CreateLabels()) scroll.Add(it);
+            } else {
+                SetState(previousState);
+            }
         }
 
         private void OnClsClicked()
         {
-            SetState(State.PauseMenuPanel);
+            SetState(previousState);
         }
         
         private static void OnAutoRollChanged(bool value) {
             PreferencesManager.Instance.SetAutoRoll(value);
+        }
+        
+        private static void OnDoubleSpeedChanged(bool value) {
+            new DoubleSpeedChangedEvent(value).Invoke();
         }
 
         private static void OnMusChanged(float value)
@@ -185,13 +209,14 @@ namespace UI_Toolkit
             pauseMenuPanel.Q<Button>("button-dck").clicked += OnDckClicked;
             pauseMenuPanel.Q<Button>("button-lvl").clicked += OnLvlClicked;
             pauseMenuPanel.Q<Button>("button-gls").clicked += OnGlsClicked;
-            pauseMenuPanel.Q<Button>("button-dlg").clicked += OnDlgClicked;
             pauseMenuPanel.Q<Button>("button-mnu").clicked += OnMnuClicked;
 
             dialogue.Q<Button>("button-cls").clicked += OnClsClicked;
             glossary.Q<Button>("button-cls").clicked += OnClsClicked;
 
             autoRollToggle.RegisterValueChangedCallback(e => OnAutoRollChanged(e.newValue));
+            doubleSpeedToggle.RegisterValueChangedCallback(e => OnDoubleSpeedChanged(e.newValue));
+            dialogueLogButton.clicked += OnDlgClicked;
 
             pauseMenuPanel.Q<Slider>("slider-mus").RegisterValueChangedCallback(e => OnMusChanged(e.newValue));
             pauseMenuPanel.Q<Slider>("slider-sfx").RegisterValueChangedCallback(e => OnSfxChanged(e.newValue));
@@ -210,6 +235,7 @@ namespace UI_Toolkit
             pauseMenuPanel.Q<Toggle>("toggle-vfx").value = ScreenShakeHandler.IsScreenShakeEnabled;
 
             autoRollToggle.value = preferences.AutoRollEnabled;
+            doubleSpeedToggle.value = TimeManager.Instance.IsDoubleSpeed;
         }
 
         private enum State
@@ -246,5 +272,14 @@ namespace UI_Toolkit
                 yield return label2;
             }
         }
+    }
+
+    public record DoubleSpeedChangedEvent(bool enabled) : IEvent;
+    public record PauseStateChangedEvent(bool paused) : IEvent;
+}
+
+public static class VisualElementExtensions {
+    public static void Display(this VisualElement el, bool visible) {
+        el.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
     }
 }
