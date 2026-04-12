@@ -32,8 +32,6 @@ public class CombatManager : MonoBehaviour
     
     [SerializeField] private PlayerDatabase playerDatabase;
     [SerializeField] private CardDatabase cardDatabase;
-
-    private bool IsDoubleSpeedEnabled { get; set; }
     
     public List<InstantiableActionClassInfo> GetDeck(PlayerDatabase.PlayerName playerName)
     {
@@ -419,7 +417,6 @@ public class CombatManager : MonoBehaviour
                     PerformFighting();
                     break;
                 case GameState.GAME_WIN:
-                    Time.timeScale = 1f;
                     PerformWin();
                     break;
                 case GameState.GAME_LOSE:
