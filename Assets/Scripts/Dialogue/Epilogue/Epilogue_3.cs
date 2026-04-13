@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using DialogueScripts;
+using LevelSelectInformation;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -31,6 +32,7 @@ public class Epilogue_3 : MonoBehaviour {
     [SerializeField] private DialogueEntryWrapper WesternMarsh;
     [SerializeField] private DialogueEntryWrapper WesternMarsh2;
     [SerializeField] private DialogueEntryWrapper WesternMarsh3;
+    [SerializeField] private DialogueEntryWrapper HeadingOut;
 
     [SerializeField] private DialogueEntryWrapper Tundra;
 
@@ -70,7 +72,6 @@ public class Epilogue_3 : MonoBehaviour {
                 cam.gameObject.SetActive(false);
                 beetle.gameObject.SetActive(true);
                 beetle.OutOfCombat();
-                vignette.SetLightScreen();
             }
             StartCoroutine(PurpleFlash(0.5f, Callback));
         }
@@ -89,7 +90,6 @@ public class Epilogue_3 : MonoBehaviour {
         yield return DialogueBoxV2.Instance.Play(Driving);
         AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
         yield return black.FadeInDarkScreen(1f);
-        yield return car.FadeInLightScreen(0f);
         tundraBackground.SetActive(true);
         StartCoroutine(vignette.FadeToAlpha(155f/255f, 0f));
         yield return new WaitForSeconds(1f);
@@ -118,17 +118,16 @@ public class Epilogue_3 : MonoBehaviour {
         SoundID.VN_finger_snap.Play();
         yield return PurpleFlash(0.5f, IvesCallback);
 
+        yield return new WaitForSeconds(0.5f);
+        yield return DialogueBoxV2.Instance.Play(HeadingOut);
+        yield return new WaitForSeconds(0.5f);
+
         StartCoroutine(slime.MoveToPosition(offFieldPosition.position, 0f, 2f));
         StartCoroutine(beetle.MoveToPosition(offFieldPosition.position, 0f, 3f));
-        yield return StartCoroutine(frog.MoveToPosition(offFieldPosition.position, 0f, 2.5f));
-
-        yield return black.FadeInDarkScreen(2f);
-
-        ////// New scene after this
-
-
-
-
+        StartCoroutine(frog.MoveToPosition(offFieldPosition.position, 0f, 2.5f));
+        yield return new WaitForSeconds(1.0f);
+        yield return black.FadeInDarkScreen(2.5f);
+        GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.PrincessFrogBounty>().SceneName);
 
 
         yield return black.FadeInLightScreen(2f);

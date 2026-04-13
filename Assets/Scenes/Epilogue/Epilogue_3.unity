@@ -2440,6 +2440,7 @@ MonoBehaviour:
   WesternMarsh: {fileID: 11400000, guid: dbe531f7898944f9681451879fb33f3d, type: 2}
   WesternMarsh2: {fileID: 11400000, guid: e11b35e4bc3c2cf43a75e568dcba17bf, type: 2}
   WesternMarsh3: {fileID: 11400000, guid: 01cc52c137f653940a63cf517d21694e, type: 2}
+  HeadingOut: {fileID: 11400000, guid: 3cacbbfd56fed02408ecac085c243ac5, type: 2}
   Tundra: {fileID: 11400000, guid: ba5c2220069725d46a08f53d47ce447b, type: 2}
   BattlePreMoveForward: {fileID: 11400000, guid: f5fae1194eed8f84dbc450b6170a2bdf, type: 2}
   BattleHalt: {fileID: 11400000, guid: 07b18e9b813fd0c49b612d2f6577d2a0, type: 2}
