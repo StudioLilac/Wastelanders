@@ -15,6 +15,15 @@ public class Epilogue_3 : MonoBehaviour {
 
     [SerializeField] private SpriteRenderer cam;
     [SerializeField] private Beetle beetle;
+    [SerializeField] private GameObject jackie;
+    [SerializeField] private WasteFrog frog;
+    [SerializeField] private GameObject ives;
+    [SerializeField] private SlimeStack slime;
+
+    [SerializeField] private Transform offFieldPosition;
+
+
+    public AudioClip tundraAudio;
 
     // Dialogue
     [SerializeField] private DialogueEntryWrapper Driving;
@@ -42,7 +51,7 @@ public class Epilogue_3 : MonoBehaviour {
     
     [SerializeField] private DialogueEntryWrapper PrincessDeckUnlocked;
 
-    
+#nullable enable
     void Start() {
         this.Subscribe<CustomEvent>(CustomEventHandler);
         StartCoroutine(StartScene());
@@ -82,21 +91,36 @@ public class Epilogue_3 : MonoBehaviour {
         yield return black.FadeInDarkScreen(1f);
         yield return car.FadeInLightScreen(0f);
         tundraBackground.SetActive(true);
-        StartCoroutine(vignette.FadeToAlpha(225f/255f, 0f));
+        StartCoroutine(vignette.FadeToAlpha(155f/255f, 0f));
+        yield return new WaitForSeconds(1f);
+        AudioManager.Instance.FadeInBackgroundTrack(1f, tundraAudio, true);
+        yield return DialogueBoxV2.Instance.Play(WesternMarsh);
+        yield return new WaitForSeconds(1f);
+        yield return DialogueBoxV2.Instance.Play(WesternMarsh2);
+        yield return DialogueBoxV2.Instance.Play(WesternMarsh3);
         yield return new WaitForSeconds(1f);
 
-        yield return DialogueBoxV2.Instance.Play(WesternMarsh);
+        void JackieCallback()
+        {
+            jackie.SetActive(false);
+            frog.gameObject.SetActive(true);
+            frog.OutOfCombat();
+        }
+        void IvesCallback()
+        {
+            ives.SetActive(false);
+            slime.gameObject.SetActive(true);
+            slime.OutOfCombat();
+        }
 
-        yield return DialogueBoxV2.Instance.Play(WesternMarsh2);
-        // TODO: Audio: Shock and murmurs ripple through the faces of the experienced warriors.
-        yield return DialogueBoxV2.Instance.Play(WesternMarsh3);
+        SoundID.VN_finger_snap.Play();
+        yield return PurpleFlash(0.5f, JackieCallback);
+        SoundID.VN_finger_snap.Play();
+        yield return PurpleFlash(0.5f, IvesCallback);
 
-        // [multiple purples flashes with Waste creatures popping up]
-        // TODO: "Waste creatures popping up"
-        yield return new WaitForSeconds(2f);
-        yield return PurpleFlash(0.5f);
-        yield return PurpleFlash(0.5f);
-        yield return PurpleFlash(0.5f);
+        StartCoroutine(slime.MoveToPosition(offFieldPosition.position, 0f, 2f));
+        StartCoroutine(beetle.MoveToPosition(offFieldPosition.position, 0f, 3f));
+        yield return StartCoroutine(frog.MoveToPosition(offFieldPosition.position, 0f, 2.5f));
 
         yield return black.FadeInDarkScreen(2f);
 
@@ -180,7 +204,8 @@ public class Epilogue_3 : MonoBehaviour {
         yield return UIFadeScreenManager.Instance.FadeInDarkScreen(2f);
     }
 
-    private IEnumerator PurpleFlash(float delay, Action callback = null) {
+    private IEnumerator PurpleFlash(float delay, Action? callback = default) {
+        SoundID.VN_purple_pulse.Play();
         yield return purpleFlash.FadeInDarkScreen(delay);
         callback?.Invoke();
         yield return purpleFlash.FadeInLightScreen(delay);

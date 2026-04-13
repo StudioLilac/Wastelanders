@@ -69,6 +69,7 @@ public class CombatManager : MonoBehaviour
         this.Answer<GetOpponents, List<EntityClass>?>(query => HandleGetOpponents(query.Team));
         this.Subscribe<AddEntityToTeam>(HandleAddEntityToTeam);
         this.Subscribe<RemoveEntityFromTeam>(HandleRemoveEntityFromTeam);
+        this.Subscribe<EntityFacingChanged>(_ => UpdateCameraBounds());
     }
 
     public static void ClearEvents()
@@ -105,7 +106,7 @@ public class CombatManager : MonoBehaviour
 
     //Sets the Camera Bounds to "see more" in the direction that the following entity is facing
     //Usage: Should be called everytime an Entity changes their direction. 
-    public void UpdateCameraBounds()
+    private void UpdateCameraBounds()
     {
         if (dynamicCamera.Follow?.GetComponent<EntityClass>()?.IsFacingRight() ?? false)
         {

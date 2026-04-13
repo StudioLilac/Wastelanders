@@ -6,6 +6,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
+public record EntityFacingChanged() : IEvent;
+
 public class CombatInfo : MonoBehaviour
 {
     [SerializeField] private GameObject combatCardIconPrefab;
@@ -295,8 +297,6 @@ public class CombatInfo : MonoBehaviour
             cardIcon.FaceLeft();
         }
         diceRollSprite.flipX = true;
-
-        CombatManager.Instance.UpdateCameraBounds(); //Bad placement here
     }
     //Flips the CombatInfo so that the Icon is on the LEFT of the entity
     public void FaceRight()
@@ -318,9 +318,6 @@ public class CombatInfo : MonoBehaviour
             cardIcon.FaceRight();
         }
         diceRollSprite.flipX = false;
-
-        CombatManager.Instance.UpdateCameraBounds(); //Bad placement here, but I cant think of where else id put it
-
     }
 
     public void FlipTransform(Transform transform, bool faceRight)

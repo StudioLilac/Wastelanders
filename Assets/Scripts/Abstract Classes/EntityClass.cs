@@ -13,6 +13,8 @@ using UnityEditor.Animations;
 public record OnBuffsUpdatedEvent(EntityClass WhoAmI) : IEvent;
 public record AddEntityToTeam(EntityClass Entity, EntityTeam Team) : IEvent;
 public record RemoveEntityFromTeam(EntityClass Entity, EntityTeam Team) : IEvent;
+
+[RequireComponent(typeof(SpriteRenderer))]
 public abstract class EntityClass : SelectClass
 {
     public const string STAGGERED_ANIMATION_NAME = "IsStaggered";
@@ -50,6 +52,7 @@ public abstract class EntityClass : SelectClass
     public Sprite icon;
     public Animator animator;
     public CombatInfo combatInfo;
+    private SpriteRenderer spriteRenderer;
     [SerializeField] 
     protected BoxCollider boxCollider;
     [SerializeField] private Sprite passOutSprite;
@@ -71,8 +74,8 @@ public abstract class EntityClass : SelectClass
     public static event EntityDelegate? OnEntityClicked;
     public event EntityDelegate? BuffsUpdatedEvent;
 
-    private string FadeSortingLayer => new GetFadeSortingLayer().Query() ?? string.Empty;
-    private int FadeSortingOrder => new GetFadeSortingOrder().Query() ?? 0;
+    private string FadeSortingLayer => new GetFadeSortingLayer().Query() ?? spriteRenderer.sortingLayerName;
+    private int FadeSortingOrder => new GetFadeSortingOrder().Query() ?? spriteRenderer.sortingOrder;
 
     private EntityMovementHandler entityMovement = null!;
 
@@ -80,6 +83,7 @@ public abstract class EntityClass : SelectClass
     {
         entityMovement = this.gameObject.AddComponent<EntityMovementHandler>();
         initialPosition = myTransform.position;
+        spriteRenderer = GetComponent<SpriteRenderer>();
         DeathHandler = Die;
     }
 
@@ -88,7 +92,7 @@ public abstract class EntityClass : SelectClass
         DeEmphasize();
         DisableDice();
         AssignTeam();
-        GetComponent<SpriteRenderer>().sortingLayerName = FadeSortingLayer;
+        spriteRenderer.sortingLayerName = FadeSortingLayer;
 
         OnEntitySpawn?.Invoke(this);
     }
@@ -206,7 +210,6 @@ public abstract class EntityClass : SelectClass
 
         if (passOutSprite != null)
         {
-            SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
             spriteRenderer.sprite = passOutSprite;
         } else if (HasAnimationParameter(STAGGERED_ANIMATION_NAME))
         {
@@ -239,12 +242,14 @@ public abstract class EntityClass : SelectClass
     {
         FlipTransform(this.transform, true);
         combatInfo.FaceRight();
+        new EntityFacingChanged().Invoke();
     }
 
     public void FaceLeft()
     {
         FlipTransform(this.transform, false);
         combatInfo.FaceLeft();
+        new EntityFacingChanged().Invoke();
     }
 
     public bool IsFacingRight()
@@ -520,7 +525,6 @@ public abstract class EntityClass : SelectClass
     //Increases this Entity Class' sorting layer (negative number is higher up)
     public void Emphasize()
     {
-        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         Vector3 largeTransform = transform.position;
         largeTransform.z = FadeSortingOrder - 3 + ZOffset(spriteRenderer.bounds.min.y);
         transform.position = largeTransform;
@@ -531,7 +535,6 @@ public abstract class EntityClass : SelectClass
     //Decreases this Entity Class' sorting layer. (Standardizes Sorting Layers for entities)
     public void DeEmphasize()
     {
-        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         Vector3 largeTransform = transform.position;
         largeTransform.z = FadeSortingOrder - 1 + ZOffset(spriteRenderer.bounds.min.y);
         transform.position = largeTransform;
@@ -541,7 +544,6 @@ public abstract class EntityClass : SelectClass
 
     public float GetSortingZ()
     {
-        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         return ZOffset(spriteRenderer.bounds.min.y);
     }
 
