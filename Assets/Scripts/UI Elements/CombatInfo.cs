@@ -25,8 +25,8 @@ public class CombatInfo : MonoBehaviour
 
     public Canvas buffListCanvas;
 
-    private int FadeSortingOrder => CombatFadeScreenHandler.Instance.FADE_SORTING_ORDER;
-    private string FadeSortingLayer => CombatFadeScreenHandler.Instance.FADE_SORTING_LAYER;
+    private int FadeSortingOrder => new GetFadeSortingOrder().Query() ?? 0;
+    private string FadeSortingLayer => new GetFadeSortingLayer().Query() ?? string.Empty;
     
     // TODO: [perf] cache this
     private bool BelongsToEnemy => GetComponentInParent<EnemyClass>() != null;

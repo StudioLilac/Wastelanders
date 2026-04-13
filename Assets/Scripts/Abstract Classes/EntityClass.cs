@@ -69,8 +69,8 @@ public abstract class EntityClass : SelectClass
     public static event EntityDelegate? OnEntityClicked;
     public event EntityDelegate? BuffsUpdatedEvent;
 
-    private string FadeSortingLayer => CombatFadeScreenHandler.Instance.FADE_SORTING_LAYER;
-    private int FadeSortingOrder => CombatFadeScreenHandler.Instance.FADE_SORTING_ORDER;
+    private string FadeSortingLayer => new GetFadeSortingLayer().Query() ?? string.Empty;
+    private int FadeSortingOrder => new GetFadeSortingOrder().Query() ?? 0;
 
     private EntityMovementHandler entityMovement = null!;
 

@@ -35,8 +35,8 @@ public class BattleQueueIcons : DisplayableClass, IBattleQueueDisplayable
 
     private bool isActive = true;
     private bool isShaking = false;
-    private int FadeSortingOrder => CombatFadeScreenHandler.Instance.FADE_SORTING_ORDER;
-    private string FadeSortingLayer => CombatFadeScreenHandler.Instance.FADE_SORTING_LAYER;
+    private int FadeSortingOrder => new GetFadeSortingOrder().Query() ?? 0;
+    private string FadeSortingLayer => new GetFadeSortingLayer().Query() ?? string.Empty;
 
     public void RenderBQIcon(ActionClass ac)
     {

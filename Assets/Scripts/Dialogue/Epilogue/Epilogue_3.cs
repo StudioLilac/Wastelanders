@@ -61,6 +61,7 @@ public class Epilogue_3 : MonoBehaviour {
                 cam.gameObject.SetActive(false);
                 beetle.gameObject.SetActive(true);
                 beetle.OutOfCombat();
+                vignette.SetLightScreen();
             }
             StartCoroutine(PurpleFlash(0.5f, Callback));
         }
@@ -85,6 +86,7 @@ public class Epilogue_3 : MonoBehaviour {
         yield return new WaitForSeconds(1f);
 
         yield return DialogueBoxV2.Instance.Play(WesternMarsh);
+
         yield return DialogueBoxV2.Instance.Play(WesternMarsh2);
         // TODO: Audio: Shock and murmurs ripple through the faces of the experienced warriors.
         yield return DialogueBoxV2.Instance.Play(WesternMarsh3);

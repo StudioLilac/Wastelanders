@@ -1,6 +1,12 @@
 using System.Collections;
 using UnityEngine;
 
+#nullable enable
+public record GetFadeSortingLayer() : IQuery<string?>;
+public record GetFadeSortingLayerId() : IQuery<int?>;
+public record GetFadeSortingOrder() : IQuery<int?>;
+public record GetFadeScreenZValue() : IQuery<float?>;
+
 public class CombatFadeScreenHandler : MonoBehaviour
 {
     public static CombatFadeScreenHandler Instance { get; private set; }
@@ -17,13 +23,14 @@ public class CombatFadeScreenHandler : MonoBehaviour
         else if (Instance != null && Instance != this)
         {
             Destroy(this);
+            return;
         }
-    }
 
-    public string FADE_SORTING_LAYER => spriteFadeHandler.FadeSortingLayer;
-    public int FADE_SORTING_LAYER_ID => spriteFadeHandler.FadeSortingLayerId;
-    public int FADE_SORTING_ORDER => spriteFadeHandler.FadeSortingOrder;
-    public float FADE_SCREEN_Z_VALUE => spriteFadeHandler.FadeScreenZValue;
+        this.Answer<GetFadeSortingLayer, string?>(_ => spriteFadeHandler.FadeSortingLayer);
+        this.Answer<GetFadeSortingLayerId, int?>(_ => spriteFadeHandler.FadeSortingLayerId);
+        this.Answer<GetFadeSortingOrder, int?>(_ => spriteFadeHandler.FadeSortingOrder);
+        this.Answer<GetFadeScreenZValue, float?>(_ => spriteFadeHandler.FadeScreenZValue);
+    }
 
     public void SetDarkScreen() => spriteFadeHandler.SetDarkScreen();
 
