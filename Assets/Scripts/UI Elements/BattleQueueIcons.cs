@@ -148,7 +148,7 @@ public class BattleQueueIcons : DisplayableClass, IBattleQueueDisplayable
 
     private void OnMouseDown()
     {
-        if (ActionClass.Origin is PlayerClass && CombatManager.Instance.CanHighlight() && isActive)
+        if (ActionClass.Origin is PlayerClass && new CanHighlight().Query() == true && isActive)
         {
             new BattleQueueIconClick(this).Invoke();
             DeHighlightTarget();

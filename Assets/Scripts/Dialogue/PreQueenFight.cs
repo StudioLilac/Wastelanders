@@ -710,7 +710,7 @@ public class PreQueenFight : DialogueClasses
             enemy.DestroyDeck();
         } else if (entityClass is PlayerClass player)
         {
-            CombatManager.Instance.RemovePlayer(player);
+            new RemoveEntityFromTeam(player, EntityTeam.PlayerTeam).Invoke();
             player.DestroyDeck();
         }
         entityClass.animator.enabled = false;

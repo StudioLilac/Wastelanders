@@ -130,14 +130,5 @@ public abstract class EnemyClass : EntityClass
         toAdd.transform.position = new Vector3(-100, -100, 1);
     }
 
-    protected virtual List<EntityClass> GetOpponents()
-    {
-        return Team switch
-        {
-            EntityTeam.PlayerTeam => new List<EntityClass>(CombatManager.Instance.GetEnemies().Concat(CombatManager.Instance.GetNeutral())),
-            EntityTeam.EnemyTeam => new List<EntityClass>(CombatManager.Instance.GetPlayers().Concat(CombatManager.Instance.GetNeutral())),
-            EntityTeam.NeutralTeam => new(),
-            _ => throw new ArgumentOutOfRangeException("Team possibly not initialized, this is my team: " + Team)
-        };
-    }
+    protected virtual List<EntityClass> GetOpponents() => new GetOpponents(Team).Query() ?? new();
 }

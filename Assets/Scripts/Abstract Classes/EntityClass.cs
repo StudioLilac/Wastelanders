@@ -11,6 +11,8 @@ using UnityEditor.Animations;
 #endif
 
 public record OnBuffsUpdatedEvent(EntityClass WhoAmI) : IEvent;
+public record AddEntityToTeam(EntityClass Entity, EntityTeam Team) : IEvent;
+public record RemoveEntityFromTeam(EntityClass Entity, EntityTeam Team) : IEvent;
 public abstract class EntityClass : SelectClass
 {
     public const string STAGGERED_ANIMATION_NAME = "IsStaggered";
@@ -355,7 +357,7 @@ public abstract class EntityClass : SelectClass
 
     public void Highlight(float speed = 0.55f)
     {
-        if (CombatManager.Instance.CanHighlight())
+        if (new CanHighlight().Query() ?? false)
         {
             combatInfo.ActivateCrosshair(speed);
         }
@@ -380,30 +382,9 @@ public abstract class EntityClass : SelectClass
     public abstract void DestroyDeck();
     public abstract void PerformSelection();
 
-    private void AssignTeam()
-    {
-        Action<EntityClass> action = Team switch
-        {
-            EntityTeam.PlayerTeam => CombatManager.Instance.AddPlayer,
-            EntityTeam.EnemyTeam=> CombatManager.Instance.AddEnemy,
-            EntityTeam.NeutralTeam => CombatManager.Instance.AddNeutral,
-            _ => throw new ArgumentOutOfRangeException()
-        };
+    private void AssignTeam() => new AddEntityToTeam(this, Team).Invoke();
 
-        action(this);
-    }
-    public void RemoveEntityFromCombat()
-    {
-        Action<EntityClass> action = Team switch
-        {
-            EntityTeam.PlayerTeam => CombatManager.Instance.RemovePlayer,
-            EntityTeam.EnemyTeam => CombatManager.Instance.RemoveEnemy,
-            EntityTeam.NeutralTeam => CombatManager.Instance.RemoveNeutral,
-            _ => throw new ArgumentOutOfRangeException()
-        };
-
-        action(this);
-    }
+    public void RemoveEntityFromCombat() => new RemoveEntityFromTeam(this, Team).Invoke();
 
     protected void FaceOpponent()
     {

@@ -2189,6 +2189,7 @@ MonoBehaviour:
   black: {fileID: 685827663}
   purpleFlash: {fileID: 20743286}
   car: {fileID: 788154146}
+  vignette: {fileID: 862193507}
   tundraBackground: {fileID: 336697909}
   battleBackground: {fileID: 1978940688}
   cam: {fileID: 128909163}

@@ -7,10 +7,14 @@ using Context;
 using Systems.Persistence;
 using WeaponDeckSerialization;
 using UI_Toolkit;
+using System;
 
 #nullable enable
-public record GetGameState() : IQuery<GameState?>; 
+public record GetGameState() : IQuery<GameState?>;
 public record DefaultCard(PlayerClass player) : IQuery<ClasslessCards?>;
+public record CanHighlight() : IQuery<bool?>;
+public record GetTeammates(EntityTeam Team) : IQuery<List<EntityClass>?>;
+public record GetOpponents(EntityTeam Team) : IQuery<List<EntityClass>?>;
 public record GameStateChanged(GameState OldState, GameState NewState): IEvent;
 #nullable disable
 
@@ -60,6 +64,11 @@ public class CombatManager : MonoBehaviour
             Destroy(this);
         }
         this.Answer<GetGameState, GameState?>(_ => GameState);
+        this.Answer<CanHighlight, bool?>(_ => CanHighlight());
+        this.Answer<GetTeammates, List<EntityClass>?>(query => HandleGetTeammates(query.Team));
+        this.Answer<GetOpponents, List<EntityClass>?>(query => HandleGetOpponents(query.Team));
+        this.Subscribe<AddEntityToTeam>(HandleAddEntityToTeam);
+        this.Subscribe<RemoveEntityFromTeam>(HandleRemoveEntityFromTeam);
     }
 
     public static void ClearEvents()
@@ -170,23 +179,48 @@ public class CombatManager : MonoBehaviour
         gameObject.GetComponent<Transform>().position = position;
     }
 
-    public void AddPlayer(EntityClass player)
+
+    private void HandleAddEntityToTeam(AddEntityToTeam evt)
+    {
+        Action<EntityClass> action = evt.Team switch
+        {
+            EntityTeam.PlayerTeam => AddPlayer,
+            EntityTeam.EnemyTeam => AddEnemy,
+            EntityTeam.NeutralTeam => AddNeutral,
+            _ => throw new ArgumentOutOfRangeException()
+        };
+        action(evt.Entity);
+    }
+
+    private void HandleRemoveEntityFromTeam(RemoveEntityFromTeam evt)
+    {
+        Action<EntityClass> action = evt.Team switch
+        {
+            EntityTeam.PlayerTeam => RemovePlayer,
+            EntityTeam.EnemyTeam => RemoveEnemy,
+            EntityTeam.NeutralTeam => RemoveNeutral,
+            _ => throw new ArgumentOutOfRangeException()
+        };
+        action(evt.Entity);
+    }
+
+    private void AddPlayer(EntityClass player)
     {
         playerTeam.Add(player);
     }
 
-    public void AddEnemy(EntityClass enemy)
+    private void AddEnemy(EntityClass enemy)
     {
         enemyTeam.Add(enemy);
     }
 
-    public void AddNeutral(EntityClass neutral)
+    private void AddNeutral(EntityClass neutral)
     {
         neutralTeam.Add(neutral);
     }
 
     //Purpose: Call this when a player is removed or killed
-    public void RemovePlayer(EntityClass player)
+    private void RemovePlayer(EntityClass player)
     {
         playerTeam.Remove(player);
         if (dynamicCamera.Follow?.GetComponent<EntityClass>() == player)
@@ -201,7 +235,7 @@ public class CombatManager : MonoBehaviour
     }
 
     //Purpose: Call this when an enemy is removed or killed
-    public void RemoveEnemy(EntityClass enemy)
+    private void RemoveEnemy(EntityClass enemy)
     {
         enemyTeam.Remove(enemy);
         if (dynamicCamera.Follow?.GetComponent<EntityClass>() == enemy)
@@ -223,6 +257,28 @@ public class CombatManager : MonoBehaviour
         {
             dynamicCamera.Follow = null;
         }
+    }
+
+    private List<EntityClass>? HandleGetTeammates(EntityTeam team)
+    {
+        return team switch
+        {
+            EntityTeam.PlayerTeam => new List<EntityClass>(playerTeam),
+            EntityTeam.EnemyTeam => new List<EntityClass>(enemyTeam),
+            EntityTeam.NeutralTeam => new List<EntityClass>(neutralTeam),
+            _ => throw new ArgumentOutOfRangeException("Team possibly not initialized, this is my team: " + team)
+        };
+    }
+
+    private List<EntityClass>? HandleGetOpponents(EntityTeam team)
+    {
+        return team switch
+        {
+            EntityTeam.PlayerTeam => new List<EntityClass>(enemyTeam.Concat(neutralTeam)),
+            EntityTeam.EnemyTeam => new List<EntityClass>(playerTeam.Concat(neutralTeam)),
+            EntityTeam.NeutralTeam => new(),
+            _ => throw new ArgumentOutOfRangeException("Team possibly not initialized, this is my team: " + team)
+        };
     }
 
     private void PerformLose()
@@ -395,7 +451,7 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    public bool CanHighlight()
+    private bool CanHighlight()
     {
         return (!PauseMenuV2.IsPaused) && GameState == GameState.SELECTION;
     }
@@ -449,7 +505,7 @@ public class CombatManager : MonoBehaviour
         return new List<EntityClass>(enemyTeam);
     }
 
-    public List<EntityClass> GetNeutral()
+    private List<EntityClass> GetNeutral()
     {
         return new List<EntityClass>(neutralTeam);
     }

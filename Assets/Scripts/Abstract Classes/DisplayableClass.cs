@@ -70,7 +70,7 @@ public abstract class DisplayableClass : SelectClass
     
     public virtual void OnMouseEnter()
     {
-        if (CombatManager.Instance.CanHighlight() && !grewLarger && !PauseMenuV2.IsPaused)
+        if (new CanHighlight().Query() == true && !grewLarger && !PauseMenuV2.IsPaused)
         {
             StartScale(true);
 

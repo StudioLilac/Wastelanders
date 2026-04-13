@@ -9,10 +9,9 @@ public record GetFadeScreenZValue() : IQuery<float?>;
 
 public class CombatFadeScreenHandler : MonoBehaviour
 {
-    public static CombatFadeScreenHandler Instance { get; private set; }
+    public static CombatFadeScreenHandler Instance { get; private set; } = null!;
 
-    [SerializeField]
-    private SpriteFadeHandler spriteFadeHandler;
+    [SerializeField] private SpriteFadeHandler spriteFadeHandler = null!;
 
     void Awake()
     {
