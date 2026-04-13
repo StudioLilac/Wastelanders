@@ -81,7 +81,7 @@ public class CombatCardUI : DisplayableClass
         SetTargetIcon(ActionClass);
         UpdateRangeText(ActionClass);
         GetComponent<SpriteRenderer>().sprite = actionClass.GetIcon();
-
+        if (!ActionClass.IsPlayedByPlayer()) RenderUnseenIndicator();
     }
 
     void UpdateRangeText(ActionClass actionClass)

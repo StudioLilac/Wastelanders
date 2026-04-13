@@ -6,7 +6,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public record EntityFacingChanged() : IEvent;
 
 public class CombatInfo : MonoBehaviour
 {
@@ -29,9 +28,6 @@ public class CombatInfo : MonoBehaviour
 
     private int FadeSortingOrder => new GetFadeSortingOrder().Query() ?? 0;
     private string FadeSortingLayer => new GetFadeSortingLayer().Query() ?? string.Empty;
-    
-    // TODO: [perf] cache this
-    private bool BelongsToEnemy => GetComponentInParent<EnemyClass>() != null;
 
     public void Awake()
     {
@@ -162,7 +158,6 @@ public class CombatInfo : MonoBehaviour
             combatIcon.transform.localPosition = new Vector3(0, startY - i * iconHeight, 0);
             combatIcon.GetComponent<CombatCardUI>().SetActionClass(combatCards[num - i - 1]); //Reverse the order of rendering 
             combatIcon.GetComponent<CombatCardUI>().DeEmphasize();
-            if (BelongsToEnemy) combatIcon.GetComponent<CombatCardUI>().RenderUnseenIndicator();
         }
     }
     private void UnrenderCombatIcons()
