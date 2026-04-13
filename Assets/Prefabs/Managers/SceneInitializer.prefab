@@ -60,3 +60,4 @@ MonoBehaviour:
     tooltip: {fileID: 5694149662472277880, guid: 4524d47b539ea464c9018f4aae690ce3, type: 3}
     bountyManager: {fileID: -481522924497141555, guid: e992ec4ee3f3f7446b999d54616c0226, type: 3}
     timeManager: {fileID: 7356177414066196612, guid: ea41dbcfae72f8249924a4bc57fbb42a, type: 3}
+    combatManager: {fileID: 8061570941568338762, guid: 945f42f8017bf504295ae416cbc461ed, type: 3}

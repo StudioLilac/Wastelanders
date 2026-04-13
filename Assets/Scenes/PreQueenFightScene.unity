@@ -1559,9 +1559,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bd353aabc4247943a4de83d4aeeeb9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseCamera: {fileID: 537786514}
-  dynamicCamera: {fileID: 1542478170}
-  handContainer: {fileID: 2102825247}
   playerDatabase: {fileID: 11400000, guid: 8727bc367ba518d4496483da96ba1cf0, type: 2}
   cardDatabase: {fileID: 11400000, guid: 4ee9950b3d655254fb0def1cd879db6a, type: 2}
 --- !u!1001 &388684082
@@ -6258,6 +6255,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1480849946}
+  - component: {fileID: 1480849947}
   m_Layer: 0
   m_Name: Cameras
   m_TagString: Untagged
@@ -6283,6 +6281,20 @@ Transform:
   - {fileID: 149275933}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1480849947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1480849945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0be86bbb35232649b1042fdca8f2aba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseCamera: {fileID: 537786514}
+  dynamicCamera: {fileID: 1542478170}
 --- !u!1 &1482516910
 GameObject:
   m_ObjectHideFlags: 0
@@ -6591,7 +6603,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.813079
+      value: -8.813839
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y
@@ -8944,11 +8956,6 @@ PrefabInstance:
 --- !u!224 &2102825246 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6236433946665406741, guid: ffdf6c0e873fb734ca3cd40ff3507571, type: 3}
-  m_PrefabInstance: {fileID: 2102825245}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &2102825247 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 297780659286361273, guid: ffdf6c0e873fb734ca3cd40ff3507571, type: 3}
   m_PrefabInstance: {fileID: 2102825245}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2120022834

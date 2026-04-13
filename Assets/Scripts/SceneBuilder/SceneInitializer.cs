@@ -80,4 +80,5 @@ public class SceneInitializerPrefabs
     public Tooltip tooltip = null!;
     public BountyManager bountyManager = null!;
     public TimeManager timeManager = null!;
+    public CombatManager combatManager = null!;
 }

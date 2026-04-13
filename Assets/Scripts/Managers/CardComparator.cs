@@ -51,7 +51,7 @@ public class CardComparator : MonoBehaviour
     {
         ActionClass card1 = actionWrapper.PlayerAction!;
         ActionClass card2 = actionWrapper.EnemyAction!;
-        CombatManager.Instance.SetCameraCenter(card1.Origin);
+        new SetCameraCenter(card1.Origin).Invoke();
         ActivateInfo(card1, card2);
         EnableDice(card1.Origin, card1.Target);
         card1.ApplyEffect();
@@ -155,7 +155,7 @@ public class CardComparator : MonoBehaviour
     public IEnumerator OneSidedAttack(BattleQueue.ActionWrapper actionWrapper)
     {
         ActionClass actionClass = actionWrapper.GetTheOnlyExistingAction();
-        CombatManager.Instance.SetCameraCenter(actionClass.Origin);
+        new SetCameraCenter(actionClass.Origin).Invoke();
         ActivateInfo(actionClass);
         EnableDice(actionClass.Origin);
         actionClass.ApplyEffect();

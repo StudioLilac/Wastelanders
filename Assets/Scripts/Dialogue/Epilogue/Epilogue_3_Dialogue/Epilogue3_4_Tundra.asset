@@ -17,13 +17,8 @@ MonoBehaviour:
       close to the crash site.
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     sfxId: 520
-    picture: {fileID: 0}
-    events:
-    - rid: 6570561780457144382
+    picture: {fileID: 21300000, guid: 5ad1d605fff12234591d8a4b1e26ee3e, type: 3}
+    events: []
   references:
     version: 2
-    RefIds:
-    - rid: 6570561780457144382
-      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+    RefIds: []

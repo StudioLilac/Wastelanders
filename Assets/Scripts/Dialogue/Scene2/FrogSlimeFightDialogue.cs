@@ -341,11 +341,11 @@ public class FrogSlimeFightDialogue : DialogueClasses
         AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
         yield return StartCoroutine(DialogueBoxV2.Instance.Play(afterCombatDialogue.Into()));
         yield return new WaitForSeconds(BRIEF_PAUSE);
-        CombatManager.Instance.ActivateDynamicCamera();
+        new ActivateDynamicCameraEvent().Invoke();
         yield return StartCoroutine(jackie.MoveToPosition(lastKilledFrog.transform.position, 1.5f, 1.7f));
         yield return new WaitForSeconds(MEDIUM_PAUSE);
-        closeUpCamera.transform.position = CombatManager.Instance.dynamicCamera.transform.position;
-        closeUpCamera.m_Lens.OrthographicSize = CombatManager.Instance.dynamicCamera.m_Lens.OrthographicSize;
+        closeUpCamera.transform.position = (new GetDynamicCamera().Query())!.transform.position;
+        closeUpCamera.m_Lens.OrthographicSize = (new GetDynamicCamera().Query())!.m_Lens.OrthographicSize;
 
         //Jackei picks up the crystal
         jackie.animator.enabled = false;

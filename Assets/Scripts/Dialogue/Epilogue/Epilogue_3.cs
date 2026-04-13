@@ -3,7 +3,9 @@ using System.Collections;
 using DialogueScripts;
 using LevelSelectInformation;
 using UnityEngine;
+using System.Linq;
 using UnityEngine.Serialization;
+using System.Collections.Generic;
 
 public class Epilogue_3 : MonoBehaviour {
     // BGs
@@ -12,7 +14,6 @@ public class Epilogue_3 : MonoBehaviour {
     [SerializeField] private SpriteFadeHandler car;
     [SerializeField] private UIFadeHandler vignette;
     [SerializeField] private GameObject tundraBackground;
-    [SerializeField] private SpriteFadeHandler battleBackground;
 
     [SerializeField] private SpriteRenderer cam;
     [SerializeField] private Beetle beetle;
@@ -22,6 +23,8 @@ public class Epilogue_3 : MonoBehaviour {
     [SerializeField] private SlimeStack slime;
 
     [SerializeField] private Transform offFieldPosition;
+    [SerializeField] private GameObject tundra1Bg;
+    [SerializeField] private GameObject tundra2Bg;
 
 
     public AudioClip tundraAudio;
@@ -127,15 +130,11 @@ public class Epilogue_3 : MonoBehaviour {
         StartCoroutine(frog.MoveToPosition(offFieldPosition.position, 0f, 2.5f));
         yield return new WaitForSeconds(1.0f);
         yield return black.FadeInDarkScreen(2.5f);
-        GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.PrincessFrogBounty>().SceneName);
 
-
-        yield return black.FadeInLightScreen(2f);
+        tundra1Bg.SetActive(false);
+        tundra2Bg.SetActive(true);
         yield return DialogueBoxV2.Instance.Play(Tundra);
-
-        yield return black.FadeInDarkScreen(2f);
-        yield return battleBackground.FadeInDarkScreen(0f);
-        yield return black.FadeInLightScreen(2f);
+        yield return black.FadeInLightScreen(1f);
 
         /*
          TODO:

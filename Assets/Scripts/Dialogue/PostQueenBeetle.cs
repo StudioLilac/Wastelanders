@@ -60,7 +60,7 @@ public class PostQueenBeetle : DialogueClasses
         yield return StartCoroutine(DialogueBoxV2.Instance.Play(resultBroadcast));
         yield return StartCoroutine(backgroundScrim.FadeInLightScreen(1f));
 
-        CombatManager.Instance.ActivateDynamicCamera();
+        new ActivateDynamicCameraEvent().Invoke();
         jackie.FaceLeft();
         yield return new WaitForSeconds(0.8f);
         jackie.animator.speed = originalSpeed;
@@ -70,7 +70,7 @@ public class PostQueenBeetle : DialogueClasses
 
         ivesCamera.transform.position = mainCameraIvesTalk.position;
         ivesCamera.Priority = 2;
-        CombatManager.Instance.ActivateBaseCamera();
+        new ActivateBaseCameraEvent().Invoke();
         yield return StartCoroutine(backgroundScrim.FadeToAlpha(0.7f, 1.0f));
         yield return StartCoroutine(DialogueBoxV2.Instance.Play(jackieConfused));
         yield return new WaitForSeconds(0.5f);

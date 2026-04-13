@@ -10,6 +10,7 @@ using static StatusEffect;
 using UnityEditor.Animations;
 #endif
 
+public record EntityFacingChanged(EntityClass Entity) : IEvent;
 public record OnBuffsUpdatedEvent(EntityClass WhoAmI) : IEvent;
 public record AddEntityToTeam(EntityClass Entity, EntityTeam Team) : IEvent;
 public record RemoveEntityFromTeam(EntityClass Entity, EntityTeam Team) : IEvent;
@@ -242,14 +243,14 @@ public abstract class EntityClass : SelectClass
     {
         FlipTransform(this.transform, true);
         combatInfo.FaceRight();
-        new EntityFacingChanged().Invoke();
+        new EntityFacingChanged(this).Invoke();
     }
 
     public void FaceLeft()
     {
         FlipTransform(this.transform, false);
         combatInfo.FaceLeft();
-        new EntityFacingChanged().Invoke();
+        new EntityFacingChanged(this).Invoke();
     }
 
     public bool IsFacingRight()
