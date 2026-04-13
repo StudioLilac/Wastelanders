@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using DialogueScripts;
 using UnityEngine;
@@ -8,9 +9,12 @@ public class Epilogue_3 : MonoBehaviour {
     [SerializeField] private SpriteFadeHandler black;
     [SerializeField] private SpriteFadeHandler purpleFlash;
     [SerializeField] private SpriteFadeHandler car;
-    [SerializeField] private SpriteFadeHandler marsh;
-    [SerializeField] private SpriteFadeHandler tundra;
+    [SerializeField] private UIFadeHandler vignette;
+    [SerializeField] private GameObject tundraBackground;
     [SerializeField] private SpriteFadeHandler battleBackground;
+
+    [SerializeField] private SpriteRenderer cam;
+    [SerializeField] private Beetle beetle;
 
     // Dialogue
     [SerializeField] private DialogueEntryWrapper Driving;
@@ -40,25 +44,47 @@ public class Epilogue_3 : MonoBehaviour {
 
     
     void Start() {
+        this.Subscribe<CustomEvent>(CustomEventHandler);
         StartCoroutine(StartScene());
     }
 
-    private IEnumerator StartScene() {
+    void CustomEventHandler(CustomEvent ev)
+    {
+        if (ev.EventName == "fade")
+        {
+            StartCoroutine(black.FadeInLightScreen(1f)); // Strike Team, gather up before you all get settled!
+        }
+        else if (ev.EventName == "cam_flash") // Like this!
+        {
+            void Callback()
+            {
+                cam.gameObject.SetActive(false);
+                beetle.gameObject.SetActive(true);
+                beetle.OutOfCombat();
+            }
+            StartCoroutine(PurpleFlash(0.5f, Callback));
+        }
+        else if (ev.EventName == "klack") // Klackackakkc
+        {
+            beetle.AttackAnimation(Pincer.PINCER_ANIMATION_NAME);
+        }
+    }
+
+    private IEnumerator StartScene()
+    {
+        tundraBackground.SetActive(false);
         yield return UIFadeScreenManager.Instance.FadeInDarkScreen(0f);
         yield return UIFadeScreenManager.Instance.FadeInLightScreen(2f);
 
         yield return DialogueBoxV2.Instance.Play(Driving);
-        yield return black.FadeInDarkScreen(2f);
+        AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
+        yield return black.FadeInDarkScreen(1f);
         yield return car.FadeInLightScreen(0f);
-        yield return marsh.FadeInDarkScreen(0f);
-        // TODO: Fade out vehicle SFX
-        yield return black.FadeInLightScreen(2f);
+        tundraBackground.SetActive(true);
+        StartCoroutine(vignette.FadeToAlpha(225f/255f, 0f));
+        yield return new WaitForSeconds(1f);
 
         yield return DialogueBoxV2.Instance.Play(WesternMarsh);
-
-        yield return new WaitForSeconds(2f);
-        yield return PurpleFlash(0.5f);
-        // TODO: [Beetle sprite slides in]
         yield return DialogueBoxV2.Instance.Play(WesternMarsh2);
         // TODO: Audio: Shock and murmurs ripple through the faces of the experienced warriors.
         yield return DialogueBoxV2.Instance.Play(WesternMarsh3);
@@ -71,13 +97,18 @@ public class Epilogue_3 : MonoBehaviour {
         yield return PurpleFlash(0.5f);
 
         yield return black.FadeInDarkScreen(2f);
-        yield return marsh.FadeInLightScreen(0f);
-        yield return tundra.FadeInDarkScreen(0f);
+
+        ////// New scene after this
+
+
+
+
+
+
         yield return black.FadeInLightScreen(2f);
         yield return DialogueBoxV2.Instance.Play(Tundra);
 
         yield return black.FadeInDarkScreen(2f);
-        yield return tundra.FadeInLightScreen(0f);
         yield return battleBackground.FadeInDarkScreen(0f);
         yield return black.FadeInLightScreen(2f);
 
@@ -147,8 +178,9 @@ public class Epilogue_3 : MonoBehaviour {
         yield return UIFadeScreenManager.Instance.FadeInDarkScreen(2f);
     }
 
-    private IEnumerator PurpleFlash(float delay) {
+    private IEnumerator PurpleFlash(float delay, Action callback = null) {
         yield return purpleFlash.FadeInDarkScreen(delay);
+        callback?.Invoke();
         yield return purpleFlash.FadeInLightScreen(delay);
     }
 }
