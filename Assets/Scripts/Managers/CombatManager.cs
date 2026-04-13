@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Context;
 using Systems.Persistence;
 using WeaponDeckSerialization;
 using UI_Toolkit;
@@ -31,8 +32,7 @@ public class CombatManager : MonoBehaviour
     
     [SerializeField] private PlayerDatabase playerDatabase;
     [SerializeField] private CardDatabase cardDatabase;
-
-
+    
     public List<InstantiableActionClassInfo> GetDeck(PlayerDatabase.PlayerName playerName)
     {
         return cardDatabase.GetPrefabInfoForDeck(playerDatabase.GetDeckByPlayerName(playerName));
@@ -261,6 +261,8 @@ public class CombatManager : MonoBehaviour
 
         AudioManager.Instance.StartCombatMusic();
         GameState = GameState.SELECTION;
+        
+        new UIContextChangedEvent(new UIContext.Combat()).Invoke();
     }
 
     public void ActivateDynamicCamera()
@@ -306,6 +308,8 @@ public class CombatManager : MonoBehaviour
             entity.OutOfCombat();
             entity.UnTargetable();
         }
+        
+        new UIContextChangedEvent(new UIContext.Dialogue()).Invoke();
     }
 
     private void PerformInCombat()

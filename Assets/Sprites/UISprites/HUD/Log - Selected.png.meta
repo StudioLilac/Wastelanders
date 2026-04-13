@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 4b3ae8749f5e19246be2d67a244404a1
+guid: 10707dc8cbfae9049a02336094e6d5a1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1925944892245084028
-    second: New Piskel-1.png(1)_0
+      213: 1616619084592331828
+    second: Log - Selected_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: New Piskel-1.png(1)_0
+      name: Log - Selected_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 3
-        width: 62
-        height: 59
+        x: 0
+        y: 0
+        width: 32
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c770f37eca45aba10800000000000000
-      internalID: 1925944892245084028
+      spriteID: 43c3e320e726f6610800000000000000
+      internalID: 1616619084592331828
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      New Piskel-1.png(1)_0: 1925944892245084028
+      Log - Selected_0: 1616619084592331828
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
