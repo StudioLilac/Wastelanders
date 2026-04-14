@@ -205,6 +205,7 @@ namespace Systems.Persistence
 
             Debug.Log($"Saving the game, {gameData.SaveName}");
             dataService.Save(gameData);
+            UISaveIndicatorManager.Instance.Show();
         }
 
         private void LoadGame()
