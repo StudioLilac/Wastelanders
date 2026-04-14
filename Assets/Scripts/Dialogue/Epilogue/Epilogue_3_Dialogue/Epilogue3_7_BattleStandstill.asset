@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Epilogue3_7_BattleStandstill
   m_EditorClassIdentifier: 
   Entries:
-  - content: "(Dammit! Something\u2019s controlling the Waste creatures... We have
-      to unshif-)"
+  - content: "<i>It\u2019s controlling the Waste creatures... We have to unshif-"
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxId: 0
     picture: {fileID: 21300000, guid: 473aab34eb102ea449d7c031f047407d, type: 3}

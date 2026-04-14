@@ -65,12 +65,12 @@ public class CameraManager : MonoBehaviour
         if (entity.IsFacingRight())
         {
             var transposer = dynamicCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
-            transposer.m_ScreenX = 0.25f;
+            transposer.m_ScreenX = 0.3f;
         }
         else if (!entity.IsFacingRight())
         {
             var transposer = dynamicCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
-            transposer.m_ScreenX = 0.75f;
+            transposer.m_ScreenX = 0.7f;
         }
     }
 

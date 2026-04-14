@@ -329,11 +329,11 @@ public abstract class EntityClass : SelectClass
         Health = Mathf.Clamp(Health + val, 0, MaxHealth);
     }
 
-    public void SetUnstaggered()
+    public void SetStaggered(bool isStaggered)
     {
         if (HasAnimationParameter(STAGGERED_ANIMATION_NAME))
         {
-            animator.SetBool(STAGGERED_ANIMATION_NAME, false);
+            animator.SetBool(STAGGERED_ANIMATION_NAME, isStaggered);
         }
     }
 

@@ -13,113 +13,21 @@ MonoBehaviour:
   m_Name: Epilogue3_10_BattleIvesStaggeredForm
   m_EditorClassIdentifier: 
   Entries:
-  - content: Ives! Are you alright!?
+  - content: Ives! You alright!?
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxId: 0
-    picture: {fileID: 0}
-    events:
-    - rid: 6570561780457144394
-    - rid: 6570561780457144400
-    - rid: 6570561780457144397
-    - rid: 6570561780457144398
-    - rid: 6570561780457144395
-    - rid: 6570561780457144396
+    picture: {fileID: 21300000, guid: b87749015089a4b4eb240bad6a124e9b, type: 3}
+    events: []
   - content: <i>cough</i> Crap, thanks Jackie.
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxId: 0
-    picture: {fileID: 0}
-    events:
-    - rid: 6570561780457144401
-    - rid: 6570561780457144402
-    - rid: 6570561780457144403
-    - rid: 6570561780457144404
-    - rid: 6570561780457144405
-    - rid: 6570561780457144406
+    picture: {fileID: 21300000, guid: 2634a2f81fa74ad4f90374821cfd0ee6, type: 3}
+    events: []
   - content: 
     speaker: {fileID: 11400000, guid: 4fef3aeb65460fd498ab9efe9bac8625, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events:
-    - rid: 6570561780457144407
-    - rid: 6570561780457144408
+    events: []
   references:
     version: 2
-    RefIds:
-    - rid: 6570561780457144394
-      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-    - rid: 6570561780457144395
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        action: 10
-        duration: 1
-    - rid: 6570561780457144396
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        action: 60
-        duration: 1
-    - rid: 6570561780457144397
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        action: 70
-        duration: 0
-    - rid: 6570561780457144398
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        action: 40
-        duration: 0
-    - rid: 6570561780457144400
-      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        sprite: {fileID: 21300000, guid: e37d4fbf07c214c868939546f702fa2b, type: 3}
-    - rid: 6570561780457144401
-      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    - rid: 6570561780457144402
-      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-        sprite: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
-    - rid: 6570561780457144403
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-        action: 50
-        duration: 0
-    - rid: 6570561780457144404
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-        action: 70
-        duration: 0
-    - rid: 6570561780457144405
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-        action: 30
-        duration: 1
-    - rid: 6570561780457144406
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-        action: 60
-        duration: 1
-    - rid: 6570561780457144407
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        action: 70
-        duration: 1
-    - rid: 6570561780457144408
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-        action: 70
-        duration: 1
+    RefIds: []

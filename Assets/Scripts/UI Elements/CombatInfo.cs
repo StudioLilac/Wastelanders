@@ -26,10 +26,10 @@ public class CombatInfo : MonoBehaviour
 
     public Canvas buffListCanvas;
 
-    private int FadeSortingOrder => new GetFadeSortingOrder().Query() ?? 0;
-    private string FadeSortingLayer => new GetFadeSortingLayer().Query() ?? string.Empty;
+    protected int FadeSortingOrder => new GetFadeSortingOrder().Query() ?? 0;
+    protected string FadeSortingLayer => new GetFadeSortingLayer().Query() ?? string.Empty;
 
-    public void Awake()
+    public virtual void Awake()
     {
         buffListCanvas = buffList.gameObject.GetComponent<Canvas>();
     }

@@ -43,6 +43,10 @@ public class CardComparator : MonoBehaviour
         EntityClass.OnEntityDeath -= SubscribeEntityDeath;
     }
 
+    public void ClearEvents()
+    {
+        PlayEntityDeaths = null;
+    }
 
     /*
      * Clashes two cards together handling logic calls and activating the Combat Info
