@@ -81,7 +81,6 @@ public class Epilogue_3 : MonoBehaviour {
             {
                 cam.gameObject.SetActive(false);
                 beetle.gameObject.SetActive(true);
-                beetle.OutOfCombat();
             }
             SoundID.VN_purple_pulse.Play();
             StartCoroutine(PurpleFlash(0.5f, Callback));
@@ -92,8 +91,17 @@ public class Epilogue_3 : MonoBehaviour {
         }
     }
 
+    void Setup()
+    {
+        frog.DestroyDeck(); slime.DestroyDeck(); beetle.DestroyDeck(); ivesSlime.DestroyDeck(); jackieFrog.DestroyDeck(); 
+        frog.OutOfCombat(); slime.OutOfCombat(); beetle.OutOfCombat(); ivesSlime.OutOfCombat(); jackieFrog.OutOfCombat();
+        beetleBlue.OutOfCombat(); beetleGreen.OutOfCombat(); beetleBrown.OutOfCombat(); princessFrog.OutOfCombat();
+    }
+
     private IEnumerator StartScene()
     {
+        Setup();
+        new SetGameState(GameState.OUT_OF_COMBAT).Invoke();
         {
             tundraBackground.SetActive(false);
             yield return UIFadeScreenManager.Instance.FadeInDarkScreen(0f);
@@ -119,13 +127,11 @@ public class Epilogue_3 : MonoBehaviour {
             {
                 jackie.SetActive(false);
                 frog.gameObject.SetActive(true);
-                frog.OutOfCombat();
             }
             void IvesCallback()
             {
                 ives.SetActive(false);
                 slime.gameObject.SetActive(true);
-                slime.OutOfCombat();
             }
 
             SoundID.VN_finger_snap.Play();
@@ -184,6 +190,13 @@ public class Epilogue_3 : MonoBehaviour {
         //  [The rest of the party besides Jackie begin moving to the right following the new blast.
         //  Jackie changes back to her human form.]
         yield return DialogueBoxV2.Instance.Play(BattleJackieHumanForm); // Jackie: Ives!
+
+
+        CombatManager.Instance.SetEnemiesPassive(new List<EnemyClass>() { frog, slime, beetle, ivesSlime, jackieFrog });
+        CombatManager.Instance.BeginCombat();
+        yield return new WaitUntil(() => new GetGameState().Query() == GameState.GAME_WIN);
+
+
         // TODO: [Jackie moves up to Ives and knocks her out of her slime form. She changes into her staggered form.]
         yield return new WaitForSeconds(1f);
         yield return DialogueBoxV2.Instance.Play(BattleIvesStaggeredForm); // Jackie: Ives! Are you alright!?

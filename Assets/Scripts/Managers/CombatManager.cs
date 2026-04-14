@@ -10,6 +10,7 @@ using UI_Toolkit;
 using System;
 
 #nullable enable
+public record SetGameState(GameState State) : IEvent;
 public record GetGameState() : IQuery<GameState?>;
 public record DefaultCard(PlayerClass Player) : IQuery<ClasslessCards?>;
 public record GetDeck(PlayerDatabase.PlayerName PlayerName) : IQuery<List<InstantiableActionClassInfo>?>;
@@ -64,6 +65,7 @@ public class CombatManager : MonoBehaviour
         this.Answer<GetDeck, List<InstantiableActionClassInfo>?>(q => GetDeck(q.PlayerName));
         this.Subscribe<AddEntityToTeam>(HandleAddEntityToTeam);
         this.Subscribe<RemoveEntityFromTeam>(HandleRemoveEntityFromTeam);
+        this.Subscribe<SetGameState>(evt => GameState = evt.State);
     }
 
     public static void ClearEvents()

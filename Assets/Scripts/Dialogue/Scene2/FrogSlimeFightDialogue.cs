@@ -331,7 +331,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
             jackie.AddStacks(Accuracy.buffName, 900);
             jackie.AddStacks(Resonate.buffName, 900);
         }
-        yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
+        yield return new WaitUntil(() => new GetGameState().Query() == GameState.GAME_WIN);
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
         ReviveJackie();
         GameStateManager.Instance.UpdateLevelProgress(StageInformation.Get<StageInformation.Beetle>());
