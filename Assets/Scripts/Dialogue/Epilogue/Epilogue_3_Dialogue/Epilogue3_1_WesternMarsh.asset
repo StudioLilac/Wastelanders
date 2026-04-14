@@ -78,7 +78,7 @@ MonoBehaviour:
     - rid: 314095995325513831
     - rid: 314095995325513832
     - rid: 314095995325513834
-  - content: The glove allows you to turn into any Waste Creature you've fought.
+  - content: 'They will allow you to turn into Waste Creatures you have fought. '
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     sfxId: 0
     picture: {fileID: 0}

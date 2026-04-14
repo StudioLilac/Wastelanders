@@ -6,6 +6,7 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.Serialization;
 using System.Collections.Generic;
+using Entities;
 
 public class Epilogue_3 : MonoBehaviour {
     // BGs
@@ -26,6 +27,12 @@ public class Epilogue_3 : MonoBehaviour {
     [SerializeField] private GameObject tundra1Bg;
     [SerializeField] private GameObject tundra2Bg;
 
+    public Beetle beetleBrown;
+    public Beetle beetleBlue;
+    public Beetle beetleGreen;
+    public SlimeStack ivesSlime;
+    public WasteFrog jackieFrog;
+    public PrincessFrog princessFrog;
 
     public AudioClip tundraAudio;
 
@@ -76,6 +83,7 @@ public class Epilogue_3 : MonoBehaviour {
                 beetle.gameObject.SetActive(true);
                 beetle.OutOfCombat();
             }
+            SoundID.VN_purple_pulse.Play();
             StartCoroutine(PurpleFlash(0.5f, Callback));
         }
         else if (ev.EventName == "klack") // Klackackakkc
@@ -86,55 +94,72 @@ public class Epilogue_3 : MonoBehaviour {
 
     private IEnumerator StartScene()
     {
-        tundraBackground.SetActive(false);
-        yield return UIFadeScreenManager.Instance.FadeInDarkScreen(0f);
-        yield return UIFadeScreenManager.Instance.FadeInLightScreen(2f);
-
-        yield return DialogueBoxV2.Instance.Play(Driving);
-        AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
-        yield return black.FadeInDarkScreen(1f);
-        tundraBackground.SetActive(true);
-        StartCoroutine(vignette.FadeToAlpha(155f/255f, 0f));
-        yield return new WaitForSeconds(1f);
-        AudioManager.Instance.FadeInBackgroundTrack(1f, tundraAudio, true);
-        yield return DialogueBoxV2.Instance.Play(WesternMarsh);
-        yield return new WaitForSeconds(1f);
-        yield return DialogueBoxV2.Instance.Play(WesternMarsh2);
-        yield return DialogueBoxV2.Instance.Play(WesternMarsh3);
-        yield return new WaitForSeconds(1f);
-
-        void JackieCallback()
         {
-            jackie.SetActive(false);
-            frog.gameObject.SetActive(true);
-            frog.OutOfCombat();
+            tundraBackground.SetActive(false);
+            yield return UIFadeScreenManager.Instance.FadeInDarkScreen(0f);
+            yield return UIFadeScreenManager.Instance.FadeInLightScreen(2f);
+
+            yield return DialogueBoxV2.Instance.Play(Driving);
+            AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
+            yield return black.FadeInDarkScreen(1f);
         }
-        void IvesCallback()
         {
-            ives.SetActive(false);
-            slime.gameObject.SetActive(true);
-            slime.OutOfCombat();
+            tundra1Bg.SetActive(true);
+            tundra2Bg.SetActive(false);
+            tundraBackground.SetActive(true);
+            StartCoroutine(vignette.FadeToAlpha(155f / 255f, 0f));
+            yield return new WaitForSeconds(1f);
+            AudioManager.Instance.FadeInBackgroundTrack(1f, tundraAudio, true);
+            yield return DialogueBoxV2.Instance.Play(WesternMarsh);
+            yield return new WaitForSeconds(1f);
+            yield return DialogueBoxV2.Instance.Play(WesternMarsh2);
+            yield return DialogueBoxV2.Instance.Play(WesternMarsh3);
+            yield return new WaitForSeconds(1f);
+            void JackieCallback()
+            {
+                jackie.SetActive(false);
+                frog.gameObject.SetActive(true);
+                frog.OutOfCombat();
+            }
+            void IvesCallback()
+            {
+                ives.SetActive(false);
+                slime.gameObject.SetActive(true);
+                slime.OutOfCombat();
+            }
+
+            SoundID.VN_finger_snap.Play();
+            SoundID.VN_purple_pulse.Play();
+            yield return PurpleFlash(0.5f, JackieCallback);
+            SoundID.VN_finger_snap.Play();
+            SoundID.VN_purple_pulse.Play();
+            yield return PurpleFlash(0.5f, IvesCallback);
+
+            yield return new WaitForSeconds(0.5f);
+            yield return DialogueBoxV2.Instance.Play(HeadingOut);
+            yield return new WaitForSeconds(0.5f);
+
+            StartCoroutine(slime.MoveToPosition(offFieldPosition.position, 0f, 2f));
+            StartCoroutine(beetle.MoveToPosition(offFieldPosition.position, 0f, 3f));
+            StartCoroutine(frog.MoveToPosition(offFieldPosition.position, 0f, 2.5f));
+            yield return new WaitForSeconds(1.0f);
+            yield return black.FadeInDarkScreen(2f);
         }
 
-        SoundID.VN_finger_snap.Play();
-        yield return PurpleFlash(0.5f, JackieCallback);
-        SoundID.VN_finger_snap.Play();
-        yield return PurpleFlash(0.5f, IvesCallback);
-
-        yield return new WaitForSeconds(0.5f);
-        yield return DialogueBoxV2.Instance.Play(HeadingOut);
-        yield return new WaitForSeconds(0.5f);
-
-        StartCoroutine(slime.MoveToPosition(offFieldPosition.position, 0f, 2f));
-        StartCoroutine(beetle.MoveToPosition(offFieldPosition.position, 0f, 3f));
-        StartCoroutine(frog.MoveToPosition(offFieldPosition.position, 0f, 2.5f));
-        yield return new WaitForSeconds(1.0f);
-        yield return black.FadeInDarkScreen(2.5f);
 
         tundra1Bg.SetActive(false);
         tundra2Bg.SetActive(true);
         yield return DialogueBoxV2.Instance.Play(Tundra);
         yield return black.FadeInLightScreen(1f);
+
+        StartCoroutine(ivesSlime.MoveToPosition(ivesSlime.transform.position + new Vector3(5f, 0f, 0f), 0f, 2f));
+        StartCoroutine(beetleGreen.MoveToPosition(beetleGreen.transform.position + new Vector3(5f, 0f, 0f), 0f, 3f));
+        StartCoroutine(jackieFrog.MoveToPosition(jackieFrog.transform.position + new Vector3(5f, 0f, 0f), 0f, 2.5f));
+        StartCoroutine(beetleBlue.MoveToPosition(beetleBlue.transform.position + new Vector3(5f, 0f, 0f), 0f, 2.5f));
+        StartCoroutine(beetleBrown.MoveToPosition(beetleBrown.transform.position + new Vector3(5f, 0f, 0f), 0f, 2.5f));
+        yield return StartCoroutine(beetleGreen.MoveToPosition(beetleGreen.transform.position + new Vector3(5f, 0f, 0f), 0f, 2.5f));
+
+        yield return new WaitForSeconds(1.0f);
 
         /*
          TODO:
@@ -148,8 +173,6 @@ public class Epilogue_3 : MonoBehaviour {
         yield return DialogueBoxV2.Instance.Play(BattlePreMoveForward);
 
         // TODO: [The group moves forward. Three quick purple screen flashes. (flashes below)]
-        yield return PurpleFlash(0.5f);
-        yield return PurpleFlash(0.5f);
         yield return PurpleFlash(0.5f);
         yield return DialogueBoxV2.Instance.Play(BattleHalt); // ???: Halt
         // TODO: [The strike team immediately comes to a standstill.]
@@ -203,7 +226,6 @@ public class Epilogue_3 : MonoBehaviour {
     }
 
     private IEnumerator PurpleFlash(float delay, Action? callback = default) {
-        SoundID.VN_purple_pulse.Play();
         yield return purpleFlash.FadeInDarkScreen(delay);
         callback?.Invoke();
         yield return purpleFlash.FadeInLightScreen(delay);

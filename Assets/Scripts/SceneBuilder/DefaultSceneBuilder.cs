@@ -45,7 +45,7 @@ namespace SceneBuilder
         private void UpdatePlayerLayout()
         {
             if (PlayersPosition == null) return;
-            List<EntityClass> players = new GetTeammates(EntityTeam.EnemyTeam).Query() ?? new();
+            List<EntityClass> players = new GetTeammates(EntityTeam.PlayerTeam).Query() ?? new();
 
             var positions = PositionsFrom(PlayersPosition.transform.position, players.Count);
             for (var i = 0; i < players.Count; i++)

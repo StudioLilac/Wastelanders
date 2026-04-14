@@ -8,7 +8,7 @@ using DialogueScripts;
 using Systems.Persistence;
 using Director;
 
-public class PostQueenBeetle : DialogueClasses
+public class PostQueenBeetle : MonoBehaviour
 {
     [SerializeField] private Jackie jackie;
 
@@ -21,6 +21,7 @@ public class PostQueenBeetle : DialogueClasses
     [SerializeField] private Transform mainCameraIvesTalk;
 
     [SerializeField] Sprite jackieSmileImage;
+    [SerializeField] SpriteFadeHandler blackScrim;
     [SerializeField] private UIFadeHandler hugBackground;
     [SerializeField] private UIFadeHandler backgroundScrim;
 
@@ -31,23 +32,14 @@ public class PostQueenBeetle : DialogueClasses
     [SerializeField] private DialogueEntryWrapper ivesFinal;
     [SerializeField] private DialogueEntryWrapper jackieFinal;
 
-    protected override void GameStateChange(GameState gameState)
+    IEnumerator Start()
     {
-        if (gameState == GameState.GAME_START)
-        {
-            StartCoroutine(ExecuteGameStart());
-        }
-    }
-
-    private IEnumerator ExecuteGameStart()
-    {
-        CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
-        CombatFadeScreenHandler.Instance.SetDarkScreen();
+        blackScrim.SetDarkScreen();
         ives.FaceLeft();
         yield return new WaitForSeconds(0.8f);
 
         jackie.OutOfCombat(); ives.OutOfCombat();
-        yield return StartCoroutine(CombatFadeScreenHandler.Instance.FadeInLightScreen(1f));
+        yield return StartCoroutine(blackScrim.FadeInLightScreen(1f));
         yield return StartCoroutine(DialogueBoxV2.Instance.Play(jackieOpening));
         yield return StartCoroutine(jackie.MoveToPosition(jackieListensToBroadcast.position, 0f, 1.2f));
         var originalSpeed = jackie.animator.speed;

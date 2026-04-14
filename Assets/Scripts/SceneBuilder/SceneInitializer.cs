@@ -81,4 +81,5 @@ public class SceneInitializerPrefabs
     public BountyManager bountyManager = null!;
     public TimeManager timeManager = null!;
     public CombatManager combatManager = null!;
+    public BattleQueue battleQueue = null!;
 }
