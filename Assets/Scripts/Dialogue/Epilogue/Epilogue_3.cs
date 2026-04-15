@@ -1,3 +1,4 @@
+using Cards.EnemyCards.FrogCards;
 using DialogueScripts;
 using Entities;
 using LevelSelectInformation;
@@ -84,6 +85,8 @@ public class Epilogue_3 : MonoBehaviour {
     [SerializeField] private DialogueEntryWrapper BattleIvesStaggeredForm;
     [SerializeField] private DialogueEntryWrapper BattleHelpOthers;
     [SerializeField] private DialogueEntryWrapper GameLoseDialogue;
+    [SerializeField] private DialogueEntryWrapper FocusAttackHint;
+    [SerializeField] private DialogueEntryWrapper RedirectAttackHint;
 
     [SerializeField] private DialogueEntryWrapper PostBattleMedical;
     [SerializeField] private DialogueEntryWrapper PostBattleCheckup;
@@ -342,6 +345,9 @@ public class Epilogue_3 : MonoBehaviour {
             enemies.ForEach(it => it.DeathHandler = it.PassOut);
             enemies.ForEach(it => AdjustEnemyClass(it));
             princessFrog.OwnedMinions = enemies;
+            this.Subscribe<OnBuffsUpdatedEvent>(OnBuffEvent);
+            this.Subscribe<CardUsed<GobbleCard>>(OnGobbleUsed);
+            
         }
         CombatPrep();
         CombatManager.Instance.SetEnemiesPassive(new List<EnemyClass>() { frog, slime, beetle, ivesSlime, jackieFrog, toEat, toEat2 }.Concat(enemyWorkers).ToList());
@@ -386,6 +392,32 @@ public class Epilogue_3 : MonoBehaviour {
         yield return DialogueBoxV2.Instance.Play(PrincessDeckUnlocked);
 
         yield return UIFadeScreenManager.Instance.FadeInDarkScreen(2f);
+    }
+
+    private void OnBuffEvent(OnBuffsUpdatedEvent ev)
+    {
+        if (ev.WhoAmI.GetBuffStacks(Resonate.buffName) >= 3 && new List<EnemyClass>() { beetleBlue, beetleBrown, beetleGreen }.Contains(ev.WhoAmI))
+        {
+            this.UnSubscribe<OnBuffsUpdatedEvent>(OnBuffEvent);
+            IEnumerator ScheduleDialogue()
+            {
+                yield return new WaitUntil(() => new GetGameState().Query() != GameState.FIGHTING);
+                if (DialogueBoxV2.Instance.IsActive) // If active, wait a cycle
+                {
+                    yield return new WaitUntil(() => new GetGameState().Query() != GameState.SELECTION);
+                    yield return new WaitUntil(() => new GetGameState().Query() != GameState.FIGHTING);
+                }
+                StartCoroutine(DialogueBoxV2.Instance.Play(FocusAttackHint));
+            }
+
+            StartCoroutine(ScheduleDialogue());
+        }
+    }
+
+    private void OnGobbleUsed(CardUsed<GobbleCard> ev)
+    {
+        this.UnSubscribe<CardUsed<GobbleCard>>(OnGobbleUsed);
+        StartCoroutine(DialogueBoxV2.Instance.Play(RedirectAttackHint));
     }
 
     private IEnumerator PurpleFlash(float delay, Action? callback = default) {

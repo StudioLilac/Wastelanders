@@ -143,6 +143,7 @@ namespace Entities
                     case var _ when neutral.Count > 0 && (gobblePotentialStacks + currentStacks) < 4:
                         AttackWith(GobbleCards[i], CalculateAttackTarget(neutral));
                         gobblePotentialStacks += 3; //Pretends gobble succeeds and makes furthur decisions from there.
+                        new CardUsed<GobbleCard>().Invoke();
                         break;
                     case >= 1:
                         if (shouldPlayBurp) AttackWith(BurpCards[i], burpTarget);

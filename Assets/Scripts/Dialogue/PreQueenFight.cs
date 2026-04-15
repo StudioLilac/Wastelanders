@@ -582,12 +582,12 @@ public class PreQueenFight : DialogueClasses
         CombatManager.PlayersWinEvent += PlayersWin;
         CombatManager.EnemiesWinEvent += EnemiesWin;
         Beetle.OnGainBuffs += ExplainBeetleBuff;
-        this.Subscribe<HatcheryUsed>(ExplainHatchery);
+        this.Subscribe<CardUsed<Hatchery>>(ExplainHatchery);
     }
 
-    void ExplainHatchery(HatcheryUsed e)
+    void ExplainHatchery(CardUsed<Hatchery> e)
     {
-        this.UnSubscribe<HatcheryUsed>(ExplainHatchery);
+        this.UnSubscribe<CardUsed<Hatchery>>(ExplainHatchery);
         StartCoroutine(DialogueBoxV2.Instance.Play(hatcheryExplanation));
     }
 

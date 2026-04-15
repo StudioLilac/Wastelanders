@@ -3229,7 +3229,7 @@ Transform:
   m_GameObject: {fileID: 926469135}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.72, y: -2.91, z: 0}
+  m_LocalPosition: {x: 6.31, y: -2.91, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5572,7 +5572,9 @@ MonoBehaviour:
   BattleJackieHumanForm: {fileID: 11400000, guid: 482830ae15ff97741882a1bc1fe398cd, type: 2}
   BattleIvesStaggeredForm: {fileID: 11400000, guid: da3c3cf115dd11c41b810acd369b5e85, type: 2}
   BattleHelpOthers: {fileID: 11400000, guid: b10f87a55705d4b41bffabf3b16cf3cc, type: 2}
-  GameLoseDialogue: {fileID: 0}
+  GameLoseDialogue: {fileID: 11400000, guid: bd768c6e25978e04da6db0c19b1728c8, type: 2}
+  FocusAttackHint: {fileID: 11400000, guid: c3e671869d31a574499f35b4b0d14400, type: 2}
+  RedirectAttackHint: {fileID: 11400000, guid: 1c68a2aac793d3443b25148ddfe68658, type: 2}
   PostBattleMedical: {fileID: 11400000, guid: a21ea1d309f500044a6ec480f37714cf, type: 2}
   PostBattleCheckup: {fileID: 11400000, guid: 38ce559ff61330548a0042e0ce90a71c, type: 2}
   PostBattleInjection: {fileID: 11400000, guid: 91b1ad6d40edec24ebcbf7a32d6efd74, type: 2}
