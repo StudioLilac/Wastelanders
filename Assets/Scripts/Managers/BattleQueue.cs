@@ -92,7 +92,7 @@ public class BattleQueue : MonoBehaviour
         return (existingAction, incomingAction) switch
         {
             _ when existingAction.Target != incomingAction.Origin && existingAction.Speed > incomingAction.Speed
-                => new PopupType.CustomPopup("Speed is too slow to clash!"),
+                => new PopupType.CustomPopup("Speed is too slow to redirect!"),
             _ when existingAction.Origin is PlayerClass
                 => new PopupType.CustomPopup("Same team!"),
             _ when !existingAction.Clashable

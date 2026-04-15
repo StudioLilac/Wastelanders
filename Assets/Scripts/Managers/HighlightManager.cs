@@ -166,7 +166,10 @@ public class HighlightManager : MonoBehaviour
         {
             PlayerManuallyInsertedAction?.Invoke(clickedIcon);
             selectedPlayer!.HandleUseCard(clashingAction);
+            clickedIcon.Origin.DeHighlight();
             clashingAction.ForceNormalState();
+            currentHighlightedEnemyEntity = null;
+            currentHighlightedAction = null;
         }
     }
     public void OnActionClicked(ActionClass clicked)

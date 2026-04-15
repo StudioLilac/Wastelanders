@@ -13,6 +13,7 @@ public interface IBattleQueueDisplayable
     IEnumerator FadeOut();
     void ShakePlayerAction();
     GameObject GameObject { get; }
+    string Name { get; }
 
     public const float EXPAND_DURATION = 0.25f;
 
@@ -38,6 +39,7 @@ public class BattleQueueIcons : DisplayableClass, IBattleQueueDisplayable
     private bool isShaking = false;
     private int FadeSortingOrder => new GetFadeSortingOrder().Query() ?? 0;
     private string FadeSortingLayer => new GetFadeSortingLayer().Query() ?? string.Empty;
+    public string Name => ActionClass?.GetName() ?? string.Empty;
 
     public void RenderBQIcon(ActionClass ac)
     {

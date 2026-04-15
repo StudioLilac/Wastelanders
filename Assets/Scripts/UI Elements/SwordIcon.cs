@@ -3,7 +3,7 @@ using UnityEngine;
 using static IBattleQueueDisplayable;
 
 #nullable enable
-public class SwordIcon : MonoBehaviour, IBattleQueueDisplayable
+public class SwordIcon : MonoBehaviour
 {
     private static readonly int ClashStateHash = Animator.StringToHash("ClashState");
     [SerializeField] private SpriteRenderer swordsIcon = null!;

@@ -30,7 +30,7 @@ public class PopUpNotificationManager : MonoBehaviour
         string HandleConflict(PopupType.SpeedConflict data)
         {
             data.DuplicatedItem.ShakePlayerAction();
-            return "Same Speed Selected!";
+            return $"{data.DuplicatedItem.Name} already queued at this speed!";
         }
 
         string message = popupType switch
