@@ -10,13 +10,13 @@ namespace Entities
     {
         public int StartingHealth { get; set; } = 50;
         public int NumberOfAttacks { get; set; } = 2;
-        public BlessBuffTarget EncounterBlessTarget { get; set; } = BlessBuffTarget.Random;
+        public BlessBuffTarget EncounterBlessTarget { get; set; } = BlessBuffTarget.Resonate;
         public List<GameObject> BlessCards { get; private set; } = new();
         public List<GameObject> HurlCards { get; private set; } = new();
         public List<GameObject> BurpCards { get; private set; } = new();
         public List<GameObject> GobbleCards { get; private set; } = new();
         public List<EnemyClass> OwnedMinions { get; set; } = new();
-        public AttackDeciderDelegate AttackDecider { private get; set; } = 
+        public AttackDeciderDelegate AttackDecider { private get; set; } =
             (int enemyCount) => 
                 Random.Range(0f, 1f) > enemyCount switch
                 {
@@ -92,8 +92,11 @@ namespace Entities
 
         public override void AddAttack(List<EntityClass> targets)
         {
+            var blessPlayedThisTurn = 0;
             var opponents = targets.Where(entity => entity.Team == EntityTeam.PlayerTeam).ToList();
             var neutral = targets.Where(entity => entity.Team == EntityTeam.NeutralTeam).ToList();
+            var hurtTeammates = OwnedMinions.Where(entity => entity.Health < entity.MaxHealth && !entity.IsDead).ToList();
+            var aliveTeammates = OwnedMinions.Where(entity => !entity.IsDead).ToList();
 
             List<EnemyClass> availableDeadMinions = GetStaggeredMinions();
             int activeMinionCount = OwnedMinions.Count - availableDeadMinions.Count + 1;
@@ -116,20 +119,53 @@ namespace Entities
 
                 switch (currentStacks)
                 {
-                    case >= 6:
+                    case >= 4:
                         if (shouldPlayBurp) AttackWith(BurpCards[i], burpTarget);
-                        else                AttackWith(BlessCards[i], CalculateAttackTarget(opponents));
+                        else if (blessPlayedThisTurn < NumberOfAttacks - 1)
+                        {
+                            AttackWith(BlessCards[i], CalculateAttackTarget(opponents));
+                            blessPlayedThisTurn++;
+                        }
+                        else if (hurtTeammates.Count > 0)
+                        {
+                            EntityClass hurtTarget = hurtTeammates[Random.Range(0, hurtTeammates.Count)];
+                            AttackWith(BurpCards[i], hurtTarget);
+                        } else if (aliveTeammates.Count > 0)
+                        {
+                            EntityClass aliveTarget = aliveTeammates[Random.Range(0, aliveTeammates.Count)];
+                            AttackWith(BurpCards[i], aliveTarget);
+                        } else
+                        {
+                            AttackWith(BlessCards[i], CalculateAttackTarget(opponents));
+                            blessPlayedThisTurn++;
+                        }
                         break;
-                    case var _ when neutral.Count > 0 && (gobblePotentialStacks + currentStacks) < 6:
+                    case var _ when neutral.Count > 0 && (gobblePotentialStacks + currentStacks) < 4:
                         AttackWith(GobbleCards[i], CalculateAttackTarget(neutral));
-                        gobblePotentialStacks += 3; //Pretends gobble succeeds and makes furthur decisions from there. 
+                        gobblePotentialStacks += 3; //Pretends gobble succeeds and makes furthur decisions from there.
                         break;
-                    case >= 2:
+                    case >= 1:
                         if (shouldPlayBurp) AttackWith(BurpCards[i], burpTarget);
-                        else AttackWith(BlessCards[i], CalculateAttackTarget(opponents));
-                        break;
-                    case 1:
-                        AttackWith(BlessCards[i], CalculateAttackTarget(opponents));
+                        else if (blessPlayedThisTurn < NumberOfAttacks - 1)
+                        {
+                            AttackWith(BlessCards[i], CalculateAttackTarget(opponents));
+                            blessPlayedThisTurn++;
+                        }
+                        else if (hurtTeammates.Count > 0)
+                        {
+                            EntityClass hurtTarget = hurtTeammates[Random.Range(0, hurtTeammates.Count)];
+                            AttackWith(BurpCards[i], hurtTarget);
+                        }
+                        else if (aliveTeammates.Count > 0)
+                        {
+                            EntityClass aliveTarget = aliveTeammates[Random.Range(0, aliveTeammates.Count)];
+                            AttackWith(BurpCards[i], aliveTarget);
+                        }
+                        else
+                        {
+                            AttackWith(BlessCards[i], CalculateAttackTarget(opponents));
+                            blessPlayedThisTurn++;
+                        }
                         break;
                     default:
                         AttackWith(HurlCards[i], CalculateAttackTarget(opponents));
@@ -137,10 +173,7 @@ namespace Entities
                 }
 
             }
-        }
-
-
-       
+        }       
 
         private void HandleDamage(int amount)
         {

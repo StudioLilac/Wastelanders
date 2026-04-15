@@ -57,7 +57,12 @@ public class GameOver : MonoBehaviour
         StartCoroutine(BeginFadeIn(dialogue));
     }
 
-    private IEnumerator BeginFadeIn(DialogueWrapper dialogue)
+    public void FadeInWithDialogue(DialogueEntryWrapper dialogue)
+    {
+        StartCoroutine(BeginFadeIn(dialogue));
+    }
+
+    private IEnumerator BeginFadeIn(DialogueEntry[] dialogue)
     {
         canvasGroup.blocksRaycasts = true;
         AudioManager.Instance.PlayDeath();

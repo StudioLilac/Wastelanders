@@ -21,10 +21,10 @@ public abstract class EntityClass : SelectClass
     public const string STAGGERED_ANIMATION_NAME = "IsStaggered";
     public const string BLOCK_ANIMATION_NAME = "IsBlocking";
     protected int MAX_HEALTH;
-    protected int MaxHealth
+    public int MaxHealth
     {
         get => MAX_HEALTH;
-        set
+        protected set
         {
             MAX_HEALTH = value;
             combatInfo.SetMaxHealth(MAX_HEALTH);
@@ -199,6 +199,8 @@ public abstract class EntityClass : SelectClass
     {
         BattleQueue.BattleQueueInstance.RemoveAllInstancesOfEntity(this);
         UnTargetable();
+        statusEffects.Clear();
+        UpdateBuffs();
         combatInfo.PassOut();
         float distanceToTravel = Vector3.Distance(myTransform.position, initialPosition);
         float unitsPerSecond = 12f;

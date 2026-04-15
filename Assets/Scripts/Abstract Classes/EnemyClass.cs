@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+#nullable enable
 public abstract class EnemyClass : EntityClass
 {
     // This is the deck of the enemy, which does not change as they reshuffle/play cards.
@@ -13,7 +14,7 @@ public abstract class EnemyClass : EntityClass
     protected List<GameObject> pool = new List<GameObject>();
     
     // Initialized in editor
-    public List<GameObject> availableActions;
+    public List<GameObject> availableActions = null!;
 
     public delegate int AttackTargetDelegate(EntityClass targets);
 
@@ -60,8 +61,9 @@ public abstract class EnemyClass : EntityClass
     }
 
     // Use this if you would like to directly attack using deck
-    public void AttackWith(GameObject attack, EntityClass target)
+    public void AttackWith(GameObject attack, EntityClass? target)
     {
+        if (target == null) return;
         var action = attack.GetComponent<ActionClass>();
         action.Target = target;
         action.Origin = this;
@@ -69,13 +71,13 @@ public abstract class EnemyClass : EntityClass
         BattleQueue.BattleQueueInstance.AddAction(action);
     }
 
-    protected EntityClass CalculateAttackTarget(List<EntityClass> potentialTargets)
+    protected EntityClass? CalculateAttackTarget(List<EntityClass> potentialTargets)
     {
         int totalWeight = potentialTargets.Sum(target => TargetingWeights(target));
         int randomValue = UnityEngine.Random.Range(0, totalWeight);
 
         int cumulativeWeight = 0;
-        var selectedTarget = potentialTargets.First(target =>
+        var selectedTarget = potentialTargets.FirstOrDefault(target =>
         {
             cumulativeWeight += TargetingWeights(target);
             return cumulativeWeight > randomValue;

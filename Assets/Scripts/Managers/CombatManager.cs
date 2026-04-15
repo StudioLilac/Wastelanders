@@ -18,9 +18,8 @@ public record CanHighlight() : IQuery<bool?>;
 public record GetTeammates(EntityTeam Team) : IQuery<List<EntityClass>?>;
 public record GetOpponents(EntityTeam Team) : IQuery<List<EntityClass>?>;
 public record GameStateChanged(GameState OldState, GameState NewState): IEvent;
+public record TeamWinEvent(EntityTeam Team) : IEvent;
 #nullable disable
-
-public record PlayersWin() : IEvent;
 
 public class CombatManager : MonoBehaviour
 {
@@ -173,6 +172,7 @@ public class CombatManager : MonoBehaviour
         if (playerTeam.Count == 0)
         {
             EnemiesWinEvent?.Invoke();
+            new TeamWinEvent(EntityTeam.EnemyTeam).Invoke();
         }
     }
 
@@ -184,7 +184,7 @@ public class CombatManager : MonoBehaviour
         if (enemyTeam.Count == 0)
         {
             PlayersWinEvent?.Invoke();
-            new PlayersWin().Invoke();
+            new TeamWinEvent(EntityTeam.PlayerTeam).Invoke();
         }
     }
 

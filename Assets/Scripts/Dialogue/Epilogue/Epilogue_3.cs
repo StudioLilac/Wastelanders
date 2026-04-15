@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
+using static BattleIntroEnum;
 
 public class Epilogue_3 : MonoBehaviour {
     // BGs
@@ -59,8 +60,11 @@ public class Epilogue_3 : MonoBehaviour {
     public Transform offscreenWorkerPos;
     public Transform toPlaceCrystal;
     public Transform crystalParent;
+    public Transform toDragCrystal;
 
     public AudioClip tundraAudio;
+
+
 
     // Dialogue
     [SerializeField] private DialogueEntryWrapper Driving;
@@ -79,6 +83,7 @@ public class Epilogue_3 : MonoBehaviour {
     [SerializeField] private DialogueEntryWrapper BattleJackieHumanForm;
     [SerializeField] private DialogueEntryWrapper BattleIvesStaggeredForm;
     [SerializeField] private DialogueEntryWrapper BattleHelpOthers;
+    [SerializeField] private DialogueEntryWrapper GameLoseDialogue;
 
     [SerializeField] private DialogueEntryWrapper PostBattleMedical;
     [SerializeField] private DialogueEntryWrapper PostBattleCheckup;
@@ -92,7 +97,20 @@ public class Epilogue_3 : MonoBehaviour {
 #nullable enable
     void Start() {
         this.Subscribe<CustomEvent>(CustomEventHandler);
+        this.Subscribe<TeamWinEvent>(OnTeamWin);
         StartCoroutine(StartScene());
+    }
+
+    void OnTeamWin(TeamWinEvent ev)
+    {
+        if (ev.Team == EntityTeam.PlayerTeam)
+        {
+            new SetGameState(GameState.GAME_WIN).Invoke();
+        } else
+        {
+            new SetGameState(GameState.GAME_LOSE).Invoke();
+            GameOver.Instance.FadeInWithDialogue(GameLoseDialogue);
+        }
     }
 
     void CustomEventHandler(CustomEvent ev)
@@ -134,12 +152,12 @@ public class Epilogue_3 : MonoBehaviour {
     {
         Setup();
         new SetGameState(GameState.OUT_OF_COMBAT).Invoke();
+        black.SetDarkScreen();
         if (!GameStateManager.Instance.JumpToCombat)
         {
             {
                 tundraBackground.SetActive(false);
-                yield return UIFadeScreenManager.Instance.FadeInDarkScreen(0f);
-                yield return UIFadeScreenManager.Instance.FadeInLightScreen(2f);
+                yield return black.FadeInLightScreen(2f);
 
                 yield return DialogueBoxV2.Instance.Play(Driving);
                 AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
@@ -186,124 +204,158 @@ public class Epilogue_3 : MonoBehaviour {
                 yield return black.FadeInDarkScreen(2f);
             }
 
-        }
-        tundra1Bg.SetActive(false);
-        tundra2Bg.SetActive(true);
-        yield return DialogueBoxV2.Instance.Play(Tundra);
-        yield return black.FadeInLightScreen(1f);
 
-        IEnumerator SpittingFrog()
+            tundra1Bg.SetActive(false);
+            tundra2Bg.SetActive(true);
+            yield return DialogueBoxV2.Instance.Play(Tundra);
+            yield return black.FadeInLightScreen(1f);
+
+            IEnumerator SpittingFrog()
+            {
+                yield return new WaitForSeconds(0.3f);
+                spittingFrog.AttackAnimation(FrogAttacks.FROG_ATTACK_NAME);
+                yield return new WaitForSeconds(0.3f);
+                spatOutCrystal.gameObject.SetActive(false);
+                yield return new WaitForSeconds(1.0f);
+                yield return StartCoroutine(spittingFrog.MoveToPosition(toPlaceCrystal.transform.position + new Vector3(1f, 0, 0), 0f, 2.5f));
+                spittingFrog.FaceLeft();
+                yield return new WaitForSeconds(1.0f);
+                spittingFrog.AttackAnimation(FrogAttacks.FROG_ATTACK_NAME);
+                yield return new WaitForSeconds(0.3f);
+                spatOutCrystal.transform.position = toPlaceCrystal.position;
+                spatOutCrystal.gameObject.SetActive(true);
+            }
+
+            IEnumerator PrincessFrogEating()
+            {
+                princessFrog.AttackAnimation(FrogAttacks.PRINCESS_FROG_ATTACK_NAME);
+                yield return new WaitForSeconds(0.3f);
+                SoundID.CB_excavate.Play();
+                toEat.TakeDamage(princessFrog, toEat.Health);
+                StartCoroutine(toEat.Die());
+                yield return new WaitForSeconds(1.0f);
+                yield return StartCoroutine(princessFrog.MoveToPosition(toEat2.transform.position, 1f, 1f));
+                yield return new WaitForSeconds(1.0f);
+                princessFrog.AttackAnimation(FrogAttacks.PRINCESS_FROG_ATTACK_NAME);
+                yield return new WaitForSeconds(0.3f);
+                SoundID.CB_excavate.Play();
+                toEat2.TakeDamage(princessFrog, toEat2.Health);
+                StartCoroutine(toEat2.Die());
+                CardComparator.Instance.ClearEvents();
+            }
+
+            StartCoroutine(SpittingFrog());
+            StartCoroutine(PrincessFrogEating());
+            StartCoroutine(draggingBeetle.MoveToPosition(draggingBeetle.transform.position + new Vector3(3, 0, 0), 0, 7f, draggingBeetle.transform.position + new Vector3(-5, 0, 0)));
+            StartCoroutine(ivesSlime.MoveToPosition(ivesSlime.transform.position + new Vector3(5f, 0f, 0f), 0f, 2f));
+            StartCoroutine(beetleGreen.MoveToPosition(beetleGreen.transform.position + new Vector3(5f, 0f, 0f), 0f, 3f));
+            StartCoroutine(jackieFrog.MoveToPosition(jackieFrog.transform.position + new Vector3(5f, 0f, 0f), 0f, 2.5f));
+            StartCoroutine(beetleBlue.MoveToPosition(beetleBlue.transform.position + new Vector3(5f, 0f, 0f), 0f, 2.5f));
+            StartCoroutine(beetleBrown.MoveToPosition(beetleBrown.transform.position + new Vector3(5f, 0f, 0f), 0f, 2.5f));
+            yield return StartCoroutine(beetleGreen.MoveToPosition(beetleGreen.transform.position + new Vector3(5f, 0f, 0f), 0f, 2.5f));
+
+            yield return new WaitForSeconds(1.0f);
+            yield return DialogueBoxV2.Instance.Play(BattlePreMoveForward);
+
+            princessFrog.FaceLeft();
+            StartCoroutine(PurpleFlash(0.5f));
+            yield return DialogueBoxV2.Instance.Play(BattleHalt); // ???: Halt
+
+
+            yield return DialogueBoxV2.Instance.Play(BattleStandstill); // Dammit! Something's controlling ...
+
+            yield return StartCoroutine(princessFrog.ResetPosition());
+            StartCoroutine(PurpleFlash(0.5f));
+            yield return DialogueBoxV2.Instance.Play(BattleCome); // ???: Come
+
+
+            draggedCrystal.transform.SetParent(crystalParent, true);
+            foreach (var worker in enemyWorkers)
+            {
+                StartCoroutine(worker.MoveToPosition(offscreenWorkerPos.position, 0f, 3f));
+            }
+            StartCoroutine(beetleBlue.MoveToPosition(beetleBlueReturnPos.position, 0f, 3f));
+            StartCoroutine(beetleBrown.MoveToPosition(beetleBrownReturnPos.position, 0f, 3f));
+            StartCoroutine(beetleGreen.MoveToPosition(beetleGreenReturnPos.position, 0f, 3f));
+            var coroutine = StartCoroutine(ivesSlime.MoveToPosition(slimeReturnPosition.position, 0f, 5f));
+
+            jackieFighter.transform.position = jackieFrog.gameObject.transform.position;
+            jackieFrog.gameObject.SetActive(false);
+            jackieFighter.gameObject.SetActive(true);
+            jackieFighter.OutOfCombat();
+
+            yield return DialogueBoxV2.Instance.Play(BattleJackieHumanForm); // Jackie: Ives!
+
+            new ActivateDynamicCameraEvent().Invoke();
+            yield return StartCoroutine(jackieFighter.MoveToPosition(jackieRunPosition.position, 0f, 1.3f));
+            StopCoroutine(coroutine);
+
+            jackieAction.Target = ivesSlime;
+            jackieAction.Origin = jackieFighter;
+            jackieAction.Speed = 5;
+            yield return StartCoroutine(CardComparator.Instance.OneSidedAttack(new BattleQueue.ActionWrapper(jackieAction)));
+
+
+            ivesFighter.transform.position = ivesSlime.gameObject.transform.position;
+            ivesSlime.gameObject.SetActive(false);
+            ivesFighter.gameObject.SetActive(true);
+            ivesFighter.SetStaggered(true);
+            ivesFighter.OutOfCombat();
+            yield return new WaitForSeconds(1f);
+            yield return DialogueBoxV2.Instance.Play(BattleIvesStaggeredForm);
+            ivesFighter.SetStaggered(false);
+            ivesFighter.Heal(5);
+            yield return new WaitForSeconds(0.5f);
+            yield return DialogueBoxV2.Instance.Play(BattleHelpOthers);
+            yield return new WaitForSeconds(0.5f);
+        } else
         {
-            yield return new WaitForSeconds(0.3f);
-            spittingFrog.AttackAnimation(FrogAttacks.FROG_ATTACK_NAME);
-            yield return new WaitForSeconds(0.3f);
-            spatOutCrystal.gameObject.SetActive(false);
-            yield return new WaitForSeconds(1.0f);
-            yield return StartCoroutine(spittingFrog.MoveToPosition(toPlaceCrystal.transform.position + new Vector3(1f, 0, 0), 0f, 2.5f));
-            spittingFrog.FaceLeft();
-            yield return new WaitForSeconds(1.0f);
-            spittingFrog.AttackAnimation(FrogAttacks.FROG_ATTACK_NAME);
-            yield return new WaitForSeconds(0.3f);
+            tundra1Bg.SetActive(false);
+            tundra2Bg.SetActive(true);
+            beetleBlue.transform.position = beetleBlueReturnPos.position;
+            beetleGreen.transform.position = beetleGreenReturnPos.position;
+            beetleBrown.transform.position = beetleBrownReturnPos.position;
+            princessFrog.transform.position = princessResetPosition.position;
+            toEat.gameObject.SetActive(false);
+            toEat2.gameObject.SetActive(false);
+            ivesSlime.gameObject.SetActive(false);
+            jackieFrog.gameObject.SetActive(false);
+            ivesFighter.gameObject.SetActive(true);
+            jackieFighter.gameObject.SetActive(true);
+            StartCoroutine(ivesFighter.ResetPosition());
+            StartCoroutine(jackieFighter.ResetPosition());
             spatOutCrystal.transform.position = toPlaceCrystal.position;
-            spatOutCrystal.gameObject.SetActive(true);
+            draggedCrystal.transform.SetParent(crystalParent, true);
+            draggedCrystal.transform.position = toDragCrystal.position;
+            princessFrog.AddStacks(Resonate.buffName, 6);
+            GameStateManager.Instance.JumpToCombat = false;
+            StartCoroutine(black.FadeInLightScreen(3f));
+            yield return new WaitForSeconds(0.1f);
         }
 
-        IEnumerator PrincessFrogEating()
+
+        void CombatPrep()
         {
-            princessFrog.AttackAnimation(FrogAttacks.PRINCESS_FROG_ATTACK_NAME);
-            yield return new WaitForSeconds(0.3f);
-            SoundID.CB_excavate.Play();
-            toEat.TakeDamage(princessFrog, toEat.Health);
-            StartCoroutine(toEat.Die());
-            yield return new WaitForSeconds(1.0f);
-            yield return StartCoroutine(princessFrog.MoveToPosition(toEat2.transform.position, 1f, 1f));
-            yield return new WaitForSeconds(1.0f);
-            princessFrog.AttackAnimation(FrogAttacks.PRINCESS_FROG_ATTACK_NAME);
-            yield return new WaitForSeconds(0.3f);
-            SoundID.CB_excavate.Play();
-            toEat2.TakeDamage(princessFrog, toEat2.Health);
-            StartCoroutine(toEat2.Die());
-            CardComparator.Instance.ClearEvents();
+            enemyWorkers.ForEach(it => it.DestroyDeck());
+            enemyWorkers.ForEach(it => it.gameObject.SetActive(false));
+            List<EnemyClass> enemies = new() { beetleBlue, beetleGreen, beetleBrown, };
+            enemies.ForEach(it => it.DeathHandler = it.PassOut);
+            enemies.ForEach(it => AdjustEnemyClass(it));
+            princessFrog.OwnedMinions = enemies;
         }
-
-        StartCoroutine(SpittingFrog());
-        StartCoroutine(PrincessFrogEating());
-        StartCoroutine(draggingBeetle.MoveToPosition(draggingBeetle.transform.position + new Vector3(5, 0, 0), 0, 8f, draggingBeetle.transform.position + new Vector3(-5, 0, 0)));
-        StartCoroutine(ivesSlime.MoveToPosition(ivesSlime.transform.position + new Vector3(5f, 0f, 0f), 0f, 2f));
-        StartCoroutine(beetleGreen.MoveToPosition(beetleGreen.transform.position + new Vector3(5f, 0f, 0f), 0f, 3f));
-        StartCoroutine(jackieFrog.MoveToPosition(jackieFrog.transform.position + new Vector3(5f, 0f, 0f), 0f, 2.5f));
-        StartCoroutine(beetleBlue.MoveToPosition(beetleBlue.transform.position + new Vector3(5f, 0f, 0f), 0f, 2.5f));
-        StartCoroutine(beetleBrown.MoveToPosition(beetleBrown.transform.position + new Vector3(5f, 0f, 0f), 0f, 2.5f));
-        yield return StartCoroutine(beetleGreen.MoveToPosition(beetleGreen.transform.position + new Vector3(5f, 0f, 0f), 0f, 2.5f));
-
-        yield return new WaitForSeconds(1.0f);
-        yield return DialogueBoxV2.Instance.Play(BattlePreMoveForward);
-
-        princessFrog.FaceLeft();
-        StartCoroutine(PurpleFlash(0.5f));
-        yield return DialogueBoxV2.Instance.Play(BattleHalt); // ???: Halt
-        
-        
-        yield return DialogueBoxV2.Instance.Play(BattleStandstill); // Dammit! Something's controlling ...
-
-        yield return StartCoroutine(princessFrog.ResetPosition());
-        StartCoroutine(PurpleFlash(0.5f));
-        yield return DialogueBoxV2.Instance.Play(BattleCome); // ???: Come
-
-
-        draggedCrystal.transform.SetParent(crystalParent, true);
-        foreach (var worker in enemyWorkers)
-        {
-            StartCoroutine(worker.MoveToPosition(offscreenWorkerPos.position, 0f, 3f));
-        }
-        StartCoroutine(beetleBlue.MoveToPosition(beetleBlueReturnPos.position, 0f, 3f));
-        StartCoroutine(beetleBrown.MoveToPosition(beetleBrownReturnPos.position, 0f, 3f));
-        StartCoroutine(beetleGreen.MoveToPosition(beetleGreenReturnPos.position, 0f, 3f));
-        var coroutine = StartCoroutine(ivesSlime.MoveToPosition(slimeReturnPosition.position, 0f, 5f));
-
-        jackieFighter.transform.position = jackieFrog.gameObject.transform.position;
-        jackieFrog.gameObject.SetActive(false);
-        jackieFighter.gameObject.SetActive(true);
-        jackieFighter.OutOfCombat();
-
-        yield return DialogueBoxV2.Instance.Play(BattleJackieHumanForm); // Jackie: Ives!
-
-        new ActivateDynamicCameraEvent().Invoke();
-        yield return StartCoroutine(jackieFighter.MoveToPosition(jackieRunPosition.position, 0f, 1.3f));
-        StopCoroutine(coroutine);
-
-        jackieAction.Target = ivesSlime;
-        jackieAction.Origin = jackieFighter;
-        jackieAction.Speed = 5;
-        yield return StartCoroutine(CardComparator.Instance.OneSidedAttack(new BattleQueue.ActionWrapper(jackieAction)));
-
-
-        ivesFighter.transform.position = ivesSlime.gameObject.transform.position;
-        ivesSlime.gameObject.SetActive(false);
-        ivesFighter.gameObject.SetActive(true);
-        ivesFighter.SetStaggered(true);
-        ivesFighter.OutOfCombat();
-        yield return new WaitForSeconds(1f);
-        yield return DialogueBoxV2.Instance.Play(BattleIvesStaggeredForm);
-        ivesFighter.SetStaggered(false);
-        ivesFighter.Heal(5);
-        yield return new WaitForSeconds(1f);
-        yield return DialogueBoxV2.Instance.Play(BattleHelpOthers);
-        yield return new WaitForSeconds(0.5f);
-
-
-
-
-        CombatManager.Instance.SetEnemiesPassive(new List<EnemyClass>() { frog, slime, beetle, ivesSlime, jackieFrog }.Concat(enemyWorkers).ToList());
+        CombatPrep();
+        CombatManager.Instance.SetEnemiesPassive(new List<EnemyClass>() { frog, slime, beetle, ivesSlime, jackieFrog, toEat, toEat2 }.Concat(enemyWorkers).ToList());
         CombatManager.Instance.BeginCombat();
+        new BattleIntroEvent(Get<ClashIntro>()).Invoke();
+
         yield return new WaitUntil(() => new GetGameState().Query() == GameState.GAME_WIN);
-
-
-
-
-
+        new SetGameState(GameState.OUT_OF_COMBAT).Invoke();
+        yield return new WaitForSeconds(1f);
+        if (!ivesFighter.IsDead) ivesFighter.SetStaggered(true);
+        yield return new WaitForSeconds(1f);
         yield return black.FadeInDarkScreen(2f);
-        yield return black.FadeInLightScreen(2f);
+
+
         // TODO: [Fade into the same background, with the beetles surrounding the princess frog.] 
         // TODO: COMBAT TIME
         // TODO: [Fight scene ends. Fade into fight background again.]
@@ -340,5 +392,18 @@ public class Epilogue_3 : MonoBehaviour {
         yield return purpleFlash.FadeInDarkScreen(delay);
         callback?.Invoke();
         yield return purpleFlash.FadeInLightScreen(delay);
+    }
+
+    private void AdjustEnemyClass(EnemyClass enemyClass)
+    {
+        enemyClass.TargetingWeights = delegate (EntityClass entity)
+        {
+            return entity.Team switch
+            {
+                EntityTeam.PlayerTeam => 40,
+                EntityTeam.NeutralTeam => 20,
+                _ => 0
+            };
+        };
     }
 }
