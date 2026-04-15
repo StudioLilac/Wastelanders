@@ -402,7 +402,7 @@ public class Epilogue_3 : MonoBehaviour {
             IEnumerator ScheduleDialogue()
             {
                 yield return new WaitUntil(() => new GetGameState().Query() != GameState.FIGHTING);
-                if (DialogueBoxV2.Instance.IsActive) // If active, wait a cycle
+                if (DialogueBoxV2.Instance.IsActive) // If active, wait a cycle to avoid cutting off current dialogue
                 {
                     yield return new WaitUntil(() => new GetGameState().Query() != GameState.SELECTION);
                     yield return new WaitUntil(() => new GetGameState().Query() != GameState.FIGHTING);

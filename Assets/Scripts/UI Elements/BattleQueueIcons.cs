@@ -21,6 +21,8 @@ public interface IBattleQueueDisplayable
 }
 public record BattleQueueIconClick(BattleQueueIcons Icon) : IEvent { }
 
+
+// If you're noticing the battle queue icons can't be scrolled, that could be because you don't have a physics 2d raycaster on the main camera in your scene.
 public class BattleQueueIcons : DisplayableClass, IBattleQueueDisplayable
 {
     public GameObject GameObject => gameObject;
