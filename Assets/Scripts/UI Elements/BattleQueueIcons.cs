@@ -18,7 +18,6 @@ public interface IBattleQueueDisplayable
 
     public const float FADE_DURATION = 0.15f;
 }
-
 public record BattleQueueIconClick(BattleQueueIcons Icon) : IEvent { }
 
 public class BattleQueueIcons : DisplayableClass, IBattleQueueDisplayable
@@ -33,6 +32,8 @@ public class BattleQueueIcons : DisplayableClass, IBattleQueueDisplayable
     [SerializeField] SpriteFadeHandler unseenActionFader;
     [SerializeField] LayoutWidthFader widthFader;
 
+
+#nullable enable
     private bool isActive = true;
     private bool isShaking = false;
     private int FadeSortingOrder => new GetFadeSortingOrder().Query() ?? 0;
@@ -148,11 +149,17 @@ public class BattleQueueIcons : DisplayableClass, IBattleQueueDisplayable
 
     private void OnMouseDown()
     {
+        if (ActionClass == null) return;
+
         if (ActionClass.Origin is PlayerClass && new CanHighlight().Query() == true && isActive)
         {
             new BattleQueueIconClick(this).Invoke();
             DeHighlightTarget();
             HideCard();
+        }
+        else if (ActionClass.Origin is EnemyClass && new CanHighlight().Query() == true && isActive)
+        {
+            new ActionIconClicked(ActionClass).Invoke();
         }
     }
 }

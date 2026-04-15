@@ -28,7 +28,15 @@ public class CombatCardUI : DisplayableClass
         
         base.OnDestroy();
     }
-    
+
+    private void OnMouseDown()
+    {
+        if (ActionClass !=null && new CanHighlight().Query() == true)
+        {
+            new ActionIconClicked(ActionClass).Invoke();
+        }
+    }
+
     private void OnEnable()
     {
         GetComponent<SpriteRenderer>().sortingLayerName = FadeSortingLayer;

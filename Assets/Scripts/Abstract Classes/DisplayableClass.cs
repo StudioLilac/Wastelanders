@@ -10,7 +10,7 @@ public abstract class DisplayableClass : SelectClass
 #nullable enable
     public ActionClass? ActionClass { get; protected set; }   
     [SerializeField] protected SpriteRenderer unseenEnemyActionIndicator = null!;
-    protected bool targetHighlighted = false;
+    protected EntityClass? currentHighlightedTarget = null;
     private bool grewLarger;
     
     private readonly float scaleEaseDuration = 0.12f;
@@ -52,20 +52,21 @@ public abstract class DisplayableClass : SelectClass
 
     protected void HighlightTarget()
     {
-        if (!targetHighlighted)
+        if (currentHighlightedTarget != null)
         {
-            ActionClass?.Target?.Highlight();
+            DeHighlightTarget();
         }
-        targetHighlighted = true;
+        ActionClass?.Target?.Highlight();
+        currentHighlightedTarget = ActionClass?.Target;
     }
 
     protected void DeHighlightTarget()
     {
-        if (targetHighlighted)
+        if (currentHighlightedTarget != null)
         {
-            ActionClass?.Target?.DeHighlight();
+            currentHighlightedTarget?.DeHighlight();
+            currentHighlightedTarget = null;
         }
-        targetHighlighted = false;
     }
     
     public virtual void OnMouseEnter()
