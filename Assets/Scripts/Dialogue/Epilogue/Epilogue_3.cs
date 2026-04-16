@@ -11,12 +11,17 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using static BattleIntroEnum;
 
-public class Epilogue_3 : MonoBehaviour {
+public class Epilogue_3 : MonoBehaviour
+{
+    public bool instaKill;
     // BGs
     [SerializeField] private SpriteFadeHandler black;
     [SerializeField] private SpriteFadeHandler purpleFlash;
     [SerializeField] private SpriteFadeHandler car;
     [SerializeField] private UIFadeHandler vignette;
+    [SerializeField] private UIFadeHandler afterFightBg;
+    [SerializeField] private UIFadeHandler injectionBg;
+    [SerializeField] private Sprite injection2;
     [SerializeField] private GameObject tundraBackground;
 
     [SerializeField] private SpriteRenderer cam;
@@ -51,6 +56,9 @@ public class Epilogue_3 : MonoBehaviour {
     public Crystals toEat2;
 
 
+    public PrincessFrog princessFrogJackie;
+
+
     public Transform princessResetPosition;
     public Transform beetleBlueReturnPos;
     public Transform beetleGreenReturnPos;
@@ -64,7 +72,6 @@ public class Epilogue_3 : MonoBehaviour {
     public Transform toDragCrystal;
 
     public AudioClip tundraAudio;
-
 
 
     // Dialogue
@@ -96,6 +103,8 @@ public class Epilogue_3 : MonoBehaviour {
     [SerializeField] private DialogueEntryWrapper PostBattleJackieTransform;
     
     [SerializeField] private DialogueEntryWrapper PrincessDeckUnlocked;
+
+    private List<Beetle> EnemyBeetles => new List<Beetle> { beetleBlue, beetleBrown, beetleGreen };
 
 #nullable enable
     void Start() {
@@ -135,6 +144,9 @@ public class Epilogue_3 : MonoBehaviour {
         else if (ev.EventName == "klack") // Klackackakkc
         {
             beetle.AttackAnimation(Pincer.PINCER_ANIMATION_NAME);
+        } else if (ev.EventName == "injection_half") // Has the serum always been pink?
+        {
+            injectionBg.Image.sprite = injection2;
         }
     }
 
@@ -347,7 +359,13 @@ public class Epilogue_3 : MonoBehaviour {
             princessFrog.OwnedMinions = enemies;
             this.Subscribe<OnBuffsUpdatedEvent>(OnBuffEvent);
             this.Subscribe<CardUsed<GobbleCard>>(OnGobbleUsed);
-            
+            if (instaKill)
+            {
+                jackieFighter.AddStacks(Accuracy.buffName, 900);
+                jackieFighter.AddStacks(Resonate.buffName, 900);
+                ivesFighter.AddStacks(Accuracy.buffName, 900);
+                ivesFighter.AddStacks(Resonate.buffName, 900);
+            }
         }
         CombatPrep();
         CombatManager.Instance.SetEnemiesPassive(new List<EnemyClass>() { frog, slime, beetle, ivesSlime, jackieFrog, toEat, toEat2 }.Concat(enemyWorkers).ToList());
@@ -355,48 +373,89 @@ public class Epilogue_3 : MonoBehaviour {
         new BattleIntroEvent(Get<ClashIntro>()).Invoke();
 
         yield return new WaitUntil(() => new GetGameState().Query() == GameState.GAME_WIN);
+        GameStateManager.Instance.UpdateLevelProgress(StageInformation.Get<StageInformation.IvesFinale>());
         new SetGameState(GameState.OUT_OF_COMBAT).Invoke();
+        AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
+
+        if (ivesFighter.IsDead)
+        {
+            ivesFighter.gameObject.SetActive(true);
+            ivesFighter.OutOfCombat();
+        }
+
+        if (jackieFighter.IsDead)
+        {
+            jackieFighter.gameObject.SetActive(true);
+            jackieFighter.OutOfCombat();
+        }
+
+        StartCoroutine(ivesFighter.ResetPosition());
+        StartCoroutine(jackieFighter.ResetPosition());
         yield return new WaitForSeconds(1f);
-        if (!ivesFighter.IsDead) ivesFighter.SetStaggered(true);
+        ivesFighter.SetStaggered(true);
         yield return new WaitForSeconds(1f);
         yield return black.FadeInDarkScreen(2f);
-
-
-        // TODO: [Fade into the same background, with the beetles surrounding the princess frog.] 
-        // TODO: COMBAT TIME
-        // TODO: [Fight scene ends. Fade into fight background again.]
-        // TODO: [On the left of the screen, Jackie battle idle, Ives staggered animation.]
+        yield return StartCoroutine(afterFightBg.FadeInDarkScreen(1f));
         yield return new WaitForSeconds(1f);
-        yield return DialogueBoxV2.Instance.Play(PostBattleMedical); // Jackie: Ives! Are you alright?
-        // TODO: [Jackie and Ives battle sprites move to the left. The strike team beetles move to the right.
-        //  Purple screen flash into Jackie and Ives dialogue sprites standing together on the left,
-        //  and the NPCs on the right.]
+        AudioManager.Instance.FadeInBackgroundTrack(2f, tundraAudio, true);
+        yield return DialogueBoxV2.Instance.Play(PostBattleMedical);
+
+        EnemyBeetles.ForEach(it =>
+        {
+            it.gameObject.SetActive(true);
+            it.Revive();
+            it.OutOfCombat();
+            StartCoroutine(it.MoveToPosition(ivesFighter.transform.position, 3f, 1f));
+        });
+
         yield return new WaitForSeconds(1f);
-        yield return DialogueBoxV2.Instance.Play(PostBattleCheckup); // Thank you Jackie... for freeing us.
-        // TODO: [Display injection frame 1]
+        yield return DialogueBoxV2.Instance.Play(PostBattleCheckup); 
+        yield return injectionBg.FadeInDarkScreen(1f);
         yield return new WaitForSeconds(1f);
         yield return DialogueBoxV2.Instance.Play(PostBattleInjection);
-        // TODO: [Play injection animation to halfway]
-        yield return new WaitForSeconds(1f);
+
+        StartCoroutine(injectionBg.FadeInLightScreen(1));
         yield return DialogueBoxV2.Instance.Play(PostBattleInjection2);
-        // TODO: [Fade into Ives’ in-game sprite. Resonance stacks start to accumulate on her.
-        //  Fade back to dialogue sprites.]
+        black.SetLightScreen();
+        yield return afterFightBg.FadeInLightScreen(1f);
+
+
         yield return new WaitForSeconds(1f);
         yield return DialogueBoxV2.Instance.Play(PostBattleBlackvein);
-        // TODO: [Purple flash. Jackie turns into the princess frog.]
-        yield return new WaitForSeconds(1f);
-        yield return PurpleFlash(0.5f);
-        yield return DialogueBoxV2.Instance.Play(PostBattleJackieTransform);
-        // TODO: [The rest of the NPC’s re-shift and carry Ives in-game sprite offscreen.]
-        yield return new WaitForSeconds(1f);
-        yield return DialogueBoxV2.Instance.Play(PrincessDeckUnlocked);
 
-        yield return UIFadeScreenManager.Instance.FadeInDarkScreen(2f);
+        void TurnIntoPrincessFrog()
+        {
+            jackieFighter.gameObject.SetActive(false);
+            princessFrogJackie.gameObject.SetActive(true);
+            princessFrog.OutOfCombat();
+            princessFrogJackie.transform.position = jackieFighter.transform.position;
+        }
+
+
+        yield return new WaitForSeconds(1f);
+        yield return PurpleFlash(0.5f, TurnIntoPrincessFrog);
+        yield return new WaitForSeconds(1f);
+        yield return DialogueBoxV2.Instance.Play(PostBattleJackieTransform);
+        yield return new WaitForSeconds(1f);
+
+        StartCoroutine(princessFrogJackie.MoveToPosition(princessResetPosition.position + new Vector3(-10f, 0, 0), 0f, 3f));
+        
+        yield return StartCoroutine(beetleBrown.MoveToPosition(ivesFighter.transform.position, 0.5f, 3f));
+        ivesFighter.transform.SetParent(beetleBrown.transform, true);
+        StartCoroutine(beetleBrown.MoveToPosition(ivesFighter.transform.position + new Vector3(-10f, 0f, 0), 0.5f, 5f));
+        StartCoroutine(beetleBlue.MoveToPosition(beetleBlue.transform.position + new Vector3(-10f, 0, 0), 0f, 2.5f));
+        yield return StartCoroutine(beetleGreen.MoveToPosition(beetleGreen.transform.position + new Vector3(-10f, 0, 0), 0f, 3f));
+        yield return black.FadeInDarkScreen(2f);
+        yield return DialogueBoxV2.Instance.Play(PrincessDeckUnlocked);
+        yield return new WaitForSeconds(1f);
+
+
+        GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.ContractSelect>().SceneName);
     }
 
     private void OnBuffEvent(OnBuffsUpdatedEvent ev)
     {
-        if (ev.WhoAmI.GetBuffStacks(Resonate.buffName) >= 3 && new List<EnemyClass>() { beetleBlue, beetleBrown, beetleGreen }.Contains(ev.WhoAmI))
+        if (ev.WhoAmI.GetBuffStacks(Resonate.buffName) >= 3 && EnemyBeetles.Contains(ev.WhoAmI))
         {
             this.UnSubscribe<OnBuffsUpdatedEvent>(OnBuffEvent);
             IEnumerator ScheduleDialogue()

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Epilogue3_12_PostBattleMedical
   m_EditorClassIdentifier: 
   Entries:
-  - content: Ives! Are you alright?
+  - content: Ives! Are you alright? You took quite the hit there!
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -24,7 +24,7 @@ MonoBehaviour:
     - rid: 6570561780457144417
     - rid: 6570561780457144418
     - rid: 6570561780457144419
-  - content: <i>cough</i> Yeah, but that fight got me good.
+  - content: <i>cough</i> Yeah, I'll be fine. But that beetle nicked me good.
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -35,14 +35,14 @@ MonoBehaviour:
     - rid: 6570561780457144426
     - rid: 6570561780457144427
     - rid: 6570561780457144428
-  - content: Ives, your arm... we gotta get that treated.
+  - content: Yikes, your arm... we gotta get that treated.
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 6570561780457144429
-  - content: "I\u2019ve got my injection, don\u2019t worry. Let\u2019s check on the
-      others first."
+  - content: "I\u2019ve got my injection, don\u2019t worry. Let\u2019s help the others
+      first."
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -90,7 +90,7 @@ MonoBehaviour:
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         action: 60
-        duration: 1
+        duration: 0
     - rid: 6570561780457144423
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
@@ -123,7 +123,7 @@ MonoBehaviour:
       data:
         actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
         action: 60
-        duration: 1
+        duration: 0
     - rid: 6570561780457144429
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:

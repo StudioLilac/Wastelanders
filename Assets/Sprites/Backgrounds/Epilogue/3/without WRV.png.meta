@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f29addafedd7075418d577a938699eee
+guid: c43df930ab43e2a43aa672fe39eeb73f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -993183575786483884
-    second: Needle_0
+      213: 185819715219448911
+    second: without WRV_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Needle_0
+      name: without WRV_0
       rect:
         serializedVersion: 2
-        x: 94
-        y: 73
-        width: 151
-        height: 220
+        x: 0
+        y: 0
+        width: 640
+        height: 360
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 45f8e78ccc08732f0800000000000000
-      internalID: -993183575786483884
+      spriteID: f446be5eb0a249200800000000000000
+      internalID: 185819715219448911
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Needle_0: -993183575786483884
+      without WRV_0: 185819715219448911
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
