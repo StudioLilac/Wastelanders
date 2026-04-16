@@ -43,7 +43,7 @@ public class Epilogue_3 : MonoBehaviour
     public PrincessFrog princessFrog;
     public Jackie jackieFighter;
     public Ives ivesFighter;
-    public ActionClass jackieAction;
+    public ActionClass ivesAction;
     public ActionClass beetleAction;
     public List<EnemyClass> enemyWorkers;
 
@@ -65,7 +65,7 @@ public class Epilogue_3 : MonoBehaviour
     public Transform beetleGreenReturnPos;
     public Transform beetleBrownReturnPos;
     public Transform slimeReturnPosition;
-    public Transform jackieRunPosition;
+    public Transform ivesRunPosition;
     public Transform playerReturnPosition;
     public Transform offscreenWorkerPos;
     public Transform toPlaceCrystal;
@@ -147,9 +147,6 @@ public class Epilogue_3 : MonoBehaviour
         else if (ev.EventName == "klack") // Klackackakkc
         {
             beetle.AttackAnimation(Pincer.PINCER_ANIMATION_NAME);
-        } else if (ev.EventName == "injection_half") // Has the serum always been pink?
-        {
-            injectionBg.Image.sprite = injection2;
         }
     }
 
@@ -157,12 +154,12 @@ public class Epilogue_3 : MonoBehaviour
     {
         frog.DestroyDeck(); slime.DestroyDeck(); beetle.DestroyDeck(); ivesSlime.DestroyDeck(); jackieFrog.DestroyDeck(); 
         frog.OutOfCombat(); slime.OutOfCombat(); beetle.OutOfCombat(); ivesSlime.OutOfCombat(); jackieFrog.OutOfCombat();
-        beetleBlue.OutOfCombat(); beetleGreen.OutOfCombat(); beetleBrown.OutOfCombat(); princessFrog.OutOfCombat();
+        beetleBlue.OutOfCombat(); beetleGreen.OutOfCombat(); beetleBrown.OutOfCombat(); princessFrog.OutOfCombat(); princessFrogJackie.OutOfCombat();
+        princessFrogJackie.gameObject.SetActive(false);
         crystals.ForEach(it => it.OutOfCombat()); enemyWorkers.ForEach(it => it.OutOfCombat());
 
         beetleBlue.SetReturnPosition(beetleBlueReturnPos.position); beetleGreen.SetReturnPosition(beetleGreenReturnPos.position);
         beetleBrown.SetReturnPosition(beetleBrownReturnPos.position); princessFrog.SetReturnPosition(princessResetPosition.position);
-
         DefaultSceneBuilder.Construct().PlayersPosition = playerReturnPosition;
     }
 
@@ -301,65 +298,68 @@ public class Epilogue_3 : MonoBehaviour
             ivesFighter.gameObject.SetActive(true);
             ivesFighter.OutOfCombat();
 
-            yield return DialogueBoxV2.Instance.Play(BattleJackieHumanForm); // Jackie: Ives!
+            yield return DialogueBoxV2.Instance.Play(BattleJackieHumanForm);
 
-            new ActivateDynamicCameraEvent().Invoke();
-            (new GetDynamicCamera().Query())!.m_Lens.OrthographicSize = 3.5f;
-            void ResetCamera(GameStateChanged ev)
+            //Ives intercepts Jackie and frees her from the control
             {
-                if (ev.NewState == GameState.FIGHTING)
+                new ActivateDynamicCameraEvent().Invoke();
+                (new GetDynamicCamera().Query())!.m_Lens.OrthographicSize = 3.5f;
+                void ResetCamera(GameStateChanged ev)
                 {
-                    this.UnSubscribe<GameStateChanged>(ResetCamera);
-                    (new GetDynamicCamera().Query())!.m_Lens.OrthographicSize = 3f;
+                    if (ev.NewState == GameState.FIGHTING)
+                    {
+                        this.UnSubscribe<GameStateChanged>(ResetCamera);
+                        (new GetDynamicCamera().Query())!.m_Lens.OrthographicSize = 3f;
+                    }
                 }
+                this.Subscribe<GameStateChanged>(ResetCamera);
+
+                yield return StartCoroutine(ivesFighter.MoveToPosition(ivesRunPosition.position, 0f, 1.3f));
+                StopCoroutine(coroutine);
+
+                ivesAction.Target = jackieFrog;
+                ivesAction.Origin = ivesFighter;
+                ivesAction.Speed = 5;
+                yield return StartCoroutine(CardComparator.Instance.OneSidedAttack(new BattleQueue.ActionWrapper(ivesAction)));
+
+
+                jackieFighter.transform.position = jackieFrog.gameObject.transform.position;
+                jackieFrog.gameObject.SetActive(false);
+                jackieFighter.gameObject.SetActive(true);
+                jackieFighter.SetStaggered(true);
+                jackieFighter.OutOfCombat();
+                enemyWorkers.ForEach(it => it.DestroyDeck());
+                enemyWorkers.ForEach(it => it.gameObject.SetActive(false));
+                yield return new WaitForSeconds(1f);
+                ivesFighter.FaceRight();
+                StartCoroutine(PurpleFlash(0.5f));
+                yield return DialogueBoxV2.Instance.Play(BattleAttack);
+
+                var beetleCoroutine = StartCoroutine(beetleBlue.MoveToPosition(ivesFighter.transform.position, 2f, 3f));
+                ivesAction.Target = beetleBrown;
+                ivesAction.Speed = 3;
+                yield return StartCoroutine(CardComparator.Instance.OneSidedAttack(new BattleQueue.ActionWrapper(ivesAction), autoRoll: true));
+                yield return new WaitForSeconds(0.5f);
+                StopCoroutine(beetleCoroutine);
+                ivesAction.Target = beetleBlue;
+                ivesAction.Speed = 3;
+                var greenCoroutine = StartCoroutine(beetleGreen.MoveToPosition(beetleGreen.transform.position + new Vector3(2, 0, 0), 0f, 3f));
+                yield return StartCoroutine(CardComparator.Instance.OneSidedAttack(new BattleQueue.ActionWrapper(ivesAction), autoRoll: true));
+                yield return new WaitForSeconds(0.5f);
+
+                StopCoroutine(greenCoroutine);
+                beetleAction.Target = ivesFighter;
+                beetleAction.Origin = beetleGreen;
+                beetleAction.Speed = 4;
+                yield return StartCoroutine(CardComparator.Instance.OneSidedAttack(new BattleQueue.ActionWrapper(beetleAction), autoRoll: true));
+                BattleQueue.BattleQueueInstance.ClearBattleQueue();
+                yield return new WaitForSeconds(1f);
+                ivesFighter.DeEmphasize();
+
+                yield return DialogueBoxV2.Instance.Play(BattleIvesStaggeredForm);
+                ivesFighter.SetStaggered(false);
+                jackieFighter.SetStaggered(false);
             }
-            this.Subscribe<GameStateChanged>(ResetCamera);
-
-            yield return StartCoroutine(ivesFighter.MoveToPosition(jackieRunPosition.position, 0f, 1.3f));
-            StopCoroutine(coroutine);
-
-            jackieAction.Target = jackieFrog;
-            jackieAction.Origin = ivesFighter;
-            jackieAction.Speed = 5;
-            yield return StartCoroutine(CardComparator.Instance.OneSidedAttack(new BattleQueue.ActionWrapper(jackieAction)));
-
-
-            jackieFighter.transform.position = jackieFrog.gameObject.transform.position;
-            jackieFrog.gameObject.SetActive(false);
-            jackieFighter.gameObject.SetActive(true);
-            jackieFighter.SetStaggered(true);
-            jackieFighter.OutOfCombat();
-            enemyWorkers.ForEach(it => it.DestroyDeck());
-            enemyWorkers.ForEach(it => it.gameObject.SetActive(false));
-            yield return new WaitForSeconds(1f);
-            ivesFighter.FaceRight();
-            StartCoroutine(PurpleFlash(0.5f));
-            yield return DialogueBoxV2.Instance.Play(BattleAttack);
-
-            var beetleCoroutine = StartCoroutine(beetleBlue.MoveToPosition(ivesFighter.transform.position, 2f, 3f));
-            jackieAction.Target = beetleBrown;
-            jackieAction.Speed = 3;
-            yield return StartCoroutine(CardComparator.Instance.OneSidedAttack(new BattleQueue.ActionWrapper(jackieAction), autoRoll: true));
-            yield return new WaitForSeconds(0.5f);
-            StopCoroutine(beetleCoroutine);
-            jackieAction.Target = beetleBlue;
-            jackieAction.Speed = 3;
-            var greenCoroutine = StartCoroutine(beetleGreen.MoveToPosition(beetleGreen.transform.position + new Vector3(2, 0, 0), 0f, 3f));
-            yield return StartCoroutine(CardComparator.Instance.OneSidedAttack(new BattleQueue.ActionWrapper(jackieAction), autoRoll: true));
-            yield return new WaitForSeconds(0.5f);
-
-            StopCoroutine(greenCoroutine);
-            beetleAction.Target = ivesFighter;
-            beetleAction.Origin = beetleGreen;
-            beetleAction.Speed = 4;
-            yield return StartCoroutine(CardComparator.Instance.OneSidedAttack(new BattleQueue.ActionWrapper(beetleAction), autoRoll: true));
-            BattleQueue.BattleQueueInstance.ClearBattleQueue();
-            yield return new WaitForSeconds(1f);
-            ivesFighter.DeEmphasize();
-
-            yield return DialogueBoxV2.Instance.Play(BattleIvesStaggeredForm);
-            ivesFighter.SetStaggered(false);
-            jackieFighter.SetStaggered(false);
             yield return new WaitForSeconds(0.5f);
             yield return DialogueBoxV2.Instance.Play(BattleHelpOthers);
             yield return new WaitForSeconds(0.5f);
@@ -408,7 +408,7 @@ public class Epilogue_3 : MonoBehaviour
             }
         }
         CombatPrep();
-        CombatManager.Instance.SetEnemiesPassive(new List<EnemyClass>() { frog, slime, beetle, ivesSlime, jackieFrog, toEat, toEat2 }.Concat(enemyWorkers).ToList());
+        CombatManager.Instance.SetEnemiesPassive(new List<EnemyClass>() { frog, slime, beetle, ivesSlime, jackieFrog, toEat, toEat2, princessFrogJackie }.Concat(enemyWorkers).ToList());
         CombatManager.Instance.BeginCombat();
         new BattleIntroEvent(Get<ClashIntro>()).Invoke();
 
@@ -433,8 +433,7 @@ public class Epilogue_3 : MonoBehaviour
         StartCoroutine(ivesFighter.ResetPosition());
         StartCoroutine(jackieFighter.ResetPosition());
         yield return new WaitForSeconds(1f);
-        yield return new WaitForSeconds(1f);
-        yield return black.FadeInDarkScreen(2f);
+        yield return black.FadeInDarkScreen(1f);
         yield return StartCoroutine(afterFightBg.FadeInDarkScreen(1f));
         yield return new WaitForSeconds(1f);
         AudioManager.Instance.FadeInBackgroundTrack(2f, tundraAudio, true);
@@ -449,29 +448,30 @@ public class Epilogue_3 : MonoBehaviour
         });
         ivesFighter.SetStaggered(true);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         yield return DialogueBoxV2.Instance.Play(PostBattleCheckup); 
         yield return injectionBg.FadeInDarkScreen(1f);
         yield return new WaitForSeconds(1f);
         yield return DialogueBoxV2.Instance.Play(PostBattleInjection);
+        injectionBg.Image.sprite = injection2;
+
+        yield return new WaitForSeconds(1f);
 
         StartCoroutine(injectionBg.FadeInLightScreen(1));
         yield return DialogueBoxV2.Instance.Play(PostBattleInjection2);
 
-
         yield return new WaitForSeconds(1f);
         yield return DialogueBoxV2.Instance.Play(PostBattleBlackvein);
         black.SetLightScreen();
+        beetleBlue.DeEmphasize(); // Prevent sprite collision with crystal 
         yield return afterFightBg.FadeInLightScreen(1f);
 
         void TurnIntoPrincessFrog()
         {
             jackieFighter.gameObject.SetActive(false);
             princessFrogJackie.gameObject.SetActive(true);
-            princessFrogJackie.OutOfCombat();
             princessFrogJackie.transform.position = jackieFighter.transform.position;
         }
-
 
         yield return new WaitForSeconds(2f);
         yield return PurpleFlash(0.5f, TurnIntoPrincessFrog);
@@ -483,14 +483,14 @@ public class Epilogue_3 : MonoBehaviour
         
         yield return StartCoroutine(beetleBrown.MoveToPosition(ivesFighter.transform.position, 0.8f, 1f));
         ivesFighter.transform.SetParent(beetleBrown.transform, true);
-        StartCoroutine(beetleBrown.MoveToPosition(ivesFighter.transform.position + new Vector3(-7f, 0f, 0), 0.5f, 2f));
-        StartCoroutine(beetleBlue.MoveToPosition(beetleBlue.transform.position + new Vector3(-7f, 0, 0), 0f, 2.5f));
-        yield return StartCoroutine(beetleGreen.MoveToPosition(beetleGreen.transform.position + new Vector3(-7f, 0, 0), 0f, 3f));
+        StartCoroutine(beetleBrown.MoveToPosition(ivesFighter.transform.position + new Vector3(-9f, 0f, 0), 0.5f, 3f));
+        StartCoroutine(beetleBlue.MoveToPosition(beetleBlue.transform.position + new Vector3(-9f, 0, 0), 0f, 2.5f));
+        yield return StartCoroutine(beetleGreen.MoveToPosition(beetleGreen.transform.position + new Vector3(-9f, 0, 0), 0f, 3f));
         yield return black.FadeInDarkScreen(2f);
         yield return DialogueBoxV2.Instance.Play(PrincessDeckUnlocked);
         yield return new WaitForSeconds(1f);
 
-
+        new BountyInformationEvent(BountyInformation.Get<BountyInformation.PrincessFrogBounty>()).Invoke();
         GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.ContractSelect>().SceneName);
     }
 
@@ -537,37 +537,5 @@ public class Epilogue_3 : MonoBehaviour
                 _ => 0
             };
         };
-    }
-
-    private IEnumerator NoCombatClash(EntityClass e1, EntityClass e2, bool e1GetsHit, SoundID soundEffectName = SoundID.None)
-    {
-        EntityClass origin = e1;
-        EntityClass target = e2;
-        float originRatio = 0.5f;
-        float targetRatio = 1f - originRatio;
-        Vector3 centeredDistance = (origin.myTransform.position * originRatio + targetRatio * target.myTransform.position);
-        float bufferedRadius = 0.25f;
-        float duration = 0.6f;
-
-        float xBuffer = CardComparator.X_BUFFER;
-
-        StartCoroutine(origin?.MoveToPosition(HorizontalProjector(centeredDistance, origin.myTransform.position, xBuffer), bufferedRadius, duration, centeredDistance));
-        yield return StartCoroutine(target?.MoveToPosition(HorizontalProjector(centeredDistance, target.myTransform.position, xBuffer), bufferedRadius, duration, centeredDistance));
-        if (!e1GetsHit)
-        {
-            e1.AttackAnimation(FistCards.FIST_ANIMATION_NAME);
-            if (soundEffectName != SoundID.None) soundEffectName.Play();
-            yield return StartCoroutine(e2.StaggerEntities(e1, e2, 0.3f));
-            e2.RemoveEntityFromCombat();
-            yield return StartCoroutine(e2.Die());
-        }
-    }
-    private Vector3 HorizontalProjector(Vector3 centeredDistance, Vector3 currentPosition, float xBuffer)
-    {
-        Vector3 vectorToCenter = (centeredDistance - currentPosition);
-
-        return vectorToCenter.x > 0 ?
-            currentPosition + vectorToCenter - new Vector3(xBuffer, 0f, 0f) :
-            currentPosition + vectorToCenter + new Vector3(xBuffer, 0f, 0f);
     }
 }

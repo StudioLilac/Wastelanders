@@ -61,8 +61,8 @@ MonoBehaviour:
     events:
     - rid: 314095995325513804
     - rid: 314095995325513805
-  - content: I doubt it, this map was recorded by Master Scout Jay himself on the
-      first expedition out here. He knows best when it comes to picking good landmarks.
+  - content: 'I doubt it, this map was recorded by Master Scout Jay himself on the
+      first expedition out here. '
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -71,6 +71,11 @@ MonoBehaviour:
     - rid: 314095995325513808
     - rid: 314095995325513809
     - rid: 314095995325513810
+  - content: He knows best when it comes to picking good landmarks.
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
   - content: Then perhaps something altered the geography, the meteorite maybe...?
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxId: 0
@@ -101,8 +106,19 @@ MonoBehaviour:
     picture: {fileID: 0}
     events:
     - rid: 314095995325513816
-  - content: <i>Eventually, the convoy comes to a halt.  A lingering sense of unease
-      permeating through the tang of gasoline as the soldiers fan out to pitch camp.</i>
+  - content: We only have a good couple hours before it gets dark out here.
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  - content: '<i>Eventually, the convoy comes to a halt. '
+    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 314095995325513817
+  - content: <i>A lingering sense of unease permeating through the tang of gasoline
+      as the soldiers fan out to pitch camp.</i>
     speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
     sfxId: 0
     picture: {fileID: 0}

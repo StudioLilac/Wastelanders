@@ -28,7 +28,7 @@ MonoBehaviour:
     - rid: 7570221480750350398
     - rid: 7570221480750350399
     - rid: 7570221480750350400
-  - content: 'Ives, if it wern''t for your quick acting, who knows what would''ve
+  - content: 'Ives, if it weren''t  for your quick acting, who knows what would''ve
       happened. '
     speaker: {fileID: 11400000, guid: 17e4d93cc7e3a054e9cf5f1e74be615a, type: 2}
     sfxId: 0

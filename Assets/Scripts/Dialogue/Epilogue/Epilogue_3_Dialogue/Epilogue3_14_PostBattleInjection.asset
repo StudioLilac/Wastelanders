@@ -22,12 +22,7 @@ MonoBehaviour:
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxId: 0
     picture: {fileID: 21300000, guid: f29addafedd7075418d577a938699eee, type: 3}
-    events:
-    - rid: 7570221480750350402
+    events: []
   references:
     version: 2
-    RefIds:
-    - rid: 7570221480750350402
-      type: {class: CustomEvent, ns: DialogueScripts, asm: MainGame}
-      data:
-        EventName: injection_half
+    RefIds: []

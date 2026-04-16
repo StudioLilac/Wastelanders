@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Epilogue3_18_PrincessDeck
   m_EditorClassIdentifier: 
   Entries:
-  - content: '<i>New weapon deck unlocked: RIP Glove Waste Creatures'
+  - content: '<i>New weapon deck unlocked: RIP Glove Waste Creatures.'
     speaker: {fileID: 0}
     sfxId: 0
     picture: {fileID: 0}
     events: []
-  - content: <i>Princess Frog Actions have been unlocked. You can equipt them in
-      deck select.</i>
+  - content: <i>Princess Frog Actions have been unlocked. You can equip them in deck
+      select.</i>
     speaker: {fileID: 0}
     sfxId: 0
     picture: {fileID: 0}
