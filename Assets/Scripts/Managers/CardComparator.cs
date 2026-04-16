@@ -156,14 +156,14 @@ public class CardComparator : MonoBehaviour
         return cardOneGreater;
     }
 
-    public IEnumerator OneSidedAttack(BattleQueue.ActionWrapper actionWrapper)
+    public IEnumerator OneSidedAttack(BattleQueue.ActionWrapper actionWrapper, bool? autoRoll = null)
     {
         ActionClass actionClass = actionWrapper.GetTheOnlyExistingAction();
         new SetCameraCenter(actionClass.Origin).Invoke();
         ActivateInfo(actionClass);
         EnableDice(actionClass.Origin);
         actionClass.ApplyEffect();
-        yield return StartCoroutine(ClashBothEntities(actionClass, actionClass));
+        yield return StartCoroutine(ClashBothEntities(actionClass, actionClass, autoRoll));
         BattleQueue.BattleQueueInstance.RemoveActionWrapperFromQueue(actionWrapper);
         actionClass.RollDice();
         DeactivateInfo(actionClass);
@@ -198,9 +198,8 @@ public class CardComparator : MonoBehaviour
  Then, whoever wins the clash should stagger the opponent backwards. 
   */
     public static readonly float X_BUFFER = 0.8f;
-    private IEnumerator ClashBothEntities(ActionClass card1, ActionClass card2)
+    private IEnumerator ClashBothEntities(ActionClass card1, ActionClass card2, bool? overridedAutoRoll = null)
     {
-        bool oneSidedEnemyAttack = card1 == card2 && !card1.IsPlayedByPlayer();
         EntityClass origin = card1.Origin;
         EntityClass target = card1.Target;
         EmphasizeClashers(origin, target);
@@ -226,8 +225,10 @@ public class CardComparator : MonoBehaviour
                 yield return new WaitUntil(() => Input.GetMouseButtonDown(0) && !PauseMenuV2.IsPaused);
             }
         }
-        
-        if (!autoRoll) {
+
+        bool shouldWaitForInput = (overridedAutoRoll != null) ? !overridedAutoRoll.Value: !autoRoll;
+
+        if (shouldWaitForInput) {
             yield return new WaitUntil(() => Input.GetMouseButtonDown(0) && !PauseMenuV2.IsPaused);
         }
     }

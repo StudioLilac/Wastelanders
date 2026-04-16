@@ -55,7 +55,7 @@ public class BattleQueue : MonoBehaviour
         CombatManager.EnemiesWinEvent -= ClearBattleQueue;
     }
 
-    private void ClearBattleQueue()
+    public void ClearBattleQueue()
     {
         actionQueue.Clear();
     }
@@ -179,6 +179,11 @@ public class BattleQueue : MonoBehaviour
         //Returns the wrapper inserted
         public void Insert(ActionClass actionCard)
         {
+            Debug.Log("Inserting card " + actionCard.GetName() + " with speed " + actionCard.Speed);
+            // Print stack trace:
+            Debug.Log("Stack trace: " + System.Environment.StackTrace);
+
+
             ActionWrapper insertingWrapper = CreateClashingWrapper(actionCard);
             int location = LocationToInsertWrapper(insertingWrapper);
             array.Insert(location, insertingWrapper);

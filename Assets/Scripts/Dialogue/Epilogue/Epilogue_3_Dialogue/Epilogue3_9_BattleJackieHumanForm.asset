@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Epilogue3_9_BattleJackieHumanForm
   m_EditorClassIdentifier: 
   Entries:
-  - content: Shit. Ives!
-    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+  - content: Not on my watch!
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxId: 0
-    picture: {fileID: 0}
+    picture: {fileID: 21300000, guid: c35873cedc48d104e80b8f3f1e1f8078, type: 3}
     events:
     - rid: 6570561780457144387
     - rid: 7570221440618987582
@@ -26,7 +26,7 @@ MonoBehaviour:
     - rid: 6570561780457144387
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     - rid: 7570221440618987582
       type: {class: AutoAdvanceAfter, ns: DialogueScripts, asm: MainGame}
       data:
