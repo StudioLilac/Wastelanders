@@ -6422,7 +6422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6248b8ef00aa4f7997bff9054ab5bac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instaKill: 1
+  instaKill: 0
   black: {fileID: 685827663}
   purpleFlash: {fileID: 20743286}
   car: {fileID: 788154146}
