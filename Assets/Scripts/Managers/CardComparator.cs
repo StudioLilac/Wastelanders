@@ -11,8 +11,7 @@ public class CardComparator : MonoBehaviour
     public static CardComparator Instance { get; private set; }
 #nullable enable
     public static readonly float COMBAT_BUFFER_TIME = 1f;
-    public delegate IEnumerator DeadEntities();
-    private event DeadEntities? PlayEntityDeaths;
+    private List<EntityClass> deadEntities = new List<EntityClass>();
 
     public delegate IEnumerator ClashersAreReadyToRoll();
     public event ClashersAreReadyToRoll? playersAreRollingDiceEvent;
@@ -30,22 +29,12 @@ public class CardComparator : MonoBehaviour
         {
             Destroy(this);
         }
-
-    }
-
-    void Start()
-    {
-        EntityClass.OnEntityDeath += SubscribeEntityDeath;
-    }
-
-    private void OnDestroy()
-    {
-        EntityClass.OnEntityDeath -= SubscribeEntityDeath;
+        this.Subscribe<OnEntityDeath>(ev => SubscribeEntityDeath(ev.Entity));
     }
 
     public void ClearEvents()
     {
-        PlayEntityDeaths = null;
+        playersAreRollingDiceEvent = null;
     }
 
     /*
@@ -128,11 +117,14 @@ public class CardComparator : MonoBehaviour
         }
         
         yield return new WaitForSeconds(COMBAT_BUFFER_TIME);
-        if (PlayEntityDeaths != null)
+
+        foreach (EntityClass entity in deadEntities)
         {
-            yield return StartCoroutine(PlayEntityDeaths());
-            PlayEntityDeaths = null;
+            BattleQueue.BattleQueueInstance.RemoveAllInstancesOfEntity(entity);
+            yield return StartCoroutine(entity.DeathHandler?.Invoke());
         }
+        deadEntities.Clear();
+        
         DeEmphasizeClashers(card1.Origin, card1.Target);
         DisableDice(card1.Origin, card1.Target);
     }
@@ -179,12 +171,13 @@ public class CardComparator : MonoBehaviour
         actionClass.Origin.combatInfo.setDiceColor(Color.green);
         yield return new WaitForSeconds(COMBAT_BUFFER_TIME);
 
-        //Reset the Scene
-        if (PlayEntityDeaths != null)
+        foreach (EntityClass entity in deadEntities)
         {
-            yield return StartCoroutine(PlayEntityDeaths());
-            PlayEntityDeaths = null;
+            BattleQueue.BattleQueueInstance.RemoveAllInstancesOfEntity(entity);
+            yield return StartCoroutine(entity.DeathHandler?.Invoke());
         }
+        deadEntities.Clear();
+        
         DeEmphasizeClashers(actionClass.Origin, actionClass.Target);
         DisableDice(actionClass.Origin);
     }
@@ -276,9 +269,7 @@ public class CardComparator : MonoBehaviour
     }
     private void SubscribeEntityDeath(EntityClass entity)
     {
-        // Used to ensure most updated death handler from entity is capture, instead of the one used upon subscription
-        IEnumerator DeathHandler() => entity.DeathHandler();
-        PlayEntityDeaths += DeathHandler;
+        deadEntities.Add(entity);
     }
 
     private void ActivateInfo(params ActionClass[] cards)
