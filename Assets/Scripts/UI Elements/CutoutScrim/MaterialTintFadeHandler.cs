@@ -13,16 +13,7 @@ public class MaterialTintFadeHandler : FadeHandlerBase
         _scrimMaterial = provider.GetSharedMaterial();
     }
 
-    protected override float CurrentAlpha
-    {
-        get
-        {
-            if (_scrimMaterial != null)
-                return _scrimMaterial.GetColor(_colorPropertyId).a;
-
-            return 0f;
-        }
-    }
+    protected override float CurrentAlpha => _scrimMaterial.GetColor(_colorPropertyId).a;
 
     protected override void SetAlpha(float alpha)
     {

@@ -140,7 +140,7 @@ public class BountySelect : MonoBehaviour
 
     public void OnBackPressed()
     {
-        BountyManager.Instance.ActiveBounty = null;
+        new ClearBounty().Invoke();
         FadeLevelIn(SceneData.Get<SceneData.LevelSelect>().SceneName);
     }
 
