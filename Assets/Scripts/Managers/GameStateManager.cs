@@ -11,7 +11,7 @@ using UnityEngine.SceneManagement;
 public class GameStateManager : PersistentSingleton<GameStateManager>
 {
     public static readonly bool IS_DEVELOPMENT = false;
-    public const bool SEASON_1_ACTIVE = false;
+    public const bool SEASON_1_ACTIVE = true;
     private const float DEV_MODE_PROGRESSION = 999f;
 
     public SceneData PreviousScene { get; private set; } = SceneData.Get<SceneData.MainMenu>();
