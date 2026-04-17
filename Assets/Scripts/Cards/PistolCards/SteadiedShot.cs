@@ -3,15 +3,6 @@ using static StatusEffect;
 
 public class SteadiedShot : PistolCards
 {
-    private CombatManager.GameStateChangedHandler resetBuffHandler;
-    public void OnDestroy()
-    {
-        if (resetBuffHandler != null)
-        {
-            CombatManager.OnGameStateChanged -= resetBuffHandler;
-        }
-    }
-
     // Start is called before the first frame update
     public override void Initialize()
     {
@@ -33,13 +24,12 @@ public class SteadiedShot : PistolCards
     public override void ApplyEffect()
     {
         StatusEffectModifyValueDelegate originalHandler = Origin.SetBuffsOnHitHandler(Accuracy.buffName, (ref int damage) => { });
-        resetBuffHandler = ResetBuffHandler;
-        CombatManager.OnGameStateChanged += ResetBuffHandler;
-        void ResetBuffHandler(GameState gameState)
+        this.Subscribe<GameStateChanged>(ResetBuffHandler);
+        void ResetBuffHandler(GameStateChanged e)
         {
-            if (gameState != GameState.FIGHTING)
+            if (e.NewState != GameState.FIGHTING)
             {
-                CombatManager.OnGameStateChanged -= ResetBuffHandler;
+                this.UnSubscribe<GameStateChanged>(ResetBuffHandler);
                 Origin.SetBuffsOnHitHandler(Accuracy.buffName, originalHandler);
             }
         }

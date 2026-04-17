@@ -10,6 +10,7 @@ namespace Systems.Persistence
 {
     [Serializable] public class GameData : ISaveData {
         public string Name;
+        public int SaveVersion;
         public List<ActionData> actionData;
         public GameStateData gameStateData;
         public PlayerInformation playerInformation;
@@ -20,8 +21,10 @@ namespace Systems.Persistence
     [Serializable]
     public class UserPreferences : ISaveData {
         public string Name;
+        public int SaveVersion;
         public AudioPreferences audioPreferences;
         public ScreenShakePreference screenShakePreference;
+        public bool AutoRollEnabled;
 
         public string SaveName => Name;
     }
@@ -36,30 +39,43 @@ namespace Systems.Persistence
         SerializableGuid Id { get; set; }
         void Bind(TData data);
     }
+#nullable enable
+    public record GetSaveSystemStatus() : IQuery<SaveStatus?>;
 
     // Singleton save load manager that shows up in unity
     public class SaveLoadSystem : PersistentSingleton<SaveLoadSystem>
     {
         private const string SAVE_FILE_NAME = "Wastelanders Save File";
         private const string PREFERENCES_FILE_NAME = "Wastelanders User Preferences File";
-        [SerializeField] private GameData gameData;
-        [SerializeField] private UserPreferences userPreferences;
-        private PlayerDatabase defaultPlayerDatabase;
-        private CardDatabase defaultCardDatabase;
+        [SerializeField] private GameData gameData = null!;
+        [SerializeField] private UserPreferences userPreferences = null!;
+        private PlayerDatabase defaultPlayerDatabase = null!;
+        private CardDatabase defaultCardDatabase = null!;
+        private SaveStatus gameDataStatus = new SaveStatus.Ok();
+        private SaveStatus preferencesStatus = new SaveStatus.Ok();
+        private SaveStatus? Status => (gameDataStatus, preferencesStatus) switch { 
+            (SaveStatus.Error e, _) => e,
+            (_, SaveStatus.Error e) => e, 
+            _ => new SaveStatus.Ok() 
+        };
 
-        IDataService dataService;
+        IDataService dataService = null!;
 
         protected override void Awake()
         {
             base.Awake();
 
             if (invalid) return; // Invalidate this singleton immediately to prevent rest of Awake() from executing
-            
-            if (SteamManager.Initialized) {
+
+            this.Answer<GetSaveSystemStatus, SaveStatus?>(_ => Status);
+
+            if (SteamManager.Initialized)
+            {
                 dataService = new SteamCloudDataService(new JSonSerializer());
                 Debug.Log("[SaveLoadSystem] Using Steam Cloud for saves.");
             }
-            else {
+            else
+            {
                 dataService = new FileDataService(new JSonSerializer());
                 Debug.Log("[SaveLoadSystem] Steam Manager not initialized, using local file for saves.");
             }
@@ -68,24 +84,37 @@ namespace Systems.Persistence
             try
             {
                 LoadGame();
-            } catch (IOException e)
+            }
+            catch (FileNotFoundException e)
             {
                 Debug.Log(e.Message + " Starting a new game.");
                 NewGame();
                 SaveGame();
+            }
+            catch (Exception e) when (e is not NullReferenceException && e is not ArgumentException)
+            {
+                Debug.LogError($"[SaveLoadSystem] Critical failure loading game data: {e}");
+                gameDataStatus = new SaveStatus.Error($"Game Data could not be loaded: {e.Message}");
+                NewGame();
             }
 
             try
             {
                 LoadPreferences();
             }
-            catch (IOException e)
+            catch (FileNotFoundException e)
             {
                 NewUserPreferences();
                 SavePreferences();
                 Debug.Log(e.Message + " Generating a new user preferences file");
             }
-            
+            catch (Exception e) when (e is not NullReferenceException && e is not ArgumentException)
+            {
+                Debug.LogError($"[SaveLoadSystem] Critical failure loading preferences: {e}");
+                preferencesStatus = new SaveStatus.Error($"Preferences could not be loaded: {e.Message}");
+                NewUserPreferences();
+            }
+
             LoadAllInformation();
         }
 
@@ -95,7 +124,7 @@ namespace Systems.Persistence
             LoadGameStateInformation();
             LoadBountyStateInformation();
         }
-        
+
         public void LoadCardEvolutionProgress()
         {
             ActionClass[] actions = FindObjectsByType<ActionClass>(FindObjectsSortMode.None);
@@ -125,7 +154,8 @@ namespace Systems.Persistence
 
         public UserPreferences GetUserPreferences() => userPreferences;
 
-        void Bind<T, TData>(List<TData> datas) where T: MonoBehaviour, IBind<TData> where TData : ISaveable, new() {
+        void Bind<T, TData>(List<TData> datas) where T : MonoBehaviour, IBind<TData> where TData : ISaveable, new()
+        {
             T[] entities = FindObjectsByType<T>(FindObjectsSortMode.None);
 
             foreach (T entity in entities)
@@ -159,6 +189,7 @@ namespace Systems.Persistence
             gameData = new GameData
             {
                 Name = SAVE_FILE_NAME,
+                SaveVersion = Versioning.CURRENT_GAMEDATA_VERSION,
                 gameStateData = new GameStateData(),
                 bountyStateData = new BountyStateData(),
                 actionData = defaultCardDatabase.GetDefaultActionDatas(),
@@ -168,6 +199,12 @@ namespace Systems.Persistence
 
         public void SaveGame()
         {
+            if (gameDataStatus is SaveStatus.Error err)
+            {
+                Debug.LogWarning($"Skipping SaveGame to prevent overwrite. Lock reason: {err.Message}");
+                return;
+            }
+
             Debug.Log($"Saving the game, {gameData.SaveName}");
             dataService.Save(gameData);
         }
@@ -175,28 +212,42 @@ namespace Systems.Persistence
         private void LoadGame()
         {
             Debug.Log($"Loading the game: {SAVE_FILE_NAME}");
-            gameData = dataService.Load<GameData>(SAVE_FILE_NAME);
+            gameData = Versioning.MigrateGameData(dataService.Load<GameData>(SAVE_FILE_NAME));
         }
 
-        private void NewUserPreferences() {
+        private void NewUserPreferences()
+        {
             userPreferences = new UserPreferences
             {
                 Name = PREFERENCES_FILE_NAME,
+                SaveVersion = Versioning.CURRENT_PREFERENCES_VERSION,
                 audioPreferences = new AudioPreferences(),
                 screenShakePreference = new ScreenShakePreference(),
+                AutoRollEnabled = false
             };
         }
-        
-        public void SavePreferences() 
+
+        public void SavePreferences()
         {
+            if (preferencesStatus is SaveStatus.Error err)
+            {
+                Debug.LogWarning($"Skipping SavePreferences to prevent overwrite. Lock reason: {err.Message}");
+                return;
+            }
+
             Debug.Log($"Saving user preferences: {userPreferences.Name}");
             dataService.Save(userPreferences);
         }
-        
-        private void LoadPreferences() 
+
+        private void LoadPreferences()
         {
             Debug.Log($"Loading user preferences: {PREFERENCES_FILE_NAME}");
-            userPreferences = dataService.Load<UserPreferences>(PREFERENCES_FILE_NAME);
+            userPreferences = Versioning.MigratePreferences(dataService.Load<UserPreferences>(PREFERENCES_FILE_NAME));
         }
+    }
+    public abstract record SaveStatus
+    {
+        public sealed record Ok : SaveStatus;
+        public sealed record Error(string Message) : SaveStatus;
     }
 }

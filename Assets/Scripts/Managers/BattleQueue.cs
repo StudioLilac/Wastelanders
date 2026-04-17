@@ -8,6 +8,7 @@ using static BattleQueue;
 
 public record CardInserted(ActionClass ActionClass) : IEvent;
 public record OnQueueChanged(List<ActionWrapper> Items) : IEvent;
+public record DequeueEvent(ActionWrapper Wrapper): IEvent;
 
 public class BattleQueue : MonoBehaviour
 {
@@ -112,6 +113,7 @@ public class BattleQueue : MonoBehaviour
         {
             ActionWrapper actionWrapper = array[0];
             actionWrapper.BattleIcon?.Emphasize();
+            new DequeueEvent(actionWrapper).Invoke();
 
             if (actionWrapper.IsClashing())
             {

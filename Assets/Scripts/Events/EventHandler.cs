@@ -18,7 +18,11 @@ public class EventLifecycleHost : MonoBehaviour
 
     public void AddSubscription<T>(Action<T> handler) where T : IEvent
     {
-        if (activeSubscriptions.ContainsKey(handler)) return;
+        if (activeSubscriptions.ContainsKey(handler))
+        {
+            Debug.LogWarning($"Attempted to add duplicate subscription for event {typeof(T).Name} on {gameObject.name}. Ignoring.");
+            return;
+        }
 
         EventSubscription<T> subscription = new(handler);
 
