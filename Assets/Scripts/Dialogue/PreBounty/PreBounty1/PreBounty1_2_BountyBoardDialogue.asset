@@ -73,7 +73,7 @@ MonoBehaviour:
     events:
     - rid: 314095657258319945
     - rid: 314095657258319966
-  - content: 'Ofcourse, you and Cam are the first ones on the list. '
+  - content: 'Of course, you and Cam are the first ones on the list. '
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxId: 0
     picture: {fileID: 0}

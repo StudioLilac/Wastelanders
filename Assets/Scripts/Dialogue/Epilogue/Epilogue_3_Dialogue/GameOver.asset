@@ -13,10 +13,16 @@ MonoBehaviour:
   m_Name: GameOver
   m_EditorClassIdentifier: 
   Entries:
-  - content: Let's switch up our weapons. We have to bring our people back!
+  - content: 'Let''s fall back and change up our gameplan.  '
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxId: 0
-    picture: {fileID: 21300000, guid: 9c0fa92a7d9ea9547a72fa5d6fdbb220, type: 3}
+    picture: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
+    events: []
+  - content: Maybe more <i>burst</i> focused Actions will help us take down those
+      beetles before they charge up too much resonance.
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    sfxId: 0
+    picture: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
     events: []
   references:
     version: 2

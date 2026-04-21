@@ -69,6 +69,7 @@ public class GameOver : MonoBehaviour
         yield return StartCoroutine(uiFadeScreen.FadeInDarkScreen(1.5f));
         StartCoroutine(FadeCoroutine(true, FADE_IN_TIME));
         DialogueBoxV2.Instance.ChangeDialogueBoxOrder(UISortOrder.GameOverDialogue.GetOrder());
+        yield return new WaitForSeconds(0.5f);
         yield return StartCoroutine(DialogueBoxV2.Instance.Play(dialogue));
         DialogueBoxV2.Instance.ChangeDialogueBoxOrder(UISortOrder.DialogueBox.GetOrder());
     }

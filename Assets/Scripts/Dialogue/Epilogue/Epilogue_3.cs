@@ -414,19 +414,21 @@ public class Epilogue_3 : MonoBehaviour
 
         yield return new WaitUntil(() => new GetGameState().Query() == GameState.GAME_WIN);
         GameStateManager.Instance.UpdateLevelProgress(StageInformation.Get<StageInformation.IvesFinale>());
-        new SetGameState(GameState.OUT_OF_COMBAT).Invoke();
+        new SetGameState(GameState.AFTER_COMBAT).Invoke();
         AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
 
         yield return new WaitForSeconds(3f);
         if (ivesFighter.IsDead)
         {
             ivesFighter.gameObject.SetActive(true);
+            ivesFighter.Revive();
             ivesFighter.OutOfCombat();
         }
 
         if (jackieFighter.IsDead)
         {
             jackieFighter.gameObject.SetActive(true);
+            jackieFighter.Revive();
             jackieFighter.OutOfCombat();
         }
 
@@ -446,17 +448,20 @@ public class Epilogue_3 : MonoBehaviour
             it.OutOfCombat();
             StartCoroutine(it.MoveToPosition(ivesFighter.transform.position, 3f, 1f));
         });
+        ivesFighter.FaceLeft();
         ivesFighter.SetStaggered(true);
 
         yield return new WaitForSeconds(2f);
         yield return DialogueBoxV2.Instance.Play(PostBattleCheckup); 
         yield return injectionBg.FadeInDarkScreen(1f);
         yield return new WaitForSeconds(1f);
+        StartCoroutine(vignette.FadeToAlpha(180f / 255f, 1f));
         yield return DialogueBoxV2.Instance.Play(PostBattleInjection);
         injectionBg.Image.sprite = injection2;
 
         yield return new WaitForSeconds(1f);
 
+        StartCoroutine(vignette.FadeToAlpha(100f / 255f, 1f));
         StartCoroutine(injectionBg.FadeInLightScreen(1));
         yield return DialogueBoxV2.Instance.Play(PostBattleInjection2);
 
