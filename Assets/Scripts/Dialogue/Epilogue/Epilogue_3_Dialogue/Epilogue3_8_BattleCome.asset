@@ -19,6 +19,7 @@ MonoBehaviour:
     picture: {fileID: 0}
     events:
     - rid: 6570561780457144386
+    - rid: 7570221480750350414
   references:
     version: 2
     RefIds:
@@ -26,3 +27,7 @@ MonoBehaviour:
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: f327c12564f666246bc995a7a94e3b9e, type: 2}
+    - rid: 7570221480750350414
+      type: {class: AutoAdvanceAfter, ns: DialogueScripts, asm: MainGame}
+      data:
+        Time: 1

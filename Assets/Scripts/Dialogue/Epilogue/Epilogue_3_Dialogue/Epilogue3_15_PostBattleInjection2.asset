@@ -21,7 +21,6 @@ MonoBehaviour:
     - rid: 6570561780457144461
     - rid: 6570561780457144462
     - rid: 6570561780457144463
-    - rid: 6570561780457144464
     - rid: 6570561780457144465
     - rid: 6570561780457144466
   - content: <i>The needle tumbles in the dirt as it is batted off to the side by
@@ -42,13 +41,7 @@ MonoBehaviour:
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events:
-    - rid: 6570561780457144471
-    - rid: 6570561780457144472
-    - rid: 6570561780457144475
-    - rid: 6570561780457144476
-    - rid: 6570561780457144477
-    - rid: 6570561780457144478
+    events: []
   - content: "What about everyone else\u2019s serum? What colour are they?"
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxId: 0
@@ -56,18 +49,15 @@ MonoBehaviour:
     events:
     - rid: 6570561780457144473
     - rid: 6570561780457144474
-  - content: Mine seems to have turned pink too.
-    speaker: {fileID: 11400000, guid: 4be3841f8f6da4f3ca84917932aa6724, type: 2}
+  - content: Mine seems to have turned pink too, so have many others'.
+    speaker: {fileID: 11400000, guid: 17e4d93cc7e3a054e9cf5f1e74be615a, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
-    - rid: 6570561780457144479
-  - content: "Yeah, same here, though mine\u2019s not as dark. "
-    speaker: {fileID: 11400000, guid: 4be3841f8f6da4f3ca84917932aa6724, type: 2}
-    sfxId: 0
-    picture: {fileID: 0}
-    events:
-    - rid: 6570561780457144479
+    - rid: 7570221480750350406
+    - rid: 7570221480750350407
+    - rid: 7570221480750350408
+    - rid: 7570221480750350413
   - content: Dammit. Ives, are you feeling alright?
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxId: 0
@@ -75,20 +65,22 @@ MonoBehaviour:
     events:
     - rid: 6570561780457144480
     - rid: 6570561780457144481
-  - content: Argh, I feel like... something is about to burst out of my arm.
+  - content: 'Argh, my arm... it''s as if its about to explode. '
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events:
-    - rid: 6570561780457144482
-    - rid: 6570561780457144483
-  - content: 
-    speaker: {fileID: 11400000, guid: 4fef3aeb65460fd498ab9efe9bac8625, type: 2}
+    events: []
+  - content: '<i>A deep indigo bruise blooms where the injection was administered. '
+    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events:
-    - rid: 6570561780457144484
-    - rid: 6570561780457144485
+    events: []
+  - content: '<i>Beneath Ives'' skin, purple streaks branch through her veins like
+      roots. '
+    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
   references:
     version: 2
     RefIds:
@@ -107,24 +99,18 @@ MonoBehaviour:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         action: 40
         duration: 0
-    - rid: 6570561780457144464
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        action: 70
-        duration: 0
     - rid: 6570561780457144465
       type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        action: 10
+        action: 20
         duration: 1
     - rid: 6570561780457144466
       type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         action: 60
-        duration: 1
+        duration: 0
     - rid: 6570561780457144467
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
@@ -138,15 +124,6 @@ MonoBehaviour:
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         sprite: {fileID: 21300000, guid: 70562f64108503147861dbc82d787ef9, type: 3}
-    - rid: 6570561780457144471
-      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    - rid: 6570561780457144472
-      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-        sprite: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
     - rid: 6570561780457144473
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
@@ -156,34 +133,6 @@ MonoBehaviour:
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         sprite: {fileID: 21300000, guid: e37d4fbf07c214c868939546f702fa2b, type: 3}
-    - rid: 6570561780457144475
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-        action: 50
-        duration: 0
-    - rid: 6570561780457144476
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-        action: 70
-        duration: 0
-    - rid: 6570561780457144477
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-        action: 30
-        duration: 1
-    - rid: 6570561780457144478
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-        action: 60
-        duration: 1
-    - rid: 6570561780457144479
-      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 4be3841f8f6da4f3ca84917932aa6724, type: 2}
     - rid: 6570561780457144480
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
@@ -193,24 +142,27 @@ MonoBehaviour:
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         sprite: {fileID: 21300000, guid: df71feced233e4383b3c3903e719e156, type: 3}
-    - rid: 6570561780457144482
-      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
+    - rid: 7570221480750350406
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:
-        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    - rid: 6570561780457144483
-      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+        actor: {fileID: 11400000, guid: 17e4d93cc7e3a054e9cf5f1e74be615a, type: 2}
+        action: 30
+        duration: 0
+    - rid: 7570221480750350407
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:
-        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-        sprite: {fileID: 21300000, guid: 9c0fa92a7d9ea9547a72fa5d6fdbb220, type: 3}
-    - rid: 6570561780457144484
+        actor: {fileID: 11400000, guid: 17e4d93cc7e3a054e9cf5f1e74be615a, type: 2}
+        action: 70
+        duration: 0
+    - rid: 7570221480750350408
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 17e4d93cc7e3a054e9cf5f1e74be615a, type: 2}
+        action: 60
+        duration: 1
+    - rid: 7570221480750350413
       type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        action: 70
-        duration: 1
-    - rid: 6570561780457144485
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-        action: 70
-        duration: 1
+        action: 10
+        duration: 0.5

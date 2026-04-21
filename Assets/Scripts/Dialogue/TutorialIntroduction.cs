@@ -24,7 +24,6 @@ public class TutorialIntroduction : DialogueClasses
     [SerializeField] private List<Transform> groupDummySpawnPos;
     [SerializeField] private Transform jackieEndPosition;
     [SerializeField] private Transform ivesPassiveBattlePosition;
-    [SerializeField] private BattleBeginButton battleBeginButton;
 
 
     [SerializeField] private Sprite laidBackSprite;
@@ -66,6 +65,7 @@ public class TutorialIntroduction : DialogueClasses
     [SerializeField] private DialogueWrapper gameLoseDialogue;
 
     [SerializeField] private bool jumpToCombat;
+    private BattleBeginButton battleBeginButton;
 
     private List<GameObject> trainingDummies = new();
 
@@ -95,6 +95,7 @@ public class TutorialIntroduction : DialogueClasses
 
     private IEnumerator ExecuteGameStart()
     {
+        battleBeginButton = FindFirstObjectByType<BattleBeginButton>()!;
         CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
         CombatManager.Instance.SetDarkScreen();
         yield return new WaitForEndOfFrame();

@@ -9,7 +9,7 @@ public class Barf : FrogAttacks, IPlayablePrincessFrogCard
     {
         base.Initialize();
         lowerBound = 1;
-        upperBound = 7;
+        upperBound = 4;
 
         Speed = 4;
 

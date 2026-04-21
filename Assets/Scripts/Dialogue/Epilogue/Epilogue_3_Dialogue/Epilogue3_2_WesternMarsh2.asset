@@ -21,6 +21,7 @@ MonoBehaviour:
     - rid: 6570561757010722878
     - rid: 6570561757010722881
     - rid: 6570561757010722882
+    - rid: 7570221391745384513
   - content: <i>Shock and murmurs ripple through the faces of the experienced warriors.</i>
     speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
     sfxId: 0
@@ -50,3 +51,7 @@ MonoBehaviour:
         actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
         action: 60
         duration: 1
+    - rid: 7570221391745384513
+      type: {class: CustomEvent, ns: DialogueScripts, asm: MainGame}
+      data:
+        EventName: klack

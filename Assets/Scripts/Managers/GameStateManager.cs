@@ -42,6 +42,7 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
     {
         if (IS_DEVELOPMENT) return;
         CurrentLevelProgress = Mathf.Max(CurrentLevelProgress, level.LevelID);
+        SaveLoadSystem.Instance.SaveGame();
     }
 
     public float CurrentLevelProgress

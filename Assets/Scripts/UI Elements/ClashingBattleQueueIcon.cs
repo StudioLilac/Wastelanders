@@ -19,7 +19,7 @@ public class ClashingBattleQueueIcon : MonoBehaviour, IBattleQueueDisplayable
     private static readonly ClashCalculator Calculator = new();
     private ActionClass leftClashing = null!;
     private ActionClass rightClashing = null!;
-
+    public string Name => leftClashing.GetName();
 
     // Public initializer for this icon
     public void RenderClashingIcons(ActionClass leftClashingItem,  ActionClass rightClashingItem)

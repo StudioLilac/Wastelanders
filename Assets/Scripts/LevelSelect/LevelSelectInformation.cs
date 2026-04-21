@@ -92,7 +92,7 @@ namespace LevelSelectInformation
         public class PrincessFrogFight : StageInformation
         {
             public override string Title => "EX 1. CORONATION";
-            public override string SceneName => SceneData.Get<SceneData.PrincessFrogBounty>().SceneName;
+            public override string SceneName => SceneData.Get<SceneData.PreBounty_1>().SceneName;
             public override float LevelID => 4f;
             public override bool LevelEnabled => GameStateManager.SEASON_1_ACTIVE;
             public override Level? SelectableLevel => Level.PrincessFrogFight;
@@ -129,7 +129,7 @@ namespace LevelSelectInformation
             public override string SceneName => SceneData.Get<SceneData.PrincessFrogBounty>().SceneName;
             public override float LevelID => 6f;
             public override bool LevelEnabled => false;
-            public override bool UnlockCriteriaMet() => LevelID <= GameStateManager.Instance.CurrentLevelProgress && GameStateManager.SEASON_1_ACTIVE;
+            public override bool UnlockCriteriaMet() => LevelID <= GameStateManager.Instance.CurrentLevelProgress && Get<IvesFinale>().UnlockCriteriaMet();
         }
 
         public void UponSelectedEvent() => new StageInformationEvent(SceneName).Invoke();

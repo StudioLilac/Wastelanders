@@ -52,7 +52,7 @@ MonoBehaviour:
   - id: 504
     clip: {fileID: 8300000, guid: c477491c4be3c4aaebf8c16d05b40371, type: 3}
   - id: 505
-    clip: {fileID: 8300000, guid: fb429fed57ca948f0ba8f36e04220bd1, type: 3}
+    clip: {fileID: 8300000, guid: a5c3063e8af8fc144ab35aad893bdaf8, type: 3}
   - id: 506
     clip: {fileID: 8300000, guid: 2e0a92d1b3edc45f28e65bc095b806c1, type: 3}
   - id: 507
