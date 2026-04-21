@@ -16,9 +16,6 @@ public class BountySelectDialogue : MonoBehaviour
 
     IEnumerator Start()
     {
-        var buttonClicked = false;
-        this.Subscribe<BountyOnClickEvent>(_ => buttonClicked = true);
-
         if (true || GameStateManager.Instance.PreviousScene == SceneData.Get<SceneData.Epilogue_3>())
         {
             screenCutoutScrim.SetBlocking(true);
@@ -26,6 +23,8 @@ public class BountySelectDialogue : MonoBehaviour
             yield return DialogueBoxV2.Instance.Play(bountyIntroduction);
 
             { // Show focus on bounty items
+                var buttonClicked = false;
+                this.Subscribe<BountyOnClickEvent>(_ => buttonClicked = true);
                 interactionBlocker.gameObject.SetActive(false);
                 cutoutFadeHandler.SetDarkScreen();
                 screenCutoutScrim.SetTarget(new SpriteTarget(interactionBlocker));

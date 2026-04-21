@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+// This component provides a way to get a shared copied material instance for an Image,
+// allowing multiple consumers to modify the same material instance without modifying the underlying asset.
 public class ImageMaterialProvider : MonoBehaviour
 {
     [SerializeField] private Image img;
