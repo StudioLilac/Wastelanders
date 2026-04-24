@@ -1,0 +1,292 @@
+{
+  "captions": [
+    {
+      "content": "The Princess Frog lets out a final wail as it dissolves into purple sludge. The controlled scouts collapse, unconscious but still alive.",
+      "duration": 0,
+      "speaker": "narration",
+      "signal": ""
+    },
+    {
+      "content": "In the center of the crater, the monstrous, purple form of Ives sways. The cold rushing back as the adrenaline fades.",
+      "duration": 0,
+      "speaker": "narration",
+      "signal": ""
+    },
+    {
+      "content": "She crashes into the snow.",
+      "duration": 3,
+      "speaker": "narration",
+      "signal": "ivescrashes"
+    },
+    {
+      "content": "IVES!",
+      "duration": 2,
+      "speaker": "jackie",
+      "signal": ""
+    },
+    {
+      "content": "Jackie presses her fingers to Ives neck, checking for a pulse.",
+      "duration": 0,
+      "speaker": "narration",
+      "signal": ""
+    },
+    {
+      "content": "...Jackie?",
+      "duration": 2,
+      "speaker": "ives",
+      "signal": ""
+    },
+    {
+      "content": "I'm here! Just... hold on. We have to get you back to Kade.",
+      "duration": 0,
+      "speaker": "jackie",
+      "signal": ""
+    },
+    {
+      "content": "I can't move my legs, kid.",
+      "duration": 0,
+      "speaker": "ives",
+      "signal": ""
+    },
+    {
+      "content": "The world is... spinning.",
+      "duration": 0,
+      "speaker": "ives",
+      "signal": ""
+    },
+    {
+      "content": "I got you. I can carry you back. Just please, please hang on!",
+      "duration": 0,
+      "speaker": "jackie",
+      "signal": ""
+    },
+    {
+      "content": "Hah... ",
+      "duration": 0,
+      "speaker": "ives",
+      "signal": ""
+    },
+    {
+      "content": "...Sorry, kid.",
+      "duration": 0,
+      "speaker": "ives",
+      "signal": ""
+    },
+    {
+      "content": "I can't be making any more promises I can't keep.",
+      "duration": 0,
+      "speaker": "ives",
+      "signal": "jackiesorry"
+    },
+    {
+      "content": "Ives, I'm so sor-",
+      "duration": 0,
+      "speaker": "jackie",
+      "signal": ""
+    },
+    {
+      "content": "Jackie freezes. A familiar feeling rises up her throat, threatening to burst from her chest.",
+      "duration": 0,
+      "speaker": "narration",
+      "signal": ""
+    },
+    {
+      "content": "",
+      "duration": 15,
+      "speaker": "narration",
+      "signal": ""
+    },
+    {
+      "content": "The apology stops burning in her throat.",
+      "duration": 0,
+      "speaker": "narration",
+      "signal": "apologystops"
+    },
+    {
+      "content": "...But how... ",
+      "duration": 0,
+      "speaker": "jackie",
+      "signal": ""
+    },
+    {
+      "content": "The one thing I can promise you… is that I will always be so proud of you. Even if I'm not here.",
+      "duration": 0,
+      "speaker": "ives",
+      "signal": ""
+    },
+    {
+      "content": "Because I know you're constantly changing for the better.",
+      "duration": 0,
+      "speaker": "ives",
+      "signal": ""
+    },
+    {
+      "content": "And because I'm so proud of you right now.",
+      "duration": 0,
+      "speaker": "ives",
+      "signal": ""
+    },
+    {
+      "content": "You found out what happened to your mother, and you defeated that Frog.",
+      "duration": 0,
+      "speaker": "ives",
+      "signal": ""
+    },
+    {
+      "content": "But I never did that alone... Cam... You were with me. Without you... what am I going to...",
+      "duration": 0,
+      "speaker": "jackie",
+      "signal": ""
+    },
+    {
+      "content": "There will always be more people like me. But you'll never find them, if you don't open your heart… and let them in.",
+      "duration": 0,
+      "speaker": "ives",
+      "signal": ""
+    },
+    {
+      "content": "I'll try… I… wish I saw it sooner. What you all were doing for me. So I could do the same for you.",
+      "duration": 0,
+      "speaker": "jackie",
+      "signal": ""
+    },
+    {
+      "content": "...",
+      "duration": 0,
+      "speaker": "ives",
+      "signal": ""
+    },
+    {
+      "content": "I get it... you feel like a fraud... Like you're never doing enough for the people around you.",
+      "duration": 0,
+      "speaker": "ives",
+      "signal": ""
+    },
+    {
+      "content": "You wonder why you get so much, when you can offer so little.",
+      "duration": 0,
+      "speaker": "ives",
+      "signal": ""
+    },
+    {
+      "content": "You may not feel like you've done a lot for me, but that's where you're wrong.",
+      "duration": 0,
+      "speaker": "ives",
+      "signal": ""
+    },
+    {
+      "content": "Raising you was the best thing that ever happened to me.",
+      "duration": 0,
+      "speaker": "ives",
+      "signal": ""
+    },
+    {
+      "content": "You could never be a burden, kid.",
+      "duration": 0,
+      "speaker": "ives",
+      "signal": ""
+    },
+    {
+      "content": "When Ailin left me behind, I thought it was because I wasn't enough of a soldier.",
+      "duration": 0,
+      "speaker": "ives",
+      "signal": ""
+    },
+    {
+      "content": "But I realized that... she didn't need a soldier. She needed... a friend, for me and for you to have a family.",
+      "duration": 0,
+      "speaker": "ives",
+      "signal": ""
+    },
+    {
+      "content": "You gave me purpose, kid. You made me realize... you don't have to save the world to be enough for someone. Sometimes you just have to be there.",
+      "duration": 0,
+      "speaker": "ives",
+      "signal": ""
+    },
+    {
+      "content": "And you were always there for me.",
+      "duration": 0,
+      "speaker": "ives",
+      "signal": ""
+    },
+    {
+      "content": "...",
+      "duration": 0,
+      "speaker": "ives",
+      "signal": ""
+    },
+    {
+      "content": "You can't ever know what being enough is for someone else. So all you can do is be there for them...",
+      "duration": 0,
+      "speaker": "ives",
+      "signal": ""
+    },
+    {
+      "content": "Can you promise me that?",
+      "duration": 0,
+      "speaker": "ives",
+      "signal": ""
+    },
+    {
+      "content": "I... will... I will always be there for you.",
+      "duration": 0,
+      "speaker": "jackie",
+      "signal": ""
+    },
+    {
+      "content": "Good...",
+      "duration": 0,
+      "speaker": "ives",
+      "signal": ""
+    },
+    {
+      "content": "That's good...",
+      "duration": 0,
+      "speaker": "ives",
+      "signal": ""
+    },
+    {
+      "content": "Tell Cam that too...",
+      "duration": 0,
+      "speaker": "ives",
+      "signal": ""
+    },
+    {
+      "content": "Ives lets out a long, slow breath. Her eyes close and the movement of her chest slows.",
+      "duration": 0,
+      "speaker": "narration",
+      "signal": "ivespassesout"
+    },
+    {
+      "content": "Jackie sits in the snow.",
+      "duration": 0,
+      "speaker": "narration",
+      "signal": ""
+    },
+    {
+      "content": "She wipes her eyes.",
+      "duration": 0,
+      "speaker": "narration",
+      "signal": ""
+    },
+    {
+      "content": "...I'm here.",
+      "duration": 0,
+      "speaker": "jackie",
+      "signal": ""
+    },
+    {
+      "content": "She stands up, taking Ives' arm, and puts it around her shoulder.",
+      "duration": 0,
+      "speaker": "narration",
+      "signal": ""
+    },
+    {
+      "content": "And begins the long trek back towards the firelight.",
+      "duration": 0,
+      "speaker": "narration",
+      "signal": "end"
+    }
+  ]
+}
