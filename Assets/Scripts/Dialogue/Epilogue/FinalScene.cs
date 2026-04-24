@@ -44,8 +44,6 @@ namespace Dialogue.Epilogue {
         [SerializeField] private ParticleSystem clouds;
         
         [SerializeField] private TextMeshProUGUI captionTextMesh;
-        [SerializeField] private TextMeshProUGUI jackieTextMesh;
-        [SerializeField] private TextMeshProUGUI ivesTextMesh;
         
         [Header ("Sound")]
         [SerializeField] public EventReference blizzardOneShot;
@@ -68,8 +66,6 @@ namespace Dialogue.Epilogue {
             
             UIFadeScreenManager.Instance.SetDarkScreen();
             captionTextMesh.alpha = 0;
-            jackieTextMesh.alpha = 0;
-            ivesTextMesh.alpha = 0;
             whiteOverlay.color = new Color(1, 1, 1, 0);
             mainCamera = Camera.main;
             moonCamera.enabled = false;
@@ -113,10 +109,11 @@ namespace Dialogue.Epilogue {
             
             
             foreach (CaptionNarration narration in narrations) {
-                TextMeshProUGUI activeText = GetSpeakerTextMesh(narration.speaker);
-                activeText.text = (narration.speaker != "Narration" ? narration.speaker + ": " : "") + narration.content;
+                captionTextMesh.text = (narration.speaker != "Narration" ? narration.speaker + ": " : "") + narration.content;
+                
+                HandleCaptionTextMeshColor(narration.speaker);
 
-                yield return StartCoroutine(FadeText(activeText, 1f, 1f));
+                yield return StartCoroutine(FadeText(captionTextMesh, 1f, 1f));
                 
                 HandleSignal(narration.signal);
 
@@ -124,12 +121,22 @@ namespace Dialogue.Epilogue {
                     yield return new WaitForSeconds(narration.manualDuration);
                 } else {
                     int wordCount = narration.content
-                        .Split((char[])null, System.StringSplitOptions.RemoveEmptyEntries)
+                        .Split((char[])null, StringSplitOptions.RemoveEmptyEntries)
                         .Length;
                     yield return new WaitForSeconds(wordCount / timeScale);
                 }
                 
-                yield return StartCoroutine(FadeText(activeText, 0f, 0.5f));
+                yield return StartCoroutine(FadeText(captionTextMesh, 0f, 0.5f));
+            }
+        }
+
+        void HandleCaptionTextMeshColor(string speaker)
+        {
+            switch (speaker)
+            {
+                case "Narration": captionTextMesh.color = new Color(1, 1, 1, 1); break;
+                case "Jackie": captionTextMesh.color = new Color(0f, 0.8f, 1, 1); break;
+                case "Ives": captionTextMesh.color = new Color(1, 0.3f, 0.1f, 1); break;
             }
         }
 
@@ -276,15 +283,7 @@ namespace Dialogue.Epilogue {
         }
         
         private TextMeshProUGUI GetSpeakerTextMesh(String speaker) {
-            switch (speaker) {
-                case "Jackie":
-                    return jackieTextMesh;
-                case "Ives":
-                    return ivesTextMesh;
-                case "Narration":
-                default:
-                    return captionTextMesh;
-            }
+            return captionTextMesh;
         }
 
         private IEnumerator FlashText(
