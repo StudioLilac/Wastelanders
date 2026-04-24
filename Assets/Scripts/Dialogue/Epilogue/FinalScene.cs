@@ -9,30 +9,31 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace Dialogue.Epilogue {
-    enum CaptionType {
-        Narration,
-        Jackie,
-        Ives
-    }
-    
     public class FinalScene : MonoBehaviour {
+        [SerializeField] private TextAsset dialogueJson;
+        
         [Serializable]
         private class CaptionNarration {
-            [SerializeField] [TextArea(1, 5)] public string content;
+            [TextArea(1, 5)] public string content;
             
             // leave this as 0 to use the default timing.
-            [SerializeField] public int manualDuration = 0;
+            public int manualDuration = 0;
             
-            [SerializeField] public CaptionType speaker = CaptionType.Narration;
+            public String speaker = "Narration";
             
             // use this to trigger events
-            [SerializeField] public string signal;
+            public string signal;
+        }
+
+        [Serializable]
+        private class CaptionNarrationList {
+            public List<CaptionNarration> captions;
         }
 
         private Camera mainCamera;
         [SerializeField] private float timeScale = 5f;
         
-        [SerializeField] private List<CaptionNarration> narrations;
+        private List<CaptionNarration> narrations;
         
         [SerializeField] private Image whiteOverlay;
         [SerializeField] private POVBlizzard povBlizzard;
@@ -60,7 +61,8 @@ namespace Dialogue.Epilogue {
         private EventInstance blizzardInstance;
         
         private void Start() {
-            int n = narrations.Count;
+            LoadDialogueFromJson();
+            
             UIFadeScreenManager.Instance.SetDarkScreen();
             captionTextMesh.alpha = 0;
             jackieTextMesh.alpha = 0;
@@ -85,6 +87,11 @@ namespace Dialogue.Epilogue {
             blizzardInstance.start();
             
             StartCoroutine(PlayScene());
+        }
+
+        private void LoadDialogueFromJson()
+        {
+            narrations = JsonUtility.FromJson<CaptionNarrationList>(dialogueJson.text).captions;   
         }
 
         private IEnumerator PlayScene() {
@@ -250,13 +257,13 @@ namespace Dialogue.Epilogue {
             mainCamera.fieldOfView = targetPos;
         }
         
-        private TextMeshProUGUI GetSpeakerTextMesh(CaptionType speaker) {
+        private TextMeshProUGUI GetSpeakerTextMesh(String speaker) {
             switch (speaker) {
-                case CaptionType.Jackie:
+                case "Jackie":
                     return jackieTextMesh;
-                case CaptionType.Ives:
+                case "Ives":
                     return ivesTextMesh;
-                case CaptionType.Narration:
+                case "Narration":
                 default:
                     return captionTextMesh;
             }
