@@ -114,7 +114,7 @@ namespace Dialogue.Epilogue {
             
             foreach (CaptionNarration narration in narrations) {
                 TextMeshProUGUI activeText = GetSpeakerTextMesh(narration.speaker);
-                activeText.text = narration.content;
+                activeText.text = (narration.speaker != "Narration" ? narration.speaker + ": " : "") + narration.content;
 
                 yield return StartCoroutine(FadeText(activeText, 1f, 1f));
                 
@@ -145,8 +145,8 @@ namespace Dialogue.Epilogue {
                     StartCoroutine(PlayYouKilledHerSequence());
                     break;
                 case "apologystops":
-                    StartCoroutine(MoveCamera(moonCamera, new Vector2(-0.85f, -1.35f), 30f));
-                    StartCoroutine(ZoomCamera(moonCamera, 1.6f, 30f));
+                    StartCoroutine(MoveCamera(moonCamera, new Vector2(-0.85f, -1.35f), 60f));
+                    StartCoroutine(ZoomCamera(moonCamera, 1.6f, 60f));
                     break;
                 case "end":
                     StartCoroutine(FadeImageAlpha(
