@@ -11,6 +11,9 @@ using UnityEngine.UI;
 namespace Dialogue.Epilogue {
     public class FinalScene : MonoBehaviour {
         [SerializeField] private TextAsset dialogueJson;
+
+        [SerializeField] private Camera moonCamera;
+        [SerializeField] private GameObject effectsParent;
         
         [Serializable]
         private class CaptionNarration {
@@ -69,6 +72,7 @@ namespace Dialogue.Epilogue {
             ivesTextMesh.alpha = 0;
             whiteOverlay.color = new Color(1, 1, 1, 0);
             mainCamera = Camera.main;
+            moonCamera.enabled = false;
 
             itsYourFaultText.alpha = 0;
             youDidThisToHerText.alpha = 0;
@@ -104,7 +108,7 @@ namespace Dialogue.Epilogue {
             // now the scene starts, with the music synced up
             
             
-            StartCoroutine(MoveCamera(new Vector2(0, -2), 3f));
+            StartCoroutine(MoveCamera(mainCamera, new Vector2(0, -2), 3f));
             yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(2f));
             
             
@@ -132,25 +136,17 @@ namespace Dialogue.Epilogue {
         private void HandleSignal(string signal) {
             switch (signal) {
                 case "ivescrashes":
-                    StartCoroutine(MoveCamera(new Vector2(0, -1), 2f));
-                    StartCoroutine(ZoomCamera(-10, 2f));
+                    StartCoroutine(MoveCamera(mainCamera, new Vector2(0, -1), 2f));
+                    StartCoroutine(ZoomCamera(mainCamera, -10, 2f));
                     break;
                 case "jackiesorry":
-                    StartCoroutine(MoveCamera(new Vector2(0, 2), 9f));
-                    StartCoroutine(ZoomCamera(10, 6f));
+                    StartCoroutine(MoveCamera(mainCamera, new Vector2(0, 2), 9f));
+                    StartCoroutine(ZoomCamera(mainCamera, 10, 6f));
                     StartCoroutine(PlayYouKilledHerSequence());
                     break;
                 case "apologystops":
-                    StartCoroutine(MoveCamera(new Vector2(0, -1.5f), 3f));
-                    fogVolume2D.SetIntensity(24);
-                    var emission = clouds.emission;
-                    emission.rateOverTime = emission.rateOverTime.constant + 10f;
-                    break;
-                case "ivespassesout":
-                    StartCoroutine(MoveCamera(new Vector2(0, 2f), 12f));
-                    fogVolume2D.SetIntensity(30);
-                    emission = clouds.emission;
-                    emission.rateOverTime = emission.rateOverTime.constant + 10f;
+                    StartCoroutine(MoveCamera(moonCamera, new Vector2(-0.85f, -1.35f), 30f));
+                    StartCoroutine(ZoomCamera(moonCamera, 1.6f, 30f));
                     break;
                 case "end":
                     StartCoroutine(FadeImageAlpha(
@@ -191,6 +187,10 @@ namespace Dialogue.Epilogue {
             yield return new WaitForSeconds(2f);
             yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInDarkScreen(2f));
             jayFlashback.color = new Color(0,0,0,0);
+
+            mainCamera.enabled = false;
+            moonCamera.enabled = true;
+            DisableSnowEffects();
             
             // quickly, now back to the real world.
             StartCoroutine(FadeFMODVolume(blizzardInstance, 0f, 1f, 0.5f));
@@ -216,9 +216,9 @@ namespace Dialogue.Epilogue {
         }
 
 
-        private IEnumerator MoveCamera(Vector2 deltaPosition, float duration)
+        private IEnumerator MoveCamera(Camera camera, Vector2 deltaPosition, float duration)
         {
-            Vector3 startPos = mainCamera.transform.position;
+            Vector3 startPos = camera.transform.position;
             Vector3 targetPos = startPos + new Vector3(deltaPosition.x, deltaPosition.y, 0f);
 
             float elapsed = 0f;
@@ -230,15 +230,25 @@ namespace Dialogue.Epilogue {
 
                 float easedT = t * t * (3f - 2f * t);
 
-                mainCamera.transform.position = Vector3.Lerp(startPos, targetPos, easedT);
+                camera.transform.position = Vector3.Lerp(startPos, targetPos, easedT);
                 yield return null;
             }
 
-            mainCamera.transform.position = targetPos;
+            camera.transform.position = targetPos;
         }
         
-        private IEnumerator ZoomCamera(float deltaFov, float duration) {
-            float startPos = mainCamera.fieldOfView;
+        private IEnumerator ZoomCamera(Camera camera, float deltaFov, float duration)
+        {
+            float startPos;
+            if (camera.orthographic)
+            {
+                startPos = camera.orthographicSize;
+            }
+            else
+            {
+                startPos = camera.fieldOfView;
+            }
+            
             float targetPos = startPos + deltaFov;
 
             float elapsed = 0f;
@@ -250,11 +260,19 @@ namespace Dialogue.Epilogue {
 
                 float easedT = t * t * (3f - 2f * t);
 
-                mainCamera.fieldOfView = Mathf.Lerp(startPos, targetPos, easedT);
+                if (camera.orthographic)
+                {
+                    camera.orthographicSize = Mathf.Lerp(startPos, targetPos, easedT);
+                }
+                else
+                {
+                    camera.fieldOfView = Mathf.Lerp(startPos, targetPos, easedT);
+                }
                 yield return null;
             }
 
-            mainCamera.fieldOfView = targetPos;
+            camera.orthographicSize = targetPos;
+            camera.fieldOfView = targetPos;
         }
         
         private TextMeshProUGUI GetSpeakerTextMesh(String speaker) {
@@ -476,6 +494,11 @@ namespace Dialogue.Epilogue {
 
             color.a = targetAlpha;
             image.color = color;
+        }
+
+        private void DisableSnowEffects()
+        {
+            effectsParent.SetActive(false);
         }
 
     }
