@@ -60,6 +60,11 @@ public class PopUpNotificationManager : MonoBehaviour
             out Vector2 localPoint
         );
 
+        var a = 0.5f * ((RectTransform)canvas.transform).rect.size;
+        var b = 0.5f * notification.Measure(message);
+        localPoint.x = Mathf.Clamp(localPoint.x, b.x - a.x, a.x - b.x);
+        localPoint.y = Mathf.Clamp(localPoint.y, b.y - a.y, a.y - b.y);
+
         notification.Initialize(localPoint, message);
     }
 
