@@ -148,11 +148,11 @@ namespace Dialogue.Epilogue {
         private void HandleSignal(string signal) {
             switch (signal) {
                 case "ivescrashes":
-                    StartCoroutine(MoveCamera(mainCamera, new Vector2(0, -1), 2f));
+                    StartCoroutine(MoveCamera(mainCamera, new Vector2(0, -1.5f), 2f));
                     StartCoroutine(ZoomCamera(mainCamera, -10, 2f));
                     break;
                 case "jackiesorry":
-                    StartCoroutine(MoveCamera(mainCamera, new Vector2(0, 2), 9f));
+                    StartCoroutine(MoveCamera(mainCamera, new Vector2(0, 3.5f), 9f));
                     StartCoroutine(ZoomCamera(mainCamera, 10, 6f));
                     StartCoroutine(PlayFlashbackSequence());
                     break;
