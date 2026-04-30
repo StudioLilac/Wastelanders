@@ -221,7 +221,7 @@ namespace Dialogue.Epilogue {
 
             while (time < duration)
             {
-                time += Time.unscaledDeltaTime;
+                time += Time.deltaTime;
                 textMesh.alpha = Mathf.Lerp(startAlpha, targetAlpha, time / duration);
                 yield return null;
             }
@@ -362,7 +362,7 @@ namespace Dialogue.Epilogue {
             // ---------- Phase A: normal floating ----------
             while (elapsed < floatDuration)
             {
-                elapsed += Time.unscaledDeltaTime;
+                elapsed += Time.deltaTime;
 
                 UpdateFloatingMotion(
                     textMesh,
@@ -388,7 +388,7 @@ namespace Dialogue.Epilogue {
 
             while (fadeElapsed < fadeOutDuration)
             {
-                fadeElapsed += Time.unscaledDeltaTime;
+                fadeElapsed += Time.deltaTime;
                 float fadeT = Mathf.Clamp01(fadeElapsed / fadeOutDuration);
 
                 UpdateFloatingMotion(
