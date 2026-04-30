@@ -48,13 +48,6 @@ namespace Dialogue.Epilogue {
         [Header ("Sound")]
         [SerializeField] public EventReference blizzardOneShot;
 
-        [Header("You killed her")] 
-        [SerializeField] private float jitterAmount;
-        [SerializeField] private GameObject youKilledHerObj;
-        [SerializeField] private TextMeshProUGUI itsYourFaultText;
-        [SerializeField] private TextMeshProUGUI youDidThisToHerText;
-        [SerializeField] private TextMeshProUGUI youKilledHerText;
-        
         [Header("Flashback")]
         [SerializeField] private Image camFlashback;
         [SerializeField] private Image jayFlashback;
@@ -70,10 +63,6 @@ namespace Dialogue.Epilogue {
             captionTextMesh.alpha = 0;
             mainCamera = Camera.main;
             moonCamera.enabled = false;
-
-            itsYourFaultText.alpha = 0;
-            youDidThisToHerText.alpha = 0;
-            youKilledHerText.alpha = 0;
             
             camFlashback.color = new Color(0, 0, 0, 0);
             jayFlashback.color = new Color(0, 0, 0, 0);
