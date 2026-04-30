@@ -6,6 +6,7 @@ using FMODUnity;
 using Particles;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Dialogue.Epilogue {
@@ -20,7 +21,7 @@ namespace Dialogue.Epilogue {
             [TextArea(1, 5)] public string content;
             
             // leave this as 0 to use the default timing.
-            public int manualDuration = 0;
+            public int duration = 0;
             
             public String speaker = "Narration";
             
@@ -117,8 +118,8 @@ namespace Dialogue.Epilogue {
                 
                 HandleSignal(narration.signal);
 
-                if (narration.manualDuration != 0) {
-                    yield return new WaitForSeconds(narration.manualDuration);
+                if (narration.duration != 0) {
+                    yield return new WaitForSeconds(narration.duration);
                 } else {
                     int wordCount = narration.content
                         .Split((char[])null, StringSplitOptions.RemoveEmptyEntries)
@@ -191,7 +192,7 @@ namespace Dialogue.Epilogue {
             DisableSnowEffects();
             
             // quickly, now back to the real world.
-            StartCoroutine(FadeFMODVolume(blizzardInstance, 0f, 1f, 0.5f));
+            StartCoroutine(FadeFMODVolume(blizzardInstance, 0f, 0.5f, 0.5f));
             yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(0.5f));
         }
         
