@@ -58,6 +58,8 @@ namespace Dialogue.Epilogue {
         [Header("Flashback")]
         [SerializeField] private Image camFlashback;
         [SerializeField] private Image jayFlashback;
+
+        [SerializeField] private Animator cinematicBarsAnimator;
         
         private EventInstance blizzardInstance;
         
@@ -128,6 +130,11 @@ namespace Dialogue.Epilogue {
                 
                 yield return StartCoroutine(FadeText(captionTextMesh, 0f, 0.5f));
             }
+            
+            // Narration is finished, remove the black bars
+            yield return new WaitForSeconds(0.5f);
+            cinematicBarsAnimator.SetTrigger("RemoveBars");
+            
         }
 
         void HandleCaptionTextMeshColor(string speaker)
