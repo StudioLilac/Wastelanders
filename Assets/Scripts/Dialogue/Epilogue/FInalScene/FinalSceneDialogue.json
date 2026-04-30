@@ -76,12 +76,6 @@
       "content": "I can't be making any more promises I can't keep.",
       "duration": 0,
       "speaker": "Ives",
-      "signal": "jackiesorry"
-    },
-    {
-      "content": "Ives, I'm so sor-",
-      "duration": 0,
-      "speaker": "Jackie",
       "signal": ""
     },
     {
@@ -91,8 +85,32 @@
       "signal": ""
     },
     {
+      "content": "It tells her in her own voice:",
+      "duration": 0,
+      "speaker": "Narration",
+      "signal": ""
+    },
+    {
+      "content": "She's hurt and it's all your fault. You're killing her.",
+      "duration": 0,
+      "speaker": "Narration",
+      "signal": ""
+    },
+    {
+      "content": "Ives, I'm so sor-",
+      "duration": 0,
+      "speaker": "Jackie",
+      "signal": ""
+    },
+    {
+      "content": "But then Jackie catches herself. She hears Cam's voice.",
+      "duration": 0,
+      "speaker": "Narration",
+      "signal": "jackiesorry"
+    },
+    {
       "content": "",
-      "duration": 20,
+      "duration": 30,
       "speaker": "Narration",
       "signal": ""
     },
