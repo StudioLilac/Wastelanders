@@ -132,6 +132,8 @@ namespace Dialogue.Epilogue {
                 case "Narration": captionTextMesh.color = new Color(1, 1, 1, 1); break;
                 case "Jackie": captionTextMesh.color = new Color(0f, 0.8f, 1, 1); break;
                 case "Ives": captionTextMesh.color = new Color(1, 0.3f, 0.1f, 1); break;
+                case "Cam": captionTextMesh.color = new Color(1, 0.8f, 0f, 1); break;
+                case "Jay": captionTextMesh.color = new Color(0.7f, 0f, 0.9f, 1); break;
             }
         }
 
@@ -144,7 +146,12 @@ namespace Dialogue.Epilogue {
                 case "jackiesorry":
                     StartCoroutine(MoveCamera(mainCamera, new Vector2(0, 3.5f), 9f));
                     StartCoroutine(ZoomCamera(mainCamera, 10, 6f));
-                    StartCoroutine(PlayFlashbackSequence());
+                    break;
+                case "camfb":
+                    StartCoroutine(PlayCamFlashbackSequence());
+                    break;
+                case "jayfb":
+                    StartCoroutine(PlayJayFlashbackSequence());
                     break;
                 case "apologystops":
                     StartCoroutine(MoveCamera(moonCamera, new Vector2(-0.85f, -1.35f), 60f));
@@ -158,9 +165,7 @@ namespace Dialogue.Epilogue {
             }
         }
 
-        private IEnumerator PlayFlashbackSequence() {
-            yield return new WaitForSeconds(1.5f);
-            
+        private IEnumerator PlayCamFlashbackSequence() {
             StartCoroutine(FadeFMODVolume(blizzardInstance, 1f, 0f, 2f));
             yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInDarkScreen(2f));
             
@@ -170,6 +175,10 @@ namespace Dialogue.Epilogue {
             yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInDarkScreen(2f));
             
             camFlashback.color = new Color(0,0,0,0);
+        }
+
+        private IEnumerator PlayJayFlashbackSequence()
+        {
             jayFlashback.color = new Color(1, 1, 1, 1);
             yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(1f));
             yield return new WaitForSeconds(2f);

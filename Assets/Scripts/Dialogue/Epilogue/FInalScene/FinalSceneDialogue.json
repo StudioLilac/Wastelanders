@@ -110,7 +110,31 @@
     },
     {
       "content": "",
-      "duration": 12,
+      "duration": 1,
+      "speaker": "Narration",
+      "signal": "camfb"
+    },
+    {
+      "content": "We do this together, even when we're apart. Got it?",
+      "duration": 6,
+      "speaker": "Cam",
+      "signal": ""
+    },
+    {
+      "content": "Then Jay's.",
+      "duration": 0,
+      "speaker": "Narration",
+      "signal": "jayfb"
+    },
+    {
+      "content": "No, really. It's too bad, haha. You don't get to make that decision for them, Jackie.",
+      "duration": 6,
+      "speaker": "Jay",
+      "signal": ""
+    },
+    {
+      "content": "",
+      "duration": 1,
       "speaker": "Narration",
       "signal": ""
     },
