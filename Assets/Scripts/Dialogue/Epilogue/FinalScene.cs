@@ -16,6 +16,8 @@ namespace Dialogue.Epilogue {
         [SerializeField] private Camera moonCamera;
         [SerializeField] private GameObject effectsParent;
         
+        [SerializeField] private UIFadeHandler uiFadeHandler;
+        
         [Serializable]
         private class CaptionNarration {
             [TextArea(1, 5)] public string content;
@@ -63,6 +65,8 @@ namespace Dialogue.Epilogue {
             captionTextMesh.alpha = 0;
             mainCamera = Camera.main;
             moonCamera.enabled = false;
+            
+            uiFadeHandler.SetLightScreen();
             
             camFlashback.color = new Color(0, 0, 0, 0);
             jayFlashback.color = new Color(0, 0, 0, 0);
@@ -150,8 +154,14 @@ namespace Dialogue.Epilogue {
                 case "camfb":
                     StartCoroutine(PlayCamFlashbackSequence());
                     break;
+                case "endcamfb":
+                    StartCoroutine(EndCamFlashbackSequence());
+                    break;
                 case "jayfb":
                     StartCoroutine(PlayJayFlashbackSequence());
+                    break;
+                case "endjayfb":
+                    StartCoroutine(EndJayFlashbackSequence());
                     break;
                 case "apologystops":
                     StartCoroutine(MoveCamera(moonCamera, new Vector2(-0.85f, -1.35f), 60f));
@@ -167,31 +177,36 @@ namespace Dialogue.Epilogue {
 
         private IEnumerator PlayCamFlashbackSequence() {
             StartCoroutine(FadeFMODVolume(blizzardInstance, 1f, 0f, 2f));
-            yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInDarkScreen(2f));
+            yield return StartCoroutine(uiFadeHandler.FadeInDarkScreen(2f));
             
             camFlashback.color = new Color(1, 1, 1, 1);
-            yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(1f));
-            yield return new WaitForSeconds(2f);
-            yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInDarkScreen(2f));
-            
+            yield return StartCoroutine(uiFadeHandler.FadeInLightScreen(1f));
+        }
+
+        private IEnumerator EndCamFlashbackSequence()
+        {
+            yield return StartCoroutine(uiFadeHandler.FadeInDarkScreen(1f));
             camFlashback.color = new Color(0,0,0,0);
         }
 
         private IEnumerator PlayJayFlashbackSequence()
         {
             jayFlashback.color = new Color(1, 1, 1, 1);
-            yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(1f));
-            yield return new WaitForSeconds(2f);
-            yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInDarkScreen(2f));
+            yield return StartCoroutine(uiFadeHandler.FadeInLightScreen(1f));
+        }
+
+        private IEnumerator EndJayFlashbackSequence()
+        {
+            yield return StartCoroutine(uiFadeHandler.FadeInDarkScreen(1f));
             jayFlashback.color = new Color(0,0,0,0);
 
             mainCamera.enabled = false;
             moonCamera.enabled = true;
             DisableSnowEffects();
             
-            // quickly, now back to the real world.
+            // moon scene time
             StartCoroutine(FadeFMODVolume(blizzardInstance, 0f, 0.5f, 0.5f));
-            yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(0.5f));
+            yield return StartCoroutine(uiFadeHandler.FadeInLightScreen(0.5f));
         }
         
         private IEnumerator FadeText(TextMeshProUGUI textMesh, float targetAlpha, float duration)
