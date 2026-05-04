@@ -164,6 +164,11 @@ namespace UI_Toolkit
             }
         }
 
+        private void OnSkpClicked()
+        {
+            OnGlsClicked();
+        }
+
         private void OnClsClicked()
         {
             SetState(previousState);
@@ -217,6 +222,7 @@ namespace UI_Toolkit
             autoRollToggle.RegisterValueChangedCallback(e => OnAutoRollChanged(e.newValue));
             doubleSpeedToggle.RegisterValueChangedCallback(e => OnDoubleSpeedChanged(e.newValue));
             dialogueLogButton.clicked += OnDlgClicked;
+            skipDialogueButton.clicked += OnSkpClicked;
 
             pauseMenuPanel.Q<Slider>("slider-mus").RegisterValueChangedCallback(e => OnMusChanged(e.newValue));
             pauseMenuPanel.Q<Slider>("slider-sfx").RegisterValueChangedCallback(e => OnSfxChanged(e.newValue));
