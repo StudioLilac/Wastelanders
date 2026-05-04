@@ -164,8 +164,8 @@ namespace Dialogue.Epilogue {
                     StartCoroutine(EndJayFlashbackSequence());
                     break;
                 case "apologystops":
-                    StartCoroutine(MoveCamera(moonCamera, new Vector2(-0.85f, -1.35f), 60f));
-                    StartCoroutine(ZoomCamera(moonCamera, 1.6f, 60f));
+                    StartCoroutine(MoveCamera(moonCamera, new Vector2(-0.85f, -1.35f), 130f));
+                    StartCoroutine(ZoomCamera(moonCamera, 1.6f, 130f));
                     break;
                 case "end":
                     StartCoroutine(FadeFMODVolume(blizzardInstance, 1f, 0f, 3f));
