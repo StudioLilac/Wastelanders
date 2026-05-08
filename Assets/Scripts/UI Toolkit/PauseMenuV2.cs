@@ -32,6 +32,10 @@ namespace UI_Toolkit
         // Retained legacy cruft for compat.
         public static bool IsPaused;
         public static event Action DidPause;
+        
+        // is the cursor over an element that should "block/consume" click events?
+        // needed for compatability between PauseMenuV2 and Unity native UI elements.
+        public static bool IsOverBlockingElement { get; private set; }
 
         public void Awake()
         {
@@ -53,6 +57,13 @@ namespace UI_Toolkit
             LoadInitialValues();
             
             this.Subscribe<UIContextChangedEvent>(HandleUIContextChanged);
+            
+            RegisterBlockingElement(pauseIconButton);
+            RegisterBlockingElement(autoRollToggle);
+            RegisterBlockingElement(doubleSpeedToggle);
+            RegisterBlockingElement(dialogueLogButton);
+            RegisterBlockingElement(skipDialogueButton);
+            
             SetState(State.Unpaused);
         }
         
@@ -104,6 +115,18 @@ namespace UI_Toolkit
             doubleSpeedToggle.Display(flags.HasFlag(UIContextCustomFlags.DoubleSpeed));
             dialogueLogButton.Display(flags.HasFlag(UIContextCustomFlags.DialogueLog));
             skipDialogueButton.Display(flags.HasFlag(UIContextCustomFlags.SkipDialogue));
+        }
+        
+        private void RegisterBlockingElement(VisualElement element)
+        {
+            element.RegisterCallback<MouseEnterEvent>(_ => IsOverBlockingElement = true);
+            element.RegisterCallback<MouseLeaveEvent>(_ => IsOverBlockingElement = false);
+    
+            element.RegisterCallback<MouseDownEvent>(evt => 
+            {
+                evt.StopPropagation();
+                evt.StopImmediatePropagation();
+            });
         }
 
         private void OnRsmClicked()

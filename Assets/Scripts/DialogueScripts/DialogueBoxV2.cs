@@ -223,7 +223,7 @@ namespace DialogueScripts
             DialogueManager.Instance.AddDialogueEntryToHistory(entry);
         }
 
-        private static bool HasInput() => !PauseMenuV2.IsPaused && (Input.GetKey(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Space));
+        private static bool HasInput() => !PauseMenuV2.IsPaused && !PauseMenuV2.IsOverBlockingElement && (Input.GetKey(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Space));
         private class DialogueBatch
         {
             public DialogueEntry[] Entries { get; }
