@@ -63,6 +63,8 @@ namespace UI_Toolkit
             RegisterBlockingElement(doubleSpeedToggle);
             RegisterBlockingElement(dialogueLogButton);
             RegisterBlockingElement(skipDialogueButton);
+
+            RegisterIconTooltipMouseEvents();
             
             SetState(State.Unpaused);
         }
@@ -127,6 +129,29 @@ namespace UI_Toolkit
                 evt.StopPropagation();
                 evt.StopImmediatePropagation();
             });
+        }
+
+        private void RegisterIconTooltipMouseEvents()
+        {
+            autoRollToggle.RegisterCallback<MouseEnterEvent>(evt => ShowTooltip("Toggle Auto Roll"));
+            doubleSpeedToggle.RegisterCallback<MouseEnterEvent>(evt => ShowTooltip("Toggle Double Speed"));
+            dialogueLogButton.RegisterCallback<MouseEnterEvent>(evt => ShowTooltip("View Dialogue Log"));
+            skipDialogueButton.RegisterCallback<MouseEnterEvent>(evt => ShowTooltip("Skip Dialogue"));
+            
+            autoRollToggle.RegisterCallback<MouseLeaveEvent>(evt => HideTooltip());
+            doubleSpeedToggle.RegisterCallback<MouseLeaveEvent>(evt => HideTooltip());
+            dialogueLogButton.RegisterCallback<MouseLeaveEvent>(evt => HideTooltip());
+            skipDialogueButton.RegisterCallback<MouseLeaveEvent>(evt => HideTooltip());
+        }
+
+        private void ShowTooltip(string tooltip)
+        {
+            new TooltipEvent(TextTipDisplayStyle.Display, "", tooltip).Invoke();
+        }
+
+        private void HideTooltip()
+        {
+            new TooltipEvent(TextTipDisplayStyle.None).Invoke();
         }
 
         private void OnRsmClicked()
