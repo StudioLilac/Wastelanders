@@ -7,7 +7,7 @@ using UnityEngine;
 using UtilClass;
 
 public record CardUsed<T>() : IEvent where T : ActionClass;
-public abstract class ActionClass : SelectClass, IBind<ActionData>, ITooltipable
+public abstract class ActionClass : SelectClass, IBind<ActionData>
 {
     [field: SerializeField] public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
     private EntityClass target;
@@ -73,9 +73,8 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>, ITooltipable
 
     public int Speed { get; set; }
     public string description;
-    public string Tooltip => description;
     
-    public IReadOnlyList<ITooltipable> Children { get; protected set; } = new List<ITooltipable>();
+    public GlossaryNode GlossaryNode;
 
     public string evolutionDescription { get; protected set; }
     public string evolutionCriteria{ get; protected set; }
@@ -184,7 +183,11 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>, ITooltipable
     public virtual void Initialize()
     {
         UpdateDup();
+        
+        GlossaryNode = new(myName, description, null, GetChildrenGlossaryNodes());
     }
+    
+    protected virtual GlossaryNode[] GetChildrenGlossaryNodes() => Array.Empty<GlossaryNode>();
 
     public int getRolledDamage()
     {
