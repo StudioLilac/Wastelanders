@@ -18,6 +18,7 @@ public abstract class SceneData : Enum<SceneData>
         prefabs.uiFadeScreenManager,
         prefabs.audioManager,
         prefabs.timeManager,
+        prefabs.saveIndicatorManager,
         prefabs.bountyManager,
     };
 
