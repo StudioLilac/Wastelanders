@@ -17,13 +17,7 @@ MonoBehaviour:
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events:
-    - rid: 6570561780457144486
-    - rid: 6570561780457144487
-    - rid: 6570561780457144488
-    - rid: 6570561780457144489
-    - rid: 6570561780457144490
-    - rid: 6570561780457144491
+    events: []
   - content: "Everyone! We\u2019ve gotta get her back to the city. These serums are
       dangerous until we figure out what\u2019s going on."
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
@@ -31,13 +25,17 @@ MonoBehaviour:
     picture: {fileID: 0}
     events:
     - rid: 6570561780457144493
-  - content: But now that the frog is gone, all the monsters are running wild! How
-      are we going to get back like this?
-    speaker: {fileID: 11400000, guid: 4be3841f8f6da4f3ca84917932aa6724, type: 2}
+  - content: But now that the frog with the crown is gone, all the monsters are running
+      wild.
+    speaker: {fileID: 11400000, guid: 17e4d93cc7e3a054e9cf5f1e74be615a, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events:
-    - rid: 6570561780457144494
+    events: []
+  - content: How are we going to get back like this?
+    speaker: {fileID: 11400000, guid: 17e4d93cc7e3a054e9cf5f1e74be615a, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
   - content: "Don\u2019t worry, if what Cam said about replicating powers is true,
       we\u2019ll be fine."
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
@@ -52,50 +50,14 @@ MonoBehaviour:
     picture: {fileID: 0}
     events:
     - rid: 6570561780457144497
+    - rid: 7570221480750350412
   references:
     version: 2
     RefIds:
-    - rid: 6570561780457144486
-      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-    - rid: 6570561780457144487
-      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        sprite: {fileID: 21300000, guid: 70562f64108503147861dbc82d787ef9, type: 3}
-    - rid: 6570561780457144488
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        action: 40
-        duration: 0
-    - rid: 6570561780457144489
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        action: 70
-        duration: 0
-    - rid: 6570561780457144490
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        action: 10
-        duration: 1
-    - rid: 6570561780457144491
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        action: 60
-        duration: 1
     - rid: 6570561780457144493
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-    - rid: 6570561780457144494
-      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 4be3841f8f6da4f3ca84917932aa6724, type: 2}
     - rid: 6570561780457144495
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
@@ -109,5 +71,11 @@ MonoBehaviour:
       type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        action: 70
+        duration: 1
+    - rid: 7570221480750350412
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 17e4d93cc7e3a054e9cf5f1e74be615a, type: 2}
         action: 70
         duration: 1

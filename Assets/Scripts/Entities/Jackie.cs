@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Jackie : PlayerClass
 {
-    // Start is called before the first frame update
     public override void Start()
     {
         myName = "Jackie";
@@ -15,6 +14,6 @@ public class Jackie : PlayerClass
 
     protected override void GrabDeck()
     {
-        cardPrefabs = CombatManager.Instance.GetDeck(PlayerDatabase.PlayerName.JACKIE);
+        cardPrefabs = new GetDeck(PlayerDatabase.PlayerName.JACKIE).Query() ?? new();
     }
 }

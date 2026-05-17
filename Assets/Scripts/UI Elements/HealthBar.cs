@@ -12,9 +12,9 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private TMP_Text healthText;
     [SerializeField] private Canvas healthCanvas;
 
-    private int FadeSortingOrder => CombatFadeScreenHandler.Instance.FADE_SORTING_ORDER;
-    private string FadeSortingLayer => CombatFadeScreenHandler.Instance.FADE_SORTING_LAYER;
-    private float FadeZValue => CombatFadeScreenHandler.Instance.FADE_SCREEN_Z_VALUE;
+    private int FadeSortingOrder => new GetFadeSortingOrder().Query() ?? 0;
+    private string FadeSortingLayer => new GetFadeSortingLayer().Query() ?? string.Empty;
+    private float FadeZValue => new GetFadeScreenZValue().Query() ?? 0f;
 
     public void Start()
     {

@@ -7,17 +7,17 @@ namespace Cards.EnemyCards.FrogCards
 {
     public class BurpCard : FrogAttacks, IPlayablePrincessFrogCard
     {
-        public const int BURP_COST = 2;
+        public const int BURP_COST = 1;
         public override void Initialize()
         {
             base.Initialize();
 
             myName = "Burp";
-            description = $"Spend +{BURP_COST} Resonance to play. On ally hit, refund resonance spent and heal ally rolled power + resonance stacks instead.";
+            description = $"Spend +{BURP_COST} Resonance to play. On ally hit, heal ally (rolled power + resonance stacks) and refund resonance spent.";
 
             CostToAddToDeck = 2;
             lowerBound = upperBound = 1;
-            Speed = 4;
+            Speed = 2;
             CardType = CardType.RangedAttack;
             frogAttackAnimationName = PRINCESS_FROG_ATTACK_NAME;
         }

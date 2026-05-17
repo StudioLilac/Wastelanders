@@ -9,7 +9,7 @@ namespace Cards.EnemyCards.FrogCards
 
         [SerializeField] private AnimationClip animationClip;
 
-        public BlessBuffTarget TargetBuff { get; set; } = BlessBuffTarget.Random;
+        public BlessBuffTarget TargetBuff { get; set; } = BlessBuffTarget.Resonate;
 
         public override void Initialize()
         {

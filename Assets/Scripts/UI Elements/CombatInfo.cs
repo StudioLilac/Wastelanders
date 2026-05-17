@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class CombatInfo : MonoBehaviour
 {
     [SerializeField] private GameObject combatCardIconPrefab;
@@ -25,13 +26,10 @@ public class CombatInfo : MonoBehaviour
 
     public Canvas buffListCanvas;
 
-    private int FadeSortingOrder => CombatFadeScreenHandler.Instance.FADE_SORTING_ORDER;
-    private string FadeSortingLayer => CombatFadeScreenHandler.Instance.FADE_SORTING_LAYER;
-    
-    // TODO: [perf] cache this
-    private bool BelongsToEnemy => GetComponentInParent<EnemyClass>() != null;
+    protected int FadeSortingOrder => new GetFadeSortingOrder().Query() ?? 0;
+    protected string FadeSortingLayer => new GetFadeSortingLayer().Query() ?? string.Empty;
 
-    public void Awake()
+    public virtual void Awake()
     {
         buffListCanvas = buffList.gameObject.GetComponent<Canvas>();
     }
@@ -160,7 +158,6 @@ public class CombatInfo : MonoBehaviour
             combatIcon.transform.localPosition = new Vector3(0, startY - i * iconHeight, 0);
             combatIcon.GetComponent<CombatCardUI>().SetActionClass(combatCards[num - i - 1]); //Reverse the order of rendering 
             combatIcon.GetComponent<CombatCardUI>().DeEmphasize();
-            if (BelongsToEnemy) combatIcon.GetComponent<CombatCardUI>().RenderUnseenIndicator();
         }
     }
     private void UnrenderCombatIcons()
@@ -295,8 +292,6 @@ public class CombatInfo : MonoBehaviour
             cardIcon.FaceLeft();
         }
         diceRollSprite.flipX = true;
-
-        CombatManager.Instance.UpdateCameraBounds(); //Bad placement here
     }
     //Flips the CombatInfo so that the Icon is on the LEFT of the entity
     public void FaceRight()
@@ -318,9 +313,6 @@ public class CombatInfo : MonoBehaviour
             cardIcon.FaceRight();
         }
         diceRollSprite.flipX = false;
-
-        CombatManager.Instance.UpdateCameraBounds(); //Bad placement here, but I cant think of where else id put it
-
     }
 
     public void FlipTransform(Transform transform, bool faceRight)

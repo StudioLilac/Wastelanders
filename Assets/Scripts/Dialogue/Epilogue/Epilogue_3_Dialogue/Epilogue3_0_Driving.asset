@@ -31,7 +31,6 @@ MonoBehaviour:
     events:
     - rid: 314095995325513794
     - rid: 314095995325513795
-    - rid: 314095995325513796
     - rid: 314095995325513797
     - rid: 314095995325513799
   - content: So much for being a great navigator, Cam.
@@ -62,8 +61,8 @@ MonoBehaviour:
     events:
     - rid: 314095995325513804
     - rid: 314095995325513805
-  - content: I doubt it, this map was recorded by Master Scout Jay himself on the
-      first expedition out here. He knows best when it comes to picking good landmarks.
+  - content: 'I doubt it, this map was recorded by Master Scout Jay himself on the
+      first expedition out here. '
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -72,6 +71,11 @@ MonoBehaviour:
     - rid: 314095995325513808
     - rid: 314095995325513809
     - rid: 314095995325513810
+  - content: He knows best when it comes to picking good landmarks.
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
   - content: Then perhaps something altered the geography, the meteorite maybe...?
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxId: 0
@@ -93,16 +97,27 @@ MonoBehaviour:
     picture: {fileID: 0}
     events:
     - rid: 314095995325513815
+    - rid: 7570221391745384510
   - content: "Good thinkin\u2019. Once we get there, we\u2019ll need to focus on
-      setting up camp fast. We only have a good couple hours before it gets dark
-      out here."
+      setting up camp fast."
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 314095995325513816
-  - content: <i>Eventually, the convoy comes to a halt.  A lingering sense of unease
-      permeating through the tang of gasoline as the soldiers fan out to pitch camp.</i>
+  - content: We only have a good couple hours before it gets dark out here.
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  - content: '<i>Eventually, the convoy comes to a halt. '
+    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 314095995325513817
+  - content: <i>A lingering sense of unease permeating through the tang of gasoline
+      as the soldiers fan out to pitch camp.</i>
     speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -134,7 +149,7 @@ MonoBehaviour:
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         action: 10
-        duration: 1
+        duration: 0
     - rid: 314095995325513793
       type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
@@ -149,18 +164,12 @@ MonoBehaviour:
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
         sprite: {fileID: 21300000, guid: db44253f429a20c419e48d0a34881773, type: 3}
-    - rid: 314095995325513796
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-        action: 50
-        duration: 0
     - rid: 314095995325513797
       type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
         action: 30
-        duration: 1
+        duration: 0
     - rid: 314095995325513798
       type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:
@@ -269,3 +278,8 @@ MonoBehaviour:
         actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
         action: 70
         duration: 1
+    - rid: 7570221391745384510
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+        sprite: {fileID: 21300000, guid: 2c87828110c96b641b4334f1af609d2c, type: 3}

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backgroundImage: {fileID: -128571246683356328, guid: a04efbb7a1f068f429e719b7a1c61d50, type: 3}
   overlayOpacity: 180
-  width: 2100
-  height: 1080
+  width: 2380
+  height: 1224

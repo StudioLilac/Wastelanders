@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4fafe43b89343e3a7ba1235e8987c0f, type: 3}
+  m_Name: RedirectHint
+  m_EditorClassIdentifier: 
+  Entries:
+  - content: 'Crap, looks like that frog is planning to have a snack to charge back
+      up. '
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxId: 0
+    picture: {fileID: 21300000, guid: 88a7e4552c1afa641acadc54e9b6cbac, type: 3}
+    events: []
+  - content: 'Right. We''ll need to intercept and redirect the attack from the crystals
+      then. '
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    sfxId: 0
+    picture: {fileID: 21300000, guid: 2634a2f81fa74ad4f90374821cfd0ee6, type: 3}
+    events: []
+  - content: <i>You can redirect enemy Actions by clashing it with a faster Action.
+    speaker: {fileID: 11400000, guid: b64e232132ef228439856328530fa3c8, type: 2}
+    sfxId: 0
+    picture: {fileID: -2991674613422419996, guid: 1e6cf2fca7138174e8f34bd44807fdc0, type: 3}
+    events: []
+  - content: <i>You can now form a Clash by [Dragging an Action] onto an enemy Action
+      Icon in the queue.
+    speaker: {fileID: 11400000, guid: b64e232132ef228439856328530fa3c8, type: 2}
+    sfxId: 0
+    picture: {fileID: 21300000, guid: d2c4ec02e6276894c8ebc5adbd2f086f, type: 3}
+    events: []
+  - content: '<i>If the queue becomes too large, you can scroll it with [Mouse Wheel]
+      or by dragging it. '
+    speaker: {fileID: 11400000, guid: b64e232132ef228439856328530fa3c8, type: 2}
+    sfxId: 0
+    picture: {fileID: 21300000, guid: d2c4ec02e6276894c8ebc5adbd2f086f, type: 3}
+    events: []
+  references:
+    version: 2
+    RefIds: []

@@ -43,6 +43,10 @@ public class CardComparator : MonoBehaviour
         EntityClass.OnEntityDeath -= SubscribeEntityDeath;
     }
 
+    public void ClearEvents()
+    {
+        PlayEntityDeaths = null;
+    }
 
     /*
      * Clashes two cards together handling logic calls and activating the Combat Info
@@ -51,7 +55,7 @@ public class CardComparator : MonoBehaviour
     {
         ActionClass card1 = actionWrapper.PlayerAction!;
         ActionClass card2 = actionWrapper.EnemyAction!;
-        CombatManager.Instance.SetCameraCenter(card1.Origin);
+        new SetCameraCenter(card1.Origin).Invoke();
         ActivateInfo(card1, card2);
         EnableDice(card1.Origin, card1.Target);
         card1.ApplyEffect();
@@ -152,14 +156,14 @@ public class CardComparator : MonoBehaviour
         return cardOneGreater;
     }
 
-    public IEnumerator OneSidedAttack(BattleQueue.ActionWrapper actionWrapper)
+    public IEnumerator OneSidedAttack(BattleQueue.ActionWrapper actionWrapper, bool? autoRoll = null)
     {
         ActionClass actionClass = actionWrapper.GetTheOnlyExistingAction();
-        CombatManager.Instance.SetCameraCenter(actionClass.Origin);
+        new SetCameraCenter(actionClass.Origin).Invoke();
         ActivateInfo(actionClass);
         EnableDice(actionClass.Origin);
         actionClass.ApplyEffect();
-        yield return StartCoroutine(ClashBothEntities(actionClass, actionClass));
+        yield return StartCoroutine(ClashBothEntities(actionClass, actionClass, autoRoll));
         BattleQueue.BattleQueueInstance.RemoveActionWrapperFromQueue(actionWrapper);
         actionClass.RollDice();
         DeactivateInfo(actionClass);
@@ -194,9 +198,8 @@ public class CardComparator : MonoBehaviour
  Then, whoever wins the clash should stagger the opponent backwards. 
   */
     public static readonly float X_BUFFER = 0.8f;
-    private IEnumerator ClashBothEntities(ActionClass card1, ActionClass card2)
+    private IEnumerator ClashBothEntities(ActionClass card1, ActionClass card2, bool? overridedAutoRoll = null)
     {
-        bool oneSidedEnemyAttack = card1 == card2 && !card1.IsPlayedByPlayer();
         EntityClass origin = card1.Origin;
         EntityClass target = card1.Target;
         EmphasizeClashers(origin, target);
@@ -222,8 +225,10 @@ public class CardComparator : MonoBehaviour
                 yield return new WaitUntil(() => Input.GetMouseButtonDown(0) && !PauseMenuV2.IsPaused);
             }
         }
-        
-        if (!autoRoll) {
+
+        bool shouldWaitForInput = (overridedAutoRoll != null) ? !overridedAutoRoll.Value: !autoRoll;
+
+        if (shouldWaitForInput) {
             yield return new WaitUntil(() => Input.GetMouseButtonDown(0) && !PauseMenuV2.IsPaused);
         }
     }

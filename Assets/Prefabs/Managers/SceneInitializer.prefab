@@ -61,3 +61,5 @@ MonoBehaviour:
     bountyManager: {fileID: -481522924497141555, guid: e992ec4ee3f3f7446b999d54616c0226, type: 3}
     timeManager: {fileID: 7356177414066196612, guid: ea41dbcfae72f8249924a4bc57fbb42a, type: 3}
     saveIndicatorManager: {fileID: 5065427473290648346, guid: 64f4cd4ffac10482fb4f54fb548ec9f0, type: 3}
+    combatManager: {fileID: 8061570941568338762, guid: 945f42f8017bf504295ae416cbc461ed, type: 3}
+    battleQueue: {fileID: 234536196861661656, guid: 0ce0ee3d06315164a88fea5184a490b6, type: 3}

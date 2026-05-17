@@ -54,7 +54,7 @@ public enum SoundID
     VN_jacket_rustle_1 = 502,
     VN_jacket_rustle_2 = 503,
     VN_finger_snap = 504,
-    VN_pulse_1 = 505,
+    VN_purple_pulse = 505,
     VN_pulse_2 = 506,
     VN_ives_cough_1 = 507,
     VN_ives_cough_2 = 508,
@@ -70,7 +70,6 @@ public enum SoundID
     VN_video_call_pickup = 518,
     VN_video_call_hangup = 519,
     VN_radio_static = 520,
-
 }
 
 public static class SoundIDExtensions

@@ -221,7 +221,7 @@ namespace SceneBuilder
 
         private void UpdateEnemyLayout()
         {
-            List<EntityClass> spawns = CombatManager.Instance.GetEnemies();
+            List<EntityClass> spawns = new GetTeammates(EntityTeam.EnemyTeam).Query() ?? new();
 
             var positions = PositionsFrom(enemiesPosition, spawns.Count);
             for (var i = 0; i < spawns.Count; i++)
@@ -232,7 +232,7 @@ namespace SceneBuilder
 
         private void UpdatePlayerLayout()
         {
-            List<EntityClass> players = CombatManager.Instance.GetPlayers();
+            List<EntityClass> players = new GetTeammates(EntityTeam.PlayerTeam).Query() ?? new();
 
 
             var positions = PositionsFrom(playersPosition, players.Count);

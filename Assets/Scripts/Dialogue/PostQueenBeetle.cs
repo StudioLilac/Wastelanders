@@ -8,7 +8,7 @@ using DialogueScripts;
 using Systems.Persistence;
 using Director;
 
-public class PostQueenBeetle : DialogueClasses
+public class PostQueenBeetle : MonoBehaviour
 {
     [SerializeField] private Jackie jackie;
 
@@ -21,6 +21,7 @@ public class PostQueenBeetle : DialogueClasses
     [SerializeField] private Transform mainCameraIvesTalk;
 
     [SerializeField] Sprite jackieSmileImage;
+    [SerializeField] SpriteFadeHandler blackScrim;
     [SerializeField] private UIFadeHandler hugBackground;
     [SerializeField] private UIFadeHandler backgroundScrim;
 
@@ -31,23 +32,14 @@ public class PostQueenBeetle : DialogueClasses
     [SerializeField] private DialogueEntryWrapper ivesFinal;
     [SerializeField] private DialogueEntryWrapper jackieFinal;
 
-    protected override void GameStateChange(GameState gameState)
+    IEnumerator Start()
     {
-        if (gameState == GameState.GAME_START)
-        {
-            StartCoroutine(ExecuteGameStart());
-        }
-    }
-
-    private IEnumerator ExecuteGameStart()
-    {
-        CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
-        CombatFadeScreenHandler.Instance.SetDarkScreen();
+        blackScrim.SetDarkScreen();
         ives.FaceLeft();
         yield return new WaitForSeconds(0.8f);
 
         jackie.OutOfCombat(); ives.OutOfCombat();
-        yield return StartCoroutine(CombatFadeScreenHandler.Instance.FadeInLightScreen(1f));
+        yield return StartCoroutine(blackScrim.FadeInLightScreen(1f));
         yield return StartCoroutine(DialogueBoxV2.Instance.Play(jackieOpening));
         yield return StartCoroutine(jackie.MoveToPosition(jackieListensToBroadcast.position, 0f, 1.2f));
         var originalSpeed = jackie.animator.speed;
@@ -60,7 +52,7 @@ public class PostQueenBeetle : DialogueClasses
         yield return StartCoroutine(DialogueBoxV2.Instance.Play(resultBroadcast));
         yield return StartCoroutine(backgroundScrim.FadeInLightScreen(1f));
 
-        CombatManager.Instance.ActivateDynamicCamera();
+        new ActivateDynamicCameraEvent().Invoke();
         jackie.FaceLeft();
         yield return new WaitForSeconds(0.8f);
         jackie.animator.speed = originalSpeed;
@@ -70,7 +62,7 @@ public class PostQueenBeetle : DialogueClasses
 
         ivesCamera.transform.position = mainCameraIvesTalk.position;
         ivesCamera.Priority = 2;
-        CombatManager.Instance.ActivateBaseCamera();
+        new ActivateBaseCameraEvent().Invoke();
         yield return StartCoroutine(backgroundScrim.FadeToAlpha(0.7f, 1.0f));
         yield return StartCoroutine(DialogueBoxV2.Instance.Play(jackieConfused));
         yield return new WaitForSeconds(0.5f);

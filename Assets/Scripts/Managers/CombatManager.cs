@@ -7,14 +7,19 @@ using Context;
 using Systems.Persistence;
 using WeaponDeckSerialization;
 using UI_Toolkit;
+using System;
 
 #nullable enable
-public record GetGameState() : IQuery<GameState?>; 
-public record DefaultCard(PlayerClass player) : IQuery<ClasslessCards?>;
+public record SetGameState(GameState State) : IEvent;
+public record GetGameState() : IQuery<GameState?>;
+public record DefaultCard(PlayerClass Player) : IQuery<ClasslessCards?>;
+public record GetDeck(PlayerDatabase.PlayerName PlayerName) : IQuery<List<InstantiableActionClassInfo>?>;
+public record CanHighlight() : IQuery<bool?>;
+public record GetTeammates(EntityTeam Team) : IQuery<List<EntityClass>?>;
+public record GetOpponents(EntityTeam Team) : IQuery<List<EntityClass>?>;
 public record GameStateChanged(GameState OldState, GameState NewState): IEvent;
+public record TeamWinEvent(EntityTeam Team) : IEvent;
 #nullable disable
-
-public record PlayersWin() : IEvent;
 
 public class CombatManager : MonoBehaviour
 {
@@ -22,21 +27,13 @@ public class CombatManager : MonoBehaviour
 
     private GameState gameState;
 
-    public CinemachineVirtualCamera baseCamera;
-    public CinemachineVirtualCamera dynamicCamera;
     private List<EntityClass> playerTeam = new();
     private List<EntityClass> enemyTeam = new();
     private List<EntityClass> neutralTeam = new();
 
-    public GameObject handContainer;
-    
     [SerializeField] private PlayerDatabase playerDatabase;
     [SerializeField] private CardDatabase cardDatabase;
-    
-    public List<InstantiableActionClassInfo> GetDeck(PlayerDatabase.PlayerName playerName)
-    {
-        return cardDatabase.GetPrefabInfoForDeck(playerDatabase.GetDeckByPlayerName(playerName));
-    }
+    private List<InstantiableActionClassInfo> GetDeck(PlayerDatabase.PlayerName playerName) => cardDatabase.GetPrefabInfoForDeck(playerDatabase.GetDeckByPlayerName(playerName));
 
 #nullable enable
     public delegate void GameStateChangedHandler(GameState newState); // Subscribe to this delegate if you want something to be run when gamestate changes
@@ -60,6 +57,14 @@ public class CombatManager : MonoBehaviour
             Destroy(this);
         }
         this.Answer<GetGameState, GameState?>(_ => GameState);
+        this.Answer<CanHighlight, bool?>(_ => CanHighlight());
+        this.Answer<GetTeammates, List<EntityClass>?>(query => HandleGetTeammates(query.Team));
+        this.Answer<GetOpponents, List<EntityClass>?>(query => HandleGetOpponents(query.Team));
+        this.Answer<DefaultCard, ClasslessCards?>(q => cardDatabase.GetDefaultAction(q.Player));
+        this.Answer<GetDeck, List<InstantiableActionClassInfo>?>(q => GetDeck(q.PlayerName));
+        this.Subscribe<AddEntityToTeam>(HandleAddEntityToTeam);
+        this.Subscribe<RemoveEntityFromTeam>(HandleRemoveEntityFromTeam);
+        this.Subscribe<SetGameState>(evt => GameState = evt.State);
     }
 
     public static void ClearEvents()
@@ -74,10 +79,7 @@ public class CombatManager : MonoBehaviour
     void Start()
     {
         GameState = GameState.GAME_START; //Put game start code in the performGameStart method.
-        gameObject.AddComponent<ScreenShakeHandler>();
         ActionClass.CardStateChange += HandleCrosshairEnemies;
-        this.Answer<DefaultCard, ClasslessCards?>(GetDefaultAction);
-        this.Answer<GetActiveCamera, CinemachineVirtualCamera?>(_ => (dynamicCamera.Priority > baseCamera.Priority) ? dynamicCamera : baseCamera);
     }
 
     private void OnDestroy()
@@ -87,35 +89,10 @@ public class CombatManager : MonoBehaviour
     }
 
 
-    //Sets the Camera Center to the following Entity. 
-    public void SetCameraCenter(EntityClass entity)
-    {
-        dynamicCamera.Follow = entity.transform;
-        UpdateCameraBounds();
-    }
-
-    //Sets the Camera Bounds to "see more" in the direction that the following entity is facing
-    //Usage: Should be called everytime an Entity changes their direction. 
-    public void UpdateCameraBounds()
-    {
-        if (dynamicCamera.Follow?.GetComponent<EntityClass>()?.IsFacingRight() ?? false)
-        {
-            var transposer = dynamicCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
-            transposer.m_ScreenX = 0.25f;
-        }
-        else if (!(dynamicCamera.Follow?.GetComponent<EntityClass>()?.IsFacingRight()) ?? false)
-        {
-            var transposer = dynamicCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
-            transposer.m_ScreenX = 0.75f;
-        }
-    }
 
     //Allows players to start selection again, resets enemies attacks and position
     private void PerformSelection()
     {
-        Activate(handContainer);
-        baseCamera.Priority = 1;
-        dynamicCamera.Priority = 0;
         PerformInCombat();
         StartCoroutine(FadeCombatBackground(false));
 
@@ -148,88 +125,99 @@ public class CombatManager : MonoBehaviour
         return allEntities;
     }
 
-    private void Activate(GameObject gameObject)
+    private void HandleAddEntityToTeam(AddEntityToTeam evt)
     {
-        if (gameObject.GetComponent<Collider2D>())
+        Action<EntityClass> action = evt.Team switch
         {
-            gameObject.GetComponent<Collider2D>().enabled = true;
-        }
-        Vector3 position = gameObject.GetComponent<Transform>().position;
-        position.z = -1;
-        gameObject.GetComponent<Transform>().position = position;
+            EntityTeam.PlayerTeam => AddPlayer,
+            EntityTeam.EnemyTeam => AddEnemy,
+            EntityTeam.NeutralTeam => AddNeutral,
+            _ => throw new ArgumentOutOfRangeException()
+        };
+        action(evt.Entity);
     }
 
-    private void Deactivate(GameObject gameObject)
+    private void HandleRemoveEntityFromTeam(RemoveEntityFromTeam evt)
     {
-        if (gameObject.GetComponent<Collider2D>())
+        Action<EntityClass> action = evt.Team switch
         {
-            gameObject.GetComponent<Collider2D>().enabled = false;
-        }
-        Vector3 position = gameObject.GetComponent<Transform>().position;
-        position.z = -200;
-        gameObject.GetComponent<Transform>().position = position;
+            EntityTeam.PlayerTeam => RemovePlayer,
+            EntityTeam.EnemyTeam => RemoveEnemy,
+            EntityTeam.NeutralTeam => RemoveNeutral,
+            _ => throw new ArgumentOutOfRangeException()
+        };
+        action(evt.Entity);
     }
 
-    public void AddPlayer(EntityClass player)
+    private void AddPlayer(EntityClass player)
     {
         playerTeam.Add(player);
     }
 
-    public void AddEnemy(EntityClass enemy)
+    private void AddEnemy(EntityClass enemy)
     {
         enemyTeam.Add(enemy);
     }
 
-    public void AddNeutral(EntityClass neutral)
+    private void AddNeutral(EntityClass neutral)
     {
         neutralTeam.Add(neutral);
     }
 
     //Purpose: Call this when a player is removed or killed
-    public void RemovePlayer(EntityClass player)
+    private void RemovePlayer(EntityClass player)
     {
         playerTeam.Remove(player);
-        if (dynamicCamera.Follow?.GetComponent<EntityClass>() == player)
-        {
-            dynamicCamera.Follow = null;
-        }
 
         if (playerTeam.Count == 0)
         {
             EnemiesWinEvent?.Invoke();
+            new TeamWinEvent(EntityTeam.EnemyTeam).Invoke();
         }
     }
 
     //Purpose: Call this when an enemy is removed or killed
-    public void RemoveEnemy(EntityClass enemy)
+    private void RemoveEnemy(EntityClass enemy)
     {
         enemyTeam.Remove(enemy);
-        if (dynamicCamera.Follow?.GetComponent<EntityClass>() == enemy)
-        {
-            dynamicCamera.Follow = null;
-        }
 
         if (enemyTeam.Count == 0)
         {
             PlayersWinEvent?.Invoke();
-            new PlayersWin().Invoke();
+            new TeamWinEvent(EntityTeam.PlayerTeam).Invoke();
         }
     }
 
-    public void RemoveNeutral(EntityClass neutral)
+    private void RemoveNeutral(EntityClass neutral)
     {
         neutralTeam.Remove(neutral);
-        if (dynamicCamera.Follow?.GetComponent<EntityClass>() == neutral)
+    }
+
+    private List<EntityClass>? HandleGetTeammates(EntityTeam team)
+    {
+        return team switch
         {
-            dynamicCamera.Follow = null;
-        }
+            EntityTeam.PlayerTeam => new List<EntityClass>(playerTeam),
+            EntityTeam.EnemyTeam => new List<EntityClass>(enemyTeam),
+            EntityTeam.NeutralTeam => new List<EntityClass>(neutralTeam),
+            _ => throw new ArgumentOutOfRangeException("Team possibly not initialized, this is my team: " + team)
+        };
+    }
+
+    private List<EntityClass>? HandleGetOpponents(EntityTeam team)
+    {
+        return team switch
+        {
+            EntityTeam.PlayerTeam => new List<EntityClass>(enemyTeam.Concat(neutralTeam)),
+            EntityTeam.EnemyTeam => new List<EntityClass>(playerTeam.Concat(neutralTeam)),
+            EntityTeam.NeutralTeam => new(),
+            _ => throw new ArgumentOutOfRangeException("Team possibly not initialized, this is my team: " + team)
+        };
     }
 
     private void PerformLose()
     {
         StartCoroutine(FadeCombatBackground(false));
-        baseCamera.Priority = 1;
-        dynamicCamera.Priority = 0;
         PerformOutOfCombat();
         //Save game after loss too.
         SaveLoadSystem.Instance.SaveGame();
@@ -238,8 +226,6 @@ public class CombatManager : MonoBehaviour
     private void PerformWin()
     {
         StartCoroutine(FadeCombatBackground(false));
-        baseCamera.Priority = 1;
-        dynamicCamera.Priority = 0;
         PerformOutOfCombat();
         // Save game after each win 
         SaveLoadSystem.Instance.SaveGame();
@@ -248,9 +234,6 @@ public class CombatManager : MonoBehaviour
     private void PerformFighting()
     {
         SoundID.CB_roll_dice.Play();
-        Deactivate(handContainer);
-        baseCamera.Priority = 0;
-        dynamicCamera.Priority = 1;
         StartCoroutine(FadeCombatBackground(true));
     }
 
@@ -265,17 +248,6 @@ public class CombatManager : MonoBehaviour
         new UIContextChangedEvent(new UIContext.Combat()).Invoke();
     }
 
-    public void ActivateDynamicCamera()
-    {
-        baseCamera.Priority = 0;
-        dynamicCamera.Priority = 1;
-    }
-
-    public void ActivateBaseCamera()
-    {
-        baseCamera.Priority = 1;
-        dynamicCamera.Priority = 0;
-    }
 
     private void PerformGameStart()
     {
@@ -300,8 +272,6 @@ public class CombatManager : MonoBehaviour
 
     private void PerformOutOfCombat()
     {
-        Deactivate(handContainer);
-
         foreach (EntityClass entity in GrabAllEntities())
         {
             entity.DeEmphasize();
@@ -395,7 +365,7 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    public bool CanHighlight()
+    private bool CanHighlight()
     {
         return (!PauseMenuV2.IsPaused) && GameState == GameState.SELECTION;
     }
@@ -438,22 +408,4 @@ public class CombatManager : MonoBehaviour
             OnGameStateChanged?.Invoke(value);
         }
     }
-
-    public List<EntityClass> GetPlayers()
-    {
-        return new List<EntityClass>(playerTeam);
-    }
-
-    public List<EntityClass> GetEnemies() 
-    { 
-        return new List<EntityClass>(enemyTeam);
-    }
-
-    public List<EntityClass> GetNeutral()
-    {
-        return new List<EntityClass>(neutralTeam);
-    }
-    
-    private ClasslessCards? GetDefaultAction(DefaultCard q) => cardDatabase.GetDefaultAction(q.player);
-
 }
