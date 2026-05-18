@@ -8,8 +8,9 @@ using UtilClass;
 
 namespace UI_Toolkit
 {
-    public class HUDV2 : MonoBehaviour
-    {
+    public class HUDV2 : MonoBehaviour {
+        private const float FADED_OPACITY = 0.1f;
+        
         [SerializeField] private Sprite deckInfoSprite;
         public static HUDV2 Instance { get; private set; }
         
@@ -138,7 +139,7 @@ namespace UI_Toolkit
                     icon.style.display = DisplayStyle.None;
 
                 childrenElem.Add(entry);
-                if (childrenFaded) entry.style.opacity = 0.2f;
+                if (childrenFaded) entry.style.opacity = FADED_OPACITY;
             }
 
             childrenElem.style.display = children.Count > 1 
@@ -188,7 +189,7 @@ namespace UI_Toolkit
             if (childrenFaded) return;
             foreach (VisualElement child in childrenElem.Children())
             {
-                child.experimental.animation.Start(1f, 0.2f, 300, (el, val) => el.style.opacity = val);
+                child.experimental.animation.Start(1f, FADED_OPACITY, 300, (el, val) => el.style.opacity = val);
             }
             childrenFaded = true;
         }
@@ -198,7 +199,7 @@ namespace UI_Toolkit
             if (!childrenFaded) return;
             foreach (VisualElement child in childrenElem.Children())
             {
-                child.experimental.animation.Start(0.2f, 1f, 300, (el, val) => el.style.opacity = val);
+                child.experimental.animation.Start(FADED_OPACITY, 1f, 300, (el, val) => el.style.opacity = val);
             }
             childrenFaded = false;
         }
