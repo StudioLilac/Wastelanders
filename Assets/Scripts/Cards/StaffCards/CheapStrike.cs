@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UtilClass;
 
 public class CheapStrike : StaffCards
 {
@@ -22,6 +23,8 @@ public class CheapStrike : StaffCards
         CardType = CardType.MeleeAttack;
         base.Initialize();
     }
+    
+    protected override GlossaryNode[] GetChildrenGlossaryNodes() => new[] { StatusEffects.Flow, Keywords.OnHit };
 
     public override void OnHit()
     {

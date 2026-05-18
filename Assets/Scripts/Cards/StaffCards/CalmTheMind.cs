@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Linq;
+using UtilClass;
 
 public class CalmTheMind : StaffCards
 {
@@ -18,6 +19,7 @@ public class CalmTheMind : StaffCards
         CardType = CardType.Defense;
     }
 
+    protected override GlossaryNode[] GetChildrenGlossaryNodes() => new[] { StatusEffects.Flow };
     public override void CardIsUnstaggered()
     {
         base.CardIsUnstaggered();
