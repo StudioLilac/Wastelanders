@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/HUDV2.uss" />
+    <ui:VisualElement name="glossary-node" class="child-blurb">
+        <ui:VisualElement name="header-row" style="flex-direction: row; justify-content: space-between; align-items: stretch;">
+            <ui:Label name="node-title" class="child-blurb-title" style="white-space: normal;" />
+            <ui:VisualElement name="node-icon" class="child-blurb-icon" style="width: 60px; height: 60px; -unity-background-scale-mode: scale-to-fit; flex-shrink: 0;" />
+        </ui:VisualElement>
+        <ui:Label name="node-tooltip" class="child-blurb-body" style="white-space: normal; flex-grow: 0;" />
+    </ui:VisualElement>
+</ui:UXML>

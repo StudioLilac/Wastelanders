@@ -12,11 +12,29 @@ namespace UtilClass
 
     public static class StatusEffects
     {
-        public static readonly GlossaryNode OnHitNode = new(
+        public static readonly GlossaryNode Accuracy = new(
             "Accuracy",
             BuffExplainer.WeaponExplanation.PISTOL_EXPLANATION.ExplanationText,
-            Resources.Load<Sprite>("StatusIcon/Accuracy"),
+            Resources.Load<Sprite>("StatusIcon/Accuracy")
+        );
+        
+        public static readonly GlossaryNode Flow = new(
+            "Accuracy",
+            BuffExplainer.WeaponExplanation.STAFF_EXPLANATION.ExplanationText,
+            Resources.Load<Sprite>("StatusIcon/Flow"),
             Keywords.OnHit
+        );
+        
+        public static readonly GlossaryNode Wound = new(
+            "Accuracy",
+            BuffExplainer.WeaponExplanation.AXE_EXPLANATION.ExplanationText,
+            Resources.Load<Sprite>("StatusIcon/Wound")
+        );
+        
+        public static readonly GlossaryNode Resonance = new(
+            "Accuracy",
+            BuffExplainer.WeaponExplanation.RESONANCE_EXPLANATION.ExplanationText,
+            Resources.Load<Sprite>("StatusIcon/resonance")
         );
     }
 }

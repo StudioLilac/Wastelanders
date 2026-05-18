@@ -1,0 +1,25 @@
+.child-blurb {
+    width: 220px;
+    margin-bottom: 8px;
+    padding: 12px 14px 18px 14px;
+    -unity-slice-left: 22;
+    -unity-slice-top: 22;
+    -unity-slice-right: 22;
+    -unity-slice-bottom: 22;
+    -unity-slice-scale: 3.59px;
+    background-image: url("project://database/Assets/Sprites/card-v2/bg-card-info-player.png?fileID=2800000&guid=a520e8af37466400db0dd6dac9589749&type=3#bg-card-info-player");
+}
+
+.child-blurb-title {
+    font-size: 32px;
+    -unity-font: url("project://database/Assets/TextMesh%20Pro/Fonts/VT323-Regular.ttf?fileID=12800000&guid=46b9139fed5cc6a42a6a5d42b82c3c7e&type=3#VT323-Regular");
+}
+
+.child-blurb-body {
+    font-size: 20px;
+    -unity-font: url("project://database/Assets/TextMesh%20Pro/Fonts/VT323-Regular.ttf?fileID=12800000&guid=46b9139fed5cc6a42a6a5d42b82c3c7e&type=3#VT323-Regular");
+    color: rgb(0, 0, 0);
+}
+
+.child-blurb-icon {
+}

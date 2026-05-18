@@ -1,9 +1,15 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="CardV2" src="project://database/Assets/UI%20Toolkit/CardV2.uxml?fileID=9197481963319205126&amp;guid=2e517996501674993b8fb9df38dedc1b&amp;type=3#CardV2" />
     <Style src="project://database/Assets/UI%20Toolkit/HUDV2.uss?fileID=7433441132597879392&amp;guid=b0c45c879e3d14a0ea0a4ae41ebc1a6b&amp;type=3#HUDV2" />
-    <ui:VisualElement name="layout-info-container" style="position: absolute; top: 64px; right: 64px; align-items: center;">
-        <ui:Instance template="CardV2" name="CardV2" />
-        <ui:Label text="Lorem ipsum si dolor sit amet. Lorem ipsum si dolor sit amet." name="txt-blurb" class="blurb-enemy" style="width: 294px; margin-top: 16px; padding-top: 19px; padding-left: 20px; padding-right: 22px; padding-bottom: 30px; white-space: normal; -unity-font-definition: initial; -unity-font: url(&quot;project://database/Assets/TextMesh%20Pro/Fonts/VT323-Regular.ttf?fileID=12800000&amp;guid=46b9139fed5cc6a42a6a5d42b82c3c7e&amp;type=3#VT323-Regular&quot;); font-size: 28px; color: rgb(0, 0, 0); min-height: 158px; -unity-slice-left: 22; -unity-slice-top: 22; -unity-slice-right: 22; -unity-slice-bottom: 22; -unity-slice-scale: 3.590909px;" />
+    <ui:VisualElement name="layout-info-container" style="position: absolute; top: 64px; right: 64px; align-items: center; flex-direction: row;">
+        <ui:ScrollView name="children-container" 
+                       vertical-scroller-visibility="Hidden"
+                       horizontal-scroller-visibility="Hidden"
+                       style="margin-right: 8px; max-height: 600px;" />
+        <ui:VisualElement style="flex-grow: 0; flex-direction: column;">
+            <ui:Instance template="CardV2" name="CardV2" style="flex-direction: column; align-items: flex-start; align-self: auto; align-content: auto; left: 20px;" />
+            <ui:Label text="Lorem ipsum si dolor sit amet. Lorem ipsum si dolor sit amet." name="txt-blurb" class="blurb-enemy" style="width: 294px; margin-top: 16px; padding-top: 19px; padding-left: 20px; padding-right: 22px; padding-bottom: 30px; white-space: normal; -unity-font-definition: initial; -unity-font: url(&quot;project://database/Assets/TextMesh%20Pro/Fonts/VT323-Regular.ttf?fileID=12800000&amp;guid=46b9139fed5cc6a42a6a5d42b82c3c7e&amp;type=3#VT323-Regular&quot;); font-size: 28px; color: rgb(0, 0, 0); min-height: 158px; -unity-slice-left: 22; -unity-slice-top: 22; -unity-slice-right: 22; -unity-slice-bottom: 22; -unity-slice-scale: 3.590909px; align-items: center;" />
+        </ui:VisualElement>
     </ui:VisualElement>
     <ui:VisualElement style="left: 64px; position: absolute; bottom: -45.36px; flex-direction: row; align-items: center;">
         <ui:VisualElement name="layout-hand-container" style="flex-direction: row; align-items: center; height: 303.36px;">
