@@ -23,6 +23,8 @@ namespace UI_Toolkit
         private ScrollView childrenElem;
         private Label deckInfoLabel;
 
+        private bool childrenFaded;
+
 #nullable enable
         public void Awake()
         {
@@ -136,6 +138,7 @@ namespace UI_Toolkit
                     icon.style.display = DisplayStyle.None;
 
                 childrenElem.Add(entry);
+                if (childrenFaded) entry.style.opacity = 0.2f;
             }
 
             childrenElem.style.display = children.Count > 1 
@@ -179,6 +182,25 @@ namespace UI_Toolkit
         public void SetDeckInfoVisibility(bool visible)
         {
             deckInfoLabel.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
+        }
+        
+        public void FadeChildren() {
+            if (childrenFaded) return;
+            foreach (VisualElement child in childrenElem.Children())
+            {
+                child.experimental.animation.Start(1f, 0.2f, 300, (el, val) => el.style.opacity = val);
+            }
+            childrenFaded = true;
+        }
+
+        public void UnfadeChildren()
+        {
+            if (!childrenFaded) return;
+            foreach (VisualElement child in childrenElem.Children())
+            {
+                child.experimental.animation.Start(0.2f, 1f, 300, (el, val) => el.style.opacity = val);
+            }
+            childrenFaded = false;
         }
     }
 }

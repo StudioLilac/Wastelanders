@@ -19,20 +19,20 @@ namespace UtilClass
         );
         
         public static readonly GlossaryNode Flow = new(
-            "Accuracy",
+            "Flow",
             BuffExplainer.WeaponExplanation.STAFF_EXPLANATION.ExplanationText,
             Resources.Load<Sprite>("StatusIcon/Flow"),
             Keywords.OnHit
         );
         
         public static readonly GlossaryNode Wound = new(
-            "Accuracy",
+            "Wound",
             BuffExplainer.WeaponExplanation.AXE_EXPLANATION.ExplanationText,
             Resources.Load<Sprite>("StatusIcon/Wound")
         );
         
         public static readonly GlossaryNode Resonance = new(
-            "Accuracy",
+            "Resonance",
             BuffExplainer.WeaponExplanation.RESONANCE_EXPLANATION.ExplanationText,
             Resources.Load<Sprite>("StatusIcon/resonance")
         );
