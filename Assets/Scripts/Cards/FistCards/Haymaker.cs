@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UtilClass;
 
 public class Haymaker : FistCards
 {
@@ -17,5 +18,10 @@ public class Haymaker : FistCards
         Renderer renderer = GetComponent<Renderer>();
         base.Initialize();
     }
+    
+    public static readonly GlossaryNode Glossary = new(
+        "Haymaker",
+        "Deals a solid blow!"
+    );
 
 }
