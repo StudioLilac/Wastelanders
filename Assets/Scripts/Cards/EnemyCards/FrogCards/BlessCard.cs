@@ -1,4 +1,5 @@
 using UnityEngine;
+using UtilClass;
 
 namespace Cards.EnemyCards.FrogCards
 {
@@ -22,6 +23,8 @@ namespace Cards.EnemyCards.FrogCards
             Speed = 1;
             CardType = CardType.Defense;
         }
+        
+        protected override GlossaryNode[] GetChildrenGlossaryNodes() => new[] { StatusEffects.Resonance };
 
         public override void OnQueue()
         {

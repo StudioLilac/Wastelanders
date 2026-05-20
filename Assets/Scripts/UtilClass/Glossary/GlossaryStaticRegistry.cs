@@ -8,6 +8,14 @@ namespace UtilClass
             "On Hit",
             "An action triggers its On-hit effect when it deals at least 1 damage."
         );
+
+        public static readonly GlossaryNode Crystals = new(
+            "Crystals",
+            "Crystals grant 1 resonance stack upon dropping to 10, 5, and 0 health.",
+            null,
+            null,
+            StatusEffects.Resonance
+        );
     }
 
     public static class StatusEffects

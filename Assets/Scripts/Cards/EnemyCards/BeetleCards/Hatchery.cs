@@ -1,5 +1,6 @@
 using Cards.EnemyCards.FrogCards;
 using UnityEngine;
+using UtilClass;
 
 
 public class Hatchery : ActionClass, IPlayableQueenCard
@@ -24,6 +25,8 @@ public class Hatchery : ActionClass, IPlayableQueenCard
         myName = "Hatchery";
         CardType = CardType.Defense;
     }
+    
+    protected override GlossaryNode[] GetChildrenGlossaryNodes() => new[] { StatusEffects.Resonance };
 
     public override void OnQueue()
     {

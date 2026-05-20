@@ -1,5 +1,6 @@
 
 using UnityEngine;
+using UtilClass;
 
 public class Hurl : FrogAttacks, IPlayableFrogCard
 {
@@ -18,6 +19,13 @@ public class Hurl : FrogAttacks, IPlayableFrogCard
         myName = "Hurl";
         description = "Watch out!";
     }
+    
+    public static readonly GlossaryNode Glossary = new(
+        "Hurl",
+        "Watch out!",
+        null,
+        new CardStats(1, 7)
+    );
 
     public override void OnHit()
     {

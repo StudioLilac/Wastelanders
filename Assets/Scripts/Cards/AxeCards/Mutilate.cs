@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
+using UtilClass;
 using static StatusEffect;
 
 public class Mutilate : AxeCards
@@ -32,6 +33,8 @@ public class Mutilate : AxeCards
         base.Initialize();
         CardType = CardType.MeleeAttack;
     }
+    
+    protected override GlossaryNode[] GetChildrenGlossaryNodes() => new[] { StatusEffects.Wound, Keywords.OnHit };
 
     void AddWound(int damage)
     {
