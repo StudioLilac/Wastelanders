@@ -21,8 +21,7 @@ namespace UtilClass
         public static readonly GlossaryNode Flow = new(
             "Flow",
             BuffExplainer.WeaponExplanation.STAFF_EXPLANATION.ExplanationText,
-            Resources.Load<Sprite>("StatusIcon/Flow"),
-            Keywords.OnHit
+            Resources.Load<Sprite>("StatusIcon/Flow")
         );
         
         public static readonly GlossaryNode Wound = new(
