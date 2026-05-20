@@ -137,6 +137,17 @@ namespace UI_Toolkit
                     icon.style.backgroundImage = new StyleBackground(node.Icon);
                 else
                     icon.style.display = DisplayStyle.None;
+                
+                var cardInfoRow = entry.Q<VisualElement>("card-info-row");
+                if (node.Stats.HasValue)
+                {
+                    cardInfoRow.style.display = DisplayStyle.Flex;
+                    entry.Q<Label>("range").text = $"{node.Stats.Value.LowerBound}-{node.Stats.Value.UpperBound}";
+                }
+                else
+                {
+                    cardInfoRow.style.display = DisplayStyle.None;
+                }
 
                 childrenElem.Add(entry);
                 if (childrenFaded) entry.style.opacity = FADED_OPACITY;

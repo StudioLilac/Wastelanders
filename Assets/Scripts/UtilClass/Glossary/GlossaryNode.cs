@@ -4,6 +4,18 @@ using UnityEngine;
 
 namespace UtilClass
 {
+    public struct CardStats
+    {
+        public int LowerBound { get; }
+        public int UpperBound { get; }
+
+        public CardStats(int lowerBound, int upperBound)
+        {
+            LowerBound = lowerBound;
+            UpperBound = upperBound;
+        }
+    }
+    
     /// <summary>
     /// Contains information about a Card, Status effect, or Keyword.
     ///
@@ -13,14 +25,16 @@ namespace UtilClass
     {
         public string Title { get; }
         public string Tooltip { get; }
+        public CardStats? Stats { get; }
         [CanBeNull] public Sprite Icon { get; }
         public IReadOnlyList<GlossaryNode> Children { get; }
         
-        public GlossaryNode(string title, string tooltip, Sprite icon = null, params GlossaryNode[] children)
+        public GlossaryNode(string title, string tooltip, Sprite icon = null, CardStats? stats = null, params GlossaryNode[] children)
         {
             Title = title;
             Tooltip = tooltip;
             Icon = icon;
+            Stats = stats;
             Children = children;
         }
 

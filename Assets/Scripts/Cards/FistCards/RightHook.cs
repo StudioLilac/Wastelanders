@@ -27,10 +27,13 @@ public class RightHook : FistCards
         base.Initialize();
     }
     
+    protected override GlossaryNode[] GetChildrenGlossaryNodes() => new[] { Haymaker.Glossary };
+    
     public static readonly GlossaryNode Glossary = new(
         "Right Hook",
         "If this card is not staggered, use 'Haymaker'.",
         null,
+        new CardStats(2, 4),
         Haymaker.Glossary
     );
 

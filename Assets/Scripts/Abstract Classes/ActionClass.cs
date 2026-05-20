@@ -184,7 +184,7 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
     {
         UpdateDup();
         
-        GlossaryNode = new(myName, description, null, GetChildrenGlossaryNodes());
+        GlossaryNode = new(myName, description, null, null, GetChildrenGlossaryNodes());
     }
     
     protected virtual GlossaryNode[] GetChildrenGlossaryNodes() => Array.Empty<GlossaryNode>();

@@ -21,7 +21,9 @@ public class Haymaker : FistCards
     
     public static readonly GlossaryNode Glossary = new(
         "Haymaker",
-        "Deals a solid blow!"
+        "Deals a solid blow!",
+        null,
+        new CardStats(2, 5)
     );
 
 }
