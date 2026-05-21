@@ -251,40 +251,22 @@ namespace Dialogue.Epilogue {
         
         private IEnumerator ZoomCamera(Camera cam, float deltaFov, float duration)
         {
-            float startPos;
-            if (cam.orthographic)
-            {
-                startPos = cam.orthographicSize;
-            }
-            else
-            {
-                startPos = cam.fieldOfView;
-            }
-            
-            float targetPos = startPos + deltaFov;
+            float GetSize() => cam.orthographic ? cam.orthographicSize : cam.fieldOfView;
+            void SetSize(float v) { if (cam.orthographic) cam.orthographicSize = v; else cam.fieldOfView = v; }
 
+            float startPos = GetSize();
+            float targetPos = startPos + deltaFov;
             float elapsed = 0f;
 
             while (elapsed < duration)
             {
                 elapsed += Time.deltaTime;
                 float t = Mathf.Clamp01(elapsed / duration);
-
-                float easedT = t * t * (3f - 2f * t);
-
-                if (cam.orthographic)
-                {
-                    cam.orthographicSize = Mathf.Lerp(startPos, targetPos, easedT);
-                }
-                else
-                {
-                    cam.fieldOfView = Mathf.Lerp(startPos, targetPos, easedT);
-                }
+                SetSize(Mathf.Lerp(startPos, targetPos, t * t * (3f - 2f * t)));
                 yield return null;
             }
 
-            cam.orthographicSize = targetPos;
-            cam.fieldOfView = targetPos;
+            SetSize(targetPos);
         }
         
         private IEnumerator FadeFMODVolume(
