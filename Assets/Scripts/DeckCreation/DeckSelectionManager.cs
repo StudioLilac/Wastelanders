@@ -82,7 +82,7 @@ public class DeckSelectionManager : MonoBehaviour
     public static event Action<DeckSelectionState>? OnDeckSelectStateChanged;
     public static event Action<int, List<ActionClass>>? OnRenderDecks;
 
-    private Collider2D[] allCollidersInScene;
+    private Collider2D[] allCollidersInScene = null!;
 
     void Awake()
     {
