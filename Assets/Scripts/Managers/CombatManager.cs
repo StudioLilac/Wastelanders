@@ -339,7 +339,7 @@ public class CombatManager : MonoBehaviour
 
     private void CrosshairAllEnemies()
     {
-        foreach (var enemy in enemyTeam)
+        foreach (var enemy in enemyTeam.Concat(neutralTeam))
         {
             enemy.CrossHair();
         }
@@ -347,7 +347,7 @@ public class CombatManager : MonoBehaviour
 
     private void UncrosshairAllEnemies()
     {
-        foreach (var enemy in enemyTeam)
+        foreach (var enemy in enemyTeam.Concat(neutralTeam))
         {
             enemy.UnCrossHair();
         }
