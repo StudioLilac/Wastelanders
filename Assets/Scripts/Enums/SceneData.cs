@@ -294,7 +294,7 @@ public abstract class SceneData : Enum<SceneData>
     {
         public override string SceneName => "FinalCutscene";
 
-        public override SceneAudio GetAudio(AudioDatabase database) => null;
+        public override SceneAudio GetAudio(AudioDatabase database) => database.Epilogue9;
 
         public override MonoBehaviour[] ScenePrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
         {
