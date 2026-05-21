@@ -120,6 +120,7 @@ public class FogVolume2D : MonoBehaviour
             ));
 
             quad.GetComponent<Renderer>().material = mat;
+            quad.GetComponent<Renderer>().sortingOrder = 9;
 
             layers.Add(quad);
         }

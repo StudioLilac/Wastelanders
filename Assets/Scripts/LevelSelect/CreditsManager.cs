@@ -7,8 +7,8 @@ public class CreditsManager : MonoBehaviour
     public Animator animator;
     public Image blackBg;
     public UIFadeHandler fadeHandler;
-    public float speedNormal = 1f;
-    public float speedFast = 10f;
+    public const float speedNormal = 1f;
+    public const float speedFast = 10f;
 
     void Start()
     {
