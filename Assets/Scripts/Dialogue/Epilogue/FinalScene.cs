@@ -55,6 +55,7 @@ namespace Dialogue.Epilogue {
         [SerializeField] private Image jayFlashback;
 
         [SerializeField] private Animator cinematicBarsAnimator;
+        [SerializeField] private Animator creditsAnimator;
         
         private EventInstance blizzardInstance;
         
@@ -81,6 +82,11 @@ namespace Dialogue.Epilogue {
             blizzardInstance.start();
             
             StartCoroutine(PlayScene());
+        }
+        
+        void Update() {
+            bool fastForward = Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.Mouse0);
+            creditsAnimator.speed = fastForward ? CreditsManager.speedFast : CreditsManager.speedNormal;
         }
 
         private void LoadDialogueFromJson()
@@ -127,6 +133,15 @@ namespace Dialogue.Epilogue {
             yield return new WaitForSeconds(0.5f);
             cinematicBarsAnimator.SetTrigger("RemoveBars");
             
+            yield return new WaitForSeconds(1f);
+            creditsAnimator.SetTrigger("RollCredits");
+            
+            yield return new WaitUntil(() => creditsAnimator.GetCurrentAnimatorStateInfo(0).IsName("Season1FinaleAnimation"));
+
+            
+            yield return new WaitUntil(() => creditsAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.95f);
+            yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInDarkScreen(2f));
+            GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.MainMenu>().SceneName);
         }
 
         void HandleCaptionTextMeshColor(string speaker)
