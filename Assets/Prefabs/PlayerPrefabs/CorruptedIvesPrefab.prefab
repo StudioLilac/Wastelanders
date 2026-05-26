@@ -46,7 +46,7 @@ Animator:
   m_GameObject: {fileID: 5836655443787502691}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f001d61155be94e4da4b96b03bf3197f, type: 2}
+  m_Controller: {fileID: 9100000, guid: 18f4b6ee1857ef74d9e0b5561cabf55e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -102,12 +102,12 @@ SpriteRenderer:
   m_SortingLayerID: 2146528631
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ea71187071d56984eb47aedf78cb6d92, type: 3}
+  m_Sprite: {fileID: -5501608355732291442, guid: 23c1c33d949f0814ab27e17279691ad8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 7.68, y: 7.68}
+  m_Size: {x: 5.1412554, y: 7.22}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -131,7 +131,7 @@ MonoBehaviour:
   combatInfo: {fileID: 8487347338577429512}
   boxCollider: {fileID: 1337325846832566119}
   passOutSprite: {fileID: 21300000, guid: 0fcb114476433f64bacdc25292f42558, type: 3}
-  <AnimatorController>k__BackingField: {fileID: 9100000, guid: f001d61155be94e4da4b96b03bf3197f, type: 2}
+  <AnimatorController>k__BackingField: {fileID: 9100000, guid: 18f4b6ee1857ef74d9e0b5561cabf55e, type: 2}
   availableActions: []
 --- !u!65 &1337325846832566119
 BoxCollider:

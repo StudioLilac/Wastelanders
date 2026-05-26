@@ -1,25 +1,25 @@
 fileFormatVersion: 2
-guid: cbd4cfd4056f1e447b3ca1df24cd726e
+guid: 23c1c33d949f0814ab27e17279691ad8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2237550213906174002
-    second: Ives Corrupted - Idle_0
+      213: -8846867510835592792
+    second: Ives Corrupted - Idle 1_0
   - first:
-      213: 6420727711897675092
-    second: Ives Corrupted - Idle_1
+      213: -5501608355732291442
+    second: Ives Corrupted - Idle 1_1
   - first:
-      213: 4792669543777907188
-    second: Ives Corrupted - Idle_2
+      213: -3736153706617748607
+    second: Ives Corrupted - Idle 1_2
   - first:
-      213: 4952949248008601180
-    second: Ives Corrupted - Idle_3
+      213: 2007990300803634187
+    second: Ives Corrupted - Idle 1_3
   - first:
-      213: 7149966273499186570
-    second: Ives Corrupted - Idle_4
+      213: -3650225725063577814
+    second: Ives Corrupted - Idle 1_4
   - first:
-      213: -3492016065486099815
-    second: Ives Corrupted - Idle_5
+      213: 5964224618653711289
+    second: Ives Corrupted - Idle 1_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -115,13 +115,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Ives Corrupted - Idle_0
+      name: Ives Corrupted - Idle 1_0
       rect:
         serializedVersion: 2
-        x: 271
+        x: 239
         y: 1167
-        width: 513
-        height: 705
+        width: 514
+        height: 738
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,19 +130,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ecfe50d7fef92f0e0800000000000000
-      internalID: -2237550213906174002
+      spriteID: 8a143b12fdc993580800000000000000
+      internalID: -8846867510835592792
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ives Corrupted - Idle_1
+      name: Ives Corrupted - Idle 1_1
       rect:
         serializedVersion: 2
-        x: 1294
+        x: 1263
         y: 1167
-        width: 515
+        width: 514
         height: 722
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -152,20 +152,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 455ea23e5d10b1950800000000000000
-      internalID: 6420727711897675092
+      spriteID: e808147695c56a3b0800000000000000
+      internalID: -5501608355732291442
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ives Corrupted - Idle_2
+      name: Ives Corrupted - Idle 1_2
       rect:
         serializedVersion: 2
-        x: 2319
+        x: 2287
         y: 1167
         width: 514
-        height: 738
+        height: 706
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,64 +174,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4f137b2be8bf28240800000000000000
-      internalID: 4792669543777907188
+      spriteID: 1834ac2bff3862cc0800000000000000
+      internalID: -3736153706617748607
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ives Corrupted - Idle_3
+      name: Ives Corrupted - Idle 1_3
       rect:
         serializedVersion: 2
-        x: 255
-        y: 143
-        width: 529
-        height: 723
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c5e371669196cb440800000000000000
-      internalID: 4952949248008601180
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Ives Corrupted - Idle_4
-      rect:
-        serializedVersion: 2
-        x: 1294
-        y: 143
-        width: 515
-        height: 738
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a8541ff8178c93360800000000000000
-      internalID: 7149966273499186570
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Ives Corrupted - Idle_5
-      rect:
-        serializedVersion: 2
-        x: 2319
+        x: 239
         y: 143
         width: 514
-        height: 723
+        height: 722
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -240,8 +196,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 99a6eb2d3edd98fc0800000000000000
-      internalID: -3492016065486099815
+      spriteID: b0494df2a80dddb10800000000000000
+      internalID: 2007990300803634187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ives Corrupted - Idle 1_4
+      rect:
+        serializedVersion: 2
+        x: 1263
+        y: 143
+        width: 514
+        height: 738
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2fb793fa0bc75dc0800000000000000
+      internalID: -3650225725063577814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ives Corrupted - Idle 1_5
+      rect:
+        serializedVersion: 2
+        x: 2287
+        y: 143
+        width: 530
+        height: 722
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9bb7e7bd0be25c250800000000000000
+      internalID: 5964224618653711289
       vertices: []
       indices: 
       edges: []
@@ -250,7 +250,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -260,12 +260,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Ives Corrupted - Idle_0: -2237550213906174002
-      Ives Corrupted - Idle_1: 6420727711897675092
-      Ives Corrupted - Idle_2: 4792669543777907188
-      Ives Corrupted - Idle_3: 4952949248008601180
-      Ives Corrupted - Idle_4: 7149966273499186570
-      Ives Corrupted - Idle_5: -3492016065486099815
+      Ives Corrupted - Idle 1_0: -8846867510835592792
+      Ives Corrupted - Idle 1_1: -5501608355732291442
+      Ives Corrupted - Idle 1_2: -3736153706617748607
+      Ives Corrupted - Idle 1_3: 2007990300803634187
+      Ives Corrupted - Idle 1_4: -3650225725063577814
+      Ives Corrupted - Idle 1_5: 5964224618653711289
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
