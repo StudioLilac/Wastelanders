@@ -118,10 +118,10 @@ TextureImporter:
       name: Ives Corrupted - Idle 1_0
       rect:
         serializedVersion: 2
-        x: 239
-        y: 1167
-        width: 514
-        height: 738
+        x: 0
+        y: 1024
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,10 +140,10 @@ TextureImporter:
       name: Ives Corrupted - Idle 1_1
       rect:
         serializedVersion: 2
-        x: 1263
-        y: 1167
-        width: 514
-        height: 722
+        x: 1024
+        y: 1024
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -162,10 +162,10 @@ TextureImporter:
       name: Ives Corrupted - Idle 1_2
       rect:
         serializedVersion: 2
-        x: 2287
-        y: 1167
-        width: 514
-        height: 706
+        x: 2048
+        y: 1024
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -184,10 +184,10 @@ TextureImporter:
       name: Ives Corrupted - Idle 1_3
       rect:
         serializedVersion: 2
-        x: 239
-        y: 143
-        width: 514
-        height: 722
+        x: 0
+        y: 0
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -206,10 +206,10 @@ TextureImporter:
       name: Ives Corrupted - Idle 1_4
       rect:
         serializedVersion: 2
-        x: 1263
-        y: 143
-        width: 514
-        height: 738
+        x: 1024
+        y: 0
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -228,10 +228,10 @@ TextureImporter:
       name: Ives Corrupted - Idle 1_5
       rect:
         serializedVersion: 2
-        x: 2287
-        y: 143
-        width: 530
-        height: 722
+        x: 2048
+        y: 0
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -250,7 +250,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: ff1001ad3c6f06d41bd45b0c4f6d3bbe
     internalID: 0
     vertices: []
     indices: 
