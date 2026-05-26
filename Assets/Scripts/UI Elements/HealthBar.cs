@@ -8,13 +8,13 @@ public class HealthBar : MonoBehaviour
 {
     [SerializeField]
     private RectTransform myRectTransform;
-    public Slider slider;
-    public TMP_Text healthText;
-    public Canvas healthCanvas;
+    [SerializeField] private Slider slider;
+    [SerializeField] private TMP_Text healthText;
+    [SerializeField] private Canvas healthCanvas;
 
-    private int FadeSortingOrder => CombatFadeScreenHandler.Instance.FADE_SORTING_ORDER;
-    private string FadeSortingLayer => CombatFadeScreenHandler.Instance.FADE_SORTING_LAYER;
-    private float FadeZValue => CombatFadeScreenHandler.Instance.FADE_SCREEN_Z_VALUE;
+    private int FadeSortingOrder => new GetFadeSortingOrder().Query() ?? 0;
+    private string FadeSortingLayer => new GetFadeSortingLayer().Query() ?? string.Empty;
+    private float FadeZValue => new GetFadeScreenZValue().Query() ?? 0f;
 
     public void Start()
     {
@@ -23,6 +23,11 @@ public class HealthBar : MonoBehaviour
         myPosition.z = FadeZValue + 0.5f; // Default health bar seems to be offset by z by this amount
         myRectTransform.localPosition = myPosition;
         DeEmphasize();
+    }
+
+    public void SetText(string str)
+    {
+        healthText.text = str;
     }
 
     public void setMaxHealth(int maxHealth)

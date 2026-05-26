@@ -1,31 +1,26 @@
 using LevelSelectInformation;
 using System.Collections;
+using Systems.Persistence;
 using UnityEngine;
+using static LevelSelectInformation.BountyInformation;
 
 public class LevelSelect : MonoBehaviour
 {
-    public void OnEnable()
+    public void Awake()
     {
-        StageInformation.StageInformationEvent += OpenScene;
-        BountyInformation.BountyInformationEvent += OpenBountyByTypeName;
+        this.Subscribe<StageInformationEvent> (e => OpenScene(e.SceneName));
+        this.Subscribe<BountyInformationEvent>(e => OpenScene(SceneData.Get<SceneData.ContractSelect>().SceneName));
     }
-    public void OnDisable()
+
+    public void PrincessFrogBounties()
     {
-        StageInformation.StageInformationEvent -= OpenScene;
-        BountyInformation.BountyInformationEvent -= OpenBountyByTypeName;
+        new BountyInformationEvent(Get<PrincessFrogBounty>()).Invoke();
     }
 
     protected void OpenScene(string s)
     {
         FadeLevelIn(s);
     }
-
-    private void OpenBountyByTypeName(BountyInformation bountyInformation)
-    {
-        BountyManager.Instance.SelectedBountyInformation = bountyInformation;
-        FadeLevelIn(SceneData.Get<SceneData.ContractSelect>().SceneName);
-    }
-
     public void DeckSelect()
     {
         OpenScene(SceneData.Get<SceneData.SelectionScreen>().SceneName);
@@ -34,11 +29,6 @@ public class LevelSelect : MonoBehaviour
     public void MainMenu()
     {
         OpenScene(SceneData.Get<SceneData.MainMenu>().SceneName);
-    }
-
-    public void Tutorial()
-    {
-        OpenScene(SceneData.Get<SceneData.TutorialFight>().SceneName);
     }
 
     public void LevelSelectScene()
@@ -72,13 +62,13 @@ public class LevelSelect : MonoBehaviour
         OpenScene(SceneData.Get<SceneData.PreBounty2>().SceneName);
     }
 
-    public void PrincessFrogBounties()
-    {
-        OpenBountyByTypeName(BountyInformation.PRINCESS_FROG_BOUNTY);
-    }
-
     void FadeLevelIn(string levelName)
     {
+        if (new GetSaveSystemStatus().Query() is SaveStatus.Error)
+        {
+            new DisplayWarning(new PopupType.CustomPopup("Wow, I'm glad I added this fallback. The current save file has issues right now. \n Could you please try restarting the game or notifying the devs?")).Invoke();
+            return;
+        }
         GameStateManager.Instance.LoadScene(levelName);
     }
 }

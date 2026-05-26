@@ -1,0 +1,9 @@
+﻿<Solution>
+  <Project Path="MainGame.csproj" />
+  <Project Path="FMODUnityEditor.csproj" />
+  <Project Path="FMODUnityResonanceEditor.csproj" />
+  <Project Path="FMODUnity.csproj" />
+  <Project Path="FMODUnityHaptics.csproj" />
+  <Project Path="FMODUnityResonance.csproj" />
+  <Project Path="Tests.csproj" />
+</Solution>

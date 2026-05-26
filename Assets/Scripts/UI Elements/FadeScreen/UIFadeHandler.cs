@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class UIFadeHandler : FadeHandlerBase
 {
     [SerializeField] private Image uiImage;
+    public Image Image => uiImage;
     protected override float CurrentAlpha => uiImage.color.a;
 
     protected override void SetAlpha(float alpha)

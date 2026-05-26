@@ -53,6 +53,7 @@ MonoBehaviour:
   animator: {fileID: 3297183234373819581}
   combatInfo: {fileID: 5598173080790413213}
   boxCollider: {fileID: 6773406975685228959}
+  passOutSprite: {fileID: 21300000, guid: 87829d35cc4de8b4db02b857e0431956, type: 3}
   <AnimatorController>k__BackingField: {fileID: 9100000, guid: 499364b2686c3514a9c74e8bf5f15063, type: 2}
   availableActions:
   - {fileID: 2376898879351982445, guid: 763a690f87eae40e2ba78421da934720, type: 3}
@@ -61,7 +62,7 @@ MonoBehaviour:
   - {fileID: 2376898879351982445, guid: 8e1f3cbdadd7f894aa929faf762c174e, type: 3}
 --- !u!95 &3297183234373819581
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -75,6 +76,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -97,6 +99,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

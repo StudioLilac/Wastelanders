@@ -31,8 +31,8 @@ public class ProjectileBehaviour : MonoBehaviour
         //UpdateFacing(diffInLocation, destination);
         GameObject spitProjectile = Instantiate(projectilePrefab, originalPosition, UpdateAngleWithPosition(origin, targetPosition));
         SpriteRenderer spitSpriteRenderer = spitProjectile.GetComponent<SpriteRenderer>();
-        spitSpriteRenderer.sortingOrder = CombatFadeScreenHandler.Instance.FADE_SORTING_ORDER;
-        spitSpriteRenderer.sortingLayerName = CombatFadeScreenHandler.Instance.FADE_SORTING_LAYER;
+        spitSpriteRenderer.sortingOrder = new GetFadeSortingOrder().Query() ?? 0;
+        spitSpriteRenderer.sortingLayerName = new GetFadeSortingLayer().Query() ?? string.Empty;
         float flipTimer = 0.0f;
         float flipInterval = 0.2f;
         float spitDuration = distance / projSpeed;

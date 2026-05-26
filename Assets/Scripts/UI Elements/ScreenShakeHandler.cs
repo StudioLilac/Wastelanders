@@ -6,13 +6,8 @@ using UnityEngine;
 #nullable enable
 public record ShakeScreen(float Intensity) : IEvent;
 public record GetActiveCamera(): IQuery<CinemachineVirtualCamera?>;
-public class ScreenShakeHandler : MonoBehaviour
-{
-    public static bool IsScreenShakeEnabled
-    {
-        get => SaveLoadSystem.Instance.GetUserPreferences().screenShakePreference.IsScreenShakeEnabled;
-        set => SaveLoadSystem.Instance.GetUserPreferences().screenShakePreference.IsScreenShakeEnabled = value;
-    }
+public class ScreenShakeHandler : MonoBehaviour {
+    public static bool IsScreenShakeEnabled = true;
 
     private void Awake()
     {

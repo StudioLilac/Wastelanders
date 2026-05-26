@@ -8,6 +8,7 @@ using static BattleQueue;
 
 public record CardInserted(ActionClass ActionClass) : IEvent;
 public record OnQueueChanged(List<ActionWrapper> Items) : IEvent;
+public record DequeueEvent(ActionWrapper Wrapper): IEvent;
 
 public class BattleQueue : MonoBehaviour
 {
@@ -54,7 +55,7 @@ public class BattleQueue : MonoBehaviour
         CombatManager.EnemiesWinEvent -= ClearBattleQueue;
     }
 
-    private void ClearBattleQueue()
+    public void ClearBattleQueue()
     {
         actionQueue.Clear();
     }
@@ -86,6 +87,22 @@ public class BattleQueue : MonoBehaviour
         return new PopupType.None();
     }
 
+    public PopupType TryFormClash(ActionClass existingAction, ActionClass incomingAction)
+    {
+        return (existingAction, incomingAction) switch
+        {
+            _ when existingAction.Origin is PlayerClass
+                => new PopupType.CustomPopup("Same team!"),
+            _ when !existingAction.Clashable
+                => new PopupType.CustomPopup("Unclashable!"),
+            _ when !incomingAction.Clashable
+                => new PopupType.CustomPopup("This action cannot clash!"),
+            _ when existingAction.Target != incomingAction.Origin && existingAction.Speed > incomingAction.Speed
+                => new PopupType.CustomPopup("Speed is too slow to redirect!"),
+            _ => actionQueue.FormClash(existingAction, incomingAction)
+        };
+    }
+
     //Remove all cards with (@param entity) as the target and origin
     public void RemoveAllInstancesOfEntity(EntityClass entity)
     {
@@ -112,6 +129,7 @@ public class BattleQueue : MonoBehaviour
         {
             ActionWrapper actionWrapper = array[0];
             actionWrapper.BattleIcon?.Emphasize();
+            new DequeueEvent(actionWrapper).Invoke();
 
             if (actionWrapper.IsClashing())
             {
@@ -295,6 +313,29 @@ public class BattleQueue : MonoBehaviour
         {
             return array;
         }
+
+        public PopupType FormClash(ActionClass origin, ActionClass attempt)
+        {
+            for (int i = 0; i < array.Count; i++)
+            {
+                ActionWrapper wrapper = array[i];
+                if (wrapper.PlayerAction == origin || wrapper.EnemyAction == origin)
+                {
+                    if (wrapper.IsClashing())
+                    {
+                        return new PopupType.CustomPopup("Already in a clash!");
+                    }
+
+                    wrapper.SetClashingAction(attempt);
+                    Remove(wrapper);
+                    array.Insert(LocationToInsertWrapper(wrapper), wrapper);
+                    new OnQueueChanged(new(array)).Invoke();
+                    return new PopupType.None();
+                }
+            }
+
+            return new PopupType.CustomPopup("Action not found in queue!");
+        }
     }
     
 
@@ -338,8 +379,8 @@ public class BattleQueue : MonoBehaviour
             if ((PlayerAction && !PlayerAction.Clashable) || (EnemyAction && !EnemyAction.Clashable)) return false;
 
             // If the PlayerAction's speed is greater than the enemy Action's speed it can redirect the enemy's attack and clash. Enemies cannot redirect player attacks. 
-            bool playerWrapperClashesWithEnemyAction = PlayerAction != null && (PlayerAction.Origin == clashingAction.Target || PlayerAction.Speed >= clashingAction.Speed) && PlayerAction.Target == clashingAction.Origin;
-            bool enemyWrapperClashesWithPlayerAction = EnemyAction != null && EnemyAction.Origin == clashingAction.Target && (EnemyAction.Target == clashingAction.Origin || clashingAction.Speed >= EnemyAction.Speed);
+            bool playerWrapperClashesWithEnemyAction = PlayerAction != null && (PlayerAction.Origin == clashingAction.Target || PlayerAction.Speed >= clashingAction.Speed) && PlayerAction.Target == clashingAction.Origin && PlayerAction.Clashable && clashingAction.Clashable;
+            bool enemyWrapperClashesWithPlayerAction = EnemyAction != null && EnemyAction.Origin == clashingAction.Target && (EnemyAction.Target == clashingAction.Origin || clashingAction.Speed >= EnemyAction.Speed) && EnemyAction.Clashable && clashingAction.Clashable;
 
             if (clashingAction.IsPlayedByPlayer())
             {

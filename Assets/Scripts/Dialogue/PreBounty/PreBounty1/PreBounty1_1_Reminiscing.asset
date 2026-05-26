@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4fafe43b89343e3a7ba1235e8987c0f, type: 3}
+  m_Name: PreBounty1_1_Reminiscing
+  m_EditorClassIdentifier: 
+  Entries:
+  - content: <i>After a decade of closure due to unresolved NITES disappearances,
+      the Tundra reopens for active research expeditions.</i>
+    speaker: {fileID: 11400000, guid: a9924d74021fb49d796b34e9cd8d18a3, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 314095657258319938
+  - content: <i>Leading scientific experts now theorize the volatile region was ground
+      zero for a massive meteor strike. </i>
+    speaker: {fileID: 11400000, guid: a9924d74021fb49d796b34e9cd8d18a3, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 314095657258319938
+  - content: <i>Qualified personnel proficient in Waste Crystal extractions instructed
+      to contact the head office for immediate details.</i>
+    speaker: {fileID: 11400000, guid: a9924d74021fb49d796b34e9cd8d18a3, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 314095657258319938
+  - content: 'Finally... it worked. '
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 314095657258319953
+    - rid: 314095657258319955
+    - rid: 314095657258319956
+  - content: 'All the research and convincing I did. They actually listened. '
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 314095657258319938
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: a9924d74021fb49d796b34e9cd8d18a3, type: 2}
+    - rid: 314095657258319953
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        sprite: {fileID: 21300000, guid: e37d4fbf07c214c868939546f702fa2b, type: 3}
+    - rid: 314095657258319955
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        action: 10
+        duration: 0
+    - rid: 314095657258319956
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        action: 60
+        duration: 1

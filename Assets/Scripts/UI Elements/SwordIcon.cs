@@ -3,7 +3,7 @@ using UnityEngine;
 using static IBattleQueueDisplayable;
 
 #nullable enable
-public class SwordIcon : MonoBehaviour, IBattleQueueDisplayable
+public class SwordIcon : MonoBehaviour
 {
     private static readonly int ClashStateHash = Animator.StringToHash("ClashState");
     [SerializeField] private SpriteRenderer swordsIcon = null!;
@@ -20,13 +20,13 @@ public class SwordIcon : MonoBehaviour, IBattleQueueDisplayable
 
     public void Emphasize()
     {
-        swordsIcon.sortingLayerName = CombatFadeScreenHandler.Instance.FADE_SORTING_LAYER;
-        swordsIcon.sortingOrder = CombatFadeScreenHandler.Instance.FADE_SORTING_ORDER + 6;
+        swordsIcon.sortingLayerName = new GetFadeSortingLayer().Query() ?? string.Empty;
+        swordsIcon.sortingOrder = (new GetFadeSortingOrder().Query() ?? 0) + 6;
     }
 
     public void DeEmphasize()
     {
-        swordsIcon.sortingOrder = CombatFadeScreenHandler.Instance.FADE_SORTING_ORDER - 1;
+        swordsIcon.sortingOrder = (new GetFadeSortingOrder().Query() ?? 0) - 1;
     }
 
     public void SetFullyTransparent()

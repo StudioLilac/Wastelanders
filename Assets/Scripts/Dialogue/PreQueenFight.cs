@@ -554,9 +554,7 @@ public class PreQueenFight : DialogueClasses
             yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
             yield return new WaitForSeconds(1.0f);
             AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
-
-            GameStateManager.Instance.FirstTimeFinished = GameStateManager.Instance.CurrentLevelProgress < StageInformation.PRINCESS_FROG_FIGHT.LevelID;
-            GameStateManager.Instance.UpdateLevelProgress(StageInformation.PRINCESS_FROG_FIGHT);
+            GameStateManager.Instance.UpdateLevelProgress(StageInformation.Get<StageInformation.PrincessFrogFight>());
 
             yield return new WaitForSeconds(1.5f);
             VerticalLayoutChange.MoveBoxV2ToBottom();
@@ -584,12 +582,12 @@ public class PreQueenFight : DialogueClasses
         CombatManager.PlayersWinEvent += PlayersWin;
         CombatManager.EnemiesWinEvent += EnemiesWin;
         Beetle.OnGainBuffs += ExplainBeetleBuff;
-        this.Subscribe<HatcheryUsed>(ExplainHatchery);
+        this.Subscribe<CardUsed<Hatchery>>(ExplainHatchery);
     }
 
-    void ExplainHatchery(HatcheryUsed e)
+    void ExplainHatchery(CardUsed<Hatchery> e)
     {
-        this.UnSubscribe<HatcheryUsed>(ExplainHatchery);
+        this.UnSubscribe<CardUsed<Hatchery>>(ExplainHatchery);
         StartCoroutine(DialogueBoxV2.Instance.Play(hatcheryExplanation));
     }
 
@@ -712,7 +710,7 @@ public class PreQueenFight : DialogueClasses
             enemy.DestroyDeck();
         } else if (entityClass is PlayerClass player)
         {
-            CombatManager.Instance.RemovePlayer(player);
+            new RemoveEntityFromTeam(player, EntityTeam.PlayerTeam).Invoke();
             player.DestroyDeck();
         }
         entityClass.animator.enabled = false;

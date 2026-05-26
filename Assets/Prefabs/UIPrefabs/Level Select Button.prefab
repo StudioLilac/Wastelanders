@@ -769,7 +769,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Level>k__BackingField: 0
   _textMeshPro: {fileID: 697530316340953098}
-  title: 1. TUTORIAL
   button: {fileID: 4262495870184010103}
   outline: {fileID: 9140122339366179723}
   defaultOutline: {x: 1, y: 1}
@@ -780,6 +779,7 @@ MonoBehaviour:
   hoverTextColor: {r: 1, g: 1, b: 0, a: 1}
   hover: {fileID: 3512210353524396091}
   lockedIndicator: {fileID: 69882546978433369}
+  levelPreview: {fileID: 8545744965772050300}
   lockAnimationDuration: 0.5
 --- !u!1 &8631010744981370892
 GameObject:

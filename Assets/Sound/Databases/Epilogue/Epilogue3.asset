@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a670f5b60f9ade045bd8e0301eecbe93, type: 3}
+  m_Name: Epilogue3
+  m_EditorClassIdentifier: 
+  backgroundMusicPrimary: {fileID: 8300000, guid: 1855cb6c7d3574f81b4a4a7aeab293eb, type: 3}
+  backgroundMusicIntro: {fileID: 0}
+  combatMusicPrimary: {fileID: 8300000, guid: f7d78169f4dbd734eae797926ecffca2, type: 3}
+  combatMusicIntro: {fileID: 0}
+  backgroundMusicDeath: {fileID: 0}
+  isPersisting: 0
