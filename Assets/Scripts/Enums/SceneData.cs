@@ -301,7 +301,7 @@ public abstract class SceneData : Enum<SceneData>
 
         public override SceneAudio GetAudio(AudioDatabase database) => database.Empty;
 
-        public override MonoBehaviour[] RequiredPrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
+        public override MonoBehaviour[] ScenePrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
         { prefabs.audioManager, prefabs.uiFadeScreenManager, prefabs.combatFadeScreenManager, prefabs.pauseMenuV2, prefabs.hudV2, prefabs.tooltip, prefabs.dialogueManager, prefabs.popupManager,  prefabs.gameOver, prefabs.battleIntro, prefabs.arrowIndicatorManager, prefabs.dialogueBoxV2  };
     }
     
