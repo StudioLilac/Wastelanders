@@ -77,9 +77,8 @@ namespace Dialogue.Epilogue
             }
         }
 
-        private IEnumerator FadeOutBG(Image bgImage)
+        private IEnumerator FadeOutBG(Image bgImage, float fadeTime = 0.8f)
         {
-            float fadeTime = 0.8f;
             for (var t = 0f; t < fadeTime; t += Time.deltaTime)
             {
                 bgImage.color = new Color(1f, 1f, 1f, fadeTime - t / fadeTime);
@@ -111,13 +110,14 @@ namespace Dialogue.Epilogue
             yield return DialogueBoxV2.Instance.Play(postVisionDialogue.Into());
 
             shouldFlicker = true;
+            yield return new WaitForSeconds(5);
             yield return DialogueBoxV2.Instance.Play(postBonfireDialogue.Into());
 
             background2.SetActive(true);
             yield return FadeInBG(tundraWithNoise);
 
             yield return DialogueBoxV2.Instance.Play(momStoryFlashbackDialogue.Into());
-            yield return FadeOutBG(tundraWithNoise);
+            yield return FadeOutBG(tundraWithNoise, 1f);
             background2.SetActive(false);
 
             yield return DialogueBoxV2.Instance.Play(weiseDialogue.Into());
