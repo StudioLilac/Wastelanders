@@ -261,7 +261,6 @@ namespace UI_Toolkit
             pauseMenuPanel.Q<Button>("button-rst").clicked += OnRstClicked;
             pauseMenuPanel.Q<Button>("button-dck").clicked += OnDckClicked;
             pauseMenuPanel.Q<Button>("button-lvl").clicked += OnLvlClicked;
-            pauseMenuPanel.Q<Button>("button-gls").clicked += OnGlsClicked;
             pauseMenuPanel.Q<Button>("button-mnu").clicked += OnMnuClicked;
 
             dialogue.Q<Button>("button-cls").clicked += OnClsClicked;
