@@ -528,10 +528,10 @@ public class PreQueenFight : DialogueClasses
             ives.DeEmphasize();
             theQueen.DeEmphasize();
 
-            yield return blackbg.FadeInDarkScreen(2f);
+            yield return blackbg.FadeInDarkScreen(3f);
             
-            yield return title.FadeInDarkScreen(1f);
-            yield return subtitle.FadeInDarkScreen(1f);
+            yield return title.FadeInDarkScreen(2f);
+            yield return subtitle.FadeInDarkScreen(2f);
 
             yield return new WaitForSeconds(1f);
 
