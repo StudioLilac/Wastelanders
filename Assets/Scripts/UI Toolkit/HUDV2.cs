@@ -9,7 +9,7 @@ using UtilClass;
 namespace UI_Toolkit
 {
     public class HUDV2 : MonoBehaviour {
-        private const float FADED_OPACITY = 0.1f;
+        private const float FADED_OPACITY = 0.0f;
         
         [SerializeField] private Sprite deckInfoSprite;
         public static HUDV2 Instance { get; private set; }
