@@ -1,9 +1,11 @@
 using System;
 using UI_Toolkit;
 using UnityEngine;
+using static UnityEngine.UI.Image;
 
 
 #nullable enable
+public record ActionIconClicked(ActionClass CardUI) : IEvent;
 public record CurrentPlayer() : IQuery<PlayerClass?>;
 public record UpdateHand() : IEvent;
 public class HighlightManager : MonoBehaviour 
@@ -39,6 +41,7 @@ public class HighlightManager : MonoBehaviour
     {
         this.Answer<CurrentPlayer, PlayerClass?>(GetCurrentPlayer);
         this.Subscribe<UpdateHand>(RenderAppropriateHand);
+        this.Subscribe<ActionIconClicked>(e => OnIconClicked(e.CardUI, currentHighlightedAction));
         CombatManager.OnGameStateChanged += ResetSelection;
         EntityClass.OnEntityClicked += OnEntityClicked;
         ActionClass.CardClickedEvent += OnActionClicked;
@@ -150,6 +153,25 @@ public class HighlightManager : MonoBehaviour
         currentHighlightedAction = null;
     }
 
+    public void OnIconClicked(ActionClass clickedIcon, ActionClass? clashingAction)
+    {
+        if (clashingAction == null) return;
+        clashingAction.Target = clickedIcon.Origin;
+        PopupType result = BattleQueue.BattleQueueInstance.TryFormClash(clickedIcon, clashingAction);
+        if (result is not PopupType.None)
+        {
+            new DisplayWarning(result).Invoke();
+            clashingAction.Target = null;
+        } else
+        {
+            PlayerManuallyInsertedAction?.Invoke(clickedIcon);
+            selectedPlayer!.HandleUseCard(clashingAction);
+            clickedIcon.Origin.DeHighlight();
+            clashingAction.ForceNormalState();
+            currentHighlightedEnemyEntity = null;
+            currentHighlightedAction = null;
+        }
+    }
     public void OnActionClicked(ActionClass clicked)
     {
         if (CombatManager.Instance.GameState != GameState.SELECTION || PauseMenuV2.IsPaused) return;

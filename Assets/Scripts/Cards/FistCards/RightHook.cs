@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Xml.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UtilClass;
 using static UnityEngine.UI.Image;
 
 public class RightHook : FistCards
@@ -25,6 +26,16 @@ public class RightHook : FistCards
         CardType = CardType.MeleeAttack;
         base.Initialize();
     }
+    
+    protected override GlossaryNode[] GetChildrenGlossaryNodes() => new[] { Haymaker.Glossary };
+    
+    public static readonly GlossaryNode Glossary = new(
+        "Right Hook",
+        "If this card is not staggered, use 'Haymaker'.",
+        null,
+        new CardStats(2, 4),
+        Haymaker.Glossary
+    );
 
     public override void CardIsUnstaggered()
     {

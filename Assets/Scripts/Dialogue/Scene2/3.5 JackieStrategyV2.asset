@@ -76,22 +76,22 @@ MonoBehaviour:
     version: 2
     RefIds:
     - rid: 1207053248668106824
-      type: {class: CustomEvent, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: CustomEvent, ns: DialogueScripts, asm: MainGame}
       data:
         EventName: 
     - rid: 1207053248668106825
-      type: {class: CustomEvent, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: CustomEvent, ns: DialogueScripts, asm: MainGame}
       data:
         EventName: 
     - rid: 1207053248668106826
-      type: {class: CustomEvent, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: CustomEvent, ns: DialogueScripts, asm: MainGame}
       data:
         EventName: 
     - rid: 1207053248668106827
-      type: {class: CustomEvent, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: CustomEvent, ns: DialogueScripts, asm: MainGame}
       data:
         EventName: 
     - rid: 1207053248668106828
-      type: {class: CustomEvent, ns: DialogueScripts, asm: Assembly-CSharp}
+      type: {class: CustomEvent, ns: DialogueScripts, asm: MainGame}
       data:
         EventName: 

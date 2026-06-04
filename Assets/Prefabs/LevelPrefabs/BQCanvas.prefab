@@ -365,6 +365,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2110569621900783587}
   - component: {fileID: 6479902584017537077}
+  - component: {fileID: 234536196861661656}
   - component: {fileID: 785467685062423962}
   - component: {fileID: 6234085889068335930}
   m_Layer: 0
@@ -413,6 +414,18 @@ MonoBehaviour:
   battleBeginButton: {fileID: 1933517300366859696}
   clashingPrefab: {fileID: 156142739676490864, guid: b10263b2eb9aadc41aa6c2d7606dba7a, type: 3}
   battleQueueParent: {fileID: 7622365840802787573}
+--- !u!114 &234536196861661656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3845234593521427544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 859eeee2fa593c14088e2718e2fb837f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &785467685062423962
 MonoBehaviour:
   m_ObjectHideFlags: 0

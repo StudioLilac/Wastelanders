@@ -1,6 +1,8 @@
+using LevelSelectInformation;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static LevelSelectInformation.StageInformation;
 
 /*
  * It seems that for the most part, the level select scene components are mostly self managed
@@ -9,15 +11,15 @@ using UnityEngine;
  */
 public class LevelSelectManager : MonoBehaviour
 {
-
-    [SerializeField] private LevelSelectButton princessFrogFightButton;
     [SerializeField] private CanvasGroup levelSelectCanvas;
 
     public void Start()
     {
-        if (GameStateManager.Instance.FirstTimeFinished) {
-            princessFrogFightButton.Lock();
-            GameStateManager.Instance.FirstTimeFinished = false;
+        var showUnlockDialogue = !GameStateManager.SEASON_1_ACTIVE &&
+            GameStateManager.Instance.CurrentLevelProgress >= Get<PrincessFrogFight>().LevelID &&
+            GameStateManager.Instance.RecordFirstTimeEvent(OneTimeEvents.ExplainBounties);
+
+        if (showUnlockDialogue) {
             StartCoroutine(UnlockedDialogue());
         }
     }
@@ -40,7 +42,6 @@ public class LevelSelectManager : MonoBehaviour
             new DialogueText("Thanks for playing, and leave a review for us so we know you had fun!!! (We'll personally read every one of them out to the team.)", tutorialName, null),
             new DialogueText("Keep in touch, Studio Lilac.", tutorialName, null),
         }));
-        princessFrogFightButton.Unlock(animate: true);
         levelSelectCanvas.interactable = true;
         levelSelectCanvas.blocksRaycasts = true;
         yield return null;

@@ -11,6 +11,10 @@ using static BattleIntroEnum;
 //@author: Andrew
 public class PreQueenFight : DialogueClasses
 {
+    [SerializeField] private UIFadeHandler blackbg;
+    [SerializeField] private TMPFadeHandler title;
+    [SerializeField] private TMPFadeHandler subtitle;
+    
     [SerializeField] private Jackie jackie;
     [SerializeField] private Ives ives;
     [SerializeField] private Transform playerCombatTransform;
@@ -524,50 +528,55 @@ public class PreQueenFight : DialogueClasses
             ives.DeEmphasize();
             theQueen.DeEmphasize();
 
-            ives.InCombat();
-            jackie.InCombat();
-            theQueen.InCombat();
-            theQueen.SetReturnPosition(theQueen.transform.position);
-            theQueen.IntializeChildBeetles(queenGuardBeetles);
-            for (int i = 0; i < queenGuardBeetles.Count; i++)
-            {
-                queenGuardBeetles[i].InCombat();
-                queenGuardBeetles[i].SetReturnPosition(queenGuardBeetles[i].transform.position);
-            }
-            foreach (Crystals crystal in crystals)
-            {
-                crystal.InCombat();
-            }
+            yield return blackbg.FadeInDarkScreen(3f);
+            
+            yield return title.FadeInDarkScreen(2f);
+            yield return subtitle.FadeInDarkScreen(2f);
 
-            if (instaKill)
-            {
-                jackie.AddStacks(Accuracy.buffName, 900);
-                jackie.AddStacks(Resonate.buffName, 900);
-            }
+            yield return new WaitForSeconds(1f);
 
-            treeSprite.gameObject.SetActive(false);
-            closeTrees.ForEach(tree => StartCoroutine(tree.FadeInLightScreen(0.8f)));
+            // ives.InCombat();
+            // jackie.InCombat();
+            // theQueen.InCombat();
+            // theQueen.SetReturnPosition(theQueen.transform.position);
+            // theQueen.IntializeChildBeetles(queenGuardBeetles);
+            // for (int i = 0; i < queenGuardBeetles.Count; i++)
+            // {
+            //     queenGuardBeetles[i].InCombat();
+            //     queenGuardBeetles[i].SetReturnPosition(queenGuardBeetles[i].transform.position);
+            // }
+            // foreach (Crystals crystal in crystals)
+            // {
+            //     crystal.InCombat();
+            // }
+            //
+            // if (instaKill)
+            // {
+            //     jackie.AddStacks(Accuracy.buffName, 900);
+            //     jackie.AddStacks(Resonate.buffName, 900);
+            // }
+            //
+            // treeSprite.gameObject.SetActive(false);
+            // closeTrees.ForEach(tree => StartCoroutine(tree.FadeInLightScreen(0.8f)));
+            //
+            // CombatManager.Instance.BeginCombat();
+            // new BattleIntroEvent(Get<ClashIntro>()).Invoke();
+            // BeginQueenCombat();
+            // yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
+            // yield return new WaitForSeconds(1.0f);
+            // AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
+            // GameStateManager.Instance.UpdateLevelProgress(StageInformation.Get<StageInformation.PrincessFrogFight>());
+            //
+            // yield return new WaitForSeconds(1.5f);
+            // VerticalLayoutChange.MoveBoxV2ToBottom();
+            // yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
+            //
+            // AudioManager.Instance.StartBackgroundTrack();
+            //
+            // this.Subscribe<CustomEvent>(FadeInBackground);
+            // yield return StartCoroutine(DialogueBoxV2.Instance.Play(PostFight));
 
-            CombatManager.Instance.BeginCombat();
-            new BattleIntroEvent(Get<ClashIntro>()).Invoke();
-            BeginQueenCombat();
-            yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
-            yield return new WaitForSeconds(1.0f);
-            AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
-
-            GameStateManager.Instance.FirstTimeFinished = GameStateManager.Instance.CurrentLevelProgress < StageInformation.PRINCESS_FROG_FIGHT.LevelID;
-            GameStateManager.Instance.UpdateLevelProgress(StageInformation.PRINCESS_FROG_FIGHT);
-
-            yield return new WaitForSeconds(1.5f);
-            VerticalLayoutChange.MoveBoxV2ToBottom();
-            yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
-
-            AudioManager.Instance.StartBackgroundTrack();
-
-            this.Subscribe<CustomEvent>(FadeInBackground);
-            yield return StartCoroutine(DialogueBoxV2.Instance.Play(PostFight));
-
-            GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.PostQueenFight>().SceneName);
+            GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.MainMenu>().SceneName);
         }
         
     }
@@ -584,12 +593,12 @@ public class PreQueenFight : DialogueClasses
         CombatManager.PlayersWinEvent += PlayersWin;
         CombatManager.EnemiesWinEvent += EnemiesWin;
         Beetle.OnGainBuffs += ExplainBeetleBuff;
-        this.Subscribe<HatcheryUsed>(ExplainHatchery);
+        this.Subscribe<CardUsed<Hatchery>>(ExplainHatchery);
     }
 
-    void ExplainHatchery(HatcheryUsed e)
+    void ExplainHatchery(CardUsed<Hatchery> e)
     {
-        this.UnSubscribe<HatcheryUsed>(ExplainHatchery);
+        this.UnSubscribe<CardUsed<Hatchery>>(ExplainHatchery);
         StartCoroutine(DialogueBoxV2.Instance.Play(hatcheryExplanation));
     }
 
@@ -712,7 +721,7 @@ public class PreQueenFight : DialogueClasses
             enemy.DestroyDeck();
         } else if (entityClass is PlayerClass player)
         {
-            CombatManager.Instance.RemovePlayer(player);
+            new RemoveEntityFromTeam(player, EntityTeam.PlayerTeam).Invoke();
             player.DestroyDeck();
         }
         entityClass.animator.enabled = false;

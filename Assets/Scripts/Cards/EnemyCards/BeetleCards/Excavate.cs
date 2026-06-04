@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Xml.Linq;
 using UnityEngine;
-using static Unity.Collections.AllocatorManager;
-using static UnityEngine.UI.Image;
+using UtilClass;
 
 public class Excavate : BeetleAttacks, IPlayableBeetleCard
 {
@@ -28,6 +24,8 @@ public class Excavate : BeetleAttacks, IPlayableBeetleCard
         myName = "Excavate";
         CardType = CardType.MeleeAttack;
     }
+    
+    protected override GlossaryNode[] GetChildrenGlossaryNodes() => new[] { Keywords.Crystals };
 
     public override void CardIsUnstaggered()
     {

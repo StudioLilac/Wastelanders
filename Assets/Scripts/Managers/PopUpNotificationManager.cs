@@ -30,7 +30,7 @@ public class PopUpNotificationManager : MonoBehaviour
         string HandleConflict(PopupType.SpeedConflict data)
         {
             data.DuplicatedItem.ShakePlayerAction();
-            return "Same Speed Selected!";
+            return $"{data.DuplicatedItem.Name} already queued at this speed!";
         }
 
         string message = popupType switch
@@ -39,7 +39,6 @@ public class PopUpNotificationManager : MonoBehaviour
             PopupType.SelectActionFirst => "Select an Action first!",
             PopupType.SelectPlayerFirst => "Select a Player first!",
             PopupType.InsufficientResources => "Insufficient resources!",
-            PopupType.ContentLocked => "Content Locked!",
             PopupType.CustomPopup data => data.Content,
             _ => string.Empty
         };
@@ -60,6 +59,11 @@ public class PopUpNotificationManager : MonoBehaviour
             canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : canvas.worldCamera,
             out Vector2 localPoint
         );
+
+        var a = 0.5f * ((RectTransform)canvas.transform).rect.size;
+        var b = 0.5f * notification.Measure(message);
+        localPoint.x = Mathf.Clamp(localPoint.x, b.x - a.x, a.x - b.x);
+        localPoint.y = Mathf.Clamp(localPoint.y, b.y - a.y, a.y - b.y);
 
         notification.Initialize(localPoint, message);
     }

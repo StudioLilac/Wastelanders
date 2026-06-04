@@ -8,7 +8,7 @@ public class LowBlow : FistCards
     {
         lowerBound = 3;
         upperBound = 3;
-        Speed = 5;
+        Speed = 4;
         Clashable = false;
 
         myName = "Low Blow";

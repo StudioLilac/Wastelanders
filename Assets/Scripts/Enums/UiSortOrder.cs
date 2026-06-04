@@ -14,7 +14,8 @@ public enum UISortOrder
     GameOverText,
     GameOverDialogue,
     PauseMenu,
-    FadeScreen
+    FadeScreen,
+    SaveIndicator
 }
 
 public static class UiSortOrderHelpers

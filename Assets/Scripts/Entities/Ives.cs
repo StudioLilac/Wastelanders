@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Ives : PlayerClass
 {
-    // @author: andrew
-    // i copy pasted jackie's code. it may not work completely, this is just for testing purposes.
     public override void Start()
     {
         MaxHealth = 35;
@@ -16,7 +14,7 @@ public class Ives : PlayerClass
 
     protected override void GrabDeck()
     {
-        cardPrefabs = CombatManager.Instance.GetDeck(PlayerDatabase.PlayerName.IVES);
+        cardPrefabs = new GetDeck(PlayerDatabase.PlayerName.IVES).Query() ?? new();
     }
 }
 

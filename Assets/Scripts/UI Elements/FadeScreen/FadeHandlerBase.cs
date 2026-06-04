@@ -8,6 +8,11 @@ public abstract class FadeHandlerBase : MonoBehaviour
     protected abstract void SetAlpha(float alpha);
 
     /// <summary>
+    /// Evaluates the animation curve. Override this in subclasses for non-linear fading.
+    /// </summary>
+    protected virtual float EvaluateCurve(float fraction) => fraction;
+
+    /// <summary>
     /// Immediately sets the screen to be fully opaque (black).
     /// </summary>
     public void SetDarkScreen()
@@ -90,8 +95,10 @@ public abstract class FadeHandlerBase : MonoBehaviour
         {
             elapsedTime += Time.deltaTime;
             float fraction = elapsedTime / duration;
-            // Using Lerp is fine here as we calculate fraction every frame
-            float newAlpha = Mathf.Lerp(startAlpha, endAlpha, fraction);
+
+            float easedFraction = EvaluateCurve(fraction);
+            float newAlpha = Mathf.Lerp(startAlpha, endAlpha, easedFraction);
+            
             SetAlpha(newAlpha);
             yield return null;
         }

@@ -1,0 +1,16 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/GlossaryNode.uss?fileID=7433441132597879392&amp;guid=2238380767c349946bd7c20abf66d8f9&amp;type=3#GlossaryNode" />
+    <ui:VisualElement name="glossary-node" class="child-blurb" style="width: auto; max-width: 300px; border-left-width: 10px; border-top-width: 10px; border-right-width: 10px; border-bottom-width: 10px;">
+        <ui:VisualElement name="header-row" style="flex-direction: row; justify-content: space-between; align-items: flex-start;">
+            <ui:VisualElement style="flex-grow: 1;">
+                <ui:Label name="node-title" text="Title" class="child-blurb-title" style="white-space: normal; -unity-text-align: middle-left; flex-direction: column; margin-top: 0; padding-top: 0; background-position-y: top 0; -unity-background-scale-mode: stretch-to-fill;" />
+                <ui:VisualElement enabled="true" name="card-info-row" style="flex-grow: 1; flex-direction: row; align-items: center; justify-content: flex-start;">
+                    <ui:VisualElement name="card-icon" style="flex-grow: 1; min-width: auto; min-height: auto; max-width: 48px; max-height: 48px; width: 48px; height: 48px; background-image: resource(&apos;StatusIcon/Damage&apos;); margin-right: 12px;" />
+                    <ui:Label text="1-5" name="range" style="font-size: 28px; -unity-text-align: middle-left; background-position-x: center 0; justify-content: flex-start;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="node-icon" class="child-blurb-icon" style="width: 60px; height: 60px; -unity-background-scale-mode: scale-to-fit; flex-shrink: 0; background-image: resource(&apos;StatusIcon/Accuracy&apos;);" />
+        </ui:VisualElement>
+        <ui:Label name="node-tooltip" text="This is the description of the Glossary Node. It could be a status effect, keyword, or another card&apos;s description." class="child-blurb-body" style="white-space: normal; flex-grow: 0;" />
+    </ui:VisualElement>
+</ui:UXML>

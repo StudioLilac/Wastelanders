@@ -8,6 +8,7 @@ public class Crystals : EnemyClass, NeutralEntityInterface
     public override void Awake()
     {
         if (Team == EntityTeam.NoTeam) Team = EntityTeam.NeutralTeam;
+        base.Awake();
     }
 
     // Start is called before the first frame update

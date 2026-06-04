@@ -11,7 +11,6 @@ public class LevelSelectButton : MonoBehaviour, IPointerClickHandler
 {
     [field: SerializeField] public Level Level { get; set; }
     [SerializeField] private TMP_Text _textMeshPro;
-    [SerializeField] private string title;
     [SerializeField] private Button button;
     [SerializeField] private Outline outline;
     [SerializeField] private Vector2 defaultOutline;
@@ -22,6 +21,7 @@ public class LevelSelectButton : MonoBehaviour, IPointerClickHandler
     [SerializeField] private Color hoverTextColor;
     [SerializeField] private GameObject hover;
     [SerializeField] private GameObject lockedIndicator;
+    [SerializeField] private Image levelPreview;
     [SerializeField] private float lockAnimationDuration = 0.5f;
 
     #nullable enable
@@ -36,7 +36,7 @@ public class LevelSelectButton : MonoBehaviour, IPointerClickHandler
     {
         if (!button.enabled)
         {
-            PopUpNotificationManager.Instance.DisplayWarning(new PopupType.ContentLocked());
+            PopUpNotificationManager.Instance.DisplayWarning(new PopupType.CustomPopup(LevelInformation?.UnlockRequirementsText() ?? "Content Locked!"));
         }
     }
 
@@ -47,7 +47,16 @@ public class LevelSelectButton : MonoBehaviour, IPointerClickHandler
 
     private void Initialize()
     {
-        if (LevelInformation?.LevelID > GameStateManager.Instance.CurrentLevelProgress) Lock();
+        if (LevelInformation?.UnlockCriteriaMet() == false) Lock();
+        else if (LevelInformation?.LevelEnabled == false) ComingSoon();
+        else Unlock(animate: false);
+    }
+
+    public void ComingSoon()
+    {
+        _textMeshPro.text = "COMING SOON!";
+        button.enabled = false;
+        levelPreview.color = new Color(0.1f, 0.1f, 0.1f);
     }
 
     public void Lock()
@@ -61,7 +70,7 @@ public class LevelSelectButton : MonoBehaviour, IPointerClickHandler
     }
 
     public void Unlock(bool animate = false) {
-        _textMeshPro.text = title;
+        _textMeshPro.text = LevelInformation?.Title ?? string.Empty;
         button.enabled = true;
         bool selfIsLock = lockedIndicator == gameObject;
         if (!animate) {

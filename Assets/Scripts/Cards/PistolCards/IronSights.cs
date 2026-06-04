@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UtilClass;
 
 public class IronSights : PistolCards
 {
@@ -16,6 +17,8 @@ public class IronSights : PistolCards
         description = "Gain one Accuracy, then attack.";
         base.Initialize();
     }
+
+    protected override GlossaryNode[] GetChildrenGlossaryNodes() => new[] { StatusEffects.Accuracy };
 
 
     public override void ApplyEffect()

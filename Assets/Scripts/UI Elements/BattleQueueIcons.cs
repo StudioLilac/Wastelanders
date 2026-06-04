@@ -13,14 +13,16 @@ public interface IBattleQueueDisplayable
     IEnumerator FadeOut();
     void ShakePlayerAction();
     GameObject GameObject { get; }
+    string Name { get; }
 
     public const float EXPAND_DURATION = 0.25f;
 
     public const float FADE_DURATION = 0.15f;
 }
-
 public record BattleQueueIconClick(BattleQueueIcons Icon) : IEvent { }
 
+
+// If you're noticing the battle queue icons can't be scrolled, that could be because you don't have a physics 2d raycaster on the main camera in your scene.
 public class BattleQueueIcons : DisplayableClass, IBattleQueueDisplayable
 {
     public GameObject GameObject => gameObject;
@@ -33,10 +35,13 @@ public class BattleQueueIcons : DisplayableClass, IBattleQueueDisplayable
     [SerializeField] SpriteFadeHandler unseenActionFader;
     [SerializeField] LayoutWidthFader widthFader;
 
+
+#nullable enable
     private bool isActive = true;
     private bool isShaking = false;
-    private int FadeSortingOrder => CombatFadeScreenHandler.Instance.FADE_SORTING_ORDER;
-    private string FadeSortingLayer => CombatFadeScreenHandler.Instance.FADE_SORTING_LAYER;
+    private int FadeSortingOrder => new GetFadeSortingOrder().Query() ?? 0;
+    private string FadeSortingLayer => new GetFadeSortingLayer().Query() ?? string.Empty;
+    public string Name => ActionClass?.GetName() ?? string.Empty;
 
     public void RenderBQIcon(ActionClass ac)
     {
@@ -148,11 +153,17 @@ public class BattleQueueIcons : DisplayableClass, IBattleQueueDisplayable
 
     private void OnMouseDown()
     {
-        if (ActionClass.Origin is PlayerClass && CombatManager.Instance.CanHighlight() && isActive)
+        if (ActionClass == null) return;
+
+        if (ActionClass.Origin is PlayerClass && new CanHighlight().Query() == true && isActive)
         {
             new BattleQueueIconClick(this).Invoke();
             DeHighlightTarget();
             HideCard();
+        }
+        else if (ActionClass.Origin is EnemyClass && new CanHighlight().Query() == true && isActive)
+        {
+            new ActionIconClicked(ActionClass).Invoke();
         }
     }
 }

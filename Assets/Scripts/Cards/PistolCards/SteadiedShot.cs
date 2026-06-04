@@ -1,4 +1,5 @@
 using UnityEngine;
+using UtilClass;
 using static StatusEffect;
 
 public class SteadiedShot : PistolCards
@@ -15,6 +16,9 @@ public class SteadiedShot : PistolCards
         base.Initialize();
         CardType = CardType.Defense;
     }
+    
+
+    protected override GlossaryNode[] GetChildrenGlossaryNodes() => new[] { StatusEffects.Accuracy };
 
     public override void CardIsUnstaggered()
     {

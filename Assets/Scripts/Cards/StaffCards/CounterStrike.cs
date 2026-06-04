@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Xml.Linq;
 using UnityEngine;
-using static Unity.Collections.AllocatorManager;
-using static UnityEngine.UI.Image;
+using UtilClass;
 
 public class CounterStrike : StaffCards
 {
@@ -20,6 +16,8 @@ public class CounterStrike : StaffCards
         description = "Block and gain Flow equal to damage blocked. Then make an attack and gain 1 Flow on hit.";
         base.Initialize();
     }
+    
+    protected override GlossaryNode[] GetChildrenGlossaryNodes() => new[] { StatusEffects.Flow, Keywords.OnHit };
 
     public override void CardIsUnstaggered()
     {

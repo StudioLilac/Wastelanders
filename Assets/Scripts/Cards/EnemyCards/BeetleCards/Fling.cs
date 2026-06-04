@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Linq;
 using UnityEngine;
+using UtilClass;
 
 public class Fling : BeetleAttacks, IPlayableBeetleCard
 {
@@ -24,6 +25,8 @@ public class Fling : BeetleAttacks, IPlayableBeetleCard
         CardType = CardType.RangedAttack;
         CostToAddToDeck = 2;
     }
+    
+    protected override GlossaryNode[] GetChildrenGlossaryNodes() => new[] { StatusEffects.Resonance };
 
     public override void OnHit()
     {

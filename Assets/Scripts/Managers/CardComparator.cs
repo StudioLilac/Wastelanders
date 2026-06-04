@@ -16,6 +16,8 @@ public class CardComparator : MonoBehaviour
 
     public delegate IEnumerator ClashersAreReadyToRoll();
     public event ClashersAreReadyToRoll? playersAreRollingDiceEvent;
+    
+    public static bool autoRoll = false;
 
     // Awake is called when the script instance is being loaded
     void Awake()
@@ -41,6 +43,10 @@ public class CardComparator : MonoBehaviour
         EntityClass.OnEntityDeath -= SubscribeEntityDeath;
     }
 
+    public void ClearEvents()
+    {
+        PlayEntityDeaths = null;
+    }
 
     /*
      * Clashes two cards together handling logic calls and activating the Combat Info
@@ -49,7 +55,7 @@ public class CardComparator : MonoBehaviour
     {
         ActionClass card1 = actionWrapper.PlayerAction!;
         ActionClass card2 = actionWrapper.EnemyAction!;
-        CombatManager.Instance.SetCameraCenter(card1.Origin);
+        new SetCameraCenter(card1.Origin).Invoke();
         ActivateInfo(card1, card2);
         EnableDice(card1.Origin, card1.Target);
         card1.ApplyEffect();
@@ -150,14 +156,14 @@ public class CardComparator : MonoBehaviour
         return cardOneGreater;
     }
 
-    public IEnumerator OneSidedAttack(BattleQueue.ActionWrapper actionWrapper)
+    public IEnumerator OneSidedAttack(BattleQueue.ActionWrapper actionWrapper, bool? autoRoll = null)
     {
         ActionClass actionClass = actionWrapper.GetTheOnlyExistingAction();
-        CombatManager.Instance.SetCameraCenter(actionClass.Origin);
+        new SetCameraCenter(actionClass.Origin).Invoke();
         ActivateInfo(actionClass);
         EnableDice(actionClass.Origin);
         actionClass.ApplyEffect();
-        yield return StartCoroutine(ClashBothEntities(actionClass, actionClass));
+        yield return StartCoroutine(ClashBothEntities(actionClass, actionClass, autoRoll));
         BattleQueue.BattleQueueInstance.RemoveActionWrapperFromQueue(actionWrapper);
         actionClass.RollDice();
         DeactivateInfo(actionClass);
@@ -192,7 +198,7 @@ public class CardComparator : MonoBehaviour
  Then, whoever wins the clash should stagger the opponent backwards. 
   */
     public static readonly float X_BUFFER = 0.8f;
-    private IEnumerator ClashBothEntities(ActionClass card1, ActionClass card2)
+    private IEnumerator ClashBothEntities(ActionClass card1, ActionClass card2, bool? overridedAutoRoll = null)
     {
         EntityClass origin = card1.Origin;
         EntityClass target = card1.Target;
@@ -207,17 +213,24 @@ public class CardComparator : MonoBehaviour
                         (card2.CardType == CardType.RangedAttack || card2.CardType == CardType.Defense) ? X_BUFFER * 3 : X_BUFFER; //Calculates how far away clashers should be when striking
         
         Coroutine playerMove = StartCoroutine(origin?.MoveToPosition(HorizontalProjector(centeredDistance, origin.myTransform.position, xBuffer), bufferedRadius, duration, centeredDistance));
-        Coroutine enemyMove = StartCoroutine(target?.MoveToPosition(HorizontalProjector(centeredDistance, target.myTransform.position, xBuffer), bufferedRadius, duration, centeredDistance));
-
+        if (!target.IsDead) 
+            yield return StartCoroutine(target?.MoveToPosition(HorizontalProjector(centeredDistance, target.myTransform.position, xBuffer), bufferedRadius, duration, centeredDistance));
         yield return playerMove;
-        yield return enemyMove;
 
         if (playersAreRollingDiceEvent != null)
         {
             yield return StartCoroutine(playersAreRollingDiceEvent.Invoke());
-            yield return new WaitUntil(() => Input.GetMouseButtonDown(0) && !PauseMenuV2.IsPaused); //Necessary to not immediately roll the dice
+            
+            if (!autoRoll) {
+                yield return new WaitUntil(() => Input.GetMouseButtonDown(0) && !PauseMenuV2.IsPaused);
+            }
         }
-        yield return new WaitUntil(() => Input.GetMouseButtonDown(0) && !PauseMenuV2.IsPaused);
+
+        bool shouldWaitForInput = (overridedAutoRoll != null) ? !overridedAutoRoll.Value: !autoRoll;
+
+        if (shouldWaitForInput) {
+            yield return new WaitUntil(() => Input.GetMouseButtonDown(0) && !PauseMenuV2.IsPaused);
+        }
     }
 
 

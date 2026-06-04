@@ -1,9 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Xml.Linq;
-using UnityEngine;
-using static Unity.Collections.AllocatorManager;
-using static UnityEngine.UI.Image;
+using UtilClass;
 
 public class Headshot : PistolCards
 {
@@ -20,6 +15,8 @@ public class Headshot : PistolCards
         CardType = CardType.RangedAttack;
         base.Initialize();
     }
+
+    protected override GlossaryNode[] GetChildrenGlossaryNodes() => new[] { StatusEffects.Accuracy, Keywords.OnHit };
 
     public override void OnHit()
     {

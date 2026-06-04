@@ -10,16 +10,21 @@ using static StatusEffect;
 using UnityEditor.Animations;
 #endif
 
+public record EntityFacingChanged(EntityClass Entity) : IEvent;
 public record OnBuffsUpdatedEvent(EntityClass WhoAmI) : IEvent;
+public record AddEntityToTeam(EntityClass Entity, EntityTeam Team) : IEvent;
+public record RemoveEntityFromTeam(EntityClass Entity, EntityTeam Team) : IEvent;
+
+[RequireComponent(typeof(SpriteRenderer))]
 public abstract class EntityClass : SelectClass
 {
     public const string STAGGERED_ANIMATION_NAME = "IsStaggered";
     public const string BLOCK_ANIMATION_NAME = "IsBlocking";
     protected int MAX_HEALTH;
-    protected int MaxHealth
+    public int MaxHealth
     {
         get => MAX_HEALTH;
-        set
+        protected set
         {
             MAX_HEALTH = value;
             combatInfo.SetMaxHealth(MAX_HEALTH);
@@ -48,8 +53,10 @@ public abstract class EntityClass : SelectClass
     public Sprite icon;
     public Animator animator;
     public CombatInfo combatInfo;
+    private SpriteRenderer spriteRenderer;
     [SerializeField] 
     protected BoxCollider boxCollider;
+    [SerializeField] private Sprite passOutSprite;
 
 #nullable enable
     private Vector3 damageSourceDirection = default;
@@ -68,21 +75,25 @@ public abstract class EntityClass : SelectClass
     public static event EntityDelegate? OnEntityClicked;
     public event EntityDelegate? BuffsUpdatedEvent;
 
-    private string FadeSortingLayer => CombatFadeScreenHandler.Instance.FADE_SORTING_LAYER;
-    private int FadeSortingOrder => CombatFadeScreenHandler.Instance.FADE_SORTING_ORDER;
+    private string FadeSortingLayer => new GetFadeSortingLayer().Query() ?? spriteRenderer.sortingLayerName;
+    private int FadeSortingOrder => new GetFadeSortingOrder().Query() ?? spriteRenderer.sortingOrder;
 
     private EntityMovementHandler entityMovement = null!;
 
+    public virtual void Awake()
+    {
+        entityMovement = this.gameObject.AddComponent<EntityMovementHandler>();
+        initialPosition = myTransform.position;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        DeathHandler = Die;
+    }
+
     public virtual void Start()
     {
-        entityMovement = this.AddComponent<EntityMovementHandler>();
-        initialPosition = myTransform.position;
-
         DeEmphasize();
         DisableDice();
         AssignTeam();
-        GetComponent<SpriteRenderer>().sortingLayerName = FadeSortingLayer;
-        DeathHandler = Die;
+        spriteRenderer.sortingLayerName = FadeSortingLayer;
 
         OnEntitySpawn?.Invoke(this);
     }
@@ -184,16 +195,64 @@ public abstract class EntityClass : SelectClass
         this.gameObject.SetActive(false);
     }
 
+    public IEnumerator PassOut()
+    {
+        BattleQueue.BattleQueueInstance.RemoveAllInstancesOfEntity(this);
+        UnTargetable();
+        statusEffects.Clear();
+        UpdateBuffs();
+        combatInfo.PassOut();
+        float distanceToTravel = Vector3.Distance(myTransform.position, initialPosition);
+        float unitsPerSecond = 12f;
+        float calculatedDuration = distanceToTravel / unitsPerSecond;
+        float minDuration = 0.15f;
+        float maxDuration = 1.0f;
+        float finalDuration = Mathf.Clamp(calculatedDuration, minDuration, maxDuration);
+        yield return StartCoroutine(MoveToPosition(initialPosition, 0f, finalDuration));
+        yield return new WaitForSeconds(0.1f);
+
+        if (passOutSprite != null)
+        {
+            spriteRenderer.sprite = passOutSprite;
+        } else if (HasAnimationParameter(STAGGERED_ANIMATION_NAME))
+        {
+            animator.SetBool(STAGGERED_ANIMATION_NAME, true);
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        animator.enabled = false;
+        float randomZRotation = UnityEngine.Random.Range(-30f, -15f);
+        transform.rotation = Quaternion.Euler(0, 0, randomZRotation);
+    }
+
+    public void Revive()
+    {
+        IsDead = false;
+
+        transform.rotation = Quaternion.identity;
+        animator.enabled = true;
+        if (HasAnimationParameter(STAGGERED_ANIMATION_NAME))
+        {
+            animator.SetBool(STAGGERED_ANIMATION_NAME, false);
+        }
+        
+        Targetable();
+        AssignTeam();
+        OnEntitySpawn?.Invoke(this);
+    }
+
     public void FaceRight()
     {
         FlipTransform(this.transform, true);
         combatInfo.FaceRight();
+        new EntityFacingChanged(this).Invoke();
     }
 
     public void FaceLeft()
     {
         FlipTransform(this.transform, false);
         combatInfo.FaceLeft();
+        new EntityFacingChanged(this).Invoke();
     }
 
     public bool IsFacingRight()
@@ -272,11 +331,11 @@ public abstract class EntityClass : SelectClass
         Health = Mathf.Clamp(Health + val, 0, MaxHealth);
     }
 
-    public void SetUnstaggered()
+    public void SetStaggered(bool isStaggered)
     {
         if (HasAnimationParameter(STAGGERED_ANIMATION_NAME))
         {
-            animator.SetBool(STAGGERED_ANIMATION_NAME, false);
+            animator.SetBool(STAGGERED_ANIMATION_NAME, isStaggered);
         }
     }
 
@@ -306,7 +365,7 @@ public abstract class EntityClass : SelectClass
 
     public void Highlight(float speed = 0.55f)
     {
-        if (CombatManager.Instance.CanHighlight())
+        if (new CanHighlight().Query() ?? false)
         {
             combatInfo.ActivateCrosshair(speed);
         }
@@ -331,30 +390,9 @@ public abstract class EntityClass : SelectClass
     public abstract void DestroyDeck();
     public abstract void PerformSelection();
 
-    private void AssignTeam()
-    {
-        Action<EntityClass> action = Team switch
-        {
-            EntityTeam.PlayerTeam => CombatManager.Instance.AddPlayer,
-            EntityTeam.EnemyTeam=> CombatManager.Instance.AddEnemy,
-            EntityTeam.NeutralTeam => CombatManager.Instance.AddNeutral,
-            _ => throw new ArgumentOutOfRangeException()
-        };
+    private void AssignTeam() => new AddEntityToTeam(this, Team).Invoke();
 
-        action(this);
-    }
-    public void RemoveEntityFromCombat()
-    {
-        Action<EntityClass> action = Team switch
-        {
-            EntityTeam.PlayerTeam => CombatManager.Instance.RemovePlayer,
-            EntityTeam.EnemyTeam => CombatManager.Instance.RemoveEnemy,
-            EntityTeam.NeutralTeam => CombatManager.Instance.RemoveNeutral,
-            _ => throw new ArgumentOutOfRangeException()
-        };
-
-        action(this);
-    }
+    public void RemoveEntityFromCombat() => new RemoveEntityFromTeam(this, Team).Invoke();
 
     protected void FaceOpponent()
     {
@@ -490,7 +528,6 @@ public abstract class EntityClass : SelectClass
     //Increases this Entity Class' sorting layer (negative number is higher up)
     public void Emphasize()
     {
-        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         Vector3 largeTransform = transform.position;
         largeTransform.z = FadeSortingOrder - 3 + ZOffset(spriteRenderer.bounds.min.y);
         transform.position = largeTransform;
@@ -501,7 +538,6 @@ public abstract class EntityClass : SelectClass
     //Decreases this Entity Class' sorting layer. (Standardizes Sorting Layers for entities)
     public void DeEmphasize()
     {
-        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         Vector3 largeTransform = transform.position;
         largeTransform.z = FadeSortingOrder - 1 + ZOffset(spriteRenderer.bounds.min.y);
         transform.position = largeTransform;
@@ -511,7 +547,6 @@ public abstract class EntityClass : SelectClass
 
     public float GetSortingZ()
     {
-        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         return ZOffset(spriteRenderer.bounds.min.y);
     }
 

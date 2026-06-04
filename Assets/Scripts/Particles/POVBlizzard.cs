@@ -59,7 +59,7 @@ namespace Particles {
 
             // Subtle swirling motion
             velocityModule.x = Mathf.Sin(driftTimer) * lateralDrift;
-            velocityModule.y = Mathf.Cos(driftTimer * 0.8f) * verticalDrift;
+            velocityModule.y = -20f + Mathf.Cos(driftTimer * 0.8f) * verticalDrift;
 
             // Constant motion into camera
             velocityModule.z = intoCameraSpeed;

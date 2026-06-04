@@ -1,8 +1,10 @@
+using DialogueScripts;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace UI_Toolkit.UI_Elements
 {
+#nullable enable
     [UxmlElement]
     public partial class CardV2 : VisualElement
     {
@@ -20,7 +22,7 @@ namespace UI_Toolkit.UI_Elements
         private float targetRotation;
         private int activePointerId = -1;
         
-        private IVisualElementScheduledItem rotationSchedule;
+        private IVisualElementScheduledItem? rotationSchedule;
         
         // How strongly velocity affects rotation (degrees per pixel of velocity)
         private const float ROTATION_SENSITIVITY = 0.6f;
@@ -31,7 +33,7 @@ namespace UI_Toolkit.UI_Elements
         private const float MAX_ROTATION = 35f;
         
         // TODO: is it bad to hold a reference to the actionclass associated with this card?
-        private ActionClass actionClass;
+        private ActionClass actionClass = null!;
         
         public void WithAttrsFromActionClass(ActionClass ac)
         {
@@ -102,6 +104,8 @@ namespace UI_Toolkit.UI_Elements
             if (!clicked) return;
             dragging = true;
             
+            HUDV2.Instance.FadeChildren();
+            
             HighlightManager.Instance.SetSelectedAction(actionClass);
             
             // code that moves the card
@@ -114,8 +118,7 @@ namespace UI_Toolkit.UI_Elements
             targetRotation = Mathf.Clamp(-velocityX * ROTATION_SENSITIVITY, -MAX_ROTATION, MAX_ROTATION);
         }
         
-        // Called every 16ms; handles the rotation. @Anrui let me know if we have a standardized framerate for UI 
-        //      (I don't think we do).
+        // Called every 16ms; handles the rotation.
         private void UpdateRotation()
         {
             currentRotation = Mathf.Lerp(currentRotation, targetRotation, 1f - ROTATION_DAMPING);
@@ -140,6 +143,7 @@ namespace UI_Toolkit.UI_Elements
                 return;
             }
             dragging = false;
+            HUDV2.Instance.UnfadeChildren();
             
             actionClass.ToggleSelected();
             TryClickEntity(eventData.position);
@@ -154,56 +158,90 @@ namespace UI_Toolkit.UI_Elements
         {
             return UICoordinateHelper.ToScreenPoint(panelPos, panel);
         }
-        
-        // Raycasts from the screen point to world space, looking for EntityClasses. If it finds one, it uses the
-        // existing behaviour in HighlightManager.cs.
-        // Returns true if an entity was found and clicked, false otherwise.
+
+        // Raycasts from the screen point to world space, looking for both 3D enemies and 2D UI cards.
         private void TryClickEntity(Vector2 screenPos)
         {
             Camera cam = Camera.main;
-            
+
             if (cam == null)
             {
                 return;
             }
-            
+
             screenPos = ToScreenPoint(screenPos);
 
-            Ray ray = cam.ScreenPointToRay(screenPos);
+            if (TryClickCard(cam.ScreenToWorldPoint(screenPos)))
+            {
+                return;
+            }
+
+            TryClickEnemy(cam.ScreenPointToRay(screenPos));
+        }
+
+        private bool TryClickCard(Vector3 worldPos)
+        {
+            Debug.DrawRay(worldPos, Vector3.forward * 10f, Color.red, 2f);
+
+            RaycastHit2D hit = Physics2D.Raycast(worldPos, Vector3.forward, 1000f);
+            if (!hit.collider)
+            {
+                return false;
+            }
+
+            CombatCardUI? cardIcon = hit.collider.GetComponent<CombatCardUI>();
+            BattleQueueIcons? bqIcon = hit.collider.GetComponent<BattleQueueIcons>();
+
+
+            if (cardIcon != null)
+            {
+                actionClass.OnMouseExit();
+                TryClash(cardIcon.ActionClass);
+                return true;
+            }
+
+            if (bqIcon != null)
+            {
+                actionClass.OnMouseExit();
+                TryClash(bqIcon.ActionClass);
+                return true;
+            }
+
+            return false;
+        }
+
+        private void TryClickEnemy(Ray ray)
+        {
             Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red, 2f);
 
             if (!Physics.Raycast(ray, out RaycastHit hit, 1000f))
             {
                 return;
             }
+            EnemyClass? enemy = hit.collider.GetComponent<EnemyClass>();
 
-            // Right now, I'm only looking for enemies. This is because there aren't ANY cards in the game that
-            // target a player. If we allowed this to look for EntityClass, cards would get "stuck" on a player.
-            //
-            // If we ever make cards that target players, you'd need to change this to EntityClass. Along with that,
-            // you'd need to make HighlightManager.Instance.OnEntityClicked somehow indicate if that card assignment
-            // is valid, i.e. are you playing a player-targeting card on an enemy? Technically you'd need this
-            // anyways since the old click to select method would also require this knowledge.
-            EnemyClass enemy = hit.collider.GetComponentInParent<EnemyClass>();
-            
-            if (enemy == null)
+            if (enemy != null)
             {
-                return;
+                actionClass.OnMouseExit();
+                HighlightManager.Instance.OnEntityClicked(enemy);
             }
+        }
 
-            actionClass.OnMouseExit();
-            HighlightManager.Instance.OnEntityClicked(enemy);
+        void TryClash(ActionClass? clashingAction)
+        {
+            if (clashingAction == null) return;
+            HighlightManager.Instance.OnIconClicked(clashingAction, actionClass);
         }
 
 
         private void WithAttrs(
-            Sprite fg = null,
-            string tt = null,
-            string sp = null,
-            string sf = null,
-            string sc = null)
+            Sprite? fg = null,
+            string? tt = null,
+            string? sp = null,
+            string? sf = null,
+            string? sc = null)
         {
-            if (fg) this.Q<VisualElement>("img-card-icon").style.backgroundImage = new StyleBackground(fg);
+            if (fg != null) this.Q<VisualElement>("img-card-icon").style.backgroundImage = new StyleBackground(fg);
             if (tt != null) this.Q<Label>("txt-title").text = tt;
             if (sp != null) this.Q<Label>("txt-speed").text = sp;
             if (sf != null) this.Q<Label>("txt-stat-floor").text = sf;

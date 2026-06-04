@@ -62,8 +62,9 @@ namespace DialogueScripts
 
         private IEnumerator FlashActorRoutine(float duration)
         {
-            yield return StartCoroutine(fadeHandler.FadeInDarkScreen(duration / 2));
-            yield return StartCoroutine(fadeHandler.FadeInLightScreen(duration / 2));
+            yield return StartCoroutine(fadeHandler.FadeInDarkScreen(duration / 4));
+            yield return new WaitForSeconds(duration / 2);
+            yield return StartCoroutine(fadeHandler.FadeInLightScreen(duration / 4));
         }
 
         public DialogueActor MoveTo(Vector3 targetWorldPosition, float duration)

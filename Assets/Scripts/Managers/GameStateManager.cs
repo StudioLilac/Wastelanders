@@ -11,40 +11,44 @@ using UnityEngine.SceneManagement;
 public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<GameStateData>
 {
     public static readonly bool IS_DEVELOPMENT = false;
+    public const bool SEASON_1_ACTIVE = false;
+    private const float DEV_MODE_PROGRESSION = 999f;
 
     public SceneData PreviousScene { get; private set; } = SceneData.Get<SceneData.MainMenu>();
 
     //Fields for persistence
     [field: SerializeField] public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
-    private GameStateData data;
+    private GameStateData _data;
 
-    public GameStateData Data 
+    private GameStateData Data 
     {
         get
         {
             // Data should only be nullable during development where you can open a scene from any place
-            if (data == null)
+            if (_data == null)
             {
                 SaveLoadSystem.Instance.LoadGameStateInformation();
             }
 
-            return data;
+            return _data;
         }
         set
         {
-            data = value;
+            _data = value;
         }
     }
 
-    public void UpdateLevelProgress(ILevelSelectInformation level)
+    public void UpdateLevelProgress(StageInformation level)
     {
+        if (IS_DEVELOPMENT) return;
         CurrentLevelProgress = Mathf.Max(CurrentLevelProgress, level.LevelID);
+        SaveLoadSystem.Instance.SaveGame();
     }
 
     public float CurrentLevelProgress
     {
-        get { return (IS_DEVELOPMENT) ? 999f : Data.CurrentLevelProgress; }
-        set => Data.CurrentLevelProgress = value;
+        get { return (IS_DEVELOPMENT) ? DEV_MODE_PROGRESSION : Data.CurrentLevelProgress; }
+        private set => Data.CurrentLevelProgress = value;
     }
 
     private HashSet<string> seenEnemyActions; // Private backing field for perf
@@ -73,11 +77,28 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
         seenEnemyActions = bindedData.SeenEnemyActions.ToHashSet();
     }
 
-    public void LoadScene(string scene)
+    public void LoadScene(string scene, bool shouldFade = true)
     {
         PreviousScene = SceneData.FromSceneName(SceneManager.GetActiveScene().name);
-        StartCoroutine(FadeAndLoadScene(scene));
+        if (shouldFade)
+        {
+            StartCoroutine(FadeAndLoadScene(scene));
+        } else {
+            SaveLoadSystem.Instance.SaveGame();
+            SceneManager.LoadScene(scene);
+        }
     }
+
+    public bool RecordFirstTimeEvent(OneTimeEvents eventId)
+    {
+        if (!Data.SeenOneTimeEvents.Contains(eventId))
+        {
+            Data.SeenOneTimeEvents.Add(eventId);
+            return true;
+        }
+        return false;
+    }
+
 
     private bool isFadingOut = false;
     private IEnumerator FadeAndLoadScene(string scene)
@@ -108,9 +129,6 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
      * Dialogue classes should reset this value when read, such that it does not cause unexpected behaviour in upcoming scenes
      */
     public bool JumpToCombat = false;
-
-    // Check for level select whether player finished the game first time to display bounty dialogue
-    public bool FirstTimeFinished = false;
 }
 
 
@@ -125,15 +143,25 @@ public class GameStateData : ISaveable
      */
     [field: SerializeField] public float CurrentLevelProgress { get; set; } = 0f;
     [field: SerializeField] public List<string> SeenEnemyActions { get; set; } = new List<string>(); // Must be List<T>, HashSet<T> not serializable
-    
+    [field: SerializeField] public List<OneTimeEvents> SeenOneTimeEvents { get; set; } = new List<OneTimeEvents>();
+
     public override string ToString()
     {
         var items = new List<string>
         {
             "Id: " + Id,
             "Hexcode: " + RuntimeHelpers.GetHashCode(this),
-            "Current player level progress: " + CurrentLevelProgress
+            "Current player level progress: " + CurrentLevelProgress,
+            "Seen Enemy Actions: " + string.Join(";", SeenEnemyActions),
+            "Seen One Time Events: " + string.Join(";", SeenOneTimeEvents),
         };
         return string.Join(",", items);
     }
+}
+
+[System.Serializable]
+public enum OneTimeEvents 
+{
+    None = 0,
+    ExplainBounties = 10,
 }

@@ -116,14 +116,17 @@ namespace DialogueScripts
 
         private IEnumerator TypewriteText()
         {
+            txtView.ForceMeshUpdate();
+            int totalVisibleCharacters = txtView.textInfo.characterCount;
             txtView.maxVisibleCharacters = 0;
+
             float elapsed = 0f;
 
-            while (txtView.maxVisibleCharacters < txtView.text.Length)
+            while (txtView.maxVisibleCharacters < totalVisibleCharacters)
             {
                 if (HasInput())
                 {
-                    txtView.maxVisibleCharacters = txtView.text.Length;
+                    txtView.maxVisibleCharacters = totalVisibleCharacters;
                     yield break;
                 }
 
@@ -220,7 +223,7 @@ namespace DialogueScripts
             DialogueManager.Instance.AddDialogueEntryToHistory(entry);
         }
 
-        private static bool HasInput() => !PauseMenuV2.IsPaused && (Input.GetKey(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Space));
+        private static bool HasInput() => !PauseMenuV2.IsPaused && !PauseMenuV2.IsOverBlockingElement && (Input.GetKey(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Space));
         private class DialogueBatch
         {
             public DialogueEntry[] Entries { get; }

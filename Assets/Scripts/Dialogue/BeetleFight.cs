@@ -213,7 +213,7 @@ public class BeetleFight : DialogueClasses
 
                 AudioManager.Instance?.PlaySFX(SoundID.CB_gun_hit);
                 yield return StartCoroutine(frog.StaggerEntities(jackie, frog, 0.2f));
-                CombatManager.Instance.ActivateDynamicCamera();
+                new ActivateDynamicCameraEvent().Invoke();
                 sceneCamera.Priority = 0;
                 Coroutine frogTriesToRun = StartCoroutine(frog.MoveToPosition(frog.transform.position + new Vector3(-2, 0, 0), 0, 1f));
                 yield return new WaitForSeconds(BRIEF_PAUSE);
@@ -238,7 +238,7 @@ public class BeetleFight : DialogueClasses
                 this.Subscribe<CustomEvent>(ShowCrystal);
                 yield return new WaitForSeconds(BRIEF_PAUSE);
                 yield return StartCoroutine(jackie.MoveToPosition(frog.transform.position, 1.2f, 1f));
-                sceneCamera.transform.position = CombatManager.Instance.dynamicCamera.transform.position;
+                sceneCamera.transform.position = (new GetDynamicCamera().Query())!.transform.position;
                 yield return new WaitForSeconds(BRIEF_PAUSE);
                 sceneCamera.Priority = 2;
                 yield return new WaitForSeconds(BRIEF_PAUSE);
@@ -264,12 +264,12 @@ public class BeetleFight : DialogueClasses
 
             //Jackie Chases the beetle and we fade
             {
-                sceneCamera.transform.position = CombatManager.Instance.dynamicCamera.transform.position;
+                sceneCamera.transform.position = (new GetDynamicCamera().Query())!.transform.position;
                 yield return StartCoroutine(ambushBeetle.MoveToPosition(jackieChasingTransform.position, 0, 1f)); // beetle runs away
 
                 jackie.DeEmphasize();
                 sceneCamera.Priority = 2;
-                CombatManager.Instance.ActivateBaseCamera();
+                new ActivateBaseCameraEvent().Invoke();
                 yield return StartCoroutine(DialogueBoxV2.Instance.Play(jackieChase));
                 Coroutine fade = StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1f));
                 yield return StartCoroutine(jackie.MoveToPosition(jackieChasingTransform.position, 1f, 1.3f)); //Jackie Runs into the scene
@@ -283,7 +283,7 @@ public class BeetleFight : DialogueClasses
                 sceneCamera.m_Lens.OrthographicSize = 5f;
                 sceneCamera.transform.position = beetleNestCameraPos.transform.position;
 
-                CombatManager.Instance.ActivateBaseCamera();
+                new ActivateBaseCameraEvent().Invoke();
                 yield return new WaitForSeconds(MEDIUM_PAUSE);
                 if (jackieAction.getRolledDamage() >= beetleAction.getRolledDamage())
                 {
@@ -356,7 +356,7 @@ public class BeetleFight : DialogueClasses
                 yield return StartCoroutine(jackie.MoveToPosition(campLeftEntrance.position + new Vector3(2f, 0, 0), 0f, 1f));
                 yield return StartCoroutine(DialogueBoxV2.Instance.Play(jackieShockAtBeetleEnteringCamp));
                 sceneCamera.Priority = 0;
-                CombatManager.Instance.ActivateDynamicCamera();
+                new ActivateDynamicCameraEvent().Invoke();
                 yield return StartCoroutine(jackie.MoveToPosition(ivesDefaultTransform.position, 1.5f, 3.5f));
                 yield return StartCoroutine(DialogueBoxV2.Instance.Play(ivesConversation));
                 floorBg.SetActive(false);
@@ -425,7 +425,7 @@ public class BeetleFight : DialogueClasses
             CombatManager.Instance.SetEnemiesHostile(wave2);
 
             sceneBuilder.PlayersPosition = playerWave2CombatPosition;
-            yield return ShiftObjectCoroutine(CombatManager.Instance.baseCamera.gameObject, -7.5f, 3f);
+            yield return ShiftObjectCoroutine((new GetBaseCamera().Query())!.gameObject, -7.5f, 3f);
             yield return new WaitForSeconds(0.5f);
             if (CombatManager.Instance.GameState != GameState.SELECTION) CombatManager.Instance.GameState = GameState.SELECTION;
             waveIndicator.Show(2, 3);
@@ -442,7 +442,7 @@ public class BeetleFight : DialogueClasses
             CombatManager.Instance.SetEnemiesHostile(wave3);
             sceneBuilder.PlayersPosition = playerWave3CombatPosition;
 
-            yield return ShiftObjectCoroutine(CombatManager.Instance.baseCamera.gameObject, -9.5f, 3f);
+            yield return ShiftObjectCoroutine((new GetBaseCamera().Query())!.gameObject, -9.5f, 3f);
             yield return new WaitForSeconds(0.5f);
             if (CombatManager.Instance.GameState != GameState.SELECTION) CombatManager.Instance.GameState = GameState.SELECTION;
             yield return StartCoroutine(DialogueBoxV2.Instance.Play(wave3Dialogue));
@@ -454,7 +454,7 @@ public class BeetleFight : DialogueClasses
 
         //End of Scene
         {
-            GameStateManager.Instance.UpdateLevelProgress(StageInformation.QUEEN_BEETLE_STAGE);
+            GameStateManager.Instance.UpdateLevelProgress(StageInformation.Get<StageInformation.QueenBeetle>());
             waveIndicator.Hide();
             yield return new WaitForSeconds(2);
             if (ives.IsDead)
