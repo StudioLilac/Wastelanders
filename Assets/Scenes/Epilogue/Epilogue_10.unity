@@ -1299,9 +1299,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bd353aabc4247943a4de83d4aeeeb9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseCamera: {fileID: 1732502644}
-  dynamicCamera: {fileID: 1482407978}
-  handContainer: {fileID: 1506438123}
   playerDatabase: {fileID: 11400000, guid: 8727bc367ba518d4496483da96ba1cf0, type: 2}
   cardDatabase: {fileID: 11400000, guid: 4ee9950b3d655254fb0def1cd879db6a, type: 2}
 --- !u!1 &1472852263
@@ -1455,17 +1452,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
---- !u!114 &1482407978 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6960825269109355159, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
-  m_PrefabInstance: {fileID: 1482407977}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1482407979 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
@@ -1571,11 +1557,6 @@ PrefabInstance:
 --- !u!224 &1506438122 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6236433946665406741, guid: ffdf6c0e873fb734ca3cd40ff3507571, type: 3}
-  m_PrefabInstance: {fileID: 1506438121}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1506438123 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 297780659286361273, guid: ffdf6c0e873fb734ca3cd40ff3507571, type: 3}
   m_PrefabInstance: {fileID: 1506438121}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1514491354
@@ -2201,22 +2182,28 @@ MonoBehaviour:
     speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 4468675930332856385
+    - rid: 4468675930332856389
+    - rid: 4468675930332856387
+    - rid: 4468675930332856388
+    - rid: 4468675930332856390
   - content: "It should be just up ahead. We\u2019ve reached the same elevation."
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
+    - rid: 2403556212876771395
     - rid: 2403556212876771390
-    - rid: 2403556212876771391
+    - rid: 4468675930332856391
     - rid: 2403556212876771392
     - rid: 2403556212876771393
-    - rid: 2403556212876771395
   - content: Then we should make preparations for battle.
     speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 4468675930332856392
   - content: Jay, take the vanguard and the rest of your team up to get a good read
       on the situation.
     speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
@@ -2233,24 +2220,39 @@ MonoBehaviour:
     sfxId: 0
     picture: {fileID: 0}
     events:
+    - rid: 4468675930332856393
+    - rid: 4468675930332856395
     - rid: 2403556212876771396
+    - rid: 4468675930332856396
   - content: Jackie, give Jay your tracker.
     speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 4468675930332856398
   - content: Sure, just give me a second.
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 4468675930332856399
+    - rid: 4468675930332856400
+  - content: 
+    speaker: {fileID: 11400000, guid: 4fef3aeb65460fd498ab9efe9bac8625, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 4468675930332856401
+    - rid: 4468675930332856402
+    - rid: 4468675930332856403
   postVisionDialogue:
   - content: <i>To the rest of the group, Jackie seemingly turns into an exact copy
       of the princess frog.</i>
     speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 4468675930332856404
   - content: <i>For a brief moment, the crown atop her head emanates some strange
       energy before Jackie turns back into a human.</i>
     speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
@@ -2261,60 +2263,105 @@ MonoBehaviour:
     speaker: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 4468675930332856405
+    - rid: 4468675930332856406
+    - rid: 4468675930332856407
+    - rid: 4468675930332856408
   - content: Sure thing. Pretty neat, huh?
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 4468675930332856409
+    - rid: 4468675930332856412
+    - rid: 4468675930332856410
+    - rid: 4468675930332856411
+  - content: 
+    speaker: {fileID: 11400000, guid: 4fef3aeb65460fd498ab9efe9bac8625, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 4468675930332856417
+    - rid: 4468675930332856418
   - content: <i>Jackie hands Jay the device.</i>
     speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 4468675930332856414
   - content: You gonna be okay with this, Jay? Any questions?
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 4468675930332856415
+    - rid: 4468675930332856416
+    - rid: 4468675930332856419
+    - rid: 4468675930332856420
+    - rid: 4468675930332856421
   - content: "Nah, I think I\u2019ll be okay, teach."
     speaker: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 4468675930332856422
+    - rid: 4468675930332856423
+    - rid: 4468675930332856424
+    - rid: 4468675930332856425
+    - rid: 4468675930332856426
   - content: <i>After putting on the tracking device, Jay leads the scout team out
       of the caves.</i>
     speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 4468675930332856427
   - content: <i>In the meantime, the rest of the Wastelanders begin setting up their
       outpost. Before long, a large bonfire crackles in the center.</i>
     speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events: []
+  - content: 
+    speaker: {fileID: 11400000, guid: 4fef3aeb65460fd498ab9efe9bac8625, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 4468675930332856428
+    - rid: 4468675930332856429
   postBonfireDialogue:
   - content: <i>Jackie is cleaning her staff as Rocky approaches.</i>
     speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 4468675930332856430
   - content: Jackie?
     speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 4468675930332856431
+    - rid: 4468675930332856449
+    - rid: 4468675930332856432
+    - rid: 4468675930332856433
+    - rid: 4468675930332856434
   - content: Yes?
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 4468675930332856435
+    - rid: 4468675930332856436
+    - rid: 4468675930332856437
+    - rid: 4468675930332856438
   - content: About earlier... I'd like to apologize for what I said.
     speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 4468675930332856439
   - content: I judged you too quickly, and I'm sorry.
     speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
     sfxId: 0
@@ -2324,28 +2371,42 @@ MonoBehaviour:
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 4468675930332856440
+    - rid: 4468675930332856441
   - content: "Doesn\u2019t make it right."
     speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
+    - rid: 4468675930332856442
     - rid: 2403555872759611455
   - content: ...I think it's time I told you. About your mom. You okay to hear that?
     speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 4468675930332856443
   - content: ...Yeah, yeah, I think so.
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 4468675930332856445
+    - rid: 4468675930332856446
   - content: I overheard you talking to Jay earlier.
     speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 4468675930332856444
+  - content: 
+    speaker: {fileID: 11400000, guid: 4fef3aeb65460fd498ab9efe9bac8625, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 4468675930332856447
+    - rid: 4468675930332856448
   momStoryFlashbackDialogue:
   - content: So you know we were out here rescuing scouts.
     speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
@@ -2927,24 +2988,18 @@ MonoBehaviour:
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         sprite: {fileID: 21300000, guid: 534aff9f6dfd6c544b0144954e8ef0b0, type: 3}
-    - rid: 2403556212876771391
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        action: 70
-        duration: 1
     - rid: 2403556212876771392
       type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        action: 10
+        action: 30
         duration: 1
     - rid: 2403556212876771393
       type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         action: 60
-        duration: 0.5
+        duration: 1
     - rid: 2403556212876771395
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
@@ -2952,9 +3007,324 @@ MonoBehaviour:
     - rid: 2403556212876771396
       type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:
+        actor: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
+        action: 20
+        duration: 0
+    - rid: 4468675930332856385
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+    - rid: 4468675930332856387
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+        action: 90
+        duration: 1
+    - rid: 4468675930332856388
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+        action: 60
+        duration: 1
+    - rid: 4468675930332856389
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+        sprite: {fileID: 21300000, guid: afa3bf069145346d59ce8932f4b50aad, type: 3}
+    - rid: 4468675930332856390
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+        action: 10
+        duration: 1
+    - rid: 4468675930332856391
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        action: 50
+        duration: 0
+    - rid: 4468675930332856392
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+    - rid: 4468675930332856393
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
+    - rid: 4468675930332856395
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
+        sprite: {fileID: 21300000, guid: 1098f92cacec4420bb78f9b84117de33, type: 3}
+    - rid: 4468675930332856396
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
+        action: 60
+        duration: 1
+    - rid: 4468675930332856398
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+    - rid: 4468675930332856399
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    - rid: 4468675930332856400
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        sprite: {fileID: 21300000, guid: 422f3cda08073664b8a46361afe442fb, type: 3}
+    - rid: 4468675930332856401
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+        action: 70
+        duration: 0.2
+    - rid: 4468675930332856402
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
+        action: 70
+        duration: 0.2
+    - rid: 4468675930332856403
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         action: 70
+        duration: 0.2
+    - rid: 4468675930332856404
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
+    - rid: 4468675930332856405
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
+    - rid: 4468675930332856406
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
+        sprite: {fileID: 21300000, guid: 1ada4ec2c4a8c492ba5a849dcef573d5, type: 3}
+    - rid: 4468675930332856407
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
+        action: 10
+        duration: 1
+    - rid: 4468675930332856408
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
+        action: 60
+        duration: 1
+    - rid: 4468675930332856409
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    - rid: 4468675930332856410
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        action: 60
+        duration: 1
+    - rid: 4468675930332856411
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        action: 30
+        duration: 1
+    - rid: 4468675930332856412
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        action: 50
         duration: 0
+    - rid: 4468675930332856414
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
+    - rid: 4468675930332856415
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    - rid: 4468675930332856416
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        sprite: {fileID: 21300000, guid: 534aff9f6dfd6c544b0144954e8ef0b0, type: 3}
+    - rid: 4468675930332856417
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
+        action: 70
+        duration: 0.2
+    - rid: 4468675930332856418
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        action: 70
+        duration: 0.2
+    - rid: 4468675930332856419
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        action: 40
+        duration: 0
+    - rid: 4468675930332856420
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        action: 10
+        duration: 1
+    - rid: 4468675930332856421
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        action: 60
+        duration: 1
+    - rid: 4468675930332856422
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
+    - rid: 4468675930332856423
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
+        sprite: {fileID: 21300000, guid: 2e33600600abe4eada4d07eed944f473, type: 3}
+    - rid: 4468675930332856424
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
+        action: 50
+        duration: 0
+    - rid: 4468675930332856425
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
+        action: 30
+        duration: 1
+    - rid: 4468675930332856426
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
+        action: 60
+        duration: 1
+    - rid: 4468675930332856427
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
+    - rid: 4468675930332856428
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        action: 70
+        duration: 0.2
+    - rid: 4468675930332856429
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
+        action: 70
+        duration: 0.2
+    - rid: 4468675930332856430
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
+    - rid: 4468675930332856431
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+    - rid: 4468675930332856432
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+        action: 40
+        duration: 0
+    - rid: 4468675930332856433
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+        action: 10
+        duration: 1
+    - rid: 4468675930332856434
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+        action: 60
+        duration: 1
+    - rid: 4468675930332856435
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    - rid: 4468675930332856436
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        action: 50
+        duration: 0
+    - rid: 4468675930332856437
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        action: 30
+        duration: 1
+    - rid: 4468675930332856438
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        action: 60
+        duration: 1
+    - rid: 4468675930332856439
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+    - rid: 4468675930332856440
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    - rid: 4468675930332856441
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        sprite: {fileID: 21300000, guid: 422f3cda08073664b8a46361afe442fb, type: 3}
+    - rid: 4468675930332856442
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+    - rid: 4468675930332856443
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+    - rid: 4468675930332856444
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+    - rid: 4468675930332856445
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    - rid: 4468675930332856446
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        sprite: {fileID: -6114343294647571056, guid: 4a01b29ad1efa874bb2025cda4fe3346, type: 3}
+    - rid: 4468675930332856447
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+        action: 70
+        duration: 0.2
+    - rid: 4468675930332856448
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        action: 70
+        duration: 0.2
+    - rid: 4468675930332856449
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+        sprite: {fileID: 21300000, guid: afa3bf069145346d59ce8932f4b50aad, type: 3}
 --- !u!1001 &1732502642
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3017,17 +3387,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3003710098663250916, guid: dae0c425ea64d6043bee84267d82ea32, type: 3}
   m_PrefabInstance: {fileID: 1732502642}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1732502644 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8110099267988173976, guid: dae0c425ea64d6043bee84267d82ea32, type: 3}
-  m_PrefabInstance: {fileID: 1732502642}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1759427659
 GameObject:
   m_ObjectHideFlags: 0
@@ -3057,12 +3416,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95df7a01555958f4fa297345c1bc160a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playersPosition: {x: -5, y: 0, z: 0}
-  enemiesPosition: {x: 5, y: 0, z: 0}
-  jackiePrefab: {fileID: 3367972655850899957, guid: 18ff4a241e9f877439ebd5fd1de51dd0, type: 3}
-  ivesPrefab: {fileID: 1176295796460791934, guid: 75f09660183a2304fac17861f4ee9fc7, type: 3}
-  princessFrogPrefab: {fileID: 9159394439057369962, guid: 3727fe42f1ca7415fb600d193eb41d2d, type: 3}
-  entityContainer: {fileID: 1016551561}
 --- !u!4 &1759427661
 Transform:
   m_ObjectHideFlags: 0
