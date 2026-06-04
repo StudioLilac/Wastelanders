@@ -88,6 +88,7 @@ namespace UI_Toolkit
         private void DoStart()
         {
             SetState(State.Unpaused);
+            HideTooltip();
             new PauseStateChangedEvent(false).Invoke();
             SaveLoadSystem.Instance.SavePreferences();
         }
