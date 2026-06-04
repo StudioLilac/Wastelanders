@@ -1,4 +1,5 @@
 using UnityEngine;
+using UtilClass;
 
 public class ChargeUp : FrogAttacks
 {
@@ -18,8 +19,8 @@ public class ChargeUp : FrogAttacks
         CardType = CardType.Defense;
         Renderer renderer = GetComponent<Renderer>();
     }
-
-
+    
+    protected override GlossaryNode[] GetChildrenGlossaryNodes() => new[] { Hurl.Glossary };
 
     public override void CardIsUnstaggered()
     {

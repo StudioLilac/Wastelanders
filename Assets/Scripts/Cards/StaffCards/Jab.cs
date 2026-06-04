@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UtilClass;
 
 public class Jab : StaffCards
 {
@@ -19,6 +20,8 @@ public class Jab : StaffCards
 
         base.Initialize();
     }
+    
+    protected override GlossaryNode[] GetChildrenGlossaryNodes() => new[] { StatusEffects.Flow };
 
     public override void OnCardStagger()
     {

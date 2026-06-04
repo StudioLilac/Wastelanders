@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UtilClass;
 
 
 public class Fragment : ActionClass, IPlayableQueenCard
@@ -25,8 +26,8 @@ public class Fragment : ActionClass, IPlayableQueenCard
         CardType = CardType.RangedAttack;
         CostToAddToDeck = 2;
     }
-
-
+    
+    protected override GlossaryNode[] GetChildrenGlossaryNodes() => new[] { StatusEffects.Resonance };
 
     public override void OnHit()
     {

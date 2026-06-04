@@ -104,6 +104,8 @@ namespace UI_Toolkit.UI_Elements
             if (!clicked) return;
             dragging = true;
             
+            HUDV2.Instance.FadeChildren();
+            
             HighlightManager.Instance.SetSelectedAction(actionClass);
             
             // code that moves the card
@@ -116,8 +118,7 @@ namespace UI_Toolkit.UI_Elements
             targetRotation = Mathf.Clamp(-velocityX * ROTATION_SENSITIVITY, -MAX_ROTATION, MAX_ROTATION);
         }
         
-        // Called every 16ms; handles the rotation. @Anrui let me know if we have a standardized framerate for UI 
-        //      (I don't think we do).
+        // Called every 16ms; handles the rotation.
         private void UpdateRotation()
         {
             currentRotation = Mathf.Lerp(currentRotation, targetRotation, 1f - ROTATION_DAMPING);
@@ -142,6 +143,7 @@ namespace UI_Toolkit.UI_Elements
                 return;
             }
             dragging = false;
+            HUDV2.Instance.UnfadeChildren();
             
             actionClass.ToggleSelected();
             TryClickEntity(eventData.position);

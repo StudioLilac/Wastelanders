@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
 using Steamworks;
 using Systems.Persistence;
 using UI_Toolkit;
 using UnityEngine;
+using UtilClass;
 
 public record CardUsed<T>() : IEvent where T : ActionClass;
 public abstract class ActionClass : SelectClass, IBind<ActionData>
@@ -71,7 +73,9 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
 
     public int Speed { get; set; }
     public string description;
-    public string Description { get { return description; } }
+    
+    public GlossaryNode GlossaryNode;
+
     public string evolutionDescription { get; protected set; }
     public string evolutionCriteria{ get; protected set; }
 
@@ -179,7 +183,11 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
     public virtual void Initialize()
     {
         UpdateDup();
+        
+        GlossaryNode = new(myName, description, null, null, GetChildrenGlossaryNodes());
     }
+    
+    protected virtual GlossaryNode[] GetChildrenGlossaryNodes() => Array.Empty<GlossaryNode>();
 
     public int getRolledDamage()
     {

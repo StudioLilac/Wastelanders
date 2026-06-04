@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Xml.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UtilClass;
 
 public class Harvest : AxeCards
 {
@@ -21,6 +22,8 @@ public class Harvest : AxeCards
         base.Initialize();
         CardType = CardType.MeleeAttack;
     }
+    
+    protected override GlossaryNode[] GetChildrenGlossaryNodes() => new[] { StatusEffects.Wound, Keywords.OnHit };
 
     public override void OnHit()
     {

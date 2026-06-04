@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UtilClass;
 
 public class PistolWhip : PistolCards
 {
@@ -16,6 +17,8 @@ public class PistolWhip : PistolCards
         base.Initialize();
         CardType = CardType.MeleeAttack; //Has to be after otherwise it will get overwritten by superclass
     }
+
+    protected override GlossaryNode[] GetChildrenGlossaryNodes() => new[] { StatusEffects.Accuracy };
 
     public override void OnHit()
     {
