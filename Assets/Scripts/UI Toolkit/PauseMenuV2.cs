@@ -107,16 +107,24 @@ namespace UI_Toolkit
 
         private void HandleUIContextChanged(UIContextChangedEvent e) {
             var flags = e.context switch {
-                UIContext.Combat   => UIContextCustomFlags.DialogueLog | UIContextCustomFlags.AutoRoll | UIContextCustomFlags.DoubleSpeed,
-                UIContext.Dialogue => UIContextCustomFlags.DialogueLog | UIContextCustomFlags.SkipDialogue,
-                UIContext.Custom data  => data.Flags,
-                _                  => UIContextCustomFlags.None,
+                UIContext.Combat        => UIContextCustomFlags.DialogueLog | UIContextCustomFlags.AutoRoll | UIContextCustomFlags.DoubleSpeed,
+                UIContext.Dialogue      => UIContextCustomFlags.DialogueLog | UIContextCustomFlags.SkipDialogue,
+                UIContext.Custom data   => data.Flags,
+                _                       => UIContextCustomFlags.None,
             };
 
-            autoRollToggle.Display(flags.HasFlag(UIContextCustomFlags.AutoRoll));
-            doubleSpeedToggle.Display(flags.HasFlag(UIContextCustomFlags.DoubleSpeed));
-            dialogueLogButton.Display(flags.HasFlag(UIContextCustomFlags.DialogueLog));
-            skipDialogueButton.Display(flags.HasFlag(UIContextCustomFlags.SkipDialogue));
+            SetButtonVisibility(autoRollToggle,      flags.HasFlag(UIContextCustomFlags.AutoRoll));
+            SetButtonVisibility(doubleSpeedToggle,   flags.HasFlag(UIContextCustomFlags.DoubleSpeed));
+            SetButtonVisibility(dialogueLogButton,   flags.HasFlag(UIContextCustomFlags.DialogueLog));
+            SetButtonVisibility(skipDialogueButton,  flags.HasFlag(UIContextCustomFlags.SkipDialogue));
+        }
+
+        private void SetButtonVisibility(VisualElement element, bool visible) {
+            if (!visible && element.style.display != DisplayStyle.None)
+                HideTooltip();
+            element.Display(visible);
+            if (!visible)
+                IsOverBlockingElement = false;
         }
         
         private void RegisterBlockingElement(VisualElement element)
