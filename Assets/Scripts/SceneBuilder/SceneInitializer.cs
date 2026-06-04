@@ -80,6 +80,7 @@ public class SceneInitializerPrefabs
     public Tooltip tooltip = null!;
     public BountyManager bountyManager = null!;
     public TimeManager timeManager = null!;
+    public UISaveIndicatorManager saveIndicatorManager = null!;
     public CombatManager combatManager = null!;
     public BattleQueue battleQueue = null!;
 }
