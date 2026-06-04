@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Systems.Persistence;
 using TMPro;
+using UI_Toolkit;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -81,6 +82,8 @@ public class DeckSelectionManager : MonoBehaviour
     public static event Action<DeckSelectionState>? OnDeckSelectStateChanged;
     public static event Action<int, List<ActionClass>>? OnRenderDecks;
 
+    private Collider2D[] allCollidersInScene = null!;
+
     void Awake()
     {
         if (Instance == null)
@@ -91,6 +94,9 @@ public class DeckSelectionManager : MonoBehaviour
         {
             Destroy(this);
         }
+
+        allCollidersInScene = FindObjectsByType<Collider2D>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        this.Subscribe<PauseStateChangedEvent>(HandlePauseStateChanged);
     }
 
     void Start()
@@ -384,6 +390,20 @@ public class DeckSelectionManager : MonoBehaviour
         foreach (Transform child in enemyEditParent)
         {
             Destroy(child.gameObject);
+        }
+    }
+
+    private void HandlePauseStateChanged(PauseStateChangedEvent evt)
+    {
+        UpdateUIColliders(evt.paused);
+    }
+
+    private void UpdateUIColliders(bool isPaused)
+    {
+        foreach (var cldr in allCollidersInScene)
+        {
+            if (cldr != null)
+                cldr.enabled = !isPaused;
         }
     }
 }
