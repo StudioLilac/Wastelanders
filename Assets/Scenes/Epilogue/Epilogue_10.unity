@@ -2268,6 +2268,7 @@ MonoBehaviour:
     - rid: 4468675930332856406
     - rid: 4468675930332856407
     - rid: 4468675930332856408
+    - rid: 4468675995853652145
   - content: Sure thing. Pretty neat, huh?
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxId: 0
@@ -2599,7 +2600,9 @@ MonoBehaviour:
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 4468675995853652146
+    - rid: 4468675995853652148
   - content: "Jackie drifts into quiet thought. She realized she\u2019d been bracing
       for the worst. As if ready to accept that her pursuit was over."
     speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
@@ -3183,6 +3186,15 @@ MonoBehaviour:
     picture: {fileID: 0}
     events:
     - rid: 4468675995853652048
+  - content: 
+    speaker: {fileID: 11400000, guid: 4fef3aeb65460fd498ab9efe9bac8625, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 4468675995853652144
+  blizzardBg: {fileID: 8300000, guid: 3d67d9bdd19644e9980a5d3beac8a298, type: 3}
+  campfireBg: {fileID: 8300000, guid: 8ea19789380e64f0fb4e4a8767e6b3cf, type: 3}
+  tundraBg: {fileID: 8300000, guid: ee8a6302b1ddb4caf928a3603478b64d, type: 3}
   references:
     version: 2
     RefIds:
@@ -3650,7 +3662,7 @@ MonoBehaviour:
       type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        sprite: {fileID: 21300000, guid: 534aff9f6dfd6c544b0144954e8ef0b0, type: 3}
+        sprite: {fileID: 21300000, guid: 70562f64108503147861dbc82d787ef9, type: 3}
     - rid: 4468675932372861019
       type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:
@@ -3666,7 +3678,7 @@ MonoBehaviour:
     - rid: 4468675932372861021
       type: {class: AutoAdvanceAfter, ns: DialogueScripts, asm: MainGame}
       data:
-        Time: 2
+        Time: 1
     - rid: 4468675976161132606
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
@@ -4491,6 +4503,27 @@ MonoBehaviour:
         actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
         action: 70
         duration: 0
+    - rid: 4468675995853652144
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        action: 70
+        duration: 1
+    - rid: 4468675995853652145
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
+        action: 100
+        duration: 0
+    - rid: 4468675995853652146
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    - rid: 4468675995853652148
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        sprite: {fileID: 21300000, guid: 534aff9f6dfd6c544b0144954e8ef0b0, type: 3}
 --- !u!1001 &1732502642
 PrefabInstance:
   m_ObjectHideFlags: 0
