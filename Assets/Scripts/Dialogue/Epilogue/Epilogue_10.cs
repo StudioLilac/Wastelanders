@@ -34,6 +34,9 @@ namespace Dialogue.Epilogue
         [SerializeField] private DialogueEntryInUnityEditor[] spottedPFrogDialogue;
         [SerializeField] private DialogueEntryInUnityEditor[] battleStartDialogue;
 
+        [SerializeField] private AudioClip campfireBg;
+        [SerializeField] private AudioClip tundraBg;
+
         private void Update()
         {
             if (!shouldFlicker) { return; }
@@ -100,6 +103,7 @@ namespace Dialogue.Epilogue
             purpleFlash.color = Color.black;
             caveFlickerLayer.color = new Color(1f, 1f, 1f, 0f);
             yield return DialogueBoxV2.Instance.Play(jayOpeningDialogue.Into());
+            AudioManager.Instance.FadeInBackgroundTrack(5f, tundraBg, true);
             UIFadeScreenManager.Instance.SetDarkScreen();
             purpleFlash.color = TRANSPARENT_PURPLE;
 
@@ -108,29 +112,39 @@ namespace Dialogue.Epilogue
 
             yield return PurpleFlash();
             yield return DialogueBoxV2.Instance.Play(postVisionDialogue.Into());
-
             shouldFlicker = true;
+            AudioManager.Instance.FadeOutCurrentBackgroundTrack(1f);
+            yield return new WaitForSeconds(1);
+            AudioManager.Instance.FadeInBackgroundTrack(2f, campfireBg, true);
             yield return new WaitForSeconds(5);
             yield return DialogueBoxV2.Instance.Play(postBonfireDialogue.Into());
 
+            AudioManager.Instance.FadeOutCurrentBackgroundTrack(1f);
+            yield return new WaitForSeconds(1);
             background2.SetActive(true);
+            AudioManager.Instance.FadeInBackgroundTrack(2f, tundraBg, true);
             yield return FadeInBG(tundraWithNoise);
 
             yield return DialogueBoxV2.Instance.Play(momStoryFlashbackDialogue.Into());
+            AudioManager.Instance.FadeOutCurrentBackgroundTrack(1f);
             yield return FadeOutBG(tundraWithNoise, 1f);
+            AudioManager.Instance.FadeInBackgroundTrack(1f, campfireBg, true);
             background2.SetActive(false);
 
             yield return DialogueBoxV2.Instance.Play(weiseDialogue.Into());
+            AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
             yield return UIFadeScreenManager.Instance.FadeInDarkScreen(2f);
 
             background1.SetActive(false);
             purpleFlash.color = TRANSPARENT_PURPLE;
+            AudioManager.Instance.FadeInBackgroundTrack(2f, tundraBg, true);
             yield return UIFadeScreenManager.Instance.FadeInLightScreen(2f);
             yield return DialogueBoxV2.Instance.Play(spottedPFrogDialogue.Into());
             StartCoroutine(jackie.MoveToPosition(new Vector3(2.75f, 0.4f, jackie.transform.position.z), 0f, 2f));
 
             yield return new WaitForSeconds(2);
             ives.AttackAnimation("IsPunching");
+            AudioManager.Instance.PlaySFX(SoundID.CB_fist_hit);
             yield return StartCoroutine(jackie.StaggerEntities(ives, jackie, 0.4f));
             yield return DialogueBoxV2.Instance.Play(battleStartDialogue.Into());
             yield return UIFadeScreenManager.Instance.FadeInDarkScreen(2f);
