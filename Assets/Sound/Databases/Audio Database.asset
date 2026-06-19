@@ -21,4 +21,10 @@ MonoBehaviour:
   PreQueenFight: {fileID: 11400000, guid: 98d5da874bc3aaa4d8aa13fb657714bb, type: 2}
   PostQueenFight: {fileID: 11400000, guid: 5f27792be48fa444980879b30454cf7a, type: 2}
   PrincessFrogBounty: {fileID: 11400000, guid: db7db3a7d2f999b4d8d0e9fb05150a71, type: 2}
-  TeaserScene: {fileID: 11400000, guid: abfaf97b5ca4bd34a9e3bcc9fbf5f334, type: 2}
+  Tundra: {fileID: 11400000, guid: abfaf97b5ca4bd34a9e3bcc9fbf5f334, type: 2}
+  Epilogue3: {fileID: 11400000, guid: ac90e7f4397f940fea91652ba7eb6177, type: 2}
+  Epilogue4: {fileID: 11400000, guid: 2bf435622b7d29845a04b4d21f7bf7a8, type: 2}
+  Epilogue6: {fileID: 11400000, guid: e3f09726ff40940fa973bf26f0dc35ea, type: 2}
+  Epilogue7: {fileID: 11400000, guid: d66008ece617d451b9034f2f4737382d, type: 2}
+  Epilogue8: {fileID: 11400000, guid: b7253f2a345364e219a9dd9572d9761a, type: 2}
+  Epilogue9: {fileID: 11400000, guid: fb6e4ed33edca40119e820e866c3e8f1, type: 2}

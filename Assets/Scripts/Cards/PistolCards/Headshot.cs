@@ -1,10 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Xml.Linq;
-using UnityEngine;
-using static Unity.Collections.AllocatorManager;
-using static UnityEngine.UI.Image;
-
 public class Headshot : PistolCards
 {
 

@@ -1,0 +1,193 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4fafe43b89343e3a7ba1235e8987c0f, type: 3}
+  m_Name: Epilogue3_1_WesternMarsh
+  m_EditorClassIdentifier: 
+  Entries:
+  - content: "Finally... I\u2019m beat."
+    speaker: {fileID: 11400000, guid: 4be3841f8f6da4f3ca84917932aa6724, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 314095995325513821
+  - content: "Yeah, I\u2019m ready to crash."
+    speaker: {fileID: 11400000, guid: a43544c7607a84bad870a2ff50a662f5, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 314095995325513822
+  - content: Strike team, a heads-up before you all get settled.
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 314095995325513823
+    - rid: 314095995325513826
+    - rid: 314095995325513827
+    - rid: 314095995325513824
+    - rid: 314095995325513825
+    - rid: 314095995325513828
+    - rid: 7570221391745384511
+  - content: The Tundra was forbidden up until now for a reason. It sets record Waste
+      contamination levels.
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  - content: I expect all of you to carry at least one Anti-Waste Serum at all times,
+      no exceptions.
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    sfxId: 0
+    picture: {fileID: 21300000, guid: f29addafedd7075418d577a938699eee, type: 3}
+    events: []
+  - content: 'If you have any direct contact with the Waste, inject the serum into
+      your upper arm once it''s safe. Even for a light graze. '
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    sfxId: 0
+    picture: {fileID: 21300000, guid: f29addafedd7075418d577a938699eee, type: 3}
+    events: []
+  - content: 'By the time you see the purple marks on the body that you all know
+      as blackvein a couple days later. It will be too late. '
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    sfxId: 0
+    picture: {fileID: 21300000, guid: f29addafedd7075418d577a938699eee, type: 3}
+    events: []
+  - content: "To prevent physical contact with the Waste, Cam will now explain the
+      purpose behind the new gloves you\u2019ve been issued."
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  - content: Your encounters with the Waste Creatures up to this point have been
+      calibrating these gloves.
+    speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 314095995325513829
+    - rid: 314095995325513830
+    - rid: 314095995325513831
+    - rid: 314095995325513832
+    - rid: 314095995325513834
+  - content: 'They will allow you to turn into Waste Creatures you have fought. '
+    speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  - content: The more experiences you have, the more accurate the replication.
+    speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  - content: On your glove you can scroll through which Waste Creature to resonate
+      with, and with a snap, you will be able to transform.
+    speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  - content: Like this!
+    speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+    sfxId: 504
+    picture: {fileID: 0}
+    events: []
+  - content: 
+    speaker: {fileID: 11400000, guid: 4fef3aeb65460fd498ab9efe9bac8625, type: 2}
+    sfxId: 504
+    picture: {fileID: 0}
+    events:
+    - rid: 6570561757010722879
+    - rid: 7570221391745384514
+  references:
+    version: 2
+    RefIds:
+    - rid: 314095995325513821
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 4be3841f8f6da4f3ca84917932aa6724, type: 2}
+    - rid: 314095995325513822
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: a43544c7607a84bad870a2ff50a662f5, type: 2}
+    - rid: 314095995325513823
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    - rid: 314095995325513824
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+        action: 50
+        duration: 0
+    - rid: 314095995325513825
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+        action: 30
+        duration: 1
+    - rid: 314095995325513826
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+        sprite: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
+    - rid: 314095995325513827
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+        action: 70
+        duration: 0
+    - rid: 314095995325513828
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+        action: 60
+        duration: 0
+    - rid: 314095995325513829
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+    - rid: 314095995325513830
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+        action: 40
+        duration: 0
+    - rid: 314095995325513831
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+        action: 10
+        duration: 1
+    - rid: 314095995325513832
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+        action: 60
+        duration: 0
+    - rid: 314095995325513834
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+        sprite: {fileID: 21300000, guid: 2c87828110c96b641b4334f1af609d2c, type: 3}
+    - rid: 6570561757010722879
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+        action: 70
+        duration: 0
+    - rid: 7570221391745384511
+      type: {class: CustomEvent, ns: DialogueScripts, asm: MainGame}
+      data:
+        EventName: fade
+    - rid: 7570221391745384514
+      type: {class: CustomEvent, ns: DialogueScripts, asm: MainGame}
+      data:
+        EventName: cam_flash

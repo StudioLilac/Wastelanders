@@ -1,4 +1,5 @@
 using System.Collections;
+using Managers;
 using Systems.Persistence;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -34,16 +35,8 @@ public class AudioManager : PersistentSingleton<AudioManager>
     [SerializeField] private AudioDatabase sceneAudioDatabase;
 #nullable enable
     private SceneAudio sceneAudio = null!;
-    // We need this reference for serialization purposes
-    private AudioPreferences audioPreferences = null!;
     Coroutine? combatMusicCoroutine;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        Bind(SaveLoadSystem.Instance.GetUserPreferences());
-    }
-
+    
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -98,21 +91,25 @@ public class AudioManager : PersistentSingleton<AudioManager>
     protected IEnumerator FadeAudioRoutine(AudioSource audioSource, bool isFadingOut, float fadeTime)
     {
         float startVolume = audioSource.volume;
-        float endVolume = isFadingOut ? 0 : 1;
-        float time = 0;
+
+        float targetMaxVolume = (audioSource == SFXSoundsPlayer)
+            ? PreferencesManager.Instance.GetSFXVolume()
+            : PreferencesManager.Instance.GetMusicVolume();
+
+        float endVolume = isFadingOut ? 0f : targetMaxVolume;
+        float time = 0f;
 
         while (time < fadeTime)
         {
             time += Time.deltaTime;
             audioSource.volume = Mathf.Lerp(startVolume, endVolume, time / fadeTime);
-
             yield return null;
         }
 
         if (isFadingOut)
         {
             audioSource.Stop();
-            audioSource.volume = startVolume;
+            audioSource.volume = targetMaxVolume;
         }
         else
         {
@@ -122,21 +119,33 @@ public class AudioManager : PersistentSingleton<AudioManager>
 
     public void FadeOutCurrentBackgroundTrack(float duration)
     {
-        StopCoroutine(combatMusicCoroutine);
+        if (combatMusicCoroutine != null)
+        {
+            StopCoroutine(combatMusicCoroutine);
+            combatMusicCoroutine = null;
+        }
         StartCoroutine(FadeAudioRoutine(BackgroundMusicPlayer, true, duration));
+    }
+
+    public void FadeInBackgroundTrack(float duration, AudioClip? audioclip, bool loop)
+    {
+        BackgroundMusicPlayer.volume = 0f;
+        PlayBackgroundMusic(audioclip, loop);
+        StartCoroutine(FadeAudioRoutine(BackgroundMusicPlayer, false, duration));
     }
 
     protected IEnumerator PlayStartAudio()
     {
-        BackgroundMusicPlayer.clip = sceneAudio.backgroundMusicIntro;
-        BackgroundMusicPlayer.Play();
-        BackgroundMusicPlayer.loop = false;
-
+        PlayBackgroundMusic(sceneAudio.backgroundMusicIntro, false);
         yield return new WaitUntil(() => !BackgroundMusicPlayer.isPlaying);
+        PlayBackgroundMusic(sceneAudio.backgroundMusicPrimary, true);
+    }
 
-        BackgroundMusicPlayer.clip = sceneAudio.backgroundMusicPrimary;
+    protected void PlayBackgroundMusic(AudioClip? audioclip, bool loop)
+    {
+        BackgroundMusicPlayer.clip = audioclip;
         BackgroundMusicPlayer.Play();
-        BackgroundMusicPlayer.loop = true;
+        BackgroundMusicPlayer.loop = loop;
     }
 
     public void PlaySFX(SoundID effect)
@@ -167,36 +176,21 @@ public class AudioManager : PersistentSingleton<AudioManager>
         BackgroundMusicPlayer.Play();
     }
 
-    public void SetSFXMuted(bool state)
-    {
-        SFXSoundsPlayer.mute = audioPreferences.SFXMuted = state;
-    }
-
-    public void SetMusicMuted(bool state)
-    {
-        BackgroundMusicIntroPlayer.mute = BackgroundMusicPlayer.mute = audioPreferences.MusicMuted = state;
-    }
-
-    public void SetSFXVolume(float volume)
-    {
+    public void SetSFXVolume(float volume) {
         SFXSoundsPlayer.volume = volume;
-        audioPreferences.SFXVolume = volume;
     }
 
-    public void SetMusicVolume(float volume)
-    {
-        BackgroundMusicIntroPlayer.volume = volume;
+    public void SetMusicVolume(float volume) {
         BackgroundMusicPlayer.volume = volume;
-        audioPreferences.BackgroundMusicVolume = volume;
+        BackgroundMusicIntroPlayer.volume = volume;
+    }
+    
+    public void SetSFXMuted(bool state) {
+        SFXSoundsPlayer.mute = state; 
     }
 
-    void Bind(UserPreferences data)
-    {
-        audioPreferences = data.audioPreferences;
-        SetMusicVolume(audioPreferences.BackgroundMusicVolume);
-        SetSFXVolume(audioPreferences.SFXVolume);
-        SetMusicMuted(audioPreferences.MusicMuted);
-        SetSFXMuted(audioPreferences.SFXMuted);
+    public void SetMusicMuted(bool state) {
+        BackgroundMusicPlayer.mute = BackgroundMusicIntroPlayer.mute = state;
     }
 }
 

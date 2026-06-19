@@ -15,7 +15,7 @@ namespace Cards.EnemyCards.FrogCards
 
             lowerBound = upperBound = 1;
             CostToAddToDeck = 1;
-            Speed = 3;
+            Speed = 4;
             CardType = CardType.MeleeAttack;
         }
 

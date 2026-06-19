@@ -15,8 +15,8 @@ public class CombatCardUI : DisplayableClass
     [SerializeField] GameObject oneTimeBuffObj;
     [SerializeField] GameObject buffFlipPreserver;
 #nullable enable
-    private int FadeSortingOrder => CombatFadeScreenHandler.Instance.FADE_SORTING_ORDER;
-    private string FadeSortingLayer => CombatFadeScreenHandler.Instance.FADE_SORTING_LAYER;
+    private int FadeSortingOrder => new GetFadeSortingOrder().Query() ?? 0;
+    private string FadeSortingLayer => new GetFadeSortingLayer().Query() ?? string.Empty;
 
     protected override void OnDestroy()
     {
@@ -28,7 +28,15 @@ public class CombatCardUI : DisplayableClass
         
         base.OnDestroy();
     }
-    
+
+    private void OnMouseDown()
+    {
+        if (ActionClass !=null && new CanHighlight().Query() == true)
+        {
+            new ActionIconClicked(ActionClass).Invoke();
+        }
+    }
+
     private void OnEnable()
     {
         GetComponent<SpriteRenderer>().sortingLayerName = FadeSortingLayer;
@@ -81,7 +89,7 @@ public class CombatCardUI : DisplayableClass
         SetTargetIcon(ActionClass);
         UpdateRangeText(ActionClass);
         GetComponent<SpriteRenderer>().sprite = actionClass.GetIcon();
-
+        if (!ActionClass.IsPlayedByPlayer()) RenderUnseenIndicator();
     }
 
     void UpdateRangeText(ActionClass actionClass)

@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/PauseMenuV2.uss?fileID=7433441132597879392&amp;guid=915e709ecdac2473ba299c17517b10e4&amp;type=3#PauseMenuV2" />
     <ui:Button name="pause-icon-button" class="button" style="background-image: url(&quot;project://database/Assets/Sprites/pause-menu-v2/PauseIcon2.png?fileID=21300000&amp;guid=9b852aa43b8b5cc4f80437a46b006415&amp;type=3#PauseIcon2&quot;); height: 64px; width: 64px; position: absolute; right: 32px; top: 32px; display: flex;" />
-    <ui:VisualElement name="pause-menu-root" style="background-color: rgba(0, 0, 0, 0.8); position: absolute; left: 0; top: 0; right: 0; bottom: 0;">
+    <ui:VisualElement name="pause-menu-root" enabled="true" style="background-color: rgba(0, 0, 0, 0.8); position: absolute; left: 0; top: 0; right: 0; bottom: 0;">
         <ui:VisualElement name="pause-menu-panel" style="align-items: center; position: absolute; left: 0; top: 0; right: 0; bottom: 0; justify-content: center; flex-direction: row; display: flex;">
             <ui:VisualElement style="background-image: url(&quot;project://database/Assets/Sprites/pause-menu-v2/bg-pause-menu.png?fileID=2800000&amp;guid=4945b1b75b61d462483e9484d7b5273e&amp;type=3#bg-pause-menu&quot;); -unity-slice-left: 32; -unity-slice-top: 32; -unity-slice-right: 32; -unity-slice-bottom: 32; padding-right: 240px; padding-left: 240px; -unity-slice-scale: 12px; align-self: stretch; justify-content: center; align-items: center; margin-top: 64px; margin-bottom: 64px;">
                 <ui:Button text="RESUME" name="button-rsm" class="button-bg" style="-unity-font: url(&quot;project://database/Assets/TextMesh%20Pro/Fonts/VT323-Regular.ttf?fileID=12800000&amp;guid=46b9139fed5cc6a42a6a5d42b82c3c7e&amp;type=3#VT323-Regular&quot;); -unity-font-definition: initial; color: rgb(203, 108, 230); font-size: 72px; height: 120px; width: 360px;" />
@@ -22,14 +22,6 @@
                 <ui:Toggle name="toggle-vfx" class="button toggle" style="align-items: center; margin-top: 64px;">
                     <ui:Label text="Screen Shake" style="-unity-font: url(&quot;project://database/Assets/TextMesh%20Pro/Fonts/VT323-Regular.ttf?fileID=12800000&amp;guid=46b9139fed5cc6a42a6a5d42b82c3c7e&amp;type=3#VT323-Regular&quot;); -unity-font-definition: initial; color: rgb(203, 108, 230); font-size: 72px; margin-left: 32px;" />
                 </ui:Toggle>
-                <ui:Button name="button-gls" class="button" style="align-items: center; flex-direction: row; margin-top: 64px;">
-                    <ui:VisualElement style="height: 120px; width: 120px; background-image: url(&quot;project://database/Assets/Sprites/pause-menu-v2/ic-glossary.png?fileID=2800000&amp;guid=ce77eb358f2d54544adbd71c03209471&amp;type=3#ic-glossary&quot;);" />
-                    <ui:Label text="Skip Dialogue" style="-unity-font: url(&quot;project://database/Assets/TextMesh%20Pro/Fonts/VT323-Regular.ttf?fileID=12800000&amp;guid=46b9139fed5cc6a42a6a5d42b82c3c7e&amp;type=3#VT323-Regular&quot;); -unity-font-definition: initial; color: rgb(203, 108, 230); font-size: 72px; margin-left: 32px;" />
-                </ui:Button>
-                <ui:Button name="button-dlg" class="button" style="align-items: center; flex-direction: row; margin-top: 64px;">
-                    <ui:VisualElement style="height: 120px; width: 120px; background-image: url(&quot;project://database/Assets/Sprites/pause-menu-v2/ic-dialogue.png?fileID=2800000&amp;guid=751635a2cbd6d43cb92d4ab186c2a350&amp;type=3#ic-dialogue&quot;);" />
-                    <ui:Label text="Dialogue History" style="-unity-font: url(&quot;project://database/Assets/TextMesh%20Pro/Fonts/VT323-Regular.ttf?fileID=12800000&amp;guid=46b9139fed5cc6a42a6a5d42b82c3c7e&amp;type=3#VT323-Regular&quot;); -unity-font-definition: initial; color: rgb(203, 108, 230); font-size: 72px; margin-left: 32px;" />
-                </ui:Button>
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="glossary" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; align-items: center; justify-content: center; display: none;">
@@ -75,5 +67,11 @@
             <ui:Label text="Dialogue History" style="-unity-font: url(&quot;project://database/Assets/TextMesh%20Pro/Fonts/VT323-Regular.ttf?fileID=12800000&amp;guid=46b9139fed5cc6a42a6a5d42b82c3c7e&amp;type=3#VT323-Regular&quot;); -unity-font-definition: initial; font-size: 72px; color: rgb(255, 255, 255); margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
             <ui:ScrollView name="scroll-dlg" vertical-scroller-visibility="Hidden" mouse-wheel-scroll-size="1000" style="background-image: url(&quot;project://database/Assets/Sprites/pause-menu-v2/bg-pause-menu.png?fileID=2800000&amp;guid=4945b1b75b61d462483e9484d7b5273e&amp;type=3#bg-pause-menu&quot;); -unity-slice-left: 32; -unity-slice-top: 32; -unity-slice-right: 32; -unity-slice-bottom: 32; -unity-slice-scale: 12px; width: 1700px; height: 900px; padding-top: 120px; padding-right: 120px; padding-bottom: 120px; padding-left: 120px;" />
         </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="top-left-icons" style="flex-grow: 1; flex-direction: row; position: absolute; left: 24px; top: 24px;">
+        <ui:Button name="log-button" style="width: 64px; height: 64px;" />
+        <ui:Button name="skip-dialogue-button" style="width: 64px; height: 64px;" />
+        <ui:Toggle name="2x-speed-toggle" value="false" style="width: 64px; height: 64px; background-image: url(&quot;project://database/Assets/Sprites/UISprites/HUD/2x%20Spd.png?fileID=2800000&amp;guid=1f8727a4e46b7cc4280962d242fd10ec&amp;type=3#2x Spd&quot;);" />
+        <ui:Toggle name="auto-roll-toggle" value="false" style="width: 64px; height: 64px; background-image: url(&quot;project://database/Assets/Sprites/UISprites/HUD/Autoroll.png?fileID=2800000&amp;guid=5a69238af6b2c5d479285c11ea6cbc42&amp;type=3#Autoroll&quot;);" />
     </ui:VisualElement>
 </ui:UXML>

@@ -27,7 +27,7 @@ namespace Steamworks {
 
             CheckKillAchievements();
             
-            this.Subscribe<PlayersWin>(OnPlayersWin);
+            this.Subscribe<TeamWinEvent>(OnPlayersWin);
             this.Subscribe<OnPlayerHit>(HandlePlayerHitCritical);
             this.Subscribe<OnFinishSparring>(HandlePlayerFinishedSparring);
             this.Subscribe<OnBuffsUpdatedEvent>(HandleOnBuffsUpdated);
@@ -91,8 +91,8 @@ namespace Steamworks {
             onePlayerDead = false;
         }
 
-        private void OnPlayersWin(PlayersWin playersWinEvent) {
-            if (onePlayerDead) {
+        private void OnPlayersWin(TeamWinEvent teamWinEvent) {
+            if (teamWinEvent.Team == EntityTeam.PlayerTeam && onePlayerDead) {
                 SteamManager.UnlockAchievement("REVENGE");
             }
         }

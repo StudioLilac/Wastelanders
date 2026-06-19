@@ -25,6 +25,8 @@ public class PopUpNotification : MonoBehaviour
         StartCoroutine(AnimateCoroutine());
     }
 
+    public Vector2 Measure(string text) => textMesh.GetPreferredValues(text, rectTransform.rect.width, 0f);
+
     private IEnumerator AnimateCoroutine()
     {
         yield return StartCoroutine(Fade(0f, 1f, fadeInDurationS));

@@ -50,5 +50,17 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PreBounty/PreBounty_0.unity
     guid: dc355737ca7b19a44ab4336c40062e28
+  - enabled: 1
+    path: Assets/Scenes/PreBounty/PreBounty_1.unity
+    guid: 06a6d19bf93d544d0b2d722c1b324d17
+  - enabled: 1
+    path: Assets/Scenes/PreBounty/PreBounty_2.unity
+    guid: ce1cea439c23f436ca3bd85db6dba582
+  - enabled: 1
+    path: Assets/Scenes/Epilogue/Epilogue_3.unity
+    guid: abda4b4a1f02346669fbb5df7b758438
+  - enabled: 1
+    path: Assets/Scenes/Epilogue/FinalCutscene.unity
+    guid: b6daca52c9bfcfb469a03376b1320680
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

@@ -4,6 +4,7 @@ using Systems.Persistence;
 using UI_Toolkit;
 using UnityEngine;
 
+public record CardUsed<T>() : IEvent where T : ActionClass;
 public abstract class ActionClass : SelectClass, IBind<ActionData>
 {
     [field: SerializeField] public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();

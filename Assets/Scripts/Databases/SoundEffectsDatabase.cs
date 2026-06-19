@@ -46,10 +46,30 @@ public enum SoundID
     CB_pincer_hit = 210,
     CB_hatchery_summon = 211,
     CB_roll_dice = 212,
+    CB_queen_beetle_spawn = 213,
 
     //VN SFX
     VN_page_flip = 500,
-
+    VN_footsteps = 501,
+    VN_jacket_rustle_1 = 502,
+    VN_jacket_rustle_2 = 503,
+    VN_finger_snap = 504,
+    VN_purple_pulse = 505,
+    VN_pulse_2 = 506,
+    VN_ives_cough_1 = 507,
+    VN_ives_cough_2 = 508,
+    VN_door_knock = 509,
+    VN_dragon_roar_1 = 510,
+    VN_dragon_roar_2 = 511,
+    VN_bone_crunch_1 = 512,
+    VN_bone_crunch_2 = 513,
+    VN_skull_crash = 514,
+    VN_dragon_defeat_1 = 515,
+    VN_dragon_defeat_2 = 516,
+    VN_bone_pop = 517,
+    VN_video_call_pickup = 518,
+    VN_video_call_hangup = 519,
+    VN_radio_static = 520,
 }
 
 public static class SoundIDExtensions

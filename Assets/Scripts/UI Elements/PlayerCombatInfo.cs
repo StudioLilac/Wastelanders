@@ -4,14 +4,23 @@ using UnityEngine;
 namespace UI_Elements {
     public class PlayerCombatInfo : CombatInfo {
         [SerializeField] private Animator animator;
+        private SpriteRenderer crosshairSprite;
         private const float SPEED_LERP_DURATION = 0.5f;
 
         private Coroutine speedRoutine;
+
+        public override void Awake()
+        {
+            base.Awake();
+            crosshairSprite = crosshair.GetComponent<SpriteRenderer>();
+        }
 
         public override void Update() {}
 
         public override void ActivateCrosshair(float speed = 1) {
             base.ActivateCrosshair(speed);
+            crosshairSprite.sortingLayerName = FadeSortingLayer;
+            crosshairSprite.sortingOrder = FadeSortingOrder - 20;
 
             float targetSpeed = Mathf.Min(speed, animator.speed);
 

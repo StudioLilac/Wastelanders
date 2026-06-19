@@ -1,0 +1,168 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4fafe43b89343e3a7ba1235e8987c0f, type: 3}
+  m_Name: Epilogue3_15_PostBattleInjection2
+  m_EditorClassIdentifier: 
+  Entries:
+  - content: HOLD IT.
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 6570561780457144461
+    - rid: 6570561780457144462
+    - rid: 6570561780457144463
+    - rid: 6570561780457144465
+    - rid: 6570561780457144466
+  - content: <i>The needle tumbles in the dirt as it is batted off to the side by
+      Jackie.</i>
+    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 6570561780457144467
+  - content: Ives, was the serum always this colour?
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 6570561780457144468
+    - rid: 6570561780457144469
+  - content: No... never seen that before.
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  - content: "What about everyone else\u2019s serum? What colour are they?"
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 6570561780457144473
+    - rid: 6570561780457144474
+  - content: Mine seems to have turned pink too, so have many others'.
+    speaker: {fileID: 11400000, guid: 17e4d93cc7e3a054e9cf5f1e74be615a, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 7570221480750350406
+    - rid: 7570221480750350407
+    - rid: 7570221480750350408
+    - rid: 7570221480750350413
+  - content: Dammit. Ives, are you feeling alright?
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 6570561780457144480
+    - rid: 6570561780457144481
+  - content: 'Argh, my arm... it''s as if its about to explode. '
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  - content: '<i>A deep indigo bruise blooms where the injection was administered. '
+    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  - content: '<i>Beneath Ives'' skin, purple streaks branch through her veins like
+      roots. '
+    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 6570561780457144461
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    - rid: 6570561780457144462
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        sprite: {fileID: 21300000, guid: e37d4fbf07c214c868939546f702fa2b, type: 3}
+    - rid: 6570561780457144463
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        action: 40
+        duration: 0
+    - rid: 6570561780457144465
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        action: 20
+        duration: 1
+    - rid: 6570561780457144466
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        action: 60
+        duration: 0
+    - rid: 6570561780457144467
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
+    - rid: 6570561780457144468
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    - rid: 6570561780457144469
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        sprite: {fileID: 21300000, guid: 70562f64108503147861dbc82d787ef9, type: 3}
+    - rid: 6570561780457144473
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    - rid: 6570561780457144474
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        sprite: {fileID: 21300000, guid: e37d4fbf07c214c868939546f702fa2b, type: 3}
+    - rid: 6570561780457144480
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    - rid: 6570561780457144481
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        sprite: {fileID: 21300000, guid: df71feced233e4383b3c3903e719e156, type: 3}
+    - rid: 7570221480750350406
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 17e4d93cc7e3a054e9cf5f1e74be615a, type: 2}
+        action: 30
+        duration: 0
+    - rid: 7570221480750350407
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 17e4d93cc7e3a054e9cf5f1e74be615a, type: 2}
+        action: 70
+        duration: 0
+    - rid: 7570221480750350408
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 17e4d93cc7e3a054e9cf5f1e74be615a, type: 2}
+        action: 60
+        duration: 1
+    - rid: 7570221480750350413
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        action: 10
+        duration: 0.5
