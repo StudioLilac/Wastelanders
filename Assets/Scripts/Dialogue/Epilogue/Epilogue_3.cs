@@ -174,9 +174,11 @@ public class Epilogue_3 : MonoBehaviour
                 tundraBackground.SetActive(false);
                 yield return black.FadeInLightScreen(2f);
 
-                yield return DialogueBoxV2.Instance.Play(Driving);
+                var driving = new Epilogue3Driving();
+                yield return DialogueBoxV2.Instance.Play(driving.PartA);
                 AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
-                yield return black.FadeInDarkScreen(1f);
+                yield return black.FadeInDarkScreen(2f);          // "[Fade to black, 2 seconds]"
+                yield return DialogueBoxV2.Instance.Play(driving.PartB);  // narration over black
             }
             {
                 tundra1Bg.SetActive(true);

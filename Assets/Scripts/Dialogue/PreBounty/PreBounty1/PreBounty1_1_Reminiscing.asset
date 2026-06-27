@@ -34,7 +34,7 @@ MonoBehaviour:
     picture: {fileID: 0}
     events:
     - rid: 314095657258319938
-  - content: 'Finally... it worked. '
+  - content: It finally worked...
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxId: 0
     picture: {fileID: 0}
