@@ -305,6 +305,15 @@ public abstract class SceneData : Enum<SceneData>
         { prefabs.audioManager, prefabs.uiFadeScreenManager, prefabs.combatFadeScreenManager, prefabs.pauseMenuV2, prefabs.hudV2, prefabs.tooltip, prefabs.dialogueManager, prefabs.popupManager,  prefabs.gameOver, prefabs.battleIntro, prefabs.arrowIndicatorManager, prefabs.dialogueBoxV2  };
     }
     
+    public class IvesFightCombatScene : SceneData
+    {
+        public override string SceneName => "IvesFightCombatScene";
+        public override SceneAudio GetAudio(AudioDatabase database) => database.PrincessFrogBounty;
+
+        public override MonoBehaviour[] ScenePrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
+            { prefabs.combatFadeScreenManager, prefabs.combatManager, prefabs.battleQueue, prefabs.pauseMenuV2, prefabs.hudV2, prefabs.tooltip, prefabs.dialogueManager, prefabs.popupManager,  prefabs.gameOver, prefabs.battleIntro, prefabs.dialogueBoxV2, prefabs.arrowIndicatorManager };
+    }
+    
     public class FinalCutscene : SceneData
     {
         public override string SceneName => "FinalCutscene";
