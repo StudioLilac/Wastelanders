@@ -24,21 +24,31 @@ MonoBehaviour:
     picture: {fileID: 0}
     events:
     - rid: 1014197516907839559
-  - content: But a major complication of a Waste infection is that your body's natural
-      <i>Frequency</i> will increase and shift out of phase.
+  - content: "But the Waste has a side effect that will disrupt your body\u2019s
+      natural communication systems. "
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events: []
-  - content: "This will disrupt your body\u2019s natural communication systems and
-      ability to utilize energy efficiently."
+  - content: 'It increases your body''s natural <i>Frequency</i> which can cause
+      your body to shift out of phase.
+
+'
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 1014197516907839560
-  - content: While we can manage the symptoms with suppressants and infusions, you
-      will grow weaker.
+  - content: "Naturally, this makes utilizing the existing energy in your system
+      much less efficient. \r\n"
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  - content: 'So while we can manage the symptoms with suppressants and Amplitude
+      infusions, you will still grow weaker.
+
+'
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -54,28 +64,49 @@ MonoBehaviour:
     sfxId: 0
     picture: {fileID: 0}
     events: []
-  - content: I'm...
+  - content: ...
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events: []
-  - content: "I\u2019m gonna be out there as long as I can."
+  - content: 'I made a promise. '
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 1014197516907839569
-  - content: I have to be there for Jackie.
+  - content: To be out there with all that I am, and all that I will be.
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 1014197516907839569
+  - content: And I intend to keep it.
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 1014197516907839569
+  - content: "Ives, you can\u2019t\u2014 "
+    speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 1014197516907839561
+    - rid: 1014197516907839562
+  - content: "Put me on the next re-supply transport. That\u2019s an order, Doctor."
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events: []
-  - content: ...
-    speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+  - content: "Commander, I\u2019d implore you to reconsider... Is this really something
+      as important as your\u2014 "
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events: []
-  - content: "Put me on the next re-supply transport. That\u2019s an order, Doctor."
+    events:
+    - rid: 8634271983927558206
+  - content: "That\u2019s an order, Doctor."
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -85,13 +116,6 @@ MonoBehaviour:
     sfxId: 0
     picture: {fileID: 0}
     events: []
-  - content: "Ives, you can\u2019t-"
-    speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-    sfxId: 0
-    picture: {fileID: 0}
-    events:
-    - rid: 1014197516907839561
-    - rid: 1014197516907839562
   - content: As you wish, Commander. I will prepare a regimen of our strongest suppressants.
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
@@ -133,4 +157,8 @@ MonoBehaviour:
     - rid: 1014197516907839569
       type: {class: CustomEvent, ns: DialogueScripts, asm: MainGame}
       data:
-        EventName: resolve
+        EventName: unpanic
+    - rid: 8634271983927558206
+      type: {class: AutoAdvanceAfter, ns: DialogueScripts, asm: MainGame}
+      data:
+        Time: 0.5

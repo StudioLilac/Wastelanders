@@ -29,23 +29,31 @@ So a scene is pure data and needs zero `[SerializeField]`s.
 
 ## The pattern
 
+0. Read the neighbouring file "DialogueToTranslate.md" to view the dialogue scene to translate 
+if the user has not provided a scene.
+
 1. **Make a scene class** next to the controller that owns it (e.g. under
-   `Assets/Scripts/Dialogue/Epilogue/`). No constructor args, no fields. Expose the
-   dialogue as one or more `DialogueAsCode` properties.
+   `Assets/Scripts/Dialogue/Epilogue/`). No constructor args, no fields, generally a static class.
+    Expose the dialogue as one or more `DialogueAsCode` properties.
+    Possibly consider using static on the enum namespaces. Although not standard, it should make it easier
+    to type the various speaker names and actions. That way even writers can edit this code. 
 
 2. **Translate each line** with `.Line(DialogueCharacter.X, "text", expr?, sfx?)`.
-   - Speaker → `DialogueCharacter.X`. The expression is **optional**: only pass a
-     `DialogueSprite` when the script gives a parenthetical code (e.g. `Jackie (om)` →
-     `DialogueSprite.JackieMouthOpen`). Omit it (defaults to `NoChange`) for un-coded
-     lines — the actor keeps whatever sprite they entered with, so don't invent
-     expressions just to fill the slot.
+   - Speaker → `DialogueCharacter.X`. The expression is **optional**: only pass if a change 
+   in expression is necessary. Occasionally the script will have a period of unkeyed sprites,
+   if you feel a sprite would fit somewhere that is unkeyed, feel free to add it and add a comment
+   that this was a additional choice to the script that you made. 
    - `Narration:` / `Audio:` / stage directions → `.Narrate("<i>...</i>", SoundID.X)`.
      Wrap narration in `<i>…</i>` to match house style.
+  - If you feel that a line is too long (generally should keep things less than 2 sentences),
+  then feel free to add a line break and add an annotation where it feels natural.  
 
 3. **Stage the cast** at the top with
    `.Enter(DialogueCharacter.X, CharacterActions.SetLeft, DialogueSprite.Y)` (Left /
    Middle / Right), and `.Exit(DialogueCharacter.X, …)` at the end. These are silent
-   event-only beats.
+   event-only beats. Only enter when the character first speaks their line. For scenes
+   where the character is expected to already have been in the scene, use a fade in.
+   For scenes where the character is moving into frame, use a move in without fade.
 
 4. **Split anything that must be `yield return`-ed.** A single `DialogueAsCode` builder
    is one uninterrupted dialogue batch. A screen fade-to-black, a timed wait, a
