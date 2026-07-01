@@ -60,6 +60,7 @@ public class DialogueAsCode
         return Do(
             new ExpressionChange { actor = actor, expression = expr },
             new ActorAction { actor = actor, action = position, duration = 0f },
+            new ActorAction { actor = actor, action = CharacterActions.FadeOut, duration = 0 },
             new ActorAction { actor = actor, action = CharacterActions.FadeIn, duration = fadeDuration });
     }
 

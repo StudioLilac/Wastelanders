@@ -128,10 +128,12 @@ public class Epilogue_3 : MonoBehaviour
         }
     }
 
+    public const string STOP_ENGINE = "stop_engine";
     void CustomEventHandler(CustomEvent ev)
     {
         if (ev.EventName == "fade")
         {
+            AudioManager.Instance.FadeInBackgroundTrack(1f, tundraAudio, true);
             StartCoroutine(black.FadeInLightScreen(1f)); // Strike Team, gather up before you all get settled!
         }
         else if (ev.EventName == "cam_flash") // Like this!
@@ -147,6 +149,15 @@ public class Epilogue_3 : MonoBehaviour
         else if (ev.EventName == "klack") // Klackackakkc
         {
             beetle.AttackAnimation(Pincer.PINCER_ANIMATION_NAME);
+        } else if (ev.EventName == STOP_ENGINE)
+        {
+            StartCoroutine(ScheduleAudio());
+            IEnumerator ScheduleAudio()
+            {
+                AudioManager.Instance.FadeOutCurrentBackgroundTrack(1f);
+                yield return new WaitForSeconds(1f);
+                AudioManager.Instance.FadeInBackgroundTrack(1f, tundraAudio, true);
+            }
         }
     }
 
@@ -176,8 +187,8 @@ public class Epilogue_3 : MonoBehaviour
 
                 var driving = new Epilogue3Driving();
                 yield return DialogueBoxV2.Instance.Play(driving.PartA);
-                AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
-                yield return black.FadeInDarkScreen(2f);          // "[Fade to black, 2 seconds]"
+                AudioManager.Instance.FadeOutCurrentBackgroundTrack(1f);
+                yield return black.FadeInDarkScreen(2f);          
                 yield return DialogueBoxV2.Instance.Play(driving.PartB);  // narration over black
             }
             {
@@ -186,7 +197,6 @@ public class Epilogue_3 : MonoBehaviour
                 tundraBackground.SetActive(true);
                 StartCoroutine(vignette.FadeToAlpha(155f / 255f, 0f));
                 yield return new WaitForSeconds(1f);
-                AudioManager.Instance.FadeInBackgroundTrack(1f, tundraAudio, true);
                 yield return DialogueBoxV2.Instance.Play(WesternMarsh);
                 yield return new WaitForSeconds(1f);
                 yield return DialogueBoxV2.Instance.Play(WesternMarsh2);
@@ -204,10 +214,8 @@ public class Epilogue_3 : MonoBehaviour
                 }
 
                 SoundID.VN_finger_snap.Play();
-                SoundID.VN_purple_pulse.Play();
                 yield return PurpleFlash(0.5f, JackieCallback);
                 SoundID.VN_finger_snap.Play();
-                SoundID.VN_purple_pulse.Play();
                 yield return PurpleFlash(0.5f, IvesCallback);
 
                 yield return new WaitForSeconds(0.5f);
@@ -274,6 +282,7 @@ public class Epilogue_3 : MonoBehaviour
             yield return DialogueBoxV2.Instance.Play(BattlePreMoveForward);
 
             princessFrog.FaceLeft();
+            SoundID.VN_purple_pulse.Play();
             StartCoroutine(PurpleFlash(0.5f));
             yield return DialogueBoxV2.Instance.Play(BattleHalt); // ???: Halt
 
@@ -281,6 +290,7 @@ public class Epilogue_3 : MonoBehaviour
             yield return DialogueBoxV2.Instance.Play(BattleStandstill); // Dammit! Something's controlling ...
 
             yield return StartCoroutine(princessFrog.ResetPosition());
+            SoundID.VN_purple_pulse.Play();
             StartCoroutine(PurpleFlash(0.5f));
             yield return DialogueBoxV2.Instance.Play(BattleCome); // ???: Come
 
@@ -334,6 +344,7 @@ public class Epilogue_3 : MonoBehaviour
                 enemyWorkers.ForEach(it => it.gameObject.SetActive(false));
                 yield return new WaitForSeconds(1f);
                 ivesFighter.FaceRight();
+                SoundID.VN_purple_pulse.Play();
                 StartCoroutine(PurpleFlash(0.5f));
                 yield return DialogueBoxV2.Instance.Play(BattleAttack);
 
@@ -481,6 +492,7 @@ public class Epilogue_3 : MonoBehaviour
         }
 
         yield return new WaitForSeconds(2f);
+        SoundID.VN_finger_snap.Play();
         yield return PurpleFlash(0.5f, TurnIntoPrincessFrog);
         yield return new WaitForSeconds(1f);
         yield return DialogueBoxV2.Instance.Play(PostBattleJackieTransform);
