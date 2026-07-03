@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UtilClass;
 
 public class FocusedStrike : StaffCards
 {
@@ -20,6 +21,8 @@ public class FocusedStrike : StaffCards
        
         base.Initialize();
     }
+    
+    protected override GlossaryNode[] GetChildrenGlossaryNodes() => new[] { StatusEffects.Flow };
 
     public override void ApplyEffect()
     {
