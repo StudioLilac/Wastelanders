@@ -110,7 +110,18 @@ MonoBehaviour:
     events:
     - rid: 314095657258319940
     - rid: 314095657258319971
-  - content: The mentor and mentee bump fists, a conduit of resolve.
+  - content: You... promise?
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 8634271915868684350
+  - content: 'I do. With all that I am, and all that I will be. '
+    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  - content: The mentor and mentee bump fists forming a conduit of resolve.
     speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -272,3 +283,8 @@ MonoBehaviour:
         actor: {fileID: 11400000, guid: 41a291ebbfe3c8744898031b27f37a87, type: 2}
         action: 70
         duration: 0.5
+    - rid: 8634271915868684350
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        sprite: {fileID: 21300000, guid: df71feced233e4383b3c3903e719e156, type: 3}
