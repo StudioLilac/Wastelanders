@@ -20,7 +20,6 @@ namespace Dialogue.Epilogue
         [SerializeField] private GameObject background1;
         [SerializeField] private GameObject background2;
         [SerializeField] private GameObject world;
-        [SerializeField] private GameObject sceneBuilder;
 
         [SerializeField] private Image purpleFlash;
         [SerializeField] private Image tundraWithNoise;
