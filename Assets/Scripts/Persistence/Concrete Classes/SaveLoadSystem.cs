@@ -42,6 +42,8 @@ namespace Systems.Persistence
     }
 #nullable enable
     public record GetSaveSystemStatus() : IQuery<SaveStatus?>;
+    public record GetGameStateData() : IQuery<GameStateData?>;
+    public record GetBountyStateData() : IQuery<BountyStateData?>;
 
     // Singleton save load manager that shows up in unity
     public class SaveLoadSystem : PersistentSingleton<SaveLoadSystem>
@@ -72,6 +74,8 @@ namespace Systems.Persistence
             if (invalid) return; // Invalidate this singleton immediately to prevent rest of Awake() from executing
 
             this.Answer<GetSaveSystemStatus, SaveStatus?>(_ => Status);
+            this.Answer<GetGameStateData, GameStateData?>(_ => gameData.gameStateData);
+            this.Answer<GetBountyStateData, BountyStateData?>(_ => gameData.bountyStateData);
 
             dataService ??= SteamManager.Initialized
                 ? new SteamCloudDataService(new JSonSerializer())
@@ -121,8 +125,6 @@ namespace Systems.Persistence
                 NewUserPreferences();
             }
             LoadPlayerInformation();
-            LoadGameStateInformation();
-            LoadBountyStateInformation();
         }
 
         public void LoadCardEvolutionProgress()
@@ -142,46 +144,7 @@ namespace Systems.Persistence
             defaultPlayerDatabase.Bind(gameData.playerInformation);
         }
 
-        public void LoadGameStateInformation()
-        {
-            Bind<GameStateManager, GameStateData>(gameData.gameStateData);
-        }
-
-        public void LoadBountyStateInformation()
-        {
-            Bind<BountyManager, BountyStateData>(gameData.bountyStateData);
-        }
-
         public UserPreferences GetUserPreferences() => userPreferences;
-
-        void Bind<T, TData>(List<TData> datas) where T : MonoBehaviour, IBind<TData> where TData : ISaveable, new()
-        {
-            T[] entities = FindObjectsByType<T>(FindObjectsSortMode.None);
-
-            foreach (T entity in entities)
-            {
-                TData data = datas.FirstOrDefault(it => it.Id == entity.Id);
-                if (data == null)
-                {
-                    data = new TData { Id = entity.Id };
-                    datas.Add(data);
-                }
-                entity.Bind(data);
-            }
-        }
-
-        void Bind<T, TData>(TData data) where T : MonoBehaviour, IBind<TData> where TData : ISaveable, new()
-        {
-            T entity = FindObjectsByType<T>(FindObjectsSortMode.None).FirstOrDefault();
-            if (entity != null)
-            {
-                if (data == null)
-                {
-                    data = new TData { Id = entity.Id };
-                }
-                entity.Bind(data);
-            }
-        }
 
 
         public void NewGame()

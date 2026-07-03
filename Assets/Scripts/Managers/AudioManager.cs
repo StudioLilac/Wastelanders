@@ -6,37 +6,31 @@ using UnityEngine.SceneManagement;
 
 public class AudioManager : PersistentSingleton<AudioManager>
 {
-    public new static AudioManager Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                instance = FindFirstObjectByType<AudioManager>();
-                if (instance == null)
-                {
-                    if (SceneInitializer.Instance == null)
-                    {
-                        Debug.LogError("AudioManager.Instance could not be created because SceneInitializer.Instance is null. " +
-                                       "Ensure a SceneInitializer exists in your first scene.");
-                        return null;
-                    }
-
-                    instance = Instantiate(SceneInitializer.Instance.InitializablePrefabs.audioManager);
-                }
-            }
-
-            return instance;
-        }
-    }
-
     [SerializeField] private AudioSource SFXSoundsPlayer, BackgroundMusicPlayer, BackgroundMusicIntroPlayer;
     [SerializeField] private SoundEffectsDatabase soundEffectsDatabase;
     [SerializeField] private AudioDatabase sceneAudioDatabase;
 #nullable enable
     private SceneAudio sceneAudio = null!;
     Coroutine? combatMusicCoroutine;
-    
+
+    protected override void Awake()
+    {
+        base.Awake();
+        if (invalid) return;
+        this.Subscribe<AudioPreferencesChanged>(_ => ApplyAudioPreferences());
+    }
+
+    private void Start() => ApplyAudioPreferences();
+
+    private void ApplyAudioPreferences()
+    {
+        PreferencesManager prefs = PreferencesManager.Instance;
+        SetMusicVolume(prefs.GetMusicVolume());
+        SetSFXVolume(prefs.GetSFXVolume());
+        SetMusicMuted(prefs.GetMusicMuted());
+        SetSFXMuted(prefs.GetSFXMuted());
+    }
+
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;

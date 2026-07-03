@@ -11,6 +11,3 @@ public class StatusIcons : ScriptableObject
     public Sprite damage;
     public Sprite defense;
 }
-
-#nullable enable
-public record GetStatusIcons() : IQuery<StatusIcons?>;

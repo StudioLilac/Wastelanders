@@ -8,6 +8,7 @@ using Managers;
 using UI_Toolkit;
 
 #nullable enable
+[DefaultExecutionOrder(-10000)]
 public class SceneInitializer : MonoBehaviour
 {
     public static SceneInitializer Instance { get; private set; } = null!;
@@ -44,12 +45,13 @@ public class SceneInitializer : MonoBehaviour
                 Debug.LogWarning("[SceneInitializer] Skipping unassigned manager prefab in SceneInitializerPrefabs.");
                 continue;
             }
-            // Check if a persistent instance of this manager already exists.
-            if (FindFirstObjectByType(managerPrefab.GetType()) != null)
+
+            if (FindFirstObjectByType(managerPrefab.GetType()) != null && !managerPrefab.GetType().IsSubclassOf(typeof(PersistentSingleton<>)))
             {
                 Debug.LogWarning($"{managerPrefab.GetType()} already exists!");
                 continue;
             }
+
             InstantiatePrefab(managerPrefab);
         }
     }

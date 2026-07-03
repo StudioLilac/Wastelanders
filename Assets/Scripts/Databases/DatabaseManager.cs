@@ -3,6 +3,7 @@ using UnityEngine;
 #nullable enable
 public record GetCardDatabase() : IQuery<CardDatabase?>;
 public record GetPlayerDatabase() : IQuery<PlayerDatabase?>;
+public record GetStatusIcons() : IQuery<StatusIcons?>;
 
 public class DatabaseManager : PersistentSingleton<DatabaseManager>
 {
