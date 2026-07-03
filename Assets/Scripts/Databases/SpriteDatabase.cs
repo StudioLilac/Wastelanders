@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// Keyed repository of character expression sprites for dialogue-as-code.
 [CreateAssetMenu(fileName = "SpriteDatabase", menuName = "Dialogue/SpriteDatabase")]
 public class SpriteDatabase : ScriptableObject
 {
@@ -35,13 +34,11 @@ public class SpriteDatabase : ScriptableObject
     }
 }
 
-/// Stable keys for every dialogue character expression.
 public enum DialogueSprite
 {
     NoChange, 
     None,
 
-    // Cam
     CamNeutral,             // nu
     CamPout,                // po
     CamSmile,               // sm
@@ -49,7 +46,6 @@ public enum DialogueSprite
     CamConfused,            // co
     CamProud,               // pr
 
-    // Jackie
     JackieMouthOpen,        // om
     JackieSerious,          // se
     JackieSmile,            // sm
@@ -57,13 +53,11 @@ public enum DialogueSprite
     JackieSurprisedOpen,    // su-op
     JackieTired,            // ti-cl
 
-    // Ives
     IvesQuestioning,        // qu
     IvesLaugh,              // la
     IvesSmile,              // sm
     IvesNeutral,            // nu
 
-    // Dr. Weise
     WeiseNeutral,           // nu
     WeiseSmile,             // sm
     WeiseThinking,          // th

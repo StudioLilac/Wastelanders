@@ -3,24 +3,20 @@ using System.Collections.Generic;
 using DialogueScripts;
 
 #nullable enable
-/// Fluent builder for authoring dialogue in code instead of hand-wiring
+/// Builder for authoring dialogue in code instead of hand-wiring
 public class DialogueAsCode
 {
     private readonly ActorDatabase actors;
     private readonly List<DialogueEntry> entries = new();
 
-    /// <summary>Summons the ActorDatabase from the running DialogueBoxV2 (the single
-    /// source of truth). Throws if none is registered.</summary>
     public DialogueAsCode() : this(RequireActorDatabase()) { }
 
-    /// <summary>Explicit-database overload, mainly for tests.</summary>
     public DialogueAsCode(ActorDatabase actors)
     {
         this.actors = actors;
     }
 
-    /// <summary>A spoken line: shows <paramref name="text"/> as <paramref name="speaker"/>
-    /// with the given expression, optionally playing a sound effect.</summary>
+    /// A spoken line: with the given expression, optionally playing a sound effect.
     public DialogueAsCode Line(DialogueCharacter speaker, string text, DialogueSprite expr = DialogueSprite.NoChange,  SoundID sfx = SoundID.None)
     {
         var actor = Resolve(speaker);
@@ -39,8 +35,8 @@ public class DialogueAsCode
         return this;
     }
 
-    /// <summary>An italicised narration / atmosphere beat with no staged speaker,
-    /// optionally carrying a sound effect (used for "Audio:" cues in scripts).</summary>
+    /// An italicised narration / atmosphere beat with no staged speaker,
+    /// optionally carrying a sound effect.
     public DialogueAsCode Narrate(string text, SoundID sfx = SoundID.None)
     {
         entries.Add(new DialogueEntry(
@@ -52,8 +48,8 @@ public class DialogueAsCode
         return this;
     }
 
-    /// <summary>Brings an actor on-stage at <paramref name="position"/> with a starting
-    /// expression and fades them in. Emitted as a pure-event beat (no text shown).</summary>
+    /// Brings an actor on-stage at position with a starting
+    /// expression and fades them in. 
     public DialogueAsCode Enter(DialogueCharacter character, CharacterActions position, DialogueSprite expr, float fadeDuration = 1f)
     {
         var actor = Resolve(character);
@@ -64,7 +60,7 @@ public class DialogueAsCode
             new ActorAction { actor = actor, action = CharacterActions.FadeIn, duration = fadeDuration });
     }
 
-    /// <summary>Fades the given characters off-stage. Emitted as a pure-event beat.</summary>
+    /// Fades the given characters off-stage. Emitted as a pure-event beat.
     public DialogueAsCode Exit(float fadeDuration, params DialogueCharacter[] leaving)
     {
         var events = new List<DialogueEvents>();
@@ -77,8 +73,7 @@ public class DialogueAsCode
 
     public DialogueAsCode Exit(params DialogueCharacter[] leaving) => Exit(1f, leaving);
 
-    /// <summary>Escape hatch: emit raw dialogue events as a pure-event beat (no text).
-    /// Use for actions that aren't covered by the helpers above.</summary>
+    /// Emit raw dialogue events as a pure-event beat (no text).
     public DialogueAsCode Do(params DialogueEvents[] events)
     {
         entries.Add(new DialogueEntry(
@@ -117,11 +112,6 @@ public class DialogueAsCode
             "in the scene to answer GetActorDatabase before dialogue is built.");
 }
 
-/// <summary>
-/// Stable keys for dialogue speakers, mirroring the fields on <see cref="ActorDatabase"/>.
-/// The dialogue-as-code API takes these instead of <c>ActorProfile</c> references so no
-/// scene/asset has to wire actors; <see cref="DialogueAsCode"/> maps each to a profile.
-/// </summary>
 public enum DialogueCharacter
 {
     Jackie,
