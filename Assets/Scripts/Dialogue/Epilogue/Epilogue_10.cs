@@ -1,9 +1,12 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using DialogueScripts;
+using Entities;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static BattleIntroEnum;
 
 namespace Dialogue.Epilogue
 {
@@ -11,6 +14,8 @@ namespace Dialogue.Epilogue
     {
         private static Color PURPLE = new Color(210f / 255f, 175f / 255f, 1f, 1f);
         private static Color TRANSPARENT_PURPLE = new Color(210f / 255f, 175f / 255f, 1f, 0f);
+
+        [SerializeField] private bool jumpToCombat;
 
         [SerializeField] private GameObject background1;
         [SerializeField] private GameObject background2;
@@ -24,6 +29,7 @@ namespace Dialogue.Epilogue
 
         [SerializeField] private Jackie jackie;
         [SerializeField] private EnemyIves ives;
+        [SerializeField] private PrincessFrog princess;
 
         [SerializeField] private DialogueEntryInUnityEditor[] jayOpeningDialogue;
         [SerializeField] private DialogueEntryInUnityEditor[] preBonfireDialogue;
@@ -34,6 +40,10 @@ namespace Dialogue.Epilogue
         [SerializeField] private DialogueEntryInUnityEditor[] spottedPFrogDialogue;
         [SerializeField] private DialogueEntryInUnityEditor[] battleStartDialogue;
 
+        [SerializeField] private Transform jackieReturnPosition;
+        [SerializeField] private Transform ivesReturnPosition;
+        [SerializeField] private Transform princessReturnPosition;
+        
         [SerializeField] private AudioClip campfireBg;
         [SerializeField] private AudioClip tundraBg;
 
@@ -93,61 +103,107 @@ namespace Dialogue.Epilogue
         {
             if (gameState == GameState.GAME_START)
             {
-                StartCoroutine(ExecuteSceneStart());
+                StartCoroutine(
+                    ExecuteSceneStart());
             }
+        }
+
+        void Setup() {
+            jackie.OutOfCombat();
+            ives.OutOfCombat();
+            princess.OutOfCombat();
         }
 
         private IEnumerator ExecuteSceneStart()
         {
+            Setup();
             CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
             purpleFlash.color = Color.black;
             caveFlickerLayer.color = new Color(1f, 1f, 1f, 0f);
-            yield return DialogueBoxV2.Instance.Play(jayOpeningDialogue.Into());
-            AudioManager.Instance.FadeInBackgroundTrack(5f, tundraBg, true);
-            UIFadeScreenManager.Instance.SetDarkScreen();
-            purpleFlash.color = TRANSPARENT_PURPLE;
+            jackie.SetReturnPosition(jackieReturnPosition.position);
+            ives.SetReturnPosition(ivesReturnPosition.position);
+            princess.SetReturnPosition(princessReturnPosition.position);
 
-            yield return UIFadeScreenManager.Instance.FadeInLightScreen(1.5f);
-            yield return DialogueBoxV2.Instance.Play(preBonfireDialogue.Into());
+            if (!GameStateManager.Instance.JumpToCombat && !jumpToCombat) {
+                yield return DialogueBoxV2.Instance.Play(jayOpeningDialogue.Into());
+                AudioManager.Instance.FadeInBackgroundTrack(5f, tundraBg, true);
+                UIFadeScreenManager.Instance.SetDarkScreen();
+                purpleFlash.color = TRANSPARENT_PURPLE;
 
-            yield return PurpleFlash();
-            yield return DialogueBoxV2.Instance.Play(postVisionDialogue.Into());
-            shouldFlicker = true;
-            AudioManager.Instance.FadeOutCurrentBackgroundTrack(1f);
-            yield return new WaitForSeconds(1);
-            AudioManager.Instance.FadeInBackgroundTrack(2f, campfireBg, true);
-            yield return new WaitForSeconds(5);
-            yield return DialogueBoxV2.Instance.Play(postBonfireDialogue.Into());
+                yield return UIFadeScreenManager.Instance.FadeInLightScreen(1.5f);
+                yield return DialogueBoxV2.Instance.Play(preBonfireDialogue.Into());
 
-            AudioManager.Instance.FadeOutCurrentBackgroundTrack(1f);
-            yield return new WaitForSeconds(1);
-            background2.SetActive(true);
-            AudioManager.Instance.FadeInBackgroundTrack(2f, tundraBg, true);
-            yield return FadeInBG(tundraWithNoise);
+                yield return PurpleFlash();
+                yield return DialogueBoxV2.Instance.Play(postVisionDialogue.Into());
+                shouldFlicker = true;
+                AudioManager.Instance.FadeOutCurrentBackgroundTrack(1f);
+                yield return new WaitForSeconds(1);
+                AudioManager.Instance.FadeInBackgroundTrack(2f, campfireBg, true);
+                yield return new WaitForSeconds(5);
+                yield return DialogueBoxV2.Instance.Play(postBonfireDialogue.Into());
 
-            yield return DialogueBoxV2.Instance.Play(momStoryFlashbackDialogue.Into());
-            AudioManager.Instance.FadeOutCurrentBackgroundTrack(1f);
-            yield return FadeOutBG(tundraWithNoise, 1f);
-            AudioManager.Instance.FadeInBackgroundTrack(1f, campfireBg, true);
-            background2.SetActive(false);
+                AudioManager.Instance.FadeOutCurrentBackgroundTrack(1f);
+                yield return new WaitForSeconds(1);
+                background2.SetActive(true);
+                AudioManager.Instance.FadeInBackgroundTrack(2f, tundraBg, true);
+                yield return FadeInBG(tundraWithNoise);
 
-            yield return DialogueBoxV2.Instance.Play(weiseDialogue.Into());
-            AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
+                yield return DialogueBoxV2.Instance.Play(momStoryFlashbackDialogue.Into());
+                AudioManager.Instance.FadeOutCurrentBackgroundTrack(1f);
+                yield return FadeOutBG(tundraWithNoise, 1f);
+                AudioManager.Instance.FadeInBackgroundTrack(1f, campfireBg, true);
+                background2.SetActive(false);
+
+                yield return DialogueBoxV2.Instance.Play(weiseDialogue.Into());
+                AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
+                yield return UIFadeScreenManager.Instance.FadeInDarkScreen(2f);
+
+                background1.SetActive(false);
+                purpleFlash.color = TRANSPARENT_PURPLE;
+                AudioManager.Instance.FadeInBackgroundTrack(2f, tundraBg, true);
+                yield return UIFadeScreenManager.Instance.FadeInLightScreen(2f);
+                yield return DialogueBoxV2.Instance.Play(spottedPFrogDialogue.Into());
+                StartCoroutine(jackie.MoveToPosition(new Vector3(2.75f, 0.4f, jackie.transform.position.z), 0f, 2f));
+
+                yield return new WaitForSeconds(2);
+                ives.AttackAnimation("IsPunching");
+                AudioManager.Instance.PlaySFX(SoundID.CB_fist_hit);
+                yield return StartCoroutine(jackie.StaggerEntities(ives, jackie, 0.4f));
+                yield return DialogueBoxV2.Instance.Play(battleStartDialogue.Into());
+            } else {
+                background2.SetActive(false);
+                background1.SetActive(false);
+                purpleFlash.color = TRANSPARENT_PURPLE;
+                GameStateManager.Instance.JumpToCombat = false;
+                yield return UIFadeScreenManager.Instance.FadeInLightScreen(0.5f);
+            }
+
+            new BattleIntroEvent(Get<ClashIntro>()).Invoke();
+            CombatManager.Instance.SetEnemiesHostile(new List<EnemyClass>() { ives, princess });
+            
+            CombatManager.PlayersWinEvent += PlayersWin;
+            CombatManager.EnemiesWinEvent += EnemiesWin;
+
+            CombatManager.Instance.BeginCombat();
+            
+            yield return new WaitUntil(() => new GetGameState().Query() == GameState.GAME_WIN);
+            CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
+            
             yield return UIFadeScreenManager.Instance.FadeInDarkScreen(2f);
+        }
 
-            background1.SetActive(false);
-            purpleFlash.color = TRANSPARENT_PURPLE;
-            AudioManager.Instance.FadeInBackgroundTrack(2f, tundraBg, true);
-            yield return UIFadeScreenManager.Instance.FadeInLightScreen(2f);
-            yield return DialogueBoxV2.Instance.Play(spottedPFrogDialogue.Into());
-            StartCoroutine(jackie.MoveToPosition(new Vector3(2.75f, 0.4f, jackie.transform.position.z), 0f, 2f));
+        private void PlayersWin()
+        {
+            CombatManager.EnemiesWinEvent -= EnemiesWin;
+            CombatManager.PlayersWinEvent -= PlayersWin;
+            CombatManager.Instance.GameState = GameState.GAME_WIN;
+        }
 
-            yield return new WaitForSeconds(2);
-            ives.AttackAnimation("IsPunching");
-            AudioManager.Instance.PlaySFX(SoundID.CB_fist_hit);
-            yield return StartCoroutine(jackie.StaggerEntities(ives, jackie, 0.4f));
-            yield return DialogueBoxV2.Instance.Play(battleStartDialogue.Into());
-            yield return UIFadeScreenManager.Instance.FadeInDarkScreen(2f);
+        private void EnemiesWin()
+        {
+            CombatManager.EnemiesWinEvent -= EnemiesWin;
+            CombatManager.PlayersWinEvent -= PlayersWin;
+            CombatManager.Instance.GameState = GameState.GAME_LOSE;
         }
     }
 }
