@@ -65,8 +65,20 @@ namespace UI_Toolkit
             RegisterBlockingElement(skipDialogueButton);
 
             RegisterIconTooltipMouseEvents();
+            StartCoroutine(SuppressStaleTooltipOnLoad());
             
             SetState(State.Unpaused);
+        }
+        
+        // UI Toolkit does an initial pointer hit-test when a panel first becomes active,
+        // which can dispatch a MouseEnterEvent for whatever's already under the cursor
+        // even though the mouse never "entered" anything. That fires ShowTooltip with
+        // no corresponding Leave to clean it up. Waiting a frame lets that stale Enter
+        // resolve first, then we clear it.
+        private IEnumerator SuppressStaleTooltipOnLoad()
+        {
+            yield return null;
+            HideTooltip();
         }
         
         public void Update()
