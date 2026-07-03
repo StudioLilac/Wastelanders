@@ -31,8 +31,8 @@ public class CombatManager : MonoBehaviour
     private List<EntityClass> enemyTeam = new();
     private List<EntityClass> neutralTeam = new();
 
-    [SerializeField] private PlayerDatabase playerDatabase;
-    [SerializeField] private CardDatabase cardDatabase;
+    private PlayerDatabase playerDatabase => new GetPlayerDatabase().Query();
+    private CardDatabase cardDatabase => new GetCardDatabase().Query();
     private List<InstantiableActionClassInfo> GetDeck(PlayerDatabase.PlayerName playerName) => cardDatabase.GetPrefabInfoForDeck(playerDatabase.GetDeckByPlayerName(playerName));
 
 #nullable enable

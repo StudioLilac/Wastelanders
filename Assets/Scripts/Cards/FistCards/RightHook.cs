@@ -4,10 +4,13 @@ using System.Xml.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UtilClass;
-using static UnityEngine.UI.Image;
 
 public class RightHook : FistCards
 {
+    public const string NAME = "Right Hook";
+    public const string DESCRIPTION = "If this card is not staggered, use 'Haymaker'.";
+    private const int LOWER = 2, UPPER = 4;
+
     [SerializeField]
     private GameObject haymakerPrefab;
 
@@ -17,23 +20,23 @@ public class RightHook : FistCards
     // Start is called before the first frame update
     public override void Initialize()
     {
-        lowerBound = 2;
-        upperBound = 4;
+        lowerBound = LOWER;
+        upperBound = UPPER;
         Speed = 4;
 
-        myName = "Right Hook";
-        description = "If this card is not staggered, use 'Haymaker'.";
+        myName = NAME;
+        description = DESCRIPTION;
         CardType = CardType.MeleeAttack;
         base.Initialize();
     }
-    
+
     protected override GlossaryNode[] GetChildrenGlossaryNodes() => new[] { Haymaker.Glossary };
-    
+
     public static readonly GlossaryNode Glossary = new(
-        "Right Hook",
-        "If this card is not staggered, use 'Haymaker'.",
+        NAME,
+        DESCRIPTION,
         null,
-        new CardStats(2, 4),
+        new CardStats(LOWER, UPPER),
         Haymaker.Glossary
     );
 

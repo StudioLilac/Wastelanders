@@ -74,7 +74,7 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
     public int Speed { get; set; }
     public string description;
     
-    public GlossaryNode GlossaryNode;
+    public GlossaryNode GlossaryNode { get; protected set; }
 
     public string evolutionDescription { get; protected set; }
     public string evolutionCriteria{ get; protected set; }

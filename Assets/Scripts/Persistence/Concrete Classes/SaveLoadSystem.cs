@@ -78,8 +78,10 @@ namespace Systems.Persistence
                 : new FileDataService(new JSonSerializer());
 
             Debug.Log($"[{nameof(SaveLoadSystem)}] Initialized with {dataService.GetType().Name}.");
-            defaultCardDatabase = Resources.LoadAll<CardDatabase>("").First();
-            defaultPlayerDatabase = Resources.LoadAll<PlayerDatabase>("").First(); // Could consider loading by name for better performance
+            defaultCardDatabase = new GetCardDatabase().Query()
+                ?? throw new Exception($"{nameof(CardDatabase)} unavailable — {nameof(DatabaseManager)} must be initialized before {nameof(SaveLoadSystem)}.");
+            defaultPlayerDatabase = new GetPlayerDatabase().Query()
+                ?? throw new Exception($"{nameof(PlayerDatabase)} unavailable — {nameof(DatabaseManager)} must be initialized before {nameof(SaveLoadSystem)}.");
             LoadAllInformation();
         }
 

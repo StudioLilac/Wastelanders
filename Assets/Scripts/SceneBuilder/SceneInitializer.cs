@@ -39,6 +39,11 @@ public class SceneInitializer : MonoBehaviour
         
         foreach (var managerPrefab in requiredManagers)
         {
+            if (managerPrefab == null)
+            {
+                Debug.LogWarning("[SceneInitializer] Skipping unassigned manager prefab in SceneInitializerPrefabs.");
+                continue;
+            }
             // Check if a persistent instance of this manager already exists.
             if (FindFirstObjectByType(managerPrefab.GetType()) != null)
             {
@@ -83,4 +88,9 @@ public class SceneInitializerPrefabs
     public UISaveIndicatorManager saveIndicatorManager = null!;
     public CombatManager combatManager = null!;
     public BattleQueue battleQueue = null!;
+    public DatabaseManager databaseManager = null!;
+    public Systems.Persistence.SaveLoadSystem saveLoadSystem = null!;
+    public GameStateManager gameStateManager = null!;
+    public PreferencesManager preferencesManager = null!;
+    public Steamworks.AchievementManager achievementManager = null!;
 }

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6fe727d3dbe27040a5933cd0a460d5a, type: 3}
+  m_Name: StatusIcons
+  m_EditorClassIdentifier: 
+  accuracy: {fileID: 21300000, guid: 96f5e64b5c6ee0a4286a505f53564d83, type: 3}
+  flow: {fileID: 21300000, guid: 820631014ce088c4cb748224d5467c86, type: 3}
+  wound: {fileID: 21300000, guid: e3aa195cbddbdc746a9b7d4b661ecc77, type: 3}
+  resonance: {fileID: 21300000, guid: 7af708b3e1c4e4b0497edc422888df7c, type: 3}
+  damage: {fileID: 21300000, guid: 3fea2e94140c08246a0e502ee92d3761, type: 3}
+  defense: {fileID: 21300000, guid: 926dc102ee6ad62488fa7f3605a127ce, type: 3}

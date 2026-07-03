@@ -13,14 +13,22 @@ public abstract class SceneData : Enum<SceneData>
     public abstract SceneAudio GetAudio(AudioDatabase database);
     
     // Prefabs in here are initialized on EVERY scene.
+    // Order matters: instantiation runs each prefab's Awake synchronously, so providers must
+    // precede consumers. databaseManager answers card/player DB + status-icon queries, so it
+    // must come before saveLoadSystem (which reads the DBs in Awake) and everything after.
     protected virtual MonoBehaviour[] AlwaysPresentPrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
     {
-        prefabs.uiFadeScreenManager,
-        prefabs.audioManager,
+        prefabs.databaseManager,     // provides card/player DBs + status icons; must be first
+        prefabs.saveLoadSystem,      // reads DBs during Awake
+        prefabs.gameStateManager,    // depends on saveLoadSystem
+        prefabs.audioManager,        // depends on gameStateManager (music selection)
+        prefabs.preferencesManager,  // depends on saveLoadSystem + audioManager
+        prefabs.bountyManager,       // depends on saveLoadSystem
+        prefabs.achievementManager,
         prefabs.timeManager,
+        prefabs.uiFadeScreenManager,
         prefabs.saveIndicatorManager,
-        prefabs.bountyManager,
-        prefabs.tooltip
+        prefabs.tooltip,
     };
 
     // Other prefabs specific to the scene go here.

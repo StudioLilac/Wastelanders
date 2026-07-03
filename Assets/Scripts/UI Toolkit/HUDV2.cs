@@ -33,7 +33,10 @@ namespace UI_Toolkit
             rootElem = rootDocument?.rootVisualElement ?? throw new Exception($"{nameof(rootDocument)} unset");
             handElem = rootElem.Q<VisualElement>("layout-hand-container");
             infoElem = rootElem.Q<VisualElement>("layout-info-container");
-            childrenElem = rootElem.Q<ScrollView>("children-container");
+            childrenElem = rootElem.Q<ScrollView>("children-container")
+                           ?? throw new Exception("children-container element not found");
+            if (glossaryNodeTemplate == null)
+                throw new Exception($"{nameof(glossaryNodeTemplate)} unset");
             rootDocument.panelSettings.sortingOrder = UISortOrder.Hudv2.GetOrder();
             deckInfoLabel = rootElem.Q<Label>("txt-deck-info");
             deckInfoLabel.RegisterCallback<MouseEnterEvent>(OnDeckHoverEnter);
@@ -122,7 +125,13 @@ namespace UI_Toolkit
             infoElem.style.display = DisplayStyle.Flex;
             
             childrenElem.Clear();
+            if (ac.GlossaryNode == null)
+            {
+                childrenElem.style.display = DisplayStyle.None;
+                return;
+            }
             var children = GlossaryNode.GetAllSubchildren(ac.GlossaryNode);
+            StatusIcons? statusIcons = new GetStatusIcons().Query();
 
             for (int i = 1; i < children.Count; i++)
             {
@@ -133,16 +142,25 @@ namespace UI_Toolkit
                 entry.Q<Label>("node-tooltip").text = node.Tooltip;
 
                 var icon = entry.Q<VisualElement>("node-icon");
-                if (node.Icon != null)
-                    icon.style.backgroundImage = new StyleBackground(node.Icon);
+                Sprite? nodeIcon = statusIcons != null && node.Icon != null ? node.Icon(statusIcons) : null;
+                if (nodeIcon != null)
+                    icon.style.backgroundImage = new StyleBackground(nodeIcon);
                 else
                     icon.style.display = DisplayStyle.None;
-                
+
                 var cardInfoRow = entry.Q<VisualElement>("card-info-row");
-                if (node.Stats.HasValue)
+                if (node.Stats != null)
                 {
                     cardInfoRow.style.display = DisplayStyle.Flex;
-                    entry.Q<Label>("range").text = $"{node.Stats.Value.LowerBound}-{node.Stats.Value.UpperBound}";
+                    entry.Q<Label>("range").text = $"{node.Stats.LowerBound}-{node.Stats.UpperBound}";
+
+                    Func<StatusIcons, Sprite> statSelector = node.Stats.StatIcon ?? (icons => icons.damage);
+                    Sprite? statIcon = statusIcons != null ? statSelector(statusIcons) : null;
+                    var cardIcon = entry.Q<VisualElement>("card-icon");
+                    if (statIcon != null)
+                        cardIcon.style.backgroundImage = new StyleBackground(statIcon);
+                    else
+                        cardIcon.style.display = DisplayStyle.None;
                 }
                 else
                 {

@@ -19,8 +19,8 @@ public class DeckSelectionManager : MonoBehaviour
     [SerializeField] private GameObject weaponSelectionUi;
     [SerializeField] private GameObject deckSelectionUi;
     [SerializeField] private GameObject cardArrayParent;
-    [SerializeField] private CardDatabase cardDatabase;
-    [SerializeField] private PlayerDatabase playerDatabase;
+    private CardDatabase cardDatabase => new GetCardDatabase().Query();
+    private PlayerDatabase playerDatabase => new GetPlayerDatabase().Query();
     [SerializeField] private TMP_Text cardTitleTextField;
     [SerializeField] private TMP_Text cardDescriptorTextField;
     [SerializeField] private TMP_Text chooseDecksTextField;
