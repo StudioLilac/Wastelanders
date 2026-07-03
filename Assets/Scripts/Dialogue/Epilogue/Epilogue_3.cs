@@ -143,7 +143,7 @@ public class Epilogue_3 : MonoBehaviour
                 cam.gameObject.SetActive(false);
                 beetle.gameObject.SetActive(true);
             }
-            SoundID.VN_purple_pulse.Play();
+            SoundID.VN_finger_snap.Play();
             StartCoroutine(PurpleFlash(0.5f, Callback));
         }
         else if (ev.EventName == "klack") // Klackackakkc

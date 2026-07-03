@@ -47,19 +47,19 @@ MonoBehaviour:
       no exceptions.
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxId: 0
-    picture: {fileID: 21300000, guid: f29addafedd7075418d577a938699eee, type: 3}
+    picture: {fileID: 21300000, guid: a7f4195ff6e29bc48a9190edfdd96bd2, type: 3}
     events: []
   - content: 'If you have any direct contact with the Waste, inject the serum into
       your upper arm once it''s safe. Even for a light graze. '
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxId: 0
-    picture: {fileID: 21300000, guid: f29addafedd7075418d577a938699eee, type: 3}
+    picture: {fileID: 21300000, guid: a7f4195ff6e29bc48a9190edfdd96bd2, type: 3}
     events: []
   - content: 'By the time you see the purple marks on the body that you all know
       as blackvein a couple days later. It will be too late. '
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxId: 0
-    picture: {fileID: 21300000, guid: f29addafedd7075418d577a938699eee, type: 3}
+    picture: {fileID: 21300000, guid: a7f4195ff6e29bc48a9190edfdd96bd2, type: 3}
     events: []
   - content: "To prevent physical contact with the Waste, Cam will now explain the
       purpose behind the new gloves you\u2019ve been issued."
