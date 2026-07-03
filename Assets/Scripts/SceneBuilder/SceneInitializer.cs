@@ -46,9 +46,11 @@ public class SceneInitializer : MonoBehaviour
                 continue;
             }
 
-            if (FindFirstObjectByType(managerPrefab.GetType()) != null && !managerPrefab.GetType().IsSubclassOf(typeof(PersistentSingleton<>)))
+            var existing = FindFirstObjectByType(managerPrefab.GetType());
+            if (existing != null)
             {
-                Debug.LogWarning($"{managerPrefab.GetType()} already exists!");
+                if (existing is not IPersistentSingleton)
+                    Debug.LogWarning($"{managerPrefab.GetType()} already exists!");
                 continue;
             }
 

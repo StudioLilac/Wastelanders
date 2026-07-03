@@ -31,8 +31,7 @@ namespace Systems.Persistence
             {
                 throw new IOException($"File '{data.SaveName}.{fileExtension}' already exists and can't be overwritten.");
             }
-
-            Debug.Log("Saving Content to " + Application.persistentDataPath);
+            
             File.WriteAllText(fileLocation, serializer.Serialize(data));
         }
 

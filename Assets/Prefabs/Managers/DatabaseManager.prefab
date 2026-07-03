@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 599a2879c04041c4b99a8bb6d46a9e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UnparentOnAwake: 0
+  UnparentOnAwake: 1
   statusIcons: {fileID: 11400000, guid: 68bdd27d5dba9154b89cf975fb9694df, type: 2}
   cardDatabase: {fileID: 11400000, guid: 4ee9950b3d655254fb0def1cd879db6a, type: 2}
   playerDatabase: {fileID: 11400000, guid: 8727bc367ba518d4496483da96ba1cf0, type: 2}

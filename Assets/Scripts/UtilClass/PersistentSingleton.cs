@@ -3,7 +3,9 @@ using UnityEngine;
 /**
  * Credit to adammyhre on github for this implementation of persistent singleton 
  */
-public class PersistentSingleton<T> : MonoBehaviour where T : Component
+public interface IPersistentSingleton { }
+
+public class PersistentSingleton<T> : MonoBehaviour, IPersistentSingleton where T : Component
 {
     [Tooltip("if this is true, this singleton will auto detach if it finds itself parented on awake")]
     public bool UnparentOnAwake = true;

@@ -63,7 +63,7 @@ public abstract class SceneData : Enum<SceneData>
         public override SceneAudio GetAudio(AudioDatabase database) => SelectMainMenuMusic(database);
 
         public override MonoBehaviour[] ScenePrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
-            { prefabs.pauseMenuV2, prefabs.popupManager, prefabs.bountyManager };
+            { prefabs.pauseMenuV2, prefabs.popupManager };
         
         public override UIContext UIContextOnEntry => new UIContext.None();
     }
@@ -74,7 +74,7 @@ public abstract class SceneData : Enum<SceneData>
         public override SceneAudio GetAudio(AudioDatabase database) => SelectMainMenuMusic(database);
 
         public override MonoBehaviour[] ScenePrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
-            { prefabs.pauseMenuV2, prefabs.dialogueManager, prefabs.deckSelectV2, prefabs.dialogueBoxV2, prefabs.bountyManager };
+            { prefabs.pauseMenuV2, prefabs.dialogueManager, prefabs.deckSelectV2, prefabs.dialogueBoxV2 };
         
         public override UIContext UIContextOnEntry => new UIContext.Custom(UIContextCustomFlags.DialogueLog);
     }
@@ -85,7 +85,7 @@ public abstract class SceneData : Enum<SceneData>
         public override SceneAudio GetAudio(AudioDatabase database) => SelectMainMenuMusic(database);
 
         public override MonoBehaviour[] ScenePrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
-            { prefabs.pauseMenuV2, prefabs.dialogueManager, prefabs.popupManager, prefabs.bountyManager };
+            { prefabs.pauseMenuV2, prefabs.dialogueManager, prefabs.popupManager };
         
         public override UIContext UIContextOnEntry => new UIContext.Custom(UIContextCustomFlags.DialogueLog);
     }
@@ -96,7 +96,7 @@ public abstract class SceneData : Enum<SceneData>
         public override SceneAudio GetAudio(AudioDatabase database) => SelectMainMenuMusic(database);
 
         public override MonoBehaviour[] ScenePrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
-            { prefabs.pauseMenuV2, prefabs.bountyManager };
+            { prefabs.pauseMenuV2 };
     }
 
     public class Credits : SceneData
@@ -170,7 +170,7 @@ public abstract class SceneData : Enum<SceneData>
         public override SceneAudio GetAudio(AudioDatabase database) => database.Empty;
 
         public override MonoBehaviour[] ScenePrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
-            { prefabs.pauseMenuV2, prefabs.bountyManager };
+            { prefabs.pauseMenuV2 };
     }
     
     public class PreBounty0 : SceneData {
