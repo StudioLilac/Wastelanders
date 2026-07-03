@@ -121,10 +121,8 @@ public class GameStateManager : PersistentSingleton<GameStateManager>
 
 
 [System.Serializable]
-public class GameStateData : ISaveable
+public class GameStateData
 {
-    [field: SerializeField] public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
-
     /*
      * This is the current state that the player is at
      * The associated values for this should be from [LevelSelectInformation.levelId]
@@ -137,7 +135,6 @@ public class GameStateData : ISaveable
     {
         var items = new List<string>
         {
-            "Id: " + Id,
             "Hexcode: " + RuntimeHelpers.GetHashCode(this),
             "Current player level progress: " + CurrentLevelProgress,
             "Seen Enemy Actions: " + string.Join(";", SeenEnemyActions),

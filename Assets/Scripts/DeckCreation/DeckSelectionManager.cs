@@ -376,7 +376,6 @@ public class DeckSelectionManager : MonoBehaviour
             ac.UpdateDup();
         }
 
-        SaveLoadSystem.Instance.LoadCardEvolutionProgress();
         OnRenderDecks?.Invoke(cols, instantiatedCards.Select(card => card.GetComponent<ActionClass>()).OrderBy(card => card.Speed).ToList());
     }
 

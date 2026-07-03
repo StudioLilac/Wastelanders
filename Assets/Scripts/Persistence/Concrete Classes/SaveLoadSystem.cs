@@ -30,20 +30,11 @@ namespace Systems.Persistence
         public string SaveName => Name;
     }
 
-    public interface ISaveable
-    {
-        SerializableGuid Id { get; set; }
-    }
-
-    public interface IBind<TData> where TData : ISaveable 
-    {
-        SerializableGuid Id { get; set; }
-        void Bind(TData data);
-    }
 #nullable enable
     public record GetSaveSystemStatus() : IQuery<SaveStatus?>;
     public record GetGameStateData() : IQuery<GameStateData?>;
     public record GetBountyStateData() : IQuery<BountyStateData?>;
+    public record GetActionData(string ActionClassName) : IQuery<ActionData?>;
 
     // Singleton save load manager that shows up in unity
     public class SaveLoadSystem : PersistentSingleton<SaveLoadSystem>
@@ -76,6 +67,7 @@ namespace Systems.Persistence
             this.Answer<GetSaveSystemStatus, SaveStatus?>(_ => Status);
             this.Answer<GetGameStateData, GameStateData?>(_ => gameData.gameStateData);
             this.Answer<GetBountyStateData, BountyStateData?>(_ => gameData.bountyStateData);
+            this.Answer<GetActionData, ActionData?>(q => GetActionDataFor(q.ActionClassName));
 
             dataService ??= SteamManager.Initialized
                 ? new SteamCloudDataService(new JSonSerializer())
@@ -127,18 +119,25 @@ namespace Systems.Persistence
             LoadPlayerInformation();
         }
 
-        public void LoadCardEvolutionProgress()
-        {
-            ActionClass[] actions = FindObjectsByType<ActionClass>(FindObjectsSortMode.None);
+        private Dictionary<string, ActionData>? _actionDataLookup;
 
-            foreach (ActionClass actionClass in actions)
+        private ActionData GetActionDataFor(string actionClassName)
+        {
+            if (_actionDataLookup == null)
             {
-                ActionData data = gameData.actionData.FirstOrDefault(it => it.ActionClassName == actionClass.GetType().Name);
-                if (data != null) actionClass.Bind(data);
+                _actionDataLookup = new Dictionary<string, ActionData>();
+                foreach (ActionData d in gameData.actionData) _actionDataLookup.TryAdd(d.ActionClassName, d);
             }
+
+            if (!_actionDataLookup.TryGetValue(actionClassName, out ActionData data))
+            {
+                data = new ActionData { ActionClassName = actionClassName };
+                gameData.actionData.Add(data);
+                _actionDataLookup[actionClassName] = data;
+            }
+            return data;
         }
 
-        // Scriptable objects are not saved and loaded like MonoBehaviours are. 
         private void LoadPlayerInformation()
         {
             defaultPlayerDatabase.Bind(gameData.playerInformation);
@@ -158,6 +157,7 @@ namespace Systems.Persistence
                 actionData = defaultCardDatabase.GetDefaultActionDatas(),
                 playerInformation = new PlayerInformation(PlayerDatabase.PlayerData.JACKIE_DEFAULT, PlayerDatabase.PlayerData.IVES_DEFAULT)
             };
+            _actionDataLookup = null;
         }
 
         public void SaveGame()
@@ -177,6 +177,7 @@ namespace Systems.Persistence
         {
             Debug.Log($"Loading the game: {SAVE_FILE_NAME}");
             gameData = Versioning.MigrateGameData(dataService.Load<GameData>(SAVE_FILE_NAME));
+            _actionDataLookup = null;
         }
 
         private void NewUserPreferences()

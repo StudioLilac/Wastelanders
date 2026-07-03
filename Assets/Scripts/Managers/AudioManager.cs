@@ -189,10 +189,8 @@ public class AudioManager : PersistentSingleton<AudioManager>
 }
 
 [System.Serializable]
-public class AudioPreferences : ISaveable
+public class AudioPreferences
 {
-    public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
-
     [field: SerializeField] public float BackgroundMusicVolume { get; set; } = 0.7f;
     [field: SerializeField] public float SFXVolume { get; set; } = 0.7f;
     [field: SerializeField] public bool MusicMuted { get; set; } = false;

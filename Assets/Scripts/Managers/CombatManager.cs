@@ -96,9 +96,6 @@ public class CombatManager : MonoBehaviour
         PerformInCombat();
         StartCoroutine(FadeCombatBackground(false));
 
-        // Might not capture newly spawned instances of cards, somehow they need to attract their evolved state and data binding. 
-        SaveLoadSystem.Instance.LoadCardEvolutionProgress(); // Most universal place to put this is here, but tagged for performance optimizations
-
         foreach (EntityClass entity in GrabAllEntities())
         {
             entity.PerformSelection();
