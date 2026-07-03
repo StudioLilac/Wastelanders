@@ -161,6 +161,8 @@ namespace Dialogue.Epilogue
                 background1.SetActive(false);
                 purpleFlash.color = TRANSPARENT_PURPLE;
                 AudioManager.Instance.FadeInBackgroundTrack(2f, tundraBg, true);
+                ives.FaceLeft();
+                princess.FaceLeft();
                 yield return UIFadeScreenManager.Instance.FadeInLightScreen(2f);
                 yield return DialogueBoxV2.Instance.Play(spottedPFrogDialogue.Into());
                 StartCoroutine(jackie.MoveToPosition(new Vector3(2.75f, 0.4f, jackie.transform.position.z), 0f, 2f));
@@ -171,6 +173,8 @@ namespace Dialogue.Epilogue
                 yield return StartCoroutine(jackie.StaggerEntities(ives, jackie, 0.4f));
                 yield return DialogueBoxV2.Instance.Play(battleStartDialogue.Into());
             } else {
+                ives.FaceLeft();
+                princess.FaceLeft();
                 background2.SetActive(false);
                 background1.SetActive(false);
                 purpleFlash.color = TRANSPARENT_PURPLE;
