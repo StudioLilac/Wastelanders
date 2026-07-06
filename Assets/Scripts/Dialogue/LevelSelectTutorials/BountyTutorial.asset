@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: BountyTutorial
   m_EditorClassIdentifier: 
   Entries:
-  - content: 'The frog-with-a-crown now deemed the ''Princess Frog'' has set up camps
-      that need to be cleared so that mining can commence! We need your help '
+  - content: The frog-with-a-crown now deemed the 'Princess Frog' has set up camps
+      that need to be cleared so that mining can commence!
     speaker: {fileID: 11400000, guid: a9924d74021fb49d796b34e9cd8d18a3, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events: []
-  - content: In this segment of the game, clear bounties to progress Jackie and Ives'
-      story arc and unlock new enemy Actions you can play during combat.
+  - content: Clear bounties to progress the story arc and unlock playable enemy Actions
+      for your own!
     speaker: {fileID: 11400000, guid: b64e232132ef228439856328530fa3c8, type: 2}
     sfxId: 0
     picture: {fileID: 0}

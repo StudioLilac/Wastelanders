@@ -16,7 +16,7 @@ public class BountySelectDialogue : MonoBehaviour
 
     IEnumerator Start()
     {
-        if (true || GameStateManager.Instance.PreviousScene == SceneData.Get<SceneData.Epilogue_3>())
+        if (GameStateManager.Instance.PreviousScene == SceneData.Get<SceneData.Epilogue_3>())
         {
             screenCutoutScrim.SetBlocking(true);
             yield return materialTintFadeHandler.FadeToAlpha(200f/255f, 1f);

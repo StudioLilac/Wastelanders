@@ -26,7 +26,7 @@ public class BountyManager : PersistentSingleton<BountyManager>
     }
 
     // All ActiveBounty should be contained within BountyInformation's Bounty Collection
-    public IBounties? ActiveBounty { get; set; } = null;
+    public IBounties? ActiveBounty { get; private set; } = null;
     public BountyInformation? SelectedBountyInformation { get; private set; } = null;
 
 
