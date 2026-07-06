@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace UtilClass
 {
     public static class Keywords
@@ -21,27 +19,27 @@ namespace UtilClass
     public static class StatusEffects
     {
         public static readonly GlossaryNode Accuracy = new(
-            "Accuracy",
+            global::Accuracy.buffName,
             BuffExplainer.WeaponExplanation.PISTOL_EXPLANATION.ExplanationText,
-            Resources.Load<Sprite>("StatusIcon/Accuracy")
+            icons => icons.accuracy
         );
-        
+
         public static readonly GlossaryNode Flow = new(
-            "Flow",
+            global::Flow.buffName,
             BuffExplainer.WeaponExplanation.STAFF_EXPLANATION.ExplanationText,
-            Resources.Load<Sprite>("StatusIcon/Flow")
+            icons => icons.flow
         );
-        
+
         public static readonly GlossaryNode Wound = new(
-            "Wound",
+            global::Wound.buffName,
             BuffExplainer.WeaponExplanation.AXE_EXPLANATION.ExplanationText,
-            Resources.Load<Sprite>("StatusIcon/Wound")
+            icons => icons.wound
         );
-        
+
         public static readonly GlossaryNode Resonance = new(
-            "Resonance",
+            Resonate.buffName,
             BuffExplainer.WeaponExplanation.RESONANCE_EXPLANATION.ExplanationText,
-            Resources.Load<Sprite>("StatusIcon/resonance")
+            icons => icons.resonance
         );
     }
 }

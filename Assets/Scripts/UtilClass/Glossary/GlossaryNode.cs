@@ -1,21 +1,16 @@
+using System;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 using UnityEngine;
 
+#nullable enable
 namespace UtilClass
 {
-    public struct CardStats
-    {
-        public int LowerBound { get; }
-        public int UpperBound { get; }
+    /// <summary>
+    /// Describes a card's rolled range. <paramref name="StatIcon"/> selects which status icon
+    /// accompanies the range (e.g. damage vs defense); a null selector defaults to the damage icon.
+    /// </summary>
+    public record CardStats(int LowerBound, int UpperBound, Func<StatusIcons, Sprite>? StatIcon = null);
 
-        public CardStats(int lowerBound, int upperBound)
-        {
-            LowerBound = lowerBound;
-            UpperBound = upperBound;
-        }
-    }
-    
     /// <summary>
     /// Contains information about a Card, Status effect, or Keyword.
     ///
@@ -26,10 +21,10 @@ namespace UtilClass
         public string Title { get; }
         public string Tooltip { get; }
         public CardStats? Stats { get; }
-        [CanBeNull] public Sprite Icon { get; }
+        public Func<StatusIcons, Sprite>? Icon { get; }
         public IReadOnlyList<GlossaryNode> Children { get; }
-        
-        public GlossaryNode(string title, string tooltip, Sprite icon = null, CardStats? stats = null, params GlossaryNode[] children)
+
+        public GlossaryNode(string title, string tooltip, Func<StatusIcons, Sprite>? icon = null, CardStats? stats = null, params GlossaryNode[] children)
         {
             Title = title;
             Tooltip = tooltip;

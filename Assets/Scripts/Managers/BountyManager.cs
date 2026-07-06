@@ -12,24 +12,16 @@ public record ClearBounty(): IEvent;
 
 #nullable enable
 // A class that persists the current bounty information during level selecting
-public class BountyManager : PersistentSingleton<BountyManager>, IBind<BountyStateData>
+public class BountyManager : PersistentSingleton<BountyManager>
 {
-    [field: SerializeField] public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
-
     private BountyStateData? _data;
-
     private BountyStateData ContractStateData
     {
         get
         {
-            // This can be null when this manager is created after SaveLoadManager is created. For example, when you start the game in certain scenes.
-            if (_data == null) SaveLoadSystem.Instance.LoadBountyStateInformation();
+            if (_data == null) _data = new GetBountyStateData().Query();
 
             return _data!;
-        }
-        set
-        {
-            _data = value;
         }
     }
 
@@ -75,19 +67,12 @@ public class BountyManager : PersistentSingleton<BountyManager>, IBind<BountySta
         StartCoroutine(FadeLevelIn(scene.SceneData.SceneName));
     }
 
-    void IBind<BountyStateData>.Bind(BountyStateData data)
-    {
-        ContractStateData = data;
-        Id = data.Id;
-    }
 }
 
 // The serialized data for bounties that gets stored in the JSON
 [System.Serializable]
-public class BountyStateData : ISaveable
+public class BountyStateData
 {
-
-    [field: SerializeField] public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
     [field: SerializeField] private List<ChallengeCompletionState> BountyCompletionData { get; set; } = new();
 
     public void SetChallengeComplete(IBounties bounty)

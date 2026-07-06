@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 //Singleton Class that keeps track of values representing general Game states
-public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<GameStateData>
+public class GameStateManager : PersistentSingleton<GameStateManager>
 {
     public static readonly bool IS_DEVELOPMENT = false;
     public const bool SEASON_1_ACTIVE = false;
@@ -16,25 +16,19 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
 
     public SceneData PreviousScene { get; private set; } = SceneData.Get<SceneData.MainMenu>();
 
-    //Fields for persistence
-    [field: SerializeField] public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
     private GameStateData _data;
 
-    private GameStateData Data 
+    private GameStateData Data
     {
         get
         {
-            // Data should only be nullable during development where you can open a scene from any place
             if (_data == null)
             {
-                SaveLoadSystem.Instance.LoadGameStateInformation();
+                _data = new GetGameStateData().Query();
+                seenEnemyActions = _data.SeenEnemyActions.ToHashSet();
             }
 
             return _data;
-        }
-        set
-        {
-            _data = value;
         }
     }
 
@@ -69,12 +63,6 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
     {
         Scene activeScene = SceneManager.GetActiveScene();
         LoadScene(activeScene.name);
-    }
-
-    public void Bind(GameStateData bindedData) {
-        this.Data = bindedData;
-        this.Data.Id = bindedData.Id;
-        seenEnemyActions = bindedData.SeenEnemyActions.ToHashSet();
     }
 
     public void LoadScene(string scene, bool shouldFade = true)
@@ -133,10 +121,8 @@ public class GameStateManager : PersistentSingleton<GameStateManager>, IBind<Gam
 
 
 [System.Serializable]
-public class GameStateData : ISaveable
+public class GameStateData
 {
-    [field: SerializeField] public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
-
     /*
      * This is the current state that the player is at
      * The associated values for this should be from [LevelSelectInformation.levelId]
@@ -149,7 +135,6 @@ public class GameStateData : ISaveable
     {
         var items = new List<string>
         {
-            "Id: " + Id,
             "Hexcode: " + RuntimeHelpers.GetHashCode(this),
             "Current player level progress: " + CurrentLevelProgress,
             "Seen Enemy Actions: " + string.Join(";", SeenEnemyActions),

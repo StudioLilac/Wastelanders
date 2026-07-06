@@ -10,7 +10,7 @@ using WeaponDeckSerialization;
 
 public class DeckSelectionTutorial : MonoBehaviour
 {
-    [SerializeField] private PlayerDatabase playerDatabase;
+    private PlayerDatabase playerDatabase => new GetPlayerDatabase().Query();
     [SerializeField] private CharacterSelect jackieSelect;
 
     [SerializeField] private DialogueWrapper selectYourCharacter;
