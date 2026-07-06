@@ -65,10 +65,11 @@ namespace UI_Toolkit
             RegisterBlockingElement(skipDialogueButton);
 
             RegisterIconTooltipMouseEvents();
-            
+            HideTooltip();
+
             SetState(State.Unpaused);
         }
-        
+
         public void Update()
         {
             if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Tab))
@@ -130,7 +131,7 @@ namespace UI_Toolkit
         
         private void RegisterBlockingElement(VisualElement element)
         {
-            element.RegisterCallback<MouseEnterEvent>(_ => IsOverBlockingElement = true);
+            element.RegisterCallback<MouseEnterEvent>(_ => { if (IsCursorOver(element)) IsOverBlockingElement = true; });
             element.RegisterCallback<MouseLeaveEvent>(_ => IsOverBlockingElement = false);
     
             element.RegisterCallback<MouseDownEvent>(evt => 
@@ -142,19 +143,21 @@ namespace UI_Toolkit
 
         private void RegisterIconTooltipMouseEvents()
         {
-            autoRollToggle.RegisterCallback<MouseEnterEvent>(evt => ShowTooltip("Toggle Auto Roll"));
-            doubleSpeedToggle.RegisterCallback<MouseEnterEvent>(evt => ShowTooltip("Toggle Double Speed"));
-            dialogueLogButton.RegisterCallback<MouseEnterEvent>(evt => ShowTooltip("View Dialogue Log"));
-            skipDialogueButton.RegisterCallback<MouseEnterEvent>(evt => ShowTooltip("Skip Dialogue"));
-            
-            autoRollToggle.RegisterCallback<MouseLeaveEvent>(evt => HideTooltip());
-            doubleSpeedToggle.RegisterCallback<MouseLeaveEvent>(evt => HideTooltip());
-            dialogueLogButton.RegisterCallback<MouseLeaveEvent>(evt => HideTooltip());
-            skipDialogueButton.RegisterCallback<MouseLeaveEvent>(evt => HideTooltip());
+            RegisterTooltip(autoRollToggle,     "Toggle Auto Roll");
+            RegisterTooltip(doubleSpeedToggle,  "Toggle Double Speed");
+            RegisterTooltip(dialogueLogButton,  "View Dialogue Log");
+            RegisterTooltip(skipDialogueButton, "Skip Dialogue");
         }
 
-        private void ShowTooltip(string tooltip)
+        private void RegisterTooltip(VisualElement element, string tooltip)
         {
+            element.RegisterCallback<MouseEnterEvent>(_ => ShowTooltip(element, tooltip));
+            element.RegisterCallback<MouseLeaveEvent>(_ => HideTooltip());
+        }
+
+        private void ShowTooltip(VisualElement source, string tooltip)
+        {
+            if (!IsCursorOver(source)) return;
             new TooltipEvent(TextTipDisplayStyle.Display, "", tooltip).Invoke();
         }
 
@@ -230,7 +233,13 @@ namespace UI_Toolkit
         {
             SetState(previousState);
         }
-        
+        private static bool IsCursorOver(VisualElement element)
+        {
+            if (element.panel == null) return false;
+            Vector2 cursor = UICoordinateHelper.ToPanelPoint(Input.mousePosition, element.panel);
+            return element.worldBound.Contains(cursor);
+        }
+
         private static void OnAutoRollChanged(bool value) {
             PreferencesManager.Instance.SetAutoRoll(value);
         }
