@@ -16,7 +16,11 @@ public class BountySelectDialogue : MonoBehaviour
 
     IEnumerator Start()
     {
-        if (GameStateManager.Instance.PreviousScene == SceneData.Get<SceneData.Epilogue_3>())
+        bool shouldShowBountyTutorial = 
+            GameStateManager.Instance.PreviousScene == SceneData.Get<SceneData.SelectionScreen>() && 
+            BountyManager.Instance.GetBountyProgress() == 0;
+        
+        if (shouldShowBountyTutorial)
         {
             interactionBlocker.gameObject.SetActive(true);
             screenCutoutScrim.SetBlocking(true);

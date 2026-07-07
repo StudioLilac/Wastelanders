@@ -97,6 +97,8 @@ public class DeckSelectionManager : MonoBehaviour
 
         allCollidersInScene = FindObjectsByType<Collider2D>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         this.Subscribe<PauseStateChangedEvent>(HandlePauseStateChanged);
+        this.Subscribe<CharachterSelected>(name => CharacterChosen(name.PlayerName));
+        this.Subscribe<WeaponEditSelected>(weapon => WeaponDeckEdit(weapon.WeaponEditInformation));
     }
 
     void Start()
@@ -105,9 +107,7 @@ public class DeckSelectionManager : MonoBehaviour
         ActionClass.CardRightClickedEvent += CardRightClicked;
         ActionClass.CardHighlightedEvent += RenderCardInformation;
         ActionClass.CardUnhighlightedEvent += RemoveCardInformation;
-        CharacterSelect.CharacterSelectedEvent += CharacterChosen;
         WeaponSelect.WeaponSelectEvent += WeaponSelected;
-        WeaponEdit.WeaponEditEvent += WeaponDeckEdit;
         EnterDeckSelection();
     }
 
@@ -123,9 +123,7 @@ public class DeckSelectionManager : MonoBehaviour
         ActionClass.CardRightClickedEvent -= CardRightClicked;
         ActionClass.CardHighlightedEvent -= RenderCardInformation;
         ActionClass.CardUnhighlightedEvent -= RemoveCardInformation;
-        CharacterSelect.CharacterSelectedEvent -= CharacterChosen;
         WeaponSelect.WeaponSelectEvent -= WeaponSelected;
-        WeaponEdit.WeaponEditEvent -= WeaponDeckEdit;
     }
 
     public void PrevState()
@@ -186,7 +184,7 @@ public class DeckSelectionManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Can only select 2 weapons");
+            new DisplayWarning(new PopupType.CustomPopup("2 Weapons Max! \n Deselect one to select this.")).Invoke();
         }
     }
 
@@ -245,7 +243,7 @@ public class DeckSelectionManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Insufficient experience points");
+            new DisplayWarning(new PopupType.CustomPopup("Insufficient Points! \n Deselect Actions to free up points.")).Invoke();
         }
     }
 

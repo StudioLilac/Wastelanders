@@ -5,6 +5,7 @@ using UnityEngine;
 using TMPro;
 using System.Linq;
 
+public record CharachterSelected(PlayerDatabase.PlayerName PlayerName) : IEvent;
 public class CharacterSelect : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer characterPortrait;
@@ -14,8 +15,6 @@ public class CharacterSelect : MonoBehaviour
     public PlayerDatabase.PlayerName playerName;
     private bool isMouseDown = false;
 #nullable enable
-    public delegate void CharacterSelectDelegate(PlayerDatabase.PlayerName playerName);
-    public static event CharacterSelectDelegate? CharacterSelectedEvent;
 
     private bool isLocked = false;
 
@@ -31,7 +30,7 @@ public class CharacterSelect : MonoBehaviour
         if (isMouseDown)
         {
             SetUnHovered();
-            CharacterSelectedEvent?.Invoke(playerName);
+            new CharachterSelected(playerName).Invoke();
         }
         isMouseDown = false;
     }

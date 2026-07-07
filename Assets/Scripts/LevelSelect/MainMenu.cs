@@ -63,7 +63,6 @@ public class MainMenu : MonoBehaviour {
         UpdateStatusUI();
         ApplyBGConfig();
         StartCoroutine(TransitionBackground());
-        startAttention.ConfigureAttention(StageInformation.Get<StageInformation.PrincessFrogFight>().UnlockCriteriaMet());
     }
 
     private IEnumerator TransitionBackground()
