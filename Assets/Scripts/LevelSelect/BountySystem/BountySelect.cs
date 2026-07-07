@@ -1,13 +1,11 @@
 using BountySystem;
 using LevelSelectInformation;
-using System.Collections;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 // Class that handles the rendering and scene management of bounty selection
 public class BountySelect : MonoBehaviour
@@ -22,9 +20,7 @@ public class BountySelect : MonoBehaviour
     [SerializeField] private TMP_Text bountyDescription;
     [SerializeField] private TMP_Text bountyRewards;
     [SerializeField] private TMP_Text chooseBountyText;
-    private Coroutine currentCrossFade;
-    [SerializeField] private Image frontBackground; // Used for background and fading in
-    [SerializeField] private Image backBackground; // Used for fading out
+    [SerializeField] private CrossFadeHandler crossFadeHandler;
     [SerializeField] private Sprite defaultBackground;
     [SerializeField] private float crossFadeDuration = 1f;
 
@@ -144,42 +140,9 @@ public class BountySelect : MonoBehaviour
         FadeLevelIn(SceneData.Get<SceneData.LevelSelect>().SceneName);
     }
 
-    private void AbortCrossFade()
-    {
-        if (currentCrossFade != null) StopCoroutine(currentCrossFade);
-    }
-
     private void StartCrossFadeBackground(IBounties? bounty, float duration)
     {
-        //Bugfix: Check is necessary so we don't abort cross fade after we select a bounty then move our mouse off
-        if (bounty != null && bounty == BountyManager.Instance.ActiveBounty) return;
-        AbortCrossFade(); // Abort if cross fade is currently animating
         Sprite s = bounty != null ? bounty.GetBountyAssets(bountyAssetDatabase).Background : defaultBackground;
-        currentCrossFade = StartCoroutine(CrossFadeBackground(s, duration));
-    }
-
-    private IEnumerator CrossFadeBackground(Sprite comingIn, float duration)
-    {
-        if (comingIn == null) comingIn = defaultBackground;
-        if (comingIn == frontBackground.sprite) yield break;
-        float prevAlpha = backBackground.color.a;
-
-        backBackground.sprite = frontBackground.sprite;
-        frontBackground.sprite = comingIn;
-
-        float elapsedTime = prevAlpha;
-
-        while (elapsedTime < duration)
-        {
-            float percentage = elapsedTime / duration;
-            frontBackground.color = new Color(1, 1, 1, percentage);
-            backBackground.color = new Color(1, 1, 1, 1 - percentage);
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        frontBackground.color = new Color(1, 1, 1, 1);
-        backBackground.color = new Color(1, 1, 1, 0);
-        currentCrossFade = null;
+        crossFadeHandler.CrossFadeTo(s, duration);
     }
 }

@@ -70,6 +70,7 @@ public class BountyButton : MonoBehaviour
     public void OnPress()
     {
         selected = !selected;
+        new BountyOnClickEvent(bounty).Invoke();
         if (selected)
         {
             Selected();
@@ -83,7 +84,6 @@ public class BountyButton : MonoBehaviour
     private void Selected()
     {
         selected = true;
-        new BountyOnClickEvent(bounty).Invoke();
         selectedRenderer.gameObject.SetActive(true);
         UpdateSelectedAlpha(1f);
     }

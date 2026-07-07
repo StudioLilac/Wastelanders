@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PressStart
   m_EditorClassIdentifier: 
   Entries:
-  - content: 'Press start when you are ready to fight! '
+  - content: 'Press start to accept the bounty and challenge it! '
     speaker: {fileID: 11400000, guid: b64e232132ef228439856328530fa3c8, type: 2}
     sfxId: 0
     picture: {fileID: 0}

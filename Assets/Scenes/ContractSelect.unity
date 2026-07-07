@@ -431,6 +431,7 @@ GameObject:
   - component: {fileID: 175945932}
   - component: {fileID: 175945933}
   - component: {fileID: 175945934}
+  - component: {fileID: 175945935}
   m_Layer: 0
   m_Name: Bounty Scene Manager
   m_TagString: Untagged
@@ -479,8 +480,7 @@ MonoBehaviour:
   bountyDescription: {fileID: 1090741877}
   bountyRewards: {fileID: 590808695}
   chooseBountyText: {fileID: 1475500671}
-  frontBackground: {fileID: 1645370203}
-  backBackground: {fileID: 184714176}
+  crossFadeHandler: {fileID: 175945935}
   defaultBackground: {fileID: 21300000, guid: 9bf0c0761bcaa424fa6812654eafde84, type: 3}
   crossFadeDuration: 1
 --- !u!114 &175945932
@@ -570,6 +570,20 @@ MonoBehaviour:
   interactionBlocker: {fileID: 2090370954}
   startBlocker: {fileID: 1818431061}
   startCanvas: {fileID: 529903464}
+--- !u!114 &175945935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 175945928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 570ece3d1c1091142b4cbe2ad28d1fda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frontLayer: {fileID: 1645370205}
+  backLayer: {fileID: 184714178}
 --- !u!1 &184714174
 GameObject:
   m_ObjectHideFlags: 0
@@ -581,8 +595,9 @@ GameObject:
   - component: {fileID: 184714175}
   - component: {fileID: 184714177}
   - component: {fileID: 184714176}
+  - component: {fileID: 184714178}
   m_Layer: 5
-  m_Name: Back Background
+  m_Name: Front Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -645,6 +660,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 184714174}
   m_CullTransparentMesh: 1
+--- !u!114 &184714178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184714174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2a3c0ba8ef1824438650b6e205890b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiImage: {fileID: 184714176}
 --- !u!1 &207423252
 GameObject:
   m_ObjectHideFlags: 0
@@ -2360,6 +2388,7 @@ GameObject:
   - component: {fileID: 1645370202}
   - component: {fileID: 1645370204}
   - component: {fileID: 1645370203}
+  - component: {fileID: 1645370205}
   m_Layer: 5
   m_Name: Background + Buttons
   m_TagString: Untagged
@@ -2427,6 +2456,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1645370201}
   m_CullTransparentMesh: 1
+--- !u!114 &1645370205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1645370201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2a3c0ba8ef1824438650b6e205890b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiImage: {fileID: 1645370203}
 --- !u!1 &1659490847
 GameObject:
   m_ObjectHideFlags: 0
@@ -2707,7 +2749,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2090370953
 Transform:
   m_ObjectHideFlags: 0
