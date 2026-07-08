@@ -16,10 +16,10 @@ public class BountySelectDialogue : MonoBehaviour
 
     IEnumerator Start()
     {
-        bool shouldShowBountyTutorial = 
-            GameStateManager.Instance.PreviousScene == SceneData.Get<SceneData.SelectionScreen>() && 
-            BountyManager.Instance.GetBountyProgress() == 0;
-        
+        bool shouldShowBountyTutorial =
+            BountyManager.Instance.GetBountyProgress() == 0 &&
+            GameStateManager.Instance.RecordFirstTimeEvent(OneTimeEvents.ExplainBounties);
+
         if (shouldShowBountyTutorial)
         {
             interactionBlocker.gameObject.SetActive(true);

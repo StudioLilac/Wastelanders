@@ -10,7 +10,8 @@ namespace Tutorials
             .Line(Tutorial, "New weapon deck unlocked: RIP Gloves.")
             .Do(new CustomEvent {  EventName = DeckSelectionTutorial.DismissInteractionBlocker })
             .Line(Tutorial, "Princess Frog Actions can now be played.")
-            .Line(Tutorial, "Press 'Edit deck' to view and customize your new Actions.");
+            .Line(Tutorial, "Press 'Edit deck' to view and customize your new Actions.")
+            .Line(Tutorial, "When you are done, press the back arrow to exit deck select and visit the new Bounty Board.");
 
     }
 }
