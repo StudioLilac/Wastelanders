@@ -34,31 +34,39 @@ public class SpriteDatabase : ScriptableObject
     }
 }
 
+// NOTE: These values are serialized by integer into SpriteDatabase.asset.
+// Never reorder or renumber existing entries — it silently remaps the asset's
+// sprites. Add new entries with a fresh, unused explicit value (see below).
 public enum DialogueSprite
 {
-    NoChange, 
-    None,
+    NoChange = 0,
+    None = 1,
 
-    CamNeutral,             // nu
-    CamPout,                // po
-    CamSmile,               // sm
-    CamTalk,                // ta
-    CamConfused,            // co
-    CamProud,               // pr
+    CamNeutral = 2,             // nu
+    CamPout = 3,                // po
+    CamSmile = 4,               // sm
+    CamTalk = 5,                // ta
+    CamConfused = 6,            // co
+    CamProud = 7,               // pr
 
-    JackieMouthOpen,        // om
-    JackieSerious,          // se
-    JackieSmile,            // sm
-    JackieSurprisedClosed,  // su-cl
-    JackieSurprisedOpen,    // su-op
-    JackieTired,            // ti-cl
+    JackieMouthOpen = 8,        // om
+    JackieSerious = 9,          // se
+    JackieSmile = 10,           // sm
+    JackieSurprisedClosed = 11, // su-cl
+    JackieSurprisedOpen = 12,   // su-op
+    JackieTired = 13,           // ti-cl
+    JackieAstonished = 131,
+    JackieNeutralSoft = 132,
+    JackieFocused = 133,
+    JackieWry = 134,
+    JackieStern = 135,
 
-    IvesQuestioning,        // qu
-    IvesLaugh,              // la
-    IvesSmile,              // sm
-    IvesNeutral,            // nu
+    IvesQuestioning = 14,       // qu
+    IvesLaugh = 15,             // la
+    IvesSmile = 16,             // sm
+    IvesNeutral = 17,           // nu
 
-    WeiseNeutral,           // nu
-    WeiseSmile,             // sm
-    WeiseThinking,          // th
+    WeiseNeutral = 18,          // nu
+    WeiseSmile = 19,            // sm
+    WeiseThinking = 20,         // th
 }

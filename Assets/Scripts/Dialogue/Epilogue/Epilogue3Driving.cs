@@ -21,7 +21,7 @@ public class Epilogue3Driving
         .Narrate("<i>Suddenly the tire bursts.</i>", SoundID.VN_tire_burst)
         .Line(DialogueCharacter.Ives, "There goes the rear tire.")
         .Line(DialogueCharacter.Jackie,
-            "Just great. Ives, tell me we can still drive on that. We can't stop here in the middle of... whatever this is.")
+            "Just great. Ives, tell me we can still drive on that. We can't stop here in the middle of... whatever this is.", DialogueSprite.JackieSerious)
         .Line(DialogueCharacter.Ives, "Grab the jack and the spare, kid.", sfx: SoundID.VN_door_shut)
         .Line(DialogueCharacter.Jackie,
             "Cam, if your map can't even get a detail like this right, how can we trust it to get to where we wanna go?",
@@ -43,9 +43,9 @@ public class Epilogue3Driving
         .Line(DialogueCharacter.Ives,
             "Jackie, radio the convoy. Tell 'em to let some air out of their tires. Softer rubber grips the rough better.")
         .Line(DialogueCharacter.Jackie,
-            "Copy that. I'll keep watch while you work.", DialogueSprite.JackieSerious)
+            "Copy that. I'll keep watch while you work.", DialogueSprite.JackieMouthOpen)
         .Line(DialogueCharacter.Jackie,
-            "...How long do you think this'll take?", DialogueSprite.JackieSurprisedOpen)
+            "...How long do you think this'll take?")
         .Line(DialogueCharacter.Ives, "Long as it takes. Why?")
         .Line(DialogueCharacter.Jackie, "The light's already starting to go out here.")
         .Line(DialogueCharacter.Jackie, "I don’t like the idea of crawling through this jumble in the dark.")
@@ -54,10 +54,11 @@ public class Epilogue3Driving
             DialogueSprite.CamSmile)
         .InterruptedLine(DialogueCharacter.Cam, "We'll be there soon, I promise—")
         .Line(DialogueCharacter.Jackie, "Don't.", DialogueSprite.JackieSerious)
-        .Line(DialogueCharacter.Cam, "...Huh?")
+        .Line(DialogueCharacter.Cam, "...Huh?", DialogueSprite.CamConfused)
         .Line(DialogueCharacter.Jackie, "...Don't promise. Just get it done.")
         .Narrate("<i>Cam blinks, caught off guard. Not quite sure what it was he said.</i>")
-        .Line(DialogueCharacter.Ives, "You heard her. Let’s get it done. Hand me that drill bit, will you.")
+        .Line(DialogueCharacter.Ives, "You heard her. Let's just get this job done. Hand me that drill bit, will you.")
+        .Line(DialogueCharacter.Cam, "...Sure.")
         .Narrate("<i>Eventually, the grease covered Ives emerges from under the vehicle.</i>", sfx: SoundID.VN_drill)
         .Line(DialogueCharacter.Ives, "Let's get back to it.", DialogueSprite.IvesNeutral, sfx: SoundID.VN_door_shut)
         .Exit(DialogueCharacter.Jackie, DialogueCharacter.Cam, DialogueCharacter.Ives)
