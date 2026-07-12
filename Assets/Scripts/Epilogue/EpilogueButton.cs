@@ -11,19 +11,21 @@ public class EpilogueButton : MonoBehaviour
     [SerializeField] private Image lockIndicator;
     [SerializeField] private TMP_Text titleText;
     [SerializeField] private TMP_Text requirementText;
+    [SerializeField] private Image thumbnail;
     private int completedBounties;
     private int neededBounties;
     private EpilogueSceneData sceneData;
 
 
-    public void Bind(EpilogueSceneData epilogueSceneData)
+    public void Bind(EpilogueSceneData epilogueSceneData, EpilogueThumbnails thumbnails)
     {
         sceneData = epilogueSceneData;
         neededBounties = sceneData.BountyRequirement;
+        thumbnail.sprite = epilogueSceneData.GetThumbnail(thumbnails);
         completedBounties = PrincessFrogBounties.Values.Count(b => BountyManager.Instance.IsBountyCompleted(b));
         button.onClick.AddListener(() =>
         {
-            BountyManager.Instance.GoToEpilogueScene(epilogueSceneData);
+            GameStateManager.Instance.LoadScene(sceneData.SceneData.SceneName);
         });
         SetTitle(sceneData.EpilogueTitle);
         SetLocked(neededBounties > completedBounties);

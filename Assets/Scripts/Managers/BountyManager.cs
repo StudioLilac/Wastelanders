@@ -36,11 +36,7 @@ public class BountyManager : PersistentSingleton<BountyManager>
         if (invalid) return;
 
         this.Subscribe<BountyInformationEvent>(e => SelectedBountyInformation = e.BountyType);
-        this.Subscribe<ClearBounty>(_ =>
-        {
-            ActiveBounty = null;
-            SelectedBountyInformation = null;
-        });
+        this.Subscribe<ClearBounty>(_ => ActiveBounty = null);
         this.Subscribe<BountyOnClickEvent>(OnBountySelected);
     }
 
@@ -53,20 +49,13 @@ public class BountyManager : PersistentSingleton<BountyManager>
         return ContractStateData?.IsBountyCompleted(bounty) ?? false;
     }
 
-    public void NotifyWin()
+    public bool NotifyWin()
     {
-        if (ActiveBounty != null) ContractStateData?.SetChallengeComplete(ActiveBounty);
-    }
-
-    public void GoToEpilogueScene(EpilogueSceneData scene)
-    {
-        IEnumerator FadeLevelIn(string levelName)
+        if (ActiveBounty != null)
         {
-            yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInDarkScreen(0.6f));
-            GameStateManager.Instance.LoadScene(levelName);
+            return ContractStateData?.SetChallengeComplete(ActiveBounty) == true;
         }
-
-        StartCoroutine(FadeLevelIn(scene.SceneData.SceneName));
+        return false;
     }
 
     private void OnBountySelected(BountyOnClickEvent ev)
@@ -81,13 +70,17 @@ public class BountyManager : PersistentSingleton<BountyManager>
 public class BountyStateData
 {
     [field: SerializeField] private List<ChallengeCompletionState> BountyCompletionData { get; set; } = new();
-
-    public void SetChallengeComplete(IBounties bounty)
+    
+    // If challenge completed already, return false. Newly completed challenge returns true.
+    public bool SetChallengeComplete(IBounties bounty)
     {
         ChallengeCompletionState? challengeCompletionState = BountyCompletionData.Find(data => data.BountyName == bounty.BountyName);
 
+        if (challengeCompletionState.Completed) return false;
+
         if (challengeCompletionState == null) BountyCompletionData.Add(new(bounty.BountyName, true));
         else challengeCompletionState.Completed = true;
+        return true;
     }
 
     public bool IsBountyCompleted(IBounties bounty)

@@ -399,6 +399,7 @@ MonoBehaviour:
   frogPrefab: {fileID: 7740565208951490800, guid: 6395bbe6ca801ac4d97dd23203674434, type: 3}
   slimePrefab: {fileID: 4042660394930622279, guid: 318d7b6a8a4429e40bec8a1cf14c73bd, type: 3}
   entityContainer: {fileID: 856732782}
+  instakill: 1
 --- !u!4 &245795668 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7638263227755287879, guid: 55dd1017896a4294ebc48577819d6683, type: 3}
@@ -497,7 +498,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.6673534
+      value: 2.6671202
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y

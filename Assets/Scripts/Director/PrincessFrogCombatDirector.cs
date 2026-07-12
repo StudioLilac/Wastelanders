@@ -3,6 +3,7 @@ using System.Collections;
 using LevelSelectInformation;
 using UnityEngine;
 using static BattleIntroEnum;
+using static SceneData;
 
 namespace Director
 {
@@ -12,6 +13,7 @@ namespace Director
 
         [SerializeField] private DialogueWrapper gameOverDialogue; // sucks...
 
+#nullable enable
         private void Start()
         {
             if (CombatManager.Instance.GameState != GameState.GAME_START) return;
@@ -39,10 +41,10 @@ namespace Director
             yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
             AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
             BountyManager.Instance.NotifyWin();
-            GameStateManager.Instance.UpdateLevelProgress(StageInformation.Get<StageInformation.IvesFinale>());
             yield return new WaitForSeconds(1f);
             yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
-            GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.LevelSelect>().SceneName);
+            EpilogueSceneData? data = EpilogueSceneData.LatestCompleted(BountyManager.Instance.GetBountyProgress());
+            GameStateManager.Instance.LoadScene((data?.SceneData ?? Get<ContractSelect>()).SceneName);
         }
 
         private void PlayersWin()
