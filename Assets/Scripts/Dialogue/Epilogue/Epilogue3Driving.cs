@@ -50,16 +50,11 @@ public class Epilogue3Driving
         .Line(DialogueCharacter.Jackie, "The light's already starting to go out here.")
         .Line(DialogueCharacter.Jackie, "I don’t like the idea of crawling through this jumble in the dark.")
         .Line(DialogueCharacter.Cam,
-            "Don’t worry! We'll be back on the road soon. I'm running the numbers right now to get an ETA.",
+            "Don’t worry! I'm sure Ives will have us back on the road quickly. I'll run the numbers right now to get an ETA.",
             DialogueSprite.CamSmile)
-        .InterruptedLine(DialogueCharacter.Cam, "We'll be there soon, I promise—")
-        .Line(DialogueCharacter.Jackie, "Don't.", DialogueSprite.JackieSerious)
-        .Line(DialogueCharacter.Cam, "...Huh?", DialogueSprite.CamConfused)
-        .Line(DialogueCharacter.Jackie, "...Don't promise. Just get it done.")
-        .Narrate("<i>Cam blinks, caught off guard. Not quite sure what it was he said.</i>")
-        .Line(DialogueCharacter.Ives, "You heard her. Let's just get this job done. Hand me that drill bit, will you.")
-        .Line(DialogueCharacter.Cam, "...Sure.")
-        .Narrate("<i>Eventually, the grease covered Ives emerges from under the vehicle.</i>", sfx: SoundID.VN_drill)
+        .InterruptedLine(DialogueCharacter.Cam, "We'll be there soon, I promise!")
+        .Line(DialogueCharacter.Jackie, "...Don't promise. Just get it done.", DialogueSprite.JackieSerious)
+        .Narrate("<i>After a short while, the grease covered Ives emerges from under the vehicle.</i>", sfx: SoundID.VN_drill)
         .Line(DialogueCharacter.Ives, "Let's get back to it.", DialogueSprite.IvesNeutral, sfx: SoundID.VN_door_shut)
         .Exit(DialogueCharacter.Jackie, DialogueCharacter.Cam, DialogueCharacter.Ives)
         .Narrate("<i>The engine revs back to life, as the vanguard continues on their way.</i>", SoundID.VN_engine_rev);

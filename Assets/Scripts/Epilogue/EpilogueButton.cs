@@ -27,7 +27,6 @@ public class EpilogueButton : MonoBehaviour
         {
             GameStateManager.Instance.LoadScene(sceneData.SceneData.SceneName);
         });
-        SetTitle(sceneData.EpilogueTitle);
         SetLocked(neededBounties > completedBounties);
         UpdateRequirementText();
     }
@@ -41,6 +40,7 @@ public class EpilogueButton : MonoBehaviour
     {
         lockIndicator.enabled = state;
         button.interactable = !state;
+        SetTitle(state ? "???" : sceneData.EpilogueTitle);
     }
 
     private void UpdateRequirementText()
