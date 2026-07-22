@@ -174,7 +174,7 @@ public class CardComparator : MonoBehaviour
         foreach (EntityClass entity in deadEntities)
         {
             BattleQueue.BattleQueueInstance.RemoveAllInstancesOfEntity(entity);
-            yield return StartCoroutine(entity.DeathHandler?.Invoke());
+            if (entity.gameObject.activeInHierarchy) yield return StartCoroutine(entity.DeathHandler?.Invoke());
         }
         deadEntities.Clear();
         
