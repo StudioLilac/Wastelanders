@@ -1,3 +1,4 @@
+using LevelSelectInformation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,7 +39,7 @@ public class PlayableEnemyWeapon : ISubWeaponType
     public static readonly PlayableEnemyWeapon princessFrogWeapons = new PlayableEnemyWeapon(
         name: "Princess Frog Cards",
         getSubWeaponCards: (db => db.GetCardsByType(CardDatabase.WeaponType.ENEMY).FindAll(card => card is IPlayablePrincessFrogCard).ToList()),
-        isUnlocked: () => BountyManager.Instance.IsBountyCompleted(PrincessFrogBounties.PRINCESS_FROG_CHALLENGE)
+        isUnlocked: () => GameStateManager.Instance.CurrentLevelProgress > StageInformation.Get<StageInformation.PrincessFrogFight>().LevelID
     );
 
     public static List<ISubWeaponType> values = new()

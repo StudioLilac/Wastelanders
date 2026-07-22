@@ -26,7 +26,7 @@ public class BountyManager : PersistentSingleton<BountyManager>
     }
 
     // All ActiveBounty should be contained within BountyInformation's Bounty Collection
-    public IBounties? ActiveBounty { get; set; } = null;
+    public IBounties? ActiveBounty { get; private set; } = null;
     public BountyInformation? SelectedBountyInformation { get; private set; } = null;
 
 
@@ -36,12 +36,14 @@ public class BountyManager : PersistentSingleton<BountyManager>
         if (invalid) return;
 
         this.Subscribe<BountyInformationEvent>(e => SelectedBountyInformation = e.BountyType);
-        this.Subscribe<ClearBounty>(_ => 
+        this.Subscribe<ClearBounty>(_ =>
         {
             ActiveBounty = null;
             SelectedBountyInformation = null;
         });
+        this.Subscribe<BountyOnClickEvent>(OnBountySelected);
     }
+
 
     public int GetBountyProgress() => ContractStateData.GetNumCompletedBounties();
     public bool IsBountyCompleted(IBounties? bounty)
@@ -65,6 +67,11 @@ public class BountyManager : PersistentSingleton<BountyManager>
         }
 
         StartCoroutine(FadeLevelIn(scene.SceneData.SceneName));
+    }
+
+    private void OnBountySelected(BountyOnClickEvent ev)
+    {
+        ActiveBounty = (ev.Bounty != ActiveBounty) ? ev.Bounty : null;
     }
 
 }

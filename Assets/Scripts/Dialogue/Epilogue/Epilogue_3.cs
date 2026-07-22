@@ -509,8 +509,7 @@ public class Epilogue_3 : MonoBehaviour
         yield return DialogueBoxV2.Instance.Play(PrincessDeckUnlocked);
         yield return new WaitForSeconds(1f);
 
-        new BountyInformationEvent(BountyInformation.Get<BountyInformation.PrincessFrogBounty>()).Invoke();
-        GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.ContractSelect>().SceneName);
+        GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.SelectionScreen>().SceneName);
     }
 
     private void OnBuffEvent(OnBuffsUpdatedEvent ev)

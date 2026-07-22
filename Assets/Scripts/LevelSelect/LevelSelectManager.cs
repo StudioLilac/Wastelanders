@@ -17,7 +17,7 @@ public class LevelSelectManager : MonoBehaviour
     {
         var showUnlockDialogue = !GameStateManager.SEASON_1_ACTIVE &&
             GameStateManager.Instance.CurrentLevelProgress >= Get<PrincessFrogFight>().LevelID &&
-            GameStateManager.Instance.RecordFirstTimeEvent(OneTimeEvents.ExplainBounties);
+            GameStateManager.Instance.RecordFirstTimeEvent(OneTimeEvents.ShowPrologueGreeting);
 
         if (showUnlockDialogue) {
             StartCoroutine(UnlockedDialogue());

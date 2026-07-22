@@ -11,7 +11,7 @@ using UnityEngine.SceneManagement;
 public class GameStateManager : PersistentSingleton<GameStateManager>
 {
     public static readonly bool IS_DEVELOPMENT = false;
-    public const bool SEASON_1_ACTIVE = false;
+    public const bool SEASON_1_ACTIVE = true;
     private const float DEV_MODE_PROGRESSION = 999f;
 
     public SceneData PreviousScene { get; private set; } = SceneData.Get<SceneData.MainMenu>();
@@ -77,6 +77,7 @@ public class GameStateManager : PersistentSingleton<GameStateManager>
         }
     }
 
+    // Returns true if first time seeing the event. 
     public bool RecordFirstTimeEvent(OneTimeEvents eventId)
     {
         if (!Data.SeenOneTimeEvents.Contains(eventId))
@@ -148,5 +149,6 @@ public class GameStateData
 public enum OneTimeEvents 
 {
     None = 0,
-    ExplainBounties = 10,
+    ShowPrologueGreeting = 10,
+    ExplainBounties = 20,
 }

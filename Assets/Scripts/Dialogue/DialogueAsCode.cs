@@ -35,6 +35,21 @@ public class DialogueAsCode
         return this;
     }
 
+    public DialogueAsCode InterruptedLine(DialogueCharacter speaker, string text, DialogueSprite expr = DialogueSprite.NoChange, SoundID sfx = SoundID.None)
+    {
+        var actor = Resolve(speaker);
+        var events = new List<DialogueEvents>() { new AutoAdvanceAfter { Time = 0.5f } };
+        if (expr != DialogueSprite.NoChange) events.Add(new ExpressionChange { actor = actor, expression = expr });
+        entries.Add(new DialogueEntry(
+            content: text,
+            speaker: actor,
+            sfxId: sfx,
+            picture: null,
+            events: events
+        ));
+        return this;
+    }
+
     /// An italicised narration / atmosphere beat with no staged speaker,
     /// optionally carrying a sound effect.
     public DialogueAsCode Narrate(string text, SoundID sfx = SoundID.None)

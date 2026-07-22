@@ -1936,6 +1936,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cycleSpeed: 1
   attentionObj: {fileID: 808953401}
+  condition: 2
 --- !u!1 &839108392
 GameObject:
   m_ObjectHideFlags: 0

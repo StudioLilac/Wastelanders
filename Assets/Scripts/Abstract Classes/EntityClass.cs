@@ -2,18 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UI_Toolkit;
-using Unity.VisualScripting;
 using UnityEngine;
-using static CardComparator;
 using static StatusEffect;
 #if UNITY_EDITOR
 using UnityEditor.Animations;
 #endif
 
+public record OnEntityDeath(EntityClass Entity) : IEvent;
 public record EntityFacingChanged(EntityClass Entity) : IEvent;
 public record OnBuffsUpdatedEvent(EntityClass WhoAmI) : IEvent;
-public record AddEntityToTeam(EntityClass Entity, EntityTeam Team) : IEvent;
-public record RemoveEntityFromTeam(EntityClass Entity, EntityTeam Team) : IEvent;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public abstract class EntityClass : SelectClass
@@ -46,6 +43,8 @@ public abstract class EntityClass : SelectClass
     public bool IsDead { get; set; }
     protected Vector3 initialPosition;
     private bool crosshairStaysActive = false;
+
+    public delegate IEnumerator DeadEntities();
     public DeadEntities DeathHandler { get; set; }
     protected readonly Dictionary<string, StatusEffect> statusEffects = new();
 
@@ -128,6 +127,7 @@ public abstract class EntityClass : SelectClass
             IsDead = true;
             RemoveEntityFromCombat();
             OnEntityDeath?.Invoke(this);
+            new OnEntityDeath(this).Invoke();
         }
 
         EntityTookDamage?.Invoke(damage);
@@ -188,7 +188,6 @@ public abstract class EntityClass : SelectClass
 
         float runDistance = 10f * runDirection;
 
-        BattleQueue.BattleQueueInstance.RemoveAllInstancesOfEntity(this);
         DestroyDeck();
 
         yield return StartCoroutine(MoveToPosition(myTransform.position + new Vector3(runDistance, 0, 0), 0, 0.8f));
@@ -197,7 +196,6 @@ public abstract class EntityClass : SelectClass
 
     public IEnumerator PassOut()
     {
-        BattleQueue.BattleQueueInstance.RemoveAllInstancesOfEntity(this);
         UnTargetable();
         statusEffects.Clear();
         UpdateBuffs();

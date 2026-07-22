@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Tutorials;
 using UnityEngine;
 using UnityEngine.UI;
 using WeaponDeckSerialization;
@@ -31,8 +32,14 @@ public class DeckSelectionTutorial : MonoBehaviour
     [SerializeField] private Image backButtonIndicator;
     [SerializeField] private GameObject backButton;
 
-    [SerializeField] private bool activateTutorial;
+    [SerializeField] private ScreenCutoutScrim screenCutoutScrim;
+    [SerializeField] private MaterialTintFadeHandler materialTintFadeHandler;
+    [SerializeField] private SpriteRenderer interactionArea;
 
+    [SerializeField] private bool activateTutorial;
+    [SerializeField] private bool activateEnemyDeckTutorial;
+
+    public const String DismissInteractionBlocker = "DismissInteractionBlocker";
 #nullable enable
     private void Start()
     {
@@ -42,8 +49,6 @@ public class DeckSelectionTutorial : MonoBehaviour
     private void OnDestroy()
     {
         WeaponSelect.WeaponSelectEvent -= HandleWeaponSelected;
-        CharacterSelect.CharacterSelectedEvent -= HandleCharacterSelected;
-        WeaponEdit.WeaponEditEvent -= HandleWeaponEdited;
         DeckSelectionManager.Instance.PlayerActionDeckModifiedEvent -= HandleRunOutOfPoints;
         DeckSelectionManager.OnDeckSelectStateChanged -= HandleDeckSelectStateChanged;
     }
@@ -53,8 +58,10 @@ public class DeckSelectionTutorial : MonoBehaviour
         bool showTutorial =
             SceneData.Get<SceneData.TutorialFight>() == GameStateManager.Instance.PreviousScene &&
             GameStateManager.Instance.CurrentLevelProgress > StageInformation.Get<StageInformation.DeckSelectionTutorial>().LevelID;
+        bool showHowToDeckSelectTutorial = Mathf.Approximately(GameStateManager.Instance.CurrentLevelProgress, StageInformation.Get<StageInformation.DeckSelectionTutorial>().LevelID) || showTutorial || activateTutorial;
+        bool showEnemyWeaponTutorial = GameStateManager.Instance.PreviousScene == SceneData.Get<SceneData.Epilogue_3>() || activateEnemyDeckTutorial;
 
-        if (Mathf.Approximately(GameStateManager.Instance.CurrentLevelProgress, StageInformation.Get<StageInformation.DeckSelectionTutorial>().LevelID) || showTutorial || activateTutorial)
+        if (showHowToDeckSelectTutorial)
         {
             backButton.SetActive(false);
             DeckSelectionManager.OnDeckSelectStateChanged += HandleDeckSelectStateChanged;
@@ -75,22 +82,58 @@ public class DeckSelectionTutorial : MonoBehaviour
             }
             // Wait for fade screen to come in
             yield return new WaitForSeconds(1f);
-            yield return StartCoroutine(StartDialogueWithNextEvent(selectYourCharacter, () => {
+            yield return StartCoroutine(StartDialogueWithNextEvent(selectYourCharacter, () =>
+            {
                 playerSelectIndicator.enabled = true;
                 jackieSelect.GetComponent<BoxCollider2D>().enabled = true;
-                CharacterSelect.CharacterSelectedEvent += HandleCharacterSelected; 
+
+                this.Subscribe<CharachterSelected>(HandleCharacterSelected);
             }));
         }
+        else if (showEnemyWeaponTutorial)
+        {
+            this.Subscribe<CustomEvent>(DismissBlocker);
+            void DismissBlocker(CustomEvent customEvent)
+            {
+                this.UnSubscribe<CustomEvent>(DismissBlocker);
+                if (customEvent.EventName == DismissInteractionBlocker)
+                {
+                    interactionArea.gameObject.SetActive(false);
+                }
+            }
+
+            this.Subscribe<WeaponEditSelected>(DismissScrim);
+            void DismissScrim(WeaponEditSelected ev)
+            {
+                this.UnSubscribe<WeaponEditSelected>(DismissScrim);
+                materialTintFadeHandler.SetLightScreen();
+            }
+
+            new CharachterSelected(PlayerDatabase.PlayerName.JACKIE).Invoke();
+            interactionArea.gameObject.SetActive(true);
+            materialTintFadeHandler.SetDarkScreen();
+            screenCutoutScrim.SetTarget(new SpriteTarget(interactionArea));
+            VerticalLayoutChange.MoveBoxV2ToTop();
+
+            new BountyInformationEvent(BountyInformation.Get<BountyInformation.PrincessFrogBounty>()).Invoke();
+            DeckSelectionManager.Instance.SetNextScene(SceneData.Get<SceneData.ContractSelect>().SceneName);
+            yield return materialTintFadeHandler.FadeToAlpha(200f / 255f, 1f);
+            yield return DialogueBoxV2.Instance.Play(EnemyActionTutorial.Explanation);
+            yield return materialTintFadeHandler.FadeInLightScreen(1f);
+        }
     }
+
 
     private void HandleDeckSelectStateChanged(DeckSelectionState newState)
     {
         backButton.SetActive(newState != DeckSelectionState.CharacterSelection);
     }
 
-    private void HandleCharacterSelected(PlayerDatabase.PlayerName playerName)
+    private void HandleCharacterSelected(CharachterSelected cs)
     {
-        CharacterSelect.CharacterSelectedEvent -= HandleCharacterSelected;
+        this.UnSubscribe<CharachterSelected>(HandleCharacterSelected);
+
+        PlayerDatabase.PlayerName playerName = cs.PlayerName;
         playerSelectIndicator.enabled = false;
         weaponSelectBoxCollidersToDisable.ForEach(ws => ws.GetComponent<PolygonCollider2D>().enabled = false);
         StartCoroutine(StartDialogueWithNextEvent(selectYourWeapon, () =>
@@ -113,14 +156,17 @@ public class DeckSelectionTutorial : MonoBehaviour
             }
             DeckSelectionManager.OnDeckSelectStateChanged -= HandleDeckSelectStateChanged;
             editDeckIndicator.enabled = true;
-            WeaponEdit.WeaponEditEvent += HandleWeaponEdited; }));
+
+            this.Subscribe<WeaponEditSelected>(HandleWeaponEdited);
+        }));
     }
 
-    private void HandleWeaponEdited(WeaponEditInformation weaponEditInformation)
+    private void HandleWeaponEdited(WeaponEditSelected ev)
     {
+        this.UnSubscribe<WeaponEditSelected>(HandleWeaponEdited);
+        WeaponEditInformation weaponEditInformation = ev.WeaponEditInformation;
         if (weaponEditInformation.WeaponType != CardDatabase.WeaponType.PISTOL) return;
         editDeckIndicator.enabled = false;
-        WeaponEdit.WeaponEditEvent -= HandleWeaponEdited;
         GameStateManager.Instance.UpdateLevelProgress(StageInformation.Get<StageInformation.FrogSlime>());
         DeckSelectionManager.Instance.SetNextScene(SceneData.Get<SceneData.FrogSlimeFight>().SceneName);
         StartCoroutine(StartDialogueWithNextEvent(selectYourActions, () => { DeckSelectionManager.Instance.PlayerActionDeckModifiedEvent += HandleRunOutOfPoints; }));

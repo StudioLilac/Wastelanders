@@ -22,6 +22,7 @@ MonoBehaviour:
     - rid: 7570221363656654915
     - rid: 7570221363656654917
     - rid: 7570221363656654922
+    - rid: 3492363553437384766
   - content: Ives. How long have you been here?
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxId: 0
@@ -52,8 +53,7 @@ MonoBehaviour:
     events:
     - rid: 314095657258319948
     - rid: 314095657258319963
-  - content: 'You''re saying that he''s invented something that can help us cross
-      the Tundra safely? '
+  - content: Then you're saying we can actually cross the Tundra safely?
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -110,7 +110,12 @@ MonoBehaviour:
     events:
     - rid: 314095657258319940
     - rid: 314095657258319971
-  - content: You... promise?
+  - content: <i>The word catches Jackie for half a second. It always does.
+    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  - content: '...You promise? '
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -121,7 +126,8 @@ MonoBehaviour:
     sfxId: 0
     picture: {fileID: 0}
     events: []
-  - content: The mentor and mentee bump fists forming a conduit of resolve.
+  - content: '<i>Ives raises a fist between them. After a breath, Jackie meets it
+      with hers. '
     speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -198,6 +204,10 @@ MonoBehaviour:
       data:
         actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
         sprite: {fileID: 21300000, guid: 85e302f93093f564290df1bd57119113, type: 3}
+    - rid: 3492363553437384766
+      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     - rid: 7570221363656654914
       type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:

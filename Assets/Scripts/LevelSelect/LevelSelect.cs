@@ -2,6 +2,7 @@ using LevelSelectInformation;
 using System.Collections;
 using Systems.Persistence;
 using UnityEngine;
+using UnityEngine.UI;
 using static LevelSelectInformation.BountyInformation;
 
 public class LevelSelect : MonoBehaviour
