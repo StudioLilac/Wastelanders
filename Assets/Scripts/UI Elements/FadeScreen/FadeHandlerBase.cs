@@ -42,6 +42,10 @@ public abstract class FadeHandlerBase : MonoBehaviour
         yield return new WaitUntil(() => _animationCoroutine == null);
     }
 
+    // Fire-and-forget fade: starts the animation without having to be awaited, cancelling any
+    // running fade. Useful when a caller (e.g. a dialogue event) can't yield on the fade.
+    public void StartFadeToAlpha(float targetAlpha, float duration) => RequestFade(targetAlpha, duration);
+
     /// <summary>
     /// Starts a fade to fully transparent over a duration.
     /// </summary>

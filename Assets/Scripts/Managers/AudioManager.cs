@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using Managers;
 using Systems.Persistence;
 using UnityEngine;
@@ -12,6 +13,9 @@ public class AudioManager : PersistentSingleton<AudioManager>
 #nullable enable
     private SceneAudio sceneAudio = null!;
     Coroutine? combatMusicCoroutine;
+
+    // Scene-scoped ambient sources with their own volume control, kept in sync with preferences.
+    private readonly List<ControllableAudioChannel> channels = new();
 
     protected override void Awake()
     {
@@ -29,6 +33,7 @@ public class AudioManager : PersistentSingleton<AudioManager>
         SetSFXVolume(prefs.GetSFXVolume());
         SetMusicMuted(prefs.GetMusicMuted());
         SetSFXMuted(prefs.GetSFXMuted());
+        foreach (ControllableAudioChannel channel in channels) channel.ApplyPreferences();
     }
 
     private void OnEnable()
@@ -43,6 +48,7 @@ public class AudioManager : PersistentSingleton<AudioManager>
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        DisposeAllChannels(); // ambient channels are scene-scoped, never outlive their scene
         SceneAudio incomingAudio = SceneData.FromSceneName(scene.name).GetAudio(sceneAudioDatabase);
 
         // This check allows us to have certain audio traacks persist across scenes 
@@ -148,6 +154,33 @@ public class AudioManager : PersistentSingleton<AudioManager>
         SFXSoundsPlayer.PlayOneShot(soundEffectsDatabase.GetClipByID(effect));
     }
 
+    // Spawns a standalone audio source the caller can play, fade, and dispose independently
+    // of the global music/SFX players. Useful for scenes needing several ambient loops at once.
+    public ControllableAudioChannel CreateChannel(SoundID clip, AudioCategory category, bool loop = true, float level = 1f)
+        => CreateChannel(soundEffectsDatabase.GetClipByID(clip), category, loop, level);
+
+    public ControllableAudioChannel CreateChannel(AudioClip? clip, AudioCategory category, bool loop = true, float level = 1f)
+    {
+        GameObject host = new GameObject(clip != null ? $"AudioChannel_{clip.name}" : "AudioChannel");
+        host.transform.SetParent(transform);
+        AudioSource source = host.AddComponent<AudioSource>();
+        source.clip = clip;
+        source.loop = loop;
+        source.playOnAwake = false;
+        AudioTempoHandler tempoHandler = host.AddComponent<AudioTempoHandler>();
+
+        ControllableAudioChannel channel = new(source, tempoHandler, category, level, ReleaseChannel);
+        channels.Add(channel);
+        return channel;
+    }
+
+    private void ReleaseChannel(ControllableAudioChannel channel) => channels.Remove(channel);
+
+    private void DisposeAllChannels()
+    {
+        foreach (ControllableAudioChannel channel in channels.ToArray()) channel.Dispose();
+    }
+
     private void RandomizePitch()
     {
         SFXSoundsPlayer.pitch = Random.Range(0.90f, 1.1f);
@@ -185,6 +218,75 @@ public class AudioManager : PersistentSingleton<AudioManager>
 
     public void SetMusicMuted(bool state) {
         BackgroundMusicPlayer.mute = BackgroundMusicIntroPlayer.mute = state;
+    }
+}
+
+public enum AudioCategory { SFX, Music }
+
+// A portable, preference-aware audio source. The author sets a 'level' (0..1 mix), and the
+// final output volume is that level scaled by the player's live volume preference for its
+// category. Fades lerp the level while continuously re-reading preferences, so a volume or
+// mute change mid-fade stays respected. Created and owned by AudioManager.CreateChannel.
+public class ControllableAudioChannel
+{
+    private readonly AudioSource source;
+    private readonly AudioTempoHandler tempoHandler;
+    private readonly AudioCategory category;
+    private readonly System.Action<ControllableAudioChannel> release;
+    private float level;
+
+    internal ControllableAudioChannel(AudioSource source, AudioTempoHandler tempoHandler, AudioCategory category, float level, System.Action<ControllableAudioChannel> release)
+    {
+        this.source = source;
+        this.tempoHandler = tempoHandler;
+        this.category = category;
+        this.level = level;
+        this.release = release;
+        ApplyPreferences();
+        Debug.Log($"Created audio channel for {source.clip?.name ?? "null"} in category {category} with level {level}");
+    }
+
+    public void Play() => source.Play();
+    public void Stop() => source.Stop();
+
+    // Eases the loop's playback tempo (via pitch) down to the given fraction of normal speed,
+    // e.g. SlowTempo(0.7f, 2f) winds the tracker's beeping down to 70% over two seconds.
+    public void SlowTempo(float tempo, float duration) => tempoHandler.SlowTempo(tempo, duration);
+    public void RestoreTempo(float duration) => tempoHandler.RestoreTempo(duration);
+
+    public void SetLevel(float value)
+    {
+        level = value;
+        ApplyPreferences();
+    }
+
+    public IEnumerator FadeTo(float targetLevel, float duration)
+    {
+        float startLevel = level;
+        float time = 0f;
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            level = Mathf.Lerp(startLevel, targetLevel, time / duration);
+            ApplyPreferences();
+            yield return null;
+        }
+        SetLevel(targetLevel);
+    }
+
+    public void ApplyPreferences()
+    {
+        if (source == null) return;
+        PreferencesManager prefs = PreferencesManager.Instance;
+        bool isMusic = category == AudioCategory.Music;
+        source.volume = level * (isMusic ? prefs.GetMusicVolume() : prefs.GetSFXVolume());
+        source.mute = isMusic ? prefs.GetMusicMuted() : prefs.GetSFXMuted();
+    }
+
+    public void Dispose()
+    {
+        release?.Invoke(this);
+        if (source != null) Object.Destroy(source.gameObject);
     }
 }
 
