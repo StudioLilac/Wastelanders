@@ -243,7 +243,6 @@ public class ControllableAudioChannel
         this.level = level;
         this.release = release;
         ApplyPreferences();
-        Debug.Log($"Created audio channel for {source.clip?.name ?? "null"} in category {category} with level {level}");
     }
 
     public void Play() => source.Play();

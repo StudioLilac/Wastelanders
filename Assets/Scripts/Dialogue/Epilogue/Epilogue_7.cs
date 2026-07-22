@@ -1,6 +1,7 @@
-using System.Collections;
 using Cinemachine;
 using DialogueScripts;
+using LevelSelectInformation;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -88,14 +89,23 @@ namespace Dialogue.Epilogue
             yield return DialogueBoxV2.Instance.Play(preKadeFadeDialogue.Into());
             yield return DialogueBoxV2.Instance.Play(postKadeFadeDialogue.Into());
 
-            yield return FadeOutSpriteRenderers(2, wakeUpBackground);
+            yield return StartCoroutine(blackFadeHandler.FadeInDarkScreen(1f));
+            StartCoroutine(FadeOutSpriteRenderers(0f, wakeUpBackground));
             yield return new WaitForSeconds(1f);
+            yield return StartCoroutine(blackFadeHandler.FadeInLightScreen(1f));
             yield return DialogueBoxV2.Instance.Play(kadeAndOthersDialogue.Into());
 
-            yield return FadeOutSpriteRenderers(2, reversedCaveBackground);
+
+            yield return StartCoroutine(blackFadeHandler.FadeInDarkScreen(1f));
+            yield return FadeOutSpriteRenderers(0.1f, reversedCaveBackground);
+            SoundID.VN_footsteps.Play();
+            yield return new WaitForSeconds(1f);
+            yield return StartCoroutine(blackFadeHandler.FadeInLightScreen(1f));
             yield return new WaitForSeconds(1f);
             yield return DialogueBoxV2.Instance.Play(everyoneDialogue.Into());
             yield return UIFadeScreenManager.Instance.FadeInDarkScreen(2f);
+            new BountyInformationEvent(BountyInformation.Get<BountyInformation.PrincessFrogBounty>()).Invoke();
+            GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.ContractSelect>().SceneName);
         }
 
 
@@ -135,9 +145,10 @@ namespace Dialogue.Epilogue
         // Jackie navigating the tunnels, up to the moment the blips fade under the water drips.
         public static DialogueAsCode PreFight(ControllableAudioChannel tracker) => new DialogueAsCode()
             .Line(DialogueCharacter.Jackie, "Yeesh, these tunnels are impossible to navigate.", DialogueSprite.JackRetort)
+            .Narrate("<i>The darkness returns the words back to her.")
             .Do(new CallbackEvent(() => tracker.SlowTempo(0.7f, 4f)))
-            .Narrate("<i>The dark hands her words back, as Jackie uses the faint glow of the tracker to illuminate her steps.</i>", SoundID.VN_footsteps)
-            .Narrate("<i>As she continues forward, the beeps begin to slow.</i>")
+            .Narrate("<i>Jackie continues forward regardless, using the faint glow of the tracker to illuminate her steps.</i>", SoundID.VN_footsteps)
+            .Narrate("<i>As she does, the tracker beeps begin to slow.</i>")
             .Line(DialogueCharacter.Jackie, "Guess I took a wrong turn, should have taken a left.", DialogueSprite.JackieNeutralSoft)
             .Narrate("<i>Jackie backtracks and takes the left tunnel. Walking ahead, she enters a wide cavern with debris piled high around her.</i>", SoundID.VN_footsteps);
 
@@ -158,7 +169,7 @@ namespace Dialogue.Epilogue
             .Line(DialogueCharacter.Jackie, "Ugh!", DialogueSprite.JackieTired)
             .Line(DialogueCharacter.Jackie, "Too heavy. Can't... can’t take it head on.", DialogueSprite.JackieTired)
             .Line(DialogueCharacter.Jackie, "...Okay. Calm. What did Ives say before? 'Don’t fight its strength...'", DialogueSprite.JackieNeutralSoft)
-            .Narrate("<i>The creature closes the distance. Claws primed to reap.</i>")
+            .Narrate("<i>The creature closes the distance. Claws primed to reap.</i>", SoundID.VN_ep7_creature_growl)
             .Narrate("<i>Jackie dives under the swing and past its foreleg.</i>")
             .Narrate("<i>But she’s not quite fast enough. A claw catches and tears through her calf.</i>", SoundID.VN_ep7_pant_rip)
             .Line(DialogueCharacter.Jackie, "ACK! My leg...", DialogueSprite.JackieSurprisedOpen)
@@ -168,11 +179,11 @@ namespace Dialogue.Epilogue
             .Line(DialogueCharacter.Jackie, "Right. But how, with a busted leg?", DialogueSprite.JackieFocused) // expression is an added choice; the script leaves it unkeyed
             .Narrate("<i>She scrambles back, and steadies herself on stone.</i>", SoundID.VN_ep7_gravel_drag)
             .Narrate("<i>The beast stares down Jackie with its one good eye. Judging the damage and distance.</i>")
-            .Narrate("<i>Jackie props herself with the staff. Hot blood pounding in her ears. The glove beeps monotonously in rhythm.</i>")
+            .Narrate("<i>Jackie props herself with the staff. Hot blood pounding in her ears. The glove beeping monotonously in rhythm.</i>")
             .Line(DialogueCharacter.Jackie, "I got it. I just need to time this.", DialogueSprite.JackieFocused)
             .Narrate("<i>Seeing its prey wobble upright, the creature lunges for the kill.</i>")
             .Line(DialogueCharacter.Jackie, "NOW!", DialogueSprite.JackieSurprisedOpen)
-            .Narrate("<i>Jackie morphs into the form of the smallest beetle she’s fought.</i>")
+            .Narrate("<i>Jackie morphs into the form of the smallest beetle she’s fought.</i>", SoundID.VN_finger_snap)
             .Narrate("<i>The world balloons around her as she clings to the gravel. The creature’s momentum carrying it past her.</i>")
             .Narrate("<i>The entire cave shudders as maw meets stone.</i>", SoundID.VN_ep7_dragon_hit_wall)
             .Narrate("<i>Jackie unshifts, and in a breath, springs up on her good leg. Driving all of her weight behind her staff.</i>")

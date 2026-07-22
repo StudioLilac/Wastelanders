@@ -88,6 +88,7 @@ public enum SoundID
     VN_ep7_water_drips = 536,    // ambient loop
     VN_ep7_gravel_drag = 537,
     VN_ep7_pant_rip = 538,
+    VN_ep7_creature_growl = 539,
 }
 
 public static class SoundIDExtensions

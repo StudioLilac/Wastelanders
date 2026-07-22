@@ -33,9 +33,9 @@ public struct MainMenuConfigHolder
         return true switch
         {
             _ when levelProgress < Get<PrincessFrogFight>().LevelID => startingBackground,
-            _ when levelProgress <= Get<IvesFinale>().LevelID && bountyProgress < 3 => season1Background,
-            _ when levelProgress <= Get<IvesFinale>().LevelID => season1AltBackground,
-            _ when levelProgress > Get<IvesFinale>().LevelID => season2Background,
+            _ when levelProgress <= Get<IvesFinale>().LevelID && bountyProgress <= 3 => season1Background,
+            _ when levelProgress <= Get<IvesFinale>().LevelID && bountyProgress > 3 => season1AltBackground,
+            _ when levelProgress > Get<IvesFinale>().LevelID && bountyProgress == 6 => season2Background,
             _ => startingBackground
         };
     }
