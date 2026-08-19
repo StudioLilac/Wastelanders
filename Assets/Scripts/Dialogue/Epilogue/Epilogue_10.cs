@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using DialogueScripts;
 using Entities;
+using FMOD.Studio;
+using FMODUnity;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,6 +18,7 @@ namespace Dialogue.Epilogue
         private static Color TRANSPARENT_PURPLE = new Color(210f / 255f, 175f / 255f, 1f, 0f);
 
         [SerializeField] private bool jumpToCombat;
+        [SerializeField] private bool instakill;
 
         [SerializeField] private GameObject background1;
         [SerializeField] private GameObject background2;
@@ -45,6 +48,8 @@ namespace Dialogue.Epilogue
         
         [SerializeField] private AudioClip campfireBg;
         [SerializeField] private AudioClip tundraBg;
+        
+        public StudioEventEmitter bossfightTrackEmitter;
         
         [SerializeField] private List<GameObject> ivesActions;
         private void Update()
@@ -189,9 +194,19 @@ namespace Dialogue.Epilogue
 
             princess.OwnedMinions.Add(ives);
             ives.InjectDeck(ivesActions);
+            bossfightTrackEmitter.Play();
+
+            if (instakill) {
+                jackie.AddStacks(Accuracy.buffName, 999);
+                jackie.AddStacks(Resonate.buffName, 999);
+            }
+            
             CombatManager.Instance.BeginCombat();
             
             yield return new WaitUntil(() => new GetGameState().Query() == GameState.GAME_WIN);
+            EventInstance instance = bossfightTrackEmitter.EventInstance;
+            instance.setParameterByNameWithLabel("BossState", "Defeated");
+            
             CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
             
             yield return UIFadeScreenManager.Instance.FadeInDarkScreen(2f);
