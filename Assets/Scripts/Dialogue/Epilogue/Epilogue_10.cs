@@ -182,11 +182,11 @@ namespace Dialogue.Epilogue
             }
 
             new BattleIntroEvent(Get<ClashIntro>()).Invoke();
-            CombatManager.Instance.SetEnemiesHostile(new List<EnemyClass>() { ives, princess });
             
             CombatManager.PlayersWinEvent += PlayersWin;
             CombatManager.EnemiesWinEvent += EnemiesWin;
 
+            princess.OwnedMinions.Add(ives);
             CombatManager.Instance.BeginCombat();
             
             yield return new WaitUntil(() => new GetGameState().Query() == GameState.GAME_WIN);
