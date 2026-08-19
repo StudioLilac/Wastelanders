@@ -4204,6 +4204,14 @@ MonoBehaviour:
   princessReturnPosition: {fileID: 2100964856}
   campfireBg: {fileID: 8300000, guid: 8ea19789380e64f0fb4e4a8767e6b3cf, type: 3}
   tundraBg: {fileID: 8300000, guid: ee8a6302b1ddb4caf928a3603478b64d, type: 3}
+  ivesActions:
+  - {fileID: 1570116063941554911, guid: 4ceb98929208ac64ab848aa79d636595, type: 3}
+  - {fileID: 2880102989998038478, guid: 5409b61dd444e6642b0320973153a1ff, type: 3}
+  - {fileID: 365813191591832820, guid: 0f9d35f67947f2241aac5a9ed31099d3, type: 3}
+  - {fileID: 896435628826858811, guid: bf18f4bcef84eab4fb058f76cb0337b5, type: 3}
+  - {fileID: 365813191591832820, guid: 2ad830e2c11c55c4092ab2dd87a38abf, type: 3}
+  - {fileID: 6303317681585222872, guid: 43abfdc4bd2a36448afda6f0a2f0571e, type: 3}
+  - {fileID: 6429530541201259997, guid: 4e812ef45f6aef54092f7985015b5248, type: 3}
   references:
     version: 2
     RefIds:

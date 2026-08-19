@@ -45,7 +45,8 @@ namespace Dialogue.Epilogue
         
         [SerializeField] private AudioClip campfireBg;
         [SerializeField] private AudioClip tundraBg;
-
+        
+        [SerializeField] private List<GameObject> ivesActions;
         private void Update()
         {
             if (!shouldFlicker) { return; }
@@ -187,6 +188,7 @@ namespace Dialogue.Epilogue
             CombatManager.EnemiesWinEvent += EnemiesWin;
 
             princess.OwnedMinions.Add(ives);
+            ives.InjectDeck(ivesActions);
             CombatManager.Instance.BeginCombat();
             
             yield return new WaitUntil(() => new GetGameState().Query() == GameState.GAME_WIN);
