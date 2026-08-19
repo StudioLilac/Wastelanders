@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+public record BountyOnClickEvent(IBounties Bounty) : IEvent;
 // A Specific Bounty Button Component
 public class BountyButton : MonoBehaviour
 {
@@ -27,18 +28,12 @@ public class BountyButton : MonoBehaviour
     private bool mouseOver = false;
 
     public delegate void BountyButtonDelegate(IBounties bounty);
-    public static event BountyButtonDelegate? BountyOnSelectEvent;
     public static event BountyButtonDelegate? BountyOnHoverEvent; // Needed for updating popup board
     public static event BountyButtonDelegate? BountyOnHoverEndEvent;  // Needed for updating popup board
 
-    void OnEnable()
+    private void Awake()
     {
-        BountyOnSelectEvent += HandleOtherBountySelectedEvent;
-    }
-
-    void OnDisable()
-    {
-        BountyOnSelectEvent -= HandleOtherBountySelectedEvent;
+        this.Subscribe<BountyOnClickEvent>(ev => HandleOtherBountySelectedEvent(ev.Bounty));
     }
 
     void OnMouseOver()
@@ -75,6 +70,7 @@ public class BountyButton : MonoBehaviour
     public void OnPress()
     {
         selected = !selected;
+        new BountyOnClickEvent(bounty).Invoke();
         if (selected)
         {
             Selected();
@@ -88,8 +84,6 @@ public class BountyButton : MonoBehaviour
     private void Selected()
     {
         selected = true;
-        BountyManager.Instance.ActiveBounty = bounty;
-        BountyOnSelectEvent?.Invoke(bounty);
         selectedRenderer.gameObject.SetActive(true);
         UpdateSelectedAlpha(1f);
     }
@@ -97,7 +91,6 @@ public class BountyButton : MonoBehaviour
     private void Deselected()
     {
         selected = false;
-        if (BountyManager.Instance.ActiveBounty == bounty) BountyManager.Instance.ActiveBounty = null;
         if (!mouseOver) selectedRenderer.gameObject.SetActive(false);
         else UpdateSelectedAlpha(hoverAlpha);
     }

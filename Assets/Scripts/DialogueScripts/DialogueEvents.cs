@@ -24,6 +24,13 @@ namespace DialogueScripts
         public override void Execute() => this.Invoke();
     }
 
+    public class ExpressionChange : DialogueEvents, IEvent
+    {
+        public ActorProfile? actor;
+        public DialogueSprite expression;
+        public override void Execute() => this.Invoke();
+    }
+
     public class ActorAction : DialogueEvents, IEvent
     {
         public ActorProfile? actor;

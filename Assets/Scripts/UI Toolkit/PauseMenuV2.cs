@@ -32,6 +32,10 @@ namespace UI_Toolkit
         // Retained legacy cruft for compat.
         public static bool IsPaused;
         public static event Action DidPause;
+        
+        // is the cursor over an element that should "block/consume" click events?
+        // needed for compatability between PauseMenuV2 and Unity native UI elements.
+        public static bool IsOverBlockingElement { get; private set; }
 
         public void Awake()
         {
@@ -53,9 +57,19 @@ namespace UI_Toolkit
             LoadInitialValues();
             
             this.Subscribe<UIContextChangedEvent>(HandleUIContextChanged);
+            
+            RegisterBlockingElement(pauseIconButton);
+            RegisterBlockingElement(autoRollToggle);
+            RegisterBlockingElement(doubleSpeedToggle);
+            RegisterBlockingElement(dialogueLogButton);
+            RegisterBlockingElement(skipDialogueButton);
+
+            RegisterIconTooltipMouseEvents();
+            HideTooltip();
+
             SetState(State.Unpaused);
         }
-        
+
         public void Update()
         {
             if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Tab))
@@ -75,6 +89,7 @@ namespace UI_Toolkit
         private void DoStart()
         {
             SetState(State.Unpaused);
+            HideTooltip();
             new PauseStateChangedEvent(false).Invoke();
             SaveLoadSystem.Instance.SavePreferences();
         }
@@ -94,16 +109,61 @@ namespace UI_Toolkit
 
         private void HandleUIContextChanged(UIContextChangedEvent e) {
             var flags = e.context switch {
-                UIContext.Combat   => UIContextCustomFlags.DialogueLog | UIContextCustomFlags.AutoRoll | UIContextCustomFlags.DoubleSpeed,
-                UIContext.Dialogue => UIContextCustomFlags.DialogueLog | UIContextCustomFlags.SkipDialogue,
-                UIContext.Custom data  => data.Flags,
-                _                  => UIContextCustomFlags.None,
+                UIContext.Combat        => UIContextCustomFlags.DialogueLog | UIContextCustomFlags.AutoRoll | UIContextCustomFlags.DoubleSpeed,
+                UIContext.Dialogue      => UIContextCustomFlags.DialogueLog | UIContextCustomFlags.SkipDialogue,
+                UIContext.Custom data   => data.Flags,
+                _                       => UIContextCustomFlags.None,
             };
 
-            autoRollToggle.Display(flags.HasFlag(UIContextCustomFlags.AutoRoll));
-            doubleSpeedToggle.Display(flags.HasFlag(UIContextCustomFlags.DoubleSpeed));
-            dialogueLogButton.Display(flags.HasFlag(UIContextCustomFlags.DialogueLog));
-            skipDialogueButton.Display(flags.HasFlag(UIContextCustomFlags.SkipDialogue));
+            SetButtonVisibility(autoRollToggle,      flags.HasFlag(UIContextCustomFlags.AutoRoll));
+            SetButtonVisibility(doubleSpeedToggle,   flags.HasFlag(UIContextCustomFlags.DoubleSpeed));
+            SetButtonVisibility(dialogueLogButton,   flags.HasFlag(UIContextCustomFlags.DialogueLog));
+            SetButtonVisibility(skipDialogueButton,  flags.HasFlag(UIContextCustomFlags.SkipDialogue));
+        }
+
+        private void SetButtonVisibility(VisualElement element, bool visible) {
+            if (!visible && element.style.display != DisplayStyle.None)
+                HideTooltip();
+            element.Display(visible);
+            if (!visible)
+                IsOverBlockingElement = false;
+        }
+        
+        private void RegisterBlockingElement(VisualElement element)
+        {
+            element.RegisterCallback<MouseEnterEvent>(_ => { if (IsCursorOver(element)) IsOverBlockingElement = true; });
+            element.RegisterCallback<MouseLeaveEvent>(_ => IsOverBlockingElement = false);
+    
+            element.RegisterCallback<MouseDownEvent>(evt => 
+            {
+                evt.StopPropagation();
+                evt.StopImmediatePropagation();
+            });
+        }
+
+        private void RegisterIconTooltipMouseEvents()
+        {
+            RegisterTooltip(autoRollToggle,     "Toggle Auto Roll");
+            RegisterTooltip(doubleSpeedToggle,  "Toggle Double Speed");
+            RegisterTooltip(dialogueLogButton,  "View Dialogue Log");
+            RegisterTooltip(skipDialogueButton, "Skip Dialogue");
+        }
+
+        private void RegisterTooltip(VisualElement element, string tooltip)
+        {
+            element.RegisterCallback<MouseEnterEvent>(_ => ShowTooltip(element, tooltip));
+            element.RegisterCallback<MouseLeaveEvent>(_ => HideTooltip());
+        }
+
+        private void ShowTooltip(VisualElement source, string tooltip)
+        {
+            if (!IsCursorOver(source)) return;
+            new TooltipEvent(TextTipDisplayStyle.Display, "", tooltip).Invoke();
+        }
+
+        private void HideTooltip()
+        {
+            new TooltipEvent(TextTipDisplayStyle.None).Invoke();
         }
 
         private void OnRsmClicked()
@@ -164,11 +224,22 @@ namespace UI_Toolkit
             }
         }
 
+        private void OnSkpClicked()
+        {
+            OnGlsClicked();
+        }
+
         private void OnClsClicked()
         {
             SetState(previousState);
         }
-        
+        private static bool IsCursorOver(VisualElement element)
+        {
+            if (element.panel == null) return false;
+            Vector2 cursor = UICoordinateHelper.ToPanelPoint(Input.mousePosition, element.panel);
+            return element.worldBound.Contains(cursor);
+        }
+
         private static void OnAutoRollChanged(bool value) {
             PreferencesManager.Instance.SetAutoRoll(value);
         }
@@ -208,7 +279,6 @@ namespace UI_Toolkit
             pauseMenuPanel.Q<Button>("button-rst").clicked += OnRstClicked;
             pauseMenuPanel.Q<Button>("button-dck").clicked += OnDckClicked;
             pauseMenuPanel.Q<Button>("button-lvl").clicked += OnLvlClicked;
-            pauseMenuPanel.Q<Button>("button-gls").clicked += OnGlsClicked;
             pauseMenuPanel.Q<Button>("button-mnu").clicked += OnMnuClicked;
 
             dialogue.Q<Button>("button-cls").clicked += OnClsClicked;
@@ -217,6 +287,7 @@ namespace UI_Toolkit
             autoRollToggle.RegisterValueChangedCallback(e => OnAutoRollChanged(e.newValue));
             doubleSpeedToggle.RegisterValueChangedCallback(e => OnDoubleSpeedChanged(e.newValue));
             dialogueLogButton.clicked += OnDlgClicked;
+            skipDialogueButton.clicked += OnSkpClicked;
 
             pauseMenuPanel.Q<Slider>("slider-mus").RegisterValueChangedCallback(e => OnMusChanged(e.newValue));
             pauseMenuPanel.Q<Slider>("slider-sfx").RegisterValueChangedCallback(e => OnSfxChanged(e.newValue));

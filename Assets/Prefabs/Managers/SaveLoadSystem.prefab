@@ -1,0 +1,108 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5275242684164525800
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2498584445345351211}
+  - component: {fileID: 4619928436540125962}
+  m_Layer: 0
+  m_Name: SaveLoadSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2498584445345351211
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5275242684164525800}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.498195, y: 1.0178268, z: 1096.7625}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4619928436540125962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5275242684164525800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d71329b3be4571e4987b0b9bae3ee410, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UnparentOnAwake: 1
+  gameData:
+    Name: 
+    SaveVersion: 0
+    actionData: []
+    gameStateData:
+      <Id>k__BackingField:
+        Part1: 80650119
+        Part2: 1080750308
+        Part3: 1060595631
+        Part4: 1609139351
+      <CurrentLevelProgress>k__BackingField: 0
+      <SeenEnemyActions>k__BackingField: []
+      <SeenOneTimeEvents>k__BackingField: 
+    playerInformation:
+      <Id>k__BackingField:
+        Part1: 0
+        Part2: 0
+        Part3: 0
+        Part4: 0
+      <JackieData>k__BackingField:
+        name: 
+        playerWeaponProficiency: []
+        selectedWeapons: 
+        playerDeck: []
+      <IvesData>k__BackingField:
+        name: 
+        playerWeaponProficiency: []
+        selectedWeapons: 
+        playerDeck: []
+    bountyStateData:
+      <Id>k__BackingField:
+        Part1: 3909850018
+        Part2: 1125674392
+        Part3: 3754875271
+        Part4: 3367779175
+      <BountyCompletionData>k__BackingField:
+      - <BountyName>k__BackingField: FrogFest
+        <Completed>k__BackingField: 0
+      - <BountyName>k__BackingField: SlimeFest
+        <Completed>k__BackingField: 0
+      - <BountyName>k__BackingField: Exhausting Mission
+        <Completed>k__BackingField: 0
+      - <BountyName>k__BackingField: Buffed Princess
+        <Completed>k__BackingField: 0
+      - <BountyName>k__BackingField: Queen and Princess
+        <Completed>k__BackingField: 0
+      - <BountyName>k__BackingField: Solo Mission
+        <Completed>k__BackingField: 0
+  userPreferences:
+    Name: 
+    SaveVersion: 0
+    audioPreferences:
+      <BackgroundMusicVolume>k__BackingField: 0.7
+      <SFXVolume>k__BackingField: 0.7
+      <MusicMuted>k__BackingField: 0
+      <SFXMuted>k__BackingField: 0
+    screenShakePreference:
+      <IsScreenShakeEnabled>k__BackingField: 1
+    AutoRollEnabled: 0
+  defaultPlayerDatabase: {fileID: 11400000, guid: 8727bc367ba518d4496483da96ba1cf0, type: 2}
+  defaultCardDatabase: {fileID: 11400000, guid: 4ee9950b3d655254fb0def1cd879db6a, type: 2}

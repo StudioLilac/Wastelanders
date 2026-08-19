@@ -17,7 +17,7 @@ public class Flow : StatusEffect
 
     public override Sprite GetIcon()
     {
-        Sprite buffSprite = Resources.Load<Sprite>("StatusIcon/" + buffName);
+        Sprite buffSprite = new GetStatusIcons().Query()?.flow;
         if (!buffSprite)
         {
             Debug.LogWarning("Buff Sprite is missing");

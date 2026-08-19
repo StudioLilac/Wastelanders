@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UtilClass;
 
 public class QuickDraw : PistolCards
 {
@@ -27,5 +28,7 @@ public class QuickDraw : PistolCards
         CardType = CardType.RangedAttack;
         base.Initialize();
     }
+
+    protected override GlossaryNode[] GetChildrenGlossaryNodes() => new[] { StatusEffects.Accuracy };
 
 }

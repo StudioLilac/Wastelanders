@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+public record AddEntityToTeam(EntityClass Entity, EntityTeam Team) : IEvent;
+public record RemoveEntityFromTeam(EntityClass Entity, EntityTeam Team) : IEvent;
 public enum EntityTeam
 {
     NoTeam,

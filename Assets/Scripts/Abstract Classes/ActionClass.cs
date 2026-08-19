@@ -1,13 +1,14 @@
 using System;
+using System.Collections.Generic;
 using Steamworks;
 using Systems.Persistence;
 using UI_Toolkit;
 using UnityEngine;
+using UtilClass;
 
 public record CardUsed<T>() : IEvent where T : ActionClass;
-public abstract class ActionClass : SelectClass, IBind<ActionData>
+public abstract class ActionClass : SelectClass
 {
-    [field: SerializeField] public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
     private EntityClass target;
 
     public EntityClass Target
@@ -71,7 +72,9 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
 
     public int Speed { get; set; }
     public string description;
-    public string Description { get { return description; } }
+    
+    public GlossaryNode GlossaryNode { get; protected set; }
+
     public string evolutionDescription { get; protected set; }
     public string evolutionCriteria{ get; protected set; }
 
@@ -84,7 +87,7 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
     public CardUI cardUI;
 
 #nullable enable
-    [SerializeField] protected ActionData? data;
+    protected ActionData? data;
     protected int CurrentEvolutionProgress
     {
         get { return data?.CurrentProgress ?? 0; }
@@ -120,6 +123,7 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
     public virtual void Awake()
     {
         Initialize();
+        data = new GetActionData(GetType().Name).Query();
     }
 
     public virtual void Start() { }
@@ -179,7 +183,11 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
     public virtual void Initialize()
     {
         UpdateDup();
+        
+        GlossaryNode = new(myName, description, null, null, GetChildrenGlossaryNodes());
     }
+    
+    protected virtual GlossaryNode[] GetChildrenGlossaryNodes() => Array.Empty<GlossaryNode>();
 
     public int getRolledDamage()
     {
@@ -411,12 +419,6 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
         cardUI.shouldRenderCost = renderCost;
     }
 
-    public void Bind(ActionData data)
-    {
-        this.data = data;
-        this.data.Id = Id;
-    }
-
     // Returns a description based on whether the card is flipped and evolved or not
     public string GenerateCardDescription()
     {
@@ -458,9 +460,8 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
 }
 
 [Serializable]
-public class ActionData : ISaveable
+public class ActionData
 {
-    public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
     [field: SerializeField] public string ActionClassName { get; set; } = "";
     [field: SerializeField] public int CurrentProgress { get; set; } = 0;
 }

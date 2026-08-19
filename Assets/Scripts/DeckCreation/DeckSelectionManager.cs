@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Systems.Persistence;
 using TMPro;
+using UI_Toolkit;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -18,8 +19,8 @@ public class DeckSelectionManager : MonoBehaviour
     [SerializeField] private GameObject weaponSelectionUi;
     [SerializeField] private GameObject deckSelectionUi;
     [SerializeField] private GameObject cardArrayParent;
-    [SerializeField] private CardDatabase cardDatabase;
-    [SerializeField] private PlayerDatabase playerDatabase;
+    private CardDatabase cardDatabase => new GetCardDatabase().Query();
+    private PlayerDatabase playerDatabase => new GetPlayerDatabase().Query();
     [SerializeField] private TMP_Text cardTitleTextField;
     [SerializeField] private TMP_Text cardDescriptorTextField;
     [SerializeField] private TMP_Text chooseDecksTextField;
@@ -81,6 +82,8 @@ public class DeckSelectionManager : MonoBehaviour
     public static event Action<DeckSelectionState>? OnDeckSelectStateChanged;
     public static event Action<int, List<ActionClass>>? OnRenderDecks;
 
+    private Collider2D[] allCollidersInScene = null!;
+
     void Awake()
     {
         if (Instance == null)
@@ -91,6 +94,11 @@ public class DeckSelectionManager : MonoBehaviour
         {
             Destroy(this);
         }
+
+        allCollidersInScene = FindObjectsByType<Collider2D>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        this.Subscribe<PauseStateChangedEvent>(HandlePauseStateChanged);
+        this.Subscribe<CharachterSelected>(name => CharacterChosen(name.PlayerName));
+        this.Subscribe<WeaponEditSelected>(weapon => WeaponDeckEdit(weapon.WeaponEditInformation));
     }
 
     void Start()
@@ -99,9 +107,7 @@ public class DeckSelectionManager : MonoBehaviour
         ActionClass.CardRightClickedEvent += CardRightClicked;
         ActionClass.CardHighlightedEvent += RenderCardInformation;
         ActionClass.CardUnhighlightedEvent += RemoveCardInformation;
-        CharacterSelect.CharacterSelectedEvent += CharacterChosen;
         WeaponSelect.WeaponSelectEvent += WeaponSelected;
-        WeaponEdit.WeaponEditEvent += WeaponDeckEdit;
         EnterDeckSelection();
     }
 
@@ -117,9 +123,7 @@ public class DeckSelectionManager : MonoBehaviour
         ActionClass.CardRightClickedEvent -= CardRightClicked;
         ActionClass.CardHighlightedEvent -= RenderCardInformation;
         ActionClass.CardUnhighlightedEvent -= RemoveCardInformation;
-        CharacterSelect.CharacterSelectedEvent -= CharacterChosen;
         WeaponSelect.WeaponSelectEvent -= WeaponSelected;
-        WeaponEdit.WeaponEditEvent -= WeaponDeckEdit;
     }
 
     public void PrevState()
@@ -180,7 +184,7 @@ public class DeckSelectionManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Can only select 2 weapons");
+            new DisplayWarning(new PopupType.CustomPopup("2 Weapons Max! \n Deselect one to select this.")).Invoke();
         }
     }
 
@@ -239,7 +243,7 @@ public class DeckSelectionManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Insufficient experience points");
+            new DisplayWarning(new PopupType.CustomPopup("Insufficient Points! \n Deselect Actions to free up points.")).Invoke();
         }
     }
 
@@ -370,7 +374,6 @@ public class DeckSelectionManager : MonoBehaviour
             ac.UpdateDup();
         }
 
-        SaveLoadSystem.Instance.LoadCardEvolutionProgress();
         OnRenderDecks?.Invoke(cols, instantiatedCards.Select(card => card.GetComponent<ActionClass>()).OrderBy(card => card.Speed).ToList());
     }
 
@@ -384,6 +387,20 @@ public class DeckSelectionManager : MonoBehaviour
         foreach (Transform child in enemyEditParent)
         {
             Destroy(child.gameObject);
+        }
+    }
+
+    private void HandlePauseStateChanged(PauseStateChangedEvent evt)
+    {
+        UpdateUIColliders(evt.paused);
+    }
+
+    private void UpdateUIColliders(bool isPaused)
+    {
+        foreach (var cldr in allCollidersInScene)
+        {
+            if (cldr != null)
+                cldr.enabled = !isPaused;
         }
     }
 }

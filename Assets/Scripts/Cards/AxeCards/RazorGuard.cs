@@ -1,4 +1,5 @@
 using UnityEngine;
+using UtilClass;
 
 public class RazorGuard : AxeCards
 {
@@ -12,6 +13,10 @@ public class RazorGuard : AxeCards
         myName = "Razor Guard";
         description = "Inflict wound equal to damage blocked.";
     }
+    
+    
+    
+    protected override GlossaryNode[] GetChildrenGlossaryNodes() => new[] { StatusEffects.Wound };
 
     public override void OnDefendClash(ActionClass opposingCard)
     {

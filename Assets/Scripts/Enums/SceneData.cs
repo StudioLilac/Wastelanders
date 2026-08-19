@@ -12,14 +12,20 @@ public abstract class SceneData : Enum<SceneData>
     public abstract string SceneName { get; }
     public abstract SceneAudio GetAudio(AudioDatabase database);
     
-    // Prefabs in here are initialized on EVERY scene.
     protected virtual MonoBehaviour[] AlwaysPresentPrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
     {
-        prefabs.uiFadeScreenManager,
+        prefabs.databaseManager,     // must be first
+        prefabs.saveLoadSystem,      // dep: databaseManager
+        prefabs.preferencesManager,  // dep: saveLoadSystem
+        // --- order-free below ---
+        prefabs.gameStateManager,
         prefabs.audioManager,
-        prefabs.timeManager,
-        prefabs.saveIndicatorManager,
         prefabs.bountyManager,
+        prefabs.achievementManager,
+        prefabs.timeManager,
+        prefabs.uiFadeScreenManager,
+        prefabs.saveIndicatorManager,
+        prefabs.tooltip,
     };
 
     // Other prefabs specific to the scene go here.
@@ -60,7 +66,7 @@ public abstract class SceneData : Enum<SceneData>
         public override SceneAudio GetAudio(AudioDatabase database) => SelectMainMenuMusic(database);
 
         public override MonoBehaviour[] ScenePrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
-            { prefabs.pauseMenuV2, prefabs.popupManager, prefabs.bountyManager };
+            { prefabs.pauseMenuV2, prefabs.popupManager };
         
         public override UIContext UIContextOnEntry => new UIContext.None();
     }
@@ -71,7 +77,7 @@ public abstract class SceneData : Enum<SceneData>
         public override SceneAudio GetAudio(AudioDatabase database) => SelectMainMenuMusic(database);
 
         public override MonoBehaviour[] ScenePrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
-            { prefabs.pauseMenuV2, prefabs.dialogueManager, prefabs.deckSelectV2, prefabs.dialogueBoxV2, prefabs.bountyManager };
+            { prefabs.pauseMenuV2, prefabs.dialogueManager, prefabs.deckSelectV2, prefabs.dialogueBoxV2, prefabs.popupManager };
         
         public override UIContext UIContextOnEntry => new UIContext.Custom(UIContextCustomFlags.DialogueLog);
     }
@@ -82,7 +88,7 @@ public abstract class SceneData : Enum<SceneData>
         public override SceneAudio GetAudio(AudioDatabase database) => SelectMainMenuMusic(database);
 
         public override MonoBehaviour[] ScenePrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
-            { prefabs.pauseMenuV2, prefabs.dialogueManager, prefabs.popupManager, prefabs.bountyManager };
+            { prefabs.pauseMenuV2, prefabs.dialogueManager, prefabs.popupManager };
         
         public override UIContext UIContextOnEntry => new UIContext.Custom(UIContextCustomFlags.DialogueLog);
     }
@@ -93,7 +99,7 @@ public abstract class SceneData : Enum<SceneData>
         public override SceneAudio GetAudio(AudioDatabase database) => SelectMainMenuMusic(database);
 
         public override MonoBehaviour[] ScenePrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
-            { prefabs.pauseMenuV2, prefabs.bountyManager };
+            { prefabs.pauseMenuV2, prefabs.dialogueManager,  prefabs.dialogueBoxV2 };
     }
 
     public class Credits : SceneData
@@ -113,7 +119,7 @@ public abstract class SceneData : Enum<SceneData>
         public override SceneAudio GetAudio(AudioDatabase database) => database.TutorialFight;
 
         public override MonoBehaviour[] ScenePrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
-            { prefabs.combatFadeScreenManager, prefabs.combatManager, prefabs.battleQueue, prefabs.pauseMenuV2, prefabs.hudV2, prefabs.tooltip, prefabs.dialogueManager, prefabs.popupManager,  prefabs.gameOver, prefabs.battleIntro, prefabs.dialogueBoxV2, prefabs.arrowIndicatorManager };
+            { prefabs.combatFadeScreenManager, prefabs.combatManager, prefabs.battleQueue, prefabs.pauseMenuV2, prefabs.hudV2, prefabs.dialogueManager, prefabs.popupManager,  prefabs.gameOver, prefabs.battleIntro, prefabs.dialogueBoxV2, prefabs.arrowIndicatorManager };
     }
 
     public class FrogSlimeFight : SceneData
@@ -122,7 +128,7 @@ public abstract class SceneData : Enum<SceneData>
         public override SceneAudio GetAudio(AudioDatabase database) => database.FrogSlimeFight;
 
         public override MonoBehaviour[] ScenePrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
-            { prefabs.combatFadeScreenManager, prefabs.combatManager, prefabs.battleQueue, prefabs.pauseMenuV2, prefabs.hudV2, prefabs.tooltip, prefabs.dialogueManager, prefabs.popupManager,  prefabs.gameOver, prefabs.battleIntro, prefabs.dialogueBoxV2, prefabs.arrowIndicatorManager };
+            { prefabs.combatFadeScreenManager, prefabs.combatManager, prefabs.battleQueue, prefabs.pauseMenuV2, prefabs.hudV2, prefabs.dialogueManager, prefabs.popupManager,  prefabs.gameOver, prefabs.battleIntro, prefabs.dialogueBoxV2, prefabs.arrowIndicatorManager };
     }
 
     public class BeetleFight : SceneData
@@ -131,7 +137,7 @@ public abstract class SceneData : Enum<SceneData>
         public override SceneAudio GetAudio(AudioDatabase database) => database.BeetleFight;
 
         public override MonoBehaviour[] ScenePrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
-            { prefabs.combatFadeScreenManager, prefabs.combatManager, prefabs.battleQueue, prefabs.pauseMenuV2, prefabs.hudV2, prefabs.tooltip, prefabs.dialogueManager, prefabs.popupManager,  prefabs.gameOver, prefabs.battleIntro, prefabs.dialogueBoxV2, prefabs.arrowIndicatorManager };
+            { prefabs.combatFadeScreenManager, prefabs.combatManager, prefabs.battleQueue, prefabs.pauseMenuV2, prefabs.hudV2, prefabs.dialogueManager, prefabs.popupManager,  prefabs.gameOver, prefabs.battleIntro, prefabs.dialogueBoxV2, prefabs.arrowIndicatorManager };
     }
 
     public class PreQueenFight : SceneData
@@ -140,7 +146,7 @@ public abstract class SceneData : Enum<SceneData>
         public override SceneAudio GetAudio(AudioDatabase database) => database.PreQueenFight;
 
         public override MonoBehaviour[] ScenePrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
-            { prefabs.combatFadeScreenManager, prefabs.combatManager, prefabs.battleQueue, prefabs.pauseMenuV2, prefabs.hudV2, prefabs.tooltip, prefabs.dialogueManager, prefabs.popupManager,  prefabs.gameOver, prefabs.battleIntro, prefabs.dialogueBoxV2, prefabs.arrowIndicatorManager };
+            { prefabs.combatFadeScreenManager, prefabs.combatManager, prefabs.battleQueue, prefabs.pauseMenuV2, prefabs.hudV2, prefabs.dialogueManager, prefabs.popupManager,  prefabs.gameOver, prefabs.battleIntro, prefabs.dialogueBoxV2, prefabs.arrowIndicatorManager };
     }
 
     public class PostQueenFight : SceneData
@@ -158,7 +164,7 @@ public abstract class SceneData : Enum<SceneData>
         public override SceneAudio GetAudio(AudioDatabase database) => database.PrincessFrogBounty;
 
         public override MonoBehaviour[] ScenePrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
-            { prefabs.combatFadeScreenManager, prefabs.combatManager, prefabs.battleQueue, prefabs.pauseMenuV2, prefabs.hudV2, prefabs.tooltip, prefabs.dialogueManager, prefabs.popupManager,  prefabs.gameOver, prefabs.battleIntro, prefabs.dialogueBoxV2, prefabs.arrowIndicatorManager };
+            { prefabs.combatFadeScreenManager, prefabs.combatManager, prefabs.battleQueue, prefabs.pauseMenuV2, prefabs.hudV2, prefabs.dialogueManager, prefabs.popupManager,  prefabs.gameOver, prefabs.battleIntro, prefabs.dialogueBoxV2, prefabs.arrowIndicatorManager };
     }
 
     public class Epilogue : SceneData
@@ -167,7 +173,7 @@ public abstract class SceneData : Enum<SceneData>
         public override SceneAudio GetAudio(AudioDatabase database) => database.Empty;
 
         public override MonoBehaviour[] ScenePrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
-            { prefabs.pauseMenuV2, prefabs.bountyManager };
+            { prefabs.pauseMenuV2 };
     }
 
     
@@ -209,7 +215,7 @@ public abstract class SceneData : Enum<SceneData>
         public override SceneAudio GetAudio(AudioDatabase database) => database.Epilogue3;
 
         public override MonoBehaviour[] ScenePrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
-            { prefabs.combatFadeScreenManager, prefabs.combatManager, prefabs.battleQueue, prefabs.pauseMenuV2, prefabs.hudV2, prefabs.tooltip, prefabs.dialogueManager, prefabs.popupManager,  prefabs.gameOver, prefabs.battleIntro, prefabs.dialogueBoxV2, prefabs.arrowIndicatorManager  };
+            { prefabs.combatFadeScreenManager, prefabs.combatManager, prefabs.battleQueue, prefabs.pauseMenuV2, prefabs.hudV2, prefabs.dialogueManager, prefabs.popupManager,  prefabs.gameOver, prefabs.battleIntro, prefabs.dialogueBoxV2, prefabs.arrowIndicatorManager  };
     };
 
     public class Epilogue_4 : SceneData

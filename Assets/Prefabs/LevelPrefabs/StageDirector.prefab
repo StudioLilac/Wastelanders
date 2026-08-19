@@ -92,10 +92,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71f940f200521da4f8dc16d372071543, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   stageRoot: {fileID: 1110065537190286154}
   genericActorPrefab: {fileID: 2924381110899457719, guid: 00c266827b433e74a9349db1014b0e33, type: 3}
+  spriteDatabase: {fileID: 11400000, guid: a1c2e3f4b5d60798f8aabbccddeeff01, type: 2}
   offScreenLeft: {fileID: 1113043551406241649}
   leftPos: {fileID: 4480876122820321821}
   centerPos: {fileID: 3094610660630714437}

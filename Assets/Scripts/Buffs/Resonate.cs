@@ -14,7 +14,7 @@ public class Resonate : StatusEffect
 
     public override Sprite GetIcon()
     {
-        Sprite buffSprite = Resources.Load<Sprite>("StatusIcon/" + buffName);
+        Sprite buffSprite = new GetStatusIcons().Query()?.resonance;
         if (!buffSprite)
         {
             Debug.LogWarning("Buff Sprite is missing");

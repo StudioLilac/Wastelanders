@@ -13,6 +13,9 @@ namespace DialogueScripts
 
         [SerializeField] private DialogueActor genericActorPrefab;
 
+        [Header("Databases")]
+        [SerializeField] private SpriteDatabase spriteDatabase;
+
         [Header("Stage Anchors")] 
         [SerializeField] private Transform offScreenLeft;
         [SerializeField] private Transform leftPos;
@@ -26,6 +29,7 @@ namespace DialogueScripts
         private void Awake()
         {
             this.Subscribe<SpriteChange>(OnSpriteChange);
+            this.Subscribe<ExpressionChange>(OnExpressionChange);
             this.Subscribe<ActorAction>(OnActorAction);
             this.Subscribe<SetSpeaker>(OnSetSpeaker);
         }
@@ -63,6 +67,11 @@ namespace DialogueScripts
         private void OnSpriteChange(SpriteChange sc)
         {
             GetOrSummonActor(sc.actor).ChangeSprite(sc.sprite);
+        }
+
+        private void OnExpressionChange(ExpressionChange ec)
+        {
+            GetOrSummonActor(ec.actor).ChangeSprite(spriteDatabase.Get(ec.expression));
         }
 
         private DialogueActor GetOrSummonActor(ActorProfile? actor)

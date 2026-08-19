@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UtilClass;
 
 public class RapidFire : PistolCards
 {
@@ -15,6 +16,8 @@ public class RapidFire : PistolCards
         myName = "Rapid Fire";
         base.Initialize();
     }
+
+    protected override GlossaryNode[] GetChildrenGlossaryNodes() => new[] { StatusEffects.Accuracy };
 
 
     public override void OnHit()

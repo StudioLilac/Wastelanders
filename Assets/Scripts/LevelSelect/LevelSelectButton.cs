@@ -23,8 +23,10 @@ public class LevelSelectButton : MonoBehaviour, IPointerClickHandler
     [SerializeField] private GameObject lockedIndicator;
     [SerializeField] private Image levelPreview;
     [SerializeField] private float lockAnimationDuration = 0.5f;
+#nullable enable
+    [SerializeField] private AttentionSeeker? attentionIndicator;
 
-    #nullable enable
+#nullable enable
     private ILevelSelectInformation? LevelInformation { get => ILevelSelectInformation.LEVEL_INFORMATION.GetValueOrDefault(Level); }
 
     public void Awake()
@@ -57,6 +59,7 @@ public class LevelSelectButton : MonoBehaviour, IPointerClickHandler
         _textMeshPro.text = "COMING SOON!";
         button.enabled = false;
         levelPreview.color = new Color(0.1f, 0.1f, 0.1f);
+        if (attentionIndicator != null) attentionIndicator.gameObject.SetActive(false);
     }
 
     public void Lock()
@@ -67,6 +70,7 @@ public class LevelSelectButton : MonoBehaviour, IPointerClickHandler
         // Some buttons will have a locked indicator, while other buttons will disappear when locked
         // Used for hiding the bounty button when prerequiste levels aren't completed
         lockedIndicator.SetActive(!(lockedIndicator == gameObject));
+        if (attentionIndicator != null) attentionIndicator.gameObject.SetActive(false);
     }
 
     public void Unlock(bool animate = false) {
@@ -75,6 +79,7 @@ public class LevelSelectButton : MonoBehaviour, IPointerClickHandler
         bool selfIsLock = lockedIndicator == gameObject;
         if (!animate) {
             lockedIndicator.SetActive(selfIsLock);
+            if (attentionIndicator != null) attentionIndicator.gameObject.SetActive(true);
             return;
         }
         

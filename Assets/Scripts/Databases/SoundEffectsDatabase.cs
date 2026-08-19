@@ -70,6 +70,13 @@ public enum SoundID
     VN_video_call_pickup = 518,
     VN_video_call_hangup = 519,
     VN_radio_static = 520,
+
+    // Epilogue 3 - convoy / tire burst
+    VN_tire_burst = 521,
+    VN_drill = 523,
+    VN_door_shut = 524,
+    VN_engine_rev = 525,
+    VN_jack_raising = 528,
 }
 
 public static class SoundIDExtensions

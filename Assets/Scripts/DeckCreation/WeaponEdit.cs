@@ -7,6 +7,7 @@ using static CardDatabase;
 using static ISubWeaponType;
 using static WeaponEditInformation;
 
+public record WeaponEditSelected(WeaponEditInformation WeaponEditInformation) : IEvent;
 public class WeaponEdit : MonoBehaviour
 {
     [SerializeField] private Color baseColor = new Color(1f, 1f, 1f, 1f);
@@ -17,9 +18,6 @@ public class WeaponEdit : MonoBehaviour
     private WeaponEditInformation WeaponEditInformation { get; set; }
 
 #nullable enable
-    public delegate void WeaponEditDelegate(WeaponEditInformation weaponEditInformation);
-    public static event WeaponEditDelegate? WeaponEditEvent;
-
 
     public void InitializeWeaponEdit(WeaponType type, bool hasSubFolders, GetRenderableCards getCards)
     {
@@ -39,7 +37,7 @@ public class WeaponEdit : MonoBehaviour
         if (isMouseDown)
         {
             GetComponent<SpriteRenderer>().color = baseColor;
-            WeaponEditEvent?.Invoke(WeaponEditInformation);
+            new WeaponEditSelected(WeaponEditInformation).Invoke();
         }
         isMouseDown = false;
     }

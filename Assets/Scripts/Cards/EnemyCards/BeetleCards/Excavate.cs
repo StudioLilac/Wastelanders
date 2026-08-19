@@ -1,4 +1,6 @@
 using UnityEngine;
+using UtilClass;
+
 public class Excavate : BeetleAttacks, IPlayableBeetleCard
 {
     public const string EXCAVATE_SOUND_EFFECT_NAME = "Excavate Cut";
@@ -22,6 +24,8 @@ public class Excavate : BeetleAttacks, IPlayableBeetleCard
         myName = "Excavate";
         CardType = CardType.MeleeAttack;
     }
+    
+    protected override GlossaryNode[] GetChildrenGlossaryNodes() => new[] { Keywords.Crystals };
 
     public override void CardIsUnstaggered()
     {

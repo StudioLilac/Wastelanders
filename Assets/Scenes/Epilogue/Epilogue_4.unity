@@ -935,7 +935,7 @@ GameObject:
   - component: {fileID: 1280079865}
   - component: {fileID: 1280079864}
   m_Layer: 0
-  m_Name: Deception
+  m_Name: Weak
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -980,7 +980,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Deception
+  m_text: Weak
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ef98bd283b7bb734da8a833fccf0fb3e, type: 2}
   m_sharedMaterial: {fileID: -1472579445266561125, guid: ef98bd283b7bb734da8a833fccf0fb3e, type: 2}
@@ -1534,51 +1534,53 @@ MonoBehaviour:
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258087
-  - content: Although your condition has stabilized, the Serum meant to inhibit the
-      Waste vectors in your system exhibited... an unfortunate reaction.
+  - content: Although your condition has stabilized, the Waste vectors in your system
+      exhibited... an unfortunate reaction.
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events: []
-  - content: To avoid getting too technical...
-    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-    sfxId: 0
-    picture: {fileID: 0}
-    events: []
-  - content: After the Waste binds to the body, it will begin to siphon energy from
-      it, consuming the energy's <i>Amplitude</i> to replicate itself.
+  - content: 'Once in your system, the Waste binds to your body and siphons energy
+      to replicate itself. '
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 1014197516907839488
-  - content: That's what the serums prevent. They bind to the Waste vectors instead
-      to protect the body.
+  - content: "We call this energy your body\u2019s natural <i>Amplitude</i>. Lose
+      too much of it and you\u2019ll grow weak. "
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 1014197516907839488
+  - content: "That's what the serums prevent. They bind to the Waste vectors first
+      so they don\u2019t bind to your body. "
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events: []
-  - content: 'However for the serums to work, it is imperative they remain devoid
-      of <i>Amplitude</i>. Otherwise... '
+  - content: 'Naturally it is imperative that the serums remain devoid of <i>Amplitude</i>
+      themselves... '
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 1014197516907839490
-  - content: 'It becomes a catalyst for the Waste instead. '
+  - content: 'Otherwise, they become a catalyst for the Waste instead. '
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events: []
-  - content: Under normal circumstances this is highly improbable, each injection
-      is carefully tested, then inspected before being issued.
+  - content: Under normal circumstances the probabilities are near nil, each injection
+      is carefully tested, and inspected before it is issued.
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 1014197516907839491
   - content: However, lab testing reveals that the serum you injected was compromised
-      by an external influx of Amplitude.
+      by an external influx of this <i>Amplitude</i>.
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}

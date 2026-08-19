@@ -2,6 +2,7 @@ using Entities;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UtilClass;
 
 namespace Cards.EnemyCards.FrogCards
 {
@@ -21,6 +22,8 @@ namespace Cards.EnemyCards.FrogCards
             CardType = CardType.RangedAttack;
             frogAttackAnimationName = PRINCESS_FROG_ATTACK_NAME;
         }
+        
+        protected override GlossaryNode[] GetChildrenGlossaryNodes() => new[] { StatusEffects.Resonance };
 
         public override void OnQueue()
         {

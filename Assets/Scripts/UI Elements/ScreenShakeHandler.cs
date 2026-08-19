@@ -91,9 +91,7 @@ public class ScreenShakeHandler : MonoBehaviour {
 }
 
 [System.Serializable]
-public class ScreenShakePreference : ISaveable
+public class ScreenShakePreference
 {
-    public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
     [field: SerializeField] public bool IsScreenShakeEnabled { get; set; } = true;
-    
 }
