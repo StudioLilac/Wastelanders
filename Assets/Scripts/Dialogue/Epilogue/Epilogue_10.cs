@@ -54,6 +54,7 @@ namespace Dialogue.Epilogue
         [SerializeField] private Blizzard blizzardParticles;
         
         [SerializeField] private List<GameObject> ivesActions;
+        
         private void Update()
         {
             if (!shouldFlicker) { return; }
@@ -119,6 +120,7 @@ namespace Dialogue.Epilogue
             jackie.OutOfCombat();
             ives.OutOfCombat();
             princess.OutOfCombat();
+            this.Subscribe<PrincessFrog.PrincessFrogHurtEvent>(OnPrincessFrogHurt);
         }
 
         private IEnumerator ExecuteSceneStart()
@@ -130,7 +132,7 @@ namespace Dialogue.Epilogue
             jackie.SetReturnPosition(jackieReturnPosition.position);
             ives.SetReturnPosition(ivesReturnPosition.position);
             princess.SetReturnPosition(princessReturnPosition.position);
-            blizzardParticles.SetIntensity(0f);
+            blizzardParticles.SetIntensity(0.25f);
 
             if (!GameStateManager.Instance.JumpToCombat && !jumpToCombat) {
                 yield return DialogueBoxV2.Instance.Play(jayOpeningDialogue.Into());
@@ -165,7 +167,7 @@ namespace Dialogue.Epilogue
                 yield return DialogueBoxV2.Instance.Play(weiseDialogue.Into());
                 AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
                 yield return UIFadeScreenManager.Instance.FadeInDarkScreen(2f);
-
+                
                 background1.SetActive(false);
                 purpleFlash.color = TRANSPARENT_PURPLE;
                 AudioManager.Instance.FadeInBackgroundTrack(2f, tundraBg, true);
@@ -189,8 +191,6 @@ namespace Dialogue.Epilogue
                 GameStateManager.Instance.JumpToCombat = false;
                 yield return UIFadeScreenManager.Instance.FadeInLightScreen(0.5f);
             }
-            
-            blizzardParticles.SetIntensity(0.25f);
 
             new BattleIntroEvent(Get<ClashIntro>()).Invoke();
             
@@ -202,8 +202,8 @@ namespace Dialogue.Epilogue
             bossfightTrackEmitter.Play();
 
             if (instakill) {
-                jackie.AddStacks(Accuracy.buffName, 999);
-                jackie.AddStacks(Resonate.buffName, 999);
+                jackie.AddStacks(Accuracy.buffName, 5);
+                jackie.AddStacks(Resonate.buffName, 5);
             }
             
             CombatManager.Instance.BeginCombat();
@@ -229,6 +229,25 @@ namespace Dialogue.Epilogue
             CombatManager.EnemiesWinEvent -= EnemiesWin;
             CombatManager.PlayersWinEvent -= PlayersWin;
             CombatManager.Instance.GameState = GameState.GAME_LOSE;
+        }
+
+        private void OnPrincessFrogHurt(PrincessFrog.PrincessFrogHurtEvent e)
+        {
+            switch (e.RemainingHealth)
+            {
+                case > 35:
+                    blizzardParticles.SetIntensity(0.25f);
+                    break;
+                case > 20:
+                    blizzardParticles.SetIntensity(0.5f);
+                    break;
+                case > 10:
+                    blizzardParticles.SetIntensity(0.75f);
+                    break;
+                default:
+                    blizzardParticles.SetIntensity(1f);
+                    break;
+            }
         }
     }
 }
