@@ -194,13 +194,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Blizzard
       objectReference: {fileID: 0}
+    - target: {fileID: 4257671291984548270, guid: f9d610b739dde21419bb2da4482af8d7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4257671291984548270, guid: f9d610b739dde21419bb2da4482af8d7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6291342337810391346, guid: f9d610b739dde21419bb2da4482af8d7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 6291342337810391346, guid: f9d610b739dde21419bb2da4482af8d7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6291342337810391346, guid: f9d610b739dde21419bb2da4482af8d7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -626,6 +634,17 @@ Canvas:
   m_SortingLayerID: -172551265
   m_SortingOrder: 1
   m_TargetDisplay: 0
+--- !u!114 &462983790 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8032606345709588493, guid: f9d610b739dde21419bb2da4482af8d7, type: 3}
+  m_PrefabInstance: {fileID: 70956841}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de1c18774a3b3414cb25b193172f5542, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &473850228
 GameObject:
   m_ObjectHideFlags: 0
@@ -4334,6 +4353,7 @@ MonoBehaviour:
   campfireBg: {fileID: 8300000, guid: 8ea19789380e64f0fb4e4a8767e6b3cf, type: 3}
   tundraBg: {fileID: 8300000, guid: ee8a6302b1ddb4caf928a3603478b64d, type: 3}
   bossfightTrackEmitter: {fileID: 66728192}
+  blizzardParticles: {fileID: 462983790}
   ivesActions:
   - {fileID: 1570116063941554911, guid: 4ceb98929208ac64ab848aa79d636595, type: 3}
   - {fileID: 2880102989998038478, guid: 5409b61dd444e6642b0320973153a1ff, type: 3}

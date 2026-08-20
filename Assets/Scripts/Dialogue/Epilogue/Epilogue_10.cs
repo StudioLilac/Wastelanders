@@ -5,6 +5,7 @@ using DialogueScripts;
 using Entities;
 using FMOD.Studio;
 using FMODUnity;
+using Particles;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -49,7 +50,8 @@ namespace Dialogue.Epilogue
         [SerializeField] private AudioClip campfireBg;
         [SerializeField] private AudioClip tundraBg;
         
-        public StudioEventEmitter bossfightTrackEmitter;
+        [SerializeField] private StudioEventEmitter bossfightTrackEmitter;
+        [SerializeField] private Blizzard blizzardParticles;
         
         [SerializeField] private List<GameObject> ivesActions;
         private void Update()
@@ -128,6 +130,7 @@ namespace Dialogue.Epilogue
             jackie.SetReturnPosition(jackieReturnPosition.position);
             ives.SetReturnPosition(ivesReturnPosition.position);
             princess.SetReturnPosition(princessReturnPosition.position);
+            blizzardParticles.SetIntensity(0f);
 
             if (!GameStateManager.Instance.JumpToCombat && !jumpToCombat) {
                 yield return DialogueBoxV2.Instance.Play(jayOpeningDialogue.Into());
@@ -186,6 +189,8 @@ namespace Dialogue.Epilogue
                 GameStateManager.Instance.JumpToCombat = false;
                 yield return UIFadeScreenManager.Instance.FadeInLightScreen(0.5f);
             }
+            
+            blizzardParticles.SetIntensity(0.25f);
 
             new BattleIntroEvent(Get<ClashIntro>()).Invoke();
             

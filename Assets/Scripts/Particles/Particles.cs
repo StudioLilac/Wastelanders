@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 
 namespace Particles {
@@ -38,6 +39,8 @@ namespace Particles {
         [Tooltip("Overall particle intensity (0 = no particles, 1 = full effect)")]
         [SerializeField]
         protected float intensity = 1f;
+        
+        [SerializeField] private StudioEventEmitter emitter;
 
         protected ParticleSystem mainParticleSystem;
         protected ParticleSystem.MainModule mainModule;
@@ -88,7 +91,8 @@ namespace Particles {
         /// </summary>
         public void SetIntensity(float newIntensity) {
             intensity = Mathf.Clamp01(newIntensity);
-            emissionModule.rateOverTime = baseEmissionRate * intensity;
+            emissionModule.rateOverTime = baseEmissionRate * intensity; 
+            emitter.EventInstance.setParameterByName("Intensity", newIntensity);
         }
 
         /// <summary>
