@@ -102,3 +102,4 @@ steam_appid.txt
 /FMOD/Project/.cache/*
 /FMOD/Project/Build/*
 /FMOD/Project/*.user
+/FMOD/Project/.cache
