@@ -1,4 +1,6 @@
 using System.Collections;
+using FMOD.Studio;
+using FMODUnity;
 using Managers;
 using Systems.Persistence;
 using UnityEngine;
@@ -12,11 +14,18 @@ public class AudioManager : PersistentSingleton<AudioManager>
 #nullable enable
     private SceneAudio sceneAudio = null!;
     Coroutine? combatMusicCoroutine;
+    
+    private Bus fmodMusicBus;
+    private Bus fmodSFXBus;
 
     protected override void Awake()
     {
         base.Awake();
         if (invalid) return;
+        
+        fmodMusicBus = RuntimeManager.GetBus("bus:/Music");
+        fmodSFXBus = RuntimeManager.GetBus("bus:/SFX");
+        
         this.Subscribe<AudioPreferencesChanged>(_ => ApplyAudioPreferences());
     }
 
@@ -170,21 +179,29 @@ public class AudioManager : PersistentSingleton<AudioManager>
         BackgroundMusicPlayer.Play();
     }
 
-    public void SetSFXVolume(float volume) {
+    public void SetSFXVolume(float volume)
+    {
         SFXSoundsPlayer.volume = volume;
+        fmodSFXBus.setVolume(volume);
     }
 
-    public void SetMusicVolume(float volume) {
+    public void SetMusicVolume(float volume)
+    {
         BackgroundMusicPlayer.volume = volume;
         BackgroundMusicIntroPlayer.volume = volume;
-    }
-    
-    public void SetSFXMuted(bool state) {
-        SFXSoundsPlayer.mute = state; 
+        fmodMusicBus.setVolume(volume);
     }
 
-    public void SetMusicMuted(bool state) {
+    public void SetSFXMuted(bool state)
+    {
+        SFXSoundsPlayer.mute = state;
+        fmodSFXBus.setMute(state);
+    }
+
+    public void SetMusicMuted(bool state)
+    {
         BackgroundMusicPlayer.mute = BackgroundMusicIntroPlayer.mute = state;
+        fmodMusicBus.setMute(state);
     }
 }
 
