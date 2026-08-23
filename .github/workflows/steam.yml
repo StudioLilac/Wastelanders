@@ -5,41 +5,46 @@ on:
     tags:
       - 'v*'
 
+permissions:
+  contents: read
+
+concurrency:
+  group: steam-release-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  BUILD_NAME: Wastelanders
+
 jobs:
   buildGame:
-    name: Build for ${{ matrix.targetPlatform }}
+    name: Build ${{ matrix.targetPlatform }}
     runs-on: ubuntu-latest
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
         targetPlatform:
           - StandaloneWindows64
           - StandaloneOSX
           - StandaloneLinux64
-    outputs:
-      buildVersion: ${{ steps.buildStep.outputs.buildVersion }}
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
           lfs: true
-          
+
       - name: Free up disk space
         run: |
-          sudo rm -rf /usr/share/dotnet
-          sudo rm -rf /usr/local/lib/android
-          sudo rm -rf /opt/ghc
-          sudo rm -rf /usr/local/share/boost
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /usr/local/share/boost
           docker system prune -af
-          
-      - uses: actions/cache@v3
+
+      - uses: actions/cache@v4
         with:
           path: Library
-          key: Library-${{ matrix.targetPlatform }}-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+          key: Library-${{ matrix.targetPlatform }}-${{ hashFiles('Packages/packages-lock.json', 'ProjectSettings/**') }}
           restore-keys: |
             Library-${{ matrix.targetPlatform }}-
             Library-
-            
+
       - uses: game-ci/unity-builder@v4
         id: buildStep
         env:
@@ -49,55 +54,82 @@ jobs:
         with:
           targetPlatform: ${{ matrix.targetPlatform }}
           versioning: Tag
-          buildName: Wastelanders
-          
+          buildName: ${{ env.BUILD_NAME }}
+
+      - name: Strip folders Unity says not to ship
+        run: |
+          find build -depth -type d \
+            \( -name '*_BurstDebugInformation_DoNotShip' \
+            -o -name '*_BackUpThisFolder_ButDontShipItWithYourGame' \) \
+            -exec rm -rf {} +
+          find build -type f -name '*.pdb' -delete
+
+      - name: Restore executable bits
+        run: |
+          set -euo pipefail
+          case "${{ matrix.targetPlatform }}" in
+            StandaloneLinux64)
+              # Matches both "Wastelanders" and "Wastelanders.x86_64"
+              find "build/StandaloneLinux64" -maxdepth 1 -type f \
+                -name "${BUILD_NAME}*" -exec chmod +x {} +
+              ;;
+            StandaloneOSX)
+              find "build/StandaloneOSX" -type d -name 'MacOS' -path '*.app/Contents/*' \
+                -exec chmod -R +x {} +
+              ;;
+          esac
+          ls -lR build/
+
+      - name: Tar build
+        run: tar -cf "${{ matrix.targetPlatform }}.tar" -C "build/${{ matrix.targetPlatform }}" .
+
       - uses: actions/upload-artifact@v4
         with:
           name: Build-${{ matrix.targetPlatform }}
-          path: build/${{ matrix.targetPlatform }}
+          path: ${{ matrix.targetPlatform }}.tar
+          retention-days: 14
 
   deployToSteam:
-    needs: [buildGame]
+    name: Upload to Steam
+    needs: buildGame
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
         with:
-          fetch-depth: 0
+          pattern: Build-*
+          path: artifacts
 
-      - name: Download StandaloneWindows64 Artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: Build-StandaloneWindows64
-          path: build/StandaloneWindows64
-
-      - name: Download StandaloneOSX Artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: Build-StandaloneOSX
-          path: build/StandaloneOSX
-
-      - name: Download StandaloneLinux64 Artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: Build-StandaloneLinux64
-          path: build/StandaloneLinux64
-          
-      - name: Make Linux executable runnable
+      - name: Unpack builds
         run: |
-          chmod +x build/StandaloneLinux64/Wastelanders
-          
-      - name: List build directory
+          set -euo pipefail
+          for p in StandaloneWindows64 StandaloneOSX StandaloneLinux64; do
+            mkdir -p "build/$p"
+            tar -xf "artifacts/Build-$p/$p.tar" -C "build/$p"
+          done
+          ls -lR build/
+
+      - name: Verify depot contents before upload
         run: |
-          echo "=== Build directory structure ==="
-          ls -R build/
-          
+          set -euo pipefail
+          test -f "build/StandaloneWindows64/${BUILD_NAME}.exe" \
+            || { echo "Windows executable missing"; exit 1; }
+
+          linux_bin=$(find build/StandaloneLinux64 -maxdepth 1 -type f -name "${BUILD_NAME}*" | head -n1)
+          [ -n "$linux_bin" ] && [ -x "$linux_bin" ] \
+            || { echo "Linux executable missing or not +x"; exit 1; }
+
+          mac_bin=$(find build/StandaloneOSX -type f -path '*.app/Contents/MacOS/*' | head -n1)
+          [ -n "$mac_bin" ] && [ -x "$mac_bin" ] \
+            || { echo "macOS executable missing or not +x"; exit 1; }
+
+          echo "All three depots look sane."
+
       - uses: game-ci/steam-deploy@v3
         with:
           username: ${{ secrets.STEAM_USERNAME }}
-          configVdf: ${{ secrets.STEAM_CONFIG_VDF}}
-          appId: ${{ secrets.STEAM_APP_ID }}
-          buildDescription: v${{ needs.buildGame.outputs.buildVersion }}
+          configVdf: ${{ secrets.STEAM_CONFIG_VDF }}
+          appId: ${{ vars.STEAM_APP_ID }}
+          buildDescription: ${{ github.ref_name }}
           rootPath: build
           depot1Path: StandaloneWindows64
           depot2Path: StandaloneOSX
