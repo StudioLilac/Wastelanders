@@ -56,32 +56,39 @@ jobs:
           versioning: Tag
           buildName: ${{ env.BUILD_NAME }}
 
+      - name: Locate build output
+        id: locate
+        run: |
+          set -eu
+          dir=$(find build -mindepth 1 -maxdepth 1 -type d -print -quit)
+          [ -n "$dir" ] || { echo "::error::No build output found under build/"; exit 1; }
+          echo "dir=$dir" >> "$GITHUB_OUTPUT"
+          echo "Build output: $dir"
+          ls -lR "$dir"
+
       - name: Strip folders Unity says not to ship
         run: |
-          find build -depth -type d \
+          set -eu
+          find "${{ steps.locate.outputs.dir }}" -depth -type d \
             \( -name '*_BurstDebugInformation_DoNotShip' \
             -o -name '*_BackUpThisFolder_ButDontShipItWithYourGame' \) \
             -exec rm -rf {} +
-          find build -type f -name '*.pdb' -delete
 
       - name: Restore executable bits
         run: |
-          set -euo pipefail
+          set -eu
+          dir="${{ steps.locate.outputs.dir }}"
           case "${{ matrix.targetPlatform }}" in
             StandaloneLinux64)
-              # Matches both "Wastelanders" and "Wastelanders.x86_64"
-              find "build/StandaloneLinux64" -maxdepth 1 -type f \
-                -name "${BUILD_NAME}*" -exec chmod +x {} +
+              find "$dir" -maxdepth 1 -type f -name "${BUILD_NAME}*" -exec chmod +x {} +
               ;;
             StandaloneOSX)
-              find "build/StandaloneOSX" -type d -name 'MacOS' -path '*.app/Contents/*' \
-                -exec chmod -R +x {} +
+              find "$dir" -type d -path '*.app/Contents/MacOS' -exec chmod -R +x {} +
               ;;
           esac
-          ls -lR build/
 
       - name: Tar build
-        run: tar -cf "${{ matrix.targetPlatform }}.tar" -C "build/${{ matrix.targetPlatform }}" .
+        run: tar -cf "${{ matrix.targetPlatform }}.tar" -C "${{ steps.locate.outputs.dir }}" .
 
       - uses: actions/upload-artifact@v4
         with:
@@ -101,7 +108,7 @@ jobs:
 
       - name: Unpack builds
         run: |
-          set -euo pipefail
+          set -eu
           for p in StandaloneWindows64 StandaloneOSX StandaloneLinux64; do
             mkdir -p "build/$p"
             tar -xf "artifacts/Build-$p/$p.tar" -C "build/$p"
@@ -110,25 +117,30 @@ jobs:
 
       - name: Verify depot contents before upload
         run: |
-          set -euo pipefail
+          set -eu
+
           test -f "build/StandaloneWindows64/${BUILD_NAME}.exe" \
-            || { echo "Windows executable missing"; exit 1; }
+            || { echo "::error::Windows executable missing"; exit 1; }
+          test -d "build/StandaloneWindows64/${BUILD_NAME}_Data" \
+            || { echo "::error::Windows _Data folder missing or misnamed"; exit 1; }
 
-          linux_bin=$(find build/StandaloneLinux64 -maxdepth 1 -type f -name "${BUILD_NAME}*" | head -n1)
+          linux_bin=$(find build/StandaloneLinux64 -maxdepth 1 -type f -name "${BUILD_NAME}*" -print -quit)
           [ -n "$linux_bin" ] && [ -x "$linux_bin" ] \
-            || { echo "Linux executable missing or not +x"; exit 1; }
+            || { echo "::error::Linux executable missing or not +x"; exit 1; }
 
-          mac_bin=$(find build/StandaloneOSX -type f -path '*.app/Contents/MacOS/*' | head -n1)
+          test -d "build/StandaloneOSX/${BUILD_NAME}.app" \
+            || { echo "::error::Wastelanders.app missing - launch option will break"; exit 1; }
+          mac_bin=$(find build/StandaloneOSX -type f -path '*.app/Contents/MacOS/*' -print -quit)
           [ -n "$mac_bin" ] && [ -x "$mac_bin" ] \
-            || { echo "macOS executable missing or not +x"; exit 1; }
+            || { echo "::error::macOS executable missing or not +x"; exit 1; }
 
-          echo "All three depots look sane."
+          echo "All three depots match the Steam launch options."
 
       - uses: game-ci/steam-deploy@v3
         with:
           username: ${{ secrets.STEAM_USERNAME }}
           configVdf: ${{ secrets.STEAM_CONFIG_VDF }}
-          appId: ${{ vars.STEAM_APP_ID }}
+          appId: ${{ secrets.STEAM_APP_ID }}
           buildDescription: ${{ github.ref_name }}
           rootPath: build
           depot1Path: StandaloneWindows64
