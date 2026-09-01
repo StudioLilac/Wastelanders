@@ -50,7 +50,7 @@ public enum DialogueSprite
     CamProud = 7,               // pr
     CamSerious = 71,            // se
 
-    JackRetort = 8,             // om
+    JackieRetort = 8,             // om
     JackieSerious = 9,          // se
     JackieSmile = 10,           // sm
     JackieSurprisedClosed = 11, // su-cl

@@ -7,12 +7,12 @@ public class Epilogue3Driving
 {
     public DialogueAsCode PartA => new DialogueAsCode()
         .Enter(DialogueCharacter.Cam, CharacterActions.SetOffscreenLeft, DialogueSprite.CamTalk)
-        .Enter(DialogueCharacter.Jackie, CharacterActions.SetLeft, DialogueSprite.JackRetort)
+        .Enter(DialogueCharacter.Jackie, CharacterActions.SetLeft, DialogueSprite.JackieRetort)
         .Enter(DialogueCharacter.Ives, CharacterActions.SetRight, DialogueSprite.IvesNeutral)
 
         .Line(DialogueCharacter.Jackie,
             "Ow my ass, what’s with all these holes!? It’s like the road has been chewed up and spat out.",
-            DialogueSprite.JackRetort)
+            DialogueSprite.JackieRetort)
 
         .Enter(DialogueCharacter.Cam, CharacterActions.SetMiddle, DialogueSprite.CamTalk)
         .Line(DialogueCharacter.Cam,
@@ -25,7 +25,7 @@ public class Epilogue3Driving
         .Line(DialogueCharacter.Ives, "Grab the jack and the spare, kid.", sfx: SoundID.VN_door_shut)
         .Line(DialogueCharacter.Jackie,
             "Cam, if your map can't even get a detail like this right, how can we trust it to get to where we wanna go?",
-            DialogueSprite.JackRetort)
+            DialogueSprite.JackieRetort)
         .Line(DialogueCharacter.Cam,
             "I really thought the map was right...")
         .Line(DialogueCharacter.Cam,
@@ -43,7 +43,7 @@ public class Epilogue3Driving
         .Line(DialogueCharacter.Ives,
             "Jackie, radio the convoy. Tell 'em to let some air out of their tires. Softer rubber grips the rough better.")
         .Line(DialogueCharacter.Jackie,
-            "Copy that. I'll keep watch while you work.", DialogueSprite.JackRetort)
+            "Copy that. I'll keep watch while you work.", DialogueSprite.JackieRetort)
         .Line(DialogueCharacter.Jackie,
             "...How long do you think this'll take?")
         .Line(DialogueCharacter.Ives, "Long as it takes. Why?")

@@ -144,7 +144,7 @@ namespace Dialogue.Epilogue
     {
         // Jackie navigating the tunnels, up to the moment the blips fade under the water drips.
         public static DialogueAsCode PreFight(ControllableAudioChannel tracker) => new DialogueAsCode()
-            .Line(DialogueCharacter.Jackie, "Yeesh, these tunnels are impossible to navigate.", DialogueSprite.JackRetort)
+            .Line(DialogueCharacter.Jackie, "Yeesh, these tunnels are impossible to navigate.", DialogueSprite.JackieRetort)
             .Narrate("<i>The darkness returns the words back to her.")
             .Do(new CallbackEvent(() => tracker.SlowTempo(0.7f, 4f)))
             .Narrate("<i>Jackie continues forward regardless, using the faint glow of the tracker to illuminate her steps.</i>", SoundID.VN_footsteps)
