@@ -1462,8 +1462,10 @@ MonoBehaviour:
     sfxId: 0
     picture: {fileID: 0}
     events: []
-  - content: But that was deemed impossible! Our frequencies are too complex to modulate
-      with the Waste.
+  - content: 'But that was deemed impossible! Our Frequency timbre is too complex
+      to tune and Amplitudes too low to sustain any transformations.
+
+'
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     sfxId: 0
     picture: {fileID: 0}

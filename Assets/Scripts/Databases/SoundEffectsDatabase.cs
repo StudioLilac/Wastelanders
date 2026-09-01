@@ -77,6 +77,18 @@ public enum SoundID
     VN_door_shut = 524,
     VN_engine_rev = 525,
     VN_jack_raising = 528,
+
+    // Epilogue 7 - cave creature fight
+    VN_ep7_jackie_hit_wall = 530,
+    VN_ep7_dragon_hit_wall = 531,
+    VN_ep7_dragon_hiss = 532,
+    VN_ep7_dragon_death = 533,
+    VN_ep7_tracker_slow = 534,
+    VN_ep7_tracker_loop = 535,   // ambient loop
+    VN_ep7_water_drips = 536,    // ambient loop
+    VN_ep7_gravel_drag = 537,
+    VN_ep7_pant_rip = 538,
+    VN_ep7_creature_growl = 539,
 }
 
 public static class SoundIDExtensions

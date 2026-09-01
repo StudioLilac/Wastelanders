@@ -48,8 +48,9 @@ public enum DialogueSprite
     CamTalk = 5,                // ta
     CamConfused = 6,            // co
     CamProud = 7,               // pr
+    CamSerious = 71,            // se
 
-    JackieMouthOpen = 8,        // om
+    JackRetort = 8,             // om
     JackieSerious = 9,          // se
     JackieSmile = 10,           // sm
     JackieSurprisedClosed = 11, // su-cl

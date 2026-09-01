@@ -81,4 +81,14 @@ namespace DialogueScripts
         public string EventName = string.Empty;
         public override void Execute() => this.Invoke();
     }
+
+    // Runs a captured callback when the dialogue reaches this beat. Unlike CustomEvent it does
+    // not go through the event bus, so a scene can close over local state (e.g. a specific
+    // ControllableAudioChannel) directly instead of routing through a named string.
+    public class CallbackEvent : DialogueEvents
+    {
+        private readonly Action callback;
+        public CallbackEvent(Action callback) => this.callback = callback;
+        public override void Execute() => callback?.Invoke();
+    }
 }
