@@ -63,16 +63,20 @@ public class DialogueAsCode
         return this;
     }
 
+    public DialogueAsCode Move(DialogueCharacter character, CharacterActions position, float duration = 1f) => Do(new ActorAction { actor = Resolve(character), action = position, duration = duration });
+
     /// Brings an actor on-stage at position with a starting
     /// expression and fades them in. 
-    public DialogueAsCode Enter(DialogueCharacter character, CharacterActions position, DialogueSprite expr, float fadeDuration = 1f)
+    public DialogueAsCode Enter(DialogueCharacter character, CharacterActions position, DialogueSprite expr = DialogueSprite.NoChange, float fadeDuration = 1f)
     {
         var actor = Resolve(character);
-        return Do(
-            new ExpressionChange { actor = actor, expression = expr },
-            new ActorAction { actor = actor, action = position, duration = 0f },
-            new ActorAction { actor = actor, action = CharacterActions.FadeOut, duration = 0 },
-            new ActorAction { actor = actor, action = CharacterActions.FadeIn, duration = fadeDuration });
+        var events = new List<DialogueEvents>();
+        if (expr != DialogueSprite.NoChange)
+            events.Add(new ExpressionChange { actor = actor, expression = expr });
+        events.Add(new ActorAction { actor = actor, action = position, duration = 0f });
+        events.Add(new ActorAction { actor = actor, action = CharacterActions.FadeOut, duration = 0 });
+        events.Add(new ActorAction { actor = actor, action = CharacterActions.FadeIn, duration = fadeDuration });
+        return Do(events.ToArray());
     }
 
     /// Fades the given characters off-stage. Emitted as a pure-event beat.
@@ -111,6 +115,12 @@ public class DialogueAsCode
         DialogueCharacter.Cam => actors.Cam,
         DialogueCharacter.Weise => actors.Weise,
         DialogueCharacter.Ailin => actors.Ailin,
+        DialogueCharacter.Rocky => actors.Rocky,
+        DialogueCharacter.Kade => actors.Kade,
+        DialogueCharacter.Jay => actors.Jay,
+        DialogueCharacter.Ari => actors.Ari,
+        DialogueCharacter.Nites => actors.Nites,
+        DialogueCharacter.System => actors.System,
         DialogueCharacter.Narration => actors.Narration,
         DialogueCharacter.Broadcast => actors.Broadcast,
         DialogueCharacter.Loudspeaker => actors.Loudspeaker,
@@ -134,6 +144,12 @@ public enum DialogueCharacter
     Cam,
     Weise,
     Ailin,
+    Rocky,
+    Kade,
+    Jay,
+    Ari,
+    Nites,
+    System,
     Narration,
     Broadcast,
     Loudspeaker,

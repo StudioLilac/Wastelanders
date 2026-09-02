@@ -70,4 +70,11 @@ public enum DialogueSprite
     WeiseNeutral = 18,          // nu
     WeiseSmile = 19,            // sm
     WeiseThinking = 20,         // th
+
+    KadeSerious = 30,
+    KadeSoft = 31,
+    JaySerious = 32,
+    JaySorry = 33,
+    RockySerious = 34,
+    RockySmile = 35,
 }
