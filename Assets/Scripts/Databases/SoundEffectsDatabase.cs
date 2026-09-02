@@ -89,6 +89,9 @@ public enum SoundID
     VN_ep7_gravel_drag = 537,
     VN_ep7_pant_rip = 538,
     VN_ep7_creature_growl = 539,
+
+    // Epilogue 8 
+    VN_system_beep = 550,
 }
 
 public static class SoundIDExtensions

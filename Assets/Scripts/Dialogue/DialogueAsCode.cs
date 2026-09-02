@@ -1,6 +1,8 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using DialogueScripts;
+using Steamworks;
 
 #nullable enable
 /// Builder for authoring dialogue in code instead of hand-wiring
@@ -15,6 +17,8 @@ public class DialogueAsCode
     {
         this.actors = actors;
     }
+
+    public IEnumerator Play() => DialogueBoxV2.Instance.Play(this);
 
     /// A spoken line: with the given expression, optionally playing a sound effect.
     public DialogueAsCode Line(DialogueCharacter speaker, string text, DialogueSprite expr = DialogueSprite.NoChange,  SoundID sfx = SoundID.None)
@@ -35,10 +39,10 @@ public class DialogueAsCode
         return this;
     }
 
-    public DialogueAsCode InterruptedLine(DialogueCharacter speaker, string text, DialogueSprite expr = DialogueSprite.NoChange, SoundID sfx = SoundID.None)
+    public DialogueAsCode InterruptedLine(DialogueCharacter speaker, string text, DialogueSprite expr = DialogueSprite.NoChange, SoundID sfx = SoundID.None, float duration = 0.5f)
     {
         var actor = Resolve(speaker);
-        var events = new List<DialogueEvents>() { new AutoAdvanceAfter { Time = 0.5f } };
+        var events = new List<DialogueEvents>() { new AutoAdvanceAfter { Time = duration } };
         if (expr != DialogueSprite.NoChange) events.Add(new ExpressionChange { actor = actor, expression = expr });
         entries.Add(new DialogueEntry(
             content: text,
