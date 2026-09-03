@@ -47,7 +47,13 @@ namespace UI_Toolkit
             doubleSpeedToggle = rootDocument.rootVisualElement.Q<Toggle>("2x-speed-toggle");
             dialogueLogButton = rootDocument.rootVisualElement.Q<Button>("log-button");
             skipDialogueButton = rootDocument.rootVisualElement.Q<Button>("skip-dialogue-button");
-            
+            // So a spacebar press doesn't trigger any of these. 
+            autoRollToggle.focusable = false;
+            doubleSpeedToggle.focusable = false;
+            dialogueLogButton.focusable = false;
+            skipDialogueButton.focusable = false;
+            pauseIconButton.focusable = false;
+
             rootDocument.panelSettings.sortingOrder = UISortOrder.PauseMenu.GetOrder();
 
             pauseIconButton.clicked += DoPause;
