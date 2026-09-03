@@ -153,7 +153,7 @@ namespace Dialogue.Epilogue
             .Line(DialogueCharacter.Jackie, "So it's not you next.") // Pained
             .InterruptedLine(DialogueCharacter.Cam, "Jackie, you can't just—", DialogueSprite.CamSerious)
             .Line(DialogueCharacter.Jackie, "Finding Ma is my responsibility now, you hear me?", DialogueSprite.JackieRetort)
-            .Line(DialogueCharacter.Jackie, "I'm the one who has to prove that I'm strong enough to protect myself.")
+            .Line(DialogueCharacter.Jackie, "I'm the one who has to prove that I'm strong enough to protect myself now.")
             .Line(DialogueCharacter.Jackie, "That I don't need anyone else... and I won't vanish like her.") // Pained
             .Line(DialogueCharacter.Cam, "...")
             .Line(DialogueCharacter.Cam, "You know, I've also been running that same day in my head.",

@@ -13,21 +13,28 @@ MonoBehaviour:
   m_Name: Epilogue9_5_PostWallFlash
   m_EditorClassIdentifier: 
   Entries:
-  - content: <i>Suddenly, Ari stops blinking. His posture slumps, then snaps rigid.</i>
+  - content: <i>Ari stops mid sentence. His face drops.</i>
     speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 314095765763391639
-  - content: Ari? You okay?
+  - content: <i>Then his posture snaps rigid, his expression neutral.</i>
+    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 314095765763391639
+  - content: Ari? You feeling alright?
     speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 314095765763391640
-    - rid: 314095765763391650
     - rid: 314095765763391651
-  - content: <i>Without a word, Ari steps forward, walking directly towards the "wall."</i>
+    - rid: 8385543117129122099
+    - rid: 314095765763391650
+  - content: <i>Without a word, Ari steps forward, walking towards Jay.</i>
     speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -40,27 +47,27 @@ MonoBehaviour:
     events:
     - rid: 314095765763391642
     - rid: 314095765763391643
-  - content: <i>Behind him, three other scouts step forward. Then two more brush
-      past Rocky, moving in perfect unison.</i>
+    - rid: 8385543117129122097
+  - content: <i>Behind Rocky, three other scouts step forward. Then two more brush
+      past him, moving in perfect unison.</i>
     speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events:
-    - rid: 314095765763391644
-  - content: "Hey! Watch it! What\u2019s the hurry?"
+    events: []
+  - content: Hey! Watch it! Keep the formation!
     speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 314095765763391645
     - rid: 314095765763391646
-  - content: <i>They don't react nor speak as they march into the darkness.</i>
+  - content: <i>They don't react nor speak as they march towards the darkness.</i>
     speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 314095765763391647
-  - content: What the hell? Stand down! That's an order!
+  - content: Stand down! That's an order!
     speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -73,17 +80,18 @@ MonoBehaviour:
     events:
     - rid: 314095765763391652
     - rid: 314095765763391655
-    - rid: 314095765763391653
     - rid: 314095765763391654
+    - rid: 314095765763391653
     - rid: 314095765763391656
-  - content: "<i>Jay grabs Ari\u2019s arm. Ari turns. His eyes are vacant, glowing
-      a faint, milky purple.</i>"
+    - rid: 8385543117129122100
+  - content: "<i>Jay grabs Ari\u2019s arm, turning him around. His eyes are vacant,
+      glowing a faint, milky purple.</i>"
     speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 314095765763391657
-  - content: ...My god.
+  - content: "What the\u2026"
     speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -96,58 +104,69 @@ MonoBehaviour:
     events:
     - rid: 314095765763391659
     - rid: 314095765763391660
-  - content: Kid, what do you mean?
+  - content: Answers, what does that mean?
     speaker: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 314095765763391662
-    - rid: 314095765763391663
     - rid: 314095765763391675
     - rid: 314095765763391664
+    - rid: 314095765763391663
     - rid: 314095765763391665
-  - content: "Look at Ari. And the others. They\u2019re all the ones you rescued,
-      right? From the injections? "
+    - rid: 8385543117129122101
+    - rid: 8385543117129122108
+  - content: "Look at Ari. And the others. They all have crystals growing on them.
+      They\u2019re the ones you rescued, right?"
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 314095765763391666
-  - content: What!?
+  - content: 'Yeah... I suppose they are. '
     speaker: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events:
-    - rid: 314095765763391667
-  - content: The Frog controls Waste creatures. I didn't realize... that meant them
+    events: []
+  - content: The Frog controls Waste creatures. I didn't realize... that meant <i>them</i>
       too.
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
-    - rid: 314095765763391668
-    - rid: 314095765763391669
+    - rid: 8385543117129122109
   - content: <i>Ari breaks free from Jay's hold, and continues marching up the tunnels.</i>
     speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 314095765763391670
-  - content: "Then we\u2019ve got to move. Who knows what that Frog will do to them
-      once they arrive!"
+  - content: "Then we\u2019ve got to move. Jackie, what\u2019s the read, are they
+      heading to the frog? "
     speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 314095765763391671
-  - content: "Everyone on me! Let\u2019s get our people back!"
+  - content: 'Yeah... they are, forwards and up. '
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  - content: "Then that\u2019s where we\u2019re going. Everyone on me! \r\n"
     speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
     sfxId: 0
     picture: {fileID: 0}
+    events: []
+  - content: 
+    speaker: {fileID: 11400000, guid: 4fef3aeb65460fd498ab9efe9bac8625, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
     events:
-    - rid: 314095765763391672
-    - rid: 314095765763391673
-    - rid: 314095765763391674
+    - rid: 8385543117129122102
+    - rid: 8385543117129122103
+    - rid: 8385543117129122104
+    - rid: 8385543117129122110
   references:
     version: 2
     RefIds:
@@ -172,10 +191,6 @@ MonoBehaviour:
       data:
         actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
         sprite: {fileID: 21300000, guid: 701439697fac447e9becd89183c1ee61, type: 3}
-    - rid: 314095765763391644
-      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
     - rid: 314095765763391645
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
@@ -197,14 +212,14 @@ MonoBehaviour:
       type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
-        action: 10
+        action: 30
         duration: 1
     - rid: 314095765763391651
       type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
         action: 60
-        duration: 1
+        duration: 0
     - rid: 314095765763391652
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
@@ -220,7 +235,7 @@ MonoBehaviour:
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         action: 60
-        duration: 1
+        duration: 0
     - rid: 314095765763391655
       type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:
@@ -257,14 +272,14 @@ MonoBehaviour:
       type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
-        action: 20
-        duration: 0
+        action: 30
+        duration: 1
     - rid: 314095765763391664
       type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
         action: 60
-        duration: 1
+        duration: 0
     - rid: 314095765763391665
       type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
@@ -274,19 +289,6 @@ MonoBehaviour:
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-    - rid: 314095765763391667
-      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
-    - rid: 314095765763391668
-      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-    - rid: 314095765763391669
-      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        sprite: {fileID: 21300000, guid: aac9fc02e2834124a82050279325d731, type: 3}
     - rid: 314095765763391670
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
@@ -295,27 +297,66 @@ MonoBehaviour:
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
-    - rid: 314095765763391672
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
-        action: 70
-        duration: 1
-    - rid: 314095765763391673
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        action: 70
-        duration: 1
-    - rid: 314095765763391674
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
-        action: 70
-        duration: 1
     - rid: 314095765763391675
       type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
-        action: 70
+        action: 50
+        duration: 0
+    - rid: 8385543117129122097
+      type: {class: AutoAdvanceAfter, ns: DialogueScripts, asm: MainGame}
+      data:
+        Time: 0.5
+    - rid: 8385543117129122099
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+        action: 50
+        duration: 0
+    - rid: 8385543117129122100
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+        action: 10
+        duration: 1
+    - rid: 8385543117129122101
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        action: 20
+        duration: 1
+    - rid: 8385543117129122102
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
+        action: 40
+        duration: 2
+    - rid: 8385543117129122103
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        action: 40
+        duration: 1.5
+    - rid: 8385543117129122104
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+        action: 40
+        duration: 1
+    - rid: 8385543117129122108
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
+        action: 90
+        duration: 0
+    - rid: 8385543117129122109
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        sprite: {fileID: 21300000, guid: c8129ea45eac31b48ad46d4c7c943781, type: 3}
+    - rid: 8385543117129122110
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
+        action: 90
         duration: 0

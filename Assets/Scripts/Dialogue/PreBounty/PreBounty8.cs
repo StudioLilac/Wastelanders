@@ -128,8 +128,11 @@ namespace Dialogue.PreBounty
             for (float t = 0; t < 3; t += Time.deltaTime) { ailinRevealLayer.color = new Color(1, 1, 1, t / 3); yield return null; }
             ailinRevealLayer.color = Color.white;
             yield return new WaitForSeconds(1.5f);
+            StartCoroutine(eerie.FadeTo(0f, 2.5f));
             yield return scrim.FadeInDarkScreen(1.5f);
             yield return new WaitForSeconds(1f);
+
+
             new BountyInformationEvent(BountyInformation.Get<BountyInformation.PrincessFrogBounty>()).Invoke();
             GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.ContractSelect>().SceneName);
         }
@@ -352,7 +355,7 @@ namespace Dialogue.PreBounty
             .Line(DialogueCharacter.Cam, "That's fine. Before she left, she gave me coordinates. Well, I made her.")
             .Line(DialogueCharacter.Ives, "Smart thinking. Send them when you get the chance.", DialogueSprite.IvesSmile)
             .Line(DialogueCharacter.Ives, "We’ll be arriving at the Tundra camp by the end of the day. I’ll draft a plan.", DialogueSprite.IvesNeutral)
-            .Line(DialogueCharacter.Cam, "Good luck. And Ives... stay clear of any crystals alright? And watch your symptoms?")
+            .Line(DialogueCharacter.Cam, "Good luck. And Ives... stay clear of any crystals alright? And watch your symptoms with Dr. Weise?")
             .Line(DialogueCharacter.Ives, "Yeah, thanks kiddo. Hear you loud and clear, I’ll do my best to steer myself around those crystals.", DialogueSprite.IvesSmile)
             .Line(DialogueCharacter.Cam, "Sounds great. I’ll see ya.", DialogueSprite.CamSmile)
             .Line(DialogueCharacter.Ives, "See ya.")
