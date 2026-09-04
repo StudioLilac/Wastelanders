@@ -13,17 +13,17 @@ MonoBehaviour:
   m_Name: Epilogue9_6_Perimeter
   m_EditorClassIdentifier: 
   Entries:
-  - content: "Alright team, we\u2019re at the perimeter."
+  - content: Alright team, the coordinates stop at this entrance.
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 314095765763391676
     - rid: 314095765763391678
-    - rid: 314095765763391677
     - rid: 314095765763391679
+    - rid: 314095765763391677
     - rid: 314095765763391682
-  - content: Listen up. Kill the RIP gloves, we don't want a repeat of last time.
+  - content: Kill the RIP gloves, we don't want a repeat of last time.
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -32,12 +32,7 @@ MonoBehaviour:
     speaker: {fileID: 11400000, guid: 0c67bccb77acb478ca9abb7f55cabc38, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events:
-    - rid: 314095765763391680
-    - rid: 314095765763391681
-    - rid: 314095765763391684
-    - rid: 314095765763391683
-    - rid: 314095765763391685
+    events: []
   - content: 
     speaker: {fileID: 11400000, guid: 4fef3aeb65460fd498ab9efe9bac8625, type: 2}
     sfxId: 0
@@ -69,39 +64,12 @@ MonoBehaviour:
       data:
         actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
         action: 60
-        duration: 1
-    - rid: 314095765763391680
-      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 0c67bccb77acb478ca9abb7f55cabc38, type: 2}
-    - rid: 314095765763391681
-      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 0c67bccb77acb478ca9abb7f55cabc38, type: 2}
-        sprite: {fileID: 21300000, guid: b5d13694d44666248bd6437ab54688c3, type: 3}
+        duration: 0
     - rid: 314095765763391682
       type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
         sprite: {fileID: 21300000, guid: e6bd7efa92cdc3540bcf7b472fbcdba8, type: 3}
-    - rid: 314095765763391683
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 0c67bccb77acb478ca9abb7f55cabc38, type: 2}
-        action: 20
-        duration: 0
-    - rid: 314095765763391684
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 0c67bccb77acb478ca9abb7f55cabc38, type: 2}
-        action: 70
-        duration: 0
-    - rid: 314095765763391685
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 0c67bccb77acb478ca9abb7f55cabc38, type: 2}
-        action: 60
-        duration: 1
     - rid: 849616224567951425
       type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:

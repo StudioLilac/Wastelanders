@@ -17,6 +17,12 @@ MonoBehaviour:
   Cam: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
   Weise: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
   Ailin: {fileID: 11400000, guid: 8ea1ccd6a87516a42b4a830ac3f980a1, type: 2}
+  Rocky: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+  Kade: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
+  Jay: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
+  Ari: {fileID: 11400000, guid: ba10bd187431a442890fc8138cfaa1e2, type: 2}
+  Nites: {fileID: 11400000, guid: 4be3841f8f6da4f3ca84917932aa6724, type: 2}
+  System: {fileID: 11400000, guid: f52cacb6579084995aefad6ecb112eb6, type: 2}
   Narration: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
   Broadcast: {fileID: 11400000, guid: 474297f421f8c524e85a2e1640557075, type: 2}
   Loudspeaker: {fileID: 11400000, guid: bcbbdf73c3064764492351164f82d3a2, type: 2}

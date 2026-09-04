@@ -1,107 +1,81 @@
-# Add dialogue to translate here. 
+# Add dialogue to translate 
+Rocky (se): You want to know why? 
 
-Jackie: Yeesh, these tunnels are impossible to navigate. 
+Because you’re exactly like her.
 
-Narration: The dark hands her words back, as Jackie uses the faint glow of the tracker to illuminate her steps. 
+Jackie (ti): Her?
 
-As she continues forward, the beeps begin to slow. 
 
-Jackie: Guess I took a wrong turn, should have taken a left. 
+Rocky! I'm not like my Ma—
 
-Narration: Jackie backtracks and takes the left tunnel. 
+Rocky (se): Listen, I’ve worked with your mother for a long time. 
 
-    Walking ahead, she enters a wide cavern with debris piled high around her.
+The one thing you get used to hearing are assurances. That with her around, things would turn out alright.
 
-A pale light cracks through the mossy walls.
+But beneath the bravado was someone who would spend nights at the strategy table, hedging positions, preparing backup plans. 
 
-Narration: She stops to gather her bearings again, making sure she takes the correct path among the many that lay in front of her.
+Because even she knew that no matter how strong she was, she could never truly guarantee that 
+everyone would make it home. 
 
-Aside from her blips, only the drips of water break the silence.
+And so with those assurances, she always had something to prove. 
 
-*Fade blips out in favour of the drips of water* 
+To prove that, perhaps <i>she</i>—could be the one thing you could count on. 
 
-Then one of the stones lets out a wet, heavy breath. The rocks around her begin to shift. 
+…It was noble, but the world doesn’t care. 
 
-Audio: * loud clattering of boulders as it moves*
+When things got hairy, she’d order us to stay back so she could deal with it alone.
 
-Audio: *roaring*
+We could only let her step in. Up until the day she didn’t step back out.
 
-Jackie snaps to the source of the sound.  
+Rocky: And I am not about to be the one who lets Ailin’s daughter step into the dark to die.
 
-JACKIE (Internal) (su-op): Crap!
+Jackie: ...
 
-Narration: A guttural snarl echoes throughout the cavern. 
+You think I don’t know her!?
 
-A massive, lizard-like creature with a scarred eye, pounces from the rubble.
+I know how she sugarcoated her missions by calling them ‘business trips’.
 
-JACKIE (Internal) (su): Brace!
+I know how she’d promise to be back soon when there was no way of knowing.
 
-Audio: *metal clash sound* *Sound of jackie hitting the stone wall*
+I know how if she really truly wanted to be someone who could be counted on—m-maybe she should have just stayed the fuck home.
 
-Narration: Metal clashes against bone. Jackie is thrown, slamming hard against the stone wall. Her ribs flaring as the wind is knocked out of her. 
+Rocky: ...
 
-JACKIE (su): Ugh! 
+Jackie: ...
 
-JACKIE (Internal) (ti): Too heavy. Can’t... can’t take it head on.
+I’m not my Ma, Rocky.
 
-JACKIE (Internal) (nu): ...Okay. Calm. What did Ives say before? ’Don’t fight its strength...’
+I’m not gonna stand here and say to your face that everything will be fine just because I’m coming along.
 
-Narration: The creature closes the distance. Claws primed to reap.
+I don’t know if we’ll find the frog. I don’t know if your scouts are still alive. 
 
-Narration: Jackie dives under the swing and past its foreleg.
- 
-But she’s not quite fast enough. A claw catches and tears through her calf. 
+I won’t even say that I’ll be safe. 
 
-JACKIE (su-op): ACK! My leg...
+The only thing I can say is that I’ll call out every fork. Whatever I see I’ll say it, and we’ll decide where to go together based on the readings. 
 
-Narration: She tumbles through the gravel, kicking up dust and trailing red.
+So if you would rather order the only person who knows anything to stay back...
 
-Narration: Behind her, the beast wheels around. Its tail knocking boulders on the wall loose. 
+Because you’re afraid of what I might do.
 
-JACKIE (Internal) (nu-op): ’Don’t fight its strength... Fight its shape.’ 
+Won’t that make you like her instead?
 
-Right. But how, with a busted leg? 
+Rocky: ...
 
-Narration: She scrambles back, and steadies herself on stone. 
+Jackie: I’d know. It’s why I’ve got this limp. 
 
-Narration: The beast stares down Jackie with its one good eye. Judging the damage, judging the distance.
+Kade didn’t ask when she saved my life. 
 
-Narration: Jackie props herself with the staff. Hot blood pounding in her ears. The glove beeps monotonously in rhythm. 
+But I’m asking. 
 
-Jackie: I got it. I just need to time this. 
+Rocky (se): …
 
-Narration: Seeing its prey wobble upright, the creature lunges for the kill. 
+Jay (nu): She's right, Cap. Delta knows the tunnels just as well as I do. 
 
-JACKIE (Internal) (su-op): NOW!
+Whatever happened up there, they sure didn’t get lost. 
 
-Narration: The world balloons around her. Jackie morphs into the form of the smallest beetle she’s fought, clinging to the gravel as the creature’s momentum carries it past her.
+We might be a little over our heads on this one. 
 
-*crash sfx*
-
-Narration: The entire cave shudders as maw meets stone.
-
-Narration: Jackie unshifts, and after a breath, springs up on her good leg. Driving all of her weight behind her staff. 
-
-The steel tip finds the base of the skull, wedging itself arms-length deep. 
-
-The beast convulses, then collapses.
-
-*beast groan*
-
-[Fade into Dead Creature background with Jackie and creature]
-Narration: Jackie leans on her staff, her head pounding and body trembling. She lets out a wet cough.
-JACKIE (ti): That’s... not good.... I should be getting back ...
-
-Narration: She takes a step and her leg buckles. 
-
-JACKIE (ti-op): I’ll have to make sure Cam gets this damn tracker to work while I’m shifted. 
-
-Narration: The dark edges of the cavern begin to close in as her vision tunnels. As the beeping of the device begins to grow louder. 
-
-[start blackening edges of the screen]
-
-JACKIE (ti): When... I get... back...
-
-[blackening gets worse]
-
-Narration: The cold stone floor rushes up to meet her. 
+Rocky (se): ...Fine.
+But you stay in the center formation and navigate with Kade. Jay, you're on point with me.
+If I say retreat, we retreat. No heroics. Capiche?
+Jackie (nu): Capiche. 

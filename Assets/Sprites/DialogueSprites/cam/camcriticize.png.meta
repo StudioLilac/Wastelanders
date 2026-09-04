@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 9b99b14a08f33e1499aee59c0d0c041b
+guid: 4fc4d182a0b28f844abe75dbc03b25d7
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3236457122299952449
-    second: cam_proud_recoloured_0
+      213: -1477317178485302838
+    second: camcriticize_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -48,7 +48,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 1
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 3
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: cam_proud_recoloured_0
+      name: camcriticize_0
       rect:
         serializedVersion: 2
-        x: 296
+        x: 552
         y: 0
-        width: 837
-        height: 1360
+        width: 1739
+        height: 2791
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fb2478e056bc513d0800000000000000
-      internalID: -3236457122299952449
+      spriteID: ac91dc37ad38f7be0800000000000000
+      internalID: -1477317178485302838
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      cam_proud_recoloured_0: -3236457122299952449
+      camcriticize_0: -1477317178485302838
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

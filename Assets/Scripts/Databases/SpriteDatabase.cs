@@ -49,8 +49,11 @@ public enum DialogueSprite
     CamConfused = 6,            // co
     CamProud = 7,               // pr
     CamSerious = 71,            // se
+    CamAngry = 72,
+    CamCriticize = 73,
+    CamRelieved = 74,
 
-    JackRetort = 8,             // om
+    JackieRetort = 8,             // om
     JackieSerious = 9,          // se
     JackieSmile = 10,           // sm
     JackieSurprisedClosed = 11, // su-cl
@@ -70,4 +73,11 @@ public enum DialogueSprite
     WeiseNeutral = 18,          // nu
     WeiseSmile = 19,            // sm
     WeiseThinking = 20,         // th
+
+    KadeSerious = 30,
+    KadeSoft = 31,
+    JaySerious = 32,
+    JaySorry = 33,
+    RockySerious = 34,
+    RockySmile = 35,
 }
