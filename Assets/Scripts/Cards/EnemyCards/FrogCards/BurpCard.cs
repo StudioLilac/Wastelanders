@@ -1,7 +1,3 @@
-using Entities;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UIElements;
 using UtilClass;
 
 namespace Cards.EnemyCards.FrogCards

@@ -100,6 +100,16 @@ namespace Particles {
         /// </summary>
         public void StartSnow() {
             StartEffect();
+
+            // Fast-forward the system so it looks like it's been running already
+            if (mainParticleSystem != null) {
+                float warmupTime = mainModule.startLifetime.constantMax > 0 
+                    ? mainModule.startLifetime.constantMax 
+                    : 5f;
+
+                mainParticleSystem.Simulate(warmupTime, true, true);
+                mainParticleSystem.Play();
+            }
         }
 
         /// <summary>

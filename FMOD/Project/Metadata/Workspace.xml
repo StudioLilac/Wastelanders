@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.03.00">
 	<object class="Workspace" id="{0765bd83-84ce-48ac-b351-0dfa0d317772}">
+		<property name="builtBanksOutputDirectory">
+			<value>../../StreamingAssets</value>
+		</property>
 		<relationship name="masterEventFolder">
 			<destination>{055e37d6-72c0-488f-9f8b-c674c3493d93}</destination>
 		</relationship>
