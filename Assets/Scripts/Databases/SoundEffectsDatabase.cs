@@ -94,6 +94,8 @@ public enum SoundID
     VN_system_beep = 550,
     // Ep 9
     VN_whistle_vocal = 560,
+
+    VN_BGM_suspense_drone = 580,
 }
 
 public static class SoundIDExtensions

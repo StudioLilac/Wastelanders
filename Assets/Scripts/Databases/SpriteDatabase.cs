@@ -49,6 +49,9 @@ public enum DialogueSprite
     CamConfused = 6,            // co
     CamProud = 7,               // pr
     CamSerious = 71,            // se
+    CamAngry = 72,
+    CamCriticize = 73,
+    CamRelieved = 74,
 
     JackieRetort = 8,             // om
     JackieSerious = 9,          // se

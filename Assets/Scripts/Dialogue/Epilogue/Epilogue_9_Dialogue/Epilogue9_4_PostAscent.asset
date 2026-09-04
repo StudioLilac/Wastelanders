@@ -154,8 +154,8 @@ MonoBehaviour:
       type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
-        action: 20
-        duration: 1.5
+        action: 30
+        duration: 1
     - rid: 314095765763391638
       type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:

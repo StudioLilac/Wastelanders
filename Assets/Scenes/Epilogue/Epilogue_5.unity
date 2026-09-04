@@ -119,6 +119,110 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &68391725
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 68391726}
+  - component: {fileID: 68391730}
+  - component: {fileID: 68391729}
+  - component: {fileID: 68391728}
+  - component: {fileID: 68391727}
+  m_Layer: 0
+  m_Name: Scrim
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &68391726
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 68391725}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 953536275}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &68391727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 68391725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2a3c0ba8ef1824438650b6e205890b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiImage: {fileID: 68391729}
+--- !u!114 &68391728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 68391725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AspectMode: 4
+  m_AspectRatio: 1.9444445
+--- !u!114 &68391729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 68391725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 627973b2e4ace4cc8ac0129129e8c289, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &68391730
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 68391725}
+  m_CullTransparentMesh: 1
 --- !u!1 &75097875
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,10 +303,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1769104897}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1920, y: 1080}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &107732013
 MonoBehaviour:
@@ -217,7 +321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -337,6 +441,95 @@ MonoBehaviour:
   bg1: {fileID: 1886691551}
   bg2: {fileID: 2017005692}
   speed: 2
+--- !u!1 &238060761
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 238060762}
+  - component: {fileID: 238060765}
+  - component: {fileID: 238060764}
+  - component: {fileID: 238060763}
+  m_Layer: 0
+  m_Name: LabForeground
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &238060762
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 238060761}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1769104897}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1920, y: 1080}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &238060763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 238060761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2a3c0ba8ef1824438650b6e205890b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiImage: {fileID: 238060764}
+--- !u!114 &238060764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 238060761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: f450b9d397dfa4304b2349a12952e3ea, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &238060765
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 238060761}
+  m_CullTransparentMesh: 1
 --- !u!1 &342273800
 GameObject:
   m_ObjectHideFlags: 0
@@ -528,6 +721,90 @@ Transform:
   - {fileID: 1337908785}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &953536274
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 953536275}
+  - component: {fileID: 953536277}
+  - component: {fileID: 953536276}
+  m_Layer: 0
+  m_Name: Scrim
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &953536275
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 953536274}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 68391726}
+  m_Father: {fileID: 983621105}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
+--- !u!114 &953536276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 953536274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UiScaleMode: 1
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 1920, y: 1080}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
+--- !u!223 &953536277
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 953536274}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 0
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 1
+  m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 2
+  m_TargetDisplay: 0
 --- !u!1 &983621104
 GameObject:
   m_ObjectHideFlags: 0
@@ -560,6 +837,7 @@ Transform:
   - {fileID: 158060116}
   - {fileID: 1271031254}
   - {fileID: 1769104897}
+  - {fileID: 953536275}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1006889382
@@ -1252,9 +1530,7 @@ MonoBehaviour:
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events:
-    - rid: 1894806212798054504
-    - rid: 1894806212798054505
+    events: []
   - content: Resonance.
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
@@ -1269,16 +1545,17 @@ MonoBehaviour:
     picture: {fileID: 0}
     events:
     - rid: 1894806212798054508
-  - content: 'Right, but if I recall... the frequency of the serum is magnitudes
-      greater than anything found on Earth. '
+  - content: "Right, for similar frequencies. But since the serums are designed to
+      attract the Waste, they\u2019re synthesized to have a frequency greater than
+      anything natural found on Earth."
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 1894806212798054510
     - rid: 1894806212798054509
-  - content: Nothing natural should resonate with it. What could possibly have had
-      a similar frequency in the Tundra...
+  - content: To resonate with the Serums, there would need to be something just as
+      unnatural in the Tundra...
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -1289,36 +1566,34 @@ MonoBehaviour:
     picture: {fileID: 0}
     events:
     - rid: 1894806212798054511
-  - content: 'They''re alien to Earth and release a massive amount of energy when
-      broken. '
-    speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-    sfxId: 0
-    picture: {fileID: 0}
-    events:
-    - rid: 1894806212798054512
-  - content: If their frequencies are similar to the serum, they could resonate almost
-      perfectly when broken and transfer that energy to...
+  - content: 'They came from the meteorites, and are a huge energy source. '
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events: []
-  - content: 'Excellent deduction, you are correct. The signatures of the serum are
-      almost identical to those found in the crystals. '
+  - content: If their Frequencies are anything similar to the Serum, all that Amplitude
+      released when broken would be transferred into...
+    speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  - content: Excellent deduction, you're correct. It is almost certain that a broken
+      crystal was the source of the Amplitude contamination.
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 1894806212798054520
     - rid: 1894806212798054521
-  - content: But this is no coincidence, for both the crystals and the raw components
-      of the serum have the same origin. The meteors that brought the Waste.
+  - content: 'They share a common origin after all. The meteorite that brought the
+      Waste. '
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 1894806212798054522
-  - content: 'The Waste came bounded to a form of alien organic matter. That matter
-      is what we use to synthesize the Serums. '
+  - content: The Serum substrate itself was extracted from organic matter initially
+      bound to Waste.
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -1331,8 +1606,8 @@ MonoBehaviour:
     picture: {fileID: 0}
     events:
     - rid: 1894806212798054524
-  - content: The crystals seem to be a structured form of this organic matter, so
-      it is no surprise that they share similar properties.
+  - content: The crystals arrived in tandem, and so it's no surprise that they share
+      such similar frequencies.
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -1351,7 +1626,7 @@ MonoBehaviour:
     sfxId: 0
     picture: {fileID: 0}
     events: []
-  - content: '... Please, follow me to my lab. '
+  - content: '...Please, follow me to my lab. '
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -1359,21 +1634,20 @@ MonoBehaviour:
     - rid: 1894806212798054529
     - rid: 1894806212798054530
   - content: 
-    speaker: {fileID: 0}
+    speaker: {fileID: 11400000, guid: 4fef3aeb65460fd498ab9efe9bac8625, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 1894806212798054531
     - rid: 1894806212798054532
-    - rid: 1894806212798054533
-    - rid: 1894806212798054534
-    - rid: 1894806212798054537
   blackDialogue:
   - content: There was an incident years ago.
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 8385543117129122123
+    - rid: 8385543117129122124
   - content: 'The first incursion into the Tundra, a scouting mission. '
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
@@ -1390,28 +1664,22 @@ MonoBehaviour:
     picture: {fileID: 0}
     events: []
   labDialogue:
-  - content: 'These tanks... Are these creatures... or people? '
-    speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-    sfxId: 0
-    picture: {fileID: 0}
-    events:
-    - rid: 1894806212798054558
-    - rid: 1894806212798054559
-    - rid: 1894806212798054564
-    - rid: 1894806212798054565
-    - rid: 1894806212798054561
-    - rid: 1894806212798054562
   - content: "These were the scouts rescued from the mission. But, perhaps the answer
       to your question is not as clear as you\u2019d think."
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
-    - rid: 1894806212798054576
     - rid: 1894806212798054577
-    - rid: 1014197489180082240
-    - rid: 1014197489180082238
+    - rid: 8385543117129122114
     - rid: 1014197489180082239
+    - rid: 8385543117129122113
+    - rid: 1014197489180082240
+    - rid: 8385543117129122117
+    - rid: 8385543117129122118
+    - rid: 8385543117129122119
+    - rid: 8385543117129122116
+    - rid: 8385543117129122121
   - content: Are you familiar with the theory of Harmonics?
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
@@ -1425,21 +1693,31 @@ MonoBehaviour:
     events:
     - rid: 1894806212798054580
     - rid: 1894806212798054579
-  - content: Correct, after infection, the Waste slowly increases the frequency of
-      the creature. Issues typically arise as the body falls into dissonance.
+  - content: 'Correct. After infection, the Waste slowly increases the frequency
+      and thus complexity of the creature. '
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 1894806212798054581
     - rid: 1894806212798054582
-  - content: But if the host survives... the frequencies eventually stabilizes. It
-      reharmonizes.
+  - content: 'Typically, this causes the body to drift into dissonance making it
+      more difficult to survive.
+
+'
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 1894806212798054581
+    - rid: 1894806212798054582
+  - content: But if the host survives, the Frequencies may eventually reharmonize.
+      Becoming stable again.
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events: []
-  - content: 'Like octaves on a scale, frequencies become stable at specific intervals. '
+  - content: 'Like octaves on a scale, Frequencies become stable at specific intervals. '
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -1462,7 +1740,7 @@ MonoBehaviour:
     sfxId: 0
     picture: {fileID: 0}
     events: []
-  - content: 'But that was deemed impossible! Our Frequency timbre is too complex
+  - content: 'But that was deemed impossible! Our Frequency Timbre is too complex
       to tune and Amplitudes too low to sustain any transformations.
 
 '
@@ -1477,8 +1755,7 @@ MonoBehaviour:
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events:
-    - rid: 1894806212798054588
+    events: []
   - content: Correct. Under normal circumstances, that would be the outcome. But
       the key component is <i>time</i>.
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
@@ -1500,12 +1777,11 @@ MonoBehaviour:
     events:
     - rid: 1894806212798054592
     - rid: 1894806212798054593
-  - content: "And that\u2019s what happened to these Scouts."
+  - content: "And that\u2019s what happened to these scouts."
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events:
-    - rid: 1894806212798054594
+    events: []
   - content: Yes, I saw it then, a brief, unstable glimpse of a human touching the
       Second Harmonic.
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
@@ -1514,21 +1790,19 @@ MonoBehaviour:
     events:
     - rid: 1894806212798054595
     - rid: 1894806212798054596
-  - content: Their frequencies however were untuned, and could not remain in a stable
-      state.
+  - content: However, they were untuned, and could not remain in a stable state.
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 1894806212798054597
-  - content: They lashed out against the rescue team, their power overwhelming. It
-      was a slaughter.
+  - content: 'They lashed out against the rescue team, and we had to evacuate. '
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events: []
-  - content: So you <i>did</i> know. You knew exactly what could happen, and you
-      let us go in.
+  - content: So you <i>did</i> know. You were there. You knew exactly what could
+      happen, and you let us go in.
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -1569,8 +1843,8 @@ MonoBehaviour:
     sfxId: 0
     picture: {fileID: 0}
     events: []
-  - content: 'Our only chance as a species is to progress, to evolve. To move on
-      and stop focusing on how to turn things back to the way they once were. '
+  - content: 'Our only chance as a species is to progress, to evolve. To stop focusing
+      on how to turn things back to the way they once were. '
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -1587,8 +1861,8 @@ MonoBehaviour:
     sfxId: 0
     picture: {fileID: 0}
     events: []
-  - content: And your glove... it was a statistical anomaly for it to fail as it
-      did.
+  - content: And your glove... it was a statistical anomaly for it to be subverted
+      the way it was.
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -1599,7 +1873,7 @@ MonoBehaviour:
     picture: {fileID: 0}
     events:
     - rid: 1894806212798054610
-    - rid: 1894806212798054611
+    - rid: 8385543117129122125
   - content: 'But why tell me all this then? What stops me from exposing this research
       now?  '
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
@@ -1618,9 +1892,7 @@ MonoBehaviour:
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events:
-    - rid: 1894806212798054615
-    - rid: 1894806212798054616
+    events: []
   - content: "Don\u2019t you? This is the fate that awaits Ives. Life in a tank."
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
@@ -1645,7 +1917,6 @@ MonoBehaviour:
     sfxId: 0
     picture: {fileID: 0}
     events:
-    - rid: 1894806212798054619
     - rid: 1894806212798054620
   - content: What do you want?
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
@@ -1671,8 +1942,7 @@ MonoBehaviour:
     sfxId: 0
     picture: {fileID: 0}
     events:
-    - rid: 1894806212798054625
-    - rid: 1894806212798054626
+    - rid: 8385543117129122126
   - content: I want to save her.
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     sfxId: 0
@@ -1700,7 +1970,7 @@ MonoBehaviour:
     - rid: 1894806212798054630
     - rid: 1894806212798054631
   - content: "Then I continue alone. And Ives\u2019 time... runs out. Think it through.
-      We have some time. "
+      Together, we have some time. "
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -1746,9 +2016,7 @@ MonoBehaviour:
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events:
-    - rid: 1894806212798054639
-    - rid: 1894806212798054640
+    events: []
   - content: '... '
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
@@ -1776,30 +2044,28 @@ MonoBehaviour:
     picture: {fileID: 0}
     events:
     - rid: 1894806212798054644
-  labBg: {fileID: 107732013}
+  labBg: {fileID: 1769104896}
   blackFadeHandler: {fileID: 1006889385}
   labFadeHandler: {fileID: 107732015}
+  labForegroundFadeHandler: {fileID: 238060763}
+  scrim: {fileID: 68391727}
+  officeBuzz: {fileID: 8300000, guid: c8bd862a85390334a8169165a3e0a649, type: 3}
+  footstepLoop: {fileID: 8300000, guid: 911e8527aa8b7f84fa1d3d80b169b4d5, type: 3}
   references:
     version: 2
     RefIds:
-    - rid: 1014197489180082238
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-        action: 50
-        duration: 0
     - rid: 1014197489180082239
       type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
         action: 30
-        duration: 1
+        duration: 0
     - rid: 1014197489180082240
       type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
         action: 60
-        duration: 0
+        duration: 1
     - rid: 1894806212798054483
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
@@ -1875,15 +2141,6 @@ MonoBehaviour:
       data:
         actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
         sprite: {fileID: 5716319594728238710, guid: 30bd0e68e238a2746ac06e8f9527da16, type: 3}
-    - rid: 1894806212798054504
-      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-    - rid: 1894806212798054505
-      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-        sprite: {fileID: 21300000, guid: f2ed6f852c9c1594590eea28f98518b3, type: 3}
     - rid: 1894806212798054506
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
@@ -1902,7 +2159,7 @@ MonoBehaviour:
       type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-        sprite: {fileID: 21300000, guid: db44253f429a20c419e48d0a34881773, type: 3}
+        sprite: {fileID: 21300000, guid: f2ed6f852c9c1594590eea28f98518b3, type: 3}
     - rid: 1894806212798054510
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
@@ -1911,12 +2168,7 @@ MonoBehaviour:
       type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-        sprite: {fileID: 21300000, guid: f2ed6f852c9c1594590eea28f98518b3, type: 3}
-    - rid: 1894806212798054512
-      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-        sprite: {fileID: 21300000, guid: 2c87828110c96b641b4334f1af609d2c, type: 3}
+        sprite: {fileID: 21300000, guid: 10021b476392d2a4ba0605b46761a47f, type: 3}
     - rid: 1894806212798054520
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
@@ -1954,7 +2206,7 @@ MonoBehaviour:
       type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-        sprite: {fileID: 21300000, guid: 657f6fc9a6bebe642b2b933432af3e8b, type: 3}
+        sprite: {fileID: 21300000, guid: 4fc4d182a0b28f844abe75dbc03b25d7, type: 3}
     - rid: 1894806212798054529
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
@@ -1975,60 +2227,7 @@ MonoBehaviour:
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
         action: 50
-        duration: 1
-    - rid: 1894806212798054533
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-        action: 70
-        duration: 1
-    - rid: 1894806212798054534
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-        action: 70
-        duration: 1
-    - rid: 1894806212798054537
-      type: {class: AutoAdvanceAfter, ns: DialogueScripts, asm: MainGame}
-      data:
-        Time: 1
-    - rid: 1894806212798054558
-      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-    - rid: 1894806212798054559
-      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-        sprite: {fileID: 21300000, guid: 2c87828110c96b641b4334f1af609d2c, type: 3}
-    - rid: 1894806212798054561
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-        action: 10
-        duration: 1
-    - rid: 1894806212798054562
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-        action: 60
-        duration: 0
-    - rid: 1894806212798054564
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-        action: 40
-        duration: 0
-    - rid: 1894806212798054565
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-        action: 90
-        duration: 0
-    - rid: 1894806212798054576
-      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        duration: 1.5
     - rid: 1894806212798054577
       type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
@@ -2043,7 +2242,7 @@ MonoBehaviour:
       type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-        sprite: {fileID: 21300000, guid: 2c87828110c96b641b4334f1af609d2c, type: 3}
+        sprite: {fileID: 21300000, guid: f2ed6f852c9c1594590eea28f98518b3, type: 3}
     - rid: 1894806212798054580
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
@@ -2074,12 +2273,7 @@ MonoBehaviour:
       type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-        sprite: {fileID: 21300000, guid: db44253f429a20c419e48d0a34881773, type: 3}
-    - rid: 1894806212798054588
-      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-        sprite: {fileID: 21300000, guid: 2c87828110c96b641b4334f1af609d2c, type: 3}
+        sprite: {fileID: 21300000, guid: 10021b476392d2a4ba0605b46761a47f, type: 3}
     - rid: 1894806212798054589
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
@@ -2097,12 +2291,7 @@ MonoBehaviour:
       type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-        sprite: {fileID: 21300000, guid: 2c87828110c96b641b4334f1af609d2c, type: 3}
-    - rid: 1894806212798054594
-      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-        sprite: {fileID: 21300000, guid: 2c87828110c96b641b4334f1af609d2c, type: 3}
+        sprite: {fileID: 21300000, guid: 4fc4d182a0b28f844abe75dbc03b25d7, type: 3}
     - rid: 1894806212798054595
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
@@ -2125,7 +2314,7 @@ MonoBehaviour:
       type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-        sprite: {fileID: 21300000, guid: 657f6fc9a6bebe642b2b933432af3e8b, type: 3}
+        sprite: {fileID: 21300000, guid: 552db6e11cdec5b4090c499f41fec681, type: 3}
     - rid: 1894806212798054600
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
@@ -2143,7 +2332,7 @@ MonoBehaviour:
       type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-        sprite: {fileID: 21300000, guid: 657f6fc9a6bebe642b2b933432af3e8b, type: 3}
+        sprite: {fileID: 21300000, guid: 4fc4d182a0b28f844abe75dbc03b25d7, type: 3}
     - rid: 1894806212798054604
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
@@ -2162,16 +2351,11 @@ MonoBehaviour:
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-    - rid: 1894806212798054611
-      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-        sprite: {fileID: 21300000, guid: f2ed6f852c9c1594590eea28f98518b3, type: 3}
     - rid: 1894806212798054612
       type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-        sprite: {fileID: 21300000, guid: 2c87828110c96b641b4334f1af609d2c, type: 3}
+        sprite: {fileID: 21300000, guid: 552db6e11cdec5b4090c499f41fec681, type: 3}
     - rid: 1894806212798054613
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
@@ -2181,15 +2365,6 @@ MonoBehaviour:
       data:
         actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
         sprite: {fileID: 5716319594728238710, guid: 30bd0e68e238a2746ac06e8f9527da16, type: 3}
-    - rid: 1894806212798054615
-      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-    - rid: 1894806212798054616
-      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-        sprite: {fileID: 21300000, guid: 657f6fc9a6bebe642b2b933432af3e8b, type: 3}
     - rid: 1894806212798054617
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
@@ -2199,20 +2374,16 @@ MonoBehaviour:
       data:
         actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
         sprite: {fileID: 5716319594728238710, guid: 30bd0e68e238a2746ac06e8f9527da16, type: 3}
-    - rid: 1894806212798054619
-      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     - rid: 1894806212798054620
       type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-        sprite: {fileID: 21300000, guid: 657f6fc9a6bebe642b2b933432af3e8b, type: 3}
+        sprite: {fileID: 21300000, guid: 66ab213980ae05847a3d7c06b04a340f, type: 3}
     - rid: 1894806212798054621
       type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-        sprite: {fileID: 21300000, guid: 2c87828110c96b641b4334f1af609d2c, type: 3}
+        sprite: {fileID: 21300000, guid: 4fc4d182a0b28f844abe75dbc03b25d7, type: 3}
     - rid: 1894806212798054622
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
@@ -2227,20 +2398,11 @@ MonoBehaviour:
       data:
         actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
         sprite: {fileID: 5716319594728238710, guid: 30bd0e68e238a2746ac06e8f9527da16, type: 3}
-    - rid: 1894806212798054625
-      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-    - rid: 1894806212798054626
-      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-        sprite: {fileID: 21300000, guid: 2c87828110c96b641b4334f1af609d2c, type: 3}
     - rid: 1894806212798054627
       type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-        sprite: {fileID: 21300000, guid: 2c87828110c96b641b4334f1af609d2c, type: 3}
+        sprite: {fileID: 21300000, guid: 552db6e11cdec5b4090c499f41fec681, type: 3}
     - rid: 1894806212798054628
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
@@ -2258,7 +2420,7 @@ MonoBehaviour:
       type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-        sprite: {fileID: 21300000, guid: 2c87828110c96b641b4334f1af609d2c, type: 3}
+        sprite: {fileID: 21300000, guid: 4fc4d182a0b28f844abe75dbc03b25d7, type: 3}
     - rid: 1894806212798054632
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
@@ -2280,7 +2442,7 @@ MonoBehaviour:
       type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-        sprite: {fileID: 21300000, guid: 2c87828110c96b641b4334f1af609d2c, type: 3}
+        sprite: {fileID: 21300000, guid: 10021b476392d2a4ba0605b46761a47f, type: 3}
     - rid: 1894806212798054637
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
@@ -2298,7 +2460,7 @@ MonoBehaviour:
       type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-        sprite: {fileID: 21300000, guid: 657f6fc9a6bebe642b2b933432af3e8b, type: 3}
+        sprite: {fileID: 21300000, guid: 552db6e11cdec5b4090c499f41fec681, type: 3}
     - rid: 1894806212798054641
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
@@ -2318,6 +2480,69 @@ MonoBehaviour:
       data:
         actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
         sprite: {fileID: 5716319594728238710, guid: 30bd0e68e238a2746ac06e8f9527da16, type: 3}
+    - rid: 8385543117129122113
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        action: 100
+        duration: 0
+    - rid: 8385543117129122114
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        action: 70
+        duration: 0
+    - rid: 8385543117129122116
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+        action: 60
+        duration: 1
+    - rid: 8385543117129122117
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+        action: 10
+        duration: 0
+    - rid: 8385543117129122118
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+        action: 90
+        duration: 0
+    - rid: 8385543117129122119
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+        action: 70
+        duration: 0
+    - rid: 8385543117129122121
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+        sprite: {fileID: 21300000, guid: 10021b476392d2a4ba0605b46761a47f, type: 3}
+    - rid: 8385543117129122123
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+        action: 70
+        duration: 0
+    - rid: 8385543117129122124
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        action: 70
+        duration: 0
+    - rid: 8385543117129122125
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+        sprite: {fileID: 21300000, guid: 66ab213980ae05847a3d7c06b04a340f, type: 3}
+    - rid: 8385543117129122126
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
+        sprite: {fileID: 21300000, guid: 66ab213980ae05847a3d7c06b04a340f, type: 3}
 --- !u!4 &1559697842
 Transform:
   m_ObjectHideFlags: 0
@@ -2468,7 +2693,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1769104897
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2482,6 +2707,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 107732012}
+  - {fileID: 238060762}
   m_Father: {fileID: 983621105}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2857,9 +3083,9 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1525248176}
+  - {fileID: 1559697842}
   - {fileID: 983621105}
   - {fileID: 638988698}
   - {fileID: 2011333043}
   - {fileID: 1312421352}
   - {fileID: 418624938}
-  - {fileID: 1559697842}
