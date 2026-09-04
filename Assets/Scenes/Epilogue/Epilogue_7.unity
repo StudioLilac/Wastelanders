@@ -1612,218 +1612,11 @@ MonoBehaviour:
   reversedCaveBackground:
   - {fileID: 922788333}
   dynamicCamera: {fileID: 962921368}
-  preFightDialogue:
-  - content: Jackie enters a cavern, large rocks and debris piled high around her.
-    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
-    sfxId: 501
-    picture: {fileID: 0}
-    events:
-    - rid: 6522887042225930314
-    - rid: 6522887042225930319
-    - rid: 6522887042225930318
-    - rid: 6522887042225930316
-    - rid: 6522887042225930309
-  - content: The morning sun leaks through the cracks in the walls.
-    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
-    sfxId: 0
-    picture: {fileID: 0}
-    events: []
-  - content: She stops to gather her bearings, making sure she takes the correct
-      path among the many that lay in front of her.
-    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
-    sfxId: 0
-    picture: {fileID: 0}
-    events: []
-  - content: Aside from some mechanical blips, only the steady, echoing drips of
-      water break the silence.
-    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
-    sfxId: 0
-    picture: {fileID: 0}
-    events: []
-  - content: 'Suddenly, Jackie hears a wet, heavy breath. The rocks around her begin
-      to shift. '
-    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
-    sfxId: 0
-    picture: {fileID: 0}
-    events: []
-  defaultBackgroundDialogue:
-  - content: 'A guttural roar echoes throughout the cavern, clawing at the walls
-      as if to bring them down. '
-    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
-    sfxId: 511
-    picture: {fileID: 0}
-    events: []
-  - content: Crap!
-    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-    sfxId: 0
-    picture: {fileID: 0}
-    events:
-    - rid: 6522887042225930310
-    - rid: 6522887042225930311
-  - content: 'A massive, lizard-like creature pounces from atop a mound.
-
-'
-    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
-    sfxId: 0
-    picture: {fileID: 0}
-    events:
-    - rid: 6522887042225930320
-  - content: Brace!
-    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-    sfxId: 0
-    picture: {fileID: 0}
-    events:
-    - rid: 6522887042225930321
-    - rid: 6522887042225930322
-  - content: Metal clashes against bone. Jackie is thrown, slamming hard against
-      the stone wall.
-    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
-    sfxId: 512
-    picture: {fileID: 0}
-    events:
-    - rid: 6522887042225930323
-  - content: Ugh!
-    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-    sfxId: 0
-    picture: {fileID: 0}
-    events:
-    - rid: 6522887070328291398
-  - content: "Too heavy. Can\u2019t... Can\u2019t take it head on."
-    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-    sfxId: 0
-    picture: {fileID: 0}
-    events:
-    - rid: 6522887070328291399
-  - content: "Wait\u2026 it still has its injuries from when we fought it. I still
-      have a chance."
-    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-    sfxId: 0
-    picture: {fileID: 0}
-    events:
-    - rid: 6522887070328291400
-  - content: "...Okay. Calm. What did Ives say about fighting large enemies? \u2019Don\u2019t
-      fight its strength...\u2019"
-    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-    sfxId: 0
-    picture: {fileID: 0}
-    events: []
-  - content: The creature growls, swiping with claws like scythes.
-    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
-    sfxId: 0
-    picture: {fileID: 0}
-    events: []
-  - content: "Jackie tries to move out of the way, but she\u2019s not fast enough."
-    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
-    sfxId: 0
-    picture: {fileID: 0}
-    events: []
-  - content: ACK! My leg...
-    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-    sfxId: 0
-    picture: {fileID: 0}
-    events:
-    - rid: 6522887070328291401
-  - content: Its claws catch in the cave wall, the low ceiling limiting its reach.
-    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
-    sfxId: 0
-    picture: {fileID: 0}
-    events: []
-  - content: "The cave... it\u2019s too narrow for it!"
-    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-    sfxId: 0
-    picture: {fileID: 0}
-    events:
-    - rid: 6522887070328291402
-  - content: "\u2019Don\u2019t fight its strength... Fight its shape.\u2019 Right.
-      I just need to time this."
-    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-    sfxId: 0
-    picture: {fileID: 0}
-    events:
-    - rid: 6522887070328291403
-  - content: The beast lunges, jaws wide, filling the narrow passage.
-    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
-    sfxId: 0
-    picture: {fileID: 0}
-    events: []
-  - content: NOW!
-    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-    sfxId: 0
-    picture: {fileID: 0}
-    events:
-    - rid: 6522887070328291404
-  - content: "She slides low, the creature\u2019s momentum carrying it past her."
-    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
-    sfxId: 0
-    picture: {fileID: 0}
-    events: []
-  - content: A thunderous crash as its skull meets solid rock.
-    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
-    sfxId: 514
-    picture: {fileID: 0}
-    events: []
-  - content: Behind you!
-    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-    sfxId: 0
-    picture: {fileID: 0}
-    events:
-    - rid: 6522887070328291405
-  - content: Jackie springs up with her good leg, and drives her staff forward with
-      all her weight at the neck of the dazed creature.
-    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
-    sfxId: 0
-    picture: {fileID: 0}
-    events: []
-  - content: The beast convulses, then collapses, its massive weight shaking the
-      cavern floor.
-    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
-    sfxId: 515
-    picture: {fileID: 0}
-    events:
-    - rid: 6522887070328291407
-  deadCreatureDialogue:
-  - content: Jackie leans on her staff, her whole body shaking.
-    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
-    sfxId: 0
-    picture: {fileID: 0}
-    events: []
-  - content: "Blood. That\u2019s... that\u2019s not good."
-    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-    sfxId: 0
-    picture: {fileID: 0}
-    events:
-    - rid: 6522887070328291411
-    - rid: 6522887070328291414
-  - content: She takes a step and her leg buckles.
-    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
-    sfxId: 0
-    picture: {fileID: 0}
-    events: []
-  - content: I gotta... gotta make it back...
-    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-    sfxId: 0
-    picture: {fileID: 0}
-    events:
-    - rid: 6522887070328291416
-  - content: The dark edges of the cavern begin to close in as her vision tunnels.
-    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
-    sfxId: 0
-    picture: {fileID: 0}
-    events: []
-  blackingOut1:
-  - content: "Keep... going\u2026"
-    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-    sfxId: 0
-    picture: {fileID: 0}
-    events:
-    - rid: 6522887070328291418
-  blackingOut2:
-  - content: The cold stone floor rushes up to meet her.
-    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
-    sfxId: 0
-    picture: {fileID: 0}
-    events:
-    - rid: 6522887070328291419
+  preFightDialogue: []
+  defaultBackgroundDialogue: []
+  deadCreatureDialogue: []
+  blackingOut1: []
+  blackingOut2: []
   bonePopping:
   - content: ACK! Ow... ow... ow..
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
@@ -1944,13 +1737,27 @@ MonoBehaviour:
     picture: {fileID: 0}
     events:
     - rid: 6522887070328291445
-  - content: "I\u2019m serious! Maybe you just haven\u2019t seen it."
+  - content: "I\u2019m serious! I've got a tracker pointing me right to it. Maybe
+      you just haven\u2019t seen it."
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 6522887070328291446
-  - content: Highly unlikely. But fine. Why are you chasing this amphibian?
+  - content: 'So that''s the incessant beeping. Hell of a build, this glove thing
+      is. '
+    speaker: {fileID: 11400000, guid: a5de3fd0a5c7a8a42ad635445ff9a378, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  - content: "Whoever made it should\u2019ve picked a less irritating tone though.
+      Tracked me right to you, too. \r\n"
+    speaker: {fileID: 11400000, guid: a5de3fd0a5c7a8a42ad635445ff9a378, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  - content: But fine, let's say this amphibian exists. Why are you risking your
+      skin for it?
     speaker: {fileID: 11400000, guid: a5de3fd0a5c7a8a42ad635445ff9a378, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -1993,13 +1800,14 @@ MonoBehaviour:
     picture: {fileID: 0}
     events:
     - rid: 6522887070328291453
-  - content: Stay here so I can get a transport for you.
+  - content: Stay here. I can get a transport for you.
     speaker: {fileID: 11400000, guid: a5de3fd0a5c7a8a42ad635445ff9a378, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 6522887070328291454
-  - content: "If I can\u2019t find you, you\u2019ll bleed out. Got it?"
+  - content: "And I mean it. If I can\u2019t find you, you\u2019ll bleed out. Got
+      it?"
     speaker: {fileID: 11400000, guid: a5de3fd0a5c7a8a42ad635445ff9a378, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -2009,26 +1817,22 @@ MonoBehaviour:
     speaker: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events:
-    - rid: 6522887070328291457
-    - rid: 6522887070328291458
-    - rid: 6522887070328291460
-    - rid: 6522887070328291461
+    events: []
   - content: "\u2026 Jackie. Thanks."
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events:
-    - rid: 6522887070328291464
-    - rid: 6522887070328291465
+    events: []
   kadeAndOthersDialogue:
   - content: Hey, Captain. Need you for a minute.
     speaker: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
     sfxId: 503
     picture: {fileID: 0}
     events:
-    - rid: 6522887070328291466
     - rid: 6522887070328291467
+    - rid: 3492363892074217534
+    - rid: 3492363892074217535
+    - rid: 3492363892074217536
   - content: "*sigh* What\u2019s up now, Kay? When you call me Captain, I\u2019m
       afraid it\u2019s always trouble."
     speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
@@ -2036,8 +1840,9 @@ MonoBehaviour:
     picture: {fileID: 0}
     events:
     - rid: 6522887070328291470
-    - rid: 6522887070328291468
+    - rid: 3492363892074217537
     - rid: 6522887070328291469
+    - rid: 6522887070328291468
   - content: "It\u2019s a rat. Slipped passed our scouts, near Ol\u2019 One-Eye\u2019s
       nest."
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
@@ -2049,7 +1854,8 @@ MonoBehaviour:
     speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 3492363892074217539
   - content: She was dying, Rocky. Bleeding out. So I stepped in.
     speaker: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
     sfxId: 0
@@ -2060,7 +1866,8 @@ MonoBehaviour:
     speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 3492363892074217540
   - content: Your actions have consequences on every single life in this camp.
     speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
     sfxId: 0
@@ -2083,33 +1890,64 @@ MonoBehaviour:
     speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events: []
-  - content: Think of the big picture, Kade. Stop focusing on small problems right
-      in front of you.
+    events:
+    - rid: 3492363892074217541
+  - content: Think of the big picture, Kade. Stop fixating on the small problems
+      right in front of you.
     speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events: []
-  - content: "But those \u2018small\u2019 problems are the only ones that we can
-      change the outcomes of."
+  - content: "Then tell me. Say it\u2019s you who hears a racket by Ol\u2019 One
+      eye\u2019s nest and finds a girl bleeding out in the dark. "
     speaker: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 6522887070328291474
-  - content: That "big picture" you speak of is made of the small choices we make
-      right now, Rocky.
-    speaker: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
-    sfxId: 0
-    picture: {fileID: 0}
-    events:
-    - rid: 6522887070328291475
-  - content: And in the "now," a girl was bleeding to death. And I chose to save
-      a life.
+  - content: 'What does that "big picture" tell you then? '
     speaker: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events: []
+  - content: "To not take risks on someone else\u2019s behalf. "
+    speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 3492363892074217544
+  - content: "...Hah. How noble. That risk isn\u2019t yours to refuse either."
+    speaker: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  - content: ...
+    speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 3492363892074217545
+  - content: "If your \"big picture\" can\u2019t hold down to the smallest problem,
+      it ain\u2019t sound."
+    speaker: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 3492363892074217546
+  - content: Cuz those outcomes are the only ones that you can actually change right
+      now.
+    speaker: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 3492363892074217547
+  - content: "And in the \u2018now\u2019, a girl was bleeding to death. So I chose
+      to save a life."
+    speaker: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 3492363892074217547
   - content: ...
     speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
     sfxId: 0
@@ -2121,11 +1959,13 @@ MonoBehaviour:
     picture: {fileID: 0}
     events:
     - rid: 6522887070328291476
-  - content: '*scoffs* Intel? What intel could possibly be worth this?'
+  - content: Hah, intel? What intel could she have that we don't, be possibly worth
+      this?
     speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 3492363892074217548
   - content: "The NITES have been quiet. We need to figure out what they\u2019re
       up to so we can prepare for them."
     speaker: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
@@ -2149,7 +1989,8 @@ MonoBehaviour:
     speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 3492363892074217549
   - content: "Exactly. She\u2019s a NITE. So she has no idea what that means. But
       we do."
     speaker: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
@@ -2168,7 +2009,7 @@ MonoBehaviour:
     picture: {fileID: 0}
     events: []
   - content: "What if it\u2019s a lie, some trick to make us expose ourselves? Scouts
-      report that *that* Doctor is back on site."
+      report that <i>that</i> Doctor is back on site."
     speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -2213,13 +2054,13 @@ MonoBehaviour:
     speaker: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events:
-    - rid: 6522887070328291483
+    events: []
   - content: ...And then we silence her.
     speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 3492363892074217550
   - content: "And hope the rescue party doesn\u2019t come across this side of the
       mountains."
     speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
@@ -2232,20 +2073,26 @@ MonoBehaviour:
     picture: {fileID: 0}
     events:
     - rid: 6522887070328291484
-  - content: You can worry about that... later.
+  - content: Tsk fine. Then we'll put it to a vote. And worry about that later.
     speaker: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
-    - rid: 6522887070328291485
+    - rid: 3492363892074217551
   - content: Kade. I already have enough things to worry about.
     speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 3492363892074217538
   - content: "I\u2019ll get you your team. But I\u2019m coming with. I want to see
       this \"rat\" who slipped past the entire scout line for myself."
     speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  - content: 
+    speaker: {fileID: 11400000, guid: 4fef3aeb65460fd498ab9efe9bac8625, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
@@ -2259,6 +2106,7 @@ MonoBehaviour:
     events:
     - rid: 6522887070328291488
     - rid: 6522887070328291489
+    - rid: 3492363892074217542
   - content: Huh... wuh...
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxId: 0
@@ -2276,13 +2124,15 @@ MonoBehaviour:
     speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 3492363892074217552
   - content: So, why are you really here? All this way into this god-forsaken mountain,
       all alone.
     speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 3492363892074217553
   - content: "I... I\u2019m here to find someone. Or... what happened to them."
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxId: 0
@@ -2305,7 +2155,8 @@ MonoBehaviour:
     speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 3492363892074217543
   - content: Ailin.
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxId: 0
@@ -2317,7 +2168,7 @@ MonoBehaviour:
     sfxId: 0
     picture: {fileID: 0}
     events: []
-  - content: "...My god. You\u2019re Jackie."
+  - content: "...You\u2019re Jackie."
     speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -2325,137 +2176,115 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 6522887042225930309
-      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
-    - rid: 6522887042225930310
-      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-    - rid: 6522887042225930311
-      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        sprite: {fileID: 21300000, guid: e37d4fbf07c214c868939546f702fa2b, type: 3}
-    - rid: 6522887042225930314
-      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        sprite: {fileID: 21300000, guid: 422f3cda08073664b8a46361afe442fb, type: 3}
-    - rid: 6522887042225930316
+    - rid: 3492363892074217534
       type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        action: 10
-        duration: 1
-    - rid: 6522887042225930318
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        action: 60
-        duration: 1
-    - rid: 6522887042225930319
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        actor: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
         action: 40
         duration: 0
-    - rid: 6522887042225930320
-      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
-    - rid: 6522887042225930321
-      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-    - rid: 6522887042225930322
-      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        sprite: {fileID: 21300000, guid: e37d4fbf07c214c868939546f702fa2b, type: 3}
-    - rid: 6522887042225930323
-      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
-    - rid: 6522887070328291398
-      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        sprite: {fileID: 21300000, guid: e37d4fbf07c214c868939546f702fa2b, type: 3}
-    - rid: 6522887070328291399
-      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        sprite: {fileID: 21300000, guid: aac9fc02e2834124a82050279325d731, type: 3}
-    - rid: 6522887070328291400
-      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        sprite: {fileID: 21300000, guid: 422f3cda08073664b8a46361afe442fb, type: 3}
-    - rid: 6522887070328291401
-      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        sprite: {fileID: 21300000, guid: e37d4fbf07c214c868939546f702fa2b, type: 3}
-    - rid: 6522887070328291402
-      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        sprite: {fileID: 21300000, guid: 422f3cda08073664b8a46361afe442fb, type: 3}
-    - rid: 6522887070328291403
-      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        sprite: {fileID: 21300000, guid: 534aff9f6dfd6c544b0144954e8ef0b0, type: 3}
-    - rid: 6522887070328291404
-      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        sprite: {fileID: 21300000, guid: e37d4fbf07c214c868939546f702fa2b, type: 3}
-    - rid: 6522887070328291405
-      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        sprite: {fileID: 21300000, guid: 422f3cda08073664b8a46361afe442fb, type: 3}
-    - rid: 6522887070328291407
+    - rid: 3492363892074217535
       type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        action: 70
-        duration: 0.5
+        actor: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
+        action: 10
+        duration: 1
+    - rid: 3492363892074217536
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
+        action: 60
+        duration: 0
+    - rid: 3492363892074217537
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+        action: 50
+        duration: 0
+    - rid: 3492363892074217538
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+        sprite: {fileID: 21300000, guid: afa3bf069145346d59ce8932f4b50aad, type: 3}
+    - rid: 3492363892074217539
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+        sprite: {fileID: 21300000, guid: afa3bf069145346d59ce8932f4b50aad, type: 3}
+    - rid: 3492363892074217540
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+        sprite: {fileID: 21300000, guid: 701439697fac447e9becd89183c1ee61, type: 3}
+    - rid: 3492363892074217541
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+        sprite: {fileID: 21300000, guid: afa3bf069145346d59ce8932f4b50aad, type: 3}
+    - rid: 3492363892074217542
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+        sprite: {fileID: 21300000, guid: afa3bf069145346d59ce8932f4b50aad, type: 3}
+    - rid: 3492363892074217543
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+        sprite: {fileID: 21300000, guid: afa3bf069145346d59ce8932f4b50aad, type: 3}
+    - rid: 3492363892074217544
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+        sprite: {fileID: 21300000, guid: 701439697fac447e9becd89183c1ee61, type: 3}
+    - rid: 3492363892074217545
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+        sprite: {fileID: 21300000, guid: afa3bf069145346d59ce8932f4b50aad, type: 3}
+    - rid: 3492363892074217546
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
+        sprite: {fileID: 21300000, guid: 1ada4ec2c4a8c492ba5a849dcef573d5, type: 3}
+    - rid: 3492363892074217547
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
+        sprite: {fileID: 21300000, guid: f59357f40ad864c4198854512e290c52, type: 3}
+    - rid: 3492363892074217548
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+        sprite: {fileID: 21300000, guid: 701439697fac447e9becd89183c1ee61, type: 3}
+    - rid: 3492363892074217549
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+        sprite: {fileID: 21300000, guid: afa3bf069145346d59ce8932f4b50aad, type: 3}
+    - rid: 3492363892074217550
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+        sprite: {fileID: 21300000, guid: 701439697fac447e9becd89183c1ee61, type: 3}
+    - rid: 3492363892074217551
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
+        sprite: {fileID: 21300000, guid: f59357f40ad864c4198854512e290c52, type: 3}
+    - rid: 3492363892074217552
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+        sprite: {fileID: 21300000, guid: 701439697fac447e9becd89183c1ee61, type: 3}
+    - rid: 3492363892074217553
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+        sprite: {fileID: 21300000, guid: afa3bf069145346d59ce8932f4b50aad, type: 3}
     - rid: 6522887070328291408
       type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         sprite: {fileID: 21300000, guid: 422f3cda08073664b8a46361afe442fb, type: 3}
-    - rid: 6522887070328291411
-      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        sprite: {fileID: 21300000, guid: 770d4db9512d0574d8ee612067a1a3e2, type: 3}
-    - rid: 6522887070328291414
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        action: 60
-        duration: 1
-    - rid: 6522887070328291416
-      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        sprite: {fileID: 21300000, guid: aac9fc02e2834124a82050279325d731, type: 3}
-    - rid: 6522887070328291418
-      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        sprite: {fileID: 21300000, guid: aac9fc02e2834124a82050279325d731, type: 3}
-    - rid: 6522887070328291419
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        action: 70
-        duration: 1
     - rid: 6522887070328291422
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
@@ -2475,7 +2304,7 @@ MonoBehaviour:
       type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: a5de3fd0a5c7a8a42ad635445ff9a378, type: 2}
-        action: 30
+        action: 50
         duration: 0
     - rid: 6522887070328291427
       type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
@@ -2608,47 +2437,6 @@ MonoBehaviour:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
         action: 60
         duration: 1
-    - rid: 6522887070328291457
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: a5de3fd0a5c7a8a42ad635445ff9a378, type: 2}
-        action: 70
-        duration: 0
-    - rid: 6522887070328291458
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
-        action: 30
-        duration: 0
-    - rid: 6522887070328291460
-      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
-        sprite: {fileID: 21300000, guid: 1ada4ec2c4a8c492ba5a849dcef573d5, type: 3}
-    - rid: 6522887070328291461
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
-        action: 60
-        duration: 0
-    - rid: 6522887070328291464
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        action: 70
-        duration: 1
-    - rid: 6522887070328291465
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
-        action: 70
-        duration: 1
-    - rid: 6522887070328291466
-      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
-        action: 60
-        duration: 1
     - rid: 6522887070328291467
       type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
@@ -2658,14 +2446,14 @@ MonoBehaviour:
       type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
-        action: 10
+        action: 30
         duration: 1
     - rid: 6522887070328291469
       type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
         action: 60
-        duration: 1
+        duration: 0
     - rid: 6522887070328291470
       type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
@@ -2691,11 +2479,6 @@ MonoBehaviour:
       data:
         actor: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
         sprite: {fileID: 21300000, guid: f59357f40ad864c4198854512e290c52, type: 3}
-    - rid: 6522887070328291475
-      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
-        sprite: {fileID: 21300000, guid: 1ada4ec2c4a8c492ba5a849dcef573d5, type: 3}
     - rid: 6522887070328291476
       type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
@@ -2731,17 +2514,7 @@ MonoBehaviour:
       data:
         actor: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
         sprite: {fileID: 21300000, guid: 1ada4ec2c4a8c492ba5a849dcef573d5, type: 3}
-    - rid: 6522887070328291483
-      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
-        sprite: {fileID: 21300000, guid: 1ada4ec2c4a8c492ba5a849dcef573d5, type: 3}
     - rid: 6522887070328291484
-      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
-        sprite: {fileID: 21300000, guid: f59357f40ad864c4198854512e290c52, type: 3}
-    - rid: 6522887070328291485
       type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
@@ -2926,6 +2699,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1877674826}
   - component: {fileID: 1877674825}
+  - component: {fileID: 1877674827}
   m_Layer: 0
   m_Name: Blacked Out
   m_TagString: Untagged
@@ -2976,7 +2750,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 11
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
@@ -3003,6 +2777,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1877674827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1877674824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a6c2131294871b4499a5ce3cb16734e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 1877674825}
 --- !u!1 &2005357255
 GameObject:
   m_ObjectHideFlags: 0

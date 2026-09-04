@@ -20,10 +20,13 @@ public class AttentionSeeker : MonoBehaviour
         {
             attentionFlashRoutine = StartCoroutine(FlashAttentionRoutine());
         }
-        else if (!criteriaMet.IsMet() && attentionFlashRoutine != null)
+        else if (!criteriaMet.IsMet())
         {
-            StopCoroutine(attentionFlashRoutine);
-            attentionFlashRoutine = null;
+            if (attentionFlashRoutine != null)
+            {
+                StopCoroutine(attentionFlashRoutine);
+                attentionFlashRoutine = null;
+            }
             attentionObj.enabled = false;
         }
     }
