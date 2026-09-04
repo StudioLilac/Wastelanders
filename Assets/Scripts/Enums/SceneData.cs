@@ -37,8 +37,10 @@ public abstract class SceneData : Enum<SceneData>
     // Default values. Override per-scene if necessary.
     public virtual UIContext UIContextOnEntry => new UIContext.Dialogue();
 
-    public class SplashScreen : SceneData {
+    public class SplashScreen : SceneData
+    {
         public override string SceneName => "SplashScreen";
+
         public override SceneAudio GetAudio(AudioDatabase database) => SelectMainMenuMusic(database);
         
         public override MonoBehaviour[] ScenePrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
@@ -46,8 +48,9 @@ public abstract class SceneData : Enum<SceneData>
         
         public override UIContext UIContextOnEntry => new UIContext.None();
     }
-    
-    public class SplashScreenWebGL : SceneData {
+
+    public class SplashScreenWebGL : SceneData
+    {
         public override string SceneName => "SplashScreenWebGL";
         public override SceneAudio GetAudio(AudioDatabase database) => SelectMainMenuMusic(database);
         
@@ -172,6 +175,7 @@ public abstract class SceneData : Enum<SceneData>
         public override MonoBehaviour[] ScenePrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
             { prefabs.pauseMenuV2 };
     }
+
     
     public class PreBounty0 : SceneData {
         public override string SceneName => "PreBounty_0";
@@ -295,6 +299,25 @@ public abstract class SceneData : Enum<SceneData>
             prefabs.dialogueManager,
             prefabs.dialogueBoxV2
         };
+    }
+
+    public class Epilogue_10 : SceneData
+    {
+        public override string SceneName => "Epilogue_10";
+
+        public override SceneAudio GetAudio(AudioDatabase database) => database.Empty;
+
+        public override MonoBehaviour[] ScenePrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
+            { prefabs.combatFadeScreenManager, prefabs.combatManager, prefabs.battleQueue, prefabs.pauseMenuV2, prefabs.hudV2, prefabs.tooltip, prefabs.dialogueManager, prefabs.popupManager,  prefabs.gameOver, prefabs.battleIntro, prefabs.dialogueBoxV2, prefabs.arrowIndicatorManager  };
+    }
+    
+    public class IvesFightCombatScene : SceneData
+    {
+        public override string SceneName => "IvesFightCombatScene";
+        public override SceneAudio GetAudio(AudioDatabase database) => database.PrincessFrogBounty;
+
+        public override MonoBehaviour[] ScenePrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
+            { prefabs.combatFadeScreenManager, prefabs.combatManager, prefabs.battleQueue, prefabs.pauseMenuV2, prefabs.hudV2, prefabs.tooltip, prefabs.dialogueManager, prefabs.popupManager,  prefabs.gameOver, prefabs.battleIntro, prefabs.dialogueBoxV2, prefabs.arrowIndicatorManager };
     }
     
     public class FinalCutscene : SceneData
