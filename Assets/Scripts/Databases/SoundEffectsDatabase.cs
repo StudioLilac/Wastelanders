@@ -94,7 +94,8 @@ public enum SoundID
     VN_system_beep = 550,
     // Ep 9
     VN_whistle_vocal = 560,
-
+    // Ep 10
+    VN_Smoke_Release = 570,
     VN_BGM_suspense_drone = 580,
 }
 

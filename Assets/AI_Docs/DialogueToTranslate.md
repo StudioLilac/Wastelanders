@@ -1,81 +1,103 @@
-# Add dialogue to translate 
-Rocky (se): You want to know why? 
+Narration: As Jackie sits in silence, there is some commotion at the cave exit. Jay is back.
 
-Because you’re exactly like her.
+Jay (nu): Captain, I’ve got good news and bad.
 
-Jackie (ti): Her?
+Rocky (se): Let’s hear the good first.
 
+Jay (nu): Well, the team’s all down there, still alive and whole. 
 
-Rocky! I'm not like my Ma—
+Rocky (se): And the bad?
 
-Rocky (se): Listen, I’ve worked with your mother for a long time. 
+Jay (nu): It’s a Crystal field. It's freezing. And it’s crawling with Waste creatures. 
 
-The one thing you get used to hearing are assurances. That with her around, things would turn out alright.
+We're outnumbered. We’re already one to one with our own scouts, without counting the creatures. 
 
-But beneath the bravado was someone who would spend nights at the strategy table, hedging positions, preparing backup plans. 
+Rocky (se): Is there any way to isolate them? Get them out one by one?
 
-Because even she knew that no matter how strong she was, she could never truly guarantee that 
-everyone would make it home. 
+Jay (nu): Not likely. They're spread out, so getting to one might alert the others. 
 
-And so with those assurances, she always had something to prove. 
+Rocky (se): Then it all comes down to manpower... There’s gotta be a solution here.
 
-To prove that, perhaps <i>she</i>—could be the one thing you could count on. 
+Jay: ... 
 
-…It was noble, but the world doesn’t care. 
+Jay: ... If it’s a question of manpower. We do have an option. But you might not like it.
 
-When things got hairy, she’d order us to stay back so she could deal with it alone.
+Rocky: If it gets our guys out of the cold, I’ll like it fine. 
 
-We could only let her step in. Up until the day she didn’t step back out.
+Jay: The NITES. I’m sure they’ll be willing to lend us a hand. If not for us, for Jackie. 
 
-Rocky: And I am not about to be the one who lets Ailin’s daughter step into the dark to die.
+Rocky: What, but what if...
 
-Jackie: ...
+Rocky: No, you know what. We’ll put it to a vote.
 
-You think I don’t know her!?
+Narration: Rocky stands up and addresses the rest of the camp. Explaining the situation.  
 
-I know how she sugarcoated her missions by calling them ‘business trips’.
+Rocky: All in favour of contacting the NITES, say aye.
 
-I know how she’d promise to be back soon when there was no way of knowing.
+[“Fade to black”]
 
-I know how if she really truly wanted to be someone who could be counted on—m-maybe she should have just stayed the fuck home.
+[Chatter sfx fills the cave.]
 
-Rocky: ...
+Narration: Soon, the atmosphere lightens, as flickers of recognition turn to smiles in the cave. 
 
-Jackie: ...
+Ives (sm): So y’all need muscle eh? C’mere, I’ve got some for you.
 
-I’m not my Ma, Rocky.
+Rocky: Ives!? You’re here too.
 
-I’m not gonna stand here and say to your face that everything will be fine just because I’m coming along.
+Ives: Sure am, what’s up? The little bird didn’t say I’d be coming? 
 
-I don’t know if we’ll find the frog. I don’t know if your scouts are still alive. 
+Narration: Rocky, in a headlock, cranes his neck to give Jackie a curious look.
 
-I won’t even say that I’ll be safe. 
+Kade (int): Ives. You look terrible.
 
-The only thing I can say is that I’ll call out every fork. Whatever I see I’ll say it, and we’ll decide where to go together based on the readings. 
+Ives (sm): Hah, it’s nice to see you too, Kade.
 
-So if you would rather order the only person who knows anything to stay back...
+Kade (nu): Skin is graying. Pupils dilated. Tremors. You’re on high-grade amplitude suppressants.
 
-Because you’re afraid of what I might do.
+Ives (sm): Perceptive as always. 
 
-Won’t that make you like her instead?
+(nu) Guilty as charged. Got tangled up in a little Waste incident. 
 
-Rocky: ...
+Kade: You’re in great danger. Did any Crystals break near you on your way here? 
 
-Jackie: I’d know. It’s why I’ve got this limp. 
+Ives: A couple, but at a distance. I tried to avoid ‘em, but a scuffle is a scuffle. 
 
-Kade didn’t ask when she saved my life. 
+Kade: How did you feel?
 
-But I’m asking. 
+Ives: There was a bit of a flare up, but the Doc adjusted my dose and I’ve been fine since. 
 
-Rocky (se): …
+Kade (int): Get the adjustment wrong and the dose will either be worthless or kill you.
+ 
+Ives (sm): Good thing he’s an expert.
 
-Jay (nu): She's right, Cap. Delta knows the tunnels just as well as I do. 
+(nu) Hey, Doc! Front and center.
 
-Whatever happened up there, they sure didn’t get lost. 
+Dr. Weise (nu): ...
 
-We might be a little over our heads on this one. 
+Narration: Dr. Weise steps out from the shadows. His face is neutral and hands dug stiffly into the pockets of his lab coat.
 
-Rocky (se): ...Fine.
-But you stay in the center formation and navigate with Kade. Jay, you're on point with me.
-If I say retreat, we retreat. No heroics. Capiche?
-Jackie (nu): Capiche. 
+Dr. Weise (nu): Now’s hardly the time for acclaims, Commander.
+
+Narration: Kade freezes, her face growing pale. 
+
+Kade (int): ...You. Aleksander.
+
+Dr. Weise (th): Kade. 
+
+Kade (int): You’re alive. I... mourned you. 
+
+Dr. Weise: I did the same. 
+
+Kade: ... How far did you get? Your research to “go up”. 
+
+Dr. Weise: Nowhere. Over a decade, and nothing. 
+
+Kade: Then the slow way down was the only way there was.
+
+The ones who didn't make it... there was no faster way after all.
+
+Dr. Weise: ... 
+
+Narration: As Kade’s face softens, Jackie comes up beside her. 
+
+[Push Kade into the center, Jackie comes in from the right.] 
