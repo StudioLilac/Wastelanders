@@ -58,11 +58,11 @@ MonoBehaviour:
   - id: 17
     sprite: {fileID: 21300000, guid: 1b3241f349d62e84682b58beac0b94cb, type: 3}
   - id: 18
-    sprite: {fileID: 21300000, guid: 30bd0e68e238a2746ac06e8f9527da16, type: 3}
+    sprite: {fileID: 5716319594728238710, guid: 30bd0e68e238a2746ac06e8f9527da16, type: 3}
   - id: 19
-    sprite: {fileID: 21300000, guid: 7b946c12f8e9c9b49a06ee3348c11712, type: 3}
+    sprite: {fileID: -4505030949712079976, guid: 7b946c12f8e9c9b49a06ee3348c11712, type: 3}
   - id: 20
-    sprite: {fileID: 21300000, guid: 2da2e80130a351744801103b073bd661, type: 3}
+    sprite: {fileID: -6888621227103538543, guid: 2da2e80130a351744801103b073bd661, type: 3}
   - id: 30
     sprite: {fileID: 21300000, guid: f59357f40ad864c4198854512e290c52, type: 3}
   - id: 31

@@ -96,6 +96,8 @@ public enum SoundID
     VN_whistle_vocal = 560,
     // Ep 10
     VN_Smoke_Release = 570,
+    VN_Talk_Cheer = 571,
+    VN_Analogue_Horror = 572,
     VN_BGM_suspense_drone = 580,
 }
 
