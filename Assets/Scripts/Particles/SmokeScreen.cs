@@ -10,8 +10,6 @@ using UnityEngine.UI;
 ///   smoke.Deploy(canisterScreenPoint);   // canister lands, smoke rolls in
 ///   smoke.Dissipate();                   // smoke clears
 ///
-/// Both return a Coroutine, so from your VN sequencer you can do:
-///   yield return smoke.Deploy(point);
 /// </summary>
 [RequireComponent(typeof(Image))]
 public class SmokeScreenOverlay : MonoBehaviour

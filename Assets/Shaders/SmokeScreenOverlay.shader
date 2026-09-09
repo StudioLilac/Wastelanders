@@ -1,14 +1,9 @@
 // =====================================================================
-//  UI/Smoke Screen Overlay  -  procedural screen-space smoke for UGUI
-//  BUILT-IN RENDER PIPELINE
+//  UI/Smoke Screen Overlay  -  procedural screen-space smoke
 //
-//  Designed for a full-screen Image sitting on top of your VN UI.
-//  Nothing is sampled from the world: the density field is 3D value
-//  noise in UV space, animated continuously so it keeps rolling.
 //
-//  _Amount (0..1) drives the roll-in. It grows outward from _Origin,
-//  so you can spawn it wherever the canister lands on screen.
-//  Animate _Amount from script (see SmokeScreenOverlay.cs).
+//  _Amount (0..1) drives the roll-in. It grows outward from _Origin.
+//  Animate _Amount from script (SmokeScreenOverlay.cs).
 // =====================================================================
 Shader "UI/Smoke Screen Overlay"
 {
