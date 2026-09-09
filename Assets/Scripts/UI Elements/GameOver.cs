@@ -61,6 +61,10 @@ public class GameOver : MonoBehaviour
     {
         StartCoroutine(BeginFadeIn(dialogue));
     }
+    public void FadeInWithDialogue(DialogueAsCode dialogue)
+    {
+        StartCoroutine(BeginFadeIn(dialogue));
+    }
 
     private IEnumerator BeginFadeIn(DialogueEntry[] dialogue)
     {
