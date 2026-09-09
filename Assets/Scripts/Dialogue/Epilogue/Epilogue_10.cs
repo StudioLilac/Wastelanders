@@ -122,9 +122,9 @@ namespace Dialogue.Epilogue
             if (!GameStateManager.Instance.JumpToCombat && !jumpToCombat)
             {
                 ControllableAudioChannel backgroundWind = AudioManager.Instance.CreateChannel(tundraBg, AudioCategory.Music, level: 0f);
-                backgroundWind.Play();
                 ControllableAudioChannel ivesBlips = AudioManager.Instance.CreateChannel(ivesSignature, AudioCategory.Music, level: 0f);
-                ivesBlips.Play();
+                backgroundWind.Play(); ivesBlips.Play();
+                background1.SetActive(true); shaderBackground.SetActive(true);
                 { 
                     StartCoroutine(backgroundWind.FadeTo(0.3f, 1.5f));
                     yield return DialogueBoxV2.Instance.Play(Epilogue10Dialogue.Opening);
@@ -206,9 +206,9 @@ namespace Dialogue.Epilogue
                     yield return DialogueBoxV2.Instance.Play(Epilogue10Dialogue.Deduction(this, horrorAudio, horrorEffect));
                     StartCoroutine(campfireBackground.FadeTo(0f, 2f));
                     StartCoroutine(suspenseDrone.FadeTo(0f, 1.5f));
-
+                    StartCoroutine(horrorAudio.FadeTo(0f, 4f));
                 }
-
+            
                 yield return UIFadeScreenManager.Instance.FadeInDarkScreen(2f);
                 yield return new WaitForSeconds(0.5f);
                 AudioManager.Instance.FadeInBackgroundTrack(2f, tundraBg, true);
@@ -218,25 +218,30 @@ namespace Dialogue.Epilogue
                 ives.FaceLeft(); princess.FaceLeft();
                 yield return new WaitForSeconds(1.5f);
                 yield return UIFadeScreenManager.Instance.FadeInLightScreen(1.5f);
-                yield return DialogueBoxV2.Instance.Play(Epilogue10Dialogue.PreBattleText(horrorEffect));
-                StartCoroutine(jackie.MoveToPosition(new Vector3(2.75f, 0.4f, jackie.transform.position.z), 0f, 2f));
-
-                yield return new WaitForSeconds(2);
-                ives.AttackAnimation("IsPunching");
-                horrorEffect.Burst(0.5f, 0.5f);
-                AudioManager.Instance.PlaySFX(SoundID.CB_fist_hit);
-                yield return StartCoroutine(jackie.StaggerEntities(ives, jackie, 0.4f));
-                yield return new DialogueAsCode().Line(DialogueCharacter.Jackie, "Crap. Looks like it's come to this.").Play();
-                StartCoroutine(horrorAudio.FadeTo(0f, 1f));
-            } else {
+            }
+            else
+            {
                 ives.FaceLeft();
                 princess.FaceLeft();
                 background2.SetActive(false);
                 background1.SetActive(false);
+                shaderBackground.SetActive(false);
+                scrim.SetLightScreen();
                 purpleFlash.color = TRANSPARENT_PURPLE;
                 GameStateManager.Instance.JumpToCombat = false;
                 yield return UIFadeScreenManager.Instance.FadeInLightScreen(0.5f);
             }
+
+            yield return DialogueBoxV2.Instance.Play(Epilogue10Dialogue.PreBattleText(horrorEffect));
+            StartCoroutine(jackie.MoveToPosition(new Vector3(2.75f, 0.4f, jackie.transform.position.z), 0f, 10f));
+
+            yield return new WaitForSeconds(2);
+            ives.AttackAnimation("IsPunching");
+            horrorEffect.Burst(0.5f, 0.5f);
+            AudioManager.Instance.PlaySFX(SoundID.CB_fist_hit);
+            yield return StartCoroutine(jackie.StaggerEntities(ives, jackie, 0.4f));
+            yield return new DialogueAsCode().Line(DialogueCharacter.Jackie, "Crap. Looks like it's come to this.").Play();
+            
 
             new BattleIntroEvent(Get<ClashIntro>()).Invoke();
             
