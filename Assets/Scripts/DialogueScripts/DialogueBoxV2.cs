@@ -78,9 +78,7 @@ namespace DialogueScripts
             {
                 var currentBatch = _dialogueQueue.Peek();
 
-                boxLayout.gameObject.SetActive(true);
                 yield return RunDialogueRoutine(currentBatch.Entries);
-                boxLayout.gameObject.SetActive(false);
                 currentBatch.IsFinished = true;
 
                 _dialogueQueue.Dequeue();
@@ -91,6 +89,9 @@ namespace DialogueScripts
 
         private IEnumerator RunDialogueRoutine(DialogueEntry[] entries)
         {
+            // Don't flicker the box if there are no entries or if the only entry is an event
+            if (entries.Length == 0 || (entries.Length == 1 && SkipEntry(entries[0]))) yield break; 
+            boxLayout.gameObject.SetActive(true);
             foreach (var entry in entries)
             {
                 if (SkipEntry(entry)) continue;
@@ -101,6 +102,7 @@ namespace DialogueScripts
                 PlayTransitionSound(entry);
                 yield return null;
             }
+            boxLayout.gameObject.SetActive(false);
         }
 
         private bool SkipEntry(DialogueEntry entry)

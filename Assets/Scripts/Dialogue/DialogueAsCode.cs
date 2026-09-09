@@ -1,6 +1,9 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using DialogueScripts;
+using Steamworks;
+using UnityEngine;
 
 #nullable enable
 /// Builder for authoring dialogue in code instead of hand-wiring
@@ -16,15 +19,17 @@ public class DialogueAsCode
         this.actors = actors;
     }
 
+    public IEnumerator Play() => DialogueBoxV2.Instance.Play(this);
+
     /// A spoken line: with the given expression, optionally playing a sound effect.
-    public DialogueAsCode Line(DialogueCharacter speaker, string text, DialogueSprite expr = DialogueSprite.NoChange,  SoundID sfx = SoundID.None)
+    public DialogueAsCode Line(DialogueCharacter speaker, string text, DialogueSprite expr = DialogueSprite.NoChange,  SoundID sfx = SoundID.None, Sprite? picture = null)
     {
         var actor = Resolve(speaker);
         entries.Add(new DialogueEntry(
             content: text,
             speaker: actor,
             sfxId: sfx,
-            picture: null,
+            picture: picture,
             events: (expr == DialogueSprite.NoChange)
                 ? new()
                 : new()
@@ -35,10 +40,10 @@ public class DialogueAsCode
         return this;
     }
 
-    public DialogueAsCode InterruptedLine(DialogueCharacter speaker, string text, DialogueSprite expr = DialogueSprite.NoChange, SoundID sfx = SoundID.None)
+    public DialogueAsCode InterruptedLine(DialogueCharacter speaker, string text, DialogueSprite expr = DialogueSprite.NoChange, SoundID sfx = SoundID.None, float duration = 0.5f)
     {
         var actor = Resolve(speaker);
-        var events = new List<DialogueEvents>() { new AutoAdvanceAfter { Time = 0.5f } };
+        var events = new List<DialogueEvents>() { new AutoAdvanceAfter { Time = duration } };
         if (expr != DialogueSprite.NoChange) events.Add(new ExpressionChange { actor = actor, expression = expr });
         entries.Add(new DialogueEntry(
             content: text,
@@ -52,27 +57,30 @@ public class DialogueAsCode
 
     /// An italicised narration / atmosphere beat with no staged speaker,
     /// optionally carrying a sound effect.
-    public DialogueAsCode Narrate(string text, SoundID sfx = SoundID.None)
+    public DialogueAsCode Narrate(string text, SoundID sfx = SoundID.None, Sprite? picture = null, params DialogueEvents[] events)
     {
         entries.Add(new DialogueEntry(
             content: text,
             speaker: actors.Narration,
             sfxId: sfx,
-            picture: null,
-            events: new List<DialogueEvents>()));
+            picture: picture,
+            events: new List<DialogueEvents>(events)));
         return this;
     }
 
+    public DialogueAsCode Move(DialogueCharacter character, CharacterActions position, float duration = 1f) => Do(new ActorAction { actor = Resolve(character), action = position, duration = duration });
     /// Brings an actor on-stage at position with a starting
     /// expression and fades them in. 
-    public DialogueAsCode Enter(DialogueCharacter character, CharacterActions position, DialogueSprite expr, float fadeDuration = 1f)
+    public DialogueAsCode Enter(DialogueCharacter character, CharacterActions position, DialogueSprite expr = DialogueSprite.NoChange, float fadeDuration = 0.5f)
     {
         var actor = Resolve(character);
-        return Do(
-            new ExpressionChange { actor = actor, expression = expr },
-            new ActorAction { actor = actor, action = position, duration = 0f },
-            new ActorAction { actor = actor, action = CharacterActions.FadeOut, duration = 0 },
-            new ActorAction { actor = actor, action = CharacterActions.FadeIn, duration = fadeDuration });
+        var events = new List<DialogueEvents>();
+        if (expr != DialogueSprite.NoChange)
+            events.Add(new ExpressionChange { actor = actor, expression = expr });
+        events.Add(new ActorAction { actor = actor, action = position, duration = 0f });
+        events.Add(new ActorAction { actor = actor, action = CharacterActions.FadeOut, duration = 0 });
+        events.Add(new ActorAction { actor = actor, action = CharacterActions.FadeIn, duration = fadeDuration });
+        return Do(events.ToArray());
     }
 
     /// Fades the given characters off-stage. Emitted as a pure-event beat.
@@ -86,7 +94,7 @@ public class DialogueAsCode
         return Do(events.ToArray());
     }
 
-    public DialogueAsCode Exit(params DialogueCharacter[] leaving) => Exit(1f, leaving);
+    public DialogueAsCode Exit(params DialogueCharacter[] leaving) => Exit(0.5f, leaving);
 
     /// Emit raw dialogue events as a pure-event beat (no text).
     public DialogueAsCode Do(params DialogueEvents[] events)
@@ -104,6 +112,12 @@ public class DialogueAsCode
 
     public static implicit operator DialogueEntry[](DialogueAsCode d) => d.Build();
 
+    public DialogueAsCode ResolveActor(DialogueCharacter character, out ActorProfile actor)
+    {
+        actor = Resolve(character);
+        return this;
+    }
+
     private ActorProfile Resolve(DialogueCharacter character) => character switch
     {
         DialogueCharacter.Jackie => actors.Jackie,
@@ -111,6 +125,12 @@ public class DialogueAsCode
         DialogueCharacter.Cam => actors.Cam,
         DialogueCharacter.Weise => actors.Weise,
         DialogueCharacter.Ailin => actors.Ailin,
+        DialogueCharacter.Rocky => actors.Rocky,
+        DialogueCharacter.Kade => actors.Kade,
+        DialogueCharacter.Jay => actors.Jay,
+        DialogueCharacter.Ari => actors.Ari,
+        DialogueCharacter.Nites => actors.Nites,
+        DialogueCharacter.System => actors.System,
         DialogueCharacter.Narration => actors.Narration,
         DialogueCharacter.Broadcast => actors.Broadcast,
         DialogueCharacter.Loudspeaker => actors.Loudspeaker,
@@ -134,6 +154,12 @@ public enum DialogueCharacter
     Cam,
     Weise,
     Ailin,
+    Rocky,
+    Kade,
+    Jay,
+    Ari,
+    Nites,
+    System,
     Narration,
     Broadcast,
     Loudspeaker,

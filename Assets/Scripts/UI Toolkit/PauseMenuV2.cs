@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Context;
 using Managers;
@@ -48,7 +47,13 @@ namespace UI_Toolkit
             doubleSpeedToggle = rootDocument.rootVisualElement.Q<Toggle>("2x-speed-toggle");
             dialogueLogButton = rootDocument.rootVisualElement.Q<Button>("log-button");
             skipDialogueButton = rootDocument.rootVisualElement.Q<Button>("skip-dialogue-button");
-            
+            // So a spacebar press doesn't trigger any of these. 
+            autoRollToggle.focusable = false;
+            doubleSpeedToggle.focusable = false;
+            dialogueLogButton.focusable = false;
+            skipDialogueButton.focusable = false;
+            pauseIconButton.focusable = false;
+
             rootDocument.panelSettings.sortingOrder = UISortOrder.PauseMenu.GetOrder();
 
             pauseIconButton.clicked += DoPause;
@@ -216,9 +221,9 @@ namespace UI_Toolkit
             if (state != State.Dialogue) {
                 SetState(State.Dialogue);
                 var scroll = dialogue.Q<ScrollView>("scroll-dlg");
-                StartCoroutine(DoScrollToBottomWithDelay(scroll));
                 scroll.Clear();
                 foreach (var it in CreateLabels()) scroll.Add(it);
+                ScrollToBottomAfterLayout(scroll);
             } else {
                 SetState(previousState);
             }
@@ -317,10 +322,13 @@ namespace UI_Toolkit
             PauseMenuPanel
         }
 
-        private static IEnumerator DoScrollToBottomWithDelay(ScrollView scroll)
+        private static void ScrollToBottomAfterLayout(ScrollView scroll)
         {
-            yield return null;
-            scroll.scrollOffset = scroll.contentContainer.layout.max - scroll.contentViewport.layout.size;
+            scroll.schedule.Execute(() =>
+            {
+                float maxScrollY = Mathf.Max(0, scroll.contentContainer.layout.height - scroll.contentViewport.layout.height);
+                scroll.scrollOffset = new Vector2(0, maxScrollY);
+            });
         }
 
         // Hideous.

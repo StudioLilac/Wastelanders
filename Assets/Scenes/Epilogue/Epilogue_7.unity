@@ -1601,6 +1601,7 @@ MonoBehaviour:
   - {fileID: 1257727732}
   - {fileID: 1826358305}
   - {fileID: 1030930343}
+  blackFadeHandler: {fileID: 1877674827}
   blackingOutSr1: {fileID: 529172512}
   blackingOutSr2: {fileID: 1261434288}
   blackScreen:
@@ -1612,11 +1613,6 @@ MonoBehaviour:
   reversedCaveBackground:
   - {fileID: 922788333}
   dynamicCamera: {fileID: 962921368}
-  preFightDialogue: []
-  defaultBackgroundDialogue: []
-  deadCreatureDialogue: []
-  blackingOut1: []
-  blackingOut2: []
   bonePopping:
   - content: ACK! Ow... ow... ow..
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
@@ -1737,8 +1733,7 @@ MonoBehaviour:
     picture: {fileID: 0}
     events:
     - rid: 6522887070328291445
-  - content: "I\u2019m serious! I've got a tracker pointing me right to it. Maybe
-      you just haven\u2019t seen it."
+  - content: "I\u2019m serious! I've got a tracker pointing me right to it. "
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -1756,8 +1751,8 @@ MonoBehaviour:
     sfxId: 0
     picture: {fileID: 0}
     events: []
-  - content: But fine, let's say this amphibian exists. Why are you risking your
-      skin for it?
+  - content: Let's say this amphibian exists. What's it to you? Why risk your skin
+      for it?
     speaker: {fileID: 11400000, guid: a5de3fd0a5c7a8a42ad635445ff9a378, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -1788,7 +1783,7 @@ MonoBehaviour:
     picture: {fileID: 0}
     events:
     - rid: 6522887070328291451
-  - content: Two or three weeks now?
+  - content: Two weeks now?
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -2008,8 +2003,7 @@ MonoBehaviour:
     sfxId: 0
     picture: {fileID: 0}
     events: []
-  - content: "What if it\u2019s a lie, some trick to make us expose ourselves? Scouts
-      report that <i>that</i> Doctor is back on site."
+  - content: "What if it\u2019s a lie, some trick to make us expose ourselves?"
     speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -2173,6 +2167,7 @@ MonoBehaviour:
     sfxId: 0
     picture: {fileID: 0}
     events: []
+  suspenseDrone: {fileID: 8300000, guid: 446e43318cd10834a8836d1fbef1f551, type: 3}
   references:
     version: 2
     RefIds:

@@ -269,7 +269,6 @@ public class ControllableAudioChannel
     // e.g. SlowTempo(0.7f, 2f) winds the tracker's beeping down to 70% over two seconds.
     public void SlowTempo(float tempo, float duration) => tempoHandler.SlowTempo(tempo, duration);
     public void RestoreTempo(float duration) => tempoHandler.RestoreTempo(duration);
-
     public void SetLevel(float value)
     {
         level = value;

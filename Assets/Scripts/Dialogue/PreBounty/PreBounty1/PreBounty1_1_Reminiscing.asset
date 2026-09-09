@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Entries:
   - content: <i>After a decade of closure due to unresolved NITES disappearances,
-      the Tundra reopens for active research expeditions.</i>
+      the Tundra re-opens for active research expeditions.</i>
     speaker: {fileID: 11400000, guid: a9924d74021fb49d796b34e9cd8d18a3, type: 2}
     sfxId: 0
     picture: {fileID: 0}

@@ -42,9 +42,11 @@ namespace DialogueScripts
 
     public enum CharacterActions
     {
+        SetLeftEdge = 5,
         SetLeft = 10,
         SetMiddle = 20,
         SetRight = 30,
+        SetRightEdge = 35, 
         SetOffscreenLeft = 40,
         SetOffscreenRight = 50,
         FadeIn = 60,

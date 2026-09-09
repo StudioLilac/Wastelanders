@@ -8,7 +8,7 @@ namespace Epilogue4
             .Line(DialogueCharacter.Cam, "Ives... I'm so sorry...", DialogueSprite.CamTalk)
             .Enter(DialogueCharacter.Ives, CharacterActions.SetRight, DialogueSprite.IvesNeutral)
             .Line(DialogueCharacter.Ives,
-                "Don't you start pitying me, kid. We both know this had nothing to do with you.",
+                "Don't you start pitying me, kiddo. We both know this was nothing on you.",
                 DialogueSprite.IvesNeutral)
             .Line(DialogueCharacter.Cam,
                 "But it was my invention that failed to protect us... failed you.",
@@ -17,7 +17,7 @@ namespace Epilogue4
                 "Hey, I knew the risks. All of us did.",
                 DialogueSprite.IvesNeutral)
             .Line(DialogueCharacter.Ives,
-                "Far as I see it, your invention got the NITES further than anyone else ever has. One step closer to Ailin. One step closer to the truth.")
+                "Far as I see it, your invention got the NITES further than anyone else ever has. One step closer to Ailin.")
             .Line(DialogueCharacter.Cam,
                 "I should've known about the reaction, about the Frog. If only I knew more...",
                 DialogueSprite.CamNeutral)
@@ -48,31 +48,30 @@ namespace Epilogue4
                 DialogueSprite.IvesNeutral)
             .Line(DialogueCharacter.Ives, "I know you feel like shit right now.")
             .Line(DialogueCharacter.Ives,
-                "You're wondering how anyone can trust a piece of trash like you ever again.")
+                "You're wondering how anyone can trust you ever again.")
             .Line(DialogueCharacter.Ives, "How you can even begin to trust yourself.")
             .Line(DialogueCharacter.Ives,
-                "Been there, kid. Drove that road to the end and back.",
+                "Been there, kiddo. Drove that road to the end and back.",
                 DialogueSprite.IvesSmile)
             .Line(DialogueCharacter.Ives,
-                "But you know where that suffocating pressure comes from?",
+                "But you know where that voice comes from?",
                 DialogueSprite.IvesNeutral)
             .Line(DialogueCharacter.Ives,
                 "From an ambitious promise that you've made to yourself.")
             .Line(DialogueCharacter.Ives,
-                "That you must become a perfect scientist, and realize your full potential.")
+                "That you must become a perfect scientist. Reach your full potential.")
             .Line(DialogueCharacter.Ives,
                 "Because you figure that only the best version of yourself can navigate this uncertain world for you.")
-            .Line(DialogueCharacter.Ives,
-                "So you tail their bumper, turn for turn.")
+            .Line(DialogueCharacter.Ives, "So you tail their bumper, turn for turn.")
             .Line(DialogueCharacter.Ives, "Figure if you can just match 'em, the doubt of whether you'll finally reach the destination will finally quiet down.")
             .Line(DialogueCharacter.Ives,
-                "But that's a tough drive kid, cuz they take those turns better than you do.")
+                "But that's a tough drive kiddo, cuz they take those turns better than you do.")
             .Line(DialogueCharacter.Ives,
                 "And when you pop a tire chasing that perfect driver in front, they'll just keep cruising. Won't even spare a glance in the rear view mirror.")
             .Line(DialogueCharacter.Ives,
                 "While you're there stuck on the shoulder, jack under the car, asking ourselves, \"Can I ever catch up?\"")
             .Line(DialogueCharacter.Ives,
-                "Maybe you will. But that ideal self can't help you change this tire, kid.")
+                "Maybe you will. But that ideal self can't help you change this tire, kiddo.")
             .Line(DialogueCharacter.Ives, "Cuz they never blew one!", DialogueSprite.IvesSmile)
             .Line(DialogueCharacter.Ives,
                 "They always had the perfect map, and the perfect roads. That's their secret.")
@@ -84,7 +83,7 @@ namespace Epilogue4
             .Line(DialogueCharacter.Ives, "It'll take time to fix, and the patch is going to be there a while.")
             .Line(DialogueCharacter.Ives, "...")
             .Line(DialogueCharacter.Ives,
-                "Heh, I might be driving on a couple patches myself too, kid.",
+                "Heh, I might be driving on a couple patches myself too, kiddo.",
                 DialogueSprite.IvesSmile)
             .Line(DialogueCharacter.Ives,
                 "But, now you have an opportunity to prove to yourself something better.",

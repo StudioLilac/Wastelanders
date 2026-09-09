@@ -144,13 +144,14 @@ namespace Dialogue.Epilogue
     {
         // Jackie navigating the tunnels, up to the moment the blips fade under the water drips.
         public static DialogueAsCode PreFight(ControllableAudioChannel tracker) => new DialogueAsCode()
-            .Line(DialogueCharacter.Jackie, "Yeesh, these tunnels are impossible to navigate.", DialogueSprite.JackRetort)
+            .Line(DialogueCharacter.Jackie, "Yeesh, these tunnels are impossible to navigate.", DialogueSprite.JackieRetort)
             .Narrate("<i>The darkness returns the words back to her.")
             .Do(new CallbackEvent(() => tracker.SlowTempo(0.7f, 4f)))
             .Narrate("<i>Jackie continues forward regardless, using the faint glow of the tracker to illuminate her steps.</i>", SoundID.VN_footsteps)
             .Narrate("<i>As she does, the tracker beeps begin to slow.</i>")
-            .Line(DialogueCharacter.Jackie, "Guess I took a wrong turn, should have taken a left.", DialogueSprite.JackieNeutralSoft)
-            .Narrate("<i>Jackie backtracks and takes the left tunnel. Walking ahead, she enters a wide cavern with debris piled high around her.</i>", SoundID.VN_footsteps);
+            .Line(DialogueCharacter.Jackie, "Tsk, the tone's changed again. Can’t this damn frog keep still?", DialogueSprite.JackieNeutralSoft)
+            .Narrate("<i>Jackie retunes, backtracks, and takes another tunnel. </i>")
+            .Narrate("<i>Walking ahead, she enters a wide cavern with debris piled high around her.</i>", SoundID.VN_footsteps);
 
         public static DialogueAsCode OutOfTheCave => new DialogueAsCode()
         .Narrate("<i>A pale light cracks through the mossy walls.</i>")

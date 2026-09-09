@@ -948,7 +948,7 @@ Transform:
   m_GameObject: {fileID: 1041322788}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.88, y: -1.48, z: -10}
+  m_LocalPosition: {x: -2.21, y: 0.79, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1454,14 +1454,13 @@ MonoBehaviour:
   ailinDialogue: {fileID: 11400000, guid: 5fba588d9f21c48439cffa1941fac228, type: 2}
   camera: {fileID: 1443888954}
   keyframes:
-  - {fileID: 1041322789}
-  - {fileID: 1031375776}
   - {fileID: 1023328217}
+  - {fileID: 1031375776}
+  - {fileID: 1041322789}
   zoomValues:
-  - 3
-  - 3
   - 4
-  panDuration: 3
+  - 3
+  - 3
   fader: {fileID: 483204526}
   comingSoon: {fileID: 1322833082}
   wastelandBackground: {fileID: 1655571796}

@@ -1,107 +1,132 @@
-# Add dialogue to translate here. 
+[Push Kade into the center, Jackie comes in from the right.] 
 
-Jackie: Yeesh, these tunnels are impossible to navigate. 
+Jackie: Kade?
 
-Narration: The dark hands her words back, as Jackie uses the faint glow of the tracker to illuminate her steps. 
+Kade: Yes?
 
-As she continues forward, the beeps begin to slow. 
+Jackie: You mentioned earlier that Ives' dose adjustment had to be exact?
 
-Jackie: Guess I took a wrong turn, should have taken a left. 
+Kade (nu): I did.
 
-Narration: Jackie backtracks and takes the left tunnel. 
+Jackie: How would you determine that?
 
-    Walking ahead, she enters a wide cavern with debris piled high around her.
+Kade: Well first I’d need to know how much Amplitude to adjust for. It would be tough on the spot, but depending on the distance...
 
-A pale light cracks through the mossy walls.
+Ives, how far were you from the crystals when the break occurred.
 
-Narration: She stops to gather her bearings again, making sure she takes the correct path among the many that lay in front of her.
+Ives: The fight was up front, so I parked myself in the center. Some twenty meters back maybe? 
 
-Aside from her blips, only the drips of water break the silence.
+Kade: Twenty meters? That’s too far that would be too far for contact transfer. 
 
-*Fade blips out in favour of the drips of water* 
+Crystal to body resonance would be quite weak at that range as well. It wouldn’t cause a Waste-based flare up that quickly, at least.
 
-Then one of the stones lets out a wet, heavy breath. The rocks around her begin to shift. 
+It would have to be something obvious that I’m missing. Aleksander, what was it? 
 
-Audio: * loud clattering of boulders as it moves*
+Dr. Weise: ...
 
-Audio: *roaring*
+Dr. Weise: The suppressant is a blend. One of its components is resonant to the Crystals.
 
-Jackie snaps to the source of the sound.  
+Kade: What component?
 
-JACKIE (Internal) (su-op): Crap!
+Dr. Weise: The Waste binding substrate. 
 
-Narration: A guttural snarl echoes throughout the cavern. 
+Narration: Jackie’s hand reflexively digs into her pocket. Kade blinks rapidly and furrows her brow. 
 
-A massive, lizard-like creature with a scarred eye, pounces from the rubble.
+Kade: Resonant. So you’re playing roulette on her life against every Crystal out here? 
 
-JACKIE (Internal) (su): Brace!
+Dr. Weise: Commander’s orders.
 
-Audio: *metal clash sound* *Sound of jackie hitting the stone wall*
+Ives: Yeah... It’s true. The Doc’s been doing his best to monitor and adjust my dose since. 
 
-Narration: Metal clashes against bone. Jackie is thrown, slamming hard against the stone wall. Her ribs flaring as the wind is knocked out of her. 
+Narration: Jackie pulls out her vial, and inspects it. It’s clear. 
 
-JACKIE (su): Ugh! 
+Jackie: ...Ives, could I see one of your Serums for a sec?
 
-JACKIE (Internal) (ti): Too heavy. Can’t... can’t take it head on.
+Ives: Serum? Sure. 
 
-JACKIE (Internal) (nu): ...Okay. Calm. What did Ives say before? ’Don’t fight its strength...’
+Narration: Ives hands hers over and Jackie holds it next to her own.
 
-Narration: The creature closes the distance. Claws primed to reap.
+Jackie: It’s a little pink.
 
-Narration: Jackie dives under the swing and past its foreleg.
+Ives: ...Seriously? After all that’s happened, I made sure it wasn’t when we left.
+
+Narration: Jackie turns to the NITES besides Ives. 
+
+Jackie: And yours. Anyone. Could you hold yours up as well?
+
+Narration: Over a dozen vials come up. Some are more pink than others. 
+
+Ives: The ones with the pink vials. They’re the vanguard that dealt with the threat when the crystals broke. 
+
+Kade: A pink-shift. That’s an amplitude influx. For that to happen.... 
+
+Kade: The Serums. They’re your resonating component, aren’t they Aleksander? 
+
+Dr. Weise: ...
+
+Kade: If someone with a Waste wound was to use that... 
+
+Narration: Kade catches Jay with a wince. Jay’s eyes widen.
+
+Jay: ...My team took several doses that day before turning to Crystal. 
+
+Kade: Then it’s not just Ives in danger, it’s everyone.
+
+Narration: Murmurs begin rippling through the crowd. 
+
+Jackie: You’ve been checking up on Ives. You’ve known the danger for quite some time now. 
+
+Jackie: Did you ever plan to tell us? 
+
+Dr. Weise: ...
+
+Rocky: ...Nothing? Not a word before we walk into a Crystal stockpile? 
+
+That night happened because of something similar. Sealed inspected Serums that were off... Could it be that–
+
+Dr. Weise: Circumstantial! All of it.
+
+Narration: Weise’s voice echoes off the cave walls as the murmurs are silenced, all eyes fall onto him. 
+
+Ives steps forward. 
+
+Ives (nu): I’ve heard enough.
+
+First part’s on me. I had the condition, and I should’ve searched more to see how that could’ve affected you all. 
+
+But Doc. I vouched for you. I trusted you to be the one to tell me.
+
+And I promised Cam that if I ever found a person who knew about all this... I’d like to have some words with them.
+So. Let's chat.
+How much do you know?
+Narration: Ives steps forward, towering over the doctor. Weise backs up until he hits the cave wall.
+
+Dr. Weise (th): ...How much I know? Well… let me show you!
+
+Narration: Dr. Weise rips a syringe from his coat, jamming it into Ives' upper thigh.
+
+Ives (nu): ARGH! You—!
  
-But she’s not quite fast enough. A claw catches and tears through her calf. 
+Narration: Ives falls to the floor, her muscles rippling. 
 
-JACKIE (su-op): ACK! My leg...
+Kade (int): Jackie, get back! She's— 
 
-Narration: She tumbles through the gravel, kicking up dust and trailing red.
+Narration: But then the convulsing stops. 
 
-Narration: Behind her, the beast wheels around. Its tail knocking boulders on the wall loose. 
+Ives stands and looks to the cave exit. The whites in her eyes are gone. Replaced by a glowing violet. 
 
-JACKIE (Internal) (nu-op): ’Don’t fight its strength... Fight its shape.’ 
+[Do the same princess frog purple flash on screen the players see in Chapter 3 here.]
 
-Right. But how, with a busted leg? 
+Jackie’s tracker changes tone, and Ives begins to walk unhurried toward the cave exit. 
 
-Narration: She scrambles back, and steadies herself on stone. 
+Weise scrambles up with a grin and presses close behind Ives. Keeping one hand in his pocket.
 
-Narration: The beast stares down Jackie with its one good eye. Judging the damage, judging the distance.
+Dr. Weise (nu): Anyone else want a demonstration? No? Then I suggest you let us pass.
 
-Narration: Jackie props herself with the staff. Hot blood pounding in her ears. The glove beeps monotonously in rhythm. 
+Jackie: Ives! What do we do!?
 
-Jackie: I got it. I just need to time this. 
+Rocky (se): Tsk, he’s got the upper hand here. But if we cut down the one in control, he’ll have nothing. 
 
-Narration: Seeing its prey wobble upright, the creature lunges for the kill. 
+We’ll stick with the plan. Everyone battle formations! Let’s get our people back!
 
-JACKIE (Internal) (su-op): NOW!
-
-Narration: The world balloons around her. Jackie morphs into the form of the smallest beetle she’s fought, clinging to the gravel as the creature’s momentum carries it past her.
-
-*crash sfx*
-
-Narration: The entire cave shudders as maw meets stone.
-
-Narration: Jackie unshifts, and after a breath, springs up on her good leg. Driving all of her weight behind her staff. 
-
-The steel tip finds the base of the skull, wedging itself arms-length deep. 
-
-The beast convulses, then collapses.
-
-*beast groan*
-
-[Fade into Dead Creature background with Jackie and creature]
-Narration: Jackie leans on her staff, her head pounding and body trembling. She lets out a wet cough.
-JACKIE (ti): That’s... not good.... I should be getting back ...
-
-Narration: She takes a step and her leg buckles. 
-
-JACKIE (ti-op): I’ll have to make sure Cam gets this damn tracker to work while I’m shifted. 
-
-Narration: The dark edges of the cavern begin to close in as her vision tunnels. As the beeping of the device begins to grow louder. 
-
-[start blackening edges of the screen]
-
-JACKIE (ti): When... I get... back...
-
-[blackening gets worse]
-
-Narration: The cold stone floor rushes up to meet her. 
+[Fade to black] 
