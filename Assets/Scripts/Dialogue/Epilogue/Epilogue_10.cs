@@ -233,6 +233,7 @@ namespace Dialogue.Epilogue
                 scrim.SetLightScreen();
                 purpleFlash.color = TRANSPARENT_PURPLE;
                 GameStateManager.Instance.JumpToCombat = false;
+                yield return new WaitForSeconds(0.5f);
             }
             StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(1.5f));
             yield return cutscene.Play(this);
