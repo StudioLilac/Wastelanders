@@ -354,7 +354,7 @@ public class CombatInfo : MonoBehaviour
 
         foreach (string str in buffs.Keys)
         {
-            if (buffs[str].Stacks == 0) continue;
+            if (!buffs[str].ShouldRenderBuffIcon()) continue;
 
             GameObject instance = Instantiate(buffIconPrefab);
             BuffIcons buffIcon = instance.GetComponent<BuffIcons>();

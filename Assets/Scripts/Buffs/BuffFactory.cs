@@ -21,6 +21,9 @@ public class BuffFactory : MonoBehaviour
             case Wound.buffName:
                 return new Wound();
 
+            case Steadied.buffName:
+                return new Steadied();
+
             default:
                 throw new System.Exception("Unkown Buff: " + buffType);
         }

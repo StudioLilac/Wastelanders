@@ -8,6 +8,7 @@ public class StatusIcons : ScriptableObject
     public Sprite flow;
     public Sprite wound;
     public Sprite resonance;
+    public Sprite dissonance;
     public Sprite damage;
     public Sprite defense;
 }

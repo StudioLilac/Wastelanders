@@ -3,6 +3,7 @@ using Entities;
 using FMOD.Studio;
 using FMODUnity;
 using Particles;
+using SceneBuilder;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -59,7 +60,7 @@ namespace Dialogue.Epilogue
         
         [SerializeField] private List<GameObject> ivesActions;
         [SerializeField] private Epilogue_10_Cutscene cutscene;
-
+        private DefaultSceneBuilder sceneBuilder;
         private float justStartedFlickering = 0f;
         
         private void Update()
@@ -74,16 +75,19 @@ namespace Dialogue.Epilogue
         {
             if (gameState == GameState.GAME_START)
             {
-                StartCoroutine(
-                    ExecuteSceneStart());
+                StartCoroutine(ExecuteSceneStart());
             }
         }
 
         void Setup() {
+            sceneBuilder = DefaultSceneBuilder.Construct();
+            sceneBuilder.PlayersPosition = jackieReturnPosition;
+
             jackie.OutOfCombat();
             ives.OutOfCombat();
             princess.OutOfCombat();
             this.Subscribe<PrincessFrog.PrincessFrogHurtEvent>(OnPrincessFrogHurt);
+            this.Subscribe<EnemyIvesDied>(IvesDies);
         }
 
         public IEnumerator PurpleFlash(float fadeInDuration = 0.5f, float fadeOutDuration = 2f)
@@ -254,6 +258,15 @@ namespace Dialogue.Epilogue
             CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
             
             yield return UIFadeScreenManager.Instance.FadeInDarkScreen(2f);
+        }
+
+        void IvesDies(EnemyIvesDied e)
+        {
+            new SetGameState(GameState.GAME_LOSE).Invoke();
+            // Replace the following with signal lost game over screen.
+            GameOver.Instance.FadeInWithDialogue(new DialogueAsCode()
+                .Line(DialogueCharacter.Ives, "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+            );
         }
 
         void OnTeamWin(TeamWinEvent ev)

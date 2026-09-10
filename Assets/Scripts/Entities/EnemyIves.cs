@@ -2,14 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public record EnemyIvesDied() : IEvent;
 public class EnemyIves : EnemyClass
 {
     public override void Start()
     {
         base.Start();
-        MaxHealth = 30;
+        MaxHealth = 35;
         Health = MaxHealth;
         myName = "Le Ives";
+        AddStacks(Resonate.buffName, 3);
+        AddStacks(Dissonance.buffName, 3);
     }
 
     public void InjectDeck(List<GameObject> actions)
@@ -28,6 +31,7 @@ public class EnemyIves : EnemyClass
 
     public override IEnumerator Die()
     {
+        new EnemyIvesDied().Invoke();
         BattleQueue.BattleQueueInstance.RemoveAllInstancesOfEntity(this);
         DestroyDeck();
         combatInfo.DeactivateCardIcon();

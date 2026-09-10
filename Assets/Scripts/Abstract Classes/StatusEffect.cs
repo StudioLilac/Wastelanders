@@ -4,14 +4,15 @@ using UnityEngine.EventSystems;
 public abstract class StatusEffect
 {
     protected int buffStacks = 0;
-    public int Stacks { get { return buffStacks; } }
+    public int Stacks => buffStacks;
     public delegate void StatusEffectDelegate();
     public delegate void StatusEffectModifyValueDelegate(ref int integer);
-    // public static string fieldName; possessed by all non-abstract children
+    public virtual bool ShouldRenderBuffIcon() => buffStacks > 0;
+    public EntityClass Host { get; private set; }
 
-    public int GetStacks()
+    public virtual void OnHostAssigned(EntityClass host)
     {
-        return this.buffStacks;
+        Host = host;
     }
 
     // increments buffStacks by the amount given    
