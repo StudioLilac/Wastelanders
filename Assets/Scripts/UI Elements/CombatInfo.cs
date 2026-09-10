@@ -20,6 +20,7 @@ public class CombatInfo : MonoBehaviour
     public GameObject diceRollText;
     public GameObject buffIconPrefab;
     public HealthBar healthBar;
+    public DissonanceBarOverlay dissonanceBar;
     public GameObject crosshair;
     public TMP_Text damagePopupText;
     private float ROTATION_SPEED = 30f;
