@@ -40,6 +40,7 @@ namespace Dialogue.Epilogue
         public Beetle beetle3;
         public List<EnemyClass> crystals;
         public PrincessFrog jackiePrincessFrog;
+        public PrincessFrog truePrincessFrog;
         public AnalogueHorrorEffect analogueHorrorEffect;
         public ScalingLerpHandler overlayRocks;
         public UIFadeHandler overlayRocksUI;
@@ -125,13 +126,15 @@ namespace Dialogue.Epilogue
                 yield return new WaitForSeconds(0.5f);
                 baseCamera.Priority = 0; dynamicCamera.Priority = 1;
                 yield return StartCoroutine(jackie.MoveToPosition(jackie.transform.position + new Vector3(2f, 0f, 0f), 0f, 0.8f));
-                StartCoroutine(jackie.MoveToPosition(JackieAttackPrincessFrog.position, 0f, 2.3f));
-                yield return StartCoroutine(ives.MoveToPosition(IvesInterceptPosition.position, 0f, 1.5f));
+                StartCoroutine(jackie.MoveToPosition(JackieAttackPrincessFrog.position, 0f, 2f));
+                yield return new WaitForSeconds(0.5f);
+                yield return StartCoroutine(ives.MoveToPosition(IvesInterceptPosition.position, 0f, 1f));
                 ives.AttackAnimation("IsPunching");
                 SoundID.CB_fist_hit.Play();
                 SoundID.VN_radio_static.Play();
                 analogueHorrorEffect.Burst(0.5f, 0.5f);
                 fieldCrystal.SetActive(false);
+                truePrincessFrog.FaceLeft();
                 baseCamera.Priority = 1; dynamicCamera.Priority = 0; baseCamera.transform.position = CombatCameraAnchor.position; baseCamera.m_Lens.OrthographicSize = 4;
                 yield return StartCoroutine(jackie.StaggerEntities(ives, jackie, 0.4f));
                 jackie.SetStaggered(true);

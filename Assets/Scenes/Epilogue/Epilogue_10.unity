@@ -8957,7 +8957,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34f5fff0a8ac2764bbfd6bfa00b0ea67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpToCombat: 1
+  jumpToCombat: 0
   instakill: 1
   background1: {fileID: 2146437735}
   background2: {fileID: 102738158}

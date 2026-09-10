@@ -214,26 +214,23 @@ namespace Dialogue.Epilogue
                 yield return UIFadeScreenManager.Instance.FadeInDarkScreen(2f);
                 yield return new WaitForSeconds(0.5f);
                 AudioManager.Instance.FadeInBackgroundTrack(2f, tundraBg, true);
-                shaderBackground.SetActive(false);
+                shaderBackground.SetActive(false); injectionOverlay.gameObject.SetActive(false);
                 blizzardParticles.SetIntensity(0.25f);
                 horrorEffect.RampTo(0f, 0.5f);
-                ives.FaceLeft(); princess.FaceLeft();
+                ives.FaceLeft();
                 yield return new WaitForSeconds(1.5f);
-                yield return UIFadeScreenManager.Instance.FadeInLightScreen(1.5f);
             }
             else
             {
                 ives.FaceLeft();
-                princess.FaceLeft();
                 background2.SetActive(false);
                 background1.SetActive(false);
                 shaderBackground.SetActive(false);
                 scrim.SetLightScreen();
                 purpleFlash.color = TRANSPARENT_PURPLE;
                 GameStateManager.Instance.JumpToCombat = false;
-                yield return UIFadeScreenManager.Instance.FadeInLightScreen(0.5f);
             }
-
+            StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(1.5f));
             yield return cutscene.Play(this);
 
             new BattleIntroEvent(Get<ClashIntro>()).Invoke();
