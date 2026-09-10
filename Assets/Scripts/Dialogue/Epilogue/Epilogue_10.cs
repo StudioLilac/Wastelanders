@@ -232,6 +232,7 @@ namespace Dialogue.Epilogue
                 yield return new WaitForSeconds(0.5f);
             }
             StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(1.5f));
+            bossfightTrackEmitter.Play();
             yield return cutscene.Play(this);
 
             new BattleIntroEvent(Get<ClashIntro>()).Invoke();
@@ -239,17 +240,17 @@ namespace Dialogue.Epilogue
 
             princess.OwnedMinions.Add(ives);
             ives.InjectDeck(ivesActions);
-            bossfightTrackEmitter.Play();
 
             if (instakill) {
                 jackie.AddStacks(Accuracy.buffName, 999);
                 jackie.AddStacks(Resonate.buffName, 999);
             }
             
+            EventInstance instance = bossfightTrackEmitter.EventInstance;
+            instance.setParameterByNameWithLabel("BossState", "Fighting");
             CombatManager.Instance.BeginCombat();
             
             yield return new WaitUntil(() => new GetGameState().Query() == GameState.GAME_WIN);
-            EventInstance instance = bossfightTrackEmitter.EventInstance;
             instance.setParameterByNameWithLabel("BossState", "Defeated");
             
             CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
