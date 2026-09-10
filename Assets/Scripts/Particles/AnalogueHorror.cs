@@ -3,10 +3,9 @@ using UnityEngine;
 
 /// <summary>
 /// Drives the "Hidden/FX/Analogue Horror" post process.
-/// Put this on the camera that renders your visual novel scene.
 ///
-///   horror.RampTo(0.4f, 6f);        // dread creeps in over 6 seconds
-///   horror.Burst(1f, 0.25f);        // hard glitch stab on a line of dialogue
+///   horror.RampTo(0.4f, 6f);        // creep in over 6 seconds
+///   horror.Burst(1f, 0.25f);        // hard glitch stab.
 ///   yield return horror.RampTo(0f, 3f);   // back to clean
 ///
 /// Set pulseAmount above 0 for a slow breathing wobble on top of the

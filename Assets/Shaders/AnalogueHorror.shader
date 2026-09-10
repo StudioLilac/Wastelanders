@@ -1,12 +1,10 @@
 // =====================================================================
 //  Hidden/FX/Analogue Horror  -  VHS / broken-signal camera effect
-//  BUILT-IN RENDER PIPELINE  (OnRenderImage post process)
 //
-//  Drive it with AnalogueHorrorEffect.cs on your camera.
-//  Everything scales off _Intensity (0 = clean image, 1 = signal loss),
-//  so you can ramp the whole stack from one value in your VN script.
+//  Driven with AnalogueHorrorEffect.cs
+//  Everything scales off _Intensity (0 = clean image, 1 = signal loss).
 //
-//  Stack, in the order it is applied:
+//  Ordered Stack:
 //    tracking bar -> scanline jitter -> block corruption -> wave warp
 //    -> RGB separation -> desaturation + colour fringes -> tape bleed
 //    -> static -> speckle -> scanlines -> dropout -> flicker -> vignette
