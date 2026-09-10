@@ -215,7 +215,7 @@ namespace Dialogue.Epilogue
                 yield return new WaitForSeconds(0.5f);
                 AudioManager.Instance.FadeInBackgroundTrack(2f, tundraBg, true);
                 shaderBackground.SetActive(false); injectionOverlay.gameObject.SetActive(false);
-                blizzardParticles.SetIntensity(0.25f);
+                blizzardParticles.SetIntensity(0.05f);
                 horrorEffect.RampTo(0f, 0.5f);
                 ives.FaceLeft();
                 yield return new WaitForSeconds(1.5f);
