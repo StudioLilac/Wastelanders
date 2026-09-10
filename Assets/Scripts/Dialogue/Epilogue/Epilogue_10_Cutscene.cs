@@ -46,6 +46,19 @@ namespace Dialogue.Epilogue
         public UIFadeHandler overlayRocksUI;
         public GameObject fieldCrystal;
 
+        public void JumpToCombat()
+        {
+            fieldCrystal.SetActive(false);
+            overlayRocks.gameObject.SetActive(false);
+            baseCamera.transform.position = CombatCameraAnchor.position;
+            var enemies = new List<EnemyClass>() { slime, slime2, frog, frog2, beetle1, beetle2, beetle3, jackiePrincessFrog };
+            CombatManager.Instance.SetEnemiesPassive(enemies);
+            enemies.ForEach(e => e.gameObject.SetActive(false));
+            jackie.transform.position = JackieSpyingOnPrincessFrog.transform.position;
+            StartCoroutine(jackie.ResetPosition());
+            StartCoroutine(truePrincessFrog.ResetPosition());
+            StartCoroutine(ives.ResetPosition());
+        }
 
         public IEnumerator Play(Epilogue_10 owner)
         {

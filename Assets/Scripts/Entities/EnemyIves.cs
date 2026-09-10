@@ -11,9 +11,9 @@ public class EnemyIves : EnemyClass
         MaxHealth = 35;
         Health = MaxHealth;
         myName = "Le Ives";
+        AddStacks(Decohering.buffName, 1);
         AddStacks(Resonate.buffName, 3);
         AddStacks(Dissonance.buffName, 3);
-        AddStacks(Decohering.buffName, 1);
     }
 
     public void InjectDeck(List<GameObject> actions)

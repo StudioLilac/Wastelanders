@@ -223,6 +223,10 @@ namespace Dialogue.Epilogue
                 horrorEffect.RampTo(0f, 0.5f);
                 ives.FaceLeft();
                 yield return new WaitForSeconds(1.5f);
+                StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(1.5f));
+                bossfightTrackEmitter.Play();
+                yield return cutscene.Play(this);
+                yield return new WaitForSeconds(0.5f);
             }
             else
             {
@@ -233,11 +237,10 @@ namespace Dialogue.Epilogue
                 scrim.SetLightScreen();
                 purpleFlash.color = TRANSPARENT_PURPLE;
                 GameStateManager.Instance.JumpToCombat = false;
-                yield return new WaitForSeconds(0.5f);
+                bossfightTrackEmitter.Play();
+                cutscene.JumpToCombat();
+                yield return new WaitForSeconds(1.5f);
             }
-            StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(1.5f));
-            bossfightTrackEmitter.Play();
-            yield return cutscene.Play(this);
 
             new BattleIntroEvent(Get<ClashIntro>()).Invoke();
             this.Subscribe<TeamWinEvent>(OnTeamWin);

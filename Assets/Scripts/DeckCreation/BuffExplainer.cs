@@ -45,7 +45,7 @@ public class BuffExplainer : MonoBehaviour
         public static readonly WeaponExplanation FIST_EXPLANATION = new(weaponType: WeaponType.FIST, explanationTitle: "FIST", explanationText: "Makes several small but impactful attacks.");
         public static readonly WeaponExplanation RESONANCE_EXPLANATION = new(weaponType: WeaponType.ENEMY, explanationTitle: Resonate.buffName.ToUpper(), explanationText: "Upper bound of an Action's power increases by 1 per stack.");
         public static readonly WeaponExplanation DISSONANCE_EXPLANATION = new(weaponType: WeaponType.CLASSLESS, explanationTitle: Dissonance.buffName.ToUpper(), explanationText: "Upper bound of an Action's power decreases by 1 per stack.\nIf stacks exceeds the host's current HP, kills them immediately.");
-        public static readonly WeaponExplanation DECOHERING_EXPLANATION = new(weaponType: WeaponType.CLASSLESS, explanationTitle: Decohering.buffName.ToUpper(), explanationText: "When the host takes damage, gain 1 stack of Dissonance. When the host deals damage, lose 1 stack of Dissonance.");
+        public static readonly WeaponExplanation DECOHERING_EXPLANATION = new(weaponType: WeaponType.CLASSLESS, explanationTitle: Decohering.buffName.ToUpper(), explanationText: "When Ives takes damage, gain 1 stack of Dissonance. When Ives deals damage, lose 1 stack of Dissonance.");
         public static readonly List<WeaponExplanation> Values = new() { STAFF_EXPLANATION, PISTOL_EXPLANATION, AXE_EXPLANATION, FIST_EXPLANATION, RESONANCE_EXPLANATION, DISSONANCE_EXPLANATION, DECOHERING_EXPLANATION };
         WeaponExplanation(WeaponType weaponType, string explanationTitle, string explanationText)
         {
