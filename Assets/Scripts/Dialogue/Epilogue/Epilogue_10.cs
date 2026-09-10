@@ -118,7 +118,7 @@ namespace Dialogue.Epilogue
             jackie.SetReturnPosition(jackieReturnPosition.position);
             ives.SetReturnPosition(ivesReturnPosition.position);
             princess.SetReturnPosition(princessReturnPosition.position);
-            blizzardParticles.SetIntensity(0.25f);
+            blizzardParticles.SetIntensity(0.05f);
             backgroundOverlay.sortingOrder = UISortOrder.CharacterActors.GetOrder();
 
             if (!GameStateManager.Instance.JumpToCombat && !jumpToCombat)
@@ -248,6 +248,7 @@ namespace Dialogue.Epilogue
             
             EventInstance instance = bossfightTrackEmitter.EventInstance;
             instance.setParameterByNameWithLabel("BossState", "Fighting");
+            blizzardParticles.SetIntensity(0.25f);
             CombatManager.Instance.BeginCombat();
             
             yield return new WaitUntil(() => new GetGameState().Query() == GameState.GAME_WIN);
