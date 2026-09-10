@@ -1,14 +1,16 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+#nullable enable
 public abstract class StatusEffect
 {
     protected int buffStacks = 0;
     public int Stacks => buffStacks;
     public delegate void StatusEffectDelegate();
     public delegate void StatusEffectModifyValueDelegate(ref int integer);
-    public virtual bool ShouldRenderBuffIcon() => buffStacks > 0;
-    public EntityClass Host { get; private set; }
+    public virtual bool ShouldRenderBuffIcon() => buffStacks > 0 && GetIcon() != null;
+    public virtual bool ShouldRenderStackCount() => buffStacks > 0;
+    public EntityClass? Host { get; private set; }
 
     public virtual void OnHostAssigned(EntityClass host)
     {
@@ -49,6 +51,6 @@ public abstract class StatusEffect
     public void ClearBuff() { buffStacks = 0; }
 
     //Whenever a new Buff is created, make sure to add its Icon to Resources folder
-    public abstract Sprite GetIcon();
+    public abstract Sprite? GetIcon();
 
 }

@@ -17,5 +17,6 @@ MonoBehaviour:
   wound: {fileID: 21300000, guid: e3aa195cbddbdc746a9b7d4b661ecc77, type: 3}
   resonance: {fileID: 21300000, guid: 7af708b3e1c4e4b0497edc422888df7c, type: 3}
   dissonance: {fileID: 21300000, guid: 5074e141eda7e4f478766c386d5a129e, type: 3}
+  corruptedIves: {fileID: 21300000, guid: f921bbc86c0e6b944a4b0b27be572332, type: 3}
   damage: {fileID: 21300000, guid: 3fea2e94140c08246a0e502ee92d3761, type: 3}
   defense: {fileID: 21300000, guid: 926dc102ee6ad62488fa7f3605a127ce, type: 3}

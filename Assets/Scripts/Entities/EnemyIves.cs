@@ -13,6 +13,7 @@ public class EnemyIves : EnemyClass
         myName = "Le Ives";
         AddStacks(Resonate.buffName, 3);
         AddStacks(Dissonance.buffName, 3);
+        AddStacks(Decohering.buffName, 1);
     }
 
     public void InjectDeck(List<GameObject> actions)

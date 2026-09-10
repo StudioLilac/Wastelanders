@@ -6,27 +6,12 @@ public class Dissonance: StatusEffect
 {
     public const string buffName = "Dissonance";
 
-    public override void OnHostAssigned(EntityClass host)
+    public override void GainStacks(int stacks)
     {
-        base.OnHostAssigned(host);
-        Host.Subscribe<OnEntityTakeDamage>(HandleDamage);
-    }
+        base.GainStacks(stacks);
+        CheckLethality();
 
-    private void HandleDamage(OnEntityTakeDamage e)
-    {
-        if (e.DamageTaker == Host && e.Damage > 0)
-        {
-            GainStacks(1);
-            CheckLethality();
-            Host.UpdateBuffs();
-        }
-        else if (e.DamageDealer == Host && e.Damage > 0)
-        {
-            LoseStacks(1);
-            Host.UpdateBuffs();
-        }
     }
-
     private void CheckLethality()
     {
         if (Stacks > Host.Health)
@@ -36,7 +21,7 @@ public class Dissonance: StatusEffect
         }
     }
 
-    public override bool ShouldRenderBuffIcon() => Stacks > 0;
+    public override bool ShouldRenderBuffIcon() => Stacks >= 0;
     public override void ApplyStacks(ActionClass.RolledStats dup)
     {
         dup.CeilingBuffs -= this.buffStacks;
