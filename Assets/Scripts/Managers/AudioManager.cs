@@ -6,6 +6,7 @@ using Managers;
 using Systems.Persistence;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using STOP_MODE = FMOD.Studio.STOP_MODE;
 
 public class AudioManager : PersistentSingleton<AudioManager>
 {
@@ -58,6 +59,8 @@ public class AudioManager : PersistentSingleton<AudioManager>
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         DisposeAllChannels(); // ambient channels are scene-scoped, never outlive their scene
+        fmodMusicBus.stopAllEvents(STOP_MODE.ALLOWFADEOUT);
+        fmodSFXBus.stopAllEvents(STOP_MODE.ALLOWFADEOUT);
         SceneAudio incomingAudio = SceneData.FromSceneName(scene.name).GetAudio(sceneAudioDatabase);
 
         // This check allows us to have certain audio traacks persist across scenes 
