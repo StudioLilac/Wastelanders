@@ -3,6 +3,7 @@ using UnityEditor;
 using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
+using static SceneData;
 
 public class PlatformSplashScenePreprocessor : IPreprocessBuildWithReport
 {
@@ -17,7 +18,7 @@ public class PlatformSplashScenePreprocessor : IPreprocessBuildWithReport
 
         for (int i = 0; i < scenes.Length; i++)
         {
-            if (scenes[i].path.EndsWith("SplashScreenWebGL.unity"))
+            if (scenes[i].path.EndsWith($"{Get<SplashScreenWebGL>().SceneName}.unity"))
             {
                 if (scenes[i].enabled != isWebGL)
                 {
@@ -25,7 +26,7 @@ public class PlatformSplashScenePreprocessor : IPreprocessBuildWithReport
                     modified = true;
                 }
             }
-            else if (scenes[i].path.EndsWith("SplashScreen.unity"))
+            else if (scenes[i].path.EndsWith($"{Get<SplashScreen>().SceneName}.unity"))
             {
                 if (scenes[i].enabled == isWebGL)
                 {
