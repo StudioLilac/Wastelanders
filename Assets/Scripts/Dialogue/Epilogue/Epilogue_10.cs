@@ -118,7 +118,7 @@ namespace Dialogue.Epilogue
             jackie.SetReturnPosition(jackieReturnPosition.position);
             ives.SetReturnPosition(ivesReturnPosition.position);
             princess.SetReturnPosition(princessReturnPosition.position);
-            blizzardParticles.SetIntensity(0.25f);
+            blizzardParticles.SetIntensity(0.05f);
             backgroundOverlay.sortingOrder = UISortOrder.CharacterActors.GetOrder();
 
             if (!GameStateManager.Instance.JumpToCombat && !jumpToCombat)
@@ -215,7 +215,7 @@ namespace Dialogue.Epilogue
                 yield return new WaitForSeconds(0.5f);
                 AudioManager.Instance.FadeInBackgroundTrack(2f, tundraBg, true);
                 shaderBackground.SetActive(false); injectionOverlay.gameObject.SetActive(false);
-                blizzardParticles.SetIntensity(0.25f);
+                blizzardParticles.SetIntensity(0.05f);
                 horrorEffect.RampTo(0f, 0.5f);
                 ives.FaceLeft();
                 yield return new WaitForSeconds(1.5f);
@@ -229,8 +229,10 @@ namespace Dialogue.Epilogue
                 scrim.SetLightScreen();
                 purpleFlash.color = TRANSPARENT_PURPLE;
                 GameStateManager.Instance.JumpToCombat = false;
+                yield return new WaitForSeconds(0.5f);
             }
             StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(1.5f));
+            bossfightTrackEmitter.Play();
             yield return cutscene.Play(this);
 
             new BattleIntroEvent(Get<ClashIntro>()).Invoke();
@@ -238,17 +240,18 @@ namespace Dialogue.Epilogue
 
             princess.OwnedMinions.Add(ives);
             ives.InjectDeck(ivesActions);
-            bossfightTrackEmitter.Play();
 
             if (instakill) {
                 jackie.AddStacks(Accuracy.buffName, 999);
                 jackie.AddStacks(Resonate.buffName, 999);
             }
             
+            EventInstance instance = bossfightTrackEmitter.EventInstance;
+            instance.setParameterByNameWithLabel("BossState", "Fighting");
+            blizzardParticles.SetIntensity(0.25f);
             CombatManager.Instance.BeginCombat();
             
             yield return new WaitUntil(() => new GetGameState().Query() == GameState.GAME_WIN);
-            EventInstance instance = bossfightTrackEmitter.EventInstance;
             instance.setParameterByNameWithLabel("BossState", "Defeated");
             
             CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
