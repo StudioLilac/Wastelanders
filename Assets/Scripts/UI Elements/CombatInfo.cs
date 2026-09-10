@@ -216,6 +216,15 @@ public class CombatInfo : MonoBehaviour
         healthBar.gameObject.SetActive(false);
     }
 
+    public void EnableBuffList()
+    {
+        buffList.gameObject.SetActive(true);
+    }
+    public void DisableBuffList()
+    {
+        buffList.gameObject.SetActive(false);
+    }
+
     public virtual void ActivateCrosshair(float speed = 1)
     {
         if (!crosshair.activeSelf)

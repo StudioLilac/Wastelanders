@@ -3,6 +3,7 @@ using Entities;
 using FMOD.Studio;
 using FMODUnity;
 using Particles;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -57,6 +58,7 @@ namespace Dialogue.Epilogue
         [SerializeField] private SmokeScreenOverlay smokeScreen;
         
         [SerializeField] private List<GameObject> ivesActions;
+        [SerializeField] private Epilogue_10_Cutscene cutscene;
 
         private float justStartedFlickering = 0f;
         
@@ -212,49 +214,35 @@ namespace Dialogue.Epilogue
                 yield return UIFadeScreenManager.Instance.FadeInDarkScreen(2f);
                 yield return new WaitForSeconds(0.5f);
                 AudioManager.Instance.FadeInBackgroundTrack(2f, tundraBg, true);
-                shaderBackground.SetActive(false);
+                shaderBackground.SetActive(false); injectionOverlay.gameObject.SetActive(false);
                 blizzardParticles.SetIntensity(0.25f);
                 horrorEffect.RampTo(0f, 0.5f);
-                ives.FaceLeft(); princess.FaceLeft();
+                ives.FaceLeft();
                 yield return new WaitForSeconds(1.5f);
-                yield return UIFadeScreenManager.Instance.FadeInLightScreen(1.5f);
             }
             else
             {
                 ives.FaceLeft();
-                princess.FaceLeft();
                 background2.SetActive(false);
                 background1.SetActive(false);
                 shaderBackground.SetActive(false);
                 scrim.SetLightScreen();
                 purpleFlash.color = TRANSPARENT_PURPLE;
                 GameStateManager.Instance.JumpToCombat = false;
-                yield return UIFadeScreenManager.Instance.FadeInLightScreen(0.5f);
             }
-
-            yield return DialogueBoxV2.Instance.Play(Epilogue10Dialogue.PreBattleText(horrorEffect));
-            StartCoroutine(jackie.MoveToPosition(new Vector3(2.75f, 0.4f, jackie.transform.position.z), 0f, 10f));
-
-            yield return new WaitForSeconds(2);
-            ives.AttackAnimation("IsPunching");
-            horrorEffect.Burst(0.5f, 0.5f);
-            AudioManager.Instance.PlaySFX(SoundID.CB_fist_hit);
-            yield return StartCoroutine(jackie.StaggerEntities(ives, jackie, 0.4f));
-            yield return new DialogueAsCode().Line(DialogueCharacter.Jackie, "Crap. Looks like it's come to this.").Play();
-            
+            StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(1.5f));
+            yield return cutscene.Play(this);
 
             new BattleIntroEvent(Get<ClashIntro>()).Invoke();
-            
-            CombatManager.PlayersWinEvent += PlayersWin;
-            CombatManager.EnemiesWinEvent += EnemiesWin;
+            this.Subscribe<TeamWinEvent>(OnTeamWin);
 
             princess.OwnedMinions.Add(ives);
             ives.InjectDeck(ivesActions);
             bossfightTrackEmitter.Play();
 
             if (instakill) {
-                jackie.AddStacks(Accuracy.buffName, 5);
-                jackie.AddStacks(Resonate.buffName, 5);
+                jackie.AddStacks(Accuracy.buffName, 999);
+                jackie.AddStacks(Resonate.buffName, 999);
             }
             
             CombatManager.Instance.BeginCombat();
@@ -266,6 +254,21 @@ namespace Dialogue.Epilogue
             CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
             
             yield return UIFadeScreenManager.Instance.FadeInDarkScreen(2f);
+        }
+
+        void OnTeamWin(TeamWinEvent ev)
+        {
+            if (ev.Team == EntityTeam.PlayerTeam)
+            {
+                new SetGameState(GameState.GAME_WIN).Invoke();
+            }
+            else
+            {
+                new SetGameState(GameState.GAME_LOSE).Invoke();
+                GameOver.Instance.FadeInWithDialogue(new DialogueAsCode()
+                    .Line(DialogueCharacter.Jackie, "Rocky, I'm pulling out. We'll handle this together.")
+                );
+            }
         }
 
         public IEnumerator InjectionSequence(ControllableAudioChannel horror)
@@ -280,20 +283,6 @@ namespace Dialogue.Epilogue
             yield return horrorEffect.RampTo(0.3f, 1f);
             yield return new WaitForSeconds(1f);
             yield return injectionOverlay.FadeInLightScreen(0.5f);
-        }
-
-        private void PlayersWin()
-        {
-            CombatManager.EnemiesWinEvent -= EnemiesWin;
-            CombatManager.PlayersWinEvent -= PlayersWin;
-            CombatManager.Instance.GameState = GameState.GAME_WIN;
-        }
-
-        private void EnemiesWin()
-        {
-            CombatManager.EnemiesWinEvent -= EnemiesWin;
-            CombatManager.PlayersWinEvent -= PlayersWin;
-            CombatManager.Instance.GameState = GameState.GAME_LOSE;
         }
 
         private void OnPrincessFrogHurt(PrincessFrog.PrincessFrogHurtEvent e)
@@ -315,7 +304,7 @@ namespace Dialogue.Epilogue
             }
         }
 
-        private static class Epilogue10Dialogue
+        public static class Epilogue10Dialogue
         {
             public static DialogueAsCode Opening => new DialogueAsCode()
                 .Line(DialogueCharacter.Jay, "Feel that breeze picking up? There’s an opening up ahead!");
@@ -597,11 +586,10 @@ namespace Dialogue.Epilogue
                 .Line(DialogueCharacter.Rocky, "Let's stick with the plan. Everyone battle formations! Let’s get our people back!")
                 .Exit(DialogueCharacter.Jackie, DialogueCharacter.Rocky, DialogueCharacter.Kade, DialogueCharacter.Weise, DialogueCharacter.Ives);
 
-            public static DialogueAsCode PreBattleText(AnalogueHorrorEffect horrorEffect) => new DialogueAsCode()
-                .Line(DialogueCharacter.Jackie, "Rocky, I see the princess frog ahead. It’s alone, where’s the assault team?")
-                .Line(DialogueCharacter.Rocky, "We’re being held up by an ambush. Jay, how’s your gathering going, can you spare some men?")
-                .Do(new CallbackEvent(() => horrorEffect.Burst(0.3f)))
-                .Line(DialogueCharacter.Jay, " Can’t disengage. We’re being held back by the scouts. ")
+            public static DialogueAsCode PreBattleText() => new DialogueAsCode()
+                .Line(DialogueCharacter.Jackie, "Rocky, I see the princess frog ahead. Where’s the assault team?")
+                .Line(DialogueCharacter.Rocky, "We’re being held up by an influx of creatures. Jay, how’s your gathering going, can you spare some men?")
+                .Line(DialogueCharacter.Jay, " Can’t disengage. We’re being held back by the scouts.")
                 .Line(DialogueCharacter.Rocky, "Then it’s just you Jackie. I...")
                 .Line(DialogueCharacter.Rocky, "I trust you to engage. Keep yourself safe.")
                 .Line(DialogueCharacter.Jackie, "Got it. I’ll dip if it's too much to handle.")

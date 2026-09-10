@@ -564,11 +564,13 @@ public abstract class EntityClass : SelectClass
         DisableDice();
         statusEffects.Clear();
         UpdateBuffs();
+        combatInfo.DisableBuffList();
     }
 
     public void InCombat()
     {
         EnableHealthBar();
+        combatInfo.EnableBuffList();
     }
 
     public void UnTargetable()
