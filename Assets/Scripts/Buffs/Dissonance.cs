@@ -1,7 +1,5 @@
 using UnityEngine;
 
-public record OnDissonanceDeath(EntityClass Victim) : IEvent;
-
 public class Dissonance: StatusEffect
 {
     public const string buffName = "Dissonance";
@@ -27,8 +25,7 @@ public class Dissonance: StatusEffect
         if (Stacks > Host.Health)
         {
             overlay?.TriggerLethal();
-            new OnDissonanceDeath(Host).Invoke();
-            Host.StartCoroutine(Host.Die());
+            Host.SetCombatDeath();
         }
     }
 

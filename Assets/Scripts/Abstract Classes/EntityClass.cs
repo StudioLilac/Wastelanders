@@ -125,10 +125,7 @@ public abstract class EntityClass : SelectClass
         } 
         else
         {
-            IsDead = true;
-            RemoveEntityFromCombat();
-            OnEntityDeath?.Invoke(this);
-            new OnEntityDeath(this).Invoke();
+            SetCombatDeath();
         }
 
         new OnEntityTakeDamage(source, this, damage).Invoke();
@@ -137,6 +134,17 @@ public abstract class EntityClass : SelectClass
         if (damage > 0)
         {
             StartCoroutine(PlayHitAnimation(source, this, percentageDone));
+        }
+    }
+
+    public void SetCombatDeath()
+    {
+        if (!IsDead)
+        {
+            IsDead = true;
+            RemoveEntityFromCombat();
+            OnEntityDeath?.Invoke(this);
+            new OnEntityDeath(this).Invoke();
         }
     }
 
@@ -191,6 +199,8 @@ public abstract class EntityClass : SelectClass
         float runDistance = 10f * runDirection;
 
         DestroyDeck();
+        OutOfCombat();
+        UnTargetable();
 
         yield return StartCoroutine(MoveToPosition(myTransform.position + new Vector3(runDistance, 0, 0), 0, 0.8f));
         this.gameObject.SetActive(false);
@@ -571,6 +581,7 @@ public abstract class EntityClass : SelectClass
         DisableHealthBar();
         DisableDice();
         statusEffects.Clear();
+        combatInfo.DeactivateCardIcon();
         UpdateBuffs();
         combatInfo.DisableBuffList();
     }
@@ -578,6 +589,7 @@ public abstract class EntityClass : SelectClass
     public void InCombat()
     {
         EnableHealthBar();
+        combatInfo.ActivateCardIcon();
         combatInfo.EnableBuffList();
     }
 

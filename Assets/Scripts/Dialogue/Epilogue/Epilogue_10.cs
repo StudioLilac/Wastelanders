@@ -37,6 +37,7 @@ namespace Dialogue.Epilogue
         [SerializeField] private Canvas backgroundOverlay;
         [SerializeField] private CanvasGroupFadeHandler canvasGroupFadeHandler;
         [SerializeField] private AnalogueHorrorEffect horrorEffect;
+        [SerializeField] private SignalLostIntro signalLostIntro;
         [SerializeField] private Animator injectionClip;
 
         private bool shouldFlicker = false;
@@ -87,7 +88,7 @@ namespace Dialogue.Epilogue
             ives.OutOfCombat();
             princess.OutOfCombat();
             this.Subscribe<PrincessFrog.PrincessFrogHurtEvent>(OnPrincessFrogHurt);
-            this.Subscribe<EnemyIvesDied>(IvesDies);
+            this.Subscribe<OnEntityDeath>(EntityDeath);
         }
 
         public IEnumerator PurpleFlash(float fadeInDuration = 0.5f, float fadeOutDuration = 2f)
@@ -246,7 +247,6 @@ namespace Dialogue.Epilogue
             this.Subscribe<TeamWinEvent>(OnTeamWin);
 
             princess.OwnedMinions.Add(ives);
-            ives.InjectDeck(ivesActions);
 
             if (instakill) {
                 jackie.AddStacks(Accuracy.buffName, 999);
@@ -266,13 +266,18 @@ namespace Dialogue.Epilogue
             yield return UIFadeScreenManager.Instance.FadeInDarkScreen(2f);
         }
 
-        void IvesDies(EnemyIvesDied e)
+        private record IvesDied() : TeanWinContext;
+        void EntityDeath(OnEntityDeath e)
         {
-            new SetGameState(GameState.GAME_LOSE).Invoke();
-            // Replace the following with signal lost game over screen.
-            GameOver.Instance.FadeInWithDialogue(new DialogueAsCode()
-                .Line(DialogueCharacter.Ives, "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
-            );
+            if (e.Entity == ives)
+            {
+                new TeamWinEvent(EntityTeam.EnemyTeam, new IvesDied()).Invoke();
+                bossfightTrackEmitter.EventInstance.setParameterByNameWithLabel("BossState", "Defeated");
+            } else if (e.Entity == princess)
+            {
+                new TeamWinEvent(EntityTeam.PlayerTeam);
+            }
+            
         }
 
         void OnTeamWin(TeamWinEvent ev)
@@ -284,9 +289,22 @@ namespace Dialogue.Epilogue
             else
             {
                 new SetGameState(GameState.GAME_LOSE).Invoke();
-                GameOver.Instance.FadeInWithDialogue(new DialogueAsCode()
-                    .Line(DialogueCharacter.Jackie, "Rocky, I'm pulling out. We'll handle this together.")
-                );
+                
+                if (ev.Context is IvesDied)
+                {
+                    SoundID.VN_radio_static.Play();
+                    GameOver.Instance.FadeInWithDialogue(
+                    new DialogueAsCode().Line(DialogueCharacter.Ives, "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"),
+                    signalLostIntro
+                    );
+                } else
+                {
+                    GameOver.Instance.FadeInWithDialogue(
+                        new DialogueAsCode()
+                        .Line(DialogueCharacter.Jackie, "Rocky, I'm pulling out. We'll handle this together.")
+                    );
+                }
+                
             }
         }
 

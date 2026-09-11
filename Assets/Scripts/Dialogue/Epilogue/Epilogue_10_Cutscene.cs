@@ -142,7 +142,7 @@ namespace Dialogue.Epilogue
                 StartCoroutine(jackie.MoveToPosition(JackieAttackPrincessFrog.position, 0f, 2f));
                 yield return new WaitForSeconds(0.5f);
                 yield return StartCoroutine(ives.MoveToPosition(IvesInterceptPosition.position, 0f, 1f));
-                ives.AttackAnimation("IsPunching");
+                ives.AttackAnimation(FistCards.FIST_ANIMATION_NAME);
                 SoundID.CB_fist_hit.Play();
                 SoundID.VN_radio_static.Play();
                 analogueHorrorEffect.Burst(0.5f, 0.5f);

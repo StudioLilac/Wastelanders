@@ -2,21 +2,6 @@ using System.Collections;
 using UnityEngine;
 
 /// <summary>
-/// The intro beat of a game over screen: everything that happens between
-/// the loss firing and the dialogue starting.
-///
-/// GameOver keeps owning the buttons, sort orders and restart flow. Only
-/// the presentation of the loss varies, so that is the part we inject.
-/// </summary>
-public interface IGameOverIntro
-{
-    IEnumerator Play();
-
-    /// <summary>Undo anything global. Called before restart or scene load.</summary>
-    void Release();
-}
-
-/// <summary>
 /// "Signal Lost" — the alternate loss when Ives decoheres.
 ///
 /// Unlike the standard loss we do NOT fade to black. The battlefield stays
@@ -39,11 +24,10 @@ public class SignalLostIntro : MonoBehaviour, IGameOverIntro
     [SerializeField] private CanvasGroup partialScrim;
 
     [Tooltip("Carrier hum / tape hiss that replaces the music. Looping.")]
-    [SerializeField] private AudioSource carrierHum;
+    [SerializeField] private AudioClip carrierHum;
 
     [Header("Beats")]
     [SerializeField] private float stabDuration = 0.22f;
-    [SerializeField] private float rampDuration = 1.6f;
     [SerializeField] private float snowHold = 0.45f;
     [SerializeField] private float settleDuration = 0.8f;
 
@@ -62,60 +46,68 @@ public class SignalLostIntro : MonoBehaviour, IGameOverIntro
     [SerializeField] private float idleStabInterval = 6f;
     [Range(0f, 1f)][SerializeField] private float idleStabStrength = 0.55f;
 
-    Coroutine _idle;
+#nullable enable
+    Coroutine? idle;
+    ControllableAudioChannel? audioChannel;
 
     void Awake()
     {
         if (partialScrim != null) partialScrim.alpha = 0f;
-        if (carrierHum != null) carrierHum.volume = 0f;
     }
+
+    public string DeathMessage() => "Signal Lost...";
 
     public IEnumerator Play()
     {
         StopIdle();
-
-        // --- Beat 1: the stab. Signal breaks, music cuts. ---------------
-        AudioManager.Instance.StopMusic();          // NOTE: adjust to your API
-        if (horror != null) horror.Burst(1f, stabDuration);
-        if (carrierHum != null) { carrierHum.volume = 0f; carrierHum.Play(); }
-        yield return WaitUnscaled(stabDuration);
-
-        // --- Beat 2: degradation creeps in, battlefield still visible ---
-        float elapsed = 0f;
-        while (elapsed < rampDuration)
+        
+        var activeCamera = new GetActiveCamera().Query();
+        if (activeCamera != null) activeCamera.m_Lens.OrthographicSize += 1.5f;
+        if (carrierHum != null)
         {
-            elapsed += Time.unscaledDeltaTime;
-            float k = Mathf.Clamp01(elapsed / rampDuration);
-
-            if (horror != null) horror.SetIntensity(Mathf.Lerp(0f, 0.75f, k));
-            if (partialScrim != null) partialScrim.alpha = Mathf.Lerp(0f, scrimAlpha, k);
-            if (carrierHum != null)
-                carrierHum.volume = Mathf.Clamp01(elapsed / Mathf.Max(humFadeIn, 0.01f));
-
-            yield return null;
+            audioChannel = AudioManager.Instance.CreateChannel(carrierHum, AudioCategory.Music, level: 0f);
+            audioChannel.Play();
         }
 
-        // --- Beat 3: total signal loss ----------------------------------
-        if (horror != null) yield return horror.SignalLoss(snowHold);
-
-        // --- Beat 4: settle to a sustained, liveable level ---------------
-        // The clean UI arrives out of the snow on the far side of this.
-        float from = horror != null ? horror.intensity : 0f;
-        elapsed = 0f;
-        while (elapsed < settleDuration)
         {
-            elapsed += Time.unscaledDeltaTime;
-            float k = Mathf.Clamp01(elapsed / settleDuration);
-            if (horror != null) horror.SetIntensity(Mathf.Lerp(from, sustainedIntensity, k));
-            yield return null;
+            float elapsed = 0f;
+            while (elapsed < stabDuration)
+            {
+                elapsed += Time.unscaledDeltaTime;
+                float k = Mathf.Clamp01(elapsed / stabDuration);
+
+                if (horror != null) horror.SetIntensity(Mathf.Lerp(0f, 0.75f, k));
+                if (partialScrim != null) partialScrim.alpha = Mathf.Lerp(0f, scrimAlpha, k);
+                if (audioChannel != null)
+                    audioChannel.SetLevel(Mathf.Clamp01(elapsed / Mathf.Max(humFadeIn, 0.01f)));
+
+                yield return null;
+            }
         }
 
-        if (horror != null)
         {
-            horror.SetIntensity(sustainedIntensity);
-            horror.pulseAmount = 0.06f;     // slow breathing so the eye never settles
-            horror.snow = 0f;
+            if (horror != null) yield return horror.SignalLoss(snowHold);
         }
+
+        {
+            float from = horror != null ? horror.intensity : 0f;
+            float elapsed = 0f;
+            while (elapsed < settleDuration)
+            {
+                elapsed += Time.unscaledDeltaTime;
+                float k = Mathf.Clamp01(elapsed / settleDuration);
+                if (horror != null) horror.SetIntensity(Mathf.Lerp(from, sustainedIntensity, k));
+                yield return null;
+            }
+
+            if (horror != null)
+            {
+                horror.SetIntensity(sustainedIntensity);
+                horror.pulseAmount = 0.06f;
+                horror.snow = 0f;
+            }
+        }
+        
 
         StartIdle();
     }
@@ -129,25 +121,24 @@ public class SignalLostIntro : MonoBehaviour, IGameOverIntro
             horror.snow = 0f;
         }
         if (partialScrim != null) partialScrim.alpha = 0f;
-        if (carrierHum != null) carrierHum.Stop();
+        if (audioChannel != null) audioChannel.Stop();
     }
 
     void StartIdle()
     {
         if (idleStabInterval <= 0f) return;
-        _idle = StartCoroutine(IdleStabs());
+        idle = StartCoroutine(IdleStabs());
     }
 
     void StopIdle()
     {
-        if (_idle != null) { StopCoroutine(_idle); _idle = null; }
+        if (idle != null) { StopCoroutine(idle); idle = null; }
     }
 
     IEnumerator IdleStabs()
     {
         while (true)
         {
-            // Irregular spacing reads as a fault, regular spacing reads as an animation.
             yield return WaitUnscaled(idleStabInterval * Random.Range(0.6f, 1.7f));
             if (horror != null) horror.Burst(idleStabStrength, 0.15f);
         }

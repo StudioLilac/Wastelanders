@@ -2,9 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public record EnemyIvesDied() : IEvent;
 public class EnemyIves : EnemyClass
 {
+    [SerializeField] private Brace brace;
+    [SerializeField] private FollowThrough followThrough;
+    [SerializeField] private LeftHook leftHook;
+    [SerializeField] private RightHook rightHook;
+    [SerializeField] private Haymaker haymaker;
+    [SerializeField] private Pummel pummel;
+    [SerializeField] private Execute execute;
+    [SerializeField] private Cleave cleave;
+    [SerializeField] private Decimate decimate;
+    [SerializeField] private Whirl whirl;
+    [SerializeField] private Mutilate mutilate;
+    [SerializeField] private RazorGuard razorGuard;
+    
+
     public override void Start()
     {
         base.Start();
@@ -16,32 +29,23 @@ public class EnemyIves : EnemyClass
         AddStacks(Dissonance.buffName, 3);
     }
 
-    public void InjectDeck(List<GameObject> actions)
+    public override void AddAttack(List<EntityClass> targets)
     {
-        foreach (GameObject action in actions)
-        {
-            GameObject toAdd = Instantiate(action);
-            ActionClass addedClass = toAdd.GetComponent<ActionClass>();
-            toAdd.transform.position = new Vector3(-10, -10, -10);
-            addedClass.Origin = this;
 
-            deck.Add(toAdd);
-            pool.Add(toAdd);
-        }
     }
 
     public override IEnumerator Die()
     {
-        new EnemyIvesDied().Invoke();
-        BattleQueue.BattleQueueInstance.RemoveAllInstancesOfEntity(this);
         DestroyDeck();
-        combatInfo.DeactivateCardIcon();
+        UnTargetable();
+        OutOfCombat();
 
-        if (HasAnimationParameter("IsStaggered"))
+        yield return null;
+
+        if (HasAnimationParameter(STAGGERED_ANIMATION_NAME))
         {
-            animator.SetBool("IsStaggered", true);
+            animator.SetBool(STAGGERED_ANIMATION_NAME, true);
         }
-        yield break;
     }
 
 }

@@ -21,6 +21,10 @@ public class DissonanceBarOverlay : MonoBehaviour
     static readonly int ProximityID = Shader.PropertyToID("_Proximity");
     static readonly int PadXID = Shader.PropertyToID("_PadX");
     static readonly int PadYID = Shader.PropertyToID("_PadY");
+    static readonly int NoiseID = Shader.PropertyToID("_NoiseScale");
+    static readonly int ScanRowsID = Shader.PropertyToID("_ScanRows");
+    static readonly int SpillID = Shader.PropertyToID("_Spill");
+    static readonly int AspectID = Shader.PropertyToID("_BarAspect");
 
     [Header("References")]
     [Tooltip("The health bar's existing Slider. Read-only use: maxValue and value.")]
@@ -50,12 +54,54 @@ public class DissonanceBarOverlay : MonoBehaviour
     [Tooltip("Proximity below which the bar stays calm. Ratio of stacks to current health.")]
     [Range(0f, 1f)][SerializeField] private float proximityFloor = 0.15f;
 
+    public enum CellSizeMode
+    {
+        /// <summary>Project the rect to screen space and size cells in real pixels.
+        /// Correct for world space canvases, where lossyScale is world units.</summary>
+        ScreenPixels,
+        /// <summary>Size cells in the rect's own units (90x18 here). Stable and
+        /// camera-independent, but apparent cell size changes as you zoom.</summary>
+        RectUnits,
+        /// <summary>Leave _NoiseScale and _ScanRows alone; drive them from the material.</summary>
+        Manual
+    }
+
+    [Header("Cell Sizing")]
+    [Tooltip("How the noise grid is sized. ScreenPixels is correct for a world space " +
+             "canvas: lossyScale there is world units, not pixels, so naive scaling " +
+             "produces a 2-cell grid that strobes instead of reading as static.")]
+    [SerializeField] private CellSizeMode cellSizeMode = CellSizeMode.ScreenPixels;
+
+    [Tooltip("One static cell, in screen pixels (ScreenPixels) or rect units (RectUnits). " +
+             "3-5 px reads as TV snow.")]
+    [Range(0.5f, 16f)][SerializeField] private float cellSize = 4f;
+
+    [Tooltip("Spacing between scanlines, same units as cellSize. Too tight aliases into " +
+             "black banding. On a bar this short, consider _Scanline 0 instead.")]
+    [Range(1f, 24f)][SerializeField] private float scanlineSpacing = 5f;
+
+    [Tooltip("Clamps to stop degenerate grids on very small or very large bars.")]
+    [SerializeField] private Vector2 cellCountClamp = new Vector2(8f, 400f);
+
+    [Tooltip("Read-only: the grid actually being used. If this reads 8 x 1, measurement " +
+             "failed and every fine-grain slider (chroma, subpixel, separation) will look dead.")]
+    [SerializeField] private Vector2 debugCellCounts;
+
     [Header("Debug")]
+    [Tooltip("Copy the material ASSET's properties onto the live material every frame, so " +
+             "you can tune the material in the inspector during play and see it immediately. " +
+             "Turn OFF for shipping: it costs a copy per bar per frame and makes every bar " +
+             "share the asset's look.")]
+    [SerializeField] private bool liveEditMaterial;
+
     [Tooltip("Live stack count. Editable in play mode to preview without the status effect.")]
     [SerializeField] private int stacks;
 
     Material _template;         // per-instance base, so bars animate independently
     Material _spillTemplate;
+    bool _warnedMeasure;
+    Material _sourceAsset;      // the shared asset, kept for live editing
+    Material _spillSourceAsset;
     float _displayFill;
     float _targetFill;
     float _surge;
@@ -80,6 +126,7 @@ public class DissonanceBarOverlay : MonoBehaviour
     {
         if (staticFill != null && staticFill.material != null)
         {
+            _sourceAsset = staticFill.material;
             _template = new Material(staticFill.material);
             staticFill.material = _template;
             staticFill.raycastTarget = false;
@@ -87,11 +134,11 @@ public class DissonanceBarOverlay : MonoBehaviour
 
         if (spillFill != null && spillFill.material != null)
         {
+            _spillSourceAsset = spillFill.material;
             _spillTemplate = new Material(spillFill.material);
             _spillTemplate.SetFloat("_Spill", 1f);
             spillFill.material = _spillTemplate;
             spillFill.raycastTarget = false;
-            spillFill.enabled = true;
         }
 
         if (barRect == null && staticFill != null)
@@ -157,6 +204,99 @@ public class DissonanceBarOverlay : MonoBehaviour
             spillFill.enabled = visible;
     }
 
+    // UGUI writes the active mask configuration into the material it renders
+    // with. A blanket CopyPropertiesFromMaterial overwrites those, which
+    // silently disables the mask and leaves the Image drawing its own
+    // unclipped rect. So: save them, copy, put them back.
+    static readonly string[] StencilProps =
+    {
+        "_Stencil", "_StencilComp", "_StencilOp", "_StencilReadMask",
+        "_StencilWriteMask", "_ColorMask"
+    };
+
+    static readonly float[] StencilCache = new float[6];
+
+    static void CopyTunables(Material dst, Material src)
+    {
+        if (dst == null || src == null) return;
+
+        for (int i = 0; i < StencilProps.Length; i++)
+            StencilCache[i] = dst.HasProperty(StencilProps[i]) ? dst.GetFloat(StencilProps[i]) : -1f;
+
+        dst.CopyPropertiesFromMaterial(src);
+
+        for (int i = 0; i < StencilProps.Length; i++)
+            if (StencilCache[i] >= 0f && dst.HasProperty(StencilProps[i]))
+                dst.SetFloat(StencilProps[i], StencilCache[i]);
+    }
+
+    /// <summary>
+    /// Size the noise grid so cells land at a sensible on-screen size.
+    ///
+    /// Cell counts are meaningless on their own: 90 cells across a bar that is
+    /// 90 units wide but drawn at 0.05 scale in world space is nonsense either
+    /// way you slice it. ScreenPixels mode projects the rect's corners through
+    /// the canvas camera to get its true pixel footprint, which is the only
+    /// measurement that survives a world space canvas.
+    ///
+    /// Both images use bar-space cells, so both get the same values.
+    /// </summary>
+    void PushCellSizing(Material mat)
+    {
+        if (cellSizeMode == CellSizeMode.Manual || mat == null || barRect == null) return;
+
+        Vector2 size = barRect.rect.size;
+
+        if (cellSizeMode == CellSizeMode.ScreenPixels)
+        {
+            Vector2 screen = MeasureScreenSize();
+            // A world space canvas often has no camera to project through, and
+            // WorldToScreenPoint(null, ...) hands back raw world coordinates.
+            // Anything implausibly small is that failure, not a tiny bar.
+            if (screen.x >= 8f && screen.y >= 2f) size = screen;
+            else if (!_warnedMeasure)
+            {
+                _warnedMeasure = true;
+                Debug.LogWarning($"[DissonanceBarOverlay] Could not measure '{name}' in screen " +
+                    "pixels (no canvas camera?). Falling back to RectUnits. Assign the canvas " +
+                    "Event Camera, or set Cell Size Mode to RectUnits and tune cellSize.", this);
+            }
+        }
+
+        if (size.x < 0.01f || size.y < 0.01f) return;
+
+        float unit = Mathf.Max(cellSize, 0.01f);
+        float cellsX = Mathf.Clamp(size.x / unit, cellCountClamp.x, cellCountClamp.y);
+        float cellsY = Mathf.Clamp(size.y / unit, 1f, cellCountClamp.y);
+        mat.SetVector(NoiseID, new Vector4(cellsX, cellsY, 0f, 0f));
+        debugCellCounts = new Vector2(Mathf.Round(cellsX), Mathf.Round(cellsY));
+
+        float rows = Mathf.Clamp(size.y / Mathf.Max(scanlineSpacing, 0.01f), 1f, 64f);
+        mat.SetFloat(ScanRowsID, rows);
+
+        // Sparks need real proportions to stay round: bar UV is anisotropic.
+        Rect r = barRect.rect;
+        if (r.height > 0.01f)
+            mat.SetFloat(AspectID, Mathf.Clamp(r.width / r.height, 0.1f, 40f));
+    }
+
+    /// <summary>The bar's footprint in real screen pixels, camera and canvas aware.</summary>
+    Vector2 MeasureScreenSize()
+    {
+        Canvas canvas = staticFill != null ? staticFill.canvas : null;
+        Camera cam = null;
+        if (canvas != null && canvas.renderMode != RenderMode.ScreenSpaceOverlay)
+            cam = canvas.worldCamera != null ? canvas.worldCamera : Camera.main;
+
+        var corners = new Vector3[4];
+        barRect.GetWorldCorners(corners);
+
+        Vector2 bl = RectTransformUtility.WorldToScreenPoint(cam, corners[0]);
+        Vector2 tr = RectTransformUtility.WorldToScreenPoint(cam, corners[2]);
+
+        return new Vector2(Mathf.Abs(tr.x - bl.x), Mathf.Abs(tr.y - bl.y));
+    }
+
     /// <summary>
     /// The spill Image is bigger than the bar, so it needs to know where the
     /// bar sits inside its own rect. Computed from the two RectTransforms, so
@@ -202,15 +342,24 @@ public class DissonanceBarOverlay : MonoBehaviour
 
         float p = Mathf.Clamp01(proximity + _surge);
 
+        if (liveEditMaterial && _sourceAsset != null)
+            CopyTunables(mat, _sourceAsset);
+
         mat.SetFloat(FillID, _displayFill);
         mat.SetFloat(ProximityID, p);
+        mat.SetFloat(SpillID, 0f);
+        PushCellSizing(mat);
 
         Material spillMat = SpillMaterial;
         if (spillMat != null)
         {
+            if (liveEditMaterial && _spillSourceAsset != null)
+                CopyTunables(spillMat, _spillSourceAsset);
+
             spillMat.SetFloat(FillID, _displayFill);
             spillMat.SetFloat(ProximityID, p);
-            spillMat.SetFloat("_Spill", 1f);
+            spillMat.SetFloat(SpillID, 1f);
+            PushCellSizing(spillMat);
             PushPadding(spillMat);
         }
 

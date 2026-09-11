@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: UI_Dissonance Static
+  m_Name: UI_Dissonance Compact
   m_Shader: {fileID: 4800000, guid: eca914c65ba107744b1719d79c6df620, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -29,50 +29,31 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Chroma: 0.598
+    - _Ambient: 0.18
     - _ColorMask: 15
-    - _Contrast: 0.98
-    - _Crunch: 0.251
-    - _DarkHoles: 0.29
-    - _EdgeGlow: 0.018
-    - _EdgeRoughness: 7
-    - _EdgeSpeed: 1.4
-    - _EdgeWidth: 0.045
-    - _Feather: 0.012
+    - _Coverage: 0.8
+    - _EdgeWave: 0.07
     - _Fill: 0
-    - _FlashChance: 0.15
-    - _Floor: 0.128
+    - _Hold: 0.7
     - _Invert: 0
     - _PadX: 0
     - _PadY: 0
     - _Proximity: 0
-    - _Pulse: 0.35
-    - _PulseSpeed: 5
-    - _Rows: 9
-    - _Scanline: 0.2
-    - _Separation: 0.0262
-    - _Sparse: 0.25
     - _Spill: 0
     - _SpillAmount: 0.35
-    - _SpillFocus: 0.25
     - _SpillReach: 1
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0
     - _StencilReadMask: 255
     - _StencilWriteMask: 255
-    - _StepRate: 16
-    - _StreakChance: 0.3
-    - _StreakLength: 0.45
-    - _Subpixel: 0.137
-    - _Tear: 0.05
-    - _UseUIAlphaClip: 0
-    - _Whites: 0.62
-    - _WispReach: 0.06
+    - _StepRate: 3
+    - _WaveFreq: 1.5
+    - _WaveSpeed: 0.9
+    - _WhiteMix: 0.2
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EdgeColor: {r: 1, g: 1, b: 1, a: 1}
-    - _HotColor: {r: 1, g: 0.34999996, b: 0.39999998, a: 1}
-    - _NoiseScale: {r: 90, g: 7, b: 0, a: 0}
+    - _Ink: {r: 0.03, g: 0.03, b: 0.04, a: 1}
+    - _NoiseScale: {r: 45, g: 9, b: 0, a: 0}
+    - _Snow: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
