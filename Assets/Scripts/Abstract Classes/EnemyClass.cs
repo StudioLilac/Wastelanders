@@ -93,11 +93,7 @@ public abstract class EnemyClass : EntityClass
 
     protected virtual void Reshuffle()
     {
-        List<GameObject> temp = new List<GameObject>();
-        for (int i = 0; i < deck.Count; i++)
-        {
-            temp.Add(deck[i]);
-        }
+        List<GameObject> temp = new(deck);
 
         while (temp.Count > 0)
         {

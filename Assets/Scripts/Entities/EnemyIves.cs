@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.XR;
-using static Entities.PrincessFrog;
 
 public class EnemyIves : EnemyClass
 {
     private readonly Dictionary<Type, List<ActionClass>> instantiatedActions = new();
+    private readonly List<ActionClass> currentHand = new();
+    private bool firstTurn = true;
 
     public override void Start()
     {
@@ -22,30 +22,64 @@ public class EnemyIves : EnemyClass
         TargetingWeights = (entity => entity.Team == EntityTeam.PlayerTeam ? 30 : 10);
     }
 
-    private bool firstTurn = true;
+    
     public override void AddAttack(List<EntityClass> targets)
     {
         var opponents = targets.Where(entity => entity.Team == EntityTeam.PlayerTeam).ToList();
         var neutral = targets.Where(entity => entity.Team == EntityTeam.NeutralTeam).ToList();
+     
+        if (opponents.Count == 0) return;
+        
         int currentResonate = GetBuffStacks(Resonate.buffName);
         int currentDissonance = GetBuffStacks(Dissonance.buffName);
         int ivesAdvantage = currentResonate - currentDissonance;
         int hpWindow = Health - currentDissonance;
-
+        EntityClass RandomOpponent() => opponents[UnityEngine.Random.Range(0, opponents.Count)];
+        
         if (firstTurn)
         {
             firstTurn = false;
-            AttackWith(GetAction<Haymaker>(), opponents.FirstOrDefault());
+            AttackWith(GetAction<LowBlow>(), RandomOpponent());
             return;
         }
 
-        List<ActionClass> choices = instantiatedActions.Keys.Select(c => GetAction(c, i)).ToList();
-        List<ActionClass> chosenActions = new();
+        ActionClass topCard = GetTop();
+        currentHand.Add(topCard);
 
+        switch (topCard)
+        {
+            case Brace:
+                AttackWith(topCard, RandomOpponent());
+                break;
+            case RazorGuard:
+                AttackWith(topCard, RandomOpponent());
+                break;
+            default:
+                currentHand.ForEach(c => AttackWith(c, CalculateAttackTarget(targets)));
+                break;
+        };
 
-        chosenActions.ForEach(c => AttackWith(c, CalculateAttackTarget(targets)));
+        currentHand.Clear();
     }
 
+    private ActionClass GetTop()
+    {
+        if (pool.Count == 0)
+        {
+            Reshuffle();
+        }
+        var action = pool[0];
+        pool.RemoveAt(0);
+        return action.GetComponent<ActionClass>();
+    }
+
+    protected override void Reshuffle() {
+        base.Reshuffle();
+        var cheapStrike = GetAction<LowBlow>();
+        pool.Remove(cheapStrike.gameObject);
+        currentHand.ForEach(h => pool.Remove(h.gameObject));
+    }
+    
     public override void InstantiateDeck()
     {
         instantiatedActions.Clear();
@@ -63,6 +97,7 @@ public class EnemyIves : EnemyClass
             newAction.transform.position = new Vector3(-10, 10, 10);
 
             instantiatedActions[actionType].Add(newAction);
+            deck.Add(newAction.gameObject);
         }
     }
 

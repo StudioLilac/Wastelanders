@@ -38,7 +38,7 @@ namespace Entities
 
             myName = "Princess Frog";
             Health = MaxHealth = StartingHealth;
-            AddStacks(Resonate.buffName, 7);
+            AddStacks(Resonate.buffName, 6);
         }
 
         public override void InstantiateDeck()
