@@ -100,7 +100,7 @@ namespace Entities
             var hurtTeammates = OwnedMinions.Where(entity => entity.Health < entity.MaxHealth && !entity.IsDead).ToList();
             var aliveTeammates = OwnedMinions.Where(entity => !entity.IsDead).ToList();
 
-            List<EnemyClass> availableDeadMinions = GetStaggeredMinions();
+            List <EnemyClass> availableDeadMinions = GetStaggeredMinions();
             int activeMinionCount = OwnedMinions.Count - availableDeadMinions.Count + 1;
             int gobblePotentialStacks = 0;
 
@@ -132,10 +132,6 @@ namespace Entities
                         {
                             EntityClass hurtTarget = hurtTeammates[Random.Range(0, hurtTeammates.Count)];
                             AttackWith(BurpCards[i], hurtTarget);
-                        } else if (aliveTeammates.Count > 0)
-                        {
-                            EntityClass aliveTarget = aliveTeammates[Random.Range(0, aliveTeammates.Count)];
-                            AttackWith(BurpCards[i], aliveTarget);
                         } else
                         {
                             AttackWith(BlessCards[i], CalculateAttackTarget(opponents));

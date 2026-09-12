@@ -267,17 +267,16 @@ namespace Dialogue.Epilogue
         }
 
         private record IvesDied() : TeanWinContext;
+        
         void EntityDeath(OnEntityDeath e)
         {
             if (e.Entity == ives)
             {
                 new TeamWinEvent(EntityTeam.EnemyTeam, new IvesDied()).Invoke();
-                bossfightTrackEmitter.EventInstance.setParameterByNameWithLabel("BossState", "Defeated");
             } else if (e.Entity == princess)
             {
-                new TeamWinEvent(EntityTeam.PlayerTeam);
-            }
-            
+                new TeamWinEvent(EntityTeam.PlayerTeam).Invoke();
+            }    
         }
 
         void OnTeamWin(TeamWinEvent ev)
@@ -289,13 +288,14 @@ namespace Dialogue.Epilogue
             else
             {
                 new SetGameState(GameState.GAME_LOSE).Invoke();
-                
+                bossfightTrackEmitter.EventInstance.setParameterByNameWithLabel("BossState", "Defeated");
+
                 if (ev.Context is IvesDied)
                 {
                     SoundID.VN_radio_static.Play();
                     GameOver.Instance.FadeInWithDialogue(
-                    new DialogueAsCode().Line(DialogueCharacter.Ives, "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"),
-                    signalLostIntro
+                        new DialogueAsCode().Line(DialogueCharacter.Ives, "X'X XXXXX, X... XXXXXX'X XXXX XX XXXXXXX."),
+                        signalLostIntro
                     );
                 } else
                 {

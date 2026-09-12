@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static PlasticPipe.Server.MonitorStats;
 
 #nullable enable
 public abstract class EnemyClass : EntityClass
@@ -63,8 +64,12 @@ public abstract class EnemyClass : EntityClass
     // Use this if you would like to directly attack using deck
     public void AttackWith(GameObject attack, EntityClass? target)
     {
+        AttackWith(attack.GetComponent<ActionClass>(), target);
+    }
+
+    public void AttackWith(ActionClass action, EntityClass? target)
+    {
         if (target == null) return;
-        var action = attack.GetComponent<ActionClass>();
         action.Target = target;
         action.Origin = this;
         combatInfo.AddCombatSprite(action);
