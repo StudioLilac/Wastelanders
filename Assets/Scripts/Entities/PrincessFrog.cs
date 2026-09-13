@@ -30,7 +30,6 @@ namespace Entities
 
         public delegate bool AttackDeciderDelegate(int opponentCount);
 
-        public record PrincessFrogHurtEvent(int RemainingHealth) : IEvent;
 
         public override void Start()
         {
@@ -71,20 +70,6 @@ namespace Entities
                 }
             }
 
-        }
-
-        protected override void OnEnable()
-        {
-            base.OnEnable();
-
-            EntityTookDamage += HandleDamage;
-        }
-
-        protected override void OnDisable()
-        {
-            base.OnDisable();
-
-            EntityTookDamage -= HandleDamage;
         }
 
         private List<EnemyClass> GetStaggeredMinions()
@@ -172,16 +157,6 @@ namespace Entities
                 }
 
             }
-        }       
-
-        private void HandleDamage(int amount)
-        {
-            if (amount == 0) return;
-            
-            new PrincessFrogHurtEvent(Health).Invoke();
-
-            /* Lose stacks when taking (non-zero) damage. Commented out for balance for now*/
-            //ReduceStacks(Resonate.buffName, 1);
         }
     }
 }

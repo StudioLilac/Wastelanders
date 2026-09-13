@@ -9,7 +9,7 @@ using UnityEditor.Animations;
 #endif
 
 public record OnEntityDeath(EntityClass Entity) : IEvent;
-public record OnEntityTakeDamage(EntityClass DamageDealer, EntityClass DamageTaker, int Damage) : IEvent;
+public record OnEntityTakeDamage(EntityClass DamageDealer, EntityClass DamageTaker, int Damage, int RemainingHealth) : IEvent;
 public record EntityFacingChanged(EntityClass Entity) : IEvent;
 public record OnBuffsUpdatedEvent(EntityClass WhoAmI) : IEvent;
 
@@ -128,7 +128,7 @@ public abstract class EntityClass : SelectClass
             SetCombatDeath();
         }
 
-        new OnEntityTakeDamage(source, this, damage).Invoke();
+        new OnEntityTakeDamage(source, this, damage, Health).Invoke();
         EntityTookDamage?.Invoke(damage);
         combatInfo.DisplayDamage(damage);
         if (damage > 0)
