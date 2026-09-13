@@ -360,7 +360,7 @@ MonoBehaviour:
   moonCamera: {fileID: 1496281323}
   effectsParent: {fileID: 1652569398}
   uiFadeHandler: {fileID: 550400670}
-  timeScale: 5
+  timeScale: 4
   povBlizzard: {fileID: 1865732628}
   fogVolume2D: {fileID: 1446104670}
   clouds: {fileID: 666000006}

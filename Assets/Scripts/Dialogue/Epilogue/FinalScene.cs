@@ -37,7 +37,7 @@ namespace Dialogue.Epilogue {
         }
 
         private Camera mainCamera;
-        [SerializeField] private float timeScale = 5f;
+        [SerializeField] private float timeScale = 4f;
         
         private List<CaptionNarration> narrations;
         
@@ -219,10 +219,11 @@ namespace Dialogue.Epilogue {
             mainCamera.enabled = false;
             moonCamera.enabled = true;
             DisableSnowEffects();
-            
+
+            yield return new WaitForSeconds(0.5f);
             // moon scene time
             StartCoroutine(FadeFMODVolume(blizzardInstance, 0f, 0.5f, 0.5f));
-            yield return StartCoroutine(uiFadeHandler.FadeInLightScreen(0.5f));
+            yield return StartCoroutine(uiFadeHandler.FadeInLightScreen(1f));
         }
         
         private IEnumerator FadeText(TextMeshProUGUI textMesh, float targetAlpha, float duration)
