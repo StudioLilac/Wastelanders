@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 8fb8db2b30111ff43b955efd46810523
+guid: 8749200d53a62b44bbad7e610b25ac2b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6927421114980046641
-    second: camflashback_0
+      213: -1101550387443212798
+    second: camflashback 1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -96,16 +96,29 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: camflashback_0
+      name: camflashback 1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1577
+        width: 1574
         height: 880
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -115,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fc8e210f23bdcdf90800000000000000
-      internalID: -6927421114980046641
+      spriteID: 20ed04642c186b0f0800000000000000
+      internalID: -1101550387443212798
       vertices: []
       indices: 
       edges: []
@@ -125,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      camflashback_0: -6927421114980046641
+      camflashback 1_0: -1101550387443212798
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

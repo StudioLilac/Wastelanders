@@ -38,7 +38,7 @@
     },
     {
       "content": "I'm here! Just... hold on. We have to get you back to Kade.",
-      "duration": 0,
+      "duration": 1,
       "speaker": "Jackie",
       "signal": ""
     },
@@ -56,7 +56,7 @@
     },
     {
       "content": "I got you. I can carry you back. Just please, please hang on!",
-      "duration": 0,
+      "duration": 1,
       "speaker": "Jackie",
       "signal": ""
     },
@@ -74,13 +74,13 @@
     },
     {
       "content": "I can't be making any more promises I can't keep.",
-      "duration": 0,
+      "duration": 1,
       "speaker": "Ives",
       "signal": ""
     },
     {
       "content": "Jackie freezes. A familiar feeling rises up her throat, threatening to burst from her chest.",
-      "duration": 0,
+      "duration": 1.5,
       "speaker": "Narration",
       "signal": ""
     },
@@ -92,7 +92,7 @@
     },
     {
       "content": "She's hurt and it's all your fault. You're killing her.",
-      "duration": 0,
+      "duration": 1,
       "speaker": "Narration",
       "signal": ""
     },
