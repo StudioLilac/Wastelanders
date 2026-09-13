@@ -76,10 +76,10 @@
 	</object>
 	<object class="SingleSound" id="{ee178da4-459d-4267-a5b3-879beff2dfd1}">
 		<property name="length">
-			<value>322.96804402709358</value>
+			<value>324.96804402709358</value>
 		</property>
 		<property name="timelockedOffset">
-			<value>16.748768472906406</value>
+			<value>14.748768472906406</value>
 		</property>
 		<relationship name="fadeInCurve">
 			<destination>{c53c6a01-54b9-4953-92b2-74fba03a0c75}</destination>
