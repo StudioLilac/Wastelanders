@@ -207,6 +207,7 @@ namespace Dialogue.Epilogue {
         private IEnumerator PlayJayFlashbackSequence()
         {
             jayFlashback.color = new Color(1, 1, 1, 1);
+            yield return new WaitForSeconds(1f);
             yield return StartCoroutine(uiFadeHandler.FadeInLightScreen(1f));
         }
 
