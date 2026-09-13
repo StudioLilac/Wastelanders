@@ -81,10 +81,10 @@ namespace Dialogue.Epilogue
             ;
 
         public static DialogueAsCode Dialogue => new DialogueAsCode()
-            .Enter(DialogueCharacter.Cam, CharacterActions.SetLeft, DialogueSprite.CamTalk)
+            .Enter(DialogueCharacter.Cam, CharacterActions.SetRight, DialogueSprite.CamTalk)
             .Line(DialogueCharacter.Cam, "Hey Jackie, connection alright?")
 
-            .Enter(DialogueCharacter.Jackie, CharacterActions.SetRight, DialogueSprite.JackieSmile)
+            .Enter(DialogueCharacter.Jackie, CharacterActions.SetLeft, DialogueSprite.JackieSmile)
             .Line(DialogueCharacter.Jackie, "Hey Cam! I hear ya.")
             .Line(DialogueCharacter.Cam, "Good, how's it going out there?", DialogueSprite.CamSmile)
             .Line(DialogueCharacter.Jackie,
