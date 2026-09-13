@@ -1,0 +1,26 @@
+title: Start
+---
+<<bg 1>>
+Narrator: Swap backgrounds?
+
+-> Yes.
+    <<jump End>>
+-> No.
+    <<jump Ask>>
+===
+
+title: Ask
+---
+Narrator: This is a longer line of dialogue to give you time to test the "hurry up" functionality. Are you really sure that you don't want to swap backgrounds?
+
+-> Yes.
+    <<jump Ask>>
+-> No.
+    <<jump End>>
+===
+
+title: End
+---
+<<bg 2 0.5>>
+Narrator: Goodbye.
+===

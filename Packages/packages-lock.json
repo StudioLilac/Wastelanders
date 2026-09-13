@@ -160,7 +160,7 @@
       }
     },
     "com.unity.ide.rider": {
-      "version": "3.0.38",
+      "version": "3.0.40",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -249,6 +249,13 @@
         "com.unity.modules.jsonserialize": "1.0.0"
       },
       "url": "https://packages.unity.com"
+    },
+    "dev.yarnspinner.unity": {
+      "version": "https://github.com/YarnSpinnerTool/YarnSpinner-Unity.git#current",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "bfc5b6a2e8bc8978e777caeea3a827a0d408cc7d"
     },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",
