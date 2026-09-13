@@ -9,6 +9,7 @@ using UnityEditor.Animations;
 #endif
 
 public record OnEntityDeath(EntityClass Entity) : IEvent;
+public record OnEntityTakeDamage(EntityClass DamageDealer, EntityClass DamageTaker, int Damage, int RemainingHealth) : IEvent;
 public record EntityFacingChanged(EntityClass Entity) : IEvent;
 public record OnBuffsUpdatedEvent(EntityClass WhoAmI) : IEvent;
 
@@ -124,17 +125,26 @@ public abstract class EntityClass : SelectClass
         } 
         else
         {
-            IsDead = true;
-            RemoveEntityFromCombat();
-            OnEntityDeath?.Invoke(this);
-            new OnEntityDeath(this).Invoke();
+            SetCombatDeath();
         }
 
+        new OnEntityTakeDamage(source, this, damage, Health).Invoke();
         EntityTookDamage?.Invoke(damage);
         combatInfo.DisplayDamage(damage);
         if (damage > 0)
         {
             StartCoroutine(PlayHitAnimation(source, this, percentageDone));
+        }
+    }
+
+    public void SetCombatDeath()
+    {
+        if (!IsDead)
+        {
+            IsDead = true;
+            RemoveEntityFromCombat();
+            OnEntityDeath?.Invoke(this);
+            new OnEntityDeath(this).Invoke();
         }
     }
 
@@ -189,6 +199,8 @@ public abstract class EntityClass : SelectClass
         float runDistance = 10f * runDirection;
 
         DestroyDeck();
+        OutOfCombat();
+        UnTargetable();
 
         yield return StartCoroutine(MoveToPosition(myTransform.position + new Vector3(runDistance, 0, 0), 0, 0.8f));
         this.gameObject.SetActive(false);
@@ -411,6 +423,7 @@ public abstract class EntityClass : SelectClass
         if (!statusEffects.ContainsKey(buffType))
         {
             statusEffects[buffType] = BuffFactory.GetStatusEffect(buffType);
+            statusEffects[buffType].OnHostAssigned(this);
         }
     }
 
@@ -460,6 +473,11 @@ public abstract class EntityClass : SelectClass
     public int GetBuffStacks(string s)
     {
         return statusEffects.TryGetValue(s, out var effect) ? effect.Stacks : 0;
+    }
+
+    public bool HasBuff(string buffType)
+    {
+        return statusEffects.ContainsKey(buffType) && statusEffects[buffType].Stacks > 0;
     }
 
     // Updates buffs affected by player taking damage
@@ -563,6 +581,7 @@ public abstract class EntityClass : SelectClass
         DisableHealthBar();
         DisableDice();
         statusEffects.Clear();
+        combatInfo.DeactivateCardIcon();
         UpdateBuffs();
         combatInfo.DisableBuffList();
     }
@@ -570,6 +589,7 @@ public abstract class EntityClass : SelectClass
     public void InCombat()
     {
         EnableHealthBar();
+        combatInfo.ActivateCardIcon();
         combatInfo.EnableBuffList();
     }
 
@@ -593,16 +613,6 @@ public abstract class EntityClass : SelectClass
         combatInfo.UpdateBuffs(statusEffects);
         BuffsUpdatedEvent?.Invoke(this);
         new OnBuffsUpdatedEvent(this).Invoke();
-    }
-
-    //Please use the originalHandler to resubscribe when you are done :3
-    public StatusEffectModifyValueDelegate SetBuffsOnHitHandler(string buff, StatusEffectModifyValueDelegate handler)
-    {
-        CheckBuff(buff);
-        StatusEffectModifyValueDelegate originalHandler = statusEffects[buff].OnEntityHitHandler;
-        statusEffects[buff].OnEntityHitHandler = handler;
-        Debug.Log("A buff handler is being reassigned, be careful!");
-        return originalHandler;
     }
 
     public void EnableDice()

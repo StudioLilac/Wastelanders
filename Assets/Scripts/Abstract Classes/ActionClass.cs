@@ -446,7 +446,7 @@ public abstract class ActionClass : SelectClass
         public int FloorBuffs { get; set; } = 0;
         public int CeilingBuffs { get; set; } = 0;
         public int RollFloor => Math.Clamp(value: baseRollFloor + FloorBuffs, min: 0 , max: RollCeiling);
-        public int RollCeiling => baseRollCeiling + CeilingBuffs;
+        public int RollCeiling => Math.Max(baseRollCeiling + CeilingBuffs, baseRollFloor);
 
         //We want to render these one time buffs so we keep track of its name, lower and upper bound buffs to this card.
         public (StatusEffect?, int floorBuff, int ceilingBuff) OneTimeBuffs { get; set; } = (null, 0, 0); 

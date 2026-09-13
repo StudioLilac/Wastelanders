@@ -7,22 +7,16 @@ public class BuffFactory : MonoBehaviour
     // Returns a Buff of the Specified Type
     public static StatusEffect GetStatusEffect(string buffType)
     {
-        switch (buffType)
+        return buffType switch
         {
-            case Accuracy.buffName:
-                return new Accuracy();
-
-            case Flow.buffName:
-                return new Flow();
-
-            case Resonate.buffName:
-                return new Resonate();
-
-            case Wound.buffName:
-                return new Wound();
-
-            default:
-                throw new System.Exception("Unkown Buff: " + buffType);
-        }
+            Accuracy.buffName => new Accuracy(),
+            Flow.buffName => new Flow(),
+            Resonate.buffName => new Resonate(),
+            Wound.buffName => new Wound(),
+            Dissonance.buffName => new Dissonance(),
+            Decohering.buffName => new Decohering(),
+            Steadied.buffName => new Steadied(),
+            _ => throw new System.Exception("Unkown Buff: " + buffType),
+        };
     }
 }

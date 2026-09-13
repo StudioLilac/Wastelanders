@@ -29,6 +29,7 @@ public class BattleQueue : MonoBehaviour
         }
         this.Subscribe<BattleBegin>(BeginDequeue);
         this.Subscribe<BattleQueueIconClick>(DeletePlayerAction);
+        this.Subscribe<TeamWinEvent>(_ => ClearBattleQueue());
     }
 
     public void AddAction(ActionClass action)

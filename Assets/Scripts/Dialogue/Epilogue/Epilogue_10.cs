@@ -3,6 +3,7 @@ using Entities;
 using FMOD.Studio;
 using FMODUnity;
 using Particles;
+using SceneBuilder;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -36,6 +37,7 @@ namespace Dialogue.Epilogue
         [SerializeField] private Canvas backgroundOverlay;
         [SerializeField] private CanvasGroupFadeHandler canvasGroupFadeHandler;
         [SerializeField] private AnalogueHorrorEffect horrorEffect;
+        [SerializeField] private SignalLostIntro signalLostIntro;
         [SerializeField] private Animator injectionClip;
 
         private bool shouldFlicker = false;
@@ -56,10 +58,13 @@ namespace Dialogue.Epilogue
         [SerializeField] private StudioEventEmitter bossfightTrackEmitter;
         [SerializeField] private Blizzard blizzardParticles;
         [SerializeField] private SmokeScreenOverlay smokeScreen;
-        
-        [SerializeField] private List<GameObject> ivesActions;
+        [SerializeField] private CrownDetach crownDetachEvent;
+        [SerializeField] private ImpactSequencer impactSequncer;
+        [SerializeField] private ParticleSystem coneSpew;
+        [SerializeField] private ParticleSystem radialBurst;
+        [SerializeField] private SpriteDissolver princessDissolver;
         [SerializeField] private Epilogue_10_Cutscene cutscene;
-
+        private DefaultSceneBuilder sceneBuilder;
         private float justStartedFlickering = 0f;
         
         private void Update()
@@ -74,16 +79,21 @@ namespace Dialogue.Epilogue
         {
             if (gameState == GameState.GAME_START)
             {
-                StartCoroutine(
-                    ExecuteSceneStart());
+                StartCoroutine(ExecuteSceneStart());
             }
         }
 
         void Setup() {
+            sceneBuilder = DefaultSceneBuilder.Construct();
+            sceneBuilder.PlayersPosition = jackieReturnPosition;
+
             jackie.OutOfCombat();
             ives.OutOfCombat();
             princess.OutOfCombat();
-            this.Subscribe<PrincessFrog.PrincessFrogHurtEvent>(OnPrincessFrogHurt);
+            princess.DeathHandler = PrincessDeathHandler;
+
+            this.Subscribe<OnEntityTakeDamage>(OnPrincessFrogHurt);
+            this.Subscribe<OnEntityDeath>(EntityDeath);
         }
 
         public IEnumerator PurpleFlash(float fadeInDuration = 0.5f, float fadeOutDuration = 2f)
@@ -219,6 +229,10 @@ namespace Dialogue.Epilogue
                 horrorEffect.RampTo(0f, 0.5f);
                 ives.FaceLeft();
                 yield return new WaitForSeconds(1.5f);
+                StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(1.5f));
+                bossfightTrackEmitter.Play();
+                yield return cutscene.Play(this);
+                yield return new WaitForSeconds(0.5f);
             }
             else
             {
@@ -229,17 +243,15 @@ namespace Dialogue.Epilogue
                 scrim.SetLightScreen();
                 purpleFlash.color = TRANSPARENT_PURPLE;
                 GameStateManager.Instance.JumpToCombat = false;
-                yield return new WaitForSeconds(0.5f);
+                bossfightTrackEmitter.Play();
+                cutscene.JumpToCombat();
+                yield return new WaitForSeconds(1.5f);
             }
-            StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(1.5f));
-            bossfightTrackEmitter.Play();
-            yield return cutscene.Play(this);
 
             new BattleIntroEvent(Get<ClashIntro>()).Invoke();
             this.Subscribe<TeamWinEvent>(OnTeamWin);
 
             princess.OwnedMinions.Add(ives);
-            ives.InjectDeck(ivesActions);
 
             if (instakill) {
                 jackie.AddStacks(Accuracy.buffName, 999);
@@ -252,11 +264,60 @@ namespace Dialogue.Epilogue
             CombatManager.Instance.BeginCombat();
             
             yield return new WaitUntil(() => new GetGameState().Query() == GameState.GAME_WIN);
-            instance.setParameterByNameWithLabel("BossState", "Defeated");
             
             CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
-            
-            yield return UIFadeScreenManager.Instance.FadeInDarkScreen(2f);
+        }
+
+        IEnumerator PrincessDeathHandler()
+        {
+
+            princess.DestroyDeck();
+            princess.UnTargetable();
+            princess.SetStaggered(true);
+
+            princess.FaceLeft();
+            yield return new WaitForSeconds(0.4f);
+            princess.FaceRight();
+            yield return new WaitForSeconds(0.4f);
+            princess.FaceLeft();
+            yield return new WaitForSeconds(0.4f);
+            princess.SetStaggered(false);
+
+
+            Coroutine coroutine = StartCoroutine(princess.MoveToPosition(crownDetachEvent.SpawnedCrown.transform.position, 0f, 1.5f));
+            yield return new WaitForSeconds(0.3f);
+            yield return ives.MoveToPosition(princess.transform.position, 2.5f, 0.7f);
+            ives.AttackAnimation(AxeCards.AXE_ANIMATION_NAME);
+            SoundID.CB_axe_cut.Play();
+            StopCoroutine(coroutine);
+            StartCoroutine(princess.StaggerBack(princess.transform.position));
+            princess.SetStaggered(true);
+            new ShakeScreen(Intensity: 1f, Duration: 3f, false).Invoke();
+            VfxAim.SpewFrom(coneSpew, ives.transform, princess.transform);
+            yield return new WaitForSeconds(1f);
+            radialBurst.Play();
+            Vector2 sweep = princess.transform.position - ives.transform.position;
+            yield return princessDissolver.Play(sweep);
+            yield return new WaitForSeconds(1f);
+            ives.SetStaggered(true);
+            yield return new WaitForSeconds(0.5f);
+            var fade = StartCoroutine(UIFadeScreenManager.Instance.FadeInDarkScreen(1.5f));
+            yield return new WaitForSeconds(0.5f);
+            StartCoroutine(jackie.MoveToPosition(ives.transform.position, 0f, 1.5f));
+            yield return fade;
+        }
+
+        private record IvesDied() : TeanWinContext;
+        
+        void EntityDeath(OnEntityDeath e)
+        {
+            if (e.Entity == ives)
+            {
+                new TeamWinEvent(EntityTeam.EnemyTeam, new IvesDied()).Invoke();
+            } else if (e.Entity == princess)
+            {
+                new TeamWinEvent(EntityTeam.PlayerTeam).Invoke();
+            }    
         }
 
         void OnTeamWin(TeamWinEvent ev)
@@ -268,9 +329,23 @@ namespace Dialogue.Epilogue
             else
             {
                 new SetGameState(GameState.GAME_LOSE).Invoke();
-                GameOver.Instance.FadeInWithDialogue(new DialogueAsCode()
-                    .Line(DialogueCharacter.Jackie, "Rocky, I'm pulling out. We'll handle this together.")
-                );
+                bossfightTrackEmitter.EventInstance.setParameterByNameWithLabel("BossState", "Defeated");
+
+                if (ev.Context is IvesDied)
+                {
+                    SoundID.VN_radio_static.Play();
+                    GameOver.Instance.FadeInWithDialogue(
+                        new DialogueAsCode().Line(DialogueCharacter.Ives, "X'X XXXXX, X... XXXXXX'X XXXX XX XXXXXXX."),
+                        signalLostIntro
+                    );
+                } else
+                {
+                    GameOver.Instance.FadeInWithDialogue(
+                        new DialogueAsCode()
+                        .Line(DialogueCharacter.Jackie, "Rocky, I'm pulling out. We'll handle this together.")
+                    );
+                }
+                
             }
         }
 
@@ -288,8 +363,10 @@ namespace Dialogue.Epilogue
             yield return injectionOverlay.FadeInLightScreen(0.5f);
         }
 
-        private void OnPrincessFrogHurt(PrincessFrog.PrincessFrogHurtEvent e)
+        private void OnPrincessFrogHurt(OnEntityTakeDamage e)
         {
+            if (e.DamageTaker != princess) return;
+
             switch (e.RemainingHealth)
             {
                 case > 35:
@@ -300,6 +377,13 @@ namespace Dialogue.Epilogue
                     break;
                 case > 10:
                     blizzardParticles.SetIntensity(0.75f);
+                    break;
+                case <= 0:
+                    ImpactSilhouette.Attach(e.DamageDealer.gameObject);
+                    ImpactSilhouette.Attach(e.DamageTaker.gameObject);
+                    crownDetachEvent.SetFacing(Mathf.Sign(e.DamageTaker.transform.position.x - e.DamageDealer.transform.position.x));
+                    princess.OutOfCombat();
+                    impactSequncer.Play();
                     break;
                 default:
                     blizzardParticles.SetIntensity(1f);

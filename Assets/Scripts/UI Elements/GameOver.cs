@@ -1,7 +1,19 @@
 using DialogueScripts;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+
+
+/// The intro beat of a game over screen.
+public interface IGameOverIntro
+{
+    IEnumerator Play();
+    /// Undo anything global. Called before restart or scene load.
+    void Release();
+    string DeathMessage();
+}
+
 
 public class GameOver : MonoBehaviour
 {
@@ -13,9 +25,10 @@ public class GameOver : MonoBehaviour
     [SerializeField] bool shouldJumpToCombatWhenRestart = true;
     [SerializeField] Button levelSelectButton;
     [SerializeField] Button deckSelectButton;
-    [SerializeField] GameObject gameOverText;
+    [SerializeField] TextMeshProUGUI gameOverText;
     [SerializeField] UIFadeHandler uiFadeScreen;
 # nullable enable
+    private IGameOverIntro? activeIntro = null;
     public const float FADE_IN_TIME = 1f;
 
     void Awake()
@@ -61,16 +74,28 @@ public class GameOver : MonoBehaviour
     {
         StartCoroutine(BeginFadeIn(dialogue));
     }
-    public void FadeInWithDialogue(DialogueAsCode dialogue)
+    public void FadeInWithDialogue(DialogueAsCode dialogue, IGameOverIntro? intro = null)
     {
-        StartCoroutine(BeginFadeIn(dialogue));
+        StartCoroutine(BeginFadeIn(dialogue, intro));
     }
 
-    private IEnumerator BeginFadeIn(DialogueEntry[] dialogue)
+    private IEnumerator BeginFadeIn(DialogueEntry[] dialogue, IGameOverIntro? intro = null)
     {
         canvasGroup.blocksRaycasts = true;
-        AudioManager.Instance.PlayDeath();
-        yield return StartCoroutine(uiFadeScreen.FadeInDarkScreen(1.5f));
+        activeIntro = intro;
+
+        if (intro != null)
+        {
+            if (!string.IsNullOrEmpty(intro.DeathMessage())) gameOverText.text = intro.DeathMessage();
+            yield return StartCoroutine(intro.Play());
+
+        }
+        else
+        {
+            AudioManager.Instance.PlayDeath();
+            yield return StartCoroutine(uiFadeScreen.FadeInDarkScreen(1.5f));
+        }
+
         StartCoroutine(FadeCoroutine(true, FADE_IN_TIME));
         DialogueBoxV2.Instance.ChangeDialogueBoxOrder(UISortOrder.GameOverDialogue.GetOrder());
         yield return new WaitForSeconds(0.5f);

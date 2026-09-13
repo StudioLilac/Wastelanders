@@ -18,7 +18,7 @@ public record CanHighlight() : IQuery<bool?>;
 public record GetTeammates(EntityTeam Team) : IQuery<List<EntityClass>?>;
 public record GetOpponents(EntityTeam Team) : IQuery<List<EntityClass>?>;
 public record GameStateChanged(GameState OldState, GameState NewState): IEvent;
-public record TeamWinEvent(EntityTeam Team) : IEvent;
+public record TeamWinEvent(EntityTeam Team, TeanWinContext? Context = null) : IEvent; public record TeanWinContext();
 #nullable disable
 
 public class CombatManager : MonoBehaviour

@@ -20,6 +20,7 @@ public class CombatInfo : MonoBehaviour
     public GameObject diceRollText;
     public GameObject buffIconPrefab;
     public HealthBar healthBar;
+    public DissonanceBarOverlay dissonanceBar;
     public GameObject crosshair;
     public TMP_Text damagePopupText;
     private float ROTATION_SPEED = 30f;
@@ -354,16 +355,17 @@ public class CombatInfo : MonoBehaviour
 
         foreach (string str in buffs.Keys)
         {
-            if (buffs[str].Stacks == 0) continue;
+            StatusEffect buff = buffs[str];
+            if (!buff.ShouldRenderBuffIcon()) continue;
 
             GameObject instance = Instantiate(buffIconPrefab);
             BuffIcons buffIcon = instance.GetComponent<BuffIcons>();
             buffIcon.transform.SetParent(buffList.transform, false);
-            buffIcon.SetIcon(buffs[str].GetIcon());
-            buffIcon.SetText(buffs[str].Stacks.ToString());
+            buffIcon.SetIcon(buff.GetIcon());
+            buffIcon.SetText(buff.ShouldRenderStackCount() ? buff.Stacks.ToString() : "");
             buffIcon.buffName = str;
-            buffIcon.stacks = buffs[str].Stacks;
-            buffIcon.buffIcon = buffs[str].GetIcon();
+            buffIcon.stacks = buff.Stacks;
+            buffIcon.buffIcon = buff.GetIcon();
             if (IsFacingRight())
             {
                 FlipTransform(buffIcon.transform, true);

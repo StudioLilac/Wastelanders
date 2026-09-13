@@ -38,7 +38,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &2129534447924396366
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -52,6 +52,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -74,6 +75,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -126,8 +130,21 @@ MonoBehaviour:
   animator: {fileID: 2129534447924396366}
   combatInfo: {fileID: 8487347338577429512}
   boxCollider: {fileID: 1337325846832566119}
+  passOutSprite: {fileID: 0}
   <AnimatorController>k__BackingField: {fileID: 9100000, guid: f001d61155be94e4da4b96b03bf3197f, type: 2}
   availableActions: []
+  brace: {fileID: 0}
+  followThrough: {fileID: 0}
+  leftHook: {fileID: 0}
+  rightHook: {fileID: 0}
+  haymaker: {fileID: 0}
+  pummel: {fileID: 0}
+  execute: {fileID: 0}
+  cleave: {fileID: 0}
+  decimate: {fileID: 0}
+  whirl: {fileID: 0}
+  mutilate: {fileID: 0}
+  razorGuard: {fileID: 0}
 --- !u!65 &1337325846832566119
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -170,7 +187,7 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7769636084067756352}
     - target: {fileID: 4691229747305802767, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: -1472579445266561125, guid: 426b9bcc7b7eb8f419f8d38f41aedc33, type: 2}
     - target: {fileID: 6018344303403229583, guid: 941333e3be7f6f04688676f1827dbf1b, type: 3}
