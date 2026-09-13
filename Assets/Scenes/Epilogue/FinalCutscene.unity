@@ -337,6 +337,7 @@ GameObject:
   m_Component:
   - component: {fileID: 158212706}
   - component: {fileID: 158212705}
+  - component: {fileID: 158212707}
   m_Layer: 0
   m_Name: Director
   m_TagString: Untagged
@@ -351,7 +352,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 158212704}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: be675e165741483eb6ff89f1383c26a7, type: 3}
   m_Name: 
@@ -391,6 +392,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &158212707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 158212704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85e21fdd067fd494ba87da1c5172351e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  performer: {fileID: 1163876814}
+  moonCamera: {fileID: 1496281323}
+  effectsParent: {fileID: 1652569398}
+  uiFadeHandler: {fileID: 550400670}
+  blizzardOneShot:
+    Guid:
+      Data1: -1669670162
+      Data2: 1203749120
+      Data3: 704037258
+      Data4: -1040968240
+    Path: event:/BlizzardAmbience
+  tearRippleMaterial: {fileID: 0}
+  tearRampSeconds: 2
+  cinematicBarsAnimator: {fileID: 969384617}
+  creditsAnimator: {fileID: 1301845887}
 --- !u!1 &177980811
 GameObject:
   m_ObjectHideFlags: 0
@@ -507,7 +535,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &204956439
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6389,6 +6417,7 @@ GameObject:
   - component: {fileID: 1163876811}
   - component: {fileID: 1163876812}
   - component: {fileID: 1163876813}
+  - component: {fileID: 1163876814}
   m_Layer: 0
   m_Name: Narration Text
   m_TagString: Untagged
@@ -6515,6 +6544,50 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1163876814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1163876810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fefeb4add3497bf4580be313c08f846e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  captionText: {fileID: 1163876813}
+  speakerStyles:
+  - speaker: 11
+    color: {r: 1, g: 1, b: 1, a: 1}
+    label: 
+  - speaker: 0
+    color: {r: 0, g: 0.8, b: 1, a: 1}
+    label: Jackie
+  - speaker: 1
+    color: {r: 1, g: 0.3, b: 0.1, a: 1}
+    label: Ives
+  - speaker: 2
+    color: {r: 1, g: 0.8, b: 0, a: 1}
+    label: Cam
+  - speaker: 7
+    color: {r: 0.7, g: 0, b: 0.9, a: 1}
+    label: Jay
+  fallbackColor: {r: 1, g: 0, b: 1, a: 1}
+  punctuation:
+    enabled: 1
+    commaMs: 110
+    sentenceMs: 280
+    ellipsisMs: 520
+  holdBaseMs: 750
+  holdPerWordMs: 70
+  holdMinMs: 500
+  holdMaxMs: 3000
+  interruptedMs: 250
+  fadeInSeconds: 0.35
+  fadeOutSeconds: 0.25
+  startAtBeat: 0
+  logBeatIndices: 0
 --- !u!1001 &1301845885
 PrefabInstance:
   m_ObjectHideFlags: 0
