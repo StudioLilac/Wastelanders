@@ -309,7 +309,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 511150652}
-  - component: {fileID: 511150651}
+  - component: {fileID: 511150654}
   - component: {fileID: 511150653}
   m_Layer: 0
   m_Name: Director
@@ -318,22 +318,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &511150651
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 511150650}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d292d0e8ca3644054a4883d485d98116, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogueRunner: {fileID: 8309902627721212547}
-  bg: {fileID: 511150653}
-  sprite1: {fileID: 3946099816637777405, guid: a5498959f04df44709540c326e4c91c4, type: 3}
-  sprite2: {fileID: -7660997389621074658, guid: 070da8a6c20344edca93f204afbb2ef4, type: 3}
 --- !u!4 &511150652
 Transform:
   m_ObjectHideFlags: 0
@@ -387,6 +371,23 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &511150654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 511150650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d5c6950ddcb4540b0d1b3154c7f8375, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueRunner: {fileID: 8309902627721212547}
+  bg: {fileID: 511150653}
+  backgrounds:
+  - {fileID: -7437519879386255288, guid: 0af6878e09894464fbba9987029bb62c, type: 3}
+  entryNode: Storybook1
 --- !u!1 &609666254
 GameObject:
   m_ObjectHideFlags: 0
@@ -592,6 +593,14 @@ PrefabInstance:
     - target: {fileID: 424348359091525278, guid: bbe64d3c71196374e9542974efa500be, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2624112573756963094, guid: bbe64d3c71196374e9542974efa500be, type: 3}
+      propertyPath: autoStart
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2624112573756963094, guid: bbe64d3c71196374e9542974efa500be, type: 3}
+      propertyPath: startNode
+      value: Storybook1
       objectReference: {fileID: 0}
     - target: {fileID: 2750723614717190854, guid: bbe64d3c71196374e9542974efa500be, type: 3}
       propertyPath: m_AnchorMax.y
