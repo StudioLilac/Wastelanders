@@ -17,8 +17,40 @@ MonoBehaviour:
   description: Duplicateable scene template for Storybook sequences.
   preview: {fileID: 0}
   dependencies:
-  - dependency: {fileID: 2800000, guid: 2449f8e38d3a34a769fac64819ec4d3b, type: 3}
+  - dependency: {fileID: 7545569452688597077, guid: 3998be88b89324dc2a6dafddf4d6faf8, type: 3}
+    instantiationMode: 1
+  - dependency: {fileID: -8253061345870894857, guid: af60807951a994751a962205605b85f9, type: 3}
+    instantiationMode: 1
+  - dependency: {fileID: 2800000, guid: 2fd6421f253b4ef1a19526541f9ffc0c, type: 3}
+    instantiationMode: 1
+  - dependency: {fileID: 11400000, guid: 6df01bf68e01943908f9e625c3b0bbc6, type: 2}
+    instantiationMode: 1
+  - dependency: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+    instantiationMode: 1
+  - dependency: {fileID: 2800000, guid: f6a533d9225cd40ea9ded31d4f686e3b, type: 3}
+    instantiationMode: 1
+  - dependency: {fileID: 2800000, guid: a5498959f04df44709540c326e4c91c4, type: 3}
     instantiationMode: 0
+  - dependency: {fileID: 2800000, guid: fd59b44bd3514406197f8ceb53547969, type: 3}
+    instantiationMode: 1
+  - dependency: {fileID: 2800000, guid: 7a184148437294a7b8d96378a700727d, type: 3}
+    instantiationMode: 0
+  - dependency: {fileID: 2800000, guid: ee148e281f3c41c5b4ff5f8a5afe5a6c, type: 3}
+    instantiationMode: 1
+  - dependency: {fileID: 7262066351540048079, guid: 52571f68872914e24837210513edea1d, type: 3}
+    instantiationMode: 0
+  - dependency: {fileID: 2800000, guid: 2cbba4ddd142149b0a38697070990deb, type: 3}
+    instantiationMode: 1
+  - dependency: {fileID: 8135782471263027723, guid: e605972137b0b4c1399ffb07beae9a9b, type: 3}
+    instantiationMode: 0
+  - dependency: {fileID: 2800000, guid: 070da8a6c20344edca93f204afbb2ef4, type: 3}
+    instantiationMode: 0
+  - dependency: {fileID: 2800000, guid: 997a4571b48144fd7be9c547b769c11d, type: 3}
+    instantiationMode: 0
+  - dependency: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    instantiationMode: 1
+  - dependency: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
+    instantiationMode: 1
   templatePipeline: {fileID: 0}
   badge: {fileID: 0}
   addToDefaults: 0
