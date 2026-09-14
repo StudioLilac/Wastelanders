@@ -15,7 +15,8 @@ Shader "Wastelanders/StarTear"
         _TearMinorBias      ("Minor Lopsidedness", Range(-0.8, 0.8)) = -0.15
         _TearMinorAngle     ("Minor Angle (deg)", Range(0, 180)) = 45
         _CoreStrength       ("Core Bloom", Range(0, 2)) = 0.5
-        _TearLocal          ("Local Tear Strength (editor preview)", Range(0, 1)) = 0
+        _TearStrength       ("Tear Strength (driven by TearTarget)", Range(0, 1)) = 0
+        _TearAxis           ("Tear Axis (radians, driven)", Float) = 0
 
         [Header(Pixel Art)]
         _GlowPixels         ("Glow Pixels Across Quad", Range(8, 256)) = 48
@@ -74,7 +75,8 @@ Shader "Wastelanders/StarTear"
             float  _Intensity;
             float  _TearMajorReach, _TearMinorReach, _TearThickness, _TearFalloff;
             float  _TearMinorRatio, _TearMajorBias, _TearMinorBias, _TearMinorAngle;
-            float  _CoreStrength, _TearLocal;
+            float  _CoreStrength;
+            float  _TearStrength, _TearAxis;
             float  _GlowPixels, _Steps, _Variation;
 
             v2f vert (appdata v)
@@ -97,9 +99,7 @@ Shader "Wastelanders/StarTear"
 
             fixed4 frag (v2f i) : SV_Target
             {
-                // Zero global in the material preview; _TearLocal makes the
-                // streak previewable without running the scene.
-                float tear = max(_TearStrength, _TearLocal);
+                float tear = _TearStrength;
                 if (tear <= 0.001) return fixed4(0, 0, 0, 0);
 
                 float2 uv = i.uv;

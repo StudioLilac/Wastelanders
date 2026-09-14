@@ -338,7 +338,6 @@ GameObject:
   - component: {fileID: 158212706}
   - component: {fileID: 158212705}
   - component: {fileID: 158212707}
-  - component: {fileID: 158212708}
   m_Layer: 0
   m_Name: Director
   m_TagString: Untagged
@@ -417,33 +416,9 @@ MonoBehaviour:
       Data3: 704037258
       Data4: -1040968240
     Path: event:/BlizzardAmbience
-  tearFilm: {fileID: 158212708}
+  tearFilm: {fileID: 814693966}
   cinematicBarsAnimator: {fileID: 969384617}
   creditsAnimator: {fileID: 1301845887}
---- !u!114 &158212708
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 158212704}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f45b186f427890e43889fe36871ca353, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  peakAmount: 0.55
-  clearedAmount: 0.15
-  axisDegrees: 90
-  axisWanderDegrees: 4
-  breakupSeconds: 3.2
-  clearSeconds: 0.3
-  clearInterval: 5.5
-  onsetSeconds: 2.5
-  debugOverride: 0
-  debugStrength: 0.5
-  logEvents: 1
-  currentStrength: 0
 --- !u!1 &177980811
 GameObject:
   m_ObjectHideFlags: 0
@@ -5949,58 +5924,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!1 &684020653
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 684020654}
-  - component: {fileID: 684020655}
-  m_Layer: 0
-  m_Name: StarStreaks
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &684020654
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 684020653}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1707218431}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &684020655
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 684020653}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae7570a1c561fbe4594270feb28230f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  starLayerRoot: {fileID: 1707218431}
-  squareSprite: {fileID: 21300000, guid: 37f940bb5dfa7d744b7f29df1b0dd09d, type: 3}
-  streakMaterial: {fileID: 2100000, guid: 8ddfceb8c2e7d5149bbd7339f6d4e879, type: 2}
-  quadWorldSize: 0.6
-  sortingOffset: 0
-  maxDistanceFromMoon: 0
-  moon: {fileID: 755516811}
-  spawnOnAwake: 1
 --- !u!1 &698925045
 GameObject:
   m_ObjectHideFlags: 0
@@ -6220,6 +6143,7 @@ GameObject:
   - component: {fileID: 814693963}
   - component: {fileID: 814693964}
   - component: {fileID: 814693965}
+  - component: {fileID: 814693966}
   m_Layer: 0
   m_Name: MoonGlow
   m_TagString: Untagged
@@ -6311,8 +6235,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   intensity: 2
   envelope: 1
+  musicPulse: 0
   basePulseAmount: 0.2
+  tearFilm: {fileID: 814693966}
   randomisePhase: 1
+--- !u!114 &814693966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 814693962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f45b186f427890e43889fe36871ca353, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  peakAmount: 0.8
+  clearedAmount: 0.15
+  axisDegrees: 0
+  axisWanderDegrees: 4
+  breakupSeconds: 3.2
+  clearSeconds: 0.3
+  clearInterval: 5.5
+  onsetSeconds: 2.5
+  debugOverride: 0
+  debugStrength: 0.5
+  logEvents: 1
+  currentStrength: 0
 --- !u!1 &853237457
 GameObject:
   m_ObjectHideFlags: 0
@@ -7664,8 +7614,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 684020654}
+  m_Children: []
   m_Father: {fileID: 1888181300}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1707218432

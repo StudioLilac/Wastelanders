@@ -34,7 +34,10 @@ Material:
     - _CoreRadius: 0.35
     - _CoreStrength: 0.6
     - _DebugFlareOnly: 1
-    - _DebugMode: 1.14
+    - _DebugMode: 0
+    - _FlareEdge: 0.7
+    - _FlarePulseAmount: 0
+    - _FlareSteps: 0
     - _GlowPixels: 64
     - _GlowTime: 0
     - _HaloPower: 3
@@ -48,21 +51,24 @@ Material:
     - _RippleFreq: 18
     - _RippleSpeed: 0.7
     - _Steps: 8
+    - _TearAxis: 0
     - _TearFalloff: 2.37
     - _TearFlareStrength: 10
-    - _TearHaze: 0.7
+    - _TearHaze: 0
     - _TearLocal: 0
-    - _TearMajorBias: -0.2
+    - _TearMajorBias: 0.2
     - _TearMajorReach: 0.7
     - _TearMinorAngle: 50
-    - _TearMinorBias: -0.15
+    - _TearMinorBias: 0.12
     - _TearMinorRatio: 1
-    - _TearMinorReach: 0.45
+    - _TearMinorReach: 0.48
+    - _TearStrength: 0
     - _TearStretch: 0.8
-    - _TearThickness: 0.066
+    - _TearThickness: 0.05
     - _UseCustomTime: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _FlareColor: {r: 0.015686275, g: 0.007843138, b: 0.1254902, a: 1}
     - _GlowColor: {r: 0.015208514, g: 0.00699541, b: 0.12477186, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

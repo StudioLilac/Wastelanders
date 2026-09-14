@@ -44,13 +44,12 @@ namespace Cinematics
 
         private static readonly string[] HandledCues =
         {
-            IVES_CRASHES, TIGHTEN_SHIRT, TEARS_BEGIN, TEARS_CLEAR, TEARS_END, MOON_ZOOM, END
+            IVES_CRASHES, TIGHTEN_SHIRT, TEARS_BEGIN, TEARS_END, MOON_ZOOM, END
         };
         public const string IVES_CRASHES = "ivescrashes";
         public const string TIGHTEN_SHIRT = "tightenshirt";
         public const string MOON_ZOOM = "moonzoom";
         public const string TEARS_BEGIN = "tearsbegin";
-        public const string TEARS_CLEAR = "tearsclear";
         public const string TEARS_END = "tearsend";
         public const string END = "end";
 
@@ -147,7 +146,6 @@ namespace Cinematics
                     break;
 
                 case TEARS_BEGIN: tearFilm.Begin(); break;
-                case TEARS_CLEAR: tearFilm.Clear(); break;
                 case TEARS_END: tearFilm.End(); break;
 
                 case END:

@@ -76,10 +76,7 @@ namespace Cinematics
 
         private Dictionary<DialogueCharacter, SpeakerStyle> styleLookup;
         private float fastForwardScale = 20f;
-        private bool FastForward =>
-            Input.GetKey(KeyCode.Space) ||
-            Input.GetKey(KeyCode.RightArrow) ||
-            Input.GetKey(KeyCode.Mouse0);
+        private bool FastForward => Input.GetKey(KeyCode.RightArrow);
 
         private void Awake()
         {
