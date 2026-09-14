@@ -1,6 +1,6 @@
 #nullable enable
-
 using System;
+using UI_Elements.FadeScreen;
 using UnityEngine;
 using Yarn.Unity;
 
@@ -8,16 +8,16 @@ namespace Storybook
 {
     /// <summary>
     /// Base class for a scene's dialogue director. Handles the shared "bg" command
-    /// (crossfading to a background sprite by key) and exposes an overrideable entry
-    /// node for whichever Yarn node the scene should start on.
+    /// (crossfading to an animated background clip by key) and exposes an overrideable
+    /// entry node for whichever Yarn node the scene should start on.
     /// </summary>
     public abstract class StorybookDirector : MonoBehaviour
     {
         [SerializeField] protected DialogueRunner dialogueRunner = null!;
-        [SerializeField] protected CrossFadeHandler bg = null!;
+        [SerializeField] protected AnimationCrossFadeHandler bg = null!;
 
         [Tooltip("Backgrounds are addressed from Yarn using 1-based keys, e.g. <<bg 1>> selects backgrounds[0].")]
-        [SerializeField] private Sprite[] backgrounds = Array.Empty<Sprite>();
+        [SerializeField] private AnimationClip[] backgrounds = Array.Empty<AnimationClip>();
 
         [Tooltip("Default entry node for this scene. Can be overridden in code via EntryNode.")]
         [SerializeField] private string entryNode = "Start";

@@ -2,9 +2,10 @@ using System.IO;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
-/// Batch-creates looping SpriteRenderer AnimationClips from a folder of subfolders.
+/// Batch-creates looping UI Image AnimationClips from a folder of subfolders.
 /// Each immediate subfolder of the selected folder becomes one AnimationClip,
 /// built from all Sprites found inside it (sorted by asset path/name).
 ///
@@ -19,8 +20,8 @@ using UnityEngine;
 /// </summary>
 public static class BatchAnimationCreator
 {
-    // Standardized framerate for all generated clips. Change as needed.
-    private const float FrameRate = 12f;
+    // How long each frame stays on screen before switching to the next.
+    private const float SecondsPerFrame = 1f;
 
     [MenuItem("Assets/Create Animations From Subfolders")]
     private static void CreateAnimationsMenuItem()
@@ -39,9 +40,10 @@ public static class BatchAnimationCreator
             if (subfolders.Length > 0)
             {
                 // Treat selected folder as a "root" containing per-animation subfolders.
+                // Clips are saved into this root folder, not inside each subfolder.
                 foreach (var folder in subfolders)
                 {
-                    if (TryCreateAnimationForFolder(folder, FrameRate))
+                    if (TryCreateAnimationForFolder(folder, path, SecondsPerFrame))
                         clipsCreated++;
                 }
             }
@@ -49,7 +51,9 @@ public static class BatchAnimationCreator
             {
                 // Selected folder itself has no subfolders -- treat it as the
                 // animation folder directly (useful if you select subfolders one by one).
-                if (TryCreateAnimationForFolder(path, FrameRate))
+                // Its parent folder is treated as the "root" to save the clip into.
+                string parentFolder = Path.GetDirectoryName(path)?.Replace("\\", "/") ?? path;
+                if (TryCreateAnimationForFolder(path, parentFolder, SecondsPerFrame))
                     clipsCreated++;
             }
         }
@@ -60,7 +64,7 @@ public static class BatchAnimationCreator
         Debug.Log($"[BatchAnimationCreator] Created {clipsCreated} animation clip(s).");
     }
 
-    private static bool TryCreateAnimationForFolder(string folderPath, float frameRate)
+    private static bool TryCreateAnimationForFolder(string folderPath, string outputFolder, float secondsPerFrame)
     {
         // Find all sprite assets directly under this folder (and any sub-sprites
         // inside multi-sprite sheets), sorted by asset path for deterministic order.
@@ -80,11 +84,15 @@ public static class BatchAnimationCreator
             return false;
         }
 
-        var clip = new AnimationClip { frameRate = frameRate };
+        var clip = new AnimationClip
+        {
+            frameRate = 1f / secondsPerFrame,
+            legacy = true
+        };
 
         var spriteBinding = new EditorCurveBinding
         {
-            type = typeof(SpriteRenderer),
+            type = typeof(Image),
             path = "", // root object of whatever GameObject this clip is applied to
             propertyName = "m_Sprite"
         };
@@ -94,7 +102,7 @@ public static class BatchAnimationCreator
         {
             keyframes[i] = new ObjectReferenceKeyframe
             {
-                time = i / frameRate,
+                time = i * secondsPerFrame,
                 value = sprites[i]
             };
         }
@@ -107,7 +115,7 @@ public static class BatchAnimationCreator
         AnimationUtility.SetAnimationClipSettings(clip, settings);
 
         string folderName = new DirectoryInfo(folderPath).Name;
-        string clipPath = Path.Combine(folderPath, folderName + ".anim").Replace("\\", "/");
+        string clipPath = Path.Combine(outputFolder, folderName + ".anim").Replace("\\", "/");
 
         // Avoid overwrite errors if run twice -- delete existing clip of same name first.
         var existing = AssetDatabase.LoadAssetAtPath<AnimationClip>(clipPath);
