@@ -75,6 +75,7 @@ namespace Cinematics
         public Func<float> DeltaTime { get; set; } = () => Time.unscaledDeltaTime;
 
         private Dictionary<DialogueCharacter, SpeakerStyle> styleLookup;
+        private float fastForwardScale = 20f;
         private bool FastForward =>
             Input.GetKey(KeyCode.Space) ||
             Input.GetKey(KeyCode.RightArrow) ||
@@ -246,7 +247,7 @@ namespace Cinematics
                 // independent and high rates can emit several characters per frame.
                 while (budget < 1f)
                 {
-                    budget += DeltaTime() * rate;
+                    budget += DeltaTime() * rate * (FastForward ? fastForwardScale : 1f);
                     yield return null;
                 }
 
@@ -272,7 +273,7 @@ namespace Cinematics
             float remaining = milliseconds / 1000f;
             while (remaining > 0f)
             {
-                remaining -= DeltaTime();
+                remaining -= DeltaTime() * (FastForward ? fastForwardScale : 1f);
                 yield return null;
             }
         }
@@ -290,7 +291,7 @@ namespace Cinematics
 
             while (elapsed < duration)
             {
-                elapsed += DeltaTime();
+                elapsed += DeltaTime() * (FastForward ? fastForwardScale : 1f);
                 captionText.alpha = Mathf.Lerp(start, target, Mathf.Clamp01(elapsed / duration));
                 yield return null;
             }

@@ -27,6 +27,20 @@ Shader "Wastelanders/MoonGlow"
         _RippleFreq           ("Ripple Frequency", Range(2, 48)) = 18
         _RippleSpeed          ("Ripple Speed", Range(0, 4)) = 0.6
 
+        [Header(Tear Flare)]
+        _TearMajorReach       ("Major Reach", Range(0, 1)) = 0.90
+        _TearMinorReach       ("Minor Reach", Range(0, 1)) = 0.50
+        _TearThickness        ("Prong Thickness", Range(0.01, 0.5)) = 0.16
+        _TearFalloff          ("Prong Falloff", Range(0.5, 6)) = 1.2
+        _TearMinorRatio       ("Minor Brightness", Range(0, 1)) = 0.35
+        _TearMajorBias        ("Major Lopsidedness", Range(-0.8, 0.8)) = 0.35
+        _TearMinorBias        ("Minor Lopsidedness", Range(-0.8, 0.8)) = -0.15
+        _TearMinorAngle       ("Minor Angle (deg)", Range(0, 180)) = 45
+        _TearFlareStrength    ("Flare Brightness", Range(0, 10)) = 2.5
+        _TearHaze             ("Veiling Haze", Range(0, 2)) = 0.35
+        _TearLocal            ("Local Tear Strength (editor preview)", Range(0, 1)) = 0
+        _DebugMode            ("DEBUG (0 off, 1 flare, 2 raw, 3 uv, 4 strength)", Range(0, 4)) = 0
+
         [Header(Time)]
         [Toggle] _UseCustomTime ("Driven By Script", Float) = 0
         _GlowTime             ("Glow Time (set by script)", Float) = 0
@@ -40,10 +54,10 @@ Shader "Wastelanders/MoonGlow"
     {
         Tags
         {
-            "Queue"           = "Transparent"
-            "RenderType"      = "Transparent"
-            "IgnoreProjector" = "True"
-            "PreviewType"     = "Plane"
+            "Queue"             = "Transparent"
+            "RenderType"        = "Transparent"
+            "IgnoreProjector"   = "True"
+            "PreviewType"       = "Plane"
             "CanUseSpriteAtlas" = "True"
         }
 
@@ -60,6 +74,7 @@ Shader "Wastelanders/MoonGlow"
             #pragma fragment frag
             #pragma multi_compile_instancing
             #include "UnityCG.cginc"
+            #include "TearSpike.cginc"
 
             struct appdata
             {
@@ -87,6 +102,10 @@ Shader "Wastelanders/MoonGlow"
 
             float _PulseAmount, _Period1, _Period2, _Period3;
             float _RippleAmount, _RippleFreq, _RippleSpeed;
+
+            float _TearMajorReach, _TearMinorReach, _TearThickness, _TearFalloff;
+            float _TearMinorRatio, _TearMajorBias, _TearMinorBias, _TearMinorAngle;
+            float _TearFlareStrength, _TearHaze, _TearLocal, _DebugMode;
 
             float _UseCustomTime, _GlowTime;
 
@@ -121,6 +140,56 @@ Shader "Wastelanders/MoonGlow"
                 float halo = pow(saturate(1.0 - d), _HaloPower);
                 float g    = core * _CoreStrength + halo * _HaloStrength;
 
+                // The disc stays round. The flare radiates past it, which is what
+                // a bright source actually does through a broken tear film.
+                //
+                // Kept in its own accumulator all the way through posterisation.
+                // Folded into g first, a prong only ever nudges the halo's radial
+                // bands outward a step, which reads as the aura growing rather than
+                // as a prong appearing.
+                // Computed unconditionally. The old early-out saved nothing worth
+                // measuring and made the flare impossible to inspect when the
+                // global was zero, which is exactly when you need to look at it.
+                float flareRaw = TearFlare(
+                    p,
+                    _TearMajorReach,
+                    _TearMinorReach,
+                    _TearThickness,
+                    _TearFalloff,
+                    _TearMinorRatio,
+                    _TearMajorBias,
+                    _TearMinorBias,
+                    radians(_TearMinorAngle));
+
+                // The global is only written by a running TearFilm, so it is
+                // always zero in the material preview. _TearLocal lets you dial
+                // the effect up there to tune prong shape without playing the
+                // scene. Leave it at 0 in the scene material.
+                float tear = max(_TearStrength, _TearLocal);
+
+                float flare = flareRaw * _TearFlareStrength * tear;
+
+                // Veiling glare lifts the floor across the halo rather than
+                // brightening the centre. This one does belong to the halo.
+                g += pow(saturate(1.0 - d), 1.2) * _TearHaze * tear * 0.35;
+
+                // Diagnostics, bypassing pulse, posterisation and the corner mask
+                // so nothing downstream can swallow the signal.
+                if (_DebugMode > 0.5)
+                {
+                    float3 dbg;
+                    if (_DebugMode < 1.5)
+                        dbg = _GlowColor.rgb * flare;                       // after multipliers
+                    else if (_DebugMode < 2.5)
+                        dbg = flareRaw.xxx;                                 // shape only
+                    else if (_DebugMode < 3.5)
+                        dbg = float3(saturate(p.x * 0.5 + 0.5),
+                                     saturate(p.y * 0.5 + 0.5), 0);         // quad coordinates
+                    else
+                        dbg = tear.xxx;                            // the global
+                    return fixed4(dbg, 0);
+                }
+
                 float t = lerp(_Time.y, _GlowTime, _UseCustomTime);
 
                 // Three incommensurate periods. A single sine over a 130 second
@@ -132,22 +201,31 @@ Shader "Wastelanders/MoonGlow"
                     + 0.15 * sin(t * TAU / max(_Period3, 1e-3) + 4.1));
 
                 g *= pulse;
+                flare *= pulse;
 
                 // Optional outward-travelling ring, modulated by the glow itself
                 // so it only ever appears where there is light to disturb.
                 if (_RippleAmount > 0.0)
                     g += g * sin(d * _RippleFreq - t * _RippleSpeed * TAU) * _RippleAmount;
 
-                g = max(g, 0.0);
+                g     = max(g, 0.0);
+                flare = max(flare, 0.0);
 
                 // Posterise last, so the band edges migrate outward and inward with
                 // the pulse. On pixel art that reads as deliberate shimmer rather
-                // than as a gradient being dimmed.
+                // than as a gradient being dimmed. Each term bands on its own so the
+                // prong keeps a shape instead of dissolving into the halo's rings.
                 if (_Steps > 0.5)
-                    g = floor(g * _Steps) / _Steps;
+                {
+                    g     = floor(g * _Steps) / _Steps;
+                    flare = floor(flare * _Steps) / _Steps;
+                }
 
-                // Hard kill outside the inscribed circle so the quad never shows.
-                g *= step(d, 1.0);
+                g += flare;
+
+                // Soft kill before the quad's corners. Prong reach is in the same
+                // units, so keep it under 1.0 or the tips get clipped here.
+                g *= 1.0 - smoothstep(0.94, 1.0, d);
 
                 fixed3 rgb = _GlowColor.rgb * _GlowColor.a * g * _Intensity * i.color.rgb * i.color.a;
                 return fixed4(rgb, 0);

@@ -83,15 +83,14 @@ namespace Cinematics
 
              .Line(Ives, "...", lead: 800f, reveal: RevealMode.Fade, hold: 1400f)
 
-             .Line(Ives, "...You've been playing hide and seek with her for quite some time now. Haven't you.",
-                    rate: 18f, hold: 1400f)
+             .Line(Ives, "...You've been playing hide and seek with her for quite some time now. Haven't you.", cue: FinalSceneDirector.TEARS_BEGIN, rate: 18f, hold: 1400f)
 
-             .Narrate("Jackie grasps harder. Tears begin to stream down her face. She nods.",
+             .Narrate($"Jackie grasps harder. Tears begin to stream down her face. She nods.{FinalSceneDirector.TEARS_CLEAR}",
                     lead: 300f, hold: 1500f, cue: "tearsbegin")
 
              .Line(Ives, "...Shit. C'mere, these arms still work.", rate: 15f, hold: 1200f)
 
-             .Narrate("Ives rests her arms on Jackie's shoulders, and brings her close.", lead: 300f)
+             .Narrate("Ives rests her arms on Jackie's shoulders, and brings her close.", cue: FinalSceneDirector.TEARS_END, lead: 300f)
 
              .Line(Ives, "You know.{450} I expected you to haul me off earlier.", cue: FinalSceneDirector.MOON_ZOOM, rate: 14f, hold: 1100f)
              .Line(Jackie, "Y-you{300} did?", rate: 24f, hold: 900f)

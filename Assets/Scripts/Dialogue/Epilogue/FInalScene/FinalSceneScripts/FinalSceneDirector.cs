@@ -24,6 +24,7 @@ namespace Cinematics
         [SerializeField] private CaptionPerformer performer;
 
         [SerializeField] private Camera moonCamera;
+        [SerializeField] private MoonGlowDriver moonGlow;
         [SerializeField] private GameObject effectsParent;
         [SerializeField] private UIFadeHandler uiFadeHandler;
 
@@ -31,8 +32,7 @@ namespace Cinematics
         [SerializeField] private EventReference blizzardOneShot;
 
         [Header("Tear shader")]
-        [SerializeField] private Material tearRippleMaterial;
-        [SerializeField] private float tearRampSeconds = 2f;
+        [SerializeField] private TearFilm tearFilm;
 
         [Header("Credits")]
         [SerializeField] private Animator cinematicBarsAnimator;
@@ -44,12 +44,13 @@ namespace Cinematics
 
         private static readonly string[] HandledCues =
         {
-            IVES_CRASHES, TIGHTEN_SHIRT, TEARS_BEGIN, TEARS_END, MOON_ZOOM, END
+            IVES_CRASHES, TIGHTEN_SHIRT, TEARS_BEGIN, TEARS_CLEAR, TEARS_END, MOON_ZOOM, END
         };
         public const string IVES_CRASHES = "ivescrashes";
         public const string TIGHTEN_SHIRT = "tightenshirt";
         public const string MOON_ZOOM = "moonzoom";
         public const string TEARS_BEGIN = "tearsbegin";
+        public const string TEARS_CLEAR = "tearsclear";
         public const string TEARS_END = "tearsend";
         public const string END = "end";
 
@@ -145,13 +146,9 @@ namespace Cinematics
                     StartCoroutine(ZoomCamera(moonCamera, 1.6f, 130f));
                     break;
 
-                case TEARS_BEGIN:
-                    StartCoroutine(RampTears(0f, 1f, tearRampSeconds));
-                    break;
-
-                case TEARS_END:
-                    StartCoroutine(RampTears(1f, 0f, tearRampSeconds));
-                    break;
+                case TEARS_BEGIN: tearFilm.Begin(); break;
+                case TEARS_CLEAR: tearFilm.Clear(); break;
+                case TEARS_END: tearFilm.End(); break;
 
                 case END:
                     StartCoroutine(FadeFMODVolume(blizzardInstance, 1f, 0f, 3f));
@@ -170,25 +167,9 @@ namespace Cinematics
             yield return new WaitForSeconds(1.5f);
             StartCoroutine(FadeFMODVolume(blizzardInstance, 0f, 0.5f, 0.5f));
             yield return uiFadeHandler.FadeInLightScreen(1f);
+            StartCoroutine(moonGlow.Ramp(1f, 2.5f));
         }
 
-        private IEnumerator RampTears(float from, float to, float duration)
-        {
-            if (tearRippleMaterial == null) yield break;
-
-            int id = Shader.PropertyToID("_TearStrength");
-            float elapsed = 0f;
-
-            while (elapsed < duration)
-            {
-                elapsed += Time.unscaledDeltaTime;
-                float t = Mathf.Clamp01(elapsed / duration);
-                tearRippleMaterial.SetFloat(id, Mathf.Lerp(from, to, t * t * (3f - 2f * t)));
-                yield return null;
-            }
-
-            tearRippleMaterial.SetFloat(id, to);
-        }
 
         private IEnumerator MoveCamera(Camera cam, Vector2 delta, float duration)
         {
