@@ -2,6 +2,7 @@ using DialogueScripts;
 using Entities;
 using FMOD.Studio;
 using FMODUnity;
+using LevelSelectInformation;
 using Particles;
 using SceneBuilder;
 using System;
@@ -266,6 +267,7 @@ namespace Dialogue.Epilogue
             yield return new WaitUntil(() => new GetGameState().Query() == GameState.GAME_WIN);
             
             CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
+            GameStateManager.Instance.UpdateLevelProgress(StageInformation.Get<StageInformation.Season2>());
         }
 
         IEnumerator PrincessDeathHandler()
@@ -305,6 +307,8 @@ namespace Dialogue.Epilogue
             yield return new WaitForSeconds(0.5f);
             StartCoroutine(jackie.MoveToPosition(ives.transform.position, 0f, 1.5f));
             yield return fade;
+            yield return new WaitForSeconds(1.5f);
+            GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.FinalCutscene>().SceneName);
         }
 
         private record IvesDied() : TeanWinContext;

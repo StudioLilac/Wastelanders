@@ -28,4 +28,5 @@ public class AudioDatabase : ScriptableObject
     public SceneAudio Epilogue7;
     public SceneAudio Epilogue8;
     public SceneAudio Epilogue9;
+    public SceneAudio Machina;
 }

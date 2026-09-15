@@ -99,6 +99,9 @@ public enum SoundID
     VN_Talk_Cheer = 571,
     VN_Analogue_Horror = 572,
     VN_BGM_suspense_drone = 580,
+    // Ep 11
+    VN_Message_Tone = 590,
+    VN_Camera_Shutter = 591,
 }
 
 public static class SoundIDExtensions

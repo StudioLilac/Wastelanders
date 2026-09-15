@@ -310,6 +310,19 @@ public abstract class SceneData : Enum<SceneData>
         public override MonoBehaviour[] ScenePrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
             { prefabs.combatFadeScreenManager, prefabs.combatManager, prefabs.battleQueue, prefabs.pauseMenuV2, prefabs.hudV2, prefabs.tooltip, prefabs.dialogueManager, prefabs.popupManager,  prefabs.gameOver, prefabs.battleIntro, prefabs.dialogueBoxV2, prefabs.arrowIndicatorManager  };
     }
+    public class Epilogue_11 : SceneData
+    {
+        public override string SceneName => "Epilogue_11";
+
+        public override SceneAudio GetAudio(AudioDatabase database) => database.Machina;
+
+        public override MonoBehaviour[] ScenePrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
+        {
+            prefabs.pauseMenuV2,
+            prefabs.dialogueManager,
+            prefabs.dialogueBoxV2
+        };
+    }
     
     public class IvesFightCombatScene : SceneData
     {
@@ -324,7 +337,7 @@ public abstract class SceneData : Enum<SceneData>
     {
         public override string SceneName => "FinalCutscene";
 
-        public override SceneAudio GetAudio(AudioDatabase database) => database.Epilogue9;
+        public override SceneAudio GetAudio(AudioDatabase database) => database.Empty;
 
         public override MonoBehaviour[] ScenePrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
         {
@@ -365,8 +378,9 @@ public static class SceneDataHelpers
 {
     public static SceneAudio SelectMainMenuMusic(AudioDatabase database) => GameStateManager.Instance.CurrentLevelProgress switch
     {
-        var progress when progress < StageInformation.Get<StageInformation.PrincessFrogFight>().LevelID => database.MainMenu,
-        var progress when progress >= StageInformation.Get<StageInformation.PrincessFrogFight>().LevelID => database.Tundra,
+        var progress when StageInformation.Get<StageInformation.Season2>().UnlockCriteriaMet() 
+            && GameStateManager.Instance.PreviousScene == SceneData.Get<SceneData.Epilogue_11>() => database.Machina,
+        var progress when StageInformation.Get<StageInformation.PrincessFrogFight>().UnlockCriteriaMet() => database.Tundra,
         _ => database.MainMenu,
     };
 }

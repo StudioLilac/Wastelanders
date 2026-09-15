@@ -13,6 +13,7 @@ public class GameStateManager : PersistentSingleton<GameStateManager>
     public static readonly bool IS_DEVELOPMENT = false;
     public const bool SEASON_1_ACTIVE = true;
     private const float DEV_MODE_PROGRESSION = 999f;
+    public const int DEV_MODE_BOUNTIES = 6;
 
     public SceneData PreviousScene { get; private set; } = SceneData.Get<SceneData.MainMenu>();
 
