@@ -18,7 +18,7 @@ namespace Dialogue.Epilogue
             var channel = AudioManager.Instance.CreateChannel(SoundID.VN_BGM_suspense_drone, AudioCategory.Music);
             channel.Play();
             blackBg.SetDarkScreen();
-            yield return new WaitForEndOfFrame();
+            yield return null;
             AudioManager.Instance.FadeOutCurrentBackgroundTrack(0f);
             yield return new WaitForSeconds(1.5f);
             SoundID.VN_Message_Tone.Play();
@@ -125,6 +125,7 @@ namespace Dialogue.Epilogue
                 .Line(DialogueCharacter.Lilac, "We hope you enjoyed! If you have the opportunity, please write us a review on Steam or help spread Wastelanders hype on social media!")
                 .Line(DialogueCharacter.Lilac, "For us at Studio Lilac, we're entirely a student project. (NO ONE GETS PAID).")
                 .Line(DialogueCharacter.Lilac, "Your support for our awesome musicians, artists, and game is literally what keeps us alive and going.")
+                .Line(DialogueCharacter.Lilac, "(The current track playing is called Crater Town by the sound of Wastelanders himself, Daniel Schatz!)")
                 .Line(DialogueCharacter.Lilac, "That also means... if you want to see Cam's arc in Season 2: Where he's THE leading scientist in an increasingly urgent arms race...")
                 .Line(DialogueCharacter.Lilac, "Please, show us some love.")
                 .Line(DialogueCharacter.Lilac, "And we'll show you our's via the game.")

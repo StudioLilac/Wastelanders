@@ -46,7 +46,7 @@ namespace Cinematics
 
         private static readonly string[] HandledCues =
         {
-            IVES_CRASHES, TIGHTEN_SHIRT, TEARS_BEGIN, TEARS_END, MOON_ZOOM, END
+            IVES_CRASHES, TIGHTEN_SHIRT, TEARS_BEGIN, TEARS_END, MOON_ZOOM, END, INTRO_START
         };
         public const string IVES_CRASHES = "ivescrashes";
         public const string TIGHTEN_SHIRT = "tightenshirt";
@@ -54,6 +54,7 @@ namespace Cinematics
         public const string TEARS_BEGIN = "tearsbegin";
         public const string TEARS_END = "tearsend";
         public const string END = "end";
+        public const string INTRO_START = "intro_start";
 
         private void Start()
         {
@@ -106,15 +107,7 @@ namespace Cinematics
 
         private IEnumerator PlayScene()
         {
-            if (startTime == 0)
-            {
-                yield return new WaitForSeconds(1.5f);
-
-                StartCoroutine(MoveCamera(mainCamera, new Vector2(0f, -2f), 3f));
-                yield return UIFadeScreenManager.Instance.FadeInLightScreen(2f);
-                yield return new WaitForSeconds(1.5f);
-
-            } else
+            if (startTime > 0)
             {
                 StartCoroutine(MoveCamera(mainCamera, new Vector2(0f, -2f), 3f));
                 UIFadeScreenManager.Instance.SetLightScreen();
@@ -122,7 +115,7 @@ namespace Cinematics
 
             yield return performer.PlayFrom(script, () => musicClock.TrackSeconds, startTime);
 
-            yield return new WaitForSeconds(0.95f);
+            yield return new WaitForSeconds(0.9f);
             cinematicBarsAnimator.SetTrigger("RemoveBars");
 
             yield return new WaitForSeconds(1f);
@@ -131,16 +124,21 @@ namespace Cinematics
             yield return new WaitUntil(() =>
                 creditsAnimator.GetCurrentAnimatorStateInfo(0).IsName("Season1FinaleAnimation"));
             yield return new WaitUntil(() =>
-                creditsAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.97f);
+                creditsAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.99f);
 
             yield return UIFadeScreenManager.Instance.FadeInDarkScreen(2f);
-            GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.MainMenu>().SceneName);
+            yield return new WaitForSeconds(1.5f);
+            GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.Epilogue_11>().SceneName);
         }
 
         private void HandleCue(string cue)
         {
             switch (cue)
             {
+                case INTRO_START:
+                    StartCoroutine(IntroSequence());
+                    break;
+
                 case IVES_CRASHES:
                     StartCoroutine(MoveCamera(mainCamera, new Vector2(0f, -1.5f), 3f));
                     StartCoroutine(ZoomCamera(mainCamera, -10f, 3f));
@@ -162,6 +160,13 @@ namespace Cinematics
                     StartCoroutine(FadeFMODVolume(blizzardInstance, 1f, 0f, 3f));
                     break;
             }
+        }
+
+        private IEnumerator IntroSequence()
+        {
+            yield return new WaitForSeconds(1.5f);
+            StartCoroutine(MoveCamera(mainCamera, new Vector2(0f, -2f), 3f));
+            yield return UIFadeScreenManager.Instance.FadeInLightScreen(2f);
         }
 
         private IEnumerator ToMoonScene()

@@ -411,7 +411,7 @@ MonoBehaviour:
   effectsParent: {fileID: 1652569398}
   uiFadeHandler: {fileID: 550400670}
   musicClock: {fileID: 158212708}
-  startTime: 160
+  startTime: 0
   blizzardOneShot:
     Guid:
       Data1: -1669670162
@@ -442,7 +442,7 @@ MonoBehaviour:
       Data4: -1401019297
     Path: event:/FinalScene
   captionsStartAt: 0
-  seekOnStartSeconds: 163
+  seekOnStartSeconds: 0
   allowFallback: 1
   logSeeks: 1
 --- !u!1 &177980811
@@ -6306,7 +6306,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1672091387058136149, guid: f8ca2972854e8f34eb11d48477fef72a, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 350
       objectReference: {fileID: 0}
     - target: {fileID: 1672091387058136149, guid: f8ca2972854e8f34eb11d48477fef72a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6342,7 +6342,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1672091387058136149, guid: f8ca2972854e8f34eb11d48477fef72a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 6150
+      value: 6325
       objectReference: {fileID: 0}
     - target: {fileID: 1672091387058136149, guid: f8ca2972854e8f34eb11d48477fef72a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

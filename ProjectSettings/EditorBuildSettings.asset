@@ -83,5 +83,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Epilogue/FinalCutscene.unity
     guid: b6daca52c9bfcfb469a03376b1320680
+  - enabled: 1
+    path: Assets/Scenes/Epilogue/Epilogue_11.unity
+    guid: 854ae1f72e20d8e4092615b7ea95b4e1
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

@@ -14,7 +14,8 @@ namespace Cinematics
              .SetRate(Jackie, 42f)
              .SetRate(Ives, 20f);
 
-            s.Narrate("The Princess Frog lets out a final wail as its form dissolves into the whirling blizzard.", hold: 2000f)
+            s.Line(DialogueCharacter.Event, string.Empty, cue: FinalSceneDirector.INTRO_START, hold: 5950f)
+             .Narrate("The Princess Frog lets out a final wail as its form dissolves into the whirling blizzard.", hold: 2000f)
              .Narrate("In the center of the crater, Ives sways before crashing into the snow.{!ivescrashes}", hold: 2000f)
              .Line(Jackie, "IVES!", lead: 400f, hold: 1000f)
              .Narrate("Jackie presses her fingers to Ives' neck, checking for a pulse.", lead: 200f, hold: 2000f)
@@ -69,7 +70,7 @@ namespace Cinematics
 
              .Line(Jackie, "Every lesson, every exam, every terrible day.", rate: 28f, hold: 1300f)
              .Line(Jackie, "You were there, and you didn't need anything from me in return.", rate: 28f, hold: 1400f)
-             .Line(Ives, "Kid...", lead: 200f, rate: 14f, hold: 1000f)
+             .Line(Ives, "Kid...", lead: 200f, rate: 14f, hold: 1200f)
 
             // ---- The moon --------------------------------------------------------
              .Narrate("Jackie tightens her grasp on Ives' shirt.", cue: FinalSceneDirector.TIGHTEN_SHIRT, hold: 1500f, lead: 200f)
@@ -83,7 +84,7 @@ namespace Cinematics
 
              .Narrate("Ives rests her arms on Jackie's shoulders,{400} and brings her close.", rate: 30f, lead: 200f)
 
-             .Line(Ives, "You know. I{300} expected you to haul me off earlier.", cue: FinalSceneDirector.MOON_ZOOM, rate: 14f, hold: 1200f)
+             .Line(Ives, "You know. I{300} expected you to haul me off earlier.", lead: 200f, cue: FinalSceneDirector.MOON_ZOOM, rate: 14f, hold: 1200f)
              .Line(Jackie, "Y-you{300} did?", rate: 24f, hold: 1000f)
              .Line(Ives, "Yeah. Glad I was wrong.", rate: 15f, hold: 1300f)
              .Line(Ives, "Wouldn't be sitting here hearing about your Ma otherwise.", rate: 15f, hold: 1600f)

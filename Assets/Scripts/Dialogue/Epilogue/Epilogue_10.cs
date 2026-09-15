@@ -307,6 +307,7 @@ namespace Dialogue.Epilogue
             yield return new WaitForSeconds(0.5f);
             StartCoroutine(jackie.MoveToPosition(ives.transform.position, 0f, 1.5f));
             yield return fade;
+            yield return new WaitForSeconds(1.5f);
             GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.FinalCutscene>().SceneName);
         }
 
