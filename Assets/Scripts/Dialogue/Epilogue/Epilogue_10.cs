@@ -2,6 +2,7 @@ using DialogueScripts;
 using Entities;
 using FMOD.Studio;
 using FMODUnity;
+using LevelSelectInformation;
 using Particles;
 using SceneBuilder;
 using System;
@@ -266,6 +267,7 @@ namespace Dialogue.Epilogue
             yield return new WaitUntil(() => new GetGameState().Query() == GameState.GAME_WIN);
             
             CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
+            GameStateManager.Instance.UpdateLevelProgress(StageInformation.Get<StageInformation.Season2>());
         }
 
         IEnumerator PrincessDeathHandler()

@@ -41,7 +41,7 @@ public class BountyManager : PersistentSingleton<BountyManager>
     }
 
 
-    public int GetBountyProgress() => ContractStateData.GetNumCompletedBounties();
+    public int GetBountyProgress() => GameStateManager.IS_DEVELOPMENT ? GameStateManager.DEV_MODE_BOUNTIES : ContractStateData.GetNumCompletedBounties();
     public bool IsBountyCompleted(IBounties? bounty)
     {
         if (bounty == null) return false;

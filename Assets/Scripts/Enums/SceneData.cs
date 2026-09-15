@@ -314,7 +314,7 @@ public abstract class SceneData : Enum<SceneData>
     {
         public override string SceneName => "Epilogue_11";
 
-        public override SceneAudio GetAudio(AudioDatabase database) => database.Empty;
+        public override SceneAudio GetAudio(AudioDatabase database) => database.Machina;
 
         public override MonoBehaviour[] ScenePrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
         {
@@ -378,8 +378,9 @@ public static class SceneDataHelpers
 {
     public static SceneAudio SelectMainMenuMusic(AudioDatabase database) => GameStateManager.Instance.CurrentLevelProgress switch
     {
-        var progress when progress < StageInformation.Get<StageInformation.PrincessFrogFight>().LevelID => database.MainMenu,
-        var progress when progress >= StageInformation.Get<StageInformation.PrincessFrogFight>().LevelID => database.Tundra,
+        var progress when StageInformation.Get<StageInformation.Season2>().UnlockCriteriaMet() 
+            && GameStateManager.Instance.PreviousScene == SceneData.Get<SceneData.Epilogue_11>() => database.Machina,
+        var progress when StageInformation.Get<StageInformation.PrincessFrogFight>().UnlockCriteriaMet() => database.Tundra,
         _ => database.MainMenu,
     };
 }
