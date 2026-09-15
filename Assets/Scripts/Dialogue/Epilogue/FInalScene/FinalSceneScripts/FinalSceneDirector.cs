@@ -122,7 +122,7 @@ namespace Cinematics
 
             yield return performer.PlayFrom(script, () => musicClock.TrackSeconds, startTime);
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.95f);
             cinematicBarsAnimator.SetTrigger("RemoveBars");
 
             yield return new WaitForSeconds(1f);
