@@ -310,6 +310,19 @@ public abstract class SceneData : Enum<SceneData>
         public override MonoBehaviour[] ScenePrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
             { prefabs.combatFadeScreenManager, prefabs.combatManager, prefabs.battleQueue, prefabs.pauseMenuV2, prefabs.hudV2, prefabs.tooltip, prefabs.dialogueManager, prefabs.popupManager,  prefabs.gameOver, prefabs.battleIntro, prefabs.dialogueBoxV2, prefabs.arrowIndicatorManager  };
     }
+    public class Epilogue_11 : SceneData
+    {
+        public override string SceneName => "Epilogue_11";
+
+        public override SceneAudio GetAudio(AudioDatabase database) => database.Empty;
+
+        public override MonoBehaviour[] ScenePrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
+        {
+            prefabs.pauseMenuV2,
+            prefabs.dialogueManager,
+            prefabs.dialogueBoxV2
+        };
+    }
     
     public class IvesFightCombatScene : SceneData
     {

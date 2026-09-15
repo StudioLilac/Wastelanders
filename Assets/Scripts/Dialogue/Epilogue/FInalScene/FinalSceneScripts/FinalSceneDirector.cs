@@ -131,7 +131,7 @@ namespace Cinematics
             yield return new WaitUntil(() =>
                 creditsAnimator.GetCurrentAnimatorStateInfo(0).IsName("Season1FinaleAnimation"));
             yield return new WaitUntil(() =>
-                creditsAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.95f);
+                creditsAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.97f);
 
             yield return UIFadeScreenManager.Instance.FadeInDarkScreen(2f);
             GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.MainMenu>().SceneName);
