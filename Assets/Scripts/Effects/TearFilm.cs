@@ -41,7 +41,7 @@ namespace Cinematics
         [SerializeField] private float clearSeconds = 0.30f;
 
         [Header("Onset")]
-        [SerializeField] private float onsetSeconds = 2.5f;
+        [SerializeField] private float onsetSeconds = 2f;
 
         [Header("Debug")]
         [Tooltip("Ignore all state and drive the global directly. Use this to tune prong shape without running the scene.")]

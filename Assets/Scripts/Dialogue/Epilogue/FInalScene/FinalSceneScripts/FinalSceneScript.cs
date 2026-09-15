@@ -15,8 +15,8 @@ namespace Cinematics
              .SetRate(Ives, 20f);
 
             s.Narrate("The Princess Frog lets out a final wail as its form dissolves into the whirling blizzard.", hold: 2000f)
-             .Narrate("In the center of the crater, Ives sways before crashing into the snow.{!ivescrashes}", hold: 3000f)
-             .Line(Jackie, "IVES!", reveal: RevealMode.Cut, hold: 1000f)
+             .Narrate("In the center of the crater, Ives sways before crashing into the snow.{!ivescrashes}", hold: 2000f)
+             .Line(Jackie, "IVES!", lead: 400f, hold: 1000f)
              .Narrate("Jackie presses her fingers to Ives' neck, checking for a pulse.", lead: 200f, hold: 2000f)
              .Line(Ives, "...{800}Jackie?", lead: 600f, rate: 16f, hold: 1100f)
 
@@ -29,7 +29,7 @@ namespace Cinematics
                     hold: 1300f)
 
              .Narrate("Jackie sets the serum in the snow.", lead: 400f)
-             .Narrate("And wraps her arms tightly around Ives.", lead: 300f)
+             .Narrate("And wraps her arms tightly around Ives.", lead: 200f)
 
              .Line(Jackie, "I-I{350} can still carry you back.", rate: 34f)
 
@@ -39,86 +39,82 @@ namespace Cinematics
 
              .Line(Jackie, "Ives, you don't have the time to–", rate: 40f)
 
-             .Line(Jackie, "...", lead: 900f, reveal: RevealMode.Fade, hold: 1400f)
+             .Line(Jackie, "...", lead: 700f, reveal: RevealMode.Fade, hold: 1400f) //52/55
 
              .Line(Jackie, "Alright.{500} Just... please tell me you'll be alright.", rate: 30f)
 
             // ---- The promise -----------------------------------------------------
              .Line(Ives, "Sorry, kid.", rate: 16f, hold: 1100f)
-             .Line(Ives, "I can't be making any more promises I can't keep.", rate: 17f, hold: 1300f)
-             .Line(Ives, "I promised you before that we'd find out what happened to your Ma,{400} together.",
-                    rate: 18f, hold: 1300f)
-             .Line(Ives, "But look at me now,{500} not much use to you like this.", rate: 17f, hold: 1200f)
+             .Line(Ives, "I can't be making any more promises I can't keep.", hold: 1300f)
+             .Line(Ives, "I promised before we'd find out what happened to your Ma,{400} together.", rate: 20f, hold: 1200f)
+             .Line(Ives, "Look at me now,{400} not much use to you like this.", rate: 20f, hold: 1100f)
 
-             .Narrate("A burning sensation rises in Jackie's chest, threatening to burst from her throat.",
-                    lead: 300f, hold: 1500f)
+             .Narrate("A burning sensation rises in Jackie's chest, threatening to burst from her throat.", hold: 1300f)
 
              .Line(Jackie, "Ives, I'm so sorry, it's all my—", rate: 40f)
 
-             .Line(Jackie, "...", lead: 700f, reveal: RevealMode.Fade, hold: 1200f)
+             .Line(Jackie, "...", lead: 600f, reveal: RevealMode.Cut, exit: new ExitMode.Cut(0f), hold: 1200f)
 
             // ---- The turn --------------------------------------------------------
             // Jackie stops apologising. Everything after this is her choosing what
             // to say instead, so the rate comes down and stays down.
-             .SetRate(Jackie, 30f)
+             .SetRate(Jackie, 32f)
 
-             .Line(Jackie, "\"Fight its shape, not its strength.{0}\"", hold: 1400f)
-             .Line(Jackie, "You taught me that. And it saved my life.")
+             .Line(Jackie, "\"Fight its shape, not its strength.{0}\"", lead: 200f, hold: 1300f)
+             .Line(Jackie, "You taught me that. It saved my life.")
 
-             .Narrate("Jackie pulls up her pant leg to reveal the dressing.", lead: 200f)
+             .Narrate("Jackie pulls up her pant leg to reveal the dressing.")
              .Line(Jackie, "We've been together the whole time.")
-             .Narrate("Jackie eases Ives down with her arm.", lead: 300f)
+             .Narrate("Jackie eases Ives down with her arm.", lead: 200f)
 
-             .Line(Jackie, "Every lesson, every exam, every terrible day.", rate: 27f, hold: 1300f)
-             .Line(Jackie, "You were there, and you didn't need anything from me in return.", rate: 27f, hold: 1400f)
-             .Line(Ives, "Kid...", lead: 500f, rate: 14f, hold: 1200f)
+             .Line(Jackie, "Every lesson, every exam, every terrible day.", rate: 28f, hold: 1300f)
+             .Line(Jackie, "You were there, and you didn't need anything from me in return.", rate: 28f, hold: 1400f)
+             .Line(Ives, "Kid...", lead: 200f, rate: 14f, hold: 1000f)
 
             // ---- The moon --------------------------------------------------------
-             .Narrate("Jackie tightens her grasp on Ives' shirt.", cue: FinalSceneDirector.TIGHTEN_SHIRT, hold: 1500f, lead: 400f)
+             .Narrate("Jackie tightens her grasp on Ives' shirt.", cue: FinalSceneDirector.TIGHTEN_SHIRT, hold: 1500f, lead: 200f)
 
-             .Line(Jackie, "...I found out what happened to Ma.", lead: 600f, rate: 26f, hold: 1400f)
+             .Line(Jackie, "I... found out what happened to Ma.", lead: 600f, rate: 25f, hold: 1400f)
              .Line(Ives, "...You did?", lead: 500f, rate: 15f, hold: 1000f)
-             .Line(Jackie, "Yeah, I did. I think I see her shadow now.", rate: 25f, hold: 1400f)
-             .Line(Ives, "...You've been playing hide and seek with her for quite some time now. Haven't you.", lead: 400f, rate: 18f, hold: 1400f)
-             .Narrate("Jackie grasps harder. Tears begin to stream down her face. She nods.", lead: 300f, hold: 1500f, cue: FinalSceneDirector.TEARS_BEGIN)
-             .Line(Ives, "...Shit. C'mere, these arms still work.", rate: 15f, hold: 1200f)
+             .Line(Jackie, "Yeah, she’s still hiding. But I think I see her shadow now.", rate: 25f, hold: 1200f)
+             .Line(Ives, $"...You've been playing hide and seek with her for{{!{FinalSceneDirector.TEARS_BEGIN}}} quite some time now. Haven't you.", lead: 400f, rate: 18f, hold: 1400f)
+             .Narrate("Jackie grasps harder. Tears begin to stream down her face. She nods.", rate: 30f, lead: 300f, hold: 1500f)
+             .Line(Ives, "...Shit. C'mere, these arms still work.", rate: 16f, hold: 1200f)
 
-             .Narrate("Ives rests her arms on Jackie's shoulders, and brings her close.", lead: 300f)
+             .Narrate("Ives rests her arms on Jackie's shoulders,{400} and brings her close.", rate: 30f, lead: 200f)
 
-             .Line(Ives, "You know.{450} I expected you to haul me off earlier.", cue: FinalSceneDirector.MOON_ZOOM, rate: 14f, hold: 1100f)
-             .Line(Jackie, "Y-you{300} did?", rate: 24f, hold: 900f)
-             .Line(Ives, "Yeah. Glad I was wrong.", rate: 15f, hold: 1100f)
-             .Line(Ives, "Wouldn't be sitting here hearing about your Ma otherwise.", rate: 14f, hold: 1400f)
+             .Line(Ives, "You know. I{300} expected you to haul me off earlier.", cue: FinalSceneDirector.MOON_ZOOM, rate: 14f, hold: 1200f)
+             .Line(Jackie, "Y-you{300} did?", rate: 24f, hold: 1000f)
+             .Line(Ives, "Yeah. Glad I was wrong.", rate: 15f, hold: 1300f)
+             .Line(Ives, "Wouldn't be sitting here hearing about your Ma otherwise.", rate: 15f, hold: 1600f)
+             .Line(Jackie, "...", lead: 700f, reveal: RevealMode.Fade, hold: 1500f)
 
-             .Line(Jackie, "...", lead: 600f, reveal: RevealMode.Fade, hold: 1200f)
+            // ---- Getting up ------------------------------------------------------ 160/163
+             .Narrate("Jackie's breathing steadies. And she pushes herself up to face Ives.", rate: 25f, lead: 400f, hold: 1500f, cue: FinalSceneDirector.TEARS_END)
 
-            // ---- Getting up ------------------------------------------------------
-             .Narrate("Jackie's breathing steadies. And she pushes herself up to face Ives.",
-                    lead: 400f, hold: 1200f, cue: FinalSceneDirector.TEARS_END)
+             .Line(Jackie, "It's about time we get going. Don't you think?", rate: 26f, hold: 1300f)
+             .Line(Ives, "Yeah,{400} I suppose so.", rate: 14f, hold: 1000f)
 
-             .Line(Jackie, "It's about time we get going. Don't you think?", rate: 26f, hold: 1100f)
-             .Line(Ives, "Yeah, I suppose so.", rate: 13f, hold: 1100f)
+             .Narrate("Jackie puts her right shoulder under Ives' shoulder, propping her up.")
 
-             .Narrate("Jackie puts her right shoulder under Ives' shoulder, propping her up.", lead: 200f)
+             .Line(Ives, "...You're the one helping me off the floor now.", rate: 15f, hold: 1200f)
+             .Line(Jackie, "...Why not,{500} you my babysitter or something?", rate: 26f, hold: 1400f)
 
-             .Line(Ives, "...You're the one helping me off the floor now.", rate: 14f, hold: 1200f)
-             .Line(Jackie, "Why not, you my babysitter or something?", rate: 28f)
+             .Narrate("Jackie puts her fist out. Ives looks at it briefly.", hold: 1300f)
 
-             .Narrate("Jackie puts her fist out. Ives looks at it briefly.", lead: 300f, hold: 1300f)
+             .Line(Ives, "...Hah,{400} no.{1000} Never was.", rate: 14f, hold: 1200f)
 
-             .Line(Ives, "...Hah, no. Never was.", rate: 14f)
-
-             .Narrate("And Ives meets it.", lead: 400f, hold: 1400f)
+             .Narrate("And Ives meets it.", hold: 1300f)
 
             // ---- The last exchange -----------------------------------------------
-             .Line(Ives, "Will you...{700} take me with you one more time?", rate: 12f)
-             .Line(Jackie, "Yeah.{1000} Wherever I am. Wherever I'll go.", rate: 24f)
-             .Line(Ives, "Good...{700} That's good...", rate: 12f, hold: 1600f)
+             .Line(Ives, "Will you...{1000} take me with you one more time?", lead: 400f, rate: 13f)
+             .Line(Jackie, "Yeah.{1000} Wherever I am.{800} Wherever I'll go.", lead: 600f, rate: 24f)
+             .Line(Ives, "Good...{1000} That's good...", lead: 200f, rate: 12f, hold: 1000f)
 
              .Narrate("Ives lets out a long breath, before she closes her eyes and leans on Jackie's back.",
-                    lead: 1500f, hold: 1800f)
+                    lead: 1300f, hold: 1800f)
 
-             .Narrate("Feeling Ives' breath quiet on her back. Jackie rolls to the side and heaves upward.",
+             .Narrate("Feeling Ives' breath quiet on her back.{400} Jackie rolls to the side and heaves upward.",
                     lead: 800f, hold: 1600f)
 
              .Narrate("Standing against the wind and snow,{700} Jackie turns towards the arm across her shoulder.",

@@ -1,0 +1,61 @@
+0.000	4.793	The Princess Frog lets out a final wail as its form dissolves into the whirling blizzard.
+4.793	9.953	In the center of the crater, Ives sways before crashing into the snow.
+9.953	11.522	Jackie: IVES!
+11.522	15.882	Jackie presses her fingers to Ives' neck, checking for a pulse.
+15.882	19.257	Ives: ...Jackie?
+19.257	23.130	Jackie: I'm here! Just hold on. We have to get you back to Kade.
+23.130	27.879	Ives: No can do, kid. My legs... they don't move.
+27.879	32.481	Jackie scrambles through her pockets. Takes out her Serum. It's pink.
+32.481	35.342	Jackie sets the serum in the snow.
+35.342	38.146	And wraps her arms tightly around Ives.
+38.146	40.769	Jackie: I-I can still carry you back.
+40.769	43.885	Jackie gets under Ives' shoulder and begins to lift.
+43.885	47.938	Ives: Ah, kid... Just, give me a sec.
+47.938	49.223	Jackie: Ives, you don't have the time to–
+49.223	52.023	Jackie: ...
+52.023	56.270	Jackie: Alright. Just... please tell me you'll be alright.
+56.270	58.418	Ives: Sorry, kid.
+58.418	62.418	Ives: I can't be making any more promises I can't keep.
+62.418	67.618	Ives: I promised before we'd find out what happened to your Ma, together.
+67.618	71.668	Ives: Look at me now, not much use to you like this.
+71.668	75.670	A burning sensation rises in Jackie's chest, threatening to burst from her throat.
+75.670	77.040	Jackie: Ives, I'm so sorry, it's all my—
+77.040	78.740	Jackie: ...
+78.740	81.825	Jackie: "Fight its shape, not its strength."
+81.825	84.822	Jackie: You taught me that. It saved my life.
+84.822	88.207	Jackie pulls up her pant leg to reveal the dressing.
+88.207	90.721	Jackie: We've been together the whole time.
+90.721	93.440	Jackie eases Ives down with her arm.
+93.440	96.817	Jackie: Every lesson, every exam, every terrible day.
+96.817	100.791	Jackie: You were there, and you didn't ask anything from me in return.
+100.791	102.670	Ives: Kid...
+102.670	105.791	Jackie tightens her grasp on Ives' shirt.
+105.791	109.961	Jackie: I... found out what happened to Ma.
+109.961	112.965	Ives: ...You did?
+112.965	117.165	Jackie: Yeah, she’s still hiding. But I think I see her shadow now.
+117.165	124.626	Ives: ...You've been playing hide and seek with her for quite some time now. Haven't you.
+124.626	129.502	Jackie grasps harder. Tears begin to stream down her face. She nods.
+129.502	134.300	Ives: ...Shit. C'mere, these arms still work.
+134.300	138.803	Ives rests her arms on Jackie's shoulders, and brings her close.
+138.803	144.262	Ives: You know. I expected you to haul me off earlier.
+144.262	146.228	Jackie: Y-you did?
+146.228	149.592	Ives: Yeah. Glad I was wrong.
+149.592	155.242	Ives: Wouldn't be sitting here hearing about your Ma otherwise.
+155.242	158.042	Jackie: ...
+158.042	163.192	Jackie's breathing steadies. And she pushes herself up to face Ives.
+163.192	166.791	Jackie: It's about time we get going. Don't you think?
+166.791	169.708	Ives: Yeah, I suppose so.
+169.708	173.760	Jackie puts her right shoulder under Ives' shoulder, propping her up.
+173.760	179.087	Ives: ...You're the one helping me off the floor now.
+179.087	183.317	Jackie: ...Why not, you my babysitter or something?
+183.317	187.004	Jackie puts her fist out. Ives looks at it briefly.
+187.004	191.575	Ives: ...Hah, no. Never was.
+191.575	194.040	And Ives meets it.
+194.040	201.153	Ives: Will you... take me with you one more time?
+201.153	206.026	Jackie: Yeah. Wherever I am. Wherever I'll go.
+206.026	210.230	Ives: Good... That's good...
+210.230	216.261	Ives lets out a long breath, before she closes her eyes and leans on Jackie's back.
+216.261	221.562	Feeling Ives' breath quiet on her back. Jackie rolls to the side and heaves upward.
+221.562	227.041	Standing against the wind and snow, Jackie turns towards the arm across her shoulder.
+227.041	230.491	Jackie: Any time.
+230.491	236.805	And begins the long trek back towards the firelight.

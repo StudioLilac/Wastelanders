@@ -90,10 +90,73 @@ namespace Cinematics
             }
         }
 
+        /// <summary>
+        /// The performer's own timing values, handed to CinematicSchedule so the
+        /// offline computation cannot drift from what actually plays.
+        /// </summary>
+        public CinematicSchedule.Settings TimingSettings => new CinematicSchedule.Settings
+        {
+            Punctuation = punctuation,
+            HoldBaseMs = holdBaseMs,
+            HoldPerWordMs = holdPerWordMs,
+            HoldMinMs = holdMinMs,
+            HoldMaxMs = holdMaxMs,
+            FadeInSeconds = fadeInSeconds,
+            FadeOutSeconds = fadeOutSeconds,
+            DefaultRate = 32f,
+            InterruptedMs = interruptedMs,
+        };
+
+        public CinematicSchedule.Entry[] BuildSchedule(IReadOnlyList<CinematicBeat> beats) =>
+            CinematicSchedule.Compute(beats, TimingSettings);
+
         public IEnumerator Play(IReadOnlyList<CinematicBeat> beats)
         {
             for (int i = Mathf.Max(0, startAtBeat); i < beats.Count; i++)
             {
+                yield return PlayBeat(beats[i]);
+            }
+
+            captionText.alpha = 0f;
+        }
+
+        /// <summary>
+        /// Plays anchored to a clock rather than by accumulating waits.
+        ///
+        /// Each beat holds until the clock reaches its scheduled start, so frame
+        /// error and beat overruns cannot accumulate across the scene: a beat that
+        /// runs long steals from the gap before the next one instead of pushing
+        /// everything after it out of time with the music.
+        ///
+        /// Pass a start offset to begin partway in. Seek the clock to the matching
+        /// position first, or the first beat will wait for the clock to catch up.
+        /// </summary>
+        public IEnumerator PlayFrom(
+            IReadOnlyList<CinematicBeat> beats,
+            Func<float> clock,
+            float startSeconds = 0f)
+        {
+            CinematicSchedule.Entry[] schedule = BuildSchedule(beats);
+            int first = startSeconds <= 0f
+                ? Mathf.Max(0, startAtBeat)
+                : CinematicSchedule.IndexAt(schedule, startSeconds);
+
+            if (logBeatIndices)
+                Debug.Log($"[Caption] starting at beat {first} " +
+                          $"({CinematicSchedule.Timecode(schedule[first].Start)}), " +
+                          $"total {CinematicSchedule.Timecode(CinematicSchedule.TotalSeconds(schedule))}");
+
+            for (int i = first; i < beats.Count; i++)
+            {
+                float target = schedule[i].Start;
+
+                while (clock() < target) yield return null;
+
+                float late = clock() - target;
+                if (late > 0.35f && logBeatIndices)
+                    Debug.LogWarning($"[Caption] beat {i} started {late:F2}s late. " +
+                                     "The previous beat overran its scheduled length.");
+
                 yield return PlayBeat(beats[i]);
             }
 

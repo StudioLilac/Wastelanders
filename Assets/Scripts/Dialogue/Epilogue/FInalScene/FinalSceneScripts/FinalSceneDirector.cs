@@ -27,6 +27,8 @@ namespace Cinematics
         [SerializeField] private MoonGlowDriver moonGlow;
         [SerializeField] private GameObject effectsParent;
         [SerializeField] private UIFadeHandler uiFadeHandler;
+        [SerializeField] private MusicClock musicClock;
+        [SerializeField] private float startTime;
 
         [Header("Sound")]
         [SerializeField] private EventReference blizzardOneShot;
@@ -104,13 +106,21 @@ namespace Cinematics
 
         private IEnumerator PlayScene()
         {
-            yield return new WaitForSeconds(1.5f);
+            if (startTime == 0)
+            {
+                yield return new WaitForSeconds(1.5f);
 
-            StartCoroutine(MoveCamera(mainCamera, new Vector2(0f, -2f), 3f));
-            yield return UIFadeScreenManager.Instance.FadeInLightScreen(2f);
-            yield return new WaitForSeconds(1.5f);
+                StartCoroutine(MoveCamera(mainCamera, new Vector2(0f, -2f), 3f));
+                yield return UIFadeScreenManager.Instance.FadeInLightScreen(2f);
+                yield return new WaitForSeconds(1.5f);
 
-            yield return performer.Play(script);
+            } else
+            {
+                StartCoroutine(MoveCamera(mainCamera, new Vector2(0f, -2f), 3f));
+                UIFadeScreenManager.Instance.SetLightScreen();
+            }
+
+            yield return performer.PlayFrom(script, () => musicClock.TrackSeconds, startTime);
 
             yield return new WaitForSeconds(0.5f);
             cinematicBarsAnimator.SetTrigger("RemoveBars");
@@ -162,7 +172,7 @@ namespace Cinematics
             moonCamera.enabled = true;
             effectsParent.SetActive(false);
 
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(2.5f);
             StartCoroutine(FadeFMODVolume(blizzardInstance, 0f, 0.5f, 0.5f));
             yield return uiFadeHandler.FadeInLightScreen(1f);
             StartCoroutine(moonGlow.Ramp(1f, 2.5f));
