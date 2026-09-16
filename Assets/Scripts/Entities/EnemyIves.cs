@@ -75,6 +75,7 @@ public class EnemyIves : EnemyClass
 
     protected override void Reshuffle() {
         base.Reshuffle();
+        if (pool.Count == 0) return;
         var cheapStrike = GetAction<LowBlow>();
         pool.Remove(cheapStrike.gameObject);
         currentHand.ForEach(h => pool.Remove(h.gameObject));
