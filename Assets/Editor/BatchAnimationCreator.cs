@@ -86,8 +86,7 @@ public static class BatchAnimationCreator
 
         var clip = new AnimationClip
         {
-            frameRate = 1f / secondsPerFrame,
-            legacy = true
+            frameRate = 1f / secondsPerFrame
         };
 
         var spriteBinding = new EditorCurveBinding

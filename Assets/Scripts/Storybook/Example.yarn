@@ -1,6 +1,6 @@
 title: Start
 ---
-<<bg 1>>
+<<bg valley>>
 Narrator: Swap backgrounds?
 
 -> Yes.
@@ -21,6 +21,6 @@ Narrator: This is a longer line of dialogue to give you time to test the "hurry 
 
 title: End
 ---
-<<bg 2 0.5>>
+<<bg bloomed_rose 0.5>>
 Narrator: Goodbye.
 ===

@@ -16,9 +16,6 @@ namespace Storybook
         [SerializeField] protected DialogueRunner dialogueRunner = null!;
         [SerializeField] protected AnimationCrossFadeHandler bg = null!;
 
-        [Tooltip("Backgrounds are addressed from Yarn using 1-based keys, e.g. <<bg 1>> selects backgrounds[0].")]
-        [SerializeField] private AnimationClip[] backgrounds = Array.Empty<AnimationClip>();
-
         [Tooltip("Default entry node for this scene. Can be overridden in code via EntryNode.")]
         [SerializeField] private string entryNode = "Start";
 
@@ -40,12 +37,12 @@ namespace Storybook
 
         private void SetBackground(string key, float duration = 0f)
         {
-            if (!int.TryParse(key, out var index) || index < 1 || index > backgrounds.Length)
+            if (!StorybookBackgroundLibrary.Shared.TryGet(key, out var clip))
             {
                 throw new Exception($"unknown background key: {key}");
             }
 
-            bg.CrossFadeTo(backgrounds[index - 1], duration);
+            bg.CrossFadeTo(clip, duration);
         }
     }
 }

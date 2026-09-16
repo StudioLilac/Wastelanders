@@ -4,17 +4,27 @@ using UnityEngine.UI;
 
 namespace UI_Elements.FadeScreen {
     [RequireComponent(typeof(Image))]
-    [RequireComponent(typeof(Animation))]
+    [RequireComponent(typeof(Animator))]
     public class AnimatedUIFadeHandler : FadeHandlerBase
     {
         [SerializeField] private Image uiImage = null!;
-        [SerializeField] private Animation uiAnimation = null!;
+        [SerializeField] private Animator uiAnimator = null!;
 
         public Image Image => uiImage;
-        public Animation Animation => uiAnimation;
 
         private AnimationClip? currentClip;
+        private AnimationClip? templateClip;
+        private AnimatorOverrideController? overrideController;
         public AnimationClip? CurrentClip => currentClip;
+
+        private void EnsureOverrideController()
+        {
+            if (overrideController != null) return;
+
+            templateClip = uiAnimator.runtimeAnimatorController.animationClips[0];
+            overrideController = new AnimatorOverrideController(uiAnimator.runtimeAnimatorController);
+            uiAnimator.runtimeAnimatorController = overrideController;
+        }
 
         protected override float CurrentAlpha => uiImage.color.a;
 
@@ -32,14 +42,16 @@ namespace UI_Elements.FadeScreen {
         public void PlayClip(AnimationClip clip)
         {
             currentClip = clip;
-            uiAnimation.clip = clip;
-            uiAnimation.Play();
+            EnsureOverrideController();
+            overrideController![templateClip!] = clip;
+            uiAnimator.enabled = true;
+            uiAnimator.Play("Background", 0, 0f);
         }
 
         /// <summary>Stops playback. Called on the outgoing layer once it's fully faded out.</summary>
         public void Stop()
         {
-            uiAnimation.Stop();
+            uiAnimator.enabled = false;
         }
     }
 }
