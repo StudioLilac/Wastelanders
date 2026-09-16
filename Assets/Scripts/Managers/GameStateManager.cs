@@ -89,7 +89,6 @@ public class GameStateManager : PersistentSingleton<GameStateManager>
         return false;
     }
 
-
     private bool isFadingOut = false;
     private IEnumerator FadeAndLoadScene(string scene)
     {
@@ -152,4 +151,5 @@ public enum OneTimeEvents
     None = 0,
     ShowPrologueGreeting = 10,
     ExplainBounties = 20,
+    ShowSeason1Intro = 30,
 }

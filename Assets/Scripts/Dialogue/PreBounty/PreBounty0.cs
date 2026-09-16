@@ -12,7 +12,6 @@ namespace Dialogue.PreBounty {
         private const float PAN_DURATION = 2.5f;
         [SerializeField] private UIFadeHandler fader;
         [SerializeField] private CanvasGroupFadeHandler comingSoon;
-
         [SerializeField] private UIFadeHandler wastelandBackground;
 
         private int keyframeIndex;
@@ -20,10 +19,24 @@ namespace Dialogue.PreBounty {
         
         private IEnumerator Start()
         {
+            // Players that come in from the credits will not need a special re-introduction.
+            var _ = GameStateManager.Instance.RecordFirstTimeEvent(OneTimeEvents.ShowSeason1Intro);
             this.Subscribe<CustomEvent>(HandleDialogueEvent);
             keyframeIndex = 0;
             comingSoon.SetLightScreen();
             fader.SetDarkScreen();
+
+            yield return new WaitForSeconds(1.5f);
+            yield return new DialogueAsCode()
+                .InterruptedLine(DialogueCharacter.Ailin, "3...", duration: 1)
+                .InterruptedLine(DialogueCharacter.Ailin, "2...", duration: 1)
+                .InterruptedLine(DialogueCharacter.Ailin, "1...", duration: 1).Play();
+            
+            yield return comingSoon.FadeInDarkScreen(1f);
+            yield return new WaitUntil(() => Input.anyKeyDown || Input.GetMouseButtonDown(0));
+            yield return comingSoon.FadeInLightScreen(1f);
+            yield return new WaitForSeconds(0.5f);
+
             yield return DialogueBoxV2.Instance.Play(Scene0Dialogue.ReadyOrNot);
             HandleCameraPanEvent();
             yield return new WaitForSeconds(1.0f);
@@ -122,7 +135,8 @@ namespace Dialogue.PreBounty {
     public static class Scene0Dialogue
     {
         public static DialogueAsCode ReadyOrNot => new DialogueAsCode()
-            .Line(DialogueCharacter.Ailin, "Ready or not, here I come!");
+            .Line(DialogueCharacter.Ailin, "Ready or not, here I come!")
+            ;
 
         public static DialogueAsCode OpenerDialogue(PreBounty0 bounty) => new DialogueAsCode()
             .Line(DialogueCharacter.Ailin, "Now who could that be hiding in this alleyway...?")

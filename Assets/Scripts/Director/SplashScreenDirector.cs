@@ -1,3 +1,4 @@
+using LevelSelectInformation;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -38,7 +39,21 @@ namespace Director
             yield return new WaitForSeconds(1f);
             yield return UIFadeScreenManager.Instance.FadeInDarkScreen(1f);
             yield return new WaitForSeconds(0.5f);
-            GameStateManager.Instance.LoadScene(Get<SceneData.MainMenu>().SceneName);
+            LoadSpecialScene();
+
+        }
+
+        void LoadSpecialScene()
+        {
+            SceneData load = true switch
+            {
+                var _ when StageInformation.Get<StageInformation.PrincessFrogFight>().UnlockCriteriaMet() 
+                                && GameStateManager.Instance.RecordFirstTimeEvent(OneTimeEvents.ShowSeason1Intro)=> Get<PreBounty0>(),
+                _ => Get<SceneData.MainMenu>()
+            };
+
+            GameStateManager.Instance.LoadScene(load.SceneName);
+
         }
     }
 }
