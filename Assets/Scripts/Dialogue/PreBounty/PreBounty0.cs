@@ -36,12 +36,11 @@ namespace Dialogue.PreBounty {
             yield return new WaitUntil(() => Input.anyKeyDown || Input.GetMouseButtonDown(0));
             yield return comingSoon.FadeInLightScreen(1f);
             yield return new WaitForSeconds(0.5f);
-
-            yield return DialogueBoxV2.Instance.Play(Scene0Dialogue.ReadyOrNot);
             HandleCameraPanEvent();
-            yield return new WaitForSeconds(1.0f);
-            StartCoroutine(fader.FadeInLightScreen(2.0f));
-            yield return new WaitForSeconds(4.0f);
+            yield return StartCoroutine(fader.FadeInLightScreen(1.5f));
+            yield return new WaitForSeconds(1f);
+            yield return DialogueBoxV2.Instance.Play(Scene0Dialogue.ReadyOrNot);
+            yield return new WaitForSeconds(0.5f);
             HandleCameraPanEvent();
             yield return new WaitForSeconds(3f);
             HandleCameraPanEvent();
