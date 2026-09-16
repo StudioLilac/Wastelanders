@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static LevelSelectInformation.StageInformation;
+using static PlasticPipe.PlasticProtocol.Messages.Serialization.ItemHandlerMessagesSerialization;
 
 /*
  * It seems that for the most part, the level select scene components are mostly self managed
@@ -12,6 +13,9 @@ using static LevelSelectInformation.StageInformation;
 public class LevelSelectManager : MonoBehaviour
 {
     [SerializeField] private CanvasGroup levelSelectCanvas;
+    [SerializeField] private LevelSelectButton finalFight;
+    [SerializeField] private AttentionSeeker finalFightIndicator;
+    [SerializeField] private AttentionSeeker bountySeeker;
 
     public void Start()
     {
@@ -19,9 +23,39 @@ public class LevelSelectManager : MonoBehaviour
             GameStateManager.Instance.CurrentLevelProgress >= Get<PrincessFrogFight>().LevelID &&
             GameStateManager.Instance.RecordFirstTimeEvent(OneTimeEvents.ShowPrologueGreeting);
 
+        var showFinalFightUnlock = 
+            Get<IvesFinale>().UnlockCriteriaMet() &&
+            GameStateManager.Instance.RecordFirstTimeEvent(OneTimeEvents.ShowFinalFightUnlock);
+
         if (showUnlockDialogue) {
             StartCoroutine(UnlockedDialogue());
         }
+
+        if (showFinalFightUnlock)
+        {
+            StartCoroutine(UnlockFinalFight());
+        }
+
+        ConfigureAttentionSeekers();
+    }
+
+    void ConfigureAttentionSeekers()
+    {
+        bountySeeker.ConfigureAttention(() => BountyManager.Instance.GetBountyProgress() == 0);
+    }
+
+    IEnumerator UnlockFinalFight()
+    {
+        levelSelectCanvas.interactable = false;
+        levelSelectCanvas.blocksRaycasts = false;
+        finalFight.Lock();
+        yield return new WaitForSeconds(1f);
+        finalFightIndicator.ConfigureAttention(() => true);
+        finalFight.Unlock(animate: true);
+        yield return new WaitForSeconds(1.5f);
+        levelSelectCanvas.interactable = true;
+        levelSelectCanvas.blocksRaycasts = true;
+
     }
 
     IEnumerator UnlockedDialogue()

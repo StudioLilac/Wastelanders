@@ -100,7 +100,7 @@ public class Epilogue_9 : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         new BountyInformationEvent(BountyInformation.Get<BountyInformation.PrincessFrogBounty>()).Invoke();
-        GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.ContractSelect>().SceneName);
+        GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.LevelSelect>().SceneName);
     }
 
     public static class Epilogue9Dialogue
