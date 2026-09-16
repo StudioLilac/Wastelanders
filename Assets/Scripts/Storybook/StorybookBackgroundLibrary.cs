@@ -8,7 +8,7 @@ namespace Storybook
     [CreateAssetMenu(menuName = "Storybook/Background Library")]
     public sealed class StorybookBackgroundLibrary : ScriptableObject
     {
-        private const string ResourcePath = "StorybookBackgroundLibrary";
+        private const string ResourcePath = "Storybook/StorybookBackgroundLibrary";
 
         [Serializable]
         public sealed class Entry
