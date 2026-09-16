@@ -5,13 +5,23 @@ Narrator: Once there was a valley, in which flowers bloomed, and there grew a ro
 Narrator: Thunder boomed through the sky, though it stretched blue and clear. It was the soundings of war, it was the beginning of fear.
 Narrator: In the men ran, violence spread through the scene. Red filled their footprints, where once there was green.
 Narrator: Blossoms were scourged from their beds by their blooms. Men and roses laid down in early unearthed tombs.
+<<bg closed_bud_no_thorns>>
+Narrator: A little rose stood alone, though it strived to survive. 
 <<bg closed_bud_w_thorns>>
-Narrator: A little rose stood alone, though it strived to survive. It grew a thistle of thorns, and it blocked out the sky.
+Narrator: It grew a thistle of thorns, and it blocked out the sky.
+<<bg thorn_layers_1_layer>>
+<<wait 1>>
+<<bg thorn_layers_2_layers>>
+<<wait 1>>
+<<bg thorn_layers_3_layers>>
+<<wait 1>>
 Narrator: The war it endured, thorns gained sharpness and mass. Till at once it all ceased, there was silence at last.
 Narrator: The thorns stood their guard, pointy and sheer. Though her body was frail and too dry to shed tears,
 Narrator: she pinned shut her senses and just clung by a thread until fear released its grip, she would see no light shed.
 Narrator: Her world, it was dim, without hope, without whim. So time passed in a haze, and her outlook stayed grim.
-Narrator: The rose was shook from her trance, by a sudden advance. The ground hummed, a shadow grew, the rose trembled in her stance.
+Narrator: The rose was shook from her trance, by a sudden advance. 
+<<bg silhouette>>
+Narrator: The ground hummed, a shadow grew, the rose trembled in her stance.
 Narrator: Bracing for defense, the rose cried out in vain.
 Rose: Get away, get away, or my thorns will bring you pain.
 Gardener: I am a gardener. I've come to offer you my care. To tend to your ailments, to help your beauty be spared.
@@ -28,6 +38,7 @@ Narrator: Admittedly thirsty, the rose paused her remark.
 
 title: Refuse
 ---
+<<bg thorn_layers_fullscreen>>
 Narrator: Her thirst now awakened, she'd face sleepless nights. Her refusal of help, now the source of her blight.
 Narrator: The rose remains afraid and continues to shelter. But the gardener returns, determined to help her.
 <<jump Accept>>
@@ -35,6 +46,7 @@ Narrator: The rose remains afraid and continues to shelter. But the gardener ret
 
 title: Accept
 ---
+<<bg watering_can>>
 Narrator: The rose flinched as he poured, though her roots expanded to hoard the sweet rain that brought end to the drought she endured.
 Narrator: And no harm befell her, by the gardener's tend. But why care at all? She could not comprehend.
 ===
