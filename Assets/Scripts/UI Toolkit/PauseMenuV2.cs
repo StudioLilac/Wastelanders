@@ -186,6 +186,11 @@ namespace UI_Toolkit
             GameStateManager.Instance.Restart();
         }
 
+        private void OnGlsClicked()
+        {
+            SetState(State.Glossary);
+        }
+
         private void OnDckClicked()
         {
             DoStart();
@@ -265,6 +270,7 @@ namespace UI_Toolkit
         {
             pauseMenuPanel.Q<Button>("button-rsm").clicked += OnRsmClicked;
             pauseMenuPanel.Q<Button>("button-rst").clicked += OnRstClicked;
+            pauseMenuPanel.Q<Button>("button-gls").clicked += OnGlsClicked;
             pauseMenuPanel.Q<Button>("button-dck").clicked += OnDckClicked;
             pauseMenuPanel.Q<Button>("button-lvl").clicked += OnLvlClicked;
             pauseMenuPanel.Q<Button>("button-mnu").clicked += OnMnuClicked;
