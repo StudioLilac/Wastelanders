@@ -13,6 +13,8 @@ namespace Storybook
     /// </summary>
     public abstract class StorybookDirector : MonoBehaviour
     {
+        private const float DefaultBackgroundFadeDuration = 0.5f;
+
         [SerializeField] protected DialogueRunner dialogueRunner = null!;
         [SerializeField] protected AnimationCrossFadeHandler bg = null!;
 
@@ -35,7 +37,7 @@ namespace Storybook
             dialogueRunner.StartDialogue(EntryNode);
         }
 
-        private void SetBackground(string key, float duration = 0f)
+        private void SetBackground(string key, float duration = DefaultBackgroundFadeDuration)
         {
             if (!StorybookBackgroundLibrary.Shared.TryGet(key, out var clip))
             {

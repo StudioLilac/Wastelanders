@@ -7,13 +7,13 @@ Narrator: In the men ran, violence spread through the scene. Red filled their fo
 Narrator: Blossoms were scourged from their beds by their blooms. Men and roses laid down in early unearthed tombs.
 <<bg closed_bud_no_thorns>>
 Narrator: A little rose stood alone, though it strived to survive. 
-<<bg closed_bud_w_thorns>>
+<<bg closed_bud_w_thorns 0>>
 Narrator: It grew a thistle of thorns, and it blocked out the sky.
-<<bg thorn_layers_1_layer>>
+<<bg thorn_layers_1_layer 1>>
 <<wait 1>>
-<<bg thorn_layers_2_layers>>
+<<bg thorn_layers_2_layers 1>>
 <<wait 1>>
-<<bg thorn_layers_3_layers>>
+<<bg thorn_layers_3_layers 1>>
 <<wait 1>>
 Narrator: The war it endured, thorns gained sharpness and mass. Till at once it all ceased, there was silence at last.
 Narrator: The thorns stood their guard, pointy and sheer. Though her body was frail and too dry to shed tears,
