@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 7960594}
   - component: {fileID: 7960596}
   - component: {fileID: 7960595}
+  - component: {fileID: 7960598}
   - component: {fileID: 7960597}
   m_Layer: 5
   m_Name: Image 1
@@ -204,10 +205,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 7960593}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2a3c0ba8ef1824438650b6e205890b6, type: 3}
+  m_Script: {fileID: 11500000, guid: f84082197f5c4832b6cb0628cc8f459e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   uiImage: {fileID: 7960595}
+  uiAnimator: {fileID: 7960598}
+--- !u!95 &7960598
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7960593}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 25f2db38a6e07cb4f8e3fbcf408326c4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &154595705
 GameObject:
   m_ObjectHideFlags: 0
@@ -332,8 +356,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueRunner: {fileID: 8309902627721212547}
   bg: {fileID: 511150653}
-  sprite1: {fileID: 3946099816637777405, guid: a5498959f04df44709540c326e4c91c4, type: 3}
-  sprite2: {fileID: -7660997389621074658, guid: 070da8a6c20344edca93f204afbb2ef4, type: 3}
+  entryNode: Start
 --- !u!4 &511150652
 Transform:
   m_ObjectHideFlags: 0
@@ -358,11 +381,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 511150650}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 570ece3d1c1091142b4cbe2ad28d1fda, type: 3}
+  m_Script: {fileID: 11500000, guid: d099d656743149d981f6e0d81de3494a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  frontLayer: {fileID: 7960597}
-  backLayer: {fileID: 609666258}
+  frontLayer: {fileID: 609666258}
+  backLayer: {fileID: 7960597}
   fadeCurve:
     serializedVersion: 2
     m_Curve:
@@ -398,6 +421,7 @@ GameObject:
   - component: {fileID: 609666255}
   - component: {fileID: 609666257}
   - component: {fileID: 609666256}
+  - component: {fileID: 609666259}
   - component: {fileID: 609666258}
   m_Layer: 5
   m_Name: Image 2
@@ -472,10 +496,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 609666254}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2a3c0ba8ef1824438650b6e205890b6, type: 3}
+  m_Script: {fileID: 11500000, guid: f84082197f5c4832b6cb0628cc8f459e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   uiImage: {fileID: 609666256}
+  uiAnimator: {fileID: 609666259}
+--- !u!95 &609666259
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 609666254}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 25f2db38a6e07cb4f8e3fbcf408326c4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1549034408
 GameObject:
   m_ObjectHideFlags: 0
