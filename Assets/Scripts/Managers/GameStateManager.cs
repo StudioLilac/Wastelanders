@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Storybook;
 using Systems.Persistence;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -118,6 +119,9 @@ public class GameStateManager : PersistentSingleton<GameStateManager>
      * Dialogue classes should reset this value when read, such that it does not cause unexpected behaviour in upcoming scenes
      */
     public bool JumpToCombat = false;
+
+    // Set this variable to the intended storybook scene before jumping:
+    public StorybookSceneEnum StorybookEntryNode { get; set; } = StorybookSceneEnum.None;
 }
 
 

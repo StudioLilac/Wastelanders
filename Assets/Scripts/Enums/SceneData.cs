@@ -176,6 +176,12 @@ public abstract class SceneData : Enum<SceneData>
             { prefabs.pauseMenuV2 };
     }
 
+    public class StorybookScene : SceneData
+    {
+        public override string SceneName => "StorybookScene";
+        public override SceneAudio GetAudio(AudioDatabase database) => database.Empty;
+    }
+
     
     public class PreBounty0 : SceneData {
         public override string SceneName => "PreBounty_0";

@@ -6,26 +6,28 @@ using Yarn.Unity;
 
 namespace Storybook
 {
+    public enum StorybookSceneEnum {
+        None,
+        Storybook1,
+        Storybook2,
+        Storybook3,
+        Storybook4
+    }
+    
     /// <summary>
     /// Base class for a scene's dialogue director. Handles the shared "bg" command
     /// (crossfading to an animated background clip by key) and exposes an overrideable
     /// entry node for whichever Yarn node the scene should start on.
     /// </summary>
-    public abstract class StorybookDirector : MonoBehaviour
+    public class StorybookDirector : MonoBehaviour
     {
         private const float DefaultBackgroundFadeDuration = 0.5f;
 
         [SerializeField] protected DialogueRunner dialogueRunner = null!;
         [SerializeField] protected AnimationCrossFadeHandler bg = null!;
 
-        [Tooltip("Default entry node for this scene. Can be overridden in code via EntryNode.")]
-        [SerializeField] private string entryNode = "Start";
-
-        /// <summary>
-        /// The Yarn node this director should start dialogue on. Override this in a
-        /// subclass to hardcode a node in code, or leave as-is to use the inspector value.
-        /// </summary>
-        protected virtual string EntryNode => entryNode;
+        [Tooltip("Default entry node for this scene, useful for testing the scene. Can be overridden in code via EntryNode.")]
+        [SerializeField] private string EntryNode = "Start";
 
         protected virtual void Awake()
         {
@@ -34,7 +36,19 @@ namespace Storybook
 
         protected virtual void Start()
         {
-            dialogueRunner.StartDialogue(EntryNode);
+            StorybookSceneEnum requestedEntryNode = GameStateManager.Instance.StorybookEntryNode;
+            GameStateManager.Instance.StorybookEntryNode = StorybookSceneEnum.None;
+
+            string nodeName = requestedEntryNode == StorybookSceneEnum.None
+                ? EntryNode
+                : requestedEntryNode.ToString();
+
+            dialogueRunner.StartDialogue(string.IsNullOrWhiteSpace(nodeName) ? "Start" : nodeName);
+        }
+
+        private static string ToNodeName(StorybookSceneEnum scene)
+        {
+            return scene == StorybookSceneEnum.None ? "Start" : scene.ToString();
         }
 
         private void SetBackground(string key, float duration = DefaultBackgroundFadeDuration)

@@ -1,0 +1,72 @@
+title: Storybook4
+---
+<<bg silhouette>>
+Gardener: I've come to say goodbye.
+Narrator: The gardener held a pail in hand to offer one last try.
+Narrator: He lowered down, spoke soft and slow.
+Gardener: I've just come to water my rose before I go.
+Rose: Why must you go? I'm better with you here, you know?
+Gardener: I must go because it's time, but I have one request. Could I watch you blossom? It would give my heart rest.
+<<bg thorn_layers_3_layers>>
+Narrator: The gardener sat patient, not minding the thorns.
+Narrator: The rose, she was pensive. Unsure. Unsure.
+Rose: I might not be beautiful. Petals small and all dull. The first blooming in a blue moon, it might not be full.
+Gardener: Oh, how it would please me, even if slight. For our last night together, just to celebrate your might.
+
+-> Bloom.
+    <<jump Bloom>>
+===
+
+title: Bloom
+---
+<<bg thorn_layers_2_layers>>
+Narrator: She unwound herself slowly, from her tight spiral hold.
+Narrator: Cold air tickled her petals, and it made her feel bold.
+<<bg thorn_layers_1_layer>>
+Narrator: There was space to move into, without her defenses to cage.
+Narrator: This was the start of a new chapter; she was turning the page.
+<<bg closed_bud_no_thorns>>
+Narrator: Her tensions unspawned as her figure unfurled.
+Narrator: She yawned out of twistings in which she'd been curled.
+<<bg bloomed_rose>>
+Narrator: She blushed a deep crimson, and she stretched herself wide.
+Narrator: Eased layer after layer, she had many to hide.
+Narrator: The gardener stood speechless, with a marveling gaze.
+Narrator: An image of beauty he'd treasure for all of his days.
+<<bg soldier_gardener_reveal>>e
+Narrator: As she opened, she saw him for all of his cause.
+Rose: You're a soldier.
+Gardener: I was, once.
+
+-> Ask more.
+    <<jump Explore4>>
+-> Let it be.
+    <<jump Farewell>>
+===
+
+title: Explore4
+---
+Gardener: I came here to fight, and I stayed here to grieve. I tended to tombs with wounds that wouldn't ease.
+Gardener: But then I became a gardener and you became my garden. And I saw myself soften from the way I'd been hardened.
+Gardener: But now that I'm healed I must rip off my bandages, and return to the family from which I've disbanded.
+<<jump Farewell>>
+===
+
+title: Farewell
+---
+Narrator: Knelt by her side, he watered his rose.
+Narrator: He memorized her petals, now allowed to get close.
+Narrator: As he took his final glance, his eyes gleamed with pride.
+Gardener: Be brave little rose, you must live, not hide.
+<<bg rose_pov>>
+Rose: Don't leave me... don't go.
+Narrator: The plea was breathed again, bereaved at his departure.
+<<bg going_up>>
+Narrator: She reached beyond her vines to see him head out.
+Narrator: One last glance at the gardener, she'd have to fend without.
+<<bg rose_and_moon>>
+Narrator: Alone in the night, she dared to look at the sky.
+Narrator: She saw an ocean of stars and let her scars fall aside.
+Narrator: She felt the gardener's presence, that the sky was their tether.
+Rose: If you look to the moon we will always be together.
+===
