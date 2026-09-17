@@ -373,7 +373,7 @@ public class BattleQueue : MonoBehaviour
         }
 
         //Returns: whether (@param clashingAction) will clash with this wrapper.
-        public bool CanClashWithAction(ActionClass clashingAction)
+        private bool ClashSanityCheck(ActionClass clashingAction)
         {
             if (IsClashing()) return false;
 
@@ -383,21 +383,29 @@ public class BattleQueue : MonoBehaviour
             bool playerWrapperClashesWithEnemyAction = PlayerAction != null && (PlayerAction.Origin == clashingAction.Target || PlayerAction.Speed >= clashingAction.Speed) && PlayerAction.Target == clashingAction.Origin && PlayerAction.Clashable && clashingAction.Clashable;
             bool enemyWrapperClashesWithPlayerAction = EnemyAction != null && EnemyAction.Origin == clashingAction.Target && (EnemyAction.Target == clashingAction.Origin || clashingAction.Speed >= EnemyAction.Speed) && EnemyAction.Clashable && clashingAction.Clashable;
 
-            if (clashingAction.IsPlayedByPlayer())
-            {
-                return enemyWrapperClashesWithPlayerAction;
-            } else
-            {
-                return playerWrapperClashesWithEnemyAction;
-            }
+            if (clashingAction.IsPlayedByPlayer()) return enemyWrapperClashesWithPlayerAction;
+            else return playerWrapperClashesWithEnemyAction;
+        }
+
+        public bool CanClashWithAction(ActionClass clashingAction)
+        {
+            if (IsClashing()) return false;
+
+            if ((PlayerAction && !PlayerAction.Clashable) || (EnemyAction && !EnemyAction.Clashable)) return false;
+
+            bool playerWrapperClashesWithEnemyAction = PlayerAction != null && PlayerAction.Origin == clashingAction.Target && PlayerAction.Target == clashingAction.Origin && PlayerAction.Clashable && clashingAction.Clashable;
+            bool enemyWrapperClashesWithPlayerAction = EnemyAction != null && EnemyAction.Origin == clashingAction.Target && EnemyAction.Target == clashingAction.Origin && EnemyAction.Clashable && clashingAction.Clashable;
+
+            if (clashingAction.IsPlayedByPlayer()) return enemyWrapperClashesWithPlayerAction;
+            else return playerWrapperClashesWithEnemyAction;
         }
 
 
-    // Modifies: this to become a clashing wrapper.
-    // Requires: That (@param clashingAction) can clash with an Action within this wrapper (Call ClashesWithAction first)
-    public void SetClashingAction(ActionClass clashingAction)
+        // Modifies: this to become a clashing wrapper.
+        // Requires: That (@param clashingAction) can clash with an Action within this wrapper (Call ClashesWithAction first)
+        public void SetClashingAction(ActionClass clashingAction)
         {
-            if (!CanClashWithAction(clashingAction))
+            if (!ClashSanityCheck(clashingAction))
             {
                 Debug.LogWarning("You called SetClashingAction with a wrapper that didnt actually clash. " +
                     "Here is my info: Action played by player " + PlayerAction?.GetName() + "Action played by enemy"+ EnemyAction?.GetName());
