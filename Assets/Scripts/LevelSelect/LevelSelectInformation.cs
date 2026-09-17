@@ -107,7 +107,7 @@ namespace LevelSelectInformation
         public class IvesFinale : StageInformation
         {
             public override string Title => "EX 2. SUCCESSION";
-            public override string SceneName => SceneData.Get<SceneData.PrincessFrogBounty>().SceneName;
+            public override string SceneName => SceneData.Get<SceneData.Epilogue_10>().SceneName;
             public override float LevelID => 5f;
             public override bool LevelEnabled => GameStateManager.SEASON_1_ACTIVE;
             public override Level? SelectableLevel => Level.IvesFinale;
@@ -126,10 +126,10 @@ namespace LevelSelectInformation
         public class Season2 : StageInformation
         {
             public override string Title => string.Empty;
-            public override string SceneName => SceneData.Get<SceneData.PrincessFrogBounty>().SceneName;
+            public override string SceneName => SceneData.Get<SceneData.MainMenu>().SceneName;
             public override float LevelID => 6f;
             public override bool LevelEnabled => false;
-            public override bool UnlockCriteriaMet() => LevelID <= GameStateManager.Instance.CurrentLevelProgress && Get<IvesFinale>().UnlockCriteriaMet();
+            public override bool UnlockCriteriaMet() => GameStateManager.Instance.CurrentLevelProgress >= LevelID && Get<IvesFinale>().UnlockCriteriaMet();
         }
 
         public void UponSelectedEvent() => new StageInformationEvent(SceneName).Invoke();

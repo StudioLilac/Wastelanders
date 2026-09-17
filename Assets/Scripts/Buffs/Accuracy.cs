@@ -28,7 +28,7 @@ public class Accuracy : StatusEffect
     //Getting hit with accuracy halves it 
     void OnEntityHit(ref int damage)
     {
-        if (damage > 0)
+        if (damage > 0 && (Host == null || !Host.HasBuff(Steadied.buffName)))
         {
             buffStacks = Stacks / 2;
         }

@@ -4,20 +4,21 @@ using Systems.Persistence;
 using UnityEngine;
 
 #nullable enable
-public record ShakeScreen(float Intensity) : IEvent;
+public record ShakeScreen(float Intensity, float Duration = -1f, bool Zoom = true) : IEvent;
 public record GetActiveCamera(): IQuery<CinemachineVirtualCamera?>;
 public class ScreenShakeHandler : MonoBehaviour {
     public static bool IsScreenShakeEnabled = true;
 
     private void Awake()
     {
-        this.Subscribe<ShakeScreen>(evt => AttackCameraEffect(evt.Intensity));
+        this.Subscribe<ShakeScreen>(AttackCameraEffect);
     }
 
-    private void AttackCameraEffect(float percentageMax)
+    private void AttackCameraEffect(ShakeScreen evt)
     {
         if (!IsScreenShakeEnabled) return;
-
+        var percentageMax = evt.Intensity;
+        float time = evt.Duration > 0 ? evt.Duration : Mathf.Min(0.3f, percentageMax) + percentageMax / 20f;
         var activeCamera = new GetActiveCamera().Query();
         if (activeCamera == null)
         {
@@ -30,31 +31,30 @@ public class ScreenShakeHandler : MonoBehaviour {
 
         if (percentageMax < 0.25f)
         {
-            StartCoroutine(ShakeCamera(percentageMax, virtualCameraNoise));
-            StartCoroutine(ZoomEffect(-percentageMax, activeCamera));
+            StartCoroutine(ShakeCamera(percentageMax, time, virtualCameraNoise));
+            if (evt.Zoom) StartCoroutine(ZoomEffect(-percentageMax, activeCamera));
         }
         else if (percentageMax < 0.75f)
         {
-            StartCoroutine(ShakeCamera(percentageMax, virtualCameraNoise));
-            StartCoroutine(ZoomEffect(-percentageMax, activeCamera));
+            StartCoroutine(ShakeCamera(percentageMax, time, virtualCameraNoise));
+            if (evt.Zoom) StartCoroutine(ZoomEffect(-percentageMax, activeCamera));
         }
         else
         {
-            StartCoroutine(ShakeCamera(percentageMax, virtualCameraNoise));
-            StartCoroutine(ZoomEffect(-percentageMax, activeCamera));
+            StartCoroutine(ShakeCamera(percentageMax, time, virtualCameraNoise));
+            if (evt.Zoom) StartCoroutine(ZoomEffect(-percentageMax, activeCamera));
             StartCoroutine(TiltEffect(percentageMax, activeCamera));
         }
     }
 
     //(@param percentageMax) is a float [0, 1]
-    private IEnumerator ShakeCamera(float percentageMax, CinemachineBasicMultiChannelPerlin virtualCameraNoise)
+    private IEnumerator ShakeCamera(float percentageMax, float time, CinemachineBasicMultiChannelPerlin virtualCameraNoise)
     {
-        float time = Mathf.Min(0.3f, percentageMax);
         float shakeAmplitude = 1f + percentageMax / 2f;
         float shakeFrequency = 1f + percentageMax * 3f / 4f;
         virtualCameraNoise.m_AmplitudeGain = shakeAmplitude;
         virtualCameraNoise.m_FrequencyGain = shakeFrequency;
-        yield return new WaitForSeconds(time + percentageMax / 20f);
+        yield return new WaitForSeconds(time);
         virtualCameraNoise.m_AmplitudeGain = 0f;
         virtualCameraNoise.m_FrequencyGain = 0f;
     }

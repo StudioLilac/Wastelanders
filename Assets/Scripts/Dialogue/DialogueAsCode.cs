@@ -136,6 +136,7 @@ public class DialogueAsCode
         DialogueCharacter.Loudspeaker => actors.Loudspeaker,
         DialogueCharacter.Tutorial => actors.Tutorial,
         DialogueCharacter.Event => actors.Event,
+        DialogueCharacter.Lilac => actors.Lilac,
         DialogueCharacter.Unknown => actors.Unkown,
         _ => throw new ArgumentOutOfRangeException(nameof(character), character, "Unmapped DialogueCharacter")
     };
@@ -165,5 +166,6 @@ public enum DialogueCharacter
     Loudspeaker,
     Tutorial,
     Event,
+    Lilac,
     Unknown,
 }

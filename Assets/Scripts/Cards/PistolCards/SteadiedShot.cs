@@ -27,16 +27,7 @@ public class SteadiedShot : PistolCards
 
     public override void ApplyEffect()
     {
-        StatusEffectModifyValueDelegate originalHandler = Origin.SetBuffsOnHitHandler(Accuracy.buffName, (ref int damage) => { });
-        this.Subscribe<GameStateChanged>(ResetBuffHandler);
-        void ResetBuffHandler(GameStateChanged e)
-        {
-            if (e.NewState != GameState.FIGHTING)
-            {
-                this.UnSubscribe<GameStateChanged>(ResetBuffHandler);
-                Origin.SetBuffsOnHitHandler(Accuracy.buffName, originalHandler);
-            }
-        }
+        Origin.AddStacks(Steadied.buffName, 1);
         base.ApplyEffect();
     }
 }
