@@ -66,6 +66,8 @@ public enum DialogueSprite
     JackieContemplative = 136,
     JackieDowncast = 137,
     JackieRelaxed = 138,
+    JackieHurt = 139,
+    JackieSulk = 140,
 
     IvesQuestioning = 14,       // qu
     IvesLaugh = 15,             // la
