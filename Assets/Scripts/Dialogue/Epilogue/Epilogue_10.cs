@@ -65,6 +65,8 @@ namespace Dialogue.Epilogue
         [SerializeField] private ParticleSystem radialBurst;
         [SerializeField] private SpriteDissolver princessDissolver;
         [SerializeField] private Epilogue_10_Cutscene cutscene;
+        [SerializeField] private DialogueEntryWrapper inBattleHint;
+
         private DefaultSceneBuilder sceneBuilder;
         private float justStartedFlickering = 0f;
         
@@ -263,7 +265,8 @@ namespace Dialogue.Epilogue
             instance.setParameterByNameWithLabel("BossState", "Fighting");
             blizzardParticles.SetIntensity(0.25f);
             CombatManager.Instance.BeginCombat();
-            
+
+            yield return DialogueBoxV2.Instance.Play(inBattleHint);
             yield return new WaitUntil(() => new GetGameState().Query() == GameState.GAME_WIN);
             
             CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
@@ -676,15 +679,6 @@ namespace Dialogue.Epilogue
                 .Line(DialogueCharacter.Rocky, "If we cut down the Frog in control, he’ll have nothing.")
                 .Line(DialogueCharacter.Rocky, "Let's stick with the plan. Everyone battle formations! Let’s get our people back!")
                 .Exit(DialogueCharacter.Jackie, DialogueCharacter.Rocky, DialogueCharacter.Kade, DialogueCharacter.Weise, DialogueCharacter.Ives);
-
-            public static DialogueAsCode PreBattleText() => new DialogueAsCode()
-                .Line(DialogueCharacter.Jackie, "Rocky, I see the princess frog ahead. Where’s the assault team?")
-                .Line(DialogueCharacter.Rocky, "We’re being held up by an influx of creatures. Jay, how’s your gathering going, can you spare some men?")
-                .Line(DialogueCharacter.Jay, " Can’t disengage. We’re being held back by the scouts.")
-                .Line(DialogueCharacter.Rocky, "Then it’s just you Jackie. I...")
-                .Line(DialogueCharacter.Rocky, "I trust you to engage. Keep yourself safe.")
-                .Line(DialogueCharacter.Jackie, "Got it. I’ll dip if it's too much to handle.")
-                .Line(DialogueCharacter.Rocky, "Good luck.");
         }
     }
 }

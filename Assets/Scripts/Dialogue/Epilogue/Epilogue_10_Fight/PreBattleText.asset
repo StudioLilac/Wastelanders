@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4fafe43b89343e3a7ba1235e8987c0f, type: 3}
+  m_Name: PreBattleText
+  m_EditorClassIdentifier: 
+  Entries:
+  - content: "Rocky, I see the princess frog ahead. Where\u2019s the assault team?"
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxId: 0
+    picture: {fileID: 21300000, guid: b87749015089a4b4eb240bad6a124e9b, type: 3}
+    events: []
+  - content: "We\u2019re being held up by an influx of creatures. Jay, how\u2019s
+      your progress? Can you spare some men?"
+    speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+    sfxId: 0
+    picture: {fileID: 21300000, guid: 3df9c483aee7c9146abe38c2ec7966d9, type: 3}
+    events: []
+  - content: "Can\u2019t disengage. We\u2019re being held back by the scouts."
+    speaker: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
+    sfxId: 0
+    picture: {fileID: 21300000, guid: cbafafe13ce355141a9a2a89944f1395, type: 3}
+    events: []
+  - content: "Then it\u2019s just you Jackie. I..."
+    speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+    sfxId: 0
+    picture: {fileID: 21300000, guid: 3df9c483aee7c9146abe38c2ec7966d9, type: 3}
+    events: []
+  - content: I trust you to engage. Keep yourself safe.
+    speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+    sfxId: 0
+    picture: {fileID: 21300000, guid: 3df9c483aee7c9146abe38c2ec7966d9, type: 3}
+    events: []
+  - content: "Got it. I\u2019ll dip if it's too much to handle."
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxId: 0
+    picture: {fileID: 21300000, guid: 228f823fe8b2f4d4791ed74e46de81e1, type: 3}
+    events: []
+  - content: Good luck.
+    speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+    sfxId: 0
+    picture: {fileID: 21300000, guid: 3df9c483aee7c9146abe38c2ec7966d9, type: 3}
+    events: []
+  references:
+    version: 2
+    RefIds: []
