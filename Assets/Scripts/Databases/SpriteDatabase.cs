@@ -82,4 +82,6 @@ public enum DialogueSprite
     JaySorry = 33,
     RockySerious = 34,
     RockySmile = 35,
+    RockyGrin = 36,
+    RockyHurt = 37,
 }

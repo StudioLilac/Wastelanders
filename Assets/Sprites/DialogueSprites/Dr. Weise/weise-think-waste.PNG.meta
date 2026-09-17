@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 30bd0e68e238a2746ac06e8f9527da16
+guid: aace9c70baa25f541b82786233fd5633
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5716319594728238710
-    second: weiss_neutral_recoloured_0
+      213: 5639938651891742124
+    second: weise-think-waste_0
+  - first:
+      213: 5789420713688340097
+    second: weise-think-waste_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +40,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -100,13 +103,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: weiss_neutral_recoloured_0
+      name: weise-think-waste_0
       rect:
         serializedVersion: 2
-        x: 172
+        x: 587
         y: 0
-        width: 2184
-        height: 2655
+        width: 1751
+        height: 2672
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +118,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 67ea1629262745f40800000000000000
-      internalID: 5716319594728238710
+      spriteID: ca5b00d7256154e40800000000000000
+      internalID: 5639938651891742124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: weise-think-waste_1
+      rect:
+        serializedVersion: 2
+        x: 1468
+        y: 2661
+        width: 13
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1869ea62777285050800000000000000
+      internalID: 5789420713688340097
       vertices: []
       indices: 
       edges: []
@@ -135,7 +160,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      weiss_neutral_recoloured_0: 5716319594728238710
+      weise-think-waste_0: 5639938651891742124
+      weise-think-waste_1: 5789420713688340097
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

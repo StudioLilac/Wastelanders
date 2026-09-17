@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static LevelSelectInformation.StageInformation;
-using static PlasticPipe.PlasticProtocol.Messages.Serialization.ItemHandlerMessagesSerialization;
 
 /*
  * It seems that for the most part, the level select scene components are mostly self managed
