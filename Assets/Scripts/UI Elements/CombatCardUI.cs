@@ -4,6 +4,7 @@ using UnityEngine.U2D;
 using UnityEngine.UI;
 using static ActionClass;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class CombatCardUI : DisplayableClass
 {
     [SerializeField] SpriteRenderer targetRenderer;

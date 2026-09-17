@@ -6,6 +6,7 @@ using UI_Toolkit;
 using UnityEngine;
 using UtilClass;
 
+public record CardClicked(ActionClass Card) : IEvent;
 public record CardUsed<T>() : IEvent where T : ActionClass;
 public abstract class ActionClass : SelectClass
 {
@@ -99,7 +100,6 @@ public abstract class ActionClass : SelectClass
     public event ActionClassDelegate? TargetChanged;
     public event ActionClassDelegate? TargetChanging;
     public event ActionClassDelegate? CardValuesUpdating;
-    public static event ActionClassDelegate? CardClickedEvent;
     public static event ActionClassDelegate? CardRightClickedEvent;
     public static event ActionClassDelegate? CardHighlightedEvent;
     public static event ActionClassDelegate? CardUnhighlightedEvent;
@@ -253,10 +253,7 @@ public abstract class ActionClass : SelectClass
         cardUI?.RenderCard(this);
         CardValuesUpdating?.Invoke(this);
     }
-    public void OnMouseDown()
-    {
-        CardClickedEvent?.Invoke(this);
-    }
+    public void OnMouseDown() => new CardClicked(this).Invoke();
 
     // To handle right click detection for the Deck Selection scene
     public void OnMouseOver()
