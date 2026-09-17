@@ -22,8 +22,6 @@ public class MainMenu : MonoBehaviour {
     [SerializeField] private UIFadeHandler backgroundTransition;
     [SerializeField] private Image backgroundTransitionImage;
     [SerializeField] private RectTransform backgroundTransitionTransform;
-    [SerializeField] private AttentionSeeker startAttention;
-
 
 #nullable enable
     public void QuitGame()

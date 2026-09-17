@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3297183234373819581}
   - component: {fileID: 5604155305469604307}
   - component: {fileID: 6773406975685228959}
+  - component: {fileID: 1238392063388747907}
   m_Layer: 0
   m_Name: PrincessFrogPrefab
   m_TagString: Untagged
@@ -53,6 +54,7 @@ MonoBehaviour:
   animator: {fileID: 3297183234373819581}
   combatInfo: {fileID: 1895653638891560157}
   boxCollider: {fileID: 6773406975685228959}
+  passOutSprite: {fileID: 0}
   <AnimatorController>k__BackingField: {fileID: 9100000, guid: 8b44c2b0a76df4659b812d26b24da221, type: 2}
   availableActions:
   - {fileID: 2376898879351982445, guid: ba70a26a5c92548e48fa5e83e65734b6, type: 3}
@@ -61,7 +63,7 @@ MonoBehaviour:
   - {fileID: 2376898879351982445, guid: e07f0aec029f647ed8f2d61db2fd2989, type: 3}
 --- !u!95 &3297183234373819581
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -75,6 +77,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -97,6 +100,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -153,6 +159,131 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 5.12, y: 5.12, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1238392063388747907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8680915202774343895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5662f305f60946f45b4db7730c18ddf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crownPrefab: {fileID: 3140757779728940186, guid: c9acb63654d06894fa97efd56ccd14f5, type: 3}
+  anchor: {fileID: 7946142163233550150}
+  rotationPivot: {x: 0.1, y: 1.8}
+  facing: 1
+  ownerAnimator: {fileID: 3297183234373819581}
+  overrideController: {fileID: 22100000, guid: a243454bc5f60054c9b828a1f3be0913, type: 2}
+  arcDuration: 0.08
+  lagDistance: 0.35
+  popHeight: 0.45
+  tiltDegrees: 22
+  arcX:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 3
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  arcY:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 3.2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.55
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0.72
+      inSlope: -1.1
+      outSlope: -1.1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  arcRotation:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 2.6
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.3
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fallOnRelease: 1
+  releaseVelocityScale: 1
+  releaseVelocity: {x: -0.8, y: 0.4}
+  releaseSpin: 140
+  gravity: 30
+  bounciness: 0.45
+  horizontalFriction: 0.35
+  spinRetention: 0.55
+  maxBounces: 3
+  restThreshold: 1.2
+  groundOverride: {fileID: 0}
+  restOffsetY: 0
+  addSilhouette: 1
+  onDetach:
+    m_PersistentCalls:
+      m_Calls: []
+  onBounce:
+    m_PersistentCalls:
+      m_Calls: []
+  onRest:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &8775998853870471319
 PrefabInstance:
   m_ObjectHideFlags: 0

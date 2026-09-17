@@ -4862,6 +4862,7 @@ MonoBehaviour:
   spawnHeight: 2
   windStrength: 0
   intensity: 1
+  emitter: {fileID: 0}
   flakeSize: 0.15
   flakeSizeVariation: 0.5
   snowColor: {r: 1, g: 1, b: 1, a: 0.6}
