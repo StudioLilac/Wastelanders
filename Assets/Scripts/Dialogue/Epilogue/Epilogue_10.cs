@@ -329,6 +329,7 @@ namespace Dialogue.Epilogue
             if (ev.Team == EntityTeam.PlayerTeam)
             {
                 new SetGameState(GameState.GAME_WIN).Invoke();
+                bossfightTrackEmitter.EventInstance.setParameterByNameWithLabel("BossState", "Victory");
             }
             else
             {

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{466e5da5-469e-40ac-972e-75782448082e}">
+		<property name="assetPath">
+			<value>EX_WL_Ending_091726_livecello.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>348.44408333333331</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{9e209c8b-1dd7-4ff0-927e-67767b036eb2}</destination>
+		</relationship>
+	</object>
+</objects>
