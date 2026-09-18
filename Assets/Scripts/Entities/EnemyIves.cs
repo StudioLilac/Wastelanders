@@ -16,7 +16,7 @@ public class EnemyIves : EnemyClass
         MaxHealth = 35;
         Health = MaxHealth;
         myName = "Le Ives";
-        AddStacks(Decohering.buffName, 1);
+        AddStacks(Decoherance.buffName, 1);
         AddStacks(Resonate.buffName, 3);
         AddStacks(Dissonance.buffName, 3);
         TargetingWeights = (entity => entity.Team == EntityTeam.PlayerTeam ? 30 : 10);

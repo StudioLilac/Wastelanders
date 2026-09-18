@@ -28,7 +28,7 @@ namespace UI_Toolkit
             [Accuracy.buffName.ToUpper()] = Color.blue,
             [Flow.buffName.ToUpper()] = new Color(1f, 143f/255f, 143f/255f, 1f),
             [Wound.buffName.ToUpper()] = Color.red,
-            [Decohering.buffName.ToUpper()] = Color.red,
+            [Decoherance.buffName.ToUpper()] = Color.red,
             [Resonate.buffName.ToUpper()] = Color.magenta,
             [Dissonance.buffName.ToUpper()] = Color.blue,
         };

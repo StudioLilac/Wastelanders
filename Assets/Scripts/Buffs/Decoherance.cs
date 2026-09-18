@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class Decohering: StatusEffect
+public class Decoherance: StatusEffect
 {
-    public const string buffName = "Decohering";
+    public const string buffName = "Decoherance";
     public override void OnHostAssigned(EntityClass host)
     {
         base.OnHostAssigned(host);

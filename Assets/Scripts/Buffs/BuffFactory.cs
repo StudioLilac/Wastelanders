@@ -14,7 +14,7 @@ public class BuffFactory : MonoBehaviour
             Resonate.buffName => new Resonate(),
             Wound.buffName => new Wound(),
             Dissonance.buffName => new Dissonance(),
-            Decohering.buffName => new Decohering(),
+            Decoherance.buffName => new Decoherance(),
             Steadied.buffName => new Steadied(),
             _ => throw new System.Exception("Unkown Buff: " + buffType),
         };
