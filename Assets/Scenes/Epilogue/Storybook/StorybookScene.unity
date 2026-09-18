@@ -371,7 +371,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueRunner: {fileID: 8309902627721212547}
   bg: {fileID: 511150655}
-  EntryNode: Storybook4
+  EntryNode: Storybook1
 --- !u!114 &511150655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -705,6 +705,10 @@ PrefabInstance:
       propertyPath: startNode
       value: Storybook1
       objectReference: {fileID: 0}
+    - target: {fileID: 2624112573756963094, guid: bbe64d3c71196374e9542974efa500be, type: 3}
+      propertyPath: yarnProject
+      value: 
+      objectReference: {fileID: 7545569452688597077, guid: 3998be88b89324dc2a6dafddf4d6faf8, type: 3}
     - target: {fileID: 2750723614717190854, guid: bbe64d3c71196374e9542974efa500be, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

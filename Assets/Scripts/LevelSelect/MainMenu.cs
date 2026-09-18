@@ -16,6 +16,7 @@ public class MainMenu : MonoBehaviour {
     [SerializeField] private Button startButton;
     [SerializeField] private Button quitButton;
     [SerializeField] private GameObject bountyButton;
+    [SerializeField] private GameObject storyBoardButton;
     [SerializeField] private MainMenuConfigHolder configHolder;
     [SerializeField] private Image background;
     [SerializeField] private RectTransform backgroundTransform;
@@ -57,6 +58,7 @@ public class MainMenu : MonoBehaviour {
         quitButton.gameObject.SetActive(false);
 #endif
         bountyButton.SetActive(Get<PrincessFrogBounty>().UnlockCriteriaMet());
+        storyBoardButton.SetActive(BountyManager.Instance.IsBountyCompleted(PrincessFrogBounties.DECREASED_HAND_SIZE));
         //bountyButton.SetActive(false); // Locks this button until part 2 is ready.
         versionText.text = $"v{Application.version}";
         ConfigureAttention();

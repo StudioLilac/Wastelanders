@@ -181,8 +181,13 @@ public abstract class SceneData : Enum<SceneData>
         public override string SceneName => "StorybookScene";
         public override SceneAudio GetAudio(AudioDatabase database) => database.Empty;
     }
+    public class StorybookSelector : SceneData
+    {
+        public override string SceneName => "StoryBookSelector";
+        public override SceneAudio GetAudio(AudioDatabase database) => database.Empty;
+    }
 
-    
+
     public class PreBounty0 : SceneData {
         public override string SceneName => "PreBounty_0";
         public override SceneAudio GetAudio(AudioDatabase database) => database.Tundra;

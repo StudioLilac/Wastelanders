@@ -32,6 +32,7 @@ namespace Storybook
         protected virtual void Awake()
         {
             dialogueRunner.AddCommandHandler<string, float>("bg", SetBackground);
+            dialogueRunner.AddCommandHandler("end", End);
         }
 
         protected virtual void Start()
@@ -42,7 +43,7 @@ namespace Storybook
             string nodeName = requestedEntryNode == StorybookSceneEnum.None
                 ? EntryNode
                 : requestedEntryNode.ToString();
-
+            Debug.Log("The string to run is " + nodeName);
             dialogueRunner.StartDialogue(string.IsNullOrWhiteSpace(nodeName) ? "Start" : nodeName);
         }
 
@@ -51,6 +52,7 @@ namespace Storybook
             return scene == StorybookSceneEnum.None ? "Start" : scene.ToString();
         }
 
+        private void End() => GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.StorybookSelector>().SceneName);
         private void SetBackground(string key, float duration = DefaultBackgroundFadeDuration)
         {
             if (!StorybookBackgroundLibrary.Shared.TryGet(key, out var clip))
