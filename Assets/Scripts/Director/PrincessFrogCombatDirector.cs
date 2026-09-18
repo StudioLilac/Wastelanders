@@ -39,11 +39,16 @@ namespace Director
             new BattleIntroEvent(Get<ClashIntro>()).Invoke();
             yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
             AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
-            BountyManager.Instance.NotifyWin();
+            bool didUpdate = BountyManager.Instance.NotifyWin();
             yield return new WaitForSeconds(1f);
             yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
             EpilogueSceneData? data = EpilogueSceneData.LatestCompleted(BountyManager.Instance.GetBountyProgress());
-            GameStateManager.Instance.LoadScene((data?.SceneData ?? Get<ContractSelect>()).SceneName);
+            SceneData sceneToLoad = didUpdate switch
+            {
+                var _ when didUpdate && data?.SceneData is not null => data.SceneData,
+                _ => Get<ContractSelect>(),
+            };
+            GameStateManager.Instance.LoadScene(sceneToLoad.SceneName);
         }
 
         private void PlayersWin()
