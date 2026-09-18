@@ -3829,6 +3829,8 @@ MonoBehaviour:
   frogDeathSprite: {fileID: 21300000, guid: 87829d35cc4de8b4db02b857e0431956, type: 3}
   jackieCrystalSprite: {fileID: 21300000, guid: 39aee1878ca221043839f79d83a21ecd, type: 3}
   dialogueMarshBg: {fileID: 1429652978}
+  ivesPortrait: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
+  excavatePortrait: {fileID: 21300000, guid: adfed2bb4f0eb4a47a0cbbec5e9170b0, type: 3}
   openingJackieQuipt:
   - bodyText: 'Phew, another one down. Seems like force is much more my style. '
     speakerName: Jackie
@@ -5174,7 +5176,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 27.10506
+      value: 27.107243
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y

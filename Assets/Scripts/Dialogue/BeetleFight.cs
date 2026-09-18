@@ -59,6 +59,8 @@ public class BeetleFight : DialogueClasses
     [SerializeField] private Sprite frogDeathSprite;
     [SerializeField] private Sprite jackieCrystalSprite;
     [SerializeField] private Image dialogueMarshBg;
+    [SerializeField] private Sprite ivesPortrait;
+    [SerializeField] private Sprite excavatePortrait;
 
     [SerializeField] private List<DialogueText> openingJackieQuipt;
     [SerializeField] private DialogueWrapper openingDiscussion;
@@ -95,7 +97,6 @@ public class BeetleFight : DialogueClasses
     [SerializeField] private List<DialogueText> jackieFeelsStronger;
     [SerializeField] private List<DialogueText> ivesFeelsStronger;
     [SerializeField] private List<DialogueText> ivesAnalyzeAfterExam;
-
     [SerializeField] private WaveIndicator waveIndicator;
 
     private List<EnemyClass> campBeetlesAndCrystals = new();
@@ -598,6 +599,7 @@ public class BeetleFight : DialogueClasses
         var handElement = new GetHandElement().Query(); if (handElement == null) yield break;
         screenCutoutScrim.SetTarget(new VisualElementTarget(handElement, 0.1f));
         yield return cutOutHandler.FadeInLightScreen(0.5f);
+        yield return SelectAction.Play();
         yield return new WaitUntil(() => showNextCutout);
         yield return cutOutHandler.FadeInDarkScreen(0.2f);
         SpriteRenderer s = cardIconRendering.GetComponentInChildren<SpriteRenderer>(); if (s == null) yield break;
@@ -606,6 +608,7 @@ public class BeetleFight : DialogueClasses
         ui.SetActionClass(ui.ActionClass);
         screenCutoutScrim.SetTarget(new SpriteTarget(s, Padding: new(1f, 1f)));
         yield return cutOutHandler.FadeInLightScreen(0.2f);
+        yield return PlaceAction.Play();
         yield return new WaitUntil(() => finishedRedirectTutorial);
         if (tutorialCoroutine != null) StopCoroutine(tutorialCoroutine);
         yield return materialTintFadeHandler.FadeToAlpha(0f, 1f);
@@ -807,4 +810,8 @@ public class BeetleFight : DialogueClasses
         enemyEntity.transform.rotation = Quaternion.Euler(0, 0, 75);
         enemyEntity.DestroyDeck();
     }
+
+    private DialogueAsCode SelectAction => new DialogueAsCode().Line(DialogueCharacter.Ives, "Pick an Action that has a higher speed than Excavate's speed of 2.", picture: ivesPortrait);
+    private DialogueAsCode PlaceAction => new DialogueAsCode().Line(DialogueCharacter.Ives, "[Click] or [Drag] it onto the highlighted Action Icon. That'll form a clash and redirect the beetle's attack away from you.", picture: excavatePortrait);
+
 }

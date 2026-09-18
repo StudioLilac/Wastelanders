@@ -34,7 +34,7 @@ MonoBehaviour:
     displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
     broadcastAnEvent: 0
   - bodyText: 'Feel free to visit the glossary in the pause menu should you need
-      a refresher. '
+      a refresher on key game mechanics. '
     speakerName: Tutorial
     displayingImage: {fileID: 21300000, guid: ce77eb358f2d54544adbd71c03209471, type: 3}
     broadcastAnEvent: 0
