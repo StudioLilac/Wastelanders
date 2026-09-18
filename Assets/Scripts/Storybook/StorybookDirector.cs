@@ -51,7 +51,7 @@ namespace Storybook
             string nodeName = requestedEntryNode == StorybookSceneEnum.None
                 ? EntryNode
                 : requestedEntryNode.ToString();
-            Debug.Log("The string to run is " + nodeName);
+
             dialogueRunner.StartDialogue(string.IsNullOrWhiteSpace(nodeName) ? "Start" : nodeName);
         }
         
