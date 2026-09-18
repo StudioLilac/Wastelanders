@@ -6,6 +6,7 @@ using UI_Toolkit.UI_Elements;
 using UnityEngine;
 using static BattleQueue;
 
+public record ClashFormed(bool WasRedirected) : IEvent;
 public record CardInserted(ActionClass ActionClass) : IEvent;
 public record OnQueueChanged(List<ActionWrapper> Items) : IEvent;
 public record DequeueEvent(ActionWrapper Wrapper): IEvent;
@@ -412,6 +413,7 @@ public class BattleQueue : MonoBehaviour
             }
             OriginalEnemysTarget = EnemyAction!.Target;
             EnemyAction.Target = PlayerAction!.Origin;
+            new ClashFormed(WasRedirected: EnemyAction.Target != OriginalEnemysTarget).Invoke();
         }
 
         // Helper to return the only action that exists in this non clashing wrapper

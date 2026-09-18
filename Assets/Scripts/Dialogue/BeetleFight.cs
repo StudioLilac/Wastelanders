@@ -39,6 +39,7 @@ public class BeetleFight : DialogueClasses
     [SerializeField] private Transform ambushBeetleTransform;
     [SerializeField] private Beetle wrangledBeetle;
     [SerializeField] private Beetle beetleDraggingCrystal;
+    [SerializeField] private Beetle tutorialBeetle;
     [SerializeField] private Crystals draggedCrystal;
 
     [SerializeField] private List<Transform> combatBeetleTransforms;
@@ -109,6 +110,7 @@ public class BeetleFight : DialogueClasses
     private const float MEDIUM_PAUSE = 1f; //For use after a text box comes down and we want to add some weight to the text.
 
     private bool waveComplete = false;
+    private bool finishedRedirectTutorial = false;
     private void OnDestroy()
     { 
         CombatManager.PlayersWinEvent -= AllEntitiesDied;
@@ -424,10 +426,10 @@ public class BeetleFight : DialogueClasses
             ui.ActionClass.Target = jackie;
             ui.SetActionClass(ui.ActionClass);
             yield return StartCoroutine(DialogueBoxV2.Instance.Play(twoPlayerCombatTutorial));
-            bool ivesClicked = false;
-            var coroutine = StartCoroutine(IvesTutorial());
+
             IEnumerator IvesTutorial()
             {
+                bool ivesClicked = false;
                 yield return materialTintFadeHandler.FadeToAlpha(200f / 255f, 1f);
                 this.Subscribe<OnEntityClicked>(e => {
                     if (e.Entity == ives) ivesClicked = true;
@@ -437,17 +439,30 @@ public class BeetleFight : DialogueClasses
                 yield return new WaitUntil(() => ivesClicked);
                 yield return materialTintFadeHandler.FadeToAlpha(0f, 0.5f);
                 screenCutoutScrim.ClearTarget();
-                StartCoroutine(TwoPlayerDialogue());
 
+                yield return new WaitUntil(() => (!DialogueBoxV2.Instance.IsActive));
+                VerticalLayoutChange.MoveBoxV2ToTop();
+                yield return DialogueBoxV2.Instance.Play(ivesTutorial);
+                yield return RedirectTutorial();
+                VerticalLayoutChange.MoveBoxV2ToBottom();
+            }
+
+            var coroutine = StartCoroutine(IvesTutorial());
+            this.Subscribe<GameStateChanged>(KillTutorial);
+            void KillTutorial(GameStateChanged gs)
+            {
+                if (gs.NewState == GameState.FIGHTING)
+                {
+                    this.UnSubscribe<GameStateChanged>(KillTutorial);
+                    StopCoroutine(coroutine);
+                    StartCoroutine(materialTintFadeHandler.FadeToAlpha(0f, 1f));
+                    screenCutoutScrim.ClearTarget();
+                    finishedRedirectTutorial = true;
+                }
             }
 
             yield return new WaitUntil(() => waveComplete);
-            if (!ivesClicked)
-            {
-                StopCoroutine(coroutine);
-                yield return materialTintFadeHandler.FadeToAlpha(0f, 1f);
-                screenCutoutScrim.ClearTarget();
-            }
+            this.UnSubscribe<GameStateChanged>(KillTutorial);
         }
 
         //Start wave 2
@@ -563,34 +578,36 @@ public class BeetleFight : DialogueClasses
         ives.BuffsUpdatedEvent += ExplainPlayerBuffed;
     } 
 
-    private IEnumerator TwoPlayerDialogue()
-    {
-        yield return new WaitUntil(() => (!DialogueBoxV2.Instance.IsActive));
-        VerticalLayoutChange.MoveBoxV2ToTop();
-        yield return StartCoroutine(DialogueBoxV2.Instance.Play(ivesTutorial));
-        yield return StartCoroutine(RedirectTutorial());
-        VerticalLayoutChange.MoveBoxV2ToBottom();
-    }
-
     IEnumerator RedirectTutorial()
     {
-        bool finishedTutorial = false;
+        Coroutine tutorialCoroutine = null;
         bool showNextCutout = false;
         this.Subscribe<CardClicked>(_ => showNextCutout = true); 
-        this.Subscribe<CardInserted>(_ => finishedTutorial = true);
+        this.Subscribe<ClashFormed>(cf => {
+            if (cf.WasRedirected) finishedRedirectTutorial = true;
+        });
+        this.Subscribe<CardInserted>(ci =>
+        {
+            if (!finishedRedirectTutorial && ci.ActionClass.Target == tutorialBeetle)
+            {
+                if (tutorialCoroutine != null) StopCoroutine(tutorialCoroutine);
+                tutorialCoroutine = StartCoroutine(new DialogueAsCode().Line(DialogueCharacter.Tutorial, "You targeted the beetle directly! Try dragging Ives' Action onto the highlighted Excavate's Icon instead!").Play());
+            }
+        });
         yield return materialTintFadeHandler.FadeToAlpha(200f / 255f, 1f);
         var handElement = new GetHandElement().Query(); if (handElement == null) yield break;
         screenCutoutScrim.SetTarget(new VisualElementTarget(handElement, 0.1f));
         yield return cutOutHandler.FadeInLightScreen(0.5f);
         yield return new WaitUntil(() => showNextCutout);
-        yield return cutOutHandler.FadeInDarkScreen(0.5f);
+        yield return cutOutHandler.FadeInDarkScreen(0.2f);
         SpriteRenderer s = cardIconRendering.GetComponentInChildren<SpriteRenderer>(); if (s == null) yield break;
         var ui = s.GetComponent<CombatCardUI>(); if (ui == null) yield break;
         ui.ActionClass.Target = jackie;
         ui.SetActionClass(ui.ActionClass);
         screenCutoutScrim.SetTarget(new SpriteTarget(s, Padding: new(1f, 1f)));
-        yield return cutOutHandler.FadeInLightScreen(0.5f);
-        yield return new WaitUntil(() => finishedTutorial);
+        yield return cutOutHandler.FadeInLightScreen(0.2f);
+        yield return new WaitUntil(() => finishedRedirectTutorial);
+        if (tutorialCoroutine != null) StopCoroutine(tutorialCoroutine);
         yield return materialTintFadeHandler.FadeToAlpha(0f, 1f);
         yield return DialogueBoxV2.Instance.Play(twoPlayerCombatTutorialPart2);
     }
