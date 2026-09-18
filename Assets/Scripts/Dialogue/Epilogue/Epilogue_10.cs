@@ -57,6 +57,7 @@ namespace Dialogue.Epilogue
         [SerializeField] private AudioClip analogueHorror;
 
         [SerializeField] private StudioEventEmitter bossfightTrackEmitter;
+        [SerializeField] private StudioEventEmitter impactSFXEmitter;
         [SerializeField] private Blizzard blizzardParticles;
         [SerializeField] private SmokeScreenOverlay smokeScreen;
         [SerializeField] private CrownDetach crownDetachEvent;
@@ -66,7 +67,6 @@ namespace Dialogue.Epilogue
         [SerializeField] private SpriteDissolver princessDissolver;
         [SerializeField] private Epilogue_10_Cutscene cutscene;
         [SerializeField] private DialogueEntryWrapper inBattleHint;
-
         private DefaultSceneBuilder sceneBuilder;
         private float justStartedFlickering = 0f;
         
@@ -275,7 +275,6 @@ namespace Dialogue.Epilogue
 
         IEnumerator PrincessDeathHandler()
         {
-
             princess.DestroyDeck();
             princess.UnTargetable();
             princess.SetStaggered(true);
@@ -332,6 +331,7 @@ namespace Dialogue.Epilogue
             if (ev.Team == EntityTeam.PlayerTeam)
             {
                 new SetGameState(GameState.GAME_WIN).Invoke();
+                bossfightTrackEmitter.EventInstance.setParameterByNameWithLabel("BossState", "Victory");
             }
             else
             {
@@ -386,6 +386,7 @@ namespace Dialogue.Epilogue
                     blizzardParticles.SetIntensity(0.75f);
                     break;
                 case <= 0:
+                    impactSFXEmitter.Play();
                     ImpactSilhouette.Attach(e.DamageDealer.gameObject);
                     ImpactSilhouette.Attach(e.DamageTaker.gameObject);
                     crownDetachEvent.SetFacing(Mathf.Sign(e.DamageTaker.transform.position.x - e.DamageDealer.transform.position.x));

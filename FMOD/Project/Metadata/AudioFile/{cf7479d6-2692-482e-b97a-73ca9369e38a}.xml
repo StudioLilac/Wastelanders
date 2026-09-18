@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{cf7479d6-2692-482e-b97a-73ca9369e38a}">
+		<property name="assetPath">
+			<value>universfield-cinematic-impact-boom-05-352465.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>2.0880000000000001</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{9e209c8b-1dd7-4ff0-927e-67767b036eb2}</destination>
+		</relationship>
+	</object>
+</objects>
