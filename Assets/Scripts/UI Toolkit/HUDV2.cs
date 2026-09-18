@@ -8,30 +8,34 @@ using UtilClass;
 
 namespace UI_Toolkit
 {
+#nullable enable
+    public record GetHandElement() : IQuery<VisualElement?>;
+
     public class HUDV2 : MonoBehaviour {
         private const float FADED_OPACITY = 0.0f;
         
-        [SerializeField] private Sprite deckInfoSprite;
-        public static HUDV2 Instance { get; private set; }
-        
-        public VisualTreeAsset cardTemplate;
-        public VisualTreeAsset glossaryNodeTemplate;
-        public UIDocument rootDocument;
+        [SerializeField] private Sprite deckInfoSprite = null!;
+        public static HUDV2 Instance { get; private set; } = null!;
 
-        private VisualElement rootElem;
-        private VisualElement handElem;
-        private VisualElement infoElem;
-        private ScrollView childrenElem;
-        private Label deckInfoLabel;
+        public VisualTreeAsset cardTemplate = null!;
+        public VisualTreeAsset glossaryNodeTemplate = null!;
+        public UIDocument rootDocument = null!;
+
+        private VisualElement rootElem = null!;
+        private VisualElement handElem = null!;
+        private VisualElement infoElem = null!;
+        private ScrollView childrenElem = null!;
+        private Label deckInfoLabel = null!;
 
         private bool childrenFaded;
 
-#nullable enable
+
         public void Awake()
         {
             Instance = this;
             rootElem = rootDocument?.rootVisualElement ?? throw new Exception($"{nameof(rootDocument)} unset");
             handElem = rootElem.Q<VisualElement>("layout-hand-container");
+            this.Answer<GetHandElement, VisualElement?>(_ => handElem);
             infoElem = rootElem.Q<VisualElement>("layout-info-container");
             childrenElem = rootElem.Q<ScrollView>("children-container")
                            ?? throw new Exception("children-container element not found");

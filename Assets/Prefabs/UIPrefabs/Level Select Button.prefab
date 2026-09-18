@@ -781,6 +781,7 @@ MonoBehaviour:
   lockedIndicator: {fileID: 69882546978433369}
   levelPreview: {fileID: 8545744965772050300}
   lockAnimationDuration: 0.5
+  attentionIndicator: {fileID: 0}
 --- !u!1 &8631010744981370892
 GameObject:
   m_ObjectHideFlags: 0

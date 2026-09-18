@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 701439697fac447e9becd89183c1ee61
+guid: 5d14047b818ed334fbde39961b909024
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2541882969872714799
-    second: rocky_smile_recoloured_0
+      213: 922548117393439014
+    second: wastelanderes_thumbnail_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -48,7 +48,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 1
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: rocky_smile_recoloured_0
+      name: wastelanderes_thumbnail_0
       rect:
         serializedVersion: 2
-        x: 124
+        x: 0
         y: 0
-        width: 2572
-        height: 2823
+        width: 1997
+        height: 1132
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1d33f1808ea69bcd0800000000000000
-      internalID: -2541882969872714799
+      spriteID: 629f079ff9c8dcc00800000000000000
+      internalID: 922548117393439014
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      rocky_smile_recoloured_0: -2541882969872714799
+      wastelanderes_thumbnail_0: 922548117393439014
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

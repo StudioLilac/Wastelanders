@@ -65,6 +65,8 @@ namespace Dialogue.Epilogue
         [SerializeField] private ParticleSystem radialBurst;
         [SerializeField] private SpriteDissolver princessDissolver;
         [SerializeField] private Epilogue_10_Cutscene cutscene;
+        [SerializeField] private DialogueEntryWrapper inBattleHint;
+
         private DefaultSceneBuilder sceneBuilder;
         private float justStartedFlickering = 0f;
         
@@ -179,7 +181,7 @@ namespace Dialogue.Epilogue
                     StartCoroutine(backgroundWind.FadeTo(0f, 1f));
                     yield return scrim.FadeInDarkScreen(1f);
                     yield return new WaitForSeconds(0.5f);
-                    yield return new DialogueAsCode().Enter(DialogueCharacter.Jackie, CharacterActions.SetLeft, fadeDuration: 0).Enter(DialogueCharacter.Rocky, CharacterActions.SetRight, fadeDuration: 0).Play();
+                    yield return new DialogueAsCode().Enter(DialogueCharacter.Jackie, CharacterActions.SetLeft, DialogueSprite.JackieDowncast, fadeDuration: 0).Enter(DialogueCharacter.Rocky, CharacterActions.SetRight, fadeDuration: 0).Play();
                     background2.SetActive(false);
                     yield return new WaitForSeconds(0.5f);
                     yield return scrim.FadeToAlpha(0f, 1.5f);
@@ -263,7 +265,8 @@ namespace Dialogue.Epilogue
             instance.setParameterByNameWithLabel("BossState", "Fighting");
             blizzardParticles.SetIntensity(0.25f);
             CombatManager.Instance.BeginCombat();
-            
+
+            yield return DialogueBoxV2.Instance.Play(inBattleHint);
             yield return new WaitUntil(() => new GetGameState().Query() == GameState.GAME_WIN);
             
             CombatManager.Instance.GameState = GameState.OUT_OF_COMBAT;
@@ -450,15 +453,15 @@ namespace Dialogue.Epilogue
                 .Line(DialogueCharacter.Jackie, "Yeah?", DialogueSprite.JackieContemplative)    
                 .Line(DialogueCharacter.Rocky, "You didn't push about the NITES back there either.")
                 .Line(DialogueCharacter.Jackie, "...You said no.", DialogueSprite.JackieDowncast)
-                .Line(DialogueCharacter.Rocky, "I say no all the time.")
+                .Line(DialogueCharacter.Rocky, "I say no all the time.", DialogueSprite.RockyFocus)
                 .Line(DialogueCharacter.Rocky, "It's nice not to be asked why.")
                 .Line(DialogueCharacter.Jackie, "...")
                 .Line(DialogueCharacter.Rocky, "We have some bad blood against HQ.")
                 .Line(DialogueCharacter.Rocky, "After they found out what happened to the scouts, they wanted to leave them behind.")
                 .Line(DialogueCharacter.Rocky, "So we didn’t go back either.")
                 .Line(DialogueCharacter.Jackie, "...")
-                .Line(DialogueCharacter.Rocky, "I think you should hear about what happened to your mother. You okay for that?")
-                .Line(DialogueCharacter.Jackie, "...Yeah, I think so.", DialogueSprite.JackieContemplative)
+                .Line(DialogueCharacter.Rocky, "I think you should hear about what happened to your mother. You okay for that?", DialogueSprite.RockySerious)
+                .Line(DialogueCharacter.Jackie, "...Yeah, I think so.", DialogueSprite.JackieSulk)
                 .Narrate("<i>Jackie stops shining her staff. Her eyes drift to the wood embers in the bonfire as Rocky starts.</i>");
 
             public static DialogueAsCode AilinStory(Epilogue_10 owner, AudioClip crystalHum, SmokeScreenOverlay smokeScreen)
@@ -515,12 +518,12 @@ namespace Dialogue.Epilogue
             public static DialogueAsCode AfterAilinStory => new DialogueAsCode()
                 .Line(DialogueCharacter.Jackie, "...", DialogueSprite.JackieDowncast)
                 .Line(DialogueCharacter.Jackie, "...You mentioned before that you were betrayed?")
-                .Line(DialogueCharacter.Rocky, "...I don’t have a name. It was whoever tampered with the serums.")
+                .Line(DialogueCharacter.Rocky, "...I don’t have a name. It was whoever tampered with the serums.", DialogueSprite.RockyFocus)
                 .Narrate("<i>Jackie looks down at the staff she stopped shining, catching her pinched reflection.</i>")
                 .Line(DialogueCharacter.Jackie, "So you really don’t have a clue where Ma went?", DialogueSprite.JackieContemplative)
                 .Line(DialogueCharacter.Rocky, "None that I can give you.")
                 .Narrate("<i>Jackie lets out a long breath, one that she’d been holding for some time.</i>")
-                .Line(DialogueCharacter.Jackie, "...I see.", DialogueSprite.JackieDowncast);
+                .Line(DialogueCharacter.Jackie, "...I see.", DialogueSprite.JackieSulk);
 
             public static DialogueAsCode JayReport => new DialogueAsCode()
                 .Narrate("<i>As Jackie sits in silence, there is some commotion at the cave exit. Jay is back.</i>")
@@ -528,27 +531,27 @@ namespace Dialogue.Epilogue
                 .Line(DialogueCharacter.Jay, "Captain, I’ve got good news and bad.", DialogueSprite.JaySerious)
                 .Line(DialogueCharacter.Rocky, "Let’s hear the good first.", DialogueSprite.RockySerious)
                 .Line(DialogueCharacter.Jay, "Well, the team’s all down there, still alive and whole.", DialogueSprite.JaySerious)
-                .Line(DialogueCharacter.Rocky, "And the bad?", DialogueSprite.RockySerious)
+                .Line(DialogueCharacter.Rocky, "And the bad?", DialogueSprite.RockyFocus)
                 .Line(DialogueCharacter.Jay, "It’s a Crystal field. It's freezing. And it’s crawling with Waste creatures.", DialogueSprite.JaySerious)
                 .Line(DialogueCharacter.Jay, "We're outnumbered. We’re already one to one with our own scouts, without counting the creatures.")
-                .Line(DialogueCharacter.Rocky, "Is there any way to isolate them? Get them out one by one?", DialogueSprite.RockySerious)
+                .Line(DialogueCharacter.Rocky, "Is there any way to isolate them? Get them out one by one?")
                 .Line(DialogueCharacter.Jay, "Not likely. They're spread out, so getting to one might alert the others.", DialogueSprite.JaySerious)
-                .Line(DialogueCharacter.Rocky, "Then it all comes down to manpower... There’s gotta be a solution here.", DialogueSprite.RockySerious)
+                .Line(DialogueCharacter.Rocky, "Then it all comes down to manpower... There’s gotta be a solution here.")
                 .Line(DialogueCharacter.Jay, "...")
                 .Line(DialogueCharacter.Jay, "... If it’s a question of manpower. We do have an option. But you might not like it.")
                 .Line(DialogueCharacter.Rocky, "If it gets our guys out of the cold, I’ll like it fine.")
                 .Line(DialogueCharacter.Jay, "The NITES. I’m sure they’ll be willing to lend us a hand. If not for us, for Jackie.")
                 .Line(DialogueCharacter.Rocky, "What, but what if—")
-                .Line(DialogueCharacter.Rocky, "No, you know what. I'll put it to a vote.")
+                .Line(DialogueCharacter.Rocky, "No, you know what. I'll put it to a vote.", DialogueSprite.RockySerious)
                 .Narrate("<i>Rocky stands up and addresses the rest of the camp. Explaining the situation.</i>")
                 .Line(DialogueCharacter.Rocky, "All in favour of contacting the NITES, say aye.");
 
             public static DialogueAsCode NitesArrival => new DialogueAsCode()
                 .Narrate("<i>Soon, the atmosphere lightens. Flickers of recognition turn to smiles in the cave.</i>")
                 .Line(DialogueCharacter.Ives, "So y’all need muscle eh? C’mere, I’ve got some for you.", DialogueSprite.IvesLaugh)
-                .Line(DialogueCharacter.Rocky, "Ives!? You’re here too.")
+                .Line(DialogueCharacter.Rocky, "Ives!? You’re here too.", DialogueSprite.RockySerious)
                 .Line(DialogueCharacter.Ives, "Sure am, what’s up? The little bird didn’t say I’d be coming?", DialogueSprite.IvesSmile)
-                .Line(DialogueCharacter.Rocky, "Can't say she did.")
+                .Line(DialogueCharacter.Rocky, "Can't say she did.", DialogueSprite.RockySerious)
                 .ResolveActor(DialogueCharacter.Rocky, out ActorProfile rocky)
                 .Narrate("<i>Rocky, in a headlock, cranes his neck to give Jackie a curious look.</i>", events: new SetSpeaker { actor = rocky })
                 .Enter(DialogueCharacter.Kade, CharacterActions.SetRight, DialogueSprite.KadeSerious)
@@ -605,7 +608,7 @@ namespace Dialogue.Epilogue
                 .Line(DialogueCharacter.Weise, "...", DialogueSprite.WeiseThinking)
                 .Line(DialogueCharacter.Weise, "The suppressant is a blend. One of its components is resonant to the Crystals.")
                 .Line(DialogueCharacter.Kade, "What component?")
-                .Line(DialogueCharacter.Weise, "The Waste binding substrate.")
+                .Line(DialogueCharacter.Weise, "The Waste binding substrate.", DialogueSprite.WeiseNeutral)
                 .Narrate("<i>Jackie’s hand reflexively digs into her pocket. Kade furrows her brow.</i>")
                 .Line(DialogueCharacter.Kade, "Resonant. So you’re playing roulette on her life against every Crystal out here?")
                 .Line(DialogueCharacter.Weise, "Commander’s orders.")
@@ -622,7 +625,7 @@ namespace Dialogue.Epilogue
                 .Line(DialogueCharacter.Ives, "The ones with the pink vials. They’re the vanguard that dealt with the threat when the crystals broke.")
                 .Line(DialogueCharacter.Kade, "A pink-shift. That’s an amplitude influx. For that to happen....")
                 .Line(DialogueCharacter.Kade, "The Serums. They’re your resonating component, aren’t they Aleksander?")
-                .Line(DialogueCharacter.Weise, "...")
+                .Line(DialogueCharacter.Weise, "...", DialogueSprite.WeiseThinking)
                 .Line(DialogueCharacter.Kade, "If someone with a Waste wound was to use that...")
                 .Narrate("<i>Kade catches Jay with a wince. Jay’s eyes widen.</i>")
                 .Line(DialogueCharacter.Jay, "...My team took several doses that day before turning to Crystal.")
@@ -634,9 +637,9 @@ namespace Dialogue.Epilogue
                 .Enter(DialogueCharacter.Rocky, CharacterActions.SetOffscreenRight)
                 .Move(DialogueCharacter.Rocky, CharacterActions.SetRightEdge)
                 .Line(DialogueCharacter.Rocky, "...Nothing? Not a word before we walk into a Crystal stockpile?", DialogueSprite.RockySerious)
-                .InterruptedLine(DialogueCharacter.Rocky, "<i>That night</i> happened because of something similar. Sealed inspected Serums that were off... Could it be that–", duration: 1.5f)
+                .InterruptedLine(DialogueCharacter.Rocky, "<i>That night</i> happened because of something similar. Sealed inspected Serums that were off... Could it be that–", DialogueSprite.RockyFocus, duration: 1.5f)
                 .Do(new CallbackEvent(() => effect.Burst(0.3f)))
-                .Line(DialogueCharacter.Weise, "Circumstantial! All of it.")
+                .Line(DialogueCharacter.Weise, "Circumstantial! All of it.", DialogueSprite.WeiseNeutral)
                 .Narrate("<i>Weise’s voice echoes off the cave walls as the murmurs are silenced, all eyes fall onto him.</i>")
                 .Move(DialogueCharacter.Ives, CharacterActions.SetLeft)
                 .Move(DialogueCharacter.Weise, CharacterActions.SetRight)
@@ -672,19 +675,10 @@ namespace Dialogue.Epilogue
                 .Narrate("<i>Weise scrambles up with a grin and presses close behind Ives. Keeping one hand in his pocket.</i>")
                 .Line(DialogueCharacter.Weise, "Anyone else want a demonstration? No? Then I suggest you let us pass.", DialogueSprite.WeiseNeutral)
                 .Line(DialogueCharacter.Jackie, "Ives! What do we do!?")
-                .Line(DialogueCharacter.Rocky, "Tsk, he’s gonna use Ives to make his way out of here.", DialogueSprite.RockySerious)
-                .Line(DialogueCharacter.Rocky, "If we cut down the Frog in control, he’ll have nothing.", DialogueSprite.RockySerious)
+                .Line(DialogueCharacter.Rocky, "Tsk, he’s gonna use Ives to make his way out of here.", DialogueSprite.RockyFocus)
+                .Line(DialogueCharacter.Rocky, "If we cut down the Frog in control, he’ll have nothing.")
                 .Line(DialogueCharacter.Rocky, "Let's stick with the plan. Everyone battle formations! Let’s get our people back!")
                 .Exit(DialogueCharacter.Jackie, DialogueCharacter.Rocky, DialogueCharacter.Kade, DialogueCharacter.Weise, DialogueCharacter.Ives);
-
-            public static DialogueAsCode PreBattleText() => new DialogueAsCode()
-                .Line(DialogueCharacter.Jackie, "Rocky, I see the princess frog ahead. Where’s the assault team?")
-                .Line(DialogueCharacter.Rocky, "We’re being held up by an influx of creatures. Jay, how’s your gathering going, can you spare some men?")
-                .Line(DialogueCharacter.Jay, " Can’t disengage. We’re being held back by the scouts.")
-                .Line(DialogueCharacter.Rocky, "Then it’s just you Jackie. I...")
-                .Line(DialogueCharacter.Rocky, "I trust you to engage. Keep yourself safe.")
-                .Line(DialogueCharacter.Jackie, "Got it. I’ll dip if it's too much to handle.")
-                .Line(DialogueCharacter.Rocky, "Good luck.");
         }
     }
 }

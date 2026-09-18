@@ -60,7 +60,7 @@ namespace Dialogue.Epilogue
             .Line(DialogueCharacter.Ives, "Not bad kid, but here’s a tip. Right now, you’re faster than you are stronger, so use that speed to your advantage.")
             .Line(DialogueCharacter.Ives, "Don’t try to match someone stronger than you head on, get a good feel for how they move first, then punish the openings.")
             .Line(DialogueCharacter.Ives, "For you, I’d say...")
-            .Line(DialogueCharacter.Ives, "Don’t fight their strength, fight their shape.\r\n")
+            .Line(DialogueCharacter.Ives, "Don’t fight their strength, fight their shape.")
             .Line(DialogueCharacter.Jackie, "Hmm. ")
             .Narrate("<i>Jackie shuts her eyes, and scrunches up her face. </i>")
             .Line(DialogueCharacter.Ives, "What’s wrong? You alright?")
@@ -84,7 +84,7 @@ namespace Dialogue.Epilogue
             .Enter(DialogueCharacter.Cam, CharacterActions.SetRight, DialogueSprite.CamTalk)
             .Line(DialogueCharacter.Cam, "Hey Jackie, connection alright?")
 
-            .Enter(DialogueCharacter.Jackie, CharacterActions.SetLeft, DialogueSprite.JackieSmile)
+            .Enter(DialogueCharacter.Jackie, CharacterActions.SetLeft, DialogueSprite.JackieRelaxed)
             .Line(DialogueCharacter.Jackie, "Hey Cam! I hear ya.")
             .Line(DialogueCharacter.Cam, "Good, how's it going out there?", DialogueSprite.CamSmile)
             .Line(DialogueCharacter.Jackie,
@@ -111,7 +111,7 @@ namespace Dialogue.Epilogue
             .Line(DialogueCharacter.Cam, "Yeah, about that…")
             .Line(DialogueCharacter.Cam, "Make sure to check the serum against a light every time before you use it. If there's any colour in it, don't.")
             .Line(DialogueCharacter.Cam, "And even if it’s clear and you use it. Make sure you come back immediately and get checked up, okay?")
-            .Line(DialogueCharacter.Jackie, "Yeah, yeah. Whatever, mom.", DialogueSprite.JackieSmile)
+            .Line(DialogueCharacter.Jackie, "Yeah, yeah. Whatever, mom.", DialogueSprite.JackieRetort)
             .Line(DialogueCharacter.Cam, "Hey, I'm serious! The mountains are a signal dead zone.", DialogueSprite.CamPout)
             .Line(DialogueCharacter.Cam, "If something happens...")
             .Line(DialogueCharacter.Jackie, "Then it happens. Look. I didn’t pick up the phone to be lectured. What do you want?" , DialogueSprite.JackieRetort)
@@ -119,7 +119,7 @@ namespace Dialogue.Epilogue
             .Line(DialogueCharacter.Jackie, "Oh yeah, I heard! She'll be back.", DialogueSprite.JackieSurprisedOpen)
             .Line(DialogueCharacter.Jackie, "She's getting better right?")
             .Line(DialogueCharacter.Cam, "...", DialogueSprite.CamNeutral)
-            .Line(DialogueCharacter.Jackie, "...Cam?", DialogueSprite.JackieSurprisedClosed)
+            .Line(DialogueCharacter.Jackie, "...Cam?")
             .Line(DialogueCharacter.Cam,
                 "I'm sorry Jackie. We couldn't purge the Waste in time.",
                 DialogueSprite.CamSerious)
@@ -137,22 +137,22 @@ namespace Dialogue.Epilogue
             .Narrate("<i>Jackie looks to the ground, running a hand through her hair.</i>")
             .Line(DialogueCharacter.Jackie,
                 "If only I'd been faster. If I'd noticed that damn injection...", //Pained
-                DialogueSprite.JackieSerious)
+                DialogueSprite.JackieHurt)
             .Line(DialogueCharacter.Cam, "Jackie, no. It wasn't your fault.", DialogueSprite.CamTalk)
             .Line(DialogueCharacter.Cam, "We're all glad you noticed at all...")
-            .Line(DialogueCharacter.Jackie, "Cam...", DialogueSprite.JackieSurprisedClosed) // closed eyes /tired
+            .Line(DialogueCharacter.Jackie, "Cam...") // closed eyes /tired
             .Line(DialogueCharacter.Jackie,
-                "When I stood there seeing the doctors take Ives away... I had a thought.")
-            .Line(DialogueCharacter.Jackie, "It's happening again. First Ma... and now Ives.", DialogueSprite.JackieSurprisedOpen)
+                "When I stood there seeing the doctors take Ives away... I had a thought.", DialogueSprite.JackieDowncast)
+            .Line(DialogueCharacter.Jackie, "It's happening again. First Ma... and now Ives.", DialogueSprite.JackieSulk)
             .Line(DialogueCharacter.Jackie, "Everyone who's been there for my sake has paid for it.")
             .Line(DialogueCharacter.Jackie, "And I let it happen.")
             .Line(DialogueCharacter.Cam, "Jackie, the Waste is at fault. Not you.", DialogueSprite.CamTalk)
-            .Line(DialogueCharacter.Jackie, "But I'm the only part of this I can do anything about.", DialogueSprite.JackieSerious)
+            .Line(DialogueCharacter.Jackie, "But I'm the only part of this I can do anything about.")
             .Line(DialogueCharacter.Jackie, "Blaming the Waste won't bring Ma back... and it can't fix Ives.")
             .Line(DialogueCharacter.Jackie, "I'm putting a stop to this. No one else is following me.")
             .Line(DialogueCharacter.Jackie, "So it's not you next.") // Pained
             .InterruptedLine(DialogueCharacter.Cam, "Jackie, you can't just—", DialogueSprite.CamSerious)
-            .Line(DialogueCharacter.Jackie, "Finding Ma is my responsibility now, you hear me?", DialogueSprite.JackieRetort)
+            .Line(DialogueCharacter.Jackie, "Finding Ma is my responsibility now, you hear me?", DialogueSprite.JackieHurt)
             .Line(DialogueCharacter.Jackie, "I'm the one who has to prove that I'm strong enough to protect myself now.")
             .Line(DialogueCharacter.Jackie, "That I don't need anyone else... and I won't vanish like her.") // Pained
             .Line(DialogueCharacter.Cam, "...")
@@ -166,9 +166,9 @@ namespace Dialogue.Epilogue
                 DialogueSprite.CamTalk)
             .Line(DialogueCharacter.Cam, "While Ives is choosing to do the same for you.")
             .Line(DialogueCharacter.Cam, "It takes a lot to make those choices.")
-            .Line(DialogueCharacter.Cam, "So you don't get to just unmake them for us!", DialogueSprite.CamSerious)
-            .Line(DialogueCharacter.Jackie, "But what is that choice costing her?", DialogueSprite.JackieSerious) // /expr
-            .Line(DialogueCharacter.Jackie, "How can I let her pay that price for me!?", DialogueSprite.JackieRetort)
+            .Line(DialogueCharacter.Cam, "So you don't get to just unmake them for us!", DialogueSprite.CamAngry)
+            .Line(DialogueCharacter.Jackie, "But what is that choice costing her?") // /expr
+            .Line(DialogueCharacter.Jackie, "How can I let her pay that price for me!?")
             .Line(DialogueCharacter.Cam,
                 "There's no \"letting\" Jackie. She's not asking.",
                 DialogueSprite.CamNeutral)
@@ -177,18 +177,16 @@ namespace Dialogue.Epilogue
             .Line(DialogueCharacter.Cam,
                 "So why can't you then trust us to decide for ourselves?",
                 DialogueSprite.CamSerious)
-            .Line(DialogueCharacter.Jackie, "Because that trust... means nothing.", DialogueSprite.JackieSerious) // /pained
+            .Line(DialogueCharacter.Jackie, "Because that trust... means nothing.", DialogueSprite.JackieSulk)
             .Line(DialogueCharacter.Jackie, "My Ma was the strongest person alive. She promised she'd be back.")
-            .Line(DialogueCharacter.Jackie, "And... And she's gone.") // Pained 
+            .Line(DialogueCharacter.Jackie, "And... And she's gone.")
             .Line(DialogueCharacter.Jackie, "Ives promised we'd figure this out together.")
             .Line(DialogueCharacter.Jackie, "And she's sick.")
             .Line(DialogueCharacter.Jackie, "Now you're asking me to trust you?")
             .Line(DialogueCharacter.Jackie, "Nobody's word out here can be kept for certain, Cam.")
             .Line(DialogueCharacter.Jackie, "So tell me. How can I trust yours?")
             .Line(DialogueCharacter.Cam, "...", DialogueSprite.CamNeutral)
-            .Line(DialogueCharacter.Jackie,
-                "... Besides, there's no \"together,\" right now Cam.",
-                DialogueSprite.JackieSerious)
+            .Line(DialogueCharacter.Jackie,"... Besides, there's no \"together,\" right now Cam.",DialogueSprite.JackieDowncast)
             .Line(DialogueCharacter.Jackie, "You're at the base, stuck in a lab. Ives is... days away.")
             .Line(DialogueCharacter.Jackie, "Command has us all on lockdown.")
             .Line(DialogueCharacter.Jackie, "I just can't wait around for others anymore.") // Pained
@@ -206,12 +204,12 @@ namespace Dialogue.Epilogue
             .Line(DialogueCharacter.Cam,
                 "It should give you an edge by allowing you to track the frequency tones it emits when you get closer.")
             .Line(DialogueCharacter.Cam, "And send me your coordinates each time you go.")
-            .Line(DialogueCharacter.Jackie, "...", DialogueSprite.JackieSurprisedClosed)
+            .Line(DialogueCharacter.Jackie, "...")
             .Line(DialogueCharacter.Cam,
                 "Just like you said before. Don't promise, just do it.",
                 DialogueSprite.CamNeutral)
             .Line(DialogueCharacter.Cam, "We do this together, even when we're apart. Got it?", DialogueSprite.CamSmile)
-            .Line(DialogueCharacter.Jackie, "...Fine. I'll send it.", DialogueSprite.JackieFocused) // Closed mouth Regular. 
+            .Line(DialogueCharacter.Jackie, "...I'll send it.", DialogueSprite.JackieSulk)
             .Exit(DialogueCharacter.Cam, DialogueCharacter.Jackie);
     }
 }

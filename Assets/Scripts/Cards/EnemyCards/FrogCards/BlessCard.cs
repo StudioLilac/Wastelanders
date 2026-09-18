@@ -11,12 +11,14 @@ namespace Cards.EnemyCards.FrogCards
         [SerializeField] private AnimationClip animationClip;
 
         public BlessBuffTarget TargetBuff { get; set; } = BlessBuffTarget.Resonate;
+        private bool NoCost => (Origin == null || Origin.Team != EntityTeam.EnemyTeam) && BountyManager.Instance.IsBountyCompleted(PrincessFrogBounties.PRINCESS_FROG_CHALLENGE);
 
         public override void Initialize()
         {
             base.Initialize();
             myName = $"Bless";
-            description = $"Spend {BLESS_COST} Resonance to play. If not staggered, give all teammates 1 {TargetBuff.GetBuffDescription()}.";
+            description = NoCost ? $"If not staggered, give all teammates 1 {TargetBuff.GetBuffDescription()}." :
+                $"Spend {BLESS_COST} Resonance to play. If not staggered, give all teammates 1 {TargetBuff.GetBuffDescription()}.";
 
             CostToAddToDeck = 2;
             lowerBound = upperBound = 1;
@@ -39,7 +41,7 @@ namespace Cards.EnemyCards.FrogCards
         public override bool IsPlayableByPlayer(out PopupType popupType)
         {
             bool isPlayable = base.IsPlayableByPlayer(out popupType);
-            bool enoughStacks = Origin.GetBuffStacks(Resonate.buffName) >= BLESS_COST;
+            bool enoughStacks = Origin.GetBuffStacks(Resonate.buffName) >= BLESS_COST || NoCost;
 
             popupType = enoughStacks ? popupType : new PopupType.InsufficientResources(Origin.GetBuffStacks(Resonate.buffName), BLESS_COST);
 

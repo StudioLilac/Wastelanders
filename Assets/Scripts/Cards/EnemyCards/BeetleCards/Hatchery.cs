@@ -10,16 +10,16 @@ public class Hatchery : ActionClass, IPlayableQueenCard
     private const string HATCHERY_ANIMATION = "IsHatchery";
     private const string HATCHERY_SOUND = "WL_BeetleSummon";
     [SerializeField] private AnimationClip animationClip;
-
+    private bool NoCost => (Origin == null || Origin.Team != EntityTeam.EnemyTeam) && BountyManager.Instance.IsBountyCompleted(PrincessFrogBounties.PRINCESS_FROG_CHALLENGE);
     public override void Initialize()
     {
         base.Initialize();
         lowerBound = 2;
         upperBound = 2;
-        
         Speed = 1;
         
-        description = $"Spend +{HATCHERY_COST} resonance to play this card. If this card is not staggered, spawn 1 random beetle.";
+        description = NoCost ? "If this card is not staggered, spawn 1 random beetle." :
+            $"Spend +{HATCHERY_COST} resonance to play this card. If this card is not staggered, spawn 1 random beetle.";
 
         CostToAddToDeck = 2;
         myName = "Hatchery";
@@ -42,7 +42,7 @@ public class Hatchery : ActionClass, IPlayableQueenCard
     {
         bool isPlayable = base.IsPlayableByPlayer(out popupType);
         int stackCount = Origin.GetBuffStacks(Resonate.buffName);
-        bool enoughStacks = stackCount >= HATCHERY_COST;
+        bool enoughStacks = stackCount >= HATCHERY_COST || NoCost;
 
         popupType = enoughStacks ? popupType : new PopupType.InsufficientResources(stackCount, HATCHERY_COST);
 

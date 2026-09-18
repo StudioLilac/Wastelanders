@@ -58,7 +58,6 @@ public enum DialogueSprite
     JackieSmile = 10,           // sm
     JackieSurprisedClosed = 11, // su-cl
     JackieSurprisedOpen = 12,   // su-op
-    JackieTired = 13,           // ti-cl
     JackieAstonished = 131,
     JackieNeutralSoft = 132,
     JackieFocused = 133,
@@ -66,6 +65,9 @@ public enum DialogueSprite
     JackieStern = 135,
     JackieContemplative = 136,
     JackieDowncast = 137,
+    JackieRelaxed = 138,
+    JackieHurt = 139,
+    JackieSulk = 140,
 
     IvesQuestioning = 14,       // qu
     IvesLaugh = 15,             // la
@@ -81,5 +83,5 @@ public enum DialogueSprite
     JaySerious = 32,
     JaySorry = 33,
     RockySerious = 34,
-    RockySmile = 35,
+    RockyFocus = 37,
 }

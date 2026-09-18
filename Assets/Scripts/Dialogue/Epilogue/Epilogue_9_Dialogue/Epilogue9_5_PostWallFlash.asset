@@ -34,6 +34,7 @@ MonoBehaviour:
     - rid: 314095765763391651
     - rid: 8385543117129122099
     - rid: 314095765763391650
+    - rid: 8385543469181173833
   - content: <i>Without a word, Ari steps forward, walking towards Jay.</i>
     speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
     sfxId: 0
@@ -46,7 +47,6 @@ MonoBehaviour:
     picture: {fileID: 0}
     events:
     - rid: 314095765763391642
-    - rid: 314095765763391643
     - rid: 8385543117129122097
   - content: <i>Behind Rocky, three other scouts step forward. Then two more brush
       past him, moving in perfect unison.</i>
@@ -186,11 +186,6 @@ MonoBehaviour:
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
-    - rid: 314095765763391643
-      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
-        sprite: {fileID: 21300000, guid: 701439697fac447e9becd89183c1ee61, type: 3}
     - rid: 314095765763391645
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
@@ -199,7 +194,7 @@ MonoBehaviour:
       type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
-        sprite: {fileID: 21300000, guid: afa3bf069145346d59ce8932f4b50aad, type: 3}
+        sprite: {fileID: 21300000, guid: 66fbf232a3761f946986cd788eecea3a, type: 3}
     - rid: 314095765763391647
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
@@ -360,3 +355,8 @@ MonoBehaviour:
         actor: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
         action: 90
         duration: 0
+    - rid: 8385543469181173833
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+        sprite: {fileID: 21300000, guid: 66fbf232a3761f946986cd788eecea3a, type: 3}

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 770d4db9512d0574d8ee612067a1a3e2
+guid: 1f4c096669ed14046aab90b76fc47759
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6163765085393702040
-    second: jackietired2_0
+      213: 7077891829789423268
+    second: ClashIcons_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: jackietired2_0
+      name: ClashIcons_0
       rect:
         serializedVersion: 2
-        x: 432
+        x: 13
         y: 0
-        width: 1877
-        height: 2791
+        width: 67
+        height: 92
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8633726df48e57aa0800000000000000
-      internalID: -6163765085393702040
+      spriteID: 4a6fc317e19b93260800000000000000
+      internalID: 7077891829789423268
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      jackietired2_0: -6163765085393702040
+      ClashIcons_0: 7077891829789423268
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

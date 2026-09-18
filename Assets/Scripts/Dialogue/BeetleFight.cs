@@ -8,6 +8,8 @@ using LevelSelectInformation;
 using SceneBuilder;
 using UI_Elements;
 using static BattleIntroEnum;
+using System;
+using UI_Toolkit;
 
 //@author: Andrew
 public class BeetleFight : DialogueClasses
@@ -73,6 +75,7 @@ public class BeetleFight : DialogueClasses
     [SerializeField] private DialogueWrapper jackieShockAtBeetleEnteringCamp;
     [SerializeField] private DialogueWrapper ivesConversation;
     [SerializeField] private DialogueWrapper twoPlayerCombatTutorial;
+    [SerializeField] private DialogueWrapper twoPlayerCombatTutorialPart2;
     [SerializeField] private DialogueWrapper ivesTutorial;
     [SerializeField] private DialogueWrapper wave2Dialogue;
     [SerializeField] private DialogueWrapper wave3Dialogue;
@@ -81,6 +84,10 @@ public class BeetleFight : DialogueClasses
     [SerializeField] private DialogueWrapper gameLoseDialogue;
     [SerializeField] private DialogueWrapper resonateExplanation;
     [SerializeField] private DialogueWrapper crystalExplanation;
+    [SerializeField] private CutoutFadeHandler cutOutHandler;
+    [SerializeField] private ScreenCutoutScrim screenCutoutScrim;
+    [SerializeField] private MaterialTintFadeHandler materialTintFadeHandler;
+    [SerializeField] private GameObject cardIconRendering;
 
     [SerializeField] private List<DialogueText> afterWave3Dialogue;
     [SerializeField] private List<DialogueText> outOfCombatCrystalDialogue;
@@ -104,7 +111,6 @@ public class BeetleFight : DialogueClasses
     private bool waveComplete = false;
     private void OnDestroy()
     { 
-        HighlightManager.Instance.EntityClicked -= EntityClicked;
         CombatManager.PlayersWinEvent -= AllEntitiesDied;
         CombatManager.EnemiesWinEvent -= EnemiesWin;
 
@@ -412,9 +418,36 @@ public class BeetleFight : DialogueClasses
             CombatManager.Instance.BeginCombat();
             Begin2PCombatTutorial();
             waveIndicator.Show(1, 3);
+
+            // Manually make vro target jackie for tutorial purposes.
+            var ui = cardIconRendering.GetComponentInChildren<CombatCardUI>();
+            ui.ActionClass.Target = jackie;
+            ui.SetActionClass(ui.ActionClass);
             yield return StartCoroutine(DialogueBoxV2.Instance.Play(twoPlayerCombatTutorial));
-            
+            bool ivesClicked = false;
+            var coroutine = StartCoroutine(IvesTutorial());
+            IEnumerator IvesTutorial()
+            {
+                yield return materialTintFadeHandler.FadeToAlpha(200f / 255f, 1f);
+                this.Subscribe<OnEntityClicked>(e => {
+                    if (e.Entity == ives) ivesClicked = true;
+                });
+                screenCutoutScrim.SetTarget(new SpriteTarget(ives.GetComponent<SpriteRenderer>(), Padding: new(1f, 1f)));
+                yield return cutOutHandler.FadeInLightScreen(0.5f);
+                yield return new WaitUntil(() => ivesClicked);
+                yield return materialTintFadeHandler.FadeToAlpha(0f, 0.5f);
+                screenCutoutScrim.ClearTarget();
+                StartCoroutine(TwoPlayerDialogue());
+
+            }
+
             yield return new WaitUntil(() => waveComplete);
+            if (!ivesClicked)
+            {
+                StopCoroutine(coroutine);
+                yield return materialTintFadeHandler.FadeToAlpha(0f, 1f);
+                screenCutoutScrim.ClearTarget();
+            }
         }
 
         //Start wave 2
@@ -510,7 +543,6 @@ public class BeetleFight : DialogueClasses
 
     private void Begin2PCombatTutorial()
     {
-        HighlightManager.Instance.EntityClicked += EntityClicked;
         CombatManager.PlayersWinEvent += AllEntitiesDied;
         CombatManager.EnemiesWinEvent += EnemiesWin;
     }
@@ -531,22 +563,37 @@ public class BeetleFight : DialogueClasses
         ives.BuffsUpdatedEvent += ExplainPlayerBuffed;
     } 
 
-    private void EntityClicked(EntityClass e)
-    {
-        if (e.GetType() == typeof(Ives))
-        {
-            StartCoroutine(TwoPlayerDialogue());
-        }
-    }
     private IEnumerator TwoPlayerDialogue()
     {
-        HighlightManager.Instance.EntityClicked -= EntityClicked;
         yield return new WaitUntil(() => (!DialogueBoxV2.Instance.IsActive));
         VerticalLayoutChange.MoveBoxV2ToTop();
         yield return StartCoroutine(DialogueBoxV2.Instance.Play(ivesTutorial));
+        yield return StartCoroutine(RedirectTutorial());
         VerticalLayoutChange.MoveBoxV2ToBottom();
     }
 
+    IEnumerator RedirectTutorial()
+    {
+        bool finishedTutorial = false;
+        bool showNextCutout = false;
+        this.Subscribe<CardClicked>(_ => showNextCutout = true); 
+        this.Subscribe<CardInserted>(_ => finishedTutorial = true);
+        yield return materialTintFadeHandler.FadeToAlpha(200f / 255f, 1f);
+        var handElement = new GetHandElement().Query(); if (handElement == null) yield break;
+        screenCutoutScrim.SetTarget(new VisualElementTarget(handElement, 0.1f));
+        yield return cutOutHandler.FadeInLightScreen(0.5f);
+        yield return new WaitUntil(() => showNextCutout);
+        yield return cutOutHandler.FadeInDarkScreen(0.5f);
+        SpriteRenderer s = cardIconRendering.GetComponentInChildren<SpriteRenderer>(); if (s == null) yield break;
+        var ui = s.GetComponent<CombatCardUI>(); if (ui == null) yield break;
+        ui.ActionClass.Target = jackie;
+        ui.SetActionClass(ui.ActionClass);
+        screenCutoutScrim.SetTarget(new SpriteTarget(s, Padding: new(1f, 1f)));
+        yield return cutOutHandler.FadeInLightScreen(0.5f);
+        yield return new WaitUntil(() => finishedTutorial);
+        yield return materialTintFadeHandler.FadeToAlpha(0f, 1f);
+        yield return DialogueBoxV2.Instance.Play(twoPlayerCombatTutorialPart2);
+    }
 
     private void ExplainResonate(string buffType, int stacks, Beetle beetle)
     {
@@ -619,7 +666,6 @@ public class BeetleFight : DialogueClasses
     {
         CombatManager.EnemiesWinEvent -= EnemiesWin;
         CombatManager.PlayersWinEvent -= AllEntitiesDied;
-        HighlightManager.Instance.EntityClicked -= EntityClicked;
         Beetle.OnGainBuffs -= ExplainCrystals;
         Beetle.OnGainBuffs -= ExplainResonate;
         jackie.BuffsUpdatedEvent -= ExplainPlayerBuffed;

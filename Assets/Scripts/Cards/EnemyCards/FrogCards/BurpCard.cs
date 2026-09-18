@@ -5,12 +5,14 @@ namespace Cards.EnemyCards.FrogCards
     public class BurpCard : FrogAttacks, IPlayablePrincessFrogCard
     {
         public const int BURP_COST = 1;
+        private bool NoCost => (Origin == null || Origin.Team != EntityTeam.EnemyTeam) && BountyManager.Instance.IsBountyCompleted(PrincessFrogBounties.PRINCESS_FROG_CHALLENGE);
         public override void Initialize()
         {
             base.Initialize();
 
             myName = "Burp";
-            description = $"Spend +{BURP_COST} Resonance to play. On ally hit, heal ally (rolled power + resonance stacks) and refund resonance spent.";
+            description = NoCost ? "On monster hit, heal monster (rolled power + resonance stacks)." : 
+                $"Spend {BURP_COST} Resonance to play. On monster hit, heal monster (rolled power + resonance stacks) and refund resonance spent.";
 
             CostToAddToDeck = 2;
             lowerBound = upperBound = 1;
@@ -34,7 +36,7 @@ namespace Cards.EnemyCards.FrogCards
         public override bool IsPlayableByPlayer(out PopupType popupType)
         {
             bool isPlayable = base.IsPlayableByPlayer(out popupType);
-            bool enoughStacks = Origin.GetBuffStacks(Resonate.buffName) >= BURP_COST;
+            bool enoughStacks = Origin.GetBuffStacks(Resonate.buffName) >= BURP_COST || NoCost;
 
             popupType = enoughStacks ? popupType : new PopupType.InsufficientResources(Origin.GetBuffStacks(Resonate.buffName), BURP_COST);
 
@@ -43,11 +45,11 @@ namespace Cards.EnemyCards.FrogCards
 
         protected override void OnProjectileHit()
         {
-            if (Target.Team == Origin.Team)
+            if (Target is EnemyClass and not NeutralEntityInterface)
             {
                 AudioManager.Instance.PlaySFX(SoundID.CB_frog_hit);
 
-                Origin.AddStacks(Resonate.buffName, BURP_COST);
+                if (!NoCost) Origin.AddStacks(Resonate.buffName, BURP_COST);
                 if (Target.IsDead) Target.Revive();  
                 Target.Heal(rolledCardStats.ActualRoll + Origin.GetBuffStacks(Resonate.buffName)); 
             }
