@@ -57,6 +57,7 @@ namespace Dialogue.Epilogue
         [SerializeField] private AudioClip analogueHorror;
 
         [SerializeField] private StudioEventEmitter bossfightTrackEmitter;
+        [SerializeField] private StudioEventEmitter impactSFXEmitter;
         [SerializeField] private Blizzard blizzardParticles;
         [SerializeField] private SmokeScreenOverlay smokeScreen;
         [SerializeField] private CrownDetach crownDetachEvent;
@@ -272,7 +273,6 @@ namespace Dialogue.Epilogue
 
         IEnumerator PrincessDeathHandler()
         {
-
             princess.DestroyDeck();
             princess.UnTargetable();
             princess.SetStaggered(true);
@@ -384,6 +384,7 @@ namespace Dialogue.Epilogue
                     blizzardParticles.SetIntensity(0.75f);
                     break;
                 case <= 0:
+                    impactSFXEmitter.Play();
                     ImpactSilhouette.Attach(e.DamageDealer.gameObject);
                     ImpactSilhouette.Attach(e.DamageTaker.gameObject);
                     crownDetachEvent.SetFacing(Mathf.Sign(e.DamageTaker.transform.position.x - e.DamageDealer.transform.position.x));
