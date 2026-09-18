@@ -15,9 +15,6 @@ public class HighlightManager : MonoBehaviour
     private EntityClass? currentHighlightedEnemyEntity = null;
     private ActionClass? currentHighlightedAction = null;
     private PlayerClass? selectedPlayer = null;
-
-    public delegate void HighlightEventDelegate(EntityClass e);
-    public event HighlightEventDelegate? EntityClicked;
     public delegate void ActionAddedDelegate(ActionClass card);
     public event ActionAddedDelegate? PlayerManuallyInsertedAction;
 
@@ -42,18 +39,13 @@ public class HighlightManager : MonoBehaviour
         this.Answer<CurrentPlayer, PlayerClass?>(GetCurrentPlayer);
         this.Subscribe<UpdateHand>(RenderAppropriateHand);
         this.Subscribe<ActionIconClicked>(e => OnIconClicked(e.CardUI, currentHighlightedAction));
-        CombatManager.OnGameStateChanged += ResetSelection;
-        EntityClass.OnEntityClicked += OnEntityClicked;
-        ActionClass.CardClickedEvent += OnActionClicked;
+        this.Subscribe<CardClicked>(c => OnActionClicked(c.Card));
+        this.Subscribe<OnEntityClicked>(e => OnEntityClicked(e.Entity));
+        this.Subscribe<GameStateChanged>(e => ResetSelection(e.NewState));
     }
 
     private void OnDestroy()
     {
-        CombatManager.OnGameStateChanged -= ResetSelection;
-        EntityClass.OnEntityClicked -= OnEntityClicked;
-        ActionClass.CardClickedEvent -= OnActionClicked;
-
-        EntityClicked = null;
         PlayerManuallyInsertedAction = null;
     }
 
@@ -61,7 +53,6 @@ public class HighlightManager : MonoBehaviour
     public void OnEntityClicked(EntityClass clicked)
     {
         if (CombatManager.Instance.GameState != GameState.SELECTION || PauseMenuV2.IsPaused) return;
-        EntityClicked?.Invoke(clicked);
 
         if (clicked is PlayerClass clickedPlayer)
         {

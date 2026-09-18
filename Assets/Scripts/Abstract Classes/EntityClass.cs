@@ -8,6 +8,7 @@ using static StatusEffect;
 using UnityEditor.Animations;
 #endif
 
+public record OnEntityClicked(EntityClass Entity) : IEvent;
 public record OnEntityDeath(EntityClass Entity) : IEvent;
 public record OnEntityTakeDamage(EntityClass DamageDealer, EntityClass DamageTaker, int Damage, int RemainingHealth) : IEvent;
 public record EntityFacingChanged(EntityClass Entity) : IEvent;
@@ -72,7 +73,6 @@ public abstract class EntityClass : SelectClass
     public delegate void EntityDelegate(EntityClass player);
     public static event EntityDelegate? OnEntitySpawn;
     public static event EntityDelegate? OnEntityDeath;
-    public static event EntityDelegate? OnEntityClicked;
     public event EntityDelegate? BuffsUpdatedEvent;
 
     private string FadeSortingLayer => new GetFadeSortingLayer().Query() ?? spriteRenderer.sortingLayerName;
@@ -392,7 +392,7 @@ public abstract class EntityClass : SelectClass
     public void OnMouseDown()
     {
         if (PauseMenuV2.IsPaused) return;
-        OnEntityClicked?.Invoke(this);
+        new OnEntityClicked(this).Invoke();
     }
 
     //Run this to reset the entity position back to its starting position

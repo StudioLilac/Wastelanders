@@ -103,7 +103,7 @@ public class UITarget : IScrimTarget
     }
 }
 
-public record SpriteTarget(SpriteRenderer SpriteRenderer) : IScrimTarget
+public record SpriteTarget(SpriteRenderer SpriteRenderer, Vector2 Padding = default) : IScrimTarget
 {
     public bool IsValid => SpriteRenderer != null;
 
@@ -113,7 +113,7 @@ public record SpriteTarget(SpriteRenderer SpriteRenderer) : IScrimTarget
         Vector3 screenMin = mainCamera.WorldToScreenPoint(bounds.min);
         Vector3 screenMax = mainCamera.WorldToScreenPoint(bounds.max);
 
-        return new Rect(screenMin.x, screenMin.y, screenMax.x - screenMin.x, screenMax.y - screenMin.y);
+        return new Rect(screenMin.x - Padding.x, screenMin.y - Padding.y, screenMax.x - screenMin.x + Padding.x, screenMax.y - screenMin.y + Padding.y);
     }
 }
 
@@ -128,5 +128,32 @@ public record WorldPointTarget(Transform Transform, Vector2 BoxSizePixels) : ISc
         float halfY = BoxSizePixels.y / 2f;
 
         return new Rect(center.x - halfX, center.y - halfY, BoxSizePixels.x, BoxSizePixels.y);
+    }
+}
+
+// E.x. PaddingPercent = 0.1f for 10% padding
+public record VisualElementTarget(UnityEngine.UIElements.VisualElement VisualElement, float PaddingPercent = 0f) : IScrimTarget
+{
+    public bool IsValid => VisualElement != null;
+
+    public Rect GetScreenRect(Camera mainCamera)
+    {
+        Rect bound = VisualElement.worldBound;
+        
+        float panelWidth = VisualElement.panel.visualTree.layout.width;
+        float panelHeight = VisualElement.panel.visualTree.layout.height;
+
+        float scaleX = float.IsNaN(panelWidth) || panelWidth <= 0 ? 1f : Screen.width / panelWidth;
+        float scaleY = float.IsNaN(panelHeight) || panelHeight <= 0 ? 1f : Screen.height / panelHeight;
+
+        float padX = bound.width * PaddingPercent;
+        float padY = bound.height * PaddingPercent;
+
+        return new Rect(
+            (bound.xMin - padX) * scaleX,
+            Screen.height - ((bound.yMax + padY) * scaleY),
+            (bound.width + (padX * 2)) * scaleX,
+            (bound.height + (padY * 2)) * scaleY
+        );
     }
 }

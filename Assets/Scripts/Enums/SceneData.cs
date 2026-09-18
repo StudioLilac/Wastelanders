@@ -41,7 +41,7 @@ public abstract class SceneData : Enum<SceneData>
     {
         public override string SceneName => "SplashScreen";
 
-        public override SceneAudio GetAudio(AudioDatabase database) => SelectMainMenuMusic(database);
+        public override SceneAudio GetAudio(AudioDatabase database) => database.Empty;
         
         public override MonoBehaviour[] ScenePrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
             {  };
@@ -52,7 +52,7 @@ public abstract class SceneData : Enum<SceneData>
     public class SplashScreenWebGL : SceneData
     {
         public override string SceneName => "SplashScreenWebGL";
-        public override SceneAudio GetAudio(AudioDatabase database) => SelectMainMenuMusic(database);
+        public override SceneAudio GetAudio(AudioDatabase database) => database.Empty;
         
         public override MonoBehaviour[] ScenePrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
             {  };

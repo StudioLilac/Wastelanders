@@ -20,14 +20,14 @@ public class Fragment : ActionClass, IPlayableQueenCard
         
         Speed = 5;
 
-        description = "If this attack hits an opponent, gain +1 resonance.";
+        description = "On hit, gain +1 resonance.";
 
         myName = "Fragment";
         CardType = CardType.RangedAttack;
         CostToAddToDeck = 2;
     }
     
-    protected override GlossaryNode[] GetChildrenGlossaryNodes() => new[] { StatusEffects.Resonance };
+    protected override GlossaryNode[] GetChildrenGlossaryNodes() => new[] { StatusEffects.Resonance, Keywords.OnHit };
 
     public override void OnHit()
     {

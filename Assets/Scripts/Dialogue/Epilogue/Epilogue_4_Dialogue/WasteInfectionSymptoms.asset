@@ -29,7 +29,8 @@ MonoBehaviour:
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 8385543464946761801
   - content: 'It increases your body''s natural <i>Frequency</i> which can cause
       your body to shift out of phase.
 
@@ -37,8 +38,7 @@ MonoBehaviour:
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events:
-    - rid: 1014197516907839560
+    events: []
   - content: "Naturally, this makes utilizing the existing energy in your system
       much less efficient. \r\n"
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
@@ -104,6 +104,7 @@ MonoBehaviour:
     picture: {fileID: 0}
     events:
     - rid: 8634271983927558206
+    - rid: 8385543464946761790
   - content: "That\u2019s an order, Doctor."
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxId: 0
@@ -132,12 +133,7 @@ MonoBehaviour:
       type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-        sprite: {fileID: -6888621227103538543, guid: 2da2e80130a351744801103b073bd661, type: 3}
-    - rid: 1014197516907839560
-      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-        sprite: {fileID: 5716319594728238710, guid: 30bd0e68e238a2746ac06e8f9527da16, type: 3}
+        sprite: {fileID: 21300000, guid: aace9c70baa25f541b82786233fd5633, type: 3}
     - rid: 1014197516907839561
       type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
@@ -151,11 +147,21 @@ MonoBehaviour:
       type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-        sprite: {fileID: -6888621227103538543, guid: 2da2e80130a351744801103b073bd661, type: 3}
+        sprite: {fileID: 21300000, guid: 1fcf8fd3379a832439cce6849c937ec2, type: 3}
     - rid: 1014197516907839569
       type: {class: CustomEvent, ns: DialogueScripts, asm: MainGame}
       data:
         EventName: unpanic
+    - rid: 8385543464946761790
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        sprite: {fileID: 21300000, guid: aace9c70baa25f541b82786233fd5633, type: 3}
+    - rid: 8385543464946761801
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        sprite: {fileID: 21300000, guid: 1fcf8fd3379a832439cce6849c937ec2, type: 3}
     - rid: 8634271983927558206
       type: {class: AutoAdvanceAfter, ns: DialogueScripts, asm: MainGame}
       data:

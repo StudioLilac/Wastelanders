@@ -225,7 +225,7 @@ namespace UI_Toolkit.UI_Elements
             if (enemy != null)
             {
                 actionClass.OnMouseExit();
-                HighlightManager.Instance.OnEntityClicked(enemy);
+                enemy.OnMouseDown();
             }
         }
 

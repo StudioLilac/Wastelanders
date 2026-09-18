@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: aac9fc02e2834124a82050279325d731
+guid: cbafafe13ce355141a9a2a89944f1395
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -9036389579357966407
-    second: jackietired3_0
+      213: 7914629588580568383
+    second: jayneutral_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: jackietired3_0
+      name: jayneutral_0
       rect:
         serializedVersion: 2
-        x: 432
+        x: 0
         y: 0
-        width: 1877
-        height: 2791
+        width: 1836
+        height: 2077
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9bfa35eed8b489280800000000000000
-      internalID: -9036389579357966407
+      spriteID: f3d04246da966dd60800000000000000
+      internalID: 7914629588580568383
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      jackietired3_0: -9036389579357966407
+      jayneutral_0: 7914629588580568383
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

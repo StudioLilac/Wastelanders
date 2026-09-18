@@ -18,7 +18,7 @@ public abstract class EpilogueSceneData : Enum<EpilogueSceneData>
 
     public class Epilogue_4 : EpilogueSceneData
     {
-        public override string EpilogueTitle => "Ideal Self";
+        public override string EpilogueTitle => "The Wound";
         public override int BountyRequirement => 1;
         public override SceneData SceneData => SceneData.Get<SceneData.Epilogue_4>();
         public override Sprite GetThumbnail(EpilogueThumbnails thumbnail) => thumbnail.epilogue4;

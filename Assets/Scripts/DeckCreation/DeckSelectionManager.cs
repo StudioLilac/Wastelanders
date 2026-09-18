@@ -103,11 +103,11 @@ public class DeckSelectionManager : MonoBehaviour
 
     void Start()
     {
-        ActionClass.CardClickedEvent += ActionSelected;
         ActionClass.CardRightClickedEvent += CardRightClicked;
         ActionClass.CardHighlightedEvent += RenderCardInformation;
         ActionClass.CardUnhighlightedEvent += RemoveCardInformation;
         WeaponSelect.WeaponSelectEvent += WeaponSelected;
+        this.Subscribe<CardClicked>(c => ActionSelected(c.Card));
         EnterDeckSelection();
     }
 
@@ -119,7 +119,6 @@ public class DeckSelectionManager : MonoBehaviour
 
     void OnDestroy()
     {
-        ActionClass.CardClickedEvent -= ActionSelected;
         ActionClass.CardRightClickedEvent -= CardRightClicked;
         ActionClass.CardHighlightedEvent -= RenderCardInformation;
         ActionClass.CardUnhighlightedEvent -= RemoveCardInformation;

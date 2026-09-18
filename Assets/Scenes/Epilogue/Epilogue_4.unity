@@ -1459,7 +1459,8 @@ MonoBehaviour:
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 8385543464946761800
   dialogue3:
   - content: Cam...?
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
@@ -1493,7 +1494,7 @@ MonoBehaviour:
     events:
     - rid: 2124643721081258077
     - rid: 2124643721081258078
-  - content: "She\u2019s safe. Still in the Tundra. She wouldn\u2019t leave your
+  - content: "She\u2019s safe! Still in the Tundra. She wouldn\u2019t leave your
       side until we had you on the WRV."
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     sfxId: 0
@@ -1539,21 +1540,20 @@ MonoBehaviour:
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 8385543464946761798
   - content: 'Once in your system, the Waste binds to your body and siphons energy
       to replicate itself. '
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events:
-    - rid: 1014197516907839488
+    events: []
   - content: "We call this energy your body\u2019s natural <i>Amplitude</i>. Lose
       too much of it and you\u2019ll grow weak. "
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events:
-    - rid: 1014197516907839488
+    events: []
   - content: "That's what the serums prevent. They bind to the Waste vectors first
       so they don\u2019t bind to your body. "
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
@@ -1571,21 +1571,20 @@ MonoBehaviour:
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 8385543464946761802
   - content: Under normal circumstances the probabilities are near nil, each injection
       is carefully tested, and inspected before it is issued.
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events:
-    - rid: 1014197516907839491
+    events: []
   - content: However, lab testing reveals that the serum you injected was compromised
       by an external influx of this <i>Amplitude</i>.
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events:
-    - rid: 1014197516907839493
+    events: []
   - content: 'As a result, the vector has spread much quicker than expected through
       your entire system. To an extent where it is no longer feasible to purge. '
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
@@ -1841,31 +1840,16 @@ MonoBehaviour:
       type: {class: AutoAdvanceAfter, ns: DialogueScripts, asm: MainGame}
       data:
         Time: 0.5
-    - rid: 1014197516907839488
-      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-        sprite: {fileID: 5716319594728238710, guid: 30bd0e68e238a2746ac06e8f9527da16, type: 3}
     - rid: 1014197516907839489
       type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-        sprite: {fileID: 5716319594728238710, guid: 30bd0e68e238a2746ac06e8f9527da16, type: 3}
+        sprite: {fileID: 21300000, guid: 1fcf8fd3379a832439cce6849c937ec2, type: 3}
     - rid: 1014197516907839490
       type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-        sprite: {fileID: -6888621227103538543, guid: 2da2e80130a351744801103b073bd661, type: 3}
-    - rid: 1014197516907839491
-      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-        sprite: {fileID: 5716319594728238710, guid: 30bd0e68e238a2746ac06e8f9527da16, type: 3}
-    - rid: 1014197516907839493
-      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-        sprite: {fileID: -6888621227103538543, guid: 2da2e80130a351744801103b073bd661, type: 3}
+        sprite: {fileID: 21300000, guid: aace9c70baa25f541b82786233fd5633, type: 3}
     - rid: 1014197516907839564
       type: {class: CustomEvent, ns: DialogueScripts, asm: MainGame}
       data:
@@ -1965,7 +1949,7 @@ MonoBehaviour:
       type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-        sprite: {fileID: -6888621227103538543, guid: 2da2e80130a351744801103b073bd661, type: 3}
+        sprite: {fileID: 21300000, guid: aace9c70baa25f541b82786233fd5633, type: 3}
     - rid: 2124643721081258087
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
@@ -2211,7 +2195,7 @@ MonoBehaviour:
       type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-        sprite: {fileID: -6888621227103538543, guid: 2da2e80130a351744801103b073bd661, type: 3}
+        sprite: {fileID: 21300000, guid: aace9c70baa25f541b82786233fd5633, type: 3}
     - rid: 2124643982316142602
       type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:
@@ -2234,7 +2218,22 @@ MonoBehaviour:
       type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-        sprite: {fileID: -4505030949712079976, guid: 7b946c12f8e9c9b49a06ee3348c11712, type: 3}
+        sprite: {fileID: 21300000, guid: 1fcf8fd3379a832439cce6849c937ec2, type: 3}
+    - rid: 8385543464946761798
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        sprite: {fileID: 21300000, guid: 1fcf8fd3379a832439cce6849c937ec2, type: 3}
+    - rid: 8385543464946761800
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        sprite: {fileID: 21300000, guid: 1fcf8fd3379a832439cce6849c937ec2, type: 3}
+    - rid: 8385543464946761802
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        sprite: {fileID: 21300000, guid: 1fcf8fd3379a832439cce6849c937ec2, type: 3}
 --- !u!4 &1818432484
 Transform:
   m_ObjectHideFlags: 0

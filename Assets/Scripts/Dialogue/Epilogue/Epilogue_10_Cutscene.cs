@@ -45,6 +45,7 @@ namespace Dialogue.Epilogue
         public ScalingLerpHandler overlayRocks;
         public UIFadeHandler overlayRocksUI;
         public GameObject fieldCrystal;
+        public DialogueEntryWrapper preBattleText;
 
         public void JumpToCombat()
         {
@@ -135,7 +136,7 @@ namespace Dialogue.Epilogue
                 yield return new WaitForSeconds(0.5f);
             }
             {
-                yield return DialogueBoxV2.Instance.Play(Epilogue10Dialogue.PreBattleText());
+                yield return DialogueBoxV2.Instance.Play(preBattleText);
                 yield return new WaitForSeconds(0.5f);
                 baseCamera.Priority = 0; dynamicCamera.Priority = 1;
                 yield return StartCoroutine(jackie.MoveToPosition(jackie.transform.position + new Vector3(2f, 0f, 0f), 0f, 0.8f));

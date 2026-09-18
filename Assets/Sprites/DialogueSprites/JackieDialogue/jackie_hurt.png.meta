@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 4ce7b41f17b184f448710983a161bfe7
+guid: 4fabb601e972d25409aeaeec43876da2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 578274397695325789
-    second: jackietired_0
+      213: -7667298111161897513
+    second: Jackie hurt_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,12 +100,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: jackietired_0
+      name: Jackie hurt_0
       rect:
         serializedVersion: 2
-        x: 432
+        x: 273
         y: 0
-        width: 1877
+        width: 2036
         height: 2791
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d5635593081760800800000000000000
-      internalID: 578274397695325789
+      spriteID: 7ddeb21bdf8489590800000000000000
+      internalID: -7667298111161897513
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      jackietired_0: 578274397695325789
+      Jackie hurt_0: -7667298111161897513
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

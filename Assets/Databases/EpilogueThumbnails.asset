@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 286aa874a8654cb49b3e3c50fa63b3dc, type: 3}
   m_Name: EpilogueThumbnails
   m_EditorClassIdentifier: 
-  epilogue4: {fileID: 0}
-  epilogue5: {fileID: 0}
-  epilogue6: {fileID: 0}
-  epilogue7: {fileID: 0}
-  epilogue8: {fileID: 0}
-  epilogue9: {fileID: 0}
+  epilogue4: {fileID: 21300000, guid: 7f9ca1d58e6334bc7908de7fffd1575c, type: 3}
+  epilogue5: {fileID: 21300000, guid: 627973b2e4ace4cc8ac0129129e8c289, type: 3}
+  epilogue6: {fileID: 21300000, guid: 7d7e80689725c48078e2bed2e6590cda, type: 3}
+  epilogue7: {fileID: -128571246683356328, guid: a04efbb7a1f068f429e719b7a1c61d50, type: 3}
+  epilogue8: {fileID: 21300000, guid: 5d14047b818ed334fbde39961b909024, type: 3}
+  epilogue9: {fileID: 21300000, guid: 74a731f9a349f9a44ba3e79ed6f4557d, type: 3}

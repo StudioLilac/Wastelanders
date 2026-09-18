@@ -9207,7 +9207,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -32.574757
+      value: -32.575497
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y
@@ -11367,7 +11367,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTransform: {fileID: 1290654138}
-  fullScale: 1.2
+  fullScale: 2
   closedScale: 1
 --- !u!114 &1290654140
 MonoBehaviour:
@@ -12045,7 +12045,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -33.01916
+      value: -33.01981
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y
@@ -13988,6 +13988,7 @@ MonoBehaviour:
   radialBurst: {fileID: 591036143}
   princessDissolver: {fileID: 1919315719}
   cutscene: {fileID: 1713099864}
+  inBattleHint: {fileID: 11400000, guid: 63360ef28c1f34a46bb80c4cdc699800, type: 2}
 --- !u!114 &1713099864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14037,6 +14038,7 @@ MonoBehaviour:
   overlayRocks: {fileID: 1290654139}
   overlayRocksUI: {fileID: 1290654142}
   fieldCrystal: {fileID: 1273562999}
+  preBattleText: {fileID: 11400000, guid: 31021890805032441b5c91020564e967, type: 2}
 --- !u!114 &1713099865
 MonoBehaviour:
   m_ObjectHideFlags: 0
