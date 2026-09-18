@@ -157,7 +157,7 @@ namespace DialogueScripts
 
         private void PlayTransitionSound(DialogueEntry entry)
         {
-            if (entry.sfxId != SoundID.None || Input.GetKey(KeyCode.RightArrow))
+            if (entry.sfxId != SoundID.None || IsSkipping)
                 return;
 
             SoundID.VN_page_flip.Play();
@@ -225,7 +225,12 @@ namespace DialogueScripts
             DialogueManager.Instance.AddDialogueEntryToHistory(entry);
         }
 
-        private static bool HasInput() => !PauseMenuV2.IsPaused && !PauseMenuV2.IsOverBlockingElement && (Input.GetKey(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Space));
+        private static bool IsSkipping => Input.GetKey(KeyCode.RightArrow) || PauseMenuV2.IsHoldingFastForward;
+        private static bool HasInput() {
+            if (PauseMenuV2.IsPaused) return false;
+            if (IsSkipping) return true;
+            return !PauseMenuV2.IsOverBlockingElement && (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Space));
+        }
         private class DialogueBatch
         {
             public DialogueEntry[] Entries { get; }

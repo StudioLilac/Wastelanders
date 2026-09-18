@@ -4,7 +4,7 @@ namespace UtilClass
     {
         public static readonly GlossaryNode OnHit = new(
             "On Hit",
-            "An action triggers its On-hit effect when it deals at least 1 damage."
+            "An action triggers its On-hit effect if it is blocked or deals damage."
         );
 
         public static readonly GlossaryNode Crystals = new(

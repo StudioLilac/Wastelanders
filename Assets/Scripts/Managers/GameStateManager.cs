@@ -89,7 +89,6 @@ public class GameStateManager : PersistentSingleton<GameStateManager>
         return false;
     }
 
-
     private bool isFadingOut = false;
     private IEnumerator FadeAndLoadScene(string scene)
     {
@@ -145,11 +144,14 @@ public class GameStateData
         return string.Join(",", items);
     }
 }
+// FirstTimePath
 
 [System.Serializable]
 public enum OneTimeEvents 
 {
     None = 0,
     ShowPrologueGreeting = 10,
+    ShowFinalFightUnlock = 11,
     ExplainBounties = 20,
+    ShowSeason1Intro = 30,
 }

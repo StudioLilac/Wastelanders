@@ -22,6 +22,7 @@ public class MainMenu : MonoBehaviour {
     [SerializeField] private UIFadeHandler backgroundTransition;
     [SerializeField] private Image backgroundTransitionImage;
     [SerializeField] private RectTransform backgroundTransitionTransform;
+    [SerializeField] private AttentionSeeker attentionSeeker;
 
 #nullable enable
     public void QuitGame()
@@ -58,9 +59,18 @@ public class MainMenu : MonoBehaviour {
         bountyButton.SetActive(Get<PrincessFrogBounty>().UnlockCriteriaMet());
         //bountyButton.SetActive(false); // Locks this button until part 2 is ready.
         versionText.text = $"v{Application.version}";
+        ConfigureAttention();
         UpdateStatusUI();
         ApplyBGConfig();
         StartCoroutine(TransitionBackground());
+    }
+
+    void ConfigureAttention()
+    {
+        attentionSeeker.ConfigureAttention(() =>
+            StageInformation.Get<StageInformation.PrincessFrogFight>().UnlockCriteriaMet()
+            && !StageInformation.Get<StageInformation.Season2>().UnlockCriteriaMet()
+        );
     }
 
     private IEnumerator TransitionBackground()

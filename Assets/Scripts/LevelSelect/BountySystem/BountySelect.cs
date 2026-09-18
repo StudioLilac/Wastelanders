@@ -27,6 +27,7 @@ public class BountySelect : MonoBehaviour
 #nullable enable
     protected virtual void Awake()
     {
+        new ClearBounty().Invoke();
         BountyButton.BountyOnHoverEvent += OnBountyHover;
         BountyButton.BountyOnHoverEndEvent += OnBountyHoverEnd;
         ConstructBountyButtons();

@@ -167,8 +167,8 @@ namespace Dialogue.Epilogue
             .Line(DialogueCharacter.Jackie, "Brace!", DialogueSprite.JackieSurprisedClosed)
             .Narrate("<i>Metal clashes against bone.</i>", SoundID.CB_clash_tie)
             .Narrate("<i>Jackie is thrown, slamming hard against the stone wall. Her ribs flaring as the wind is knocked out of her.</i>", SoundID.VN_ep7_jackie_hit_wall)
-            .Line(DialogueCharacter.Jackie, "Ugh!", DialogueSprite.JackieTired)
-            .Line(DialogueCharacter.Jackie, "Too heavy. Can't... can’t take it head on.", DialogueSprite.JackieTired)
+            .Line(DialogueCharacter.Jackie, "Ugh!")
+            .Line(DialogueCharacter.Jackie, "Too heavy. Can't... can’t take it head on.")
             .Line(DialogueCharacter.Jackie, "...Okay. Calm. What did Ives say before? 'Don’t fight its strength...'", DialogueSprite.JackieNeutralSoft)
             .Narrate("<i>The creature closes the distance. Claws primed to reap.</i>", SoundID.VN_ep7_creature_growl)
             .Narrate("<i>Jackie dives under the swing and past its foreleg.</i>")
@@ -194,13 +194,13 @@ namespace Dialogue.Epilogue
         // Standing over the corpse, wounded, as the beeping starts to swell back up.
         public static DialogueAsCode DeadCreature => new DialogueAsCode()
             .Narrate("<i>Jackie leans on her staff, her head pounding and body trembling. She lets out a wet cough.</i>")
-            .Line(DialogueCharacter.Jackie, "That’s... not good.... I should be getting back ...", DialogueSprite.JackieTired)
+            .Line(DialogueCharacter.Jackie, "That’s... not good.... I should be getting back ...")
             .Narrate("<i>She takes a step and her leg buckles.</i>")
-            .Line(DialogueCharacter.Jackie, "I’ll have to make sure Cam gets this damn tracker to work while I’m shifted.", DialogueSprite.JackieTired);
+            .Line(DialogueCharacter.Jackie, "I’ll have to make sure Cam gets this damn tracker to work while I’m shifted.");
 
         public static DialogueAsCode BlackingOut1 => new DialogueAsCode()
             .Narrate("<i>The dark edges of the cavern begin to close in as her vision tunnels. As the beeping of the device begins to grow louder.</i>")
-            .Line(DialogueCharacter.Jackie, "When... I get... back...", DialogueSprite.JackieTired);
+            .Line(DialogueCharacter.Jackie, "When... I get... back...");
 
         public static DialogueAsCode BlackingOut2 => new DialogueAsCode()
             .Narrate("<i>The cold stone floor rushes up to meet her.</i>")

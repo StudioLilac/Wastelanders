@@ -138,6 +138,7 @@ MonoBehaviour:
     - rid: 7570221363656654920
     - rid: 7570221363656654921
     - rid: 7570221363656654957
+    - rid: 8385543464946761805
   references:
     version: 2
     RefIds:
@@ -193,7 +194,7 @@ MonoBehaviour:
       type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
-        sprite: {fileID: 21300000, guid: 422f3cda08073664b8a46361afe442fb, type: 3}
+        sprite: {fileID: 21300000, guid: 30bfa958d8c3cc74e98dff08dd5ed25d, type: 3}
     - rid: 314095657258319969
       type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
@@ -293,6 +294,11 @@ MonoBehaviour:
         actor: {fileID: 11400000, guid: 41a291ebbfe3c8744898031b27f37a87, type: 2}
         action: 70
         duration: 0.5
+    - rid: 8385543464946761805
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+        sprite: {fileID: 21300000, guid: 30bfa958d8c3cc74e98dff08dd5ed25d, type: 3}
     - rid: 8634271915868684350
       type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
