@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.03.00">
-	<object class="AudioFile" id="{b27c92ea-e191-4590-90a1-2f71add0079a}">
+	<object class="AudioFile" id="{7f69caeb-f198-478b-a3b0-c6e7d3aece58}">
 		<property name="assetPath">
-			<value>EX_WL_FightEndingNEW_120bpm4-4_L4M_P1M_091726.wav</value>
+			<value>EX_WL_FightEnding_NewNOPIANO_091726.wav</value>
 		</property>
 		<property name="isStreaming">
 			<value>true</value>
