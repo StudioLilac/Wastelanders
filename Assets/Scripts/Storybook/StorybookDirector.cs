@@ -1,5 +1,6 @@
 #nullable enable
 using System;
+using System.Collections;
 using UI_Elements.FadeScreen;
 using UnityEngine;
 using Yarn.Unity;
@@ -25,6 +26,7 @@ namespace Storybook
 
         [SerializeField] protected DialogueRunner dialogueRunner = null!;
         [SerializeField] protected AnimationCrossFadeHandler bg = null!;
+        [SerializeField] protected UIFadeHandler uiFadeHandler = null!;
 
         [Tooltip("Default entry node for this scene, useful for testing the scene. Can be overridden in code via EntryNode.")]
         [SerializeField] private string EntryNode = "Start";
@@ -32,11 +34,17 @@ namespace Storybook
         protected virtual void Awake()
         {
             dialogueRunner.AddCommandHandler<string, float>("bg", SetBackground);
-            dialogueRunner.AddCommandHandler("end", End);
+            dialogueRunner.onDialogueComplete?.AddListener(OnDialogueComplete);
+        }
+
+        protected virtual void OnDestroy()
+        {
+            dialogueRunner.onDialogueComplete?.RemoveListener(OnDialogueComplete);
         }
 
         protected virtual void Start()
         {
+            uiFadeHandler.SetLightScreen();
             StorybookSceneEnum requestedEntryNode = GameStateManager.Instance.StorybookEntryNode;
             GameStateManager.Instance.StorybookEntryNode = StorybookSceneEnum.None;
 
@@ -46,13 +54,21 @@ namespace Storybook
             Debug.Log("The string to run is " + nodeName);
             dialogueRunner.StartDialogue(string.IsNullOrWhiteSpace(nodeName) ? "Start" : nodeName);
         }
+        
+        protected virtual void OnDialogueComplete() {
+            StartCoroutine(End());
+        }
+
+        private IEnumerator End() {
+            yield return StartCoroutine(uiFadeHandler.FadeInDarkScreen(1f));
+            GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.StorybookSelector>().SceneName);
+        }
 
         private static string ToNodeName(StorybookSceneEnum scene)
         {
             return scene == StorybookSceneEnum.None ? "Start" : scene.ToString();
         }
 
-        private void End() => GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.StorybookSelector>().SceneName);
         private void SetBackground(string key, float duration = DefaultBackgroundFadeDuration)
         {
             if (!StorybookBackgroundLibrary.Shared.TryGet(key, out var clip))

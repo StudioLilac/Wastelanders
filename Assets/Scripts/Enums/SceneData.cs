@@ -176,18 +176,28 @@ public abstract class SceneData : Enum<SceneData>
             { prefabs.pauseMenuV2 };
     }
 
-    public class StorybookScene : SceneData
-    {
+    public class StorybookPrologue : SceneData {
+        public override string SceneName => "StorybookPrologue";
+        public override SceneAudio GetAudio(AudioDatabase database) => database.Empty;
+        public override MonoBehaviour[] ScenePrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
+            { prefabs.pauseMenuV2, prefabs.dialogueManager, prefabs.dialogueBoxV2};
+        public override UIContext UIContextOnEntry => new UIContext.None();
+    }
+
+    public class StorybookScene : SceneData {
         public override string SceneName => "StorybookScene";
         public override SceneAudio GetAudio(AudioDatabase database) => database.Empty;
+        public override MonoBehaviour[] ScenePrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
+            { prefabs.pauseMenuV2 };
+        public override UIContext UIContextOnEntry => new UIContext.None();
     }
+
     public class StorybookSelector : SceneData
     {
         public override string SceneName => "StoryBookSelector";
         public override SceneAudio GetAudio(AudioDatabase database) => database.Empty;
     }
-
-
+    
     public class PreBounty0 : SceneData {
         public override string SceneName => "PreBounty_0";
         public override SceneAudio GetAudio(AudioDatabase database) => database.Tundra;
