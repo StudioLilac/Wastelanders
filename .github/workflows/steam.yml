@@ -57,7 +57,9 @@ jobs:
           buildName: ${{ env.BUILD_NAME }}
       - name: Fix root-owned file permissions from Unity build
         if: always()
-        run: sudo chown -R $USER:$USER build/ Library/
+        run: |
+          sudo chown -R "$(id -u):$(id -g)" build/ Library/ 2>/dev/null || true
+          sudo chmod -R u+rwX build/ Library/ 2>/dev/null || true
 
       - name: Locate build output
         id: locate
