@@ -18,13 +18,16 @@ namespace Director
 
         private void Start()
         {
+            Debug.Log($"[Splash] Start. timeScale={Time.timeScale}, prepared={videoPlayer.isPrepared}");
+            videoPlayer.errorReceived += (vp, msg) => Debug.LogError($"[Splash] Video error: {msg}");
             videoPlayer.loopPointReached += OnVideoEnd;
             StartCoroutine(StartSequence());
         }
 
         private IEnumerator StartSequence()
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSecondsRealtime(1f);
+            Debug.Log($"[Splash] Playing video. timeScale={Time.timeScale}");
             videoPlayer.Play();
         }
 
