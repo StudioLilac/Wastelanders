@@ -55,6 +55,9 @@ jobs:
           targetPlatform: ${{ matrix.targetPlatform }}
           versioning: Tag
           buildName: ${{ env.BUILD_NAME }}
+      - name: Fix root-owned file permissions from Unity build
+        if: always()
+        run: sudo chown -R $USER:$USER build/ Library/
 
       - name: Locate build output
         id: locate
