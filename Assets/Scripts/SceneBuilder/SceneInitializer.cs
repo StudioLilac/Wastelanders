@@ -8,6 +8,7 @@ using Managers;
 using UI_Toolkit;
 
 #nullable enable
+[DefaultExecutionOrder(-10000)]
 public class SceneInitializer : MonoBehaviour
 {
     public static SceneInitializer Instance { get; private set; } = null!;
@@ -39,12 +40,20 @@ public class SceneInitializer : MonoBehaviour
         
         foreach (var managerPrefab in requiredManagers)
         {
-            // Check if a persistent instance of this manager already exists.
-            if (FindFirstObjectByType(managerPrefab.GetType()) != null)
+            if (managerPrefab == null)
             {
-                Debug.LogWarning($"{managerPrefab.GetType()} already exists!");
+                Debug.LogWarning("[SceneInitializer] Skipping unassigned manager prefab in SceneInitializerPrefabs.");
                 continue;
             }
+
+            var existing = FindFirstObjectByType(managerPrefab.GetType());
+            if (existing != null)
+            {
+                if (existing is not IPersistentSingleton)
+                    Debug.LogWarning($"{managerPrefab.GetType()} already exists!");
+                continue;
+            }
+
             InstantiatePrefab(managerPrefab);
         }
     }
@@ -83,4 +92,9 @@ public class SceneInitializerPrefabs
     public UISaveIndicatorManager saveIndicatorManager = null!;
     public CombatManager combatManager = null!;
     public BattleQueue battleQueue = null!;
+    public DatabaseManager databaseManager = null!;
+    public Systems.Persistence.SaveLoadSystem saveLoadSystem = null!;
+    public GameStateManager gameStateManager = null!;
+    public PreferencesManager preferencesManager = null!;
+    public Steamworks.AchievementManager achievementManager = null!;
 }

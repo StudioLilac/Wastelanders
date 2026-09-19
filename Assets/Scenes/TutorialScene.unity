@@ -2014,7 +2014,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.132647
+      value: -10.133624
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2587,9 +2587,8 @@ MonoBehaviour:
   - {fileID: 153882425}
   jackieEndPosition: {fileID: 1543907276}
   ivesPassiveBattlePosition: {fileID: 1644944200}
-  battleBeginButton: {fileID: 0}
-  laidBackSprite: {fileID: 21300000, guid: 46be2fbdcaa06464baed62813a873661, type: 3}
-  puzzledSoldierSprite: {fileID: 21300000, guid: 54030bb3888339d42ad1e64c51446568, type: 3}
+  laidBackSprite: {fileID: 21300000, guid: b5d13694d44666248bd6437ab54688c3, type: 3}
+  puzzledSoldierSprite: {fileID: 21300000, guid: cd4d67535c77ee1438d406e274cf2975, type: 3}
   cityBgImage: {fileID: 890942832}
   laidBackImageUI: {fileID: 157056470}
   puzzeledImageUI: {fileID: 1664471019}

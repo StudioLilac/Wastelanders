@@ -30,13 +30,14 @@ namespace Entities
 
         public delegate bool AttackDeciderDelegate(int opponentCount);
 
+
         public override void Start()
         {
             base.Start();
 
             myName = "Princess Frog";
             Health = MaxHealth = StartingHealth;
-            AddStacks(Resonate.buffName, 7);
+            AddStacks(Resonate.buffName, 6);
         }
 
         public override void InstantiateDeck()
@@ -71,20 +72,6 @@ namespace Entities
 
         }
 
-        protected override void OnEnable()
-        {
-            base.OnEnable();
-
-            EntityTookDamage += HandleDamage;
-        }
-
-        protected override void OnDisable()
-        {
-            base.OnDisable();
-
-            EntityTookDamage -= HandleDamage;
-        }
-
         private List<EnemyClass> GetStaggeredMinions()
         {
             return OwnedMinions.Where(m => m.IsDead).ToList();
@@ -98,7 +85,7 @@ namespace Entities
             var hurtTeammates = OwnedMinions.Where(entity => entity.Health < entity.MaxHealth && !entity.IsDead).ToList();
             var aliveTeammates = OwnedMinions.Where(entity => !entity.IsDead).ToList();
 
-            List<EnemyClass> availableDeadMinions = GetStaggeredMinions();
+            List <EnemyClass> availableDeadMinions = GetStaggeredMinions();
             int activeMinionCount = OwnedMinions.Count - availableDeadMinions.Count + 1;
             int gobblePotentialStacks = 0;
 
@@ -130,10 +117,6 @@ namespace Entities
                         {
                             EntityClass hurtTarget = hurtTeammates[Random.Range(0, hurtTeammates.Count)];
                             AttackWith(BurpCards[i], hurtTarget);
-                        } else if (aliveTeammates.Count > 0)
-                        {
-                            EntityClass aliveTarget = aliveTeammates[Random.Range(0, aliveTeammates.Count)];
-                            AttackWith(BurpCards[i], aliveTarget);
                         } else
                         {
                             AttackWith(BlessCards[i], CalculateAttackTarget(opponents));
@@ -174,14 +157,6 @@ namespace Entities
                 }
 
             }
-        }       
-
-        private void HandleDamage(int amount)
-        {
-            if (amount == 0) return;
-
-            /* Lose stacks when taking (non-zero) damage. Commented out for balance for now*/
-            //ReduceStacks(Resonate.buffName, 1);
         }
     }
 }

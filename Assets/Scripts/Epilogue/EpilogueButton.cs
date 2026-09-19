@@ -5,44 +5,44 @@ using TMPro;
 using UnityEngine.UI;
 using System.Linq;
 
-public class EpilogueButton : MonoBehaviour
+public class EpilogueButton : SceneSelectButton
 {
-    [SerializeField] private Button button;
-    [SerializeField] private Image lockIndicator;
-    [SerializeField] private TMP_Text titleText;
-    [SerializeField] private TMP_Text requirementText;
-    private int completedBounties;
-    private int neededBounties;
-    private EpilogueSceneData sceneData;
-
-
-    public void Bind(EpilogueSceneData epilogueSceneData)
+    private class EpilogueSceneDataWrapper : ISelectableSceneData
     {
-        sceneData = epilogueSceneData;
-        neededBounties = sceneData.BountyRequirement;
-        completedBounties = PrincessFrogBounties.Values.Count(b => BountyManager.Instance.IsBountyCompleted(b));
-        button.onClick.AddListener(() =>
+        private EpilogueSceneData sceneData;
+        private EpilogueThumbnails thumbnails;
+        private int completedBounties;
+
+        public EpilogueSceneDataWrapper(EpilogueSceneData sceneData, EpilogueThumbnails thumbnails)
         {
-            BountyManager.Instance.GoToEpilogueScene(epilogueSceneData);
-        });
-        SetTitle(sceneData.EpilogueTitle);
-        SetLocked(neededBounties > completedBounties);
-        UpdateRequirementText();
+            this.sceneData = sceneData;
+            this.thumbnails = thumbnails;
+            this.completedBounties = BountyManager.Instance.GetBountyProgress();
+        }
+
+        public string Title => sceneData.EpilogueTitle;
+        
+        public bool IsLocked => sceneData.BountyRequirement > completedBounties;
+        
+        public string RequirementText
+        {
+            get
+            {
+                float completed = Mathf.Min(completedBounties, sceneData.BountyRequirement);
+                return $"{completed}/{sceneData.BountyRequirement} bounties";
+            }
+        }
+        
+        public Sprite Thumbnail => sceneData.GetThumbnail(thumbnails);
+        
+        public void OnClick()
+        {
+            GameStateManager.Instance.LoadScene(sceneData.SceneData.SceneName);
+        }
     }
 
-    private void SetTitle(string text)
+    public void Bind(EpilogueSceneData epilogueSceneData, EpilogueThumbnails thumbnails)
     {
-        titleText.SetText($"{text}");
-    }
-
-    private void SetLocked(bool state)
-    {
-        lockIndicator.enabled = state;
-        button.interactable = !state;
-    }
-
-    private void UpdateRequirementText()
-    {
-        requirementText.SetText($"{completedBounties}/{neededBounties} bounties");
+        base.Bind(new EpilogueSceneDataWrapper(epilogueSceneData, thumbnails));
     }
 }

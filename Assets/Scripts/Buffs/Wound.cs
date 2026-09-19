@@ -19,7 +19,7 @@ public class Wound : StatusEffect
 
     public override Sprite GetIcon()
     {
-        Sprite buffSprite = Resources.Load<Sprite>("StatusIcon/" + buffName);
+        Sprite buffSprite = new GetStatusIcons().Query()?.wound;
         if (!buffSprite)
         {
             Debug.LogWarning("Buff Sprite is missing");

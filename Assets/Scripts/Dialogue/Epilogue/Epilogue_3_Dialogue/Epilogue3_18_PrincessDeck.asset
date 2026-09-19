@@ -13,13 +13,7 @@ MonoBehaviour:
   m_Name: Epilogue3_18_PrincessDeck
   m_EditorClassIdentifier: 
   Entries:
-  - content: '<i>New weapon deck unlocked: RIP Glove Waste Creatures.'
-    speaker: {fileID: 0}
-    sfxId: 0
-    picture: {fileID: 0}
-    events: []
-  - content: <i>Princess Frog Actions have been unlocked. You can equip them in deck
-      select.</i>
+  - content: <i>Coronation complete. The Bounty Board in level select has been unlocked.
     speaker: {fileID: 0}
     sfxId: 0
     picture: {fileID: 0}

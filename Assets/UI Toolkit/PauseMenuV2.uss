@@ -94,6 +94,23 @@
     white-space: normal;
 }
 
+#scroll-dlg .unity-scroll-view__vertical-scroller {
+    background-color: transparent;
+    margin-left: 24px;
+    width: 32px;
+}
+
+#scroll-dlg .unity-scroll-view__vertical-scroller .unity-base-slider__tracker {
+    background-color: rgb(77, 67, 91);
+    border-radius: 16px;
+}
+
+#scroll-dlg .unity-scroll-view__vertical-scroller .unity-base-slider__dragger {
+    background-color: rgb(157, 112, 178);
+    border-radius: 16px;
+    min-height: 64px;
+}
+
 #auto-roll-toggle .unity-toggle__checkmark {
     display: none;
 }

@@ -78,9 +78,7 @@ namespace DialogueScripts
             {
                 var currentBatch = _dialogueQueue.Peek();
 
-                boxLayout.gameObject.SetActive(true);
                 yield return RunDialogueRoutine(currentBatch.Entries);
-                boxLayout.gameObject.SetActive(false);
                 currentBatch.IsFinished = true;
 
                 _dialogueQueue.Dequeue();
@@ -91,6 +89,9 @@ namespace DialogueScripts
 
         private IEnumerator RunDialogueRoutine(DialogueEntry[] entries)
         {
+            // Don't flicker the box if there are no entries or if the only entry is an event
+            if (entries.Length == 0 || (entries.Length == 1 && SkipEntry(entries[0]))) yield break; 
+            boxLayout.gameObject.SetActive(true);
             foreach (var entry in entries)
             {
                 if (SkipEntry(entry)) continue;
@@ -101,6 +102,7 @@ namespace DialogueScripts
                 PlayTransitionSound(entry);
                 yield return null;
             }
+            boxLayout.gameObject.SetActive(false);
         }
 
         private bool SkipEntry(DialogueEntry entry)
@@ -155,7 +157,7 @@ namespace DialogueScripts
 
         private void PlayTransitionSound(DialogueEntry entry)
         {
-            if (entry.sfxId != SoundID.None || Input.GetKey(KeyCode.RightArrow))
+            if (entry.sfxId != SoundID.None || IsSkipping)
                 return;
 
             SoundID.VN_page_flip.Play();
@@ -223,7 +225,12 @@ namespace DialogueScripts
             DialogueManager.Instance.AddDialogueEntryToHistory(entry);
         }
 
-        private static bool HasInput() => !PauseMenuV2.IsPaused && !PauseMenuV2.IsOverBlockingElement && (Input.GetKey(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Space));
+        private static bool IsSkipping => Input.GetKey(KeyCode.RightArrow) || PauseMenuV2.IsHoldingFastForward;
+        public static bool HasInput() {
+            if (PauseMenuV2.IsPaused) return false;
+            if (IsSkipping) return true;
+            return !PauseMenuV2.IsOverBlockingElement && (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Space));
+        }
         private class DialogueBatch
         {
             public DialogueEntry[] Entries { get; }

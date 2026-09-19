@@ -7,9 +7,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UI_Toolkit;
 using UnityEngine;
 using UnityEngine.Serialization;
 using static BattleIntroEnum;
+using static LevelSelectInformation.StageInformation;
 
 public class Epilogue_3 : MonoBehaviour
 {
@@ -104,8 +106,17 @@ public class Epilogue_3 : MonoBehaviour
     [SerializeField] private DialogueEntryWrapper PostBattleInjection2;
     [SerializeField] private DialogueEntryWrapper PostBattleBlackvein;
     [SerializeField] private DialogueEntryWrapper PostBattleJackieTransform;
-    
     [SerializeField] private DialogueEntryWrapper PrincessDeckUnlocked;
+    [SerializeField] private CutoutFadeHandler cutOutHandler;
+    [SerializeField] private ScreenCutoutScrim screenCutoutScrim;
+    [SerializeField] private MaterialTintFadeHandler materialTintFadeHandler;
+    [SerializeField] private GameObject cardIconRendering;
+
+    bool finishedTutorial = false;
+
+
+
+
 
     private List<Beetle> EnemyBeetles => new List<Beetle> { beetleBlue, beetleBrown, beetleGreen };
 
@@ -128,10 +139,12 @@ public class Epilogue_3 : MonoBehaviour
         }
     }
 
+    public const string STOP_ENGINE = "stop_engine";
     void CustomEventHandler(CustomEvent ev)
     {
         if (ev.EventName == "fade")
         {
+            AudioManager.Instance.FadeInBackgroundTrack(1f, tundraAudio, true);
             StartCoroutine(black.FadeInLightScreen(1f)); // Strike Team, gather up before you all get settled!
         }
         else if (ev.EventName == "cam_flash") // Like this!
@@ -141,12 +154,21 @@ public class Epilogue_3 : MonoBehaviour
                 cam.gameObject.SetActive(false);
                 beetle.gameObject.SetActive(true);
             }
-            SoundID.VN_purple_pulse.Play();
+            SoundID.VN_finger_snap.Play();
             StartCoroutine(PurpleFlash(0.5f, Callback));
         }
         else if (ev.EventName == "klack") // Klackackakkc
         {
             beetle.AttackAnimation(Pincer.PINCER_ANIMATION_NAME);
+        } else if (ev.EventName == STOP_ENGINE)
+        {
+            StartCoroutine(ScheduleAudio());
+            IEnumerator ScheduleAudio()
+            {
+                AudioManager.Instance.FadeOutCurrentBackgroundTrack(1f);
+                yield return new WaitForSeconds(1f);
+                AudioManager.Instance.FadeInBackgroundTrack(1f, tundraAudio, true);
+            }
         }
     }
 
@@ -174,9 +196,11 @@ public class Epilogue_3 : MonoBehaviour
                 tundraBackground.SetActive(false);
                 yield return black.FadeInLightScreen(2f);
 
-                yield return DialogueBoxV2.Instance.Play(Driving);
-                AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
-                yield return black.FadeInDarkScreen(1f);
+                var driving = new Epilogue3Driving();
+                yield return DialogueBoxV2.Instance.Play(driving.PartA);
+                AudioManager.Instance.FadeOutCurrentBackgroundTrack(1f);
+                yield return black.FadeInDarkScreen(2f);          
+                yield return DialogueBoxV2.Instance.Play(driving.PartB);  // narration over black
             }
             {
                 tundra1Bg.SetActive(true);
@@ -184,7 +208,6 @@ public class Epilogue_3 : MonoBehaviour
                 tundraBackground.SetActive(true);
                 StartCoroutine(vignette.FadeToAlpha(155f / 255f, 0f));
                 yield return new WaitForSeconds(1f);
-                AudioManager.Instance.FadeInBackgroundTrack(1f, tundraAudio, true);
                 yield return DialogueBoxV2.Instance.Play(WesternMarsh);
                 yield return new WaitForSeconds(1f);
                 yield return DialogueBoxV2.Instance.Play(WesternMarsh2);
@@ -202,10 +225,8 @@ public class Epilogue_3 : MonoBehaviour
                 }
 
                 SoundID.VN_finger_snap.Play();
-                SoundID.VN_purple_pulse.Play();
                 yield return PurpleFlash(0.5f, JackieCallback);
                 SoundID.VN_finger_snap.Play();
-                SoundID.VN_purple_pulse.Play();
                 yield return PurpleFlash(0.5f, IvesCallback);
 
                 yield return new WaitForSeconds(0.5f);
@@ -272,6 +293,7 @@ public class Epilogue_3 : MonoBehaviour
             yield return DialogueBoxV2.Instance.Play(BattlePreMoveForward);
 
             princessFrog.FaceLeft();
+            SoundID.VN_purple_pulse.Play();
             StartCoroutine(PurpleFlash(0.5f));
             yield return DialogueBoxV2.Instance.Play(BattleHalt); // ???: Halt
 
@@ -279,6 +301,7 @@ public class Epilogue_3 : MonoBehaviour
             yield return DialogueBoxV2.Instance.Play(BattleStandstill); // Dammit! Something's controlling ...
 
             yield return StartCoroutine(princessFrog.ResetPosition());
+            SoundID.VN_purple_pulse.Play();
             StartCoroutine(PurpleFlash(0.5f));
             yield return DialogueBoxV2.Instance.Play(BattleCome); // ???: Come
 
@@ -332,6 +355,7 @@ public class Epilogue_3 : MonoBehaviour
                 enemyWorkers.ForEach(it => it.gameObject.SetActive(false));
                 yield return new WaitForSeconds(1f);
                 ivesFighter.FaceRight();
+                SoundID.VN_purple_pulse.Play();
                 StartCoroutine(PurpleFlash(0.5f));
                 yield return DialogueBoxV2.Instance.Play(BattleAttack);
 
@@ -412,6 +436,32 @@ public class Epilogue_3 : MonoBehaviour
         CombatManager.Instance.BeginCombat();
         new BattleIntroEvent(Get<ClashIntro>()).Invoke();
 
+        yield return new WaitForSeconds(1f);
+        Transform? burpRenderer = cardIconRendering.transform.Cast<Transform>()
+                                                                .Where(child => child.GetComponent<CombatCardUI>()?.ActionClass is BurpCard)
+                                                                .FirstOrDefault();
+        if (burpRenderer != null)
+        {
+            yield return TakeStock.Play();
+            Transform? blessCard = cardIconRendering.transform.Cast<Transform>()
+                                                                .Where(child => child.GetComponent<CombatCardUI>()?.ActionClass is BlessCard)
+                                                                .FirstOrDefault();
+            var ui = blessCard.GetComponent<CombatCardUI>(); 
+            if (ui != null && ui.ActionClass != null)
+            {
+                ui.ActionClass.Target = ivesFighter;
+                ui.SetActionClass(ui.ActionClass);
+            }
+
+            this.Subscribe<DisplayableHoveredEvent>(StartTutorial);
+            void StartTutorial(DisplayableHoveredEvent e)
+            {
+                if (e.ActionClass is not BurpCard) return;
+                StartCoroutine(StartTimedTutorial(burpRenderer));
+                this.UnSubscribe<DisplayableHoveredEvent>(StartTutorial);
+            }
+        }        
+
         yield return new WaitUntil(() => new GetGameState().Query() == GameState.GAME_WIN);
         GameStateManager.Instance.UpdateLevelProgress(StageInformation.Get<StageInformation.IvesFinale>());
         new SetGameState(GameState.AFTER_COMBAT).Invoke();
@@ -479,6 +529,7 @@ public class Epilogue_3 : MonoBehaviour
         }
 
         yield return new WaitForSeconds(2f);
+        SoundID.VN_finger_snap.Play();
         yield return PurpleFlash(0.5f, TurnIntoPrincessFrog);
         yield return new WaitForSeconds(1f);
         yield return DialogueBoxV2.Instance.Play(PostBattleJackieTransform);
@@ -495,8 +546,7 @@ public class Epilogue_3 : MonoBehaviour
         yield return DialogueBoxV2.Instance.Play(PrincessDeckUnlocked);
         yield return new WaitForSeconds(1f);
 
-        new BountyInformationEvent(BountyInformation.Get<BountyInformation.PrincessFrogBounty>()).Invoke();
-        GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.ContractSelect>().SceneName);
+        GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.SelectionScreen>().SceneName);
     }
 
     private void OnBuffEvent(OnBuffsUpdatedEvent ev)
@@ -543,4 +593,74 @@ public class Epilogue_3 : MonoBehaviour
             };
         };
     }
+
+
+    IEnumerator StartTimedTutorial(Transform burpRenderer)
+    {
+        yield return new WaitForSeconds(2f);
+        Coroutine tutorial = StartCoroutine(RedirectTutorial(burpRenderer));
+        this.Subscribe<GameStateChanged>(KillTutorial);
+        void KillTutorial(GameStateChanged gs)
+        {
+            if (gs.NewState == GameState.FIGHTING)
+            {
+                this.UnSubscribe<GameStateChanged>(KillTutorial);
+                StopCoroutine(tutorial);
+                StartCoroutine(materialTintFadeHandler.FadeToAlpha(0f, 1f));
+                screenCutoutScrim.ClearTarget();
+                finishedTutorial = true;
+            }
+        }
+    }
+
+    IEnumerator RedirectTutorial(Transform burpRenderer)
+    {
+        Coroutine? tutorialCoroutine = null;
+        bool showNextCutout = false;
+        this.Subscribe<CardClicked>(_ => showNextCutout = true);
+        this.Subscribe<ClashFormed>(cf => {
+            if (cf.WasRedirected) finishedTutorial = true;
+        });
+        this.Subscribe<CardInserted>(ci =>
+        {
+            if (!finishedTutorial && ci.ActionClass.Target == princessFrog)
+            {
+                if (tutorialCoroutine != null) StopCoroutine(tutorialCoroutine);
+                tutorialCoroutine = StartCoroutine(new DialogueAsCode().Line(DialogueCharacter.Tutorial, "You targeted the Princess Frog directly! Try dragging the Action onto the highlighted Icon instead!").Play());
+            }
+        });
+        VerticalLayoutChange.MoveBoxV2ToTop();
+        yield return Opener.Play();
+        yield return materialTintFadeHandler.FadeToAlpha(200f / 255f, 1f);
+        var handElement = new GetHandElement().Query(); if (handElement == null) yield break;
+        screenCutoutScrim.SetTarget(new VisualElementTarget(handElement, 0.1f));
+        yield return cutOutHandler.FadeInLightScreen(0.5f);
+        yield return HandSelect.Play();
+        yield return new WaitUntil(() => showNextCutout);
+        yield return cutOutHandler.FadeInDarkScreen(0.2f);
+        var ui = burpRenderer.GetComponent<SpriteRenderer>();
+        screenCutoutScrim.SetTarget(new SpriteTarget(ui, Padding: new(1f, 1f)));
+        yield return cutOutHandler.FadeInLightScreen(0.2f);
+        yield return DragToThem.Play();
+        yield return new WaitUntil(() => finishedTutorial);
+        yield return materialTintFadeHandler.FadeToAlpha(0f, 1f);
+        yield return Explanation.Play();
+        VerticalLayoutChange.MoveBoxV2ToBottom();
+    }
+
+    public Sprite IvesPortrait = null;
+    public Sprite GlossaryPortrait = null;
+    public Sprite BurpPortrait = null;
+    public Sprite CrossHair = null;
+    private DialogueAsCode TakeStock => new DialogueAsCode()
+                                        .Line(DialogueCharacter.Ives, "Let's take stock first to see what this Frog can do.", picture: IvesPortrait)
+                                        .Line(DialogueCharacter.Tutorial, "[Hover] over the Action Icons that the Frog is declaring.", picture: BurpPortrait);
+    private DialogueAsCode Opener => new DialogueAsCode().Line(DialogueCharacter.Ives, "That Frog intends to heal the damage I just dealt to the beetle. Now's a good time to freshen up on how to redirect enemy Actions so we can prevent the heal.", picture: BurpPortrait);
+    private DialogueAsCode HandSelect => new DialogueAsCode().Line(DialogueCharacter.Ives, "Select a fast Action from mine or your hand, it's gotta be faster than or equal to the speed of its 'Burp' which is 2.", picture: IvesPortrait);
+    private DialogueAsCode DragToThem => new DialogueAsCode().Line(DialogueCharacter.Ives, "Now select that Action and [Click] on the Burp's Icon to redirect it.", picture: BurpPortrait);
+    private DialogueAsCode Explanation => new DialogueAsCode()
+        .Line(DialogueCharacter.Ives, "If you had targetted the Frog directly, you would have made an unopposed attack.", picture: CrossHair)
+        .Line(DialogueCharacter.Tutorial, "You can check the Glossary in the pause menu [Esc.] if you ever forget about key game mechanics.", picture: GlossaryPortrait)
+        .Line(DialogueCharacter.Ives, "Now let's crush this operation!", picture: IvesPortrait)
+        ;
 }

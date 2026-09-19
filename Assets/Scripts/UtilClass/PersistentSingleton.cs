@@ -3,7 +3,9 @@ using UnityEngine;
 /**
  * Credit to adammyhre on github for this implementation of persistent singleton 
  */
-public class PersistentSingleton<T> : MonoBehaviour where T : Component
+public interface IPersistentSingleton { }
+
+public class PersistentSingleton<T> : MonoBehaviour, IPersistentSingleton where T : Component
 {
     [Tooltip("if this is true, this singleton will auto detach if it finds itself parented on awake")]
     public bool UnparentOnAwake = true;
@@ -21,12 +23,14 @@ public class PersistentSingleton<T> : MonoBehaviour where T : Component
             if (instance == null)
             {
                 instance = FindFirstObjectByType<T>();
-                if (instance == null)
-                {
-                    GameObject obj = new GameObject();
-                    obj.name = typeof(T).Name + "AutoCreated";
-                    instance = obj.AddComponent<T>();
-                }
+            }
+
+            if (instance == null)
+            {
+                throw new System.InvalidOperationException(
+                    $"{typeof(T).Name} has not been initialized. PersistentSingletons must be provided by " +
+                    $"SceneInitializer (add it to SceneInitializerPrefabs and AlwaysPresentPrefabs/ScenePrefabs) " +
+                    $"rather than being auto-created on first access.");
             }
 
             return instance;

@@ -12,16 +12,49 @@ using static LevelSelectInformation.StageInformation;
 public class LevelSelectManager : MonoBehaviour
 {
     [SerializeField] private CanvasGroup levelSelectCanvas;
+    [SerializeField] private LevelSelectButton finalFight;
+    [SerializeField] private AttentionSeeker finalFightIndicator;
+    [SerializeField] private AttentionSeeker bountySeeker;
 
     public void Start()
     {
         var showUnlockDialogue = !GameStateManager.SEASON_1_ACTIVE &&
             GameStateManager.Instance.CurrentLevelProgress >= Get<PrincessFrogFight>().LevelID &&
-            GameStateManager.Instance.RecordFirstTimeEvent(OneTimeEvents.ExplainBounties);
+            GameStateManager.Instance.RecordFirstTimeEvent(OneTimeEvents.ShowPrologueGreeting);
+
+        var showFinalFightUnlock = 
+            Get<IvesFinale>().UnlockCriteriaMet() &&
+            GameStateManager.Instance.RecordFirstTimeEvent(OneTimeEvents.ShowFinalFightUnlock);
 
         if (showUnlockDialogue) {
             StartCoroutine(UnlockedDialogue());
         }
+
+        if (showFinalFightUnlock)
+        {
+            StartCoroutine(UnlockFinalFight());
+        }
+
+        ConfigureAttentionSeekers();
+    }
+
+    void ConfigureAttentionSeekers()
+    {
+        bountySeeker.ConfigureAttention(() => BountyManager.Instance.GetBountyProgress() == 0);
+    }
+
+    IEnumerator UnlockFinalFight()
+    {
+        levelSelectCanvas.interactable = false;
+        levelSelectCanvas.blocksRaycasts = false;
+        finalFight.Lock();
+        yield return new WaitForSeconds(1f);
+        finalFightIndicator.ConfigureAttention(() => true);
+        finalFight.Unlock(animate: true);
+        yield return new WaitForSeconds(1.5f);
+        levelSelectCanvas.interactable = true;
+        levelSelectCanvas.blocksRaycasts = true;
+
     }
 
     IEnumerator UnlockedDialogue()

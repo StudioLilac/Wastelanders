@@ -1,0 +1,52 @@
+title: Storybook2
+---
+<<bg closed_bud_w_thorns>>
+Narrator: It had been a few days, and she thought it'd be more.
+Narrator: A small blink in a slumber that'd continue to snore.
+<<bg watering_can>>
+Narrator: His offer did help her; moisture rose through her roots.
+Narrator: It fueled the growth of her thorns; which multiplied in sharp shoots.
+<<bg thorn_layers_fullscreen>>
+Narrator: They spread outward and in, scratched and poked her leaves thin.
+Narrator: This was the cost of protection, keeping the world out, and her in.
+Rose: Safer alone, she persuaded her heart,
+Narrator: But heavy steps marked his coming, a habit did start.
+Narrator: A bag weighed his hands, with a smell rich and sweet.
+Narrator: Her fibers reached, famished, for something to eat.
+<<bg dirt_and_trowel>>
+Gardener: If I may, could I offer to give you a trim? Your many thorns are so heavy, they've made you weak in your limbs.
+Gardener: Let me prune just enough to let the nutrients seep. Just the gentlest of cuts to grant you relief.
+
+-> Ask the gardener more.
+    <<jump Explore>>
+-> Refuse the offer.
+    <<jump Decline>>
+===
+
+title: Explore
+---
+<<bg closed_bud_w_thorns>>
+Rose: I have bared you my teeth, why tend to my jaws? What are you bound by? What motives, what laws?
+Rose: There is a flaw in your plan, whatever you seek. I have nothing to give. Nothing, my harvest would reap.
+Gardener: I lend my hands because I'm a gardener. I wish to nourish and protect, I know that there is beauty beneath the neglect.
+
+-> Accept the pruning.
+    <<jump Accept2>>
+-> Refuse the pruning.
+    <<jump Decline>>
+===
+
+title: Decline
+---
+<<bg thorn_layers_fullscreen>>
+Narrator: She'd say go tend to elsewhere, I'm fending just fine. You can't tear down my defenses, you're wasting your time.
+Narrator: For the receival of gifts she would not risk deceit. The gardener would step back, accepting defeat.
+===
+
+title: Accept2
+---
+<<bg dirt_and_trowel>>
+Rose: You may remove just enough, but not a thorn more. Just an arm's gap of space, to allow you to pour.
+Narrator: The gardener obeyed, much appeased by his feat. And she stayed on his mind as he made his retreat.
+<<end>>
+===

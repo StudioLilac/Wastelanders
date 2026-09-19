@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using UtilClass;
 
 public class Cleave : AxeCards
 {
@@ -21,6 +19,8 @@ public class Cleave : AxeCards
         base.Initialize();
         CardType = CardType.MeleeAttack;
     }
+    
+    protected override GlossaryNode[] GetChildrenGlossaryNodes() => new[] { StatusEffects.Wound, Keywords.OnHit };
 
     public override void OnHit()
     {

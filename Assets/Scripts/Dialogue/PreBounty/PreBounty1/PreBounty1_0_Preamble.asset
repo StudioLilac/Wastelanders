@@ -13,12 +13,17 @@ MonoBehaviour:
   m_Name: PreBounty1_0_Preamble
   m_EditorClassIdentifier: 
   Entries:
-  - content: "<i>A couple months later\u2026"
+  - content: "<i>Years later\u2026"
     speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 314095657258319872
+  - content: Promised you'd be back soon huh...
+    speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
   references:
     version: 2
     RefIds:

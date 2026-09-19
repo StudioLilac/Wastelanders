@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="ParameterPreset" id="{cb3afae1-599e-44fe-9b03-4660f2f08901}">
+		<property name="color">
+			<value>Blue Light 2</value>
+		</property>
+		<property name="name">
+			<value>Intensity</value>
+		</property>
+		<relationship name="folder">
+			<destination>{b2b67856-3633-48eb-8e8f-f788a3d2149b}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{fc11a54c-5194-49fb-b60f-0361e2c0a97d}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{fc11a54c-5194-49fb-b60f-0361e2c0a97d}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

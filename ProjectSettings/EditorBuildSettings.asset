@@ -5,10 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/SplashScreen.unity
     guid: 34ece41ba004847068b60586ae45ee2d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SplashScreenWebGL.unity
     guid: 3b93cbd2fc4ba48519cb400485eb73d3
   - enabled: 1
@@ -60,7 +60,40 @@ EditorBuildSettings:
     path: Assets/Scenes/Epilogue/Epilogue_3.unity
     guid: abda4b4a1f02346669fbb5df7b758438
   - enabled: 1
+    path: Assets/Scenes/Epilogue/Epilogue_4.unity
+    guid: 89c13d16b34693b4b8bb5355dfc2f2d8
+  - enabled: 1
+    path: Assets/Scenes/Epilogue/Epilogue_5.unity
+    guid: b22e98faaa045494c8e80a30741ae962
+  - enabled: 1
+    path: Assets/Scenes/Epilogue/Epilogue_6.unity
+    guid: 8ce1b7dbaea19a94eb9f28e4a83231ed
+  - enabled: 1
+    path: Assets/Scenes/Epilogue/Epilogue_7.unity
+    guid: a361184412c644c47a1e9ca4fc1da7f5
+  - enabled: 1
+    path: Assets/Scenes/Epilogue/Epilogue_8.unity
+    guid: 69898fb11feaf4fe9a9bbd67e00580d0
+  - enabled: 1
+    path: Assets/Scenes/Epilogue/Epilogue_9.unity
+    guid: dd20150c439a34d809539dc015ff6a83
+  - enabled: 1
+    path: Assets/Scenes/Epilogue/Epilogue_10.unity
+    guid: 13d3f1ce28492e14e80dccd7cc516655
+  - enabled: 1
     path: Assets/Scenes/Epilogue/FinalCutscene.unity
     guid: b6daca52c9bfcfb469a03376b1320680
+  - enabled: 1
+    path: Assets/Scenes/Epilogue/Epilogue_11.unity
+    guid: 854ae1f72e20d8e4092615b7ea95b4e1
+  - enabled: 1
+    path: Assets/Scenes/Epilogue/Storybook/StoryBookSelector.unity
+    guid: 55ab1835419ea5e47add59f2beafcef4
+  - enabled: 1
+    path: Assets/Scenes/Epilogue/Storybook/StorybookPrologue.unity
+    guid: 7326127109747fb4f99c8f8c34ddba78
+  - enabled: 1
+    path: Assets/Scenes/Epilogue/Storybook/StorybookScene.unity
+    guid: b890a110f7c094a49abeef0c16046b59
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

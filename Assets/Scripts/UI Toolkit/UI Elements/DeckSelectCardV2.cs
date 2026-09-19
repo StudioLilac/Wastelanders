@@ -11,8 +11,10 @@ namespace UI_Toolkit.UI_Elements
             WithAttrs(ac.GetIcon(), ac.GetName(), ac.Speed.ToString(), ac.CostToAddToDeck.ToString(), FormatStats(ac.GetRolledStats()));
 
             var icon = this.Q<VisualElement>("img-stat-icon");
-            icon.ClearClassList();
-            icon.AddToClassList(ac.CardType == CardType.Defense ? "stat-icon-def" : "stat-icon-atk");
+            var statusIcons = new GetStatusIcons().Query();
+            if (statusIcons != null)
+                icon.style.backgroundImage = new StyleBackground(
+                    ac.CardType == CardType.Defense ? statusIcons.defense : statusIcons.damage);
 
             var back = this.Q<VisualElement>("img-card-back");
             back.ClearClassList();

@@ -98,3 +98,8 @@ crashlytics-build.properties
 # Log files can be ignored.
 fmod_editor.log
 steam_appid.txt
+
+/FMOD/Project/.cache/*
+/FMOD/Project/Build/*
+/FMOD/Project/*.user
+/FMOD/Project/.cache

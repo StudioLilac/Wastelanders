@@ -1,3 +1,5 @@
+using UtilClass;
+
 public class Headshot : PistolCards
 {
 
@@ -13,6 +15,8 @@ public class Headshot : PistolCards
         CardType = CardType.RangedAttack;
         base.Initialize();
     }
+
+    protected override GlossaryNode[] GetChildrenGlossaryNodes() => new[] { StatusEffects.Accuracy, Keywords.OnHit };
 
     public override void OnHit()
     {

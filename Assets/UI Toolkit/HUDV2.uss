@@ -6,11 +6,11 @@
 }
 
 #btn-start {
-    background-image: url('project://database/Assets/Sprites/hud-v2/bg-btn-confirm.png?fileID=2800000&guid=ac6eebf9323f6405fb24f7403fc43497&type=3#bg-btn-confirm');
+    background-image: url("project://database/Assets/Sprites/hud-v2/bg-btn-confirm.png?fileID=2800000&guid=ac6eebf9323f6405fb24f7403fc43497&type=3#bg-btn-confirm");
 }
 
 #btn-start:hover {
-    background-image: url('project://database/Assets/Sprites/hud-v2/bg-btn-confirm-hover.png?fileID=2800000&guid=a76d4217a47274a93bb9fce3e3cc9429&type=3#bg-btn-confirm-hover');
+    background-image: url("project://database/Assets/Sprites/hud-v2/bg-btn-confirm-hover.png?fileID=2800000&guid=a76d4217a47274a93bb9fce3e3cc9429&type=3#bg-btn-confirm-hover");
 }
 
 #layout-hand-container CardV2 {
@@ -21,9 +21,11 @@
 }
 
 .blurb-enemy {
-    background-image: url('project://database/Assets/Sprites/card-v2/bg-card-info-enemy.png?fileID=2800000&guid=64f9f8b58c8ac4424815eb55bce047f3&type=3#bg-card-info-enemy');
+    background-image: url("project://database/Assets/Sprites/card-v2/bg-card-info-enemy.png?fileID=2800000&guid=64f9f8b58c8ac4424815eb55bce047f3&type=3#bg-card-info-enemy");
+    -unity-font-definition: url("project://database/Assets/TextMesh%20Pro/Fonts/VT323-Regular.ttf?fileID=12800000&guid=46b9139fed5cc6a42a6a5d42b82c3c7e&type=3#VT323-Regular");
 }
 
 .blurb-player {
-    background-image: url('project://database/Assets/Sprites/card-v2/bg-card-info-player.png?fileID=2800000&guid=a520e8af37466400db0dd6dac9589749&type=3#bg-card-info-player');
+    background-image: url("project://database/Assets/Sprites/card-v2/bg-card-info-player.png?fileID=2800000&guid=a520e8af37466400db0dd6dac9589749&type=3#bg-card-info-player");
+    -unity-font-definition: url("project://database/Assets/TextMesh%20Pro/Fonts/VT323-Regular.ttf?fileID=12800000&guid=46b9139fed5cc6a42a6a5d42b82c3c7e&type=3#VT323-Regular");
 }

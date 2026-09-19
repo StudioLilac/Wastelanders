@@ -25,13 +25,8 @@ MonoBehaviour:
     sfxId: 0
     picture: {fileID: 21300000, guid: 2634a2f81fa74ad4f90374821cfd0ee6, type: 3}
     events: []
-  - content: <i>You can redirect enemy Actions by clashing it with a faster Action.
-    speaker: {fileID: 11400000, guid: b64e232132ef228439856328530fa3c8, type: 2}
-    sfxId: 0
-    picture: {fileID: -2991674613422419996, guid: 1e6cf2fca7138174e8f34bd44807fdc0, type: 3}
-    events: []
-  - content: <i>You can now form a Clash by [Dragging an Action] onto an enemy Action
-      Icon in the queue.
+  - content: <i>You can redirect the Action by [Dragging an Action] onto the Icon
+      <i>in the Queue</i> as well.
     speaker: {fileID: 11400000, guid: b64e232132ef228439856328530fa3c8, type: 2}
     sfxId: 0
     picture: {fileID: 21300000, guid: d2c4ec02e6276894c8ebc5adbd2f086f, type: 3}

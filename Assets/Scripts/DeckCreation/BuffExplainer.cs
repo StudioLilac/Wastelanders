@@ -43,8 +43,10 @@ public class BuffExplainer : MonoBehaviour
         public static readonly WeaponExplanation PISTOL_EXPLANATION = new(weaponType: WeaponType.PISTOL, explanationTitle: Accuracy.buffName.ToUpper(), explanationText: "Lower bound of an Action's Power increases by 1 per stack. On taking damage, stacks are halved (rounded down).");
         public static readonly WeaponExplanation AXE_EXPLANATION = new(weaponType: WeaponType.AXE, explanationTitle: Wound.buffName.ToUpper(), explanationText: "Damage taken by an Action increases by 1 per stack. Stacks are halved after each round (rounded down).");
         public static readonly WeaponExplanation FIST_EXPLANATION = new(weaponType: WeaponType.FIST, explanationTitle: "FIST", explanationText: "Makes several small but impactful attacks.");
-        public static readonly WeaponExplanation RESONATE_EXPLANATION = new(weaponType: WeaponType.ENEMY, explanationTitle: Resonate.buffName.ToUpper(), explanationText: "Upper bound of an Action's power increases by 1 per stack.");
-        public static readonly List<WeaponExplanation> Values = new() { STAFF_EXPLANATION, PISTOL_EXPLANATION, AXE_EXPLANATION, FIST_EXPLANATION, RESONATE_EXPLANATION };
+        public static readonly WeaponExplanation RESONANCE_EXPLANATION = new(weaponType: WeaponType.ENEMY, explanationTitle: Resonate.buffName.ToUpper(), explanationText: "Upper bound of an Action's power increases by 1 per stack.");
+        public static readonly WeaponExplanation DISSONANCE_EXPLANATION = new(weaponType: WeaponType.CLASSLESS, explanationTitle: Dissonance.buffName.ToUpper(), explanationText: "Upper bound of an Action's power decreases by 1 per stack.\nIf stacks exceeds the host's current HP, kills them immediately.");
+        public static readonly WeaponExplanation DECOHERANCE_EXPLANATION = new(weaponType: WeaponType.CLASSLESS, explanationTitle: Decoherance.buffName.ToUpper(), explanationText: "When Ives takes damage, gain 1 stack of Dissonance. When Ives deals damage, lose 1 stack of Dissonance.\nIf Ives dies, the fight is lost.");
+        public static readonly List<WeaponExplanation> Values = new() { STAFF_EXPLANATION, PISTOL_EXPLANATION, AXE_EXPLANATION, FIST_EXPLANATION, RESONANCE_EXPLANATION, DISSONANCE_EXPLANATION, DECOHERANCE_EXPLANATION };
         WeaponExplanation(WeaponType weaponType, string explanationTitle, string explanationText)
         {
             WeaponType = weaponType;

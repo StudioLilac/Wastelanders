@@ -9,7 +9,7 @@ Shader "Custom/CutoutShader"
 
     CGINCLUDE
 #include "UnityCG.cginc"
-    CGINCLUDE
+    ENDCG
 
     SubShader
     {
@@ -23,11 +23,6 @@ Shader "Custom/CutoutShader"
         Pass
         {
             Name "Cutout"
-
-            CGPROGRAM
-            #pragma vertex vert
-            #pragma exclude_renderers gles xbox360 ps3
-            ENDCG
 
             CGPROGRAM
             #pragma surface surf Lambert alpha

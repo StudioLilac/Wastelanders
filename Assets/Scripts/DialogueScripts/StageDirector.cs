@@ -13,11 +13,16 @@ namespace DialogueScripts
 
         [SerializeField] private DialogueActor genericActorPrefab;
 
+        [Header("Databases")]
+        [SerializeField] private SpriteDatabase spriteDatabase;
+
         [Header("Stage Anchors")] 
         [SerializeField] private Transform offScreenLeft;
+        [SerializeField] private Transform leftEdge;
         [SerializeField] private Transform leftPos;
         [SerializeField] private Transform centerPos;
         [SerializeField] private Transform rightPos;
+        [SerializeField] private Transform rightEdge;
         [SerializeField] private Transform offScreenRight;
 
 #nullable enable
@@ -26,6 +31,7 @@ namespace DialogueScripts
         private void Awake()
         {
             this.Subscribe<SpriteChange>(OnSpriteChange);
+            this.Subscribe<ExpressionChange>(OnExpressionChange);
             this.Subscribe<ActorAction>(OnActorAction);
             this.Subscribe<SetSpeaker>(OnSetSpeaker);
         }
@@ -47,7 +53,9 @@ namespace DialogueScripts
             _ = mc.action switch
             {
                 CharacterActions.SetLeft => actor.MoveTo(leftPos.position, mc.duration),
+                CharacterActions.SetLeftEdge => actor.MoveTo(leftEdge.position, mc.duration),
                 CharacterActions.SetRight => actor.MoveTo(rightPos.position, mc.duration),
+                CharacterActions.SetRightEdge => actor.MoveTo(rightEdge.position, mc.duration),
                 CharacterActions.SetMiddle => actor.MoveTo(centerPos.position, mc.duration),
                 CharacterActions.SetOffscreenLeft => actor.MoveTo(offScreenLeft.position, mc.duration),
                 CharacterActions.SetOffscreenRight => actor.MoveTo(offScreenRight.position, mc.duration),
@@ -63,6 +71,11 @@ namespace DialogueScripts
         private void OnSpriteChange(SpriteChange sc)
         {
             GetOrSummonActor(sc.actor).ChangeSprite(sc.sprite);
+        }
+
+        private void OnExpressionChange(ExpressionChange ec)
+        {
+            GetOrSummonActor(ec.actor).ChangeSprite(spriteDatabase.Get(ec.expression));
         }
 
         private DialogueActor GetOrSummonActor(ActorProfile? actor)

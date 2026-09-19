@@ -98,4 +98,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deckInfoSprite: {fileID: 21300000, guid: 89fe2115e3171485291a36190e68633b, type: 3}
   cardTemplate: {fileID: 9197481963319205126, guid: 2e517996501674993b8fb9df38dedc1b, type: 3}
+  glossaryNodeTemplate: {fileID: 9197481963319205126, guid: 06e613e04b803ee4e96fa2e334af99b8, type: 3}
   rootDocument: {fileID: 8398607223831343151}

@@ -1,6 +1,8 @@
 using Systems.Persistence;
 
 namespace Managers {
+    public record AudioPreferencesChanged() : IEvent;
+
     public class PreferencesManager : PersistentSingleton<PreferencesManager>
     {
         private UserPreferences userPreferences = null!;
@@ -16,12 +18,6 @@ namespace Managers {
             userPreferences = preferences;
             CardComparator.autoRoll = preferences.AutoRollEnabled;
             ScreenShakeHandler.IsScreenShakeEnabled = preferences.screenShakePreference.IsScreenShakeEnabled;
-            
-            AudioPreferences audioPreferences = preferences.audioPreferences;
-            AudioManager.Instance.SetMusicVolume(audioPreferences.BackgroundMusicVolume);
-            AudioManager.Instance.SetSFXVolume(audioPreferences.SFXVolume);
-            AudioManager.Instance.SetMusicMuted(audioPreferences.MusicMuted);
-            AudioManager.Instance.SetSFXMuted(audioPreferences.SFXMuted);
         }
 
         public void SetAutoRoll(bool value) {
@@ -38,30 +34,38 @@ namespace Managers {
 
         public void SetSFXVolume(float volume) {
             userPreferences.audioPreferences.SFXVolume = volume;
-            AudioManager.Instance.SetSFXVolume(volume);
+            new AudioPreferencesChanged().Invoke();
         }
-        
+
         public void SetMusicVolume(float volume) {
             userPreferences.audioPreferences.BackgroundMusicVolume = volume;
-            AudioManager.Instance.SetMusicVolume(volume);
+            new AudioPreferencesChanged().Invoke();
         }
-        
+
         public void SetSFXMuted(bool muted) {
             userPreferences.audioPreferences.SFXMuted = muted;
-            AudioManager.Instance.SetSFXMuted(muted);
+            new AudioPreferencesChanged().Invoke();
         }
-        
+
         public void SetMusicMuted(bool muted) {
             userPreferences.audioPreferences.MusicMuted = muted;
-            AudioManager.Instance.SetMusicMuted(muted);
+            new AudioPreferencesChanged().Invoke();
         }
 
         public float GetMusicVolume() {
             return userPreferences.audioPreferences.BackgroundMusicVolume;
         }
-        
+
         public float GetSFXVolume() {
             return userPreferences.audioPreferences.SFXVolume;
+        }
+
+        public bool GetMusicMuted() {
+            return userPreferences.audioPreferences.MusicMuted;
+        }
+
+        public bool GetSFXMuted() {
+            return userPreferences.audioPreferences.SFXMuted;
         }
     }
 }

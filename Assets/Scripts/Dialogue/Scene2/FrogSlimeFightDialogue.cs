@@ -107,7 +107,6 @@ public class FrogSlimeFightDialogue : DialogueClasses
     {
         CombatManager.ClearEvents();
         DialogueBox.ClearDialogueEvents();
-        EntityClass.OnEntityDeath -= EnsureFrogDeath;
         HighlightManager.Instance.PlayerManuallyInsertedAction -= OnPlayerPlayClashingCard;
         DisplayableClass.OnShowCard -= ExplainDefense;
     }
@@ -317,7 +316,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
 
         CombatManager.PlayersWinEvent += PlayersWin;
         CombatManager.EnemiesWinEvent += EnemiesWin;
-        EntityClass.OnEntityDeath += EnsureFrogDeath;
+        this.Subscribe<OnEntityDeath>(EnsureFrogDeath);
 
         CombatManager.Instance.BeginCombat();
         
@@ -541,8 +540,9 @@ public class FrogSlimeFightDialogue : DialogueClasses
     }
 
     private int aliveFrogs = 2;
-    private void EnsureFrogDeath(EntityClass entity)
+    private void EnsureFrogDeath(OnEntityDeath ev)
     {
+        EntityClass entity = ev.Entity;
         if (entity is WasteFrog wasteFrog) 
         {
             if (aliveFrogs == 1)
@@ -550,7 +550,6 @@ public class FrogSlimeFightDialogue : DialogueClasses
                 //Function that overrides death animation to die in the scene
                 IEnumerator DieInScene()
                 {
-                    BattleQueue.BattleQueueInstance.RemoveAllInstancesOfEntity(wasteFrog);
                     wasteFrog.RemoveEntityFromCombat();
                     wasteFrog.animator.enabled = false;
                     wasteFrog.GetComponent<SpriteRenderer>().sprite = frogDeathSprite;
@@ -564,7 +563,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
 
                 wasteFrog.DeathHandler = DieInScene;
                 lastKilledFrog = wasteFrog;
-                EntityClass.OnEntityDeath -= EnsureFrogDeath;
+                this.UnSubscribe<OnEntityDeath>(EnsureFrogDeath);
             }
             aliveFrogs--; //Only change death animation of the last frog
         }

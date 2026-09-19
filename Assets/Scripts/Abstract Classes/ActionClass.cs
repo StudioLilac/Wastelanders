@@ -1,13 +1,15 @@
 using System;
+using System.Collections.Generic;
 using Steamworks;
 using Systems.Persistence;
 using UI_Toolkit;
 using UnityEngine;
+using UtilClass;
 
+public record CardClicked(ActionClass Card) : IEvent;
 public record CardUsed<T>() : IEvent where T : ActionClass;
-public abstract class ActionClass : SelectClass, IBind<ActionData>
+public abstract class ActionClass : SelectClass
 {
-    [field: SerializeField] public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
     private EntityClass target;
 
     public EntityClass Target
@@ -71,7 +73,9 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
 
     public int Speed { get; set; }
     public string description;
-    public string Description { get { return description; } }
+    
+    public GlossaryNode GlossaryNode { get; protected set; }
+
     public string evolutionDescription { get; protected set; }
     public string evolutionCriteria{ get; protected set; }
 
@@ -84,7 +88,7 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
     public CardUI cardUI;
 
 #nullable enable
-    [SerializeField] protected ActionData? data;
+    protected ActionData? data;
     protected int CurrentEvolutionProgress
     {
         get { return data?.CurrentProgress ?? 0; }
@@ -96,7 +100,6 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
     public event ActionClassDelegate? TargetChanged;
     public event ActionClassDelegate? TargetChanging;
     public event ActionClassDelegate? CardValuesUpdating;
-    public static event ActionClassDelegate? CardClickedEvent;
     public static event ActionClassDelegate? CardRightClickedEvent;
     public static event ActionClassDelegate? CardHighlightedEvent;
     public static event ActionClassDelegate? CardUnhighlightedEvent;
@@ -120,6 +123,7 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
     public virtual void Awake()
     {
         Initialize();
+        data = new GetActionData(GetType().Name).Query();
     }
 
     public virtual void Start() { }
@@ -179,7 +183,11 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
     public virtual void Initialize()
     {
         UpdateDup();
+        
+        GlossaryNode = new(myName, description, null, null, GetChildrenGlossaryNodes());
     }
+    
+    protected virtual GlossaryNode[] GetChildrenGlossaryNodes() => Array.Empty<GlossaryNode>();
 
     public int getRolledDamage()
     {
@@ -245,10 +253,7 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
         cardUI?.RenderCard(this);
         CardValuesUpdating?.Invoke(this);
     }
-    public void OnMouseDown()
-    {
-        CardClickedEvent?.Invoke(this);
-    }
+    public void OnMouseDown() => new CardClicked(this).Invoke();
 
     // To handle right click detection for the Deck Selection scene
     public void OnMouseOver()
@@ -411,12 +416,6 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
         cardUI.shouldRenderCost = renderCost;
     }
 
-    public void Bind(ActionData data)
-    {
-        this.data = data;
-        this.data.Id = Id;
-    }
-
     // Returns a description based on whether the card is flipped and evolved or not
     public string GenerateCardDescription()
     {
@@ -444,7 +443,7 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
         public int FloorBuffs { get; set; } = 0;
         public int CeilingBuffs { get; set; } = 0;
         public int RollFloor => Math.Clamp(value: baseRollFloor + FloorBuffs, min: 0 , max: RollCeiling);
-        public int RollCeiling => baseRollCeiling + CeilingBuffs;
+        public int RollCeiling => Math.Max(baseRollCeiling + CeilingBuffs, baseRollFloor);
 
         //We want to render these one time buffs so we keep track of its name, lower and upper bound buffs to this card.
         public (StatusEffect?, int floorBuff, int ceilingBuff) OneTimeBuffs { get; set; } = (null, 0, 0); 
@@ -458,9 +457,8 @@ public abstract class ActionClass : SelectClass, IBind<ActionData>
 }
 
 [Serializable]
-public class ActionData : ISaveable
+public class ActionData
 {
-    public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
     [field: SerializeField] public string ActionClassName { get; set; } = "";
     [field: SerializeField] public int CurrentProgress { get; set; } = 0;
 }

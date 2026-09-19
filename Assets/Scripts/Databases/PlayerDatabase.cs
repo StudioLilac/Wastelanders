@@ -10,7 +10,7 @@ using static PlayerDatabase;
  * Class that holds the information of all players like level, weapon proficiency, decks. Can be edited in the unity editor
  *  */
 [CreateAssetMenu(fileName = "New Player Database", menuName = "Player Database")]
-public class PlayerDatabase : ScriptableObject, IBind<PlayerInformation>
+public class PlayerDatabase : ScriptableObject
 {
     public PlayerData JackieData;
     public PlayerData IvesData;
@@ -233,9 +233,8 @@ public class PlayerDatabase : ScriptableObject, IBind<PlayerInformation>
 
 
 [System.Serializable]
-public class PlayerInformation : ISaveable
+public class PlayerInformation
 {
-    [field: SerializeField] public SerializableGuid Id { get; set; } = SerializableGuid.NewGuid();
     [field: SerializeField] public PlayerData JackieData { get; set; }
     [field: SerializeField] public PlayerData IvesData { get; set; }
 

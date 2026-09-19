@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UtilClass;
 
 public class Vitals : PistolCards
 {
@@ -17,6 +18,8 @@ public class Vitals : PistolCards
         CardType = CardType.RangedAttack;
         base.Initialize();
     }
+    
+    protected override GlossaryNode[] GetChildrenGlossaryNodes() => new[] { StatusEffects.Accuracy };
 
     public override void OnHit()
     {

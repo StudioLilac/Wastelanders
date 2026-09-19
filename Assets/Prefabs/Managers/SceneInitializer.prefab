@@ -63,3 +63,8 @@ MonoBehaviour:
     saveIndicatorManager: {fileID: 5065427473290648346, guid: 64f4cd4ffac10482fb4f54fb548ec9f0, type: 3}
     combatManager: {fileID: 8061570941568338762, guid: 945f42f8017bf504295ae416cbc461ed, type: 3}
     battleQueue: {fileID: 234536196861661656, guid: 0ce0ee3d06315164a88fea5184a490b6, type: 3}
+    databaseManager: {fileID: 933182789945560666, guid: b909234b011565e4fbf6b9da067c9f8c, type: 3}
+    saveLoadSystem: {fileID: 4619928436540125962, guid: a393ae2a4fe47694baa84981c0e6fe6e, type: 3}
+    gameStateManager: {fileID: 6284292212356110786, guid: fd5d6a1c44ee30c4493e5a5ca1d15a84, type: 3}
+    preferencesManager: {fileID: 2547375976378534001, guid: 0ae250960cf72c74693e51211e82ad07, type: 3}
+    achievementManager: {fileID: 1690736164529353361, guid: 174f1cb1dc129ee4282ef7b62f779846, type: 3}

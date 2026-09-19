@@ -42,17 +42,28 @@ MonoBehaviour:
     speakerName: Ailin
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  - bodyText: "And you\u2019re the hardiest Mama I know! You\u2019ll be alright too!"
+  - bodyText: "And you\u2019re the hardiest Mama I know!"
     speakerName: Jackie
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  - bodyText: "Haha, thank you, Jackie. Auntie Ives will stay with you while I\u2019m
-      gone. Be good for her, alright?"
+  - bodyText: "Promise me you\u2019ll be alright too? "
+    speakerName: Jackie
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 0
+  - bodyText: "Haha, of course, Jackie. I\u2019ll be back soon, I promise.  "
     speakerName: Ailin
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
-  - bodyText: I will! Come back soon, okay?
+  - bodyText: 'I trust you''ll be good for Auntie Ives, too? '
+    speakerName: Ailin
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 0
+  - bodyText: 'I promise! '
     speakerName: Jackie
+    displayingImage: {fileID: 0}
+    broadcastAnEvent: 0
+  - bodyText: Haha, it's a deal then.
+    speakerName: Ailin
     displayingImage: {fileID: 0}
     broadcastAnEvent: 0
   - bodyText: The mother and daughter embrace, letting goodbyes stay unspoken.

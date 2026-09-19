@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Xml.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UtilClass;
 using static UnityEngine.UI.Image;
 
 public class LeftHook : FistCards
@@ -24,6 +25,8 @@ public class LeftHook : FistCards
         CardType = CardType.MeleeAttack;
         base.Initialize();
     }
+
+    protected override GlossaryNode[] GetChildrenGlossaryNodes() => new[] { RightHook.Glossary };
 
 
     public override void CardIsUnstaggered()

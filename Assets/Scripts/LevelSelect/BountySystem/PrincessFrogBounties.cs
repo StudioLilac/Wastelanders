@@ -17,7 +17,7 @@ public class PrincessFrogBounties : IBounties
         challengeName: "Buffed Princess",
         subtext: "Challenge for Level 5. Extras",
         flavourText: "The Princess is back, and she doesn’t intend to lose this time.",
-        rewards: "Princess Frog Cards",
+        rewards: "Monster Cards no longer have resonance costs.",
         bountyAssetDelegate: (database) => database.PrincessFrogAssets.PrincessFrogChallengeAsset
         );
 
@@ -62,7 +62,7 @@ public class PrincessFrogBounties : IBounties
         challengeName: "Exhausting Mission",
         subtext: "Challenge for Level 5. Extras",
         flavourText: "Fight the Princess Beetle with a restricting hand size.",
-        rewards: "TBD",
+        rewards: "Storyboard: The Rose and the Gardener.",
         bountyAssetDelegate: (database) => database.PrincessFrogAssets.ExhaustedChallengeAsset
         );
 

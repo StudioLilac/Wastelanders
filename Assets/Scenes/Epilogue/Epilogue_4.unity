@@ -935,7 +935,7 @@ GameObject:
   - component: {fileID: 1280079865}
   - component: {fileID: 1280079864}
   m_Layer: 0
-  m_Name: Deception
+  m_Name: Weak
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -980,7 +980,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Deception
+  m_text: Weak
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ef98bd283b7bb734da8a833fccf0fb3e, type: 2}
   m_sharedMaterial: {fileID: -1472579445266561125, guid: ef98bd283b7bb734da8a833fccf0fb3e, type: 2}
@@ -1459,7 +1459,8 @@ MonoBehaviour:
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events: []
+    events:
+    - rid: 8385543464946761800
   dialogue3:
   - content: Cam...?
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
@@ -1493,7 +1494,7 @@ MonoBehaviour:
     events:
     - rid: 2124643721081258077
     - rid: 2124643721081258078
-  - content: "She\u2019s safe. Still in the Tundra. She wouldn\u2019t leave your
+  - content: "She\u2019s safe! Still in the Tundra. She wouldn\u2019t leave your
       side until we had you on the WRV."
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     sfxId: 0
@@ -1534,56 +1535,56 @@ MonoBehaviour:
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258087
-  - content: Although your condition has stabilized, the Serum meant to inhibit the
-      Waste vectors in your system exhibited... an unfortunate reaction.
-    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-    sfxId: 0
-    picture: {fileID: 0}
-    events: []
-  - content: To avoid getting too technical...
-    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-    sfxId: 0
-    picture: {fileID: 0}
-    events: []
-  - content: After the Waste binds to the body, it will begin to siphon energy from
-      it, consuming the energy's <i>Amplitude</i> to replicate itself.
+  - content: Although your condition has stabilized, the Waste vectors in your system
+      exhibited... an unfortunate reaction.
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
-    - rid: 1014197516907839488
-  - content: That's what the serums prevent. They bind to the Waste vectors instead
-      to protect the body.
+    - rid: 8385543464946761798
+  - content: 'Once in your system, the Waste binds to your body and siphons energy
+      to replicate itself. '
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events: []
-  - content: 'However for the serums to work, it is imperative they remain devoid
-      of <i>Amplitude</i>. Otherwise... '
+  - content: "We call this energy your body\u2019s natural <i>Amplitude</i>. Lose
+      too much of it and you\u2019ll grow weak. "
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  - content: "That's what the serums prevent. They bind to the Waste vectors first
+      so they don\u2019t bind to your body. "
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  - content: 'Naturally it is imperative that the serums remain devoid of <i>Amplitude</i>
+      themselves... '
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 1014197516907839490
-  - content: 'It becomes a catalyst for the Waste instead. '
+  - content: 'Otherwise, they become a catalyst for the Waste instead. '
+    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 8385543464946761802
+  - content: Under normal circumstances the probabilities are near nil, each injection
+      is carefully tested, and inspected before it is issued.
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events: []
-  - content: Under normal circumstances this is highly improbable, each injection
-      is carefully tested, then inspected before being issued.
-    speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-    sfxId: 0
-    picture: {fileID: 0}
-    events:
-    - rid: 1014197516907839491
   - content: However, lab testing reveals that the serum you injected was compromised
-      by an external influx of Amplitude.
+      by an external influx of this <i>Amplitude</i>.
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
-    events:
-    - rid: 1014197516907839493
+    events: []
   - content: 'As a result, the vector has spread much quicker than expected through
       your entire system. To an extent where it is no longer feasible to purge. '
     speaker: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
@@ -1614,8 +1615,8 @@ MonoBehaviour:
     events:
     - rid: 2124643721081258108
     - rid: 2124643721081258109
-  - content: "Don\u2019t you start pitying me, kid. We both know this had nothing
-      to do with you."
+  - content: "Don\u2019t you start pitying me, kiddo. We both know this was nothing
+      on you."
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -1635,7 +1636,7 @@ MonoBehaviour:
     events:
     - rid: 2124643721081258113
   - content: Far as I see it, your invention got the NITES further than anyone else
-      ever has. One step closer to Ailin. One step closer to the truth.
+      ever has. One step closer to Ailin.
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -1713,7 +1714,7 @@ MonoBehaviour:
     sfxId: 0
     picture: {fileID: 0}
     events: []
-  - content: "I\u2019ve been there, kid. Walked that line to the end and back."
+  - content: "I\u2019ve been there, kiddo. Walked that line to the end and back."
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -1839,31 +1840,16 @@ MonoBehaviour:
       type: {class: AutoAdvanceAfter, ns: DialogueScripts, asm: MainGame}
       data:
         Time: 0.5
-    - rid: 1014197516907839488
-      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-        sprite: {fileID: 5716319594728238710, guid: 30bd0e68e238a2746ac06e8f9527da16, type: 3}
     - rid: 1014197516907839489
       type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-        sprite: {fileID: 5716319594728238710, guid: 30bd0e68e238a2746ac06e8f9527da16, type: 3}
+        sprite: {fileID: 21300000, guid: 1fcf8fd3379a832439cce6849c937ec2, type: 3}
     - rid: 1014197516907839490
       type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-        sprite: {fileID: -6888621227103538543, guid: 2da2e80130a351744801103b073bd661, type: 3}
-    - rid: 1014197516907839491
-      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-        sprite: {fileID: 5716319594728238710, guid: 30bd0e68e238a2746ac06e8f9527da16, type: 3}
-    - rid: 1014197516907839493
-      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-        sprite: {fileID: -6888621227103538543, guid: 2da2e80130a351744801103b073bd661, type: 3}
+        sprite: {fileID: 21300000, guid: aace9c70baa25f541b82786233fd5633, type: 3}
     - rid: 1014197516907839564
       type: {class: CustomEvent, ns: DialogueScripts, asm: MainGame}
       data:
@@ -1963,7 +1949,7 @@ MonoBehaviour:
       type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-        sprite: {fileID: -6888621227103538543, guid: 2da2e80130a351744801103b073bd661, type: 3}
+        sprite: {fileID: 21300000, guid: aace9c70baa25f541b82786233fd5633, type: 3}
     - rid: 2124643721081258087
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
@@ -2209,7 +2195,7 @@ MonoBehaviour:
       type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-        sprite: {fileID: -6888621227103538543, guid: 2da2e80130a351744801103b073bd661, type: 3}
+        sprite: {fileID: 21300000, guid: aace9c70baa25f541b82786233fd5633, type: 3}
     - rid: 2124643982316142602
       type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:
@@ -2232,7 +2218,22 @@ MonoBehaviour:
       type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
-        sprite: {fileID: -4505030949712079976, guid: 7b946c12f8e9c9b49a06ee3348c11712, type: 3}
+        sprite: {fileID: 21300000, guid: 1fcf8fd3379a832439cce6849c937ec2, type: 3}
+    - rid: 8385543464946761798
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        sprite: {fileID: 21300000, guid: 1fcf8fd3379a832439cce6849c937ec2, type: 3}
+    - rid: 8385543464946761800
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        sprite: {fileID: 21300000, guid: 1fcf8fd3379a832439cce6849c937ec2, type: 3}
+    - rid: 8385543464946761802
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: 76d5a271a719e8f4cad7429ce9e05c1c, type: 2}
+        sprite: {fileID: 21300000, guid: 1fcf8fd3379a832439cce6849c937ec2, type: 3}
 --- !u!4 &1818432484
 Transform:
   m_ObjectHideFlags: 0

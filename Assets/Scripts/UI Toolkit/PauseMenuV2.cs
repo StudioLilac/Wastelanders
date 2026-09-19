@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Context;
 using Managers;
@@ -36,6 +35,7 @@ namespace UI_Toolkit
         // is the cursor over an element that should "block/consume" click events?
         // needed for compatability between PauseMenuV2 and Unity native UI elements.
         public static bool IsOverBlockingElement { get; private set; }
+        public static bool IsHoldingFastForward { get; private set; }
 
         public void Awake()
         {
@@ -48,7 +48,13 @@ namespace UI_Toolkit
             doubleSpeedToggle = rootDocument.rootVisualElement.Q<Toggle>("2x-speed-toggle");
             dialogueLogButton = rootDocument.rootVisualElement.Q<Button>("log-button");
             skipDialogueButton = rootDocument.rootVisualElement.Q<Button>("skip-dialogue-button");
-            
+            // So a spacebar press doesn't trigger any of these. 
+            autoRollToggle.focusable = false;
+            doubleSpeedToggle.focusable = false;
+            dialogueLogButton.focusable = false;
+            skipDialogueButton.focusable = false;
+            pauseIconButton.focusable = false;
+
             rootDocument.panelSettings.sortingOrder = UISortOrder.PauseMenu.GetOrder();
 
             pauseIconButton.clicked += DoPause;
@@ -65,10 +71,11 @@ namespace UI_Toolkit
             RegisterBlockingElement(skipDialogueButton);
 
             RegisterIconTooltipMouseEvents();
-            
+            HideTooltip();
+
             SetState(State.Unpaused);
         }
-        
+
         public void Update()
         {
             if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Tab))
@@ -125,12 +132,15 @@ namespace UI_Toolkit
                 HideTooltip();
             element.Display(visible);
             if (!visible)
+            {
                 IsOverBlockingElement = false;
+                if (element == skipDialogueButton) IsHoldingFastForward = false;
+            }
         }
         
         private void RegisterBlockingElement(VisualElement element)
         {
-            element.RegisterCallback<MouseEnterEvent>(_ => IsOverBlockingElement = true);
+            element.RegisterCallback<MouseEnterEvent>(_ => { if (IsCursorOver(element)) IsOverBlockingElement = true; });
             element.RegisterCallback<MouseLeaveEvent>(_ => IsOverBlockingElement = false);
     
             element.RegisterCallback<MouseDownEvent>(evt => 
@@ -142,19 +152,21 @@ namespace UI_Toolkit
 
         private void RegisterIconTooltipMouseEvents()
         {
-            autoRollToggle.RegisterCallback<MouseEnterEvent>(evt => ShowTooltip("Toggle Auto Roll"));
-            doubleSpeedToggle.RegisterCallback<MouseEnterEvent>(evt => ShowTooltip("Toggle Double Speed"));
-            dialogueLogButton.RegisterCallback<MouseEnterEvent>(evt => ShowTooltip("View Dialogue Log"));
-            skipDialogueButton.RegisterCallback<MouseEnterEvent>(evt => ShowTooltip("Skip Dialogue"));
-            
-            autoRollToggle.RegisterCallback<MouseLeaveEvent>(evt => HideTooltip());
-            doubleSpeedToggle.RegisterCallback<MouseLeaveEvent>(evt => HideTooltip());
-            dialogueLogButton.RegisterCallback<MouseLeaveEvent>(evt => HideTooltip());
-            skipDialogueButton.RegisterCallback<MouseLeaveEvent>(evt => HideTooltip());
+            RegisterTooltip(autoRollToggle,     () => "Toggle Auto Roll");
+            RegisterTooltip(doubleSpeedToggle,  () => "Toggle Double Speed");
+            RegisterTooltip(dialogueLogButton, () => "View Dialogue Log");
+            RegisterTooltip(skipDialogueButton, () => IsCombatScene() ? "Skip Dialogue" : "Fast Forward");
         }
 
-        private void ShowTooltip(string tooltip)
+        private void RegisterTooltip(VisualElement element, Func<string> tooltip)
         {
+            element.RegisterCallback<MouseEnterEvent>(_ => ShowTooltip(element, tooltip()));
+            element.RegisterCallback<MouseLeaveEvent>(_ => HideTooltip());
+        }
+
+        private void ShowTooltip(VisualElement source, string tooltip)
+        {
+            if (!IsCursorOver(source)) return;
             new TooltipEvent(TextTipDisplayStyle.Display, "", tooltip).Invoke();
         }
 
@@ -172,6 +184,11 @@ namespace UI_Toolkit
         {
             DoStart();
             GameStateManager.Instance.Restart();
+        }
+
+        private void OnGlsClicked()
+        {
+            SetState(State.Glossary);
         }
 
         private void OnDckClicked()
@@ -192,45 +209,30 @@ namespace UI_Toolkit
             GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.MainMenu>().SceneName);
         }
 
-        private void OnGlsClicked()
-        {
-            var gameState = new GetGameState().Query();
-            var skipStory = gameState switch { 
-                GameState.GAME_START => true,
-                GameState.OUT_OF_COMBAT => true,
-                GameState.GAME_LOSE => true,
-                _ => false,
-            };
-            if (skipStory)
-            {
-                GameStateManager.Instance.JumpToCombat = true;
-                OnRstClicked();
-            }
-        }
-
         private void OnDlgClicked()
         {
             if (state != State.Dialogue) {
                 SetState(State.Dialogue);
                 var scroll = dialogue.Q<ScrollView>("scroll-dlg");
-                StartCoroutine(DoScrollToBottomWithDelay(scroll));
                 scroll.Clear();
                 foreach (var it in CreateLabels()) scroll.Add(it);
+                ScrollToBottomAfterLayout(scroll);
             } else {
                 SetState(previousState);
             }
-        }
-
-        private void OnSkpClicked()
-        {
-            OnGlsClicked();
         }
 
         private void OnClsClicked()
         {
             SetState(previousState);
         }
-        
+        private static bool IsCursorOver(VisualElement element)
+        {
+            if (element.panel == null) return false;
+            Vector2 cursor = UICoordinateHelper.ToPanelPoint(Input.mousePosition, element.panel);
+            return element.worldBound.Contains(cursor);
+        }
+
         private static void OnAutoRollChanged(bool value) {
             PreferencesManager.Instance.SetAutoRoll(value);
         }
@@ -268,6 +270,7 @@ namespace UI_Toolkit
         {
             pauseMenuPanel.Q<Button>("button-rsm").clicked += OnRsmClicked;
             pauseMenuPanel.Q<Button>("button-rst").clicked += OnRstClicked;
+            pauseMenuPanel.Q<Button>("button-gls").clicked += OnGlsClicked;
             pauseMenuPanel.Q<Button>("button-dck").clicked += OnDckClicked;
             pauseMenuPanel.Q<Button>("button-lvl").clicked += OnLvlClicked;
             pauseMenuPanel.Q<Button>("button-mnu").clicked += OnMnuClicked;
@@ -278,7 +281,7 @@ namespace UI_Toolkit
             autoRollToggle.RegisterValueChangedCallback(e => OnAutoRollChanged(e.newValue));
             doubleSpeedToggle.RegisterValueChangedCallback(e => OnDoubleSpeedChanged(e.newValue));
             dialogueLogButton.clicked += OnDlgClicked;
-            skipDialogueButton.clicked += OnSkpClicked;
+            SetUpSkipDialogue();
 
             pauseMenuPanel.Q<Slider>("slider-mus").RegisterValueChangedCallback(e => OnMusChanged(e.newValue));
             pauseMenuPanel.Q<Slider>("slider-sfx").RegisterValueChangedCallback(e => OnSfxChanged(e.newValue));
@@ -286,6 +289,34 @@ namespace UI_Toolkit
             pauseMenuPanel.Q<Toggle>("toggle-sfx").RegisterValueChangedCallback(e => OnSfxChecked(e.newValue));
             pauseMenuPanel.Q<Toggle>("toggle-vfx").RegisterValueChangedCallback(e => OnVfxChecked(e.newValue));
         }
+        private static bool IsCombatScene() => new GetGameState().Query() switch
+        {
+            GameState.GAME_START => true,
+            GameState.OUT_OF_COMBAT => true,
+            GameState.GAME_LOSE => true,
+            _ => false,
+        };
+
+        private void SetUpSkipDialogue()
+        {
+            void SkipDialogue()
+            {
+                if (IsCombatScene())
+                {
+                    GameStateManager.Instance.JumpToCombat = true;
+                    OnRstClicked();
+                }
+            }
+
+            skipDialogueButton.clicked += SkipDialogue;
+            skipDialogueButton.RegisterCallback<PointerDownEvent>(evt => {
+                if (!IsCombatScene()) IsHoldingFastForward = true;
+            }, TrickleDown.TrickleDown);
+            skipDialogueButton.RegisterCallback<PointerUpEvent>(evt => IsHoldingFastForward = false, TrickleDown.TrickleDown);
+            skipDialogueButton.RegisterCallback<PointerLeaveEvent>(evt => IsHoldingFastForward = false, TrickleDown.TrickleDown);
+            skipDialogueButton.RegisterCallback<PointerCancelEvent>(evt => IsHoldingFastForward = false, TrickleDown.TrickleDown);
+        }
+
 
         private void LoadInitialValues() {
             UserPreferences preferences = SaveLoadSystem.Instance.GetUserPreferences();
@@ -308,10 +339,13 @@ namespace UI_Toolkit
             PauseMenuPanel
         }
 
-        private static IEnumerator DoScrollToBottomWithDelay(ScrollView scroll)
+        private static void ScrollToBottomAfterLayout(ScrollView scroll)
         {
-            yield return null;
-            scroll.scrollOffset = scroll.contentContainer.layout.max - scroll.contentViewport.layout.size;
+            scroll.schedule.Execute(() =>
+            {
+                float maxScrollY = Mathf.Max(0, scroll.contentContainer.layout.height - scroll.contentViewport.layout.height);
+                scroll.scrollOffset = new Vector2(0, maxScrollY);
+            });
         }
 
         // Hideous.

@@ -48,11 +48,3 @@
 .card-state-2 #layout-container {
     translate: 0 -80px;
 }
-
-.stat-icon-atk {
-    background-image: resource('StatusIcon/Damage');
-}
-
-.stat-icon-def {
-    background-image: resource('StatusIcon/Defense_Icon');
-}

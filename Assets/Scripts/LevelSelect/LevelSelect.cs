@@ -2,6 +2,7 @@ using LevelSelectInformation;
 using System.Collections;
 using Systems.Persistence;
 using UnityEngine;
+using UnityEngine.UI;
 using static LevelSelectInformation.BountyInformation;
 
 public class LevelSelect : MonoBehaviour
@@ -50,8 +51,8 @@ public class LevelSelect : MonoBehaviour
     {
         OpenScene(SceneData.Get<SceneData.Epilogue>().SceneName);
     }
-    
-    
+
+    public void StoryBoard() => OpenScene(SceneData.Get<SceneData.StorybookSelector>().SceneName);
     public void PreBounty0()
     {
         OpenScene(SceneData.Get<SceneData.PreBounty0>().SceneName);

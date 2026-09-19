@@ -15,19 +15,20 @@ public abstract class FadeHandlerBase : MonoBehaviour
     /// <summary>
     /// Immediately sets the screen to be fully opaque (black).
     /// </summary>
-    public void SetDarkScreen()
-    {
-        StopCurrentFadeAnimation();
-        SetAlpha(1f);
-    }
+    public void SetDarkScreen() => SetAlphaImmediate(1f);
 
     /// <summary>
     /// Immediately sets the screen to be fully transparent.
     /// </summary>
-    public void SetLightScreen()
+    public void SetLightScreen() => SetAlphaImmediate(0f);
+
+    /// <summary>
+    /// Immediately snaps to a specific alpha, cancelling any running fade.
+    /// </summary>
+    public void SetAlphaImmediate(float alpha)
     {
         StopCurrentFadeAnimation();
-        SetAlpha(0f);
+        SetAlpha(Mathf.Clamp01(alpha));
     }
 
     /// <summary>
@@ -40,6 +41,10 @@ public abstract class FadeHandlerBase : MonoBehaviour
         // This coroutine waits until the animation coroutine has set itself to null
         yield return new WaitUntil(() => _animationCoroutine == null);
     }
+
+    // Fire-and-forget fade: starts the animation without having to be awaited, cancelling any
+    // running fade. Useful when a caller (e.g. a dialogue event) can't yield on the fade.
+    public void StartFadeToAlpha(float targetAlpha, float duration) => RequestFade(targetAlpha, duration);
 
     /// <summary>
     /// Starts a fade to fully transparent over a duration.

@@ -1757,6 +1757,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1227107689}
   - {fileID: 2143686313}
   - {fileID: 1429652976}
   m_Father: {fileID: 1877041900}
@@ -3408,6 +3409,137 @@ Transform:
   - {fileID: 1808829898}
   m_Father: {fileID: 884201476}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1227107688
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1227107689}
+  - component: {fileID: 1227107695}
+  - component: {fileID: 1227107694}
+  - component: {fileID: 1227107693}
+  - component: {fileID: 1227107692}
+  - component: {fileID: 1227107691}
+  - component: {fileID: 1227107690}
+  m_Layer: 5
+  m_Name: CutoutScrim
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1227107689
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227107688}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 596087403}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1227107690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227107688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d41173c81b45cf469c5bc55a8d9e5e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  provider: {fileID: 1227107693}
+--- !u!114 &1227107691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227107688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59e14375da3b3ad4da241ec0e03328d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  provider: {fileID: 1227107693}
+--- !u!114 &1227107692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227107688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b0f25580145b5d48842ac352e97b95b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  provider: {fileID: 1227107693}
+--- !u!114 &1227107693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227107688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5134e3736489184e925aeaa8f622390, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  img: {fileID: 1227107694}
+--- !u!114 &1227107694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227107688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 2100000, guid: 04f18c87e9817e44892facf8d96eb2db, type: 2}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1227107695
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227107688}
+  m_CullTransparentMesh: 1
 --- !u!1 &1233721675
 GameObject:
   m_ObjectHideFlags: 0
@@ -3676,6 +3808,7 @@ MonoBehaviour:
   ambushBeetleTransform: {fileID: 1965198846}
   wrangledBeetle: {fileID: 1256772860}
   beetleDraggingCrystal: {fileID: 324089119}
+  tutorialBeetle: {fileID: 1808829899}
   draggedCrystal: {fileID: 624578775}
   combatBeetleTransforms:
   - {fileID: 1587123019}
@@ -3696,6 +3829,8 @@ MonoBehaviour:
   frogDeathSprite: {fileID: 21300000, guid: 87829d35cc4de8b4db02b857e0431956, type: 3}
   jackieCrystalSprite: {fileID: 21300000, guid: 39aee1878ca221043839f79d83a21ecd, type: 3}
   dialogueMarshBg: {fileID: 1429652978}
+  ivesPortrait: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
+  excavatePortrait: {fileID: 21300000, guid: adfed2bb4f0eb4a47a0cbbec5e9170b0, type: 3}
   openingJackieQuipt:
   - bodyText: 'Phew, another one down. Seems like force is much more my style. '
     speakerName: Jackie
@@ -3752,6 +3887,7 @@ MonoBehaviour:
   jackieShockAtBeetleEnteringCamp: {fileID: 11400000, guid: 05e3a509d00569541aee34f1bbe8b638, type: 2}
   ivesConversation: {fileID: 11400000, guid: 66e08737ade094da196cc3f5bb88fd90, type: 2}
   twoPlayerCombatTutorial: {fileID: 11400000, guid: 6b67fbf4de11c4562a0efa41e86e33d9, type: 2}
+  twoPlayerCombatTutorialPart2: {fileID: 11400000, guid: 2e7055ebda772ef4d851c98f69108c5f, type: 2}
   ivesTutorial: {fileID: 11400000, guid: 907e97d12424741f483ff139b4c6647e, type: 2}
   wave2Dialogue: {fileID: 11400000, guid: 377753e56fae3204ea946cbbea8973c3, type: 2}
   wave3Dialogue: {fileID: 11400000, guid: 04e309d31bbd2094cbd5fbbeb969c8cf, type: 2}
@@ -3760,6 +3896,10 @@ MonoBehaviour:
   gameLoseDialogue: {fileID: 11400000, guid: 676bae3a33f603b4b810e2beea6db7c0, type: 2}
   resonateExplanation: {fileID: 11400000, guid: c263fe95eae201a439296c687b51e21c, type: 2}
   crystalExplanation: {fileID: 11400000, guid: 9f914eeee4cd7d14bb9c4bc27eaf8e52, type: 2}
+  cutOutHandler: {fileID: 1227107690}
+  screenCutoutScrim: {fileID: 1227107691}
+  materialTintFadeHandler: {fileID: 1227107692}
+  cardIconRendering: {fileID: 1916777579}
   afterWave3Dialogue:
   - bodyText: 'Wow, those beetles just don''t let up. '
     speakerName: Jackie
@@ -5036,7 +5176,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 27.107353
+      value: 27.107243
       objectReference: {fileID: 0}
     - target: {fileID: 6635998426718021455, guid: b9c5e4b3c9f7e024f8fe9012e7a2e437, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6181,6 +6321,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 617082415006753302, guid: fa2244f9c89fb2c42ae45cb8f73816be, type: 3}
   m_PrefabInstance: {fileID: 1808829897}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1808829899 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5232295061604255744, guid: fa2244f9c89fb2c42ae45cb8f73816be, type: 3}
+  m_PrefabInstance: {fileID: 1808829897}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 183874078d8194649a324016f66d1a65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1810605316
 GameObject:
   m_ObjectHideFlags: 0
@@ -6448,6 +6599,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1513545304}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1916777579 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4312593339194922992, guid: fa2244f9c89fb2c42ae45cb8f73816be, type: 3}
+  m_PrefabInstance: {fileID: 1808829897}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1919900977
 GameObject:
   m_ObjectHideFlags: 0
@@ -6562,20 +6718,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 1371300107}
-  <Id>k__BackingField:
-    Part1: 3113433922
-    Part2: 1311857164
-    Part3: 960895360
-    Part4: 3376284754
   description: 
   IsEvolved: 0
   icon: {fileID: 21300000, guid: 57baba5992d9e224988e93fcacf9f7eb, type: 3}
   cardBack: {fileID: 21300000, guid: b9d9ffafd54db4d16be447f80c7ef42d, type: 3}
   evolvedCardBack: {fileID: 0}
   cardUI: {fileID: 1360995282}
-  data:
-    <ActionClassName>k__BackingField: 
-    <CurrentProgress>k__BackingField: 0
 --- !u!4 &1956243773 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 617082415006753302, guid: fa2244f9c89fb2c42ae45cb8f73816be, type: 3}

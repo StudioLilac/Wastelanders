@@ -70,6 +70,38 @@ public enum SoundID
     VN_video_call_pickup = 518,
     VN_video_call_hangup = 519,
     VN_radio_static = 520,
+
+    // Epilogue 3 - convoy / tire burst
+    VN_tire_burst = 521,
+    VN_drill = 523,
+    VN_door_shut = 524,
+    VN_engine_rev = 525,
+    VN_jack_raising = 528,
+
+    // Epilogue 7 - cave creature fight
+    VN_ep7_jackie_hit_wall = 530,
+    VN_ep7_dragon_hit_wall = 531,
+    VN_ep7_dragon_hiss = 532,
+    VN_ep7_dragon_death = 533,
+    VN_ep7_tracker_slow = 534,
+    VN_ep7_tracker_loop = 535,   // ambient loop
+    VN_ep7_water_drips = 536,    // ambient loop
+    VN_ep7_gravel_drag = 537,
+    VN_ep7_pant_rip = 538,
+    VN_ep7_creature_growl = 539,
+
+    // Epilogue 8 
+    VN_system_beep = 550,
+    // Ep 9
+    VN_whistle_vocal = 560,
+    // Ep 10
+    VN_Smoke_Release = 570,
+    VN_Talk_Cheer = 571,
+    VN_Analogue_Horror = 572,
+    VN_BGM_suspense_drone = 580,
+    // Ep 11
+    VN_Message_Tone = 590,
+    VN_Camera_Shutter = 591,
 }
 
 public static class SoundIDExtensions

@@ -3,6 +3,7 @@ using System.Collections;
 using LevelSelectInformation;
 using UnityEngine;
 using static BattleIntroEnum;
+using static SceneData;
 
 namespace Director
 {
@@ -12,6 +13,7 @@ namespace Director
 
         [SerializeField] private DialogueWrapper gameOverDialogue; // sucks...
 
+#nullable enable
         private void Start()
         {
             if (CombatManager.Instance.GameState != GameState.GAME_START) return;
@@ -22,7 +24,6 @@ namespace Director
         {
             CombatManager.PlayersWinEvent -= PlayersWin;
             CombatManager.EnemiesWinEvent -= EnemiesWin;
-            new ClearBounty().Invoke();
         }
 
         private IEnumerator OnStart()
@@ -38,11 +39,16 @@ namespace Director
             new BattleIntroEvent(Get<ClashIntro>()).Invoke();
             yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
             AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
-            BountyManager.Instance.NotifyWin();
-            GameStateManager.Instance.UpdateLevelProgress(StageInformation.Get<StageInformation.IvesFinale>());
+            bool didUpdate = BountyManager.Instance.NotifyWin();
             yield return new WaitForSeconds(1f);
             yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
-            GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.LevelSelect>().SceneName);
+            EpilogueSceneData? data = EpilogueSceneData.LatestCompleted(BountyManager.Instance.GetBountyProgress());
+            SceneData sceneToLoad = didUpdate switch
+            {
+                var _ when didUpdate && data?.SceneData is not null => data.SceneData,
+                _ => Get<ContractSelect>(),
+            };
+            GameStateManager.Instance.LoadScene(sceneToLoad.SceneName);
         }
 
         private void PlayersWin()

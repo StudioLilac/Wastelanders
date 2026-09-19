@@ -16,36 +16,29 @@ MonoBehaviour:
   - bodyText: 'Each Action has two key stats: <i>Power</i> and <i>Speed</i>.'
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: ef17277e1ebf2f64abf4d8a5117608a3, type: 3}
-    sfx: 
     broadcastAnEvent: 0
   - bodyText: <i>Power</i> shows how much damage the Action can deal.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 3fea2e94140c08246a0e502ee92d3761, type: 3}
-    sfx: 
     broadcastAnEvent: 0
   - bodyText: "It\u2019s a range that damage will be randomly rolled within."
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 3fea2e94140c08246a0e502ee92d3761, type: 3}
-    sfx: 
     broadcastAnEvent: 0
   - bodyText: And <i>Speed</i> decides when the Action takes place during combat.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: b1411cc1e1231574797f223a58264863, type: 3}
-    sfx: 
     broadcastAnEvent: 0
   - bodyText: Higher <i>Speed</i> means the Action resolves earlier in the fight.
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: b1411cc1e1231574797f223a58264863, type: 3}
-    sfx: 
     broadcastAnEvent: 0
-  - bodyText: '<i>Check the Dialogue History in the Pause Menu [Esc.] if you feel
-      like you missed something!</i> '
+  - bodyText: '<i>Check the Dialogue History in the top left if you feel like you
+      missed something!</i> '
     speakerName: Tutorial
-    displayingImage: {fileID: 21300000, guid: 751635a2cbd6d43cb92d4ab186c2a350, type: 3}
-    sfx: 
+    displayingImage: {fileID: 21300000, guid: c0878658c7e61224982c993218663a22, type: 3}
     broadcastAnEvent: 0
   - bodyText: "Let\u2019s pick a card and target the enemy!"
     speakerName: Ives
     displayingImage: {fileID: 21300000, guid: 6f8ab552348e73941b245fe9ca454974, type: 3}
-    sfx: 
     broadcastAnEvent: 1

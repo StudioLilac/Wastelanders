@@ -1,6 +1,7 @@
+using DialogueScripts;
+using LevelSelectInformation;
 using System;
 using System.Collections;
-using DialogueScripts;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,12 +10,12 @@ namespace Dialogue.Epilogue
     public class Epilogue_4 : MonoBehaviour
     {
         [SerializeField] private DialogueEntryInUnityEditor[] postDialogue0;
-        [SerializeField] private DialogueEntryInUnityEditor[] dialogue1;
+        [SerializeField] private DialogueEntryInUnityEditor[] dialogue1; // Authored in Code. 
         [SerializeField] private DialogueEntryInUnityEditor[] dialogue2;
         [SerializeField] private DialogueEntryInUnityEditor[] dialogue3;
         [SerializeField] private DialogueEntryWrapper wasteInfectionSymptoms;
         [SerializeField] private DialogueEntryInUnityEditor[] postDialogue3;
-        [SerializeField] private DialogueEntryInUnityEditor[] dialogue4;
+        [SerializeField] private DialogueEntryInUnityEditor[] dialogue4; // Authored in Code. 
 
         [SerializeField] private TypewriterHelper deception;
         [SerializeField] private TypewriterHelper worthless;
@@ -43,7 +44,7 @@ namespace Dialogue.Epilogue
             yield return scrimAlpha.FadeInLightScreen(2f);
             yield return new WaitForSeconds(1f);
 
-            yield return DialogueBoxV2.Instance.Play(dialogue1.Into());
+            yield return DialogueBoxV2.Instance.Play(Epilogue4.AilinIvesDiscussion.PartA);
             yield return new WaitForSeconds(1f);
             AudioManager.Instance.FadeOutCurrentBackgroundTrack(1f);
             yield return scrimAlpha.FadeInDarkScreen(1f);
@@ -73,33 +74,47 @@ namespace Dialogue.Epilogue
 
 
             yield return DialogueBoxV2.Instance.Play(postDialogue3.Into());
+            yield return DialogueBoxV2.Instance.Play(Epilogue4.IvesCamDiscussion.PartA);
+
             AudioManager.Instance.FadeOutCurrentBackgroundTrack(1f);
             yield return new WaitForSeconds(2f);
             AudioManager.Instance.FadeInBackgroundTrack(2f, labAmbiance, true);
-            yield return DialogueBoxV2.Instance.Play(dialogue4.Into());
-            
-            yield return UIFadeScreenManager.Instance.FadeInDarkScreen(2f);
+            yield return new WaitForSeconds(1f); // [Wait 1 sec]
 
+            yield return DialogueBoxV2.Instance.Play(Epilogue4.IvesCamDiscussion.PartB);
+
+            yield return UIFadeScreenManager.Instance.FadeInDarkScreen(2f); // [Fade to black, 2 secs]
+
+            new BountyInformationEvent(BountyInformation.Get<BountyInformation.PrincessFrogBounty>()).Invoke();
+            GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.ContractSelect>().SceneName);
         }
 
         private Coroutine _panicCoroutine;
         private Coroutine _infiniteBreath;
+        public const string WEAK = "weak";
+        public const string WORTHLESS = "worthless";
+        public const string PATHETIC = "pathetic";
+        public const string RESOLVE = "resolve";
         void IvesInternalTextDisplay(CustomEvent e)
         {
-            if (e.EventName == "deception") deception.Play();
-            else if (e.EventName == "worthless") worthless.Play();
-            else if (e.EventName == "pathetic") pathetic.Play();
+            if (e.EventName == WEAK) deception.Play();
+            else if (e.EventName == WORTHLESS) worthless.Play();
+            else if (e.EventName == PATHETIC) pathetic.Play();
             else if (e.EventName == "panic") _panicCoroutine = StartCoroutine(PanicSequence()); // I'm afraid the infection is permanent line. 
-            else if (e.EventName == "resolve") Resolve(); // I have to be out there for Jackie line. 
+            else if (e.EventName == "unpanic") UnPanic(); // I intend to keep it.
+            else if (e.EventName == RESOLVE) Resolve(); // Ailin says, that makes Ives her friend.
         }
 
+        void UnPanic()
+        {
+            StartCoroutine(vignetteScale.FadeToAlpha(0f, 5f));
+            StartCoroutine(vignetteAlpha.FadeToAlpha(0.5f, 5f));
+        }
 
         void Resolve()
         {
-            StopCoroutine(_panicCoroutine);
-            StopCoroutine(_infiniteBreath);
-            StartCoroutine(vignetteScale.FadeToAlpha(0f, 5f));
-            StartCoroutine(vignetteAlpha.FadeToAlpha(0.5f, 5f));
+            if (_panicCoroutine != null) StopCoroutine(_panicCoroutine);
+            if (_infiniteBreath != null) StopCoroutine(_infiniteBreath);
 
             deception.eraseCharsPerSecond = 30f;
             worthless.eraseCharsPerSecond = 30f;

@@ -23,56 +23,68 @@ MonoBehaviour:
     - rid: 314095765763391622
     - rid: 314095765763391623
     - rid: 314095765763391637
-  - content: <i>*whistles*</i> Looks like our luck has run out. Just like they said,
-      solid rock.
-    speaker: {fileID: 11400000, guid: ba10bd187431a442890fc8138cfaa1e2, type: 2}
+  - content: '<i>The company slows and raises their lights to scan the area.</i> '
+    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events: []
-  - content: Ari... what do you mean?
+  - content: Looks like our luck has run out. Just like they said, solid rock.
+    speaker: {fileID: 11400000, guid: ba10bd187431a442890fc8138cfaa1e2, type: 2}
+    sfxId: 560
+    picture: {fileID: 0}
+    events: []
+  - content: Ari, what do you mean?
     speaker: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 314095765763391624
     - rid: 314095765763391630
-  - content: "I mean\u2026 look at it. Smooth as butter, solid as ice."
+  - content: I mean, look at it. Smooth as butter, solid as ice.
     speaker: {fileID: 11400000, guid: ba10bd187431a442890fc8138cfaa1e2, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 314095765763391628
-  - content: ...Ari. Put your hand down... There's no wall there.
+  - content: ...Ari. Put your hand down. There's no wall there.
     speaker: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 314095765763391629
+    - rid: 8385543117129122093
   - content: Ha... Good joke, boss. It's right there!
     speaker: {fileID: 11400000, guid: ba10bd187431a442890fc8138cfaa1e2, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 314095765763391632
-  - content: "<i>Confusion spreads through the group. Half the scouts are nodding
-      with Ari, staring at a wall that doesn't exist. The other half\u2014stunned.</i>"
+  - content: <i>A murmur spreads through the group. One half gestures, the other
+      meets them with furrowed faces.</i>
     speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 314095765763391634
-  - content: I'll go on ahead for now, just stay behind me.
+  - content: "Look it\u2019s just a bit of a squeeze, there\u2019s really nothing
+      here."
     speaker: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 314095765763391633
-  - content: <i>Jay steps forward, appearing to phase through solid stone.</i>
+  - content: <i>Jay starts into the tunnel entrance, Ari flinches.</i>
     speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
-    - rid: 314095765763391635
+    - rid: 8385543117129122098
+  - content: "<i>Ari reaches out, but then stops himself as Jay makes his way through.
+      Ari\u2019s face contorts as it happens.</i>"
+    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
   - content: See? It's safe! Come on!
     speaker: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
     sfxId: 0
@@ -80,6 +92,13 @@ MonoBehaviour:
     events:
     - rid: 314095765763391636
     - rid: 314095765763391649
+    - rid: 8385543117129122095
+  - content: "What the hell\u2014"
+    speaker: {fileID: 11400000, guid: ba10bd187431a442890fc8138cfaa1e2, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events:
+    - rid: 8385543117129122096
   references:
     version: 2
     RefIds:
@@ -92,7 +111,7 @@ MonoBehaviour:
       data:
         actor: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
         action: 60
-        duration: 1
+        duration: 0
     - rid: 314095765763391623
       type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
       data:
@@ -127,10 +146,6 @@ MonoBehaviour:
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
-    - rid: 314095765763391635
-      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
     - rid: 314095765763391636
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
@@ -139,17 +154,38 @@ MonoBehaviour:
       type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
-        action: 10
+        action: 30
         duration: 1
     - rid: 314095765763391638
       type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
-        action: 40
+        action: 50
         duration: 0
     - rid: 314095765763391649
       type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
         action: 70
+        duration: 1
+    - rid: 8385543117129122093
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
+        action: 10
+        duration: 1
+    - rid: 8385543117129122095
+      type: {class: SpriteChange, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
+        sprite: {fileID: 21300000, guid: 2e33600600abe4eada4d07eed944f473, type: 3}
+    - rid: 8385543117129122096
+      type: {class: AutoAdvanceAfter, ns: DialogueScripts, asm: MainGame}
+      data:
+        Time: 0.5
+    - rid: 8385543117129122098
+      type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
+      data:
+        actor: {fileID: 11400000, guid: e1d6a8a99977249eb89967ed128a714c, type: 2}
+        action: 40
         duration: 1

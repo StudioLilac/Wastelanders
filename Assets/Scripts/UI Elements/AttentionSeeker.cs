@@ -6,19 +6,22 @@ public class AttentionSeeker : MonoBehaviour
 {
     public float cycleSpeed = 1f;
     [SerializeField] private MonoBehaviour attentionObj = null!;
-    
     private Coroutine? attentionFlashRoutine = null;
+    public delegate bool Condition();
 
-    public void ConfigureAttention(bool criteriaMet)
+    public void ConfigureAttention(Condition criteriaMet)
     {
-        if (criteriaMet && attentionFlashRoutine == null)
+        if (criteriaMet() && attentionFlashRoutine == null)
         {
             attentionFlashRoutine = StartCoroutine(FlashAttentionRoutine());
         }
-        else if (!criteriaMet && attentionFlashRoutine != null)
+        else if (!criteriaMet())
         {
-            StopCoroutine(attentionFlashRoutine);
-            attentionFlashRoutine = null;
+            if (attentionFlashRoutine != null)
+            {
+                StopCoroutine(attentionFlashRoutine);
+                attentionFlashRoutine = null;
+            }
             attentionObj.enabled = false;
         }
     }

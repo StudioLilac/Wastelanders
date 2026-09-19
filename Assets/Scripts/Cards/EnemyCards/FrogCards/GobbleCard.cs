@@ -1,5 +1,5 @@
-using Entities;
 using UnityEngine;
+using UtilClass;
 
 namespace Cards.EnemyCards.FrogCards
 {
@@ -18,6 +18,8 @@ namespace Cards.EnemyCards.FrogCards
             Speed = 4;
             CardType = CardType.MeleeAttack;
         }
+        
+        protected override GlossaryNode[] GetChildrenGlossaryNodes() => new[] { Keywords.Crystals };
 
         public override void CardIsUnstaggered()
         {

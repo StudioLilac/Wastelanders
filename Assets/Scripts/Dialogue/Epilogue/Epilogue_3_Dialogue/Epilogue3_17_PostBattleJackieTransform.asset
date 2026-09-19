@@ -19,7 +19,7 @@ MonoBehaviour:
     picture: {fileID: 1407304321, guid: 41f441fe5c6ca8e42b34dc342e9797f0, type: 3}
     events:
     - rid: 6570561780457144498
-  - content: "<i>Don\u2019t worry, Ives. You're gonna be alright. I promise.</i>"
+  - content: "<i>Don\u2019t worry, Ives. I'm here for you.</i>"
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxId: 0
     picture: {fileID: 0}

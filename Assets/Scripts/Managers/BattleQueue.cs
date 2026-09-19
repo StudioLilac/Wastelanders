@@ -6,6 +6,7 @@ using UI_Toolkit.UI_Elements;
 using UnityEngine;
 using static BattleQueue;
 
+public record ClashFormed(bool WasRedirected) : IEvent;
 public record CardInserted(ActionClass ActionClass) : IEvent;
 public record OnQueueChanged(List<ActionWrapper> Items) : IEvent;
 public record DequeueEvent(ActionWrapper Wrapper): IEvent;
@@ -29,6 +30,7 @@ public class BattleQueue : MonoBehaviour
         }
         this.Subscribe<BattleBegin>(BeginDequeue);
         this.Subscribe<BattleQueueIconClick>(DeletePlayerAction);
+        this.Subscribe<TeamWinEvent>(_ => ClearBattleQueue());
     }
 
     public void AddAction(ActionClass action)
@@ -216,9 +218,9 @@ public class BattleQueue : MonoBehaviour
             {
                 foreach (ActionWrapper existingWrapper in array)
                 {
-                    if (existingWrapper.CanClashWithAction(actionCard))
+                    if (existingWrapper.CanClashWithAction(actionCard, allowRedirect: false))
                     {
-                        existingWrapper.SetClashingAction(actionCard);
+                        existingWrapper.SetClashingAction(actionCard, allowRedirect: false);
                         Remove(existingWrapper);
                         return existingWrapper;
                     }
@@ -326,10 +328,11 @@ public class BattleQueue : MonoBehaviour
                         return new PopupType.CustomPopup("Already in a clash!");
                     }
 
-                    wrapper.SetClashingAction(attempt);
+                    wrapper.SetClashingAction(attempt, allowRedirect: true);
                     Remove(wrapper);
                     array.Insert(LocationToInsertWrapper(wrapper), wrapper);
                     new OnQueueChanged(new(array)).Invoke();
+                    new CardInserted(attempt).Invoke();
                     return new PopupType.None();
                 }
             }
@@ -372,31 +375,29 @@ public class BattleQueue : MonoBehaviour
         }
 
         //Returns: whether (@param clashingAction) will clash with this wrapper.
-        public bool CanClashWithAction(ActionClass clashingAction)
+        public bool CanClashWithAction(ActionClass clashingAction, bool allowRedirect = false)
         {
-            if (IsClashing()) return false;
+            if (IsClashing() || !clashingAction.Clashable) return false;
+            
+            ActionClass existingAction = GetTheOnlyExistingAction();
+            
+            if (existingAction.IsPlayedByPlayer() == clashingAction.IsPlayedByPlayer() || !existingAction.Clashable) 
+                return false;
 
-            if ((PlayerAction && !PlayerAction.Clashable) || (EnemyAction && !EnemyAction.Clashable)) return false;
+            ActionClass playerAct = existingAction.IsPlayedByPlayer() ? existingAction : clashingAction;
+            ActionClass enemyAct = existingAction.IsPlayedByPlayer() ? clashingAction : existingAction;
 
-            // If the PlayerAction's speed is greater than the enemy Action's speed it can redirect the enemy's attack and clash. Enemies cannot redirect player attacks. 
-            bool playerWrapperClashesWithEnemyAction = PlayerAction != null && (PlayerAction.Origin == clashingAction.Target || PlayerAction.Speed >= clashingAction.Speed) && PlayerAction.Target == clashingAction.Origin && PlayerAction.Clashable && clashingAction.Clashable;
-            bool enemyWrapperClashesWithPlayerAction = EnemyAction != null && EnemyAction.Origin == clashingAction.Target && (EnemyAction.Target == clashingAction.Origin || clashingAction.Speed >= EnemyAction.Speed) && EnemyAction.Clashable && clashingAction.Clashable;
+            if (playerAct.Target != enemyAct.Origin) 
+                return false;
 
-            if (clashingAction.IsPlayedByPlayer())
-            {
-                return enemyWrapperClashesWithPlayerAction;
-            } else
-            {
-                return playerWrapperClashesWithEnemyAction;
-            }
+            return enemyAct.Target == playerAct.Origin || (allowRedirect && playerAct.Speed >= enemyAct.Speed);
         }
 
-
-    // Modifies: this to become a clashing wrapper.
-    // Requires: That (@param clashingAction) can clash with an Action within this wrapper (Call ClashesWithAction first)
-    public void SetClashingAction(ActionClass clashingAction)
+        // Modifies: this to become a clashing wrapper.
+        // Requires: That (@param clashingAction) can clash with an Action within this wrapper (Call ClashesWithAction first)
+        public void SetClashingAction(ActionClass clashingAction, bool allowRedirect = false)
         {
-            if (!CanClashWithAction(clashingAction))
+            if (!CanClashWithAction(clashingAction, allowRedirect))
             {
                 Debug.LogWarning("You called SetClashingAction with a wrapper that didnt actually clash. " +
                     "Here is my info: Action played by player " + PlayerAction?.GetName() + "Action played by enemy"+ EnemyAction?.GetName());
@@ -412,6 +413,7 @@ public class BattleQueue : MonoBehaviour
             }
             OriginalEnemysTarget = EnemyAction!.Target;
             EnemyAction.Target = PlayerAction!.Origin;
+            new ClashFormed(WasRedirected: EnemyAction.Target != OriginalEnemysTarget).Invoke();
         }
 
         // Helper to return the only action that exists in this non clashing wrapper

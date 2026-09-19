@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Xml.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UtilClass;
 
 public class Whirl : AxeCards
 {
@@ -24,6 +25,8 @@ public class Whirl : AxeCards
         CardType = CardType.MeleeAttack;
         base.Initialize();
     }
+    
+    protected override GlossaryNode[] GetChildrenGlossaryNodes() => new[] { StatusEffects.Wound, Keywords.OnHit };
 
     // for the "deals damage" portion how will you know? there is no reference to the enemy nor the outcome of a clash. 
     public override void CardIsUnstaggered()

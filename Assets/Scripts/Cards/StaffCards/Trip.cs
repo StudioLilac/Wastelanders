@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Linq;
 using UnityEngine;
+using UtilClass;
 
 public class Trip : StaffCards
 {
@@ -18,6 +19,8 @@ public class Trip : StaffCards
         CardType = CardType.MeleeAttack;
         base.Initialize();
     }
+    
+    protected override GlossaryNode[] GetChildrenGlossaryNodes() => new[] { StatusEffects.Flow };
 
     public override void ApplyEffect()
     {

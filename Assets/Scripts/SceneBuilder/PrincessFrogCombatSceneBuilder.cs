@@ -23,6 +23,7 @@ namespace SceneBuilder
         [SerializeField] private SlimeStack slimePrefab;
 
         [SerializeField] private GameObject entityContainer;
+        public bool instakill;
 
 #nullable enable
         private IBounties? bounty = null;
@@ -162,6 +163,10 @@ namespace SceneBuilder
             if (bounty?.ContractSet.Contains(PlayerContracts.DECREASED_HAND_SIZE) == true)
             {
                 playerClass.maxHandSize = 3;
+            } else if (instakill)
+            {
+                playerClass.AddStacks(Accuracy.buffName, 900);
+                playerClass.AddStacks(Resonate.buffName, 900);
             }
         }
 

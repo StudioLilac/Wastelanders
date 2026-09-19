@@ -16,14 +16,14 @@ public class MainMenu : MonoBehaviour {
     [SerializeField] private Button startButton;
     [SerializeField] private Button quitButton;
     [SerializeField] private GameObject bountyButton;
+    [SerializeField] private GameObject storyBoardButton;
     [SerializeField] private MainMenuConfigHolder configHolder;
     [SerializeField] private Image background;
     [SerializeField] private RectTransform backgroundTransform;
     [SerializeField] private UIFadeHandler backgroundTransition;
     [SerializeField] private Image backgroundTransitionImage;
     [SerializeField] private RectTransform backgroundTransitionTransform;
-    [SerializeField] private AttentionSeeker startAttention;
-
+    [SerializeField] private AttentionSeeker attentionSeeker;
 
 #nullable enable
     public void QuitGame()
@@ -58,12 +58,21 @@ public class MainMenu : MonoBehaviour {
         quitButton.gameObject.SetActive(false);
 #endif
         bountyButton.SetActive(Get<PrincessFrogBounty>().UnlockCriteriaMet());
+        storyBoardButton.SetActive(BountyManager.Instance.IsBountyCompleted(PrincessFrogBounties.DECREASED_HAND_SIZE));
         //bountyButton.SetActive(false); // Locks this button until part 2 is ready.
         versionText.text = $"v{Application.version}";
+        ConfigureAttention();
         UpdateStatusUI();
         ApplyBGConfig();
         StartCoroutine(TransitionBackground());
-        startAttention.ConfigureAttention(StageInformation.Get<StageInformation.PrincessFrogFight>().UnlockCriteriaMet());
+    }
+
+    void ConfigureAttention()
+    {
+        attentionSeeker.ConfigureAttention(() =>
+            StageInformation.Get<StageInformation.PrincessFrogFight>().UnlockCriteriaMet()
+            && !StageInformation.Get<StageInformation.Season2>().UnlockCriteriaMet()
+        );
     }
 
     private IEnumerator TransitionBackground()

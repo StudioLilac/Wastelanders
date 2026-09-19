@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace SceneBuilder
 {
+    // Important scene builder to automatically handle spawnables that players can use. 
     public class DefaultSceneBuilder : SceneBuilder
     {
         private Transform _playerPosition;

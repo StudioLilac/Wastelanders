@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -63,8 +62,12 @@ public abstract class EnemyClass : EntityClass
     // Use this if you would like to directly attack using deck
     public void AttackWith(GameObject attack, EntityClass? target)
     {
+        AttackWith(attack.GetComponent<ActionClass>(), target);
+    }
+
+    public void AttackWith(ActionClass action, EntityClass? target)
+    {
         if (target == null) return;
-        var action = attack.GetComponent<ActionClass>();
         action.Target = target;
         action.Origin = this;
         combatInfo.AddCombatSprite(action);
@@ -88,11 +91,7 @@ public abstract class EnemyClass : EntityClass
 
     protected virtual void Reshuffle()
     {
-        List<GameObject> temp = new List<GameObject>();
-        for (int i = 0; i < deck.Count; i++)
-        {
-            temp.Add(deck[i]);
-        }
+        List<GameObject> temp = new(deck);
 
         while (temp.Count > 0)
         {

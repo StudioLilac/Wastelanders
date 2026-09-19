@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Linq;
 using UnityEngine;
+using UtilClass;
 
 // REQUIRES TESTING TODO (Haven't done this yet owing to the dearth of STAFF user presumably Ives.
 public class Flurry : StaffCards
@@ -23,6 +24,8 @@ public class Flurry : StaffCards
 
         base.Initialize();
     }
+    
+    protected override GlossaryNode[] GetChildrenGlossaryNodes() => new[] { StatusEffects.Flow, Keywords.OnHit };
 
     public override void CardIsUnstaggered()
     {
