@@ -62,7 +62,7 @@ public class PrincessFrogBounties : IBounties
         challengeName: "Exhausting Mission",
         subtext: "Challenge for Level 5. Extras",
         flavourText: "Fight the Princess Beetle with a restricting hand size.",
-        rewards: "TBD",
+        rewards: "Storyboard: The Rose and the Gardener.",
         bountyAssetDelegate: (database) => database.PrincessFrogAssets.ExhaustedChallengeAsset
         );
 

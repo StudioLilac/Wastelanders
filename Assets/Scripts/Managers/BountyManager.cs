@@ -49,6 +49,7 @@ public class BountyManager : PersistentSingleton<BountyManager>
         return ContractStateData?.IsBountyCompleted(bounty) ?? false;
     }
 
+    // Returns true if a challenge was completed.
     public bool NotifyWin()
     {
         if (ActiveBounty != null)

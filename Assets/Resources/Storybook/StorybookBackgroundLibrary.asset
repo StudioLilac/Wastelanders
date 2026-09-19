@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40151ff2c15c3a846ab0ab051e311cf0, type: 3}
+  m_Name: StorybookBackgroundLibrary
+  m_EditorClassIdentifier: 
+  backgrounds:
+  - key: bloomed_rose
+    clip: {fileID: 7400000, guid: ef96f069e6436c146ae5d0fbe4236fe9, type: 2}
+  - key: closed_bud_no_thorns
+    clip: {fileID: 7400000, guid: e2b991df7b2b8924293c3a5089ee2f83, type: 2}
+  - key: closed_bud_w_thorns
+    clip: {fileID: 7400000, guid: b688dd943202d784aaedc36bc3b91d9c, type: 2}
+  - key: dirt_and_trowel
+    clip: {fileID: 7400000, guid: 72395367589de4e4e8871cabf3ab452c, type: 2}
+  - key: going_up
+    clip: {fileID: 7400000, guid: a48953778a20f4b40b6dce094a607497, type: 2}
+  - key: rose_and_moon
+    clip: {fileID: 7400000, guid: dc2d5ba10df6fd74191a56d18814ea2a, type: 2}
+  - key: rose_pov
+    clip: {fileID: 7400000, guid: 578a90dbe12335b478eaf5041381af95, type: 2}
+  - key: silhouette
+    clip: {fileID: 7400000, guid: c61fbfb9283234143ad8955951df6757, type: 2}
+  - key: soldier_gardener_reveal
+    clip: {fileID: 7400000, guid: 4f6fd8657e9570543a634009623bebc0, type: 2}
+  - key: thorn_layers_1_layer
+    clip: {fileID: 7400000, guid: 74f3ed88d291bb844a8a1c762b855ad2, type: 2}
+  - key: thorn_layers_2_layers
+    clip: {fileID: 7400000, guid: f3efc81ec35b8b4448bf0025816851f4, type: 2}
+  - key: thorn_layers_3_layers
+    clip: {fileID: 7400000, guid: 3f2ba8622ac307d49ba5ee36fe79ac70, type: 2}
+  - key: thorn_layers_fullscreen
+    clip: {fileID: 7400000, guid: 641acaab02096dc4c9c1127735b3e20f, type: 2}
+  - key: valley
+    clip: {fileID: 7400000, guid: 433a2e80f1212664e8bea3e9441fe700, type: 2}
+  - key: watering_can
+    clip: {fileID: 7400000, guid: 6d34f17bc9a9b7b48a9f3262bd84badf, type: 2}

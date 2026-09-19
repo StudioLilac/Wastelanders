@@ -226,7 +226,7 @@ namespace DialogueScripts
         }
 
         private static bool IsSkipping => Input.GetKey(KeyCode.RightArrow) || PauseMenuV2.IsHoldingFastForward;
-        private static bool HasInput() {
+        public static bool HasInput() {
             if (PauseMenuV2.IsPaused) return false;
             if (IsSkipping) return true;
             return !PauseMenuV2.IsOverBlockingElement && (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Space));
