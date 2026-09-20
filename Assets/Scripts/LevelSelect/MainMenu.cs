@@ -58,7 +58,7 @@ public class MainMenu : MonoBehaviour {
         quitButton.gameObject.SetActive(false);
 #endif
         bountyButton.SetActive(Get<PrincessFrogBounty>().UnlockCriteriaMet());
-        storyBoardButton.SetActive(BountyManager.Instance.IsBountyCompleted(PrincessFrogBounties.DECREASED_HAND_SIZE));
+        storyBoardButton.SetActive(BountyManager.Instance.IsBountyCompleted(PrincessFrogBounties.SOLO_JACKIE));
         //bountyButton.SetActive(false); // Locks this button until part 2 is ready.
         versionText.text = $"v{Application.version}";
         ConfigureAttention();

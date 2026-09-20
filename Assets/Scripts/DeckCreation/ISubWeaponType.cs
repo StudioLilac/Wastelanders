@@ -17,7 +17,7 @@ public class PlayableEnemyWeapon : ISubWeaponType
     public static readonly PlayableEnemyWeapon beetleWeapons = new PlayableEnemyWeapon(
         name: "Beetle Cards",
         getSubWeaponCards: (db => db.GetCardsByType(CardDatabase.WeaponType.ENEMY).FindAll(card => card is IPlayableBeetleCard).ToList()),
-        isUnlocked: () => BountyManager.Instance.IsBountyCompleted(PrincessFrogBounties.SOLO_JACKIE)
+        isUnlocked: () => BountyManager.Instance.IsBountyCompleted(PrincessFrogBounties.DECREASED_HAND_SIZE)
     );
 
     public static readonly PlayableEnemyWeapon frogWeapons = new PlayableEnemyWeapon(

@@ -53,8 +53,8 @@ public class PrincessFrogBounties : IBounties
         challengeName: "Solo Mission",
         subtext: "Challenge for Level 5. Extras",
         flavourText: "Take on the Princess Beetle alone.",
-        rewards: "Beetle Cards",
-        bountyAssetDelegate: (database) => database.PrincessFrogAssets.SoloChallengeAsset
+        rewards: "Storyboard: The Rose and the Gardener.",
+        bountyAssetDelegate: (database) => database.PrincessFrogAssets.ExhaustedChallengeAsset
         );
 
     public static readonly PrincessFrogBounties DECREASED_HAND_SIZE = new PrincessFrogBounties(
@@ -62,8 +62,8 @@ public class PrincessFrogBounties : IBounties
         challengeName: "Exhausting Mission",
         subtext: "Challenge for Level 5. Extras",
         flavourText: "Fight the Princess Beetle with a restricting hand size.",
-        rewards: "Storyboard: The Rose and the Gardener.",
-        bountyAssetDelegate: (database) => database.PrincessFrogAssets.ExhaustedChallengeAsset
+        rewards: "Beetle Cards",
+        bountyAssetDelegate: (database) => database.PrincessFrogAssets.SoloChallengeAsset
         );
 
     // Update this every time you add a new bounty please, I don't want to implement reflection.
@@ -71,11 +71,11 @@ public class PrincessFrogBounties : IBounties
     {
         get
         {
+            yield return QUEEN_CHALLENGE;
+            yield return PRINCESS_FROG_CHALLENGE;
+            yield return DECREASED_HAND_SIZE;
             yield return FROG_CHALLENGE;
             yield return SLIME_CHALLENGE;
-            yield return DECREASED_HAND_SIZE;
-            yield return PRINCESS_FROG_CHALLENGE;
-            yield return QUEEN_CHALLENGE;
             yield return SOLO_JACKIE;
         }
     }
