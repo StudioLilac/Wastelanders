@@ -55,6 +55,7 @@ jobs:
           targetPlatform: ${{ matrix.targetPlatform }}
           versioning: Tag
           buildName: ${{ env.BUILD_NAME }}
+          customParameters: -job-worker-count 2 -desiredWorkerCount 1
       - name: Fix root-owned file permissions from Unity build
         if: always()
         run: |
