@@ -139,7 +139,6 @@ public class TutorialIntroduction : DialogueClasses
             trainingDummies.Add(Instantiate(trainingDummyPrefab, dummy1StartingPos)); //Ives summons Dummy
         } else
         {
-            GameStateManager.Instance.JumpToCombat = false;
             //Set up the scene for a combat Jump in.
             ives.SetReturnPosition(ivesDefaultTransform.position);
             StartCoroutine(CombatManager.Instance.FadeInLightScreen(2f));

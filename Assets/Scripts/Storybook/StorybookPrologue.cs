@@ -18,8 +18,7 @@ namespace Storybook
             yield return DialogueBoxV2.Instance.Play(StorybookPrologue_Dialogue.Flashback);
 
             yield return StartCoroutine(scrim.FadeInDarkScreen(1.5f));
-            GameStateManager.Instance.StorybookEntryNode = StorybookSceneEnum.Storybook1;
-            GameStateManager.Instance.LoadScene("StorybookScene");
+            GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.StorybookScene>().SceneName, payload: new StoryBookEntry(StorybookSceneEnum.Storybook1));
         }
     }
 

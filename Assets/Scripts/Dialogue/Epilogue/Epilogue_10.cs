@@ -245,7 +245,6 @@ namespace Dialogue.Epilogue
                 shaderBackground.SetActive(false);
                 scrim.SetLightScreen();
                 purpleFlash.color = TRANSPARENT_PURPLE;
-                GameStateManager.Instance.JumpToCombat = false;
                 bossfightTrackEmitter.Play();
                 cutscene.JumpToCombat();
                 yield return new WaitForSeconds(1.5f);

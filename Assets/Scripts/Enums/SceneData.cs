@@ -1,9 +1,10 @@
+using Context;
 using LevelSelectInformation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Context;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static SceneDataHelpers;
 
 #nullable enable
@@ -384,6 +385,7 @@ public abstract class SceneData : Enum<SceneData>
         }
     }
 
+    public static SceneData CurrentScene() => SceneData.FromSceneName(SceneManager.GetActiveScene().name);
     public static SceneData FromSceneName(string sceneName)
     {
         if (!_sceneLookup.TryGetValue(sceneName, out var sceneData) || sceneData == null)

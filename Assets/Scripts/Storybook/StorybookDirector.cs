@@ -45,9 +45,7 @@ namespace Storybook
         protected virtual void Start()
         {
             uiFadeHandler.SetLightScreen();
-            StorybookSceneEnum requestedEntryNode = GameStateManager.Instance.StorybookEntryNode;
-            GameStateManager.Instance.StorybookEntryNode = StorybookSceneEnum.None;
-
+            StorybookSceneEnum requestedEntryNode = GameStateManager.Instance.Payload<StoryBookEntry>()?.StorybookEntryNode ?? StorybookSceneEnum.None;
             string nodeName = requestedEntryNode == StorybookSceneEnum.None
                 ? EntryNode
                 : requestedEntryNode.ToString();

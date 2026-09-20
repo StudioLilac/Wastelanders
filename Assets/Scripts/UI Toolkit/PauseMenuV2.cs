@@ -303,8 +303,8 @@ namespace UI_Toolkit
             {
                 if (IsCombatScene())
                 {
-                    GameStateManager.Instance.JumpToCombat = true;
-                    OnRstClicked();
+                    DoStart();
+                    GameStateManager.Instance.Restart(new CombatPayload(SceneData.CurrentScene(), JumpToCombat: true));
                 }
             }
 

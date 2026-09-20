@@ -291,7 +291,6 @@ public class FrogSlimeFightDialogue : DialogueClasses
             marshBG.gameObject.SetActive(false);
             yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(1.0f));
             Destroy(firstTutorialSlime.gameObject);
-            GameStateManager.Instance.JumpToCombat = false;
         }
         
         closeTrees.ForEach(tree => StartCoroutine(tree.FadeInLightScreen(0.8f)));

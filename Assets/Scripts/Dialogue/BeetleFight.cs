@@ -378,7 +378,6 @@ public class BeetleFight : DialogueClasses
         }
         else // setup scene
         {
-            GameStateManager.Instance.JumpToCombat = false;
             RemoveEnemyFromScene(frog);
             RemoveEnemyFromScene(frogThatRunsAway);
             RemoveEnemyFromScene(ambushBeetle);

@@ -408,7 +408,6 @@ public class Epilogue_3 : MonoBehaviour
             draggedCrystal.transform.SetParent(crystalParent, true);
             draggedCrystal.transform.position = toDragCrystal.position;
             princessFrog.AddStacks(Resonate.buffName, 6);
-            GameStateManager.Instance.JumpToCombat = false;
             StartCoroutine(black.FadeInLightScreen(3f));
             yield return new WaitForSeconds(0.1f);
         }
@@ -649,10 +648,10 @@ public class Epilogue_3 : MonoBehaviour
         VerticalLayoutChange.MoveBoxV2ToBottom();
     }
 
-    public Sprite IvesPortrait = null;
-    public Sprite GlossaryPortrait = null;
-    public Sprite BurpPortrait = null;
-    public Sprite CrossHair = null;
+    public Sprite IvesPortrait = null!;
+    public Sprite GlossaryPortrait = null!;
+    public Sprite BurpPortrait = null!;
+    public Sprite CrossHair = null!;
     private DialogueAsCode TakeStock => new DialogueAsCode()
                                         .Line(DialogueCharacter.Ives, "Let's take stock first to see what this Frog can do.", picture: IvesPortrait)
                                         .Line(DialogueCharacter.Tutorial, "[Hover] over the Action Icons that the Frog is declaring.", picture: BurpPortrait);

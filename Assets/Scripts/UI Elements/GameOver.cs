@@ -144,8 +144,7 @@ public class GameOver : MonoBehaviour
     private IEnumerator OnRestartClick()
     {
         yield return StartCoroutine(FadeCoroutine(false, 0.7f));
-        GameStateManager.Instance.JumpToCombat = shouldJumpToCombatWhenRestart;
-        GameStateManager.Instance.Restart();
+        GameStateManager.Instance.Restart(new CombatPayload(SceneData.CurrentScene(), JumpToCombat: true));
     }
 
     private IEnumerator OnLevelSelectClick()
