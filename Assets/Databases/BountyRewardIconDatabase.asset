@@ -25,9 +25,9 @@ MonoBehaviour:
     FrogChallengeAsset:
       Sprite: {fileID: 21300000, guid: 65cbe66e8e31c2e4d81b455d4c8f868f, type: 3}
       Background: {fileID: 21300000, guid: 3828ccb2a0701854c960e47645c67db0, type: 3}
-    SoloChallengeAsset:
+    HandSizeDecreaseChallengeAsset:
       Sprite: {fileID: 21300000, guid: 8b0076ca4c0ea1e4f905a59c580bb44a, type: 3}
       Background: {fileID: 21300000, guid: 3828ccb2a0701854c960e47645c67db0, type: 3}
-    ExhaustedChallengeAsset:
+    SoloChallengeAsset:
       Sprite: {fileID: 21300000, guid: 3f2a5be9c498ec3449d8ad93defff34a, type: 3}
       Background: {fileID: 21300000, guid: 3828ccb2a0701854c960e47645c67db0, type: 3}

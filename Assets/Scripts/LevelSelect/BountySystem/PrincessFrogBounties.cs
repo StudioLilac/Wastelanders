@@ -54,7 +54,7 @@ public class PrincessFrogBounties : IBounties
         subtext: "Challenge for Level 5. Extras",
         flavourText: "Take on the Princess Beetle alone.",
         rewards: "Storyboard: The Rose and the Gardener.",
-        bountyAssetDelegate: (database) => database.PrincessFrogAssets.ExhaustedChallengeAsset
+        bountyAssetDelegate: (database) => database.PrincessFrogAssets.SoloChallengeAsset
         );
 
     public static readonly PrincessFrogBounties DECREASED_HAND_SIZE = new PrincessFrogBounties(
@@ -63,7 +63,7 @@ public class PrincessFrogBounties : IBounties
         subtext: "Challenge for Level 5. Extras",
         flavourText: "Fight the Princess Beetle with a restricting hand size.",
         rewards: "Beetle Cards",
-        bountyAssetDelegate: (database) => database.PrincessFrogAssets.SoloChallengeAsset
+        bountyAssetDelegate: (database) => database.PrincessFrogAssets.HandSizeDecreaseChallengeAsset 
         );
 
     // Update this every time you add a new bounty please, I don't want to implement reflection.
@@ -105,6 +105,6 @@ public class PrincessFrogAssets
     public BountyAssets QueenChallengeAsset;
     public BountyAssets SlimeChallengeAsset;
     public BountyAssets FrogChallengeAsset;
+    public BountyAssets HandSizeDecreaseChallengeAsset;
     public BountyAssets SoloChallengeAsset;
-    public BountyAssets ExhaustedChallengeAsset;
 }
