@@ -22,7 +22,6 @@ public class GameOver : MonoBehaviour
     [SerializeField] Canvas fadeCanvas;
     [SerializeField] Canvas textCanvas;
     [SerializeField] ButtonFadable restartButton;
-    [SerializeField] bool shouldJumpToCombatWhenRestart = true;
     [SerializeField] Button levelSelectButton;
     [SerializeField] Button deckSelectButton;
     [SerializeField] TextMeshProUGUI gameOverText;
