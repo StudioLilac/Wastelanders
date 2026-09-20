@@ -187,6 +187,7 @@ public class Epilogue_3 : MonoBehaviour
 
     private IEnumerator StartScene()
     {
+        yield return null;
         Setup();
         new SetGameState(GameState.OUT_OF_COMBAT).Invoke();
         black.SetDarkScreen();
