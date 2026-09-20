@@ -30,12 +30,12 @@ namespace Cards.EnemyCards.FrogCards
 
         public override void OnQueue()
         {
-            Origin.ReduceStacks(Resonate.buffName, BLESS_COST);
+            if (!NoCost) Origin.ReduceStacks(Resonate.buffName, BLESS_COST);
         }
 
         public override void OnRetrieveFromQueue()
         {
-            Origin.AddStacks(Resonate.buffName, BLESS_COST);
+            if (!NoCost) Origin.AddStacks(Resonate.buffName, BLESS_COST);
         }
 
         public override bool IsPlayableByPlayer(out PopupType popupType)

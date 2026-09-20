@@ -30,12 +30,12 @@ public class Hatchery : ActionClass, IPlayableQueenCard
 
     public override void OnQueue()
     {
-        Origin.ReduceStacks(Resonate.buffName, HATCHERY_COST);
+        if (!NoCost) Origin.ReduceStacks(Resonate.buffName, HATCHERY_COST);
     }
 
     public override void OnRetrieveFromQueue()
     {
-        Origin.AddStacks(Resonate.buffName, HATCHERY_COST);
+        if (!NoCost) Origin.AddStacks(Resonate.buffName, HATCHERY_COST);
     }
 
     public override bool IsPlayableByPlayer(out PopupType popupType)

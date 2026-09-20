@@ -11,8 +11,8 @@ namespace Cards.EnemyCards.FrogCards
             base.Initialize();
 
             myName = "Burp";
-            description = NoCost ? "On monster hit, heal monster (rolled power + resonance stacks)." : 
-                $"Spend {BURP_COST} Resonance to play. On monster hit, heal monster (rolled power + resonance stacks) and refund resonance spent.";
+            description = NoCost ? "On monster ally hit, heal ally (rolled power + resonance stacks)." : 
+                $"Spend {BURP_COST} Resonance to play. On monster ally hit, heal ally (rolled power + resonance stacks) and refund resonance spent.";
 
             CostToAddToDeck = 2;
             lowerBound = upperBound = 1;
@@ -25,12 +25,12 @@ namespace Cards.EnemyCards.FrogCards
 
         public override void OnQueue()
         {
-            Origin.ReduceStacks(Resonate.buffName, BURP_COST);
+            if (!NoCost) Origin.ReduceStacks(Resonate.buffName, BURP_COST);
         }
 
         public override void OnRetrieveFromQueue()
         {
-            Origin.AddStacks(Resonate.buffName, BURP_COST);
+            if (!NoCost) Origin.AddStacks(Resonate.buffName, BURP_COST);
         }
 
         public override bool IsPlayableByPlayer(out PopupType popupType)
@@ -45,7 +45,7 @@ namespace Cards.EnemyCards.FrogCards
 
         protected override void OnProjectileHit()
         {
-            if (Target is EnemyClass and not NeutralEntityInterface)
+            if (Target.Team == Origin.Team)
             {
                 AudioManager.Instance.PlaySFX(SoundID.CB_frog_hit);
 
