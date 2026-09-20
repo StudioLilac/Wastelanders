@@ -11,36 +11,62 @@ namespace Director
     public class SplashScreenDirector : MonoBehaviour
     {
         [SerializeField] private VideoPlayer videoPlayer;
+        private bool sequenceEnded = false;
+
         private void OnDisable()
         {
             videoPlayer.loopPointReached -= OnVideoEnd;
+            videoPlayer.errorReceived -= OnVideoError;
         }
 
         private void Start()
         {
             videoPlayer.loopPointReached += OnVideoEnd;
+            videoPlayer.errorReceived += OnVideoError;
             StartCoroutine(StartSequence());
+        }
+
+        private void Update()
+        {
+            if (!sequenceEnded && (Input.anyKeyDown || Input.GetMouseButtonDown(0)))
+            {
+                StartCoroutine(EndSequence());
+            }
         }
 
         private IEnumerator StartSequence()
         {
             yield return new WaitForSeconds(1f);
-            videoPlayer.Play();
+            if (!sequenceEnded)
+            {
+                videoPlayer.Play();
+            }
+        }
+
+        private void OnVideoError(VideoPlayer source, string message)
+        {
+            Debug.LogWarning($"VideoPlayer error: {message}");
+            StartCoroutine(EndSequence());
         }
 
         private void OnVideoEnd(VideoPlayer vp)
         {
-            StartCoroutine(EndSequence());
+            if (!sequenceEnded) StartCoroutine(EndSequence());
         }
 
         private IEnumerator EndSequence()
         {
+            if (sequenceEnded) yield break;
+            sequenceEnded = true;
+            
             videoPlayer.loopPointReached -= OnVideoEnd;
+            videoPlayer.errorReceived -= OnVideoError;
+            videoPlayer.Stop(); // Ensure video stops if skipped
+
             yield return new WaitForSeconds(1f);
             yield return UIFadeScreenManager.Instance.FadeInDarkScreen(1f);
             yield return new WaitForSeconds(0.5f);
             LoadSpecialScene();
-
         }
 
         void LoadSpecialScene()
