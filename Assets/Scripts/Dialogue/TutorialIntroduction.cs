@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
+using Context;
 using DialogueScripts;
 using Steamworks;
 using Systems.Persistence;
@@ -164,6 +165,8 @@ public class TutorialIntroduction : DialogueClasses
         
         BeginCombatTutorial();
         yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
+        
+        
 
         yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
         DialogueManager.Instance.MoveBoxToTop();
@@ -289,6 +292,7 @@ public class TutorialIntroduction : DialogueClasses
     {
         yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
         CombatManager.Instance.GameState = GameState.SELECTION;
+        new UIContextChangedEvent(new UIContext.Combat()).Invoke();
         EntityClass.OnEntityDeath += OnDummyDies;
         dummiesLeft = groupDummySpawnPos.Count;
         HUDV2.Instance.SetDeckInfoVisibility(true);
