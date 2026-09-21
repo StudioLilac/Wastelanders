@@ -47,6 +47,7 @@ jobs:
 
       - uses: game-ci/unity-builder@v4
         id: buildStep
+        continue-on-error: true
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
@@ -56,6 +57,23 @@ jobs:
           versioning: Tag
           buildName: ${{ env.BUILD_NAME }}
           customParameters: -job-worker-count 2 -desiredWorkerCount 1
+      - uses: game-ci/unity-builder@v4
+        id: buildStepRetry
+        if: steps.buildStep.outcome == 'failure'
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          targetPlatform: ${{ matrix.targetPlatform }}
+          versioning: Tag
+          buildName: ${{ env.BUILD_NAME }}
+          customParameters: -job-worker-count 2 -desiredWorkerCount 1
+      - name: Fail if both Unity build attempts fail
+        if: steps.buildStep.outcome == 'failure' && steps.buildStepRetry.outcome == 'failure'
+        run: |
+          echo "::error::Unity build failed twice. Check the logs for persistent issues."
+          exit 1
       - name: Fix root-owned file permissions from Unity build
         if: always()
         run: |
