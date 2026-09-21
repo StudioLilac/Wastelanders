@@ -59,7 +59,8 @@ public class DeckSelectionTutorial : MonoBehaviour
             SceneData.Get<SceneData.TutorialFight>() == GameStateManager.Instance.PreviousScene &&
             GameStateManager.Instance.CurrentLevelProgress > StageInformation.Get<StageInformation.DeckSelectionTutorial>().LevelID;
         bool showHowToDeckSelectTutorial = Mathf.Approximately(GameStateManager.Instance.CurrentLevelProgress, StageInformation.Get<StageInformation.DeckSelectionTutorial>().LevelID) || showTutorial || activateTutorial;
-        bool showEnemyWeaponTutorial = GameStateManager.Instance.PreviousScene == SceneData.Get<SceneData.Epilogue_3>() || activateEnemyDeckTutorial;
+        bool showEnemyWeaponTutorial = (GameStateManager.Instance.PreviousScene == SceneData.Get<SceneData.Epilogue_3>() || activateEnemyDeckTutorial) 
+                                       && GameStateManager.Instance.CurrentLevelProgress >= StageInformation.Get<StageInformation.IvesFinale>().LevelID;
 
         if (showHowToDeckSelectTutorial)
         {
