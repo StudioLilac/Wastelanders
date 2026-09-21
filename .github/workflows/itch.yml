@@ -41,6 +41,7 @@ jobs:
           targetPlatform: WebGL
           buildName: WebGL           # ← required for v4
           allowDirtyBuild: true       # avoids failing on version control differences
+          customParameters: -job-worker-count 2 -desiredWorkerCount 1
 
       # 📦 Zip the finished WebGL build
       # game-ci v4 outputs builds to: build/${{ inputs.build-name }}/

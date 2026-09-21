@@ -8,6 +8,12 @@ using Systems.Persistence;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
+public interface IScenePayload { };
+public record CombatPayload(SceneData SceneData, bool JumpToCombat) : IScenePayload;
+public record StoryBookEntry(StorybookSceneEnum StorybookEntryNode) : IScenePayload;
+
+#nullable enable
 //Singleton Class that keeps track of values representing general Game states
 public class GameStateManager : PersistentSingleton<GameStateManager>
 {
@@ -18,7 +24,7 @@ public class GameStateManager : PersistentSingleton<GameStateManager>
 
     public SceneData PreviousScene { get; private set; } = SceneData.Get<SceneData.MainMenu>();
 
-    private GameStateData _data;
+    private GameStateData? _data;
 
     private GameStateData Data
     {
@@ -26,13 +32,15 @@ public class GameStateManager : PersistentSingleton<GameStateManager>
         {
             if (_data == null)
             {
-                _data = new GetGameStateData().Query();
+                _data = new GetGameStateData().Query()!;
                 seenEnemyActions = _data.SeenEnemyActions.ToHashSet();
             }
 
             return _data;
         }
     }
+    private IScenePayload? scenePayload;
+    private HashSet<string> seenEnemyActions = new(); // Private backing field for perf
 
     public void UpdateLevelProgress(StageInformation level)
     {
@@ -47,9 +55,6 @@ public class GameStateManager : PersistentSingleton<GameStateManager>
         private set => Data.CurrentLevelProgress = value;
     }
 
-    private HashSet<string> seenEnemyActions; // Private backing field for perf
-    
-
     public bool HasSeenEnemyAction(ActionClass a) {
         if (seenEnemyActions == null) seenEnemyActions = Data.SeenEnemyActions.ToHashSet(); // Bind is not always called
         return seenEnemyActions.Contains(a.GetName());
@@ -60,16 +65,26 @@ public class GameStateManager : PersistentSingleton<GameStateManager>
         Data.SeenEnemyActions.Add(a.GetName());
         seenEnemyActions.Add(a.GetName());
     }
-    
-    public void Restart()
+
+    // Has a side effect of consuming the current payload.
+    public bool JumpToCombat =>
+        Payload<CombatPayload>() is { JumpToCombat: true, SceneData: var sceneData }
+        && sceneData == SceneData.CurrentScene();
+
+    public T? Payload<T>() where T : IScenePayload
     {
-        Scene activeScene = SceneManager.GetActiveScene();
-        LoadScene(activeScene.name);
+        if (scenePayload is T payload)
+        {
+            scenePayload = null;
+            return payload;
+        }
+        return default(T);
     }
 
-    public void LoadScene(string scene, bool shouldFade = true)
+    public void LoadScene(string scene, bool shouldFade = true, IScenePayload? payload = null)
     {
-        PreviousScene = SceneData.FromSceneName(SceneManager.GetActiveScene().name);
+        scenePayload = payload;
+        PreviousScene = SceneData.CurrentScene();
         if (shouldFade)
         {
             StartCoroutine(FadeAndLoadScene(scene));
@@ -78,6 +93,13 @@ public class GameStateManager : PersistentSingleton<GameStateManager>
             SceneManager.LoadScene(scene);
         }
     }
+    
+    public void Restart(IScenePayload? payload = null)
+    {
+        Scene activeScene = SceneManager.GetActiveScene();
+        LoadScene(activeScene.name, true, payload);
+    }
+
 
     // Returns true if first time seeing the event. 
     public bool RecordFirstTimeEvent(OneTimeEvents eventId)
@@ -105,25 +127,7 @@ public class GameStateManager : PersistentSingleton<GameStateManager>
             yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(0.5f));
         }
     }
-
-    public const string SORTING_LAYER_TOP = "Top";
-
-    /*
-     *
-     * TEMPORARY FLAGS
-     */
-
-    /*
-     * Temporary flag to be set and read by end of combat scene, when the player restarts and should skip dialogue
-     * Is set by GameOver prefab upon restart, and read by dialogue classes
-     * Dialogue classes should reset this value when read, such that it does not cause unexpected behaviour in upcoming scenes
-     */
-    public bool JumpToCombat = false;
-
-    // Set this variable to the intended storybook scene before jumping:
-    public StorybookSceneEnum StorybookEntryNode { get; set; } = StorybookSceneEnum.None;
 }
-
 
 [System.Serializable]
 public class GameStateData

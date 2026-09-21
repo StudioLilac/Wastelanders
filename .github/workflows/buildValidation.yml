@@ -39,3 +39,4 @@ jobs:
           targetPlatform: WebGL
           buildName: PR-Check
           allowDirtyBuild: true
+          customParameters: -job-worker-count 2 -desiredWorkerCount 1

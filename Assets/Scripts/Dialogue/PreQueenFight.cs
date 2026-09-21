@@ -462,7 +462,6 @@ public class PreQueenFight : DialogueClasses
         }
         else
         {
-            GameStateManager.Instance.JumpToCombat = false;
             jackie.AddStacks(Resonate.buffName, 1);
             CleanUpScene1();
             CleanUpScene2();

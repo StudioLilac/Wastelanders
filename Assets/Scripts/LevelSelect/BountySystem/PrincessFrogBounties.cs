@@ -32,7 +32,7 @@ public class PrincessFrogBounties : IBounties
 
     public static readonly PrincessFrogBounties SLIME_CHALLENGE = new PrincessFrogBounties(
         contractSet: new HashSet<IContracts> { EnemySpawningContracts.SLIME_SPAWN },
-        challengeName: "SlimeFest",
+        challengeName: "Slime Fest",
         subtext: "Challenge for Level 5. Extras",
         flavourText: "Test your skills in this slimy situation!",
         rewards: "Slime Cards",
@@ -41,7 +41,7 @@ public class PrincessFrogBounties : IBounties
 
     public static readonly PrincessFrogBounties FROG_CHALLENGE = new PrincessFrogBounties(
         contractSet: new HashSet<IContracts> { EnemySpawningContracts.FROG_SPAWN },
-        challengeName: "FrogFest",
+        challengeName: "Frog Fest",
         subtext: "Challenge for Level 5. Extras",
         flavourText: "These frogs have gone wild, so hop to it!",
         rewards: "Frog Cards",
@@ -53,7 +53,7 @@ public class PrincessFrogBounties : IBounties
         challengeName: "Solo Mission",
         subtext: "Challenge for Level 5. Extras",
         flavourText: "Take on the Princess Beetle alone.",
-        rewards: "Beetle Cards",
+        rewards: "Storyboard: The Rose and the Gardener.",
         bountyAssetDelegate: (database) => database.PrincessFrogAssets.SoloChallengeAsset
         );
 
@@ -62,8 +62,8 @@ public class PrincessFrogBounties : IBounties
         challengeName: "Exhausting Mission",
         subtext: "Challenge for Level 5. Extras",
         flavourText: "Fight the Princess Beetle with a restricting hand size.",
-        rewards: "Storyboard: The Rose and the Gardener.",
-        bountyAssetDelegate: (database) => database.PrincessFrogAssets.ExhaustedChallengeAsset
+        rewards: "Beetle Cards",
+        bountyAssetDelegate: (database) => database.PrincessFrogAssets.HandSizeDecreaseChallengeAsset 
         );
 
     // Update this every time you add a new bounty please, I don't want to implement reflection.
@@ -71,11 +71,11 @@ public class PrincessFrogBounties : IBounties
     {
         get
         {
-            yield return FROG_CHALLENGE;
-            yield return SLIME_CHALLENGE;
+            yield return QUEEN_CHALLENGE;
             yield return DECREASED_HAND_SIZE;
             yield return PRINCESS_FROG_CHALLENGE;
-            yield return QUEEN_CHALLENGE;
+            yield return FROG_CHALLENGE;
+            yield return SLIME_CHALLENGE;
             yield return SOLO_JACKIE;
         }
     }
@@ -105,6 +105,6 @@ public class PrincessFrogAssets
     public BountyAssets QueenChallengeAsset;
     public BountyAssets SlimeChallengeAsset;
     public BountyAssets FrogChallengeAsset;
+    public BountyAssets HandSizeDecreaseChallengeAsset;
     public BountyAssets SoloChallengeAsset;
-    public BountyAssets ExhaustedChallengeAsset;
 }

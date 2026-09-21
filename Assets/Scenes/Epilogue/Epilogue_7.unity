@@ -1923,13 +1923,13 @@ MonoBehaviour:
     events:
     - rid: 3492363892074217545
   - content: "If your \"big picture\" can\u2019t hold down to the smallest problem,
-      it ain\u2019t sound."
+      it isn't sound."
     speaker: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 3492363892074217546
-  - content: Cuz those outcomes are the only ones that you can actually change right
+  - content: Those outcomes are the only ones that you can actually change right
       now.
     speaker: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
     sfxId: 0
@@ -1961,8 +1961,8 @@ MonoBehaviour:
     sfxId: 0
     picture: {fileID: 0}
     events: []
-  - content: "The NITES have been quiet. We need to figure out what they\u2019re
-      up to so we can prepare for them."
+  - content: The NITES are back in the Tundra. We need to figure out what their intentions
+      are.
     speaker: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -2051,38 +2051,36 @@ MonoBehaviour:
     sfxId: 0
     picture: {fileID: 0}
     events: []
-  - content: ...And then we silence her.
+  - content: '...And then what? We keep her forever? Silence her? '
     speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 3492363892074217550
-  - content: "And hope the rescue party doesn\u2019t come across this side of the
-      mountains."
-    speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
-    sfxId: 0
-    picture: {fileID: 0}
-    events: []
   - content: Rocky...
     speaker: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 6522887070328291484
-  - content: Tsk fine. Then we'll put it to a vote. And worry about that later.
+  - content: Tsk, fine. Let's put it to a vote then.
     speaker: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 3492363892074217551
-  - content: Kade. I already have enough things to worry about.
-    speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+  - content: Kade summons the Wastelanders, gathers them, and explains the situation.
+    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events: []
-  - content: "I\u2019ll get you your team. But I\u2019m coming with. I want to see
-      this \"rat\" who slipped past the entire scout line for myself."
-    speaker: {fileID: 11400000, guid: 58078335e5991451a946193b9f5f19ac, type: 2}
+  - content: Rocky stands by and watches.
+    speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
+    sfxId: 0
+    picture: {fileID: 0}
+    events: []
+  - content: All in favour of the transport, say 'Aye'.
+    speaker: {fileID: 11400000, guid: 2f83f78016c814045855f5b9c9f437fa, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events: []

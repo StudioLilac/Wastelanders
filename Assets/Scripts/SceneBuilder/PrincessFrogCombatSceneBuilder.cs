@@ -100,11 +100,9 @@ namespace SceneBuilder
             {
                 list.Add(frogPrefab.gameObject);
                 list.Add(frogPrefab.gameObject);
-                list.Add(frogPrefab.gameObject);
             }
             else if (bounty?.ContractSet.Contains(EnemySpawningContracts.SLIME_SPAWN) == true)
             {
-                list.Add(slimePrefab.gameObject);
                 list.Add(slimePrefab.gameObject);
                 list.Add(slimePrefab.gameObject);
             }
@@ -154,7 +152,7 @@ namespace SceneBuilder
 
             if (bounty.ContractSet.Contains(PrincessFrogContracts.EXTRA_RESONANCE))
             {
-                princessFrog.AddStacks(Resonate.buffName, 2);
+                princessFrog.AddStacks(Resonate.buffName, 1);
             }
         }
 
