@@ -26,7 +26,7 @@ public class PlatformSplashScenePreprocessor : IPreprocessBuildWithReport
                     modified = true;
                 }
             }
-            else if (scenes[i].path.EndsWith($"{Get<SplashScreen>().SceneName}.unity"))
+            else if (scenes[i].path.EndsWith($"{Get<SplashScreenWebGL>().SceneName}.unity")) //Use regular webgl for all. 
             {
                 if (scenes[i].enabled == isWebGL)
                 {
