@@ -53,7 +53,7 @@ MonoBehaviour:
     events:
     - rid: 314095657258319948
     - rid: 314095657258319963
-  - content: Then you're saying we can actually cross the Tundra safely?
+  - content: So you're saying we can actually cross the Tundra safely?
     speaker: {fileID: 11400000, guid: e9d3865c367188f4f99c47e692b92911, type: 2}
     sfxId: 0
     picture: {fileID: 0}
