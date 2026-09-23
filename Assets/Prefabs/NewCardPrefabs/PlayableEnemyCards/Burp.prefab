@@ -28,9 +28,17 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2187855665233927581, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
     - target: {fileID: 2459814067889663477, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2781438634006456598, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
       objectReference: {fileID: 0}
     - target: {fileID: 3154665990143383919, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -39,6 +47,18 @@ PrefabInstance:
     - target: {fileID: 3154665990143383919, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 4483932651697627571, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
+    - target: {fileID: 6372328020853972940, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
+    - target: {fileID: 6389459700903638366, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
       objectReference: {fileID: 0}
     - target: {fileID: 7256956916184963317, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
       propertyPath: m_Name
@@ -114,25 +134,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 1522312218679409194}
-  <Id>k__BackingField:
-    Part1: 2793263077
-    Part2: 1293330939
-    Part3: 3594164627
-    Part4: 2791975342
   description: 
   IsEvolved: 0
-  icon: {fileID: 21300000, guid: 912d8fefb107b634ca3aa71ddcab5756, type: 3}
+  icon: {fileID: 21300000, guid: 817ebd5e764316f4c9327df7b70082dd, type: 3}
   cardBack: {fileID: 21300000, guid: 0a827eeec6ce44b03a2e1fef7d2fad4c, type: 3}
   evolvedCardBack: {fileID: 21300000, guid: 6ff7012b6a06cfc44befdd4974ee6cc5, type: 3}
   cardUI: {fileID: 7205946125008355181}
-  data:
-    <ActionClassName>k__BackingField: 
-    <CurrentProgress>k__BackingField: 0
   projectileBehaviour: {fileID: 6638851633745885448, guid: 6ceeac82b22c34fd5b959daf4c2c3a61, type: 3}
-  SerializedSpawnableEnemies:
-  - {fileID: 8044949296705636452, guid: 276880eff6e9b4907a1ea5430761a162, type: 3}
-  - {fileID: 8044949296705636452, guid: 692030d7a70f84e1e9949eb9b07ebce5, type: 3}
-  - {fileID: 8044949296705636452, guid: fa2244f9c89fb2c42ae45cb8f73816be, type: 3}
 --- !u!4 &1522312218679409194 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8284128080877360369, guid: fe17b3235fb624d5983451ba5a1eb6f5, type: 3}
