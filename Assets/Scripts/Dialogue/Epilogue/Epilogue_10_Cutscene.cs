@@ -75,7 +75,7 @@ namespace Dialogue.Epilogue
                 StartCoroutine(frog.MoveToPosition(FrogDestination.position, 0f, 12f));
                 yield return new DialogueAsCode()
                     .Do(new VerticalLayoutChange { Layout = Layout.Upper })
-                    .InterruptedLine(DialogueCharacter.Jackie, "Crap, there's creatures up ahead. I need to hide.", duration: 2f).Play();
+                    .InterruptedLine(DialogueCharacter.Jackie, "Crap, there's creatures up ahead. I need to hide.", duration: 2.5f).Play();
                 dynamicCamera.Priority = 1; baseCamera.Priority = 0;
                 StartCoroutine(overlayRocks.FadeInLightScreen(2.0f));
                 yield return new WaitForSeconds(0.5f);
@@ -83,7 +83,7 @@ namespace Dialogue.Epilogue
                 yield return new WaitForSeconds(0.5f);
                 StartCoroutine(frog2.MoveToPosition(FrogDestination.position, 0f, 8f));
                 StartCoroutine(slime2.MoveToPosition(SlimeDestination.position, 0f, 10f));
-                yield return new DialogueAsCode().InterruptedLine(DialogueCharacter.Jackie, "Surroundings check. No shadows showing right?", duration: 2f).Play();
+                yield return new DialogueAsCode().InterruptedLine(DialogueCharacter.Jackie, "Surroundings check. No shadows showing right?", duration: 3f).Play();
                 yield return jackie.MoveToPosition(JackieBehindCrystal2.position, 0f, 0.5f);
                 yield return new WaitForSeconds(3f);
             }

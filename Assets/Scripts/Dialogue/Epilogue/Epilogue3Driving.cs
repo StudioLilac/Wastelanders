@@ -52,7 +52,7 @@ public class Epilogue3Driving
         .Line(DialogueCharacter.Cam,
             "Don’t worry! I'm sure Ives will have us back on the road quickly. I'll run the numbers right now to get an ETA.",
             DialogueSprite.CamSmile)
-        .InterruptedLine(DialogueCharacter.Cam, "We'll be there soon, I promise!")
+        .Line(DialogueCharacter.Cam, "We'll be there soon, I promise!")
         .Line(DialogueCharacter.Jackie, "...Don't promise. Just get it done.", DialogueSprite.JackieSerious)
         .Narrate("<i>After a short while, the grease covered Ives emerges from under the vehicle.</i>", sfx: SoundID.VN_drill)
         .Line(DialogueCharacter.Ives, "Let's get back to it.", DialogueSprite.IvesNeutral, sfx: SoundID.VN_door_shut)

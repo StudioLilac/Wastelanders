@@ -40,7 +40,7 @@ public class DialogueAsCode
         return this;
     }
 
-    public DialogueAsCode InterruptedLine(DialogueCharacter speaker, string text, DialogueSprite expr = DialogueSprite.NoChange, SoundID sfx = SoundID.None, float duration = 0.5f)
+    public DialogueAsCode InterruptedLine(DialogueCharacter speaker, string text, DialogueSprite expr = DialogueSprite.NoChange, SoundID sfx = SoundID.None, float duration = 1.5f)
     {
         var actor = Resolve(speaker);
         var events = new List<DialogueEvents>() { new AutoAdvanceAfter { Time = duration } };
