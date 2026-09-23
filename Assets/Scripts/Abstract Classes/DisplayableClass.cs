@@ -3,6 +3,9 @@ using System.Collections;
 using UI_Toolkit;
 using UnityEngine;
 
+public record DisplayableHoveredEvent(ActionClass ActionClass) : IEvent;
+public record DisplayableUnhoveredEvent(ActionClass ActionClass) : IEvent;
+
 // This class is a parent class of both BattleQueueIcons and CombatCardUI. This is because both of them
 // are "displayable" in the upper right window when clicked.
 public abstract class DisplayableClass : SelectClass
@@ -27,6 +30,8 @@ public abstract class DisplayableClass : SelectClass
     {
         baseScale = transform.localScale;
         enlargedScale = baseScale * 1.25f;
+        this.Subscribe<DisplayableHoveredEvent>(GrowLarge);
+        this.Subscribe<DisplayableUnhoveredEvent>(GrowSmall);
     }
 
     protected void ShowCard()
@@ -71,31 +76,35 @@ public abstract class DisplayableClass : SelectClass
     
     public virtual void OnMouseEnter()
     {
-        if (new CanHighlight().Query() == true && !grewLarger && !PauseMenuV2.IsPaused)
+        if (new CanHighlight().Query() == true && !grewLarger && ActionClass != null && !PauseMenuV2.IsPaused)
+        { 
+            new DisplayableHoveredEvent(ActionClass).Invoke();
+        }
+    }
+    public virtual void OnMouseExit()
+    {
+        if (grewLarger) new DisplayableUnhoveredEvent(ActionClass).Invoke();
+    }
+
+    void GrowLarge(DisplayableHoveredEvent ev)
+    {
+        if (ev.ActionClass == this.ActionClass)
         {
             StartScale(true);
-
             grewLarger = true;
             HighlightTarget();
             ShowCard();
-
-            if (ActionClass != null)
-            {
-                new DisplayableHoveredEvent(ActionClass).Invoke();
-            }
         }
     }
 
-    public virtual void OnMouseExit()
+    void GrowSmall(DisplayableUnhoveredEvent ev)
     {
-        if (grewLarger)
+        if (ev.ActionClass == this.ActionClass)
         {
             StartScale(false);
-
             grewLarger = false;
             DeHighlightTarget();
             HideCard();
-            new DisplayableUnhoveredEvent().Invoke();
         }
     }
     
@@ -153,7 +162,3 @@ public abstract class DisplayableClass : SelectClass
         unseenEnemyActionIndicator!.gameObject.SetActive(false);
     }
 }
-
-public record DisplayableHoveredEvent(ActionClass ActionClass) : IEvent;
-public record DisplayableUnhoveredEvent() : IEvent;
-

@@ -2449,7 +2449,6 @@ MonoBehaviour:
   camLabBackground: {fileID: 589473201}
   splitCallBackground: {fileID: 1738864939}
   caveFlickerLayer: {fileID: 1592478426}
-  splitScreenLayer: {fileID: 0}
   ailinRevealLayer: {fileID: 2074219358}
   scrim: {fileID: 1861725853}
   suspenseDrone: {fileID: 8300000, guid: 446e43318cd10834a8836d1fbef1f551, type: 3}

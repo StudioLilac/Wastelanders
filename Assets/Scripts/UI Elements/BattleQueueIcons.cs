@@ -167,3 +167,4 @@ public class BattleQueueIcons : DisplayableClass, IBattleQueueDisplayable
         }
     }
 }
+

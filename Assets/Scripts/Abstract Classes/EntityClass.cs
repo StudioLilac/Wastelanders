@@ -353,12 +353,14 @@ public abstract class EntityClass : SelectClass
     {
         if (PauseMenuV2.IsPaused) return;
         Highlight();
+        new EntityHovered(this).Invoke();
     }
 
     private void OnMouseExit()
     {
         if (PauseMenuV2.IsPaused) return;
         DeHighlight();
+        new EntityUnhovered(this).Invoke();
     }
 
     public void CrossHair(float speed = 0.55f)

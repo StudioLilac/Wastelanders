@@ -6,6 +6,9 @@ using static UnityEngine.UI.Image;
 
 #nullable enable
 public record ActionIconClicked(ActionClass CardUI) : IEvent;
+public record EntityHovered(EntityClass Entity) : IEvent;
+public record EntityUnhovered(EntityClass Entity) : IEvent;
+public record GetCurrentHighlightedAction() : IQuery<ActionClass?>;
 public record CurrentPlayer() : IQuery<PlayerClass?>;
 public record UpdateHand() : IEvent;
 public class HighlightManager : MonoBehaviour 
@@ -37,6 +40,7 @@ public class HighlightManager : MonoBehaviour
     private void Start()
     {
         this.Answer<CurrentPlayer, PlayerClass?>(GetCurrentPlayer);
+        this.Answer<GetCurrentHighlightedAction, ActionClass?>(_ => currentHighlightedAction);
         this.Subscribe<UpdateHand>(RenderAppropriateHand);
         this.Subscribe<ActionIconClicked>(e => OnIconClicked(e.CardUI, currentHighlightedAction));
         this.Subscribe<CardClicked>(c => OnActionClicked(c.Card));
@@ -237,5 +241,5 @@ public class HighlightManager : MonoBehaviour
     }
 
     private PlayerClass? GetCurrentPlayer(CurrentPlayer q) => selectedPlayer;
-    private static void RenderHand(PlayerClass player) => OnUpdateHand?.Invoke(player);
+    private static void RenderHand(PlayerClass player) => OnUpdateHand?.Invoke(player);    
 }
