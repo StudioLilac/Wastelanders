@@ -16,7 +16,7 @@ public class Jab : StaffCards
         MaxEvolutionProgress = 10;
         lowerBound = 2;
         upperBound = 4;
-        Speed = 4;
+        Speed = 5;
 
         base.Initialize();
     }

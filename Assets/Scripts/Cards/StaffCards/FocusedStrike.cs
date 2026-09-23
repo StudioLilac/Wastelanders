@@ -13,7 +13,7 @@ public class FocusedStrike : StaffCards
         description = "Double your Flow then make this attack.";
         lowerBound = 2;
         upperBound = 2;
-        Speed = 4;
+        Speed = 3;
         CostToAddToDeck = IsEvolved ? 4 : 2;
         evolutionCriteria = "Strike for a power of 8+ with this card three times.";
         evolutionDescription = "Double your flow then make this attack, this card does not consume flow";
