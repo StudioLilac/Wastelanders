@@ -405,7 +405,7 @@ namespace Dialogue.Epilogue
 
             public static DialogueAsCode Approach(MonoBehaviour owner, ControllableAudioChannel ivesBlips) => new DialogueAsCode()
                 .Line(DialogueCharacter.Rocky, "How close are we to the Frog, Jackie?")
-                .Line(DialogueCharacter.Jackie, "It's up ahead and out the opening. We’ve reached the same elevation.")
+                .Line(DialogueCharacter.Jackie, "It's up ahead. We’ve reached the same elevation.")
                 .Line(DialogueCharacter.Rocky, "Then we should make preparations for battle.")
                 .Line(DialogueCharacter.Rocky, "Jay, take the team up to the vanguard and see if you can get eyes on our men.")
                 .Line(DialogueCharacter.Rocky, "The rest of us will set up camp and secure the rear.")

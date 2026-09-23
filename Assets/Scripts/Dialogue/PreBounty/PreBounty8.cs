@@ -293,7 +293,7 @@ namespace Dialogue.PreBounty
             .Move(DialogueCharacter.Rocky, CharacterActions.SetLeft).Move(DialogueCharacter.Jay, CharacterActions.SetRight)
             .Narrate("<i>Rocky and Kade walk back over, their expressions grim.</i>")
             .Line(DialogueCharacter.Rocky, "Hey Jay. Kade ran her sensors. There’s a massive Amplitude concentration at the peak of the mountain.")
-            .Line(DialogueCharacter.Rocky, " That 'frog' is real. Have you seen anything in that sector?", DialogueSprite.RockyFocus)
+            .Line(DialogueCharacter.Rocky, "That 'frog' is real. Have you seen anything in that sector?", DialogueSprite.RockyFocus)
             .Line(DialogueCharacter.Jay, "What? I sent Bravo up there not a week ago. They did a full routine sweep of the routes.", DialogueSprite.JaySerious)
             .Line(DialogueCharacter.Jay, "...I'll organize another search party.")
             .Line(DialogueCharacter.Jackie, "Let me come. I can guide you.").
