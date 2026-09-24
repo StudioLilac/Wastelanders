@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8061570941568338762}
   - component: {fileID: 1905115471838439451}
   - component: {fileID: 3136830004704286861}
-  - component: {fileID: 4131209681873106981}
   m_Layer: 0
   m_Name: CombatManager
   m_TagString: Untagged
@@ -59,6 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 679523eb71397df4a9276a7796116b46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hoverIndicator: {fileID: 2819324280850706282, guid: 0d0e17ada3c7fbe41893f01782baacc9, type: 3}
 --- !u!114 &3136830004704286861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,20 +71,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e2698dbea6c95b40a778e126f9d36e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4131209681873106981
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1273132524166041697}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cc657a91eaee954d89f66e854eb304e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  redirectIcon: {fileID: -1237723571263904777, guid: 03c4a4998b9291e4a8372a967201ac92, type: 3}
-  unopposedAttackIcon: {fileID: 21300000, guid: 6f8ab552348e73941b245fe9ca454974, type: 3}
-  unopposedDefenseIcon: {fileID: 21300000, guid: 926dc102ee6ad62488fa7f3605a127ce, type: 3}
-  clashIcon: {fileID: -2991674613422419996, guid: 1e6cf2fca7138174e8f34bd44807fdc0, type: 3}
-  floatingFont: {fileID: 11400000, guid: bdff944414a5c49f68a57d29e782b2dd, type: 2}

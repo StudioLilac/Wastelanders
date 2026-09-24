@@ -33,10 +33,10 @@ public class BattleQueue : MonoBehaviour
         this.Subscribe<TeamWinEvent>(_ => ClearBattleQueue());
     }
 
-    public void AddAction(ActionClass action)
+    public void AddAction(ActionClass action, ActionWrapper? explicitTarget = null)
     {
         action.OnQueue();
-        actionQueue.Insert(action);
+        actionQueue.Insert(action, explicitTarget);
         new CardInserted(action).Invoke();
     }
 
@@ -89,21 +89,45 @@ public class BattleQueue : MonoBehaviour
         return new PopupType.None();
     }
 
+    public enum ClashResult
+    {
+        ValidClash,
+        ValidRedirect,
+        SameTeam,
+        TargetUnclashable,
+        SourceUnclashable,
+        SpeedTooSlow,
+        TargetAlreadyClashing,
+        TargetMismatch,
+        Unopposed
+    }
+
     public PopupType TryFormClash(ActionClass existingAction, ActionClass incomingAction)
     {
-        return (existingAction, incomingAction) switch
+        ActionWrapper? wrapper = actionQueue.GetWrapperForAction(existingAction);
+        if (wrapper == null) return new PopupType.CustomPopup("Action not found in queue!");
+
+        ClashResult result = wrapper.CheckClashValidity(incomingAction);
+        if (result == ClashResult.ValidClash || result == ClashResult.ValidRedirect)
         {
-            _ when existingAction.Origin is PlayerClass
-                => new PopupType.CustomPopup("Same team!"),
-            _ when !existingAction.Clashable
-                => new PopupType.CustomPopup("Unclashable!"),
-            _ when !incomingAction.Clashable
-                => new PopupType.CustomPopup("This action cannot clash!"),
-            _ when existingAction.Target != incomingAction.Origin && existingAction.Speed > incomingAction.Speed
-                => new PopupType.CustomPopup("Speed is too slow to redirect!"),
-            _ => actionQueue.FormClash(existingAction, incomingAction)
+            AddAction(incomingAction, wrapper);
+            return new PopupType.None();
+        }
+
+        return result switch
+        {
+            ClashResult.SameTeam => new PopupType.CustomPopup("Same team!"),
+            ClashResult.TargetUnclashable => new PopupType.CustomPopup("Unclashable!"),
+            ClashResult.SourceUnclashable => new PopupType.CustomPopup("This action cannot clash!"),
+            ClashResult.SpeedTooSlow => new PopupType.CustomPopup("Speed is too slow to redirect!"),
+            ClashResult.TargetAlreadyClashing => new PopupType.CustomPopup("Already clashing!"),
+            ClashResult.TargetMismatch => new PopupType.CustomPopup("Target mismatch!"),
+            _ => new PopupType.None()
         };
     }
+
+    public ActionWrapper? GetWrapperForAction(ActionClass actionCard) => actionQueue.GetWrapperForAction(actionCard);
+    public ActionWrapper? FindClashingWrapper(ActionClass actionCard, bool allowRedirect = false, EntityClass? simulatedTarget = null) => actionQueue.FindClashingWrapper(actionCard, allowRedirect, simulatedTarget);
 
     //Remove all cards with (@param entity) as the target and origin
     public void RemoveAllInstancesOfEntity(EntityClass entity)
@@ -179,9 +203,21 @@ public class BattleQueue : MonoBehaviour
         }
 
         //Returns the wrapper inserted
-        public void Insert(ActionClass actionCard)
+        public void Insert(ActionClass actionCard, ActionWrapper? explicitTarget = null)
         {
-            ActionWrapper insertingWrapper = CreateClashingWrapper(actionCard);
+            ActionWrapper insertingWrapper;
+            
+            if (explicitTarget != null)
+            {
+                explicitTarget.SetClashingAction(actionCard, allowRedirect: true);
+                Remove(explicitTarget);
+                insertingWrapper = explicitTarget;
+            }
+            else
+            {
+                insertingWrapper = CreateClashingWrapper(actionCard);
+            }
+
             int location = LocationToInsertWrapper(insertingWrapper);
             array.Insert(location, insertingWrapper);
             new OnQueueChanged(new(array)).Invoke();
@@ -209,26 +245,49 @@ public class BattleQueue : MonoBehaviour
             return null;
         }
 
-        //Searches for the first Empty Wrapper that can clash with (@param actionCard), making a new one if none exists
-        //Returns Wrapper with the (@param actionCard) wrapped
-        //Modifies: (@field array) as it will remove the existing wrapper from that array
-        private ActionWrapper CreateClashingWrapper(ActionClass actionCard)
+        public ActionWrapper? GetWrapperForAction(ActionClass actionCard)
+        {
+            foreach (ActionWrapper wrapper in array)
+            {
+                if (wrapper.PlayerAction == actionCard || wrapper.EnemyAction == actionCard)
+                {
+                    return wrapper;
+                }
+            }
+            return null;
+        }
+
+        //Searches for the first Empty Wrapper that can clash with (@param actionCard)
+        public ActionWrapper? FindClashingWrapper(ActionClass actionCard, bool allowRedirect = false, EntityClass? simulatedTarget = null)
         {
             if (actionCard.Clashable)
             {
                 foreach (ActionWrapper existingWrapper in array)
                 {
-                    if (existingWrapper.CanClashWithAction(actionCard, allowRedirect: false))
+                    if (existingWrapper.CanClashWithAction(actionCard, allowRedirect, simulatedTarget))
                     {
-                        existingWrapper.SetClashingAction(actionCard, allowRedirect: false);
-                        Remove(existingWrapper);
                         return existingWrapper;
                     }
                 }
             }
+            return null;
+        }
+
+        //Returns Wrapper with the (@param actionCard) wrapped
+        //Modifies: (@field array) as it will remove the existing wrapper from that array
+        private ActionWrapper CreateClashingWrapper(ActionClass actionCard)
+        {
+            ActionWrapper? existingWrapper = FindClashingWrapper(actionCard, allowRedirect: false);
+            if (existingWrapper != null)
+            {
+                existingWrapper.SetClashingAction(actionCard, allowRedirect: false);
+                Remove(existingWrapper);
+                return existingWrapper;
+            }
 
             return new ActionWrapper(actionCard);
         }
+
 
         //Removes all cards in the battle queue that have (@param entity) as the Origin or target.
         public void RemoveAllInstancesOfEntity(EntityClass entity)
@@ -311,34 +370,7 @@ public class BattleQueue : MonoBehaviour
             return firstPosition;
         }
 
-        public List<ActionWrapper> GetList()
-        {
-            return array;
-        }
-
-        public PopupType FormClash(ActionClass origin, ActionClass attempt)
-        {
-            for (int i = 0; i < array.Count; i++)
-            {
-                ActionWrapper wrapper = array[i];
-                if (wrapper.PlayerAction == origin || wrapper.EnemyAction == origin)
-                {
-                    if (wrapper.IsClashing())
-                    {
-                        return new PopupType.CustomPopup("Already in a clash!");
-                    }
-
-                    wrapper.SetClashingAction(attempt, allowRedirect: true);
-                    Remove(wrapper);
-                    array.Insert(LocationToInsertWrapper(wrapper), wrapper);
-                    new OnQueueChanged(new(array)).Invoke();
-                    new CardInserted(attempt).Invoke();
-                    return new PopupType.None();
-                }
-            }
-
-            return new PopupType.CustomPopup("Action not found in queue!");
-        }
+        public List<ActionWrapper> GetList() => array;
     }
     
 
@@ -373,25 +405,39 @@ public class BattleQueue : MonoBehaviour
                 this.EnemyAction = insertedAction;
             }
         }
-
-        //Returns: whether (@param clashingAction) will clash with this wrapper.
-        public bool CanClashWithAction(ActionClass clashingAction, bool allowRedirect = false)
+        public bool CanClashWithAction(ActionClass clashingAction, bool allowRedirect = false, EntityClass? simulatedTarget = null)
         {
-            if (IsClashing() || !clashingAction.Clashable) return false;
-            
-            ActionClass existingAction = GetTheOnlyExistingAction();
-            
-            if (existingAction.IsPlayedByPlayer() == clashingAction.IsPlayedByPlayer() || !existingAction.Clashable) 
-                return false;
-
-            ActionClass playerAct = existingAction.IsPlayedByPlayer() ? existingAction : clashingAction;
-            ActionClass enemyAct = existingAction.IsPlayedByPlayer() ? clashingAction : existingAction;
-
-            if (playerAct.Target != enemyAct.Origin) 
-                return false;
-
-            return enemyAct.Target == playerAct.Origin || (allowRedirect && playerAct.Speed >= enemyAct.Speed);
+            ClashResult res = CheckClashValidity(clashingAction, simulatedTarget);
+            return res == ClashResult.ValidClash || (allowRedirect && res == ClashResult.ValidRedirect);
         }
+
+        public ClashResult CheckClashValidity(ActionClass incomingAction, EntityClass? simulatedTarget = null)
+        {
+            if (IsClashing()) return ClashResult.TargetAlreadyClashing;
+            
+            if (!incomingAction.Clashable) return ClashResult.SourceUnclashable;
+            ActionClass existingAction = GetTheOnlyExistingAction();
+            if (!existingAction.Clashable) return ClashResult.TargetUnclashable;
+
+            bool isIncomingPlayer = incomingAction.IsPlayedByPlayer();
+            bool isExistingPlayer = existingAction.IsPlayedByPlayer();
+            if (isExistingPlayer == isIncomingPlayer) return ClashResult.SameTeam;
+
+            ActionClass playerAction = isIncomingPlayer ? incomingAction : existingAction;
+            ActionClass enemyAction = isIncomingPlayer ? existingAction : incomingAction;
+            EntityClass playerTarget = (isIncomingPlayer && simulatedTarget != null)
+                ? simulatedTarget
+                : playerAction.Target;
+
+            return (playerTarget == enemyAction.Origin, enemyAction.Target == playerAction.Origin, playerAction.Speed >= enemyAction.Speed) switch
+            {
+                (false, _, _) => ClashResult.TargetMismatch,
+                (true, false, true) => ClashResult.ValidRedirect,
+                (true, false, false) => ClashResult.SpeedTooSlow,
+                (true, true, _) => ClashResult.ValidClash
+            };
+        }
+
 
         // Modifies: this to become a clashing wrapper.
         // Requires: That (@param clashingAction) can clash with an Action within this wrapper (Call ClashesWithAction first)
@@ -451,3 +497,8 @@ public class BattleQueue : MonoBehaviour
         }
     }
 }
+
+
+
+
+
