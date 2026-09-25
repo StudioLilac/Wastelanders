@@ -6,15 +6,16 @@ public class HoverIndicatorManager : MonoBehaviour
 {
     [Header("Hover Indicator Assets")]
     [SerializeField] private GameObject hoverIndicatorObj;
+    [SerializeField] private Canvas canvas;
     [SerializeField] private GameObject unopposedAttack;
     [SerializeField] private GameObject clashAttack;
     [SerializeField] private Animator clashAnimator;
+    [SerializeField] private GameObject clashingDefense;
     [SerializeField] private Animator clashingDefenseAnimator;
     [SerializeField] private GameObject doesNotClash;
-    [SerializeField] private TextMeshPro doesNotClashText;
+    [SerializeField] private TextMeshProUGUI doesNotClashText;
     [SerializeField] private GameObject redirect;
     [SerializeField] private GameObject tooSlow;
-    [SerializeField] private GameObject clashingDefense;
     [SerializeField] private GameObject unopposedDefense;
 
 #nullable enable
@@ -29,6 +30,7 @@ public class HoverIndicatorManager : MonoBehaviour
         this.Subscribe<DisplayableHoveredEvent>(e => OnIconHovered(e.ActionClass));
         this.Subscribe<DisplayableUnhoveredEvent>(e => OnIconUnhovered(e.ActionClass));
         this.Subscribe<PlayerManuallyInsertedAction>(e => UpdateHoverIndicator());
+        canvas.sortingOrder = UISortOrder.CombatCursor.GetOrder();
     }
 
     private void OnEntityHovered(EntityClass entity)
@@ -62,10 +64,12 @@ public class HoverIndicatorManager : MonoBehaviour
     }
 
     private void Update()
-    {        
+    {
+        UpdateHoverIndicator();
+        
         if (hoverIndicatorObj != null && hoverIndicatorObj.activeSelf)
         {
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 mousePos = Input.mousePosition;
             mousePos.z = 0;
             hoverIndicatorObj.transform.position = mousePos;
         }
@@ -163,6 +167,7 @@ public class HoverIndicatorManager : MonoBehaviour
         _ => new CursorObject.DoesNotClash("Invalid!"),
     };
 }
+
 
 
 

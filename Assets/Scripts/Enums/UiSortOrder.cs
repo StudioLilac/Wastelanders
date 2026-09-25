@@ -16,6 +16,7 @@ public enum UISortOrder
     PauseMenu,
     FadeScreen,
     SaveIndicator,
+    CombatCursor,
 }
 public enum UISortName
 {
