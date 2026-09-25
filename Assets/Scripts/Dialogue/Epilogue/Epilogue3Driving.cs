@@ -18,7 +18,7 @@ public class Epilogue3Driving
         .Line(DialogueCharacter.Cam,
             "I don’t understand, the map says this is supposed to be a smooth, straight road. Ideal conditions for a convoy.")
         .Do(new CustomEvent { EventName = Epilogue_3.STOP_ENGINE })
-        .Narrate("<i>Suddenly, the tire bursts.</i>", SoundID.VN_tire_burst) /// Could we remove this narration and just keep the sound effect? Since Ives already comments on what happens, the narration feels redundant.
+        .Narrate("<i>Suddenly, the tire bursts.</i>", SoundID.VN_tire_burst)
         .Line(DialogueCharacter.Ives, "There goes the rear tire.")
         .Line(DialogueCharacter.Jackie,
             "Just great. Ives, tell me we can still drive on that. We can't stop here in the middle of... whatever this is.", DialogueSprite.JackieSerious)
