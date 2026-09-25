@@ -28,9 +28,9 @@ namespace Dialogue.PreBounty {
 
             yield return new WaitForSeconds(1.5f);
             yield return new DialogueAsCode()
-                .InterruptedLine(DialogueCharacter.Ailin, "3...", duration: 1)
-                .InterruptedLine(DialogueCharacter.Ailin, "2...", duration: 1)
-                .InterruptedLine(DialogueCharacter.Ailin, "1...", duration: 1).Play();
+                .InterruptedLine(DialogueCharacter.Ailin, "3...")
+                .InterruptedLine(DialogueCharacter.Ailin, "2...")
+                .InterruptedLine(DialogueCharacter.Ailin, "1...").Play();
             
             yield return comingSoon.FadeInDarkScreen(1f);
             yield return new WaitUntil(() => Input.anyKeyDown || Input.GetMouseButtonDown(0));

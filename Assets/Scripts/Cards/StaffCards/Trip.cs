@@ -13,7 +13,7 @@ public class Trip : StaffCards
         lowerBound = 2;
         upperBound = 4;
 
-        Speed = 3;
+        Speed = 4;
         myName = "Sweep";
         description = "Attack, then gain Flow equal to Flow consumed.";
         CardType = CardType.MeleeAttack;

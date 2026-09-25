@@ -30,4 +30,4 @@ MonoBehaviour:
     - rid: 7570221440618987582
       type: {class: AutoAdvanceAfter, ns: DialogueScripts, asm: MainGame}
       data:
-        Time: 0.5
+        Time: 1.5

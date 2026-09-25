@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backgroundMusicPrimary: {fileID: 8300000, guid: 8b6db91d68cf8cb4e8cc86f3dd5b035c, type: 3}
   backgroundMusicIntro: {fileID: 0}
-  combatMusicPrimary: {fileID: 8300000, guid: f7d78169f4dbd734eae797926ecffca2, type: 3}
+  combatMusicPrimary: {fileID: 8300000, guid: effca0e8a81a96042b04e5756ed53bc8, type: 3}
   combatMusicIntro: {fileID: 0}
   backgroundMusicDeath: {fileID: 8300000, guid: ad2a470944acfc048b53294c89a0945e, type: 3}
   isPersisting: 0

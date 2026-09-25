@@ -182,7 +182,7 @@ MonoBehaviour:
     - rid: 8385543117129122096
       type: {class: AutoAdvanceAfter, ns: DialogueScripts, asm: MainGame}
       data:
-        Time: 0.5
+        Time: 2
     - rid: 8385543117129122098
       type: {class: ActorAction, ns: DialogueScripts, asm: MainGame}
       data:

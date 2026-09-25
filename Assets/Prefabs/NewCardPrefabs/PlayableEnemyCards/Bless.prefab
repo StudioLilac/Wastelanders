@@ -114,20 +114,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 1522312218679409194}
-  <Id>k__BackingField:
-    Part1: 638363217
-    Part2: 1225812490
-    Part3: 1627668391
-    Part4: 1824789631
   description: 
   IsEvolved: 0
-  icon: {fileID: 21300000, guid: 790e1a74d4e7a7c40bd35457e28b79d9, type: 3}
+  icon: {fileID: 21300000, guid: 0a50257457780f54db08aaea9c77a544, type: 3}
   cardBack: {fileID: 21300000, guid: 0a827eeec6ce44b03a2e1fef7d2fad4c, type: 3}
   evolvedCardBack: {fileID: 21300000, guid: 6ff7012b6a06cfc44befdd4974ee6cc5, type: 3}
   cardUI: {fileID: 7205946125008355181}
-  data:
-    <ActionClassName>k__BackingField: 
-    <CurrentProgress>k__BackingField: 0
   animationClip: {fileID: 7400000, guid: 332ba6c32086d4a798fb86f67d0eaaf6, type: 2}
 --- !u!4 &1522312218679409194 stripped
 Transform:

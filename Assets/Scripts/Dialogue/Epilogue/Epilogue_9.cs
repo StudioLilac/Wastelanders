@@ -178,7 +178,7 @@ public class Epilogue_9 : MonoBehaviour
 
         public static DialogueAsCode Blip => new DialogueAsCode()
             .Line(DialogueCharacter.Ives, "<i>If she’s using the tracker, she’ll see this blip.</i>")
-            .Line(DialogueCharacter.Ives, "<i>You’re favourite game kid. Ready or not kid, here I come. </i>");
+            .Line(DialogueCharacter.Ives, "<i>You’re favourite game kid. Ready or not, here I come. </i>");
     }
 
 }
