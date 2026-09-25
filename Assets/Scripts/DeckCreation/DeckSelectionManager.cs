@@ -211,6 +211,13 @@ public class DeckSelectionManager : MonoBehaviour
         PlayerActionDeckModifiedEvent?.Invoke(availablePoints);
     }
 
+    public List<ActionClass> GetCurrentDeckCards()
+    {
+        if (playerData == null || cardDatabase == null) return new List<ActionClass>();
+        return cardDatabase.GetPrefabInfoForDeck(playerData.GetPlayerWeaponDeck(weaponType).weaponDeck)
+            .Select(it => it.ActionClass).ToList();
+    }
+
     // PERF: DeckContainsCard finds an actionFound but in doesn't return it, which is searched for again here.
     private void DeselectFromDeck(ActionClass ac, bool performChecks = true)
     {
