@@ -10,6 +10,7 @@ public class HoverIndicatorManager : MonoBehaviour
     [SerializeField] private GameObject unopposedAttack;
     [SerializeField] private GameObject clashAttack;
     [SerializeField] private Animator clashAnimator;
+    [SerializeField] private TextMeshProUGUI clashText;
     [SerializeField] private GameObject clashingDefense;
     [SerializeField] private Animator clashingDefenseAnimator;
     [SerializeField] private GameObject doesNotClash;
@@ -65,8 +66,6 @@ public class HoverIndicatorManager : MonoBehaviour
 
     private void Update()
     {
-        UpdateHoverIndicator();
-        
         if (hoverIndicatorObj != null && hoverIndicatorObj.activeSelf)
         {
             Vector3 mousePos = Input.mousePosition;
@@ -136,8 +135,12 @@ public class HoverIndicatorManager : MonoBehaviour
 
         if (cursor is CursorObject.DoesNotClash dnc) 
             doesNotClashText.text = dnc.Message;
-        if (cursor is CursorObject.ClashingAttack attack) 
-            clashAnimator.SetInteger(SwordIcon.ClashStateHash, (int)ClashCalculator.CompareRange(attack.Left, attack.Right));
+        if (cursor is CursorObject.ClashingAttack attack)
+        {
+            var result = ClashCalculator.CompareRange(attack.Left, attack.Right);
+            clashAnimator.SetInteger(SwordIcon.ClashStateHash, (int) result);
+            clashText.text = $"{result.ToString()} Clash";
+        }
         if (cursor is CursorObject.ClashingDefense defense)
             clashingDefenseAnimator.SetInteger(SwordIcon.ClashStateHash, (int)ClashCalculator.CompareRange(defense.Left, defense.Right));
     }

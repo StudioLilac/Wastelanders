@@ -505,7 +505,8 @@ MonoBehaviour:
   canvas: {fileID: 8903095942306317677}
   unopposedAttack: {fileID: 707096676356284608}
   clashAttack: {fileID: 8008852954499880013}
-  clashAnimator: {fileID: 3059920272354286746}
+  clashAnimator: {fileID: 5228885688168494709}
+  clashText: {fileID: 1271627934374107888}
   clashingDefense: {fileID: 2051308279901184215}
   clashingDefenseAnimator: {fileID: 2313675380446698990}
   doesNotClash: {fileID: 1066751145303321547}
@@ -622,7 +623,7 @@ GameObject:
   - component: {fileID: 1112434845375227213}
   - component: {fileID: 484355254569249528}
   - component: {fileID: 2558996999126583814}
-  - component: {fileID: 3059920272354286746}
+  - component: {fileID: 5228885688168494709}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -687,7 +688,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!95 &3059920272354286746
+--- !u!95 &5228885688168494709
 Animator:
   serializedVersion: 7
   m_ObjectHideFlags: 0
@@ -1231,7 +1232,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -80}
-  m_SizeDelta: {x: 200, y: 100}
+  m_SizeDelta: {x: 210, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8665071393790277992
 CanvasRenderer:
@@ -1261,7 +1262,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Clash
+  m_text: 'Dominating
+
+    Clash'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bdff944414a5c49f68a57d29e782b2dd, type: 2}
   m_sharedMaterial: {fileID: -1472579445266561125, guid: bdff944414a5c49f68a57d29e782b2dd, type: 2}
