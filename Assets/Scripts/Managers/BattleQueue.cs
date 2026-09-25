@@ -89,26 +89,13 @@ public class BattleQueue : MonoBehaviour
         return new PopupType.None();
     }
 
-    public enum ClashResult
-    {
-        ValidClash,
-        ValidRedirect,
-        SameTeam,
-        TargetUnclashable,
-        SourceUnclashable,
-        SpeedTooSlow,
-        TargetAlreadyClashing,
-        TargetMismatch,
-        Unopposed
-    }
-
     public PopupType TryFormClash(ActionClass existingAction, ActionClass incomingAction)
     {
         ActionWrapper? wrapper = actionQueue.GetWrapperForAction(existingAction);
         if (wrapper == null) return new PopupType.CustomPopup("Action not found in queue!");
 
         ClashResult result = wrapper.CheckClashValidity(incomingAction);
-        if (result == ClashResult.ValidClash || result == ClashResult.ValidRedirect)
+        if (result is ClashResult.ValidClash || result is ClashResult.ValidRedirect)
         {
             AddAction(incomingAction, wrapper);
             return new PopupType.None();
@@ -408,20 +395,20 @@ public class BattleQueue : MonoBehaviour
         public bool CanClashWithAction(ActionClass clashingAction, bool allowRedirect = false, EntityClass? simulatedTarget = null)
         {
             ClashResult res = CheckClashValidity(clashingAction, simulatedTarget);
-            return res == ClashResult.ValidClash || (allowRedirect && res == ClashResult.ValidRedirect);
+            return res is ClashResult.ValidClash || (allowRedirect && res is ClashResult.ValidRedirect);
         }
 
         public ClashResult CheckClashValidity(ActionClass incomingAction, EntityClass? simulatedTarget = null)
         {
-            if (IsClashing()) return ClashResult.TargetAlreadyClashing;
+            if (IsClashing()) return new ClashResult.TargetAlreadyClashing();
             
-            if (!incomingAction.Clashable) return ClashResult.SourceUnclashable;
+            if (!incomingAction.Clashable) return new ClashResult.SourceUnclashable();
             ActionClass existingAction = GetTheOnlyExistingAction();
-            if (!existingAction.Clashable) return ClashResult.TargetUnclashable;
+            if (!existingAction.Clashable) return new ClashResult.TargetUnclashable();
 
             bool isIncomingPlayer = incomingAction.IsPlayedByPlayer();
             bool isExistingPlayer = existingAction.IsPlayedByPlayer();
-            if (isExistingPlayer == isIncomingPlayer) return ClashResult.SameTeam;
+            if (isExistingPlayer == isIncomingPlayer) return new ClashResult.SameTeam();
 
             ActionClass playerAction = isIncomingPlayer ? incomingAction : existingAction;
             ActionClass enemyAction = isIncomingPlayer ? existingAction : incomingAction;
@@ -431,10 +418,10 @@ public class BattleQueue : MonoBehaviour
 
             return (playerTarget == enemyAction.Origin, enemyAction.Target == playerAction.Origin, playerAction.Speed >= enemyAction.Speed) switch
             {
-                (false, _, _) => ClashResult.TargetMismatch,
-                (true, false, true) => ClashResult.ValidRedirect,
-                (true, false, false) => ClashResult.SpeedTooSlow,
-                (true, true, _) => ClashResult.ValidClash
+                (false, _, _) => new ClashResult.TargetMismatch(),
+                (true, false, false) => new ClashResult.SpeedTooSlow(),
+                (true, false, true) => new ClashResult.ValidRedirect(playerAction, enemyAction),
+                (true, true, _) => new ClashResult.ValidClash(playerAction, enemyAction)
             };
         }
 
@@ -496,6 +483,19 @@ public class BattleQueue : MonoBehaviour
             return "Wrapper has player: " + PlayerAction?.name + "Enemy: " + EnemyAction?.name;
         }
     }
+}
+
+public abstract record ClashResult
+{
+    public record ValidClash(ActionClass Left, ActionClass Right) : ClashResult;
+    public record ValidRedirect(ActionClass Left, ActionClass Right) : ClashResult;
+    public record SameTeam : ClashResult;
+    public record TargetUnclashable : ClashResult;
+    public record SourceUnclashable : ClashResult;
+    public record SpeedTooSlow : ClashResult;
+    public record TargetAlreadyClashing : ClashResult;
+    public record TargetMismatch : ClashResult;
+    public record Unopposed : ClashResult;
 }
 
 

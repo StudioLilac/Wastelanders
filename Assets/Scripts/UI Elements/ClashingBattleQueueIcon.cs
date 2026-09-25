@@ -15,8 +15,6 @@ public class ClashingBattleQueueIcon : MonoBehaviour, IBattleQueueDisplayable
     private BattleQueueIcons rightClashingAction = null!;
     [SerializeField] private SwordIcon swordIcon = null!;
     [SerializeField] private LayoutWidthFader widthFader = null!;
-
-    private static readonly ClashCalculator Calculator = new();
     private ActionClass leftClashing = null!;
     private ActionClass rightClashing = null!;
     public string Name => leftClashing.GetName();
@@ -58,9 +56,8 @@ public class ClashingBattleQueueIcon : MonoBehaviour, IBattleQueueDisplayable
     }
 
     private void UpdateSwordIcon(ActionClass? _) =>
-        swordIcon.SetClashState(Calculator.CompareRange(GetRange(leftClashing), GetRange(rightClashing)));
+        swordIcon.SetClashState(ClashCalculator.CompareRange(leftClashing, rightClashing));
 
-    private (int, int) GetRange(ActionClass actionClass) => ((actionClass.GetRolledStats().RollFloor), (actionClass.GetRolledStats().RollCeiling));
 
     public void SetFullyTransparent()
     {
@@ -125,22 +122,9 @@ public enum ClashResultType
     Hopeless = 5
 }
 
-public static class ClashResultExtensions
+public static class ClashCalculator
 {
-    public static string GetDescription(this ClashResultType clashResultType) => clashResultType switch
-    {
-        ClashResultType.Dominating => "You are overwhelmingly likely to win this clash.",
-        ClashResultType.Favourable => "You have a strong chance of winning this clash.",
-        ClashResultType.Even => "Both sides have an equal chance of winning this clash.",
-        ClashResultType.Unfavourable => "You are unlikely to win this clash.",
-        ClashResultType.Hopeless => "You are overwhelmingly unlikely to win this clash.",
-        _ => "No clash data available."
-    };
-}
-
-public class ClashCalculator
-{
-    private readonly List<ClashBracket> _brackets = new()
+    private static readonly List<ClashBracket> _brackets = new()
     {
         new ClashBracket(0.2f, ClashResultType.Hopeless),
         new ClashBracket(0.4f, ClashResultType.Unfavourable),
@@ -149,11 +133,16 @@ public class ClashCalculator
         new ClashBracket(1.0f, ClashResultType.Dominating)
     };
 
-    [SerializeField] private bool _winsIncludeTies = true;
+    private const bool WinsIncludeTies = true;
 
-    public ClashResultType CompareRange((int min, int max) leftRange, (int min, int max) rightRange)
+    private static (int, int) GetRange(ActionClass actionClass) => ((actionClass.GetRolledStats().RollFloor), (actionClass.GetRolledStats().RollCeiling));
+
+    public static ClashResultType CompareRange(ActionClass playerAction, ActionClass enemyAction)
     {
-        float winChance = CalculateWinProbability(leftRange, rightRange, _winsIncludeTies);
+        (int min, int max) leftRange = GetRange(playerAction);
+        (int min, int max) rightRange = GetRange(enemyAction);
+
+        float winChance = CalculateWinProbability(leftRange, rightRange, WinsIncludeTies);
 
         foreach (var bracket in _brackets)
         {
@@ -165,7 +154,7 @@ public class ClashCalculator
         return ClashResultType.Dominating;
     }
 
-    private float CalculateWinProbability((int min, int max) left, (int min, int max) right, bool includeTies)
+    private static float CalculateWinProbability((int min, int max) left, (int min, int max) right, bool includeTies)
     {
         float totalCombinations = (left.max - left.min + 1) * (right.max - right.min + 1);
 
@@ -186,6 +175,15 @@ public class ClashCalculator
         return winningCombinations / totalCombinations;
     }
 
+    public static string GetDescription(this ClashResultType clashResultType) => clashResultType switch
+    {
+        ClashResultType.Dominating => "You are overwhelmingly likely to win this clash.",
+        ClashResultType.Favourable => "You have a strong chance of winning this clash.",
+        ClashResultType.Even => "Both sides have an equal chance of winning this clash.",
+        ClashResultType.Unfavourable => "You are unlikely to win this clash.",
+        ClashResultType.Hopeless => "You are overwhelmingly unlikely to win this clash.",
+        _ => "No clash data available."
+    };
 
     private record ClashBracket(float Threshold, ClashResultType Result) { }
 }
