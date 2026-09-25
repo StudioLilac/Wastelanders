@@ -75,7 +75,7 @@ namespace DialogueScripts
     /// Automatically advances this dialogue entry after it finishes. 
     public class AutoAdvanceAfter : DialogueEvents, IEvent
     {
-        public float Time = 0.5f;
+        public float Time = 1.5f;
         public override void Execute() => this.Invoke();
     }
     public class CustomEvent: DialogueEvents, IEvent

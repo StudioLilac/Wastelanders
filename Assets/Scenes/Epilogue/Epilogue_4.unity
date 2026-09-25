@@ -1623,25 +1623,13 @@ MonoBehaviour:
     events:
     - rid: 2124643721081258110
     - rid: 2124643721081258111
-  - content: But it was my invention that failed to protect us... failed you.
+  - content: But it was my gloves that the Frog used to hurt us... hurt you.
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     sfxId: 0
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258112
-  - content: Hey, I knew the risks. All of us did.
-    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxId: 0
-    picture: {fileID: 0}
-    events:
-    - rid: 2124643721081258113
-  - content: Far as I see it, your invention got the NITES further than anyone else
-      ever has. One step closer to Ailin.
-    speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
-    sfxId: 0
-    picture: {fileID: 0}
-    events: []
-  - content: "But I should\u2019ve known about the reaction, about the Frog. If only
+  - content: "I should\u2019ve known about the Frog, about the injection. If only
       I knew more..."
     speaker: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
     sfxId: 0
@@ -1663,8 +1651,8 @@ MonoBehaviour:
     picture: {fileID: 0}
     events:
     - rid: 2124643721081258118
-  - content: "Listen, I get it. That terrible feeling of \u2018what could\u2019 if
-      you had <b>just known</b>..."
+  - content: Listen, I get it. That terrible feeling of seeing what you could've
+      done if you had <b>just known</b>...
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -1736,8 +1724,8 @@ MonoBehaviour:
     sfxId: 0
     picture: {fileID: 0}
     events: []
-  - content: "So when those expectations aren\u2019t met, that person you think you
-      should be calls you worthless."
+  - content: "So when those expectations ain\u2019t met, that perfect person calls
+      you worthless."
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxId: 0
     picture: {fileID: 0}
@@ -1988,10 +1976,6 @@ MonoBehaviour:
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:
         actor: {fileID: 11400000, guid: 275918e912c757f4ab1b228eefee6401, type: 2}
-    - rid: 2124643721081258113
-      type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
-      data:
-        actor: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     - rid: 2124643721081258114
       type: {class: SetSpeaker, ns: DialogueScripts, asm: MainGame}
       data:

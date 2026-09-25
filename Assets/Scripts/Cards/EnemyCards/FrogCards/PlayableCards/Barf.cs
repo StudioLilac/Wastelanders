@@ -11,7 +11,7 @@ public class Barf : FrogAttacks, IPlayablePrincessFrogCard
         lowerBound = 1;
         upperBound = 4;
 
-        Speed = 4;
+        Speed = 3;
 
         CostToAddToDeck = 2;
 

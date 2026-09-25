@@ -88,6 +88,7 @@ namespace Entities
             List <EnemyClass> availableDeadMinions = GetStaggeredMinions();
             int activeMinionCount = OwnedMinions.Count - availableDeadMinions.Count + 1;
             int gobblePotentialStacks = 0;
+            bool shouldBarf = false;
 
             for (int i = 0; i < NumberOfAttacks; i++)
             {
@@ -152,7 +153,8 @@ namespace Entities
                         }
                         break;
                     default:
-                        AttackWith(HurlCards[i], CalculateAttackTarget(opponents));
+                        if (shouldBarf) AttackWith(HurlCards[i], CalculateAttackTarget(opponents));
+                        shouldBarf = true; // Only barf if you fall through to default twice. Otherwise, loose one attack. 
                         break;
                 }
 
