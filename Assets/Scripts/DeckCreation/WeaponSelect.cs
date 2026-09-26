@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 
+public record WeaponSelectEvent(WeaponSelect WeaponSelect, CardDatabase.WeaponType Type) : IEvent;
 public class WeaponSelect : MonoBehaviour
 {
     public CardDatabase.WeaponType type;
@@ -53,7 +54,7 @@ public class WeaponSelect : MonoBehaviour
         if (isMouseDown)
         {
             SetColor(baseColor);
-            WeaponSelectEvent?.Invoke(this, type);
+            new WeaponSelectEvent(this, type).Invoke();
         }
         isMouseDown = false;
     }
