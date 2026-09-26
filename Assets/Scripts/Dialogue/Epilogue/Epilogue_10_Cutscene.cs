@@ -93,7 +93,7 @@ namespace Dialogue.Epilogue
                 yield return jackie.MoveToPosition(JackieBehindCrystal3.position, 0f, 0.5f);
 
                 yield return new DialogueAsCode()
-                    .Line(DialogueCharacter.Jackie, "Why arn't these beetles moving?")
+                    .Line(DialogueCharacter.Jackie, "Why aren't these beetles moving?")
                     .Line(DialogueCharacter.Jackie, "Are they guarding the princess frog?")
                     .Line(DialogueCharacter.Jackie, "...")
                     .Line(DialogueCharacter.Jackie, "If so... let me try something.")
