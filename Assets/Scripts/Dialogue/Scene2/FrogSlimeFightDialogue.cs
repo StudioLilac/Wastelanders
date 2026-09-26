@@ -107,7 +107,6 @@ public class FrogSlimeFightDialogue : DialogueClasses
     {
         CombatManager.ClearEvents();
         DialogueBox.ClearDialogueEvents();
-        HighlightManager.Instance.PlayerManuallyInsertedAction -= OnPlayerPlayClashingCard;
         DisplayableClass.OnShowCard -= ExplainDefense;
     }
     private void SetUpCombatStatus()
@@ -442,7 +441,9 @@ public class FrogSlimeFightDialogue : DialogueClasses
 
     IEnumerator BeginClashTutorial()
     {
-        yield return StartDialogueWithNextEvent(explainEnemyAttacks, () => { HighlightManager.Instance.PlayerManuallyInsertedAction += OnPlayerPlayClashingCard; });
+        yield return StartDialogueWithNextEvent(explainEnemyAttacks, () => {
+            this.Subscribe<PlayerManuallyInsertedAction>(OnPlayerPlayClashingCard);
+        });
         yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.FIGHTING);
         //Combat will start and clash phase will happen in between
 
@@ -450,9 +451,9 @@ public class FrogSlimeFightDialogue : DialogueClasses
         yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.SELECTION);
         yield return StartCoroutine(DialogueBoxV2.Instance.Play(afterClashing));
     }
-    private void OnPlayerPlayClashingCard(ActionClass actionClass)
+    private void OnPlayerPlayClashingCard(PlayerManuallyInsertedAction ev)
     {
-        HighlightManager.Instance.PlayerManuallyInsertedAction -= OnPlayerPlayClashingCard;
+        this.UnSubscribe<PlayerManuallyInsertedAction>(OnPlayerPlayClashingCard);
         StartCoroutine(StartDialogueWithNextEvent(explainClashing, () => { CardComparator.Instance.playersAreRollingDiceEvent += OnPlayerClashingWithSlime; }));
     }
 

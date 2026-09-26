@@ -15,10 +15,20 @@ public enum UISortOrder
     GameOverDialogue,
     PauseMenu,
     FadeScreen,
-    SaveIndicator
+    SaveIndicator,
+    CombatCursor,
+}
+public enum UISortName
+{
+    Default,
+    CombatLayer,
+    CardUILayer,
+    DialogueLayer,
+    Top
 }
 
 public static class UiSortOrderHelpers
 {
     public static int GetOrder(this UISortOrder order) => (int) order;
+    public static string GetSortName(this UISortName name) => name.ToString();
 } 

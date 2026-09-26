@@ -13,25 +13,29 @@ MonoBehaviour:
   m_Name: 15.5 IvesTutorialAFterInsertion
   m_EditorClassIdentifier: 
   dialogue:
-  - bodyText: Sometimes if no Clash forms, your Action was too slow to redirect the
-      attack towards you.
-    speakerName: Ives
+  - bodyText: In two-player combat clashing rules are slightly different.
+    speakerName: Tutorial
     displayingImage: {fileID: -2991674613422419996, guid: 1e6cf2fca7138174e8f34bd44807fdc0, type: 3}
     broadcastAnEvent: 0
-  - bodyText: 'In that case, you can choose to play the Action on the enemy itself
-      to create an unopposed attack. '
-    speakerName: Ives
+  - bodyText: Playing an Action on the enemy itself (rather than on the Icon like
+      we did just now), will form a clash only if the enemy is targetting you back.
+    speakerName: Tutorial
     displayingImage: {fileID: 21300000, guid: 6f8ab552348e73941b245fe9ca454974, type: 3}
     broadcastAnEvent: 0
-  - bodyText: Allowing you to get guaranteed damage or abilities while the opponent
-      is distracted.
-    speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 6f8ab552348e73941b245fe9ca454974, type: 3}
+  - bodyText: 'Ealier, if Ives had played the Action on the enemy itself, it would
+      have been an unopposed attack. '
+    speakerName: Tutorial
+    displayingImage: {fileID: 21300000, guid: 3fea2e94140c08246a0e502ee92d3761, type: 3}
     broadcastAnEvent: 0
-  - bodyText: 'Once you get the hang of it, we can make openings more effectively
-      than fighting alone. '
-    speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
+  - bodyText: If Jackie had played the Action on the enemy itself, it would have
+      been a clash. Because both Jackie and the enemy targeted each other.
+    speakerName: Tutorial
+    displayingImage: {fileID: -2991674613422419996, guid: 1e6cf2fca7138174e8f34bd44807fdc0, type: 3}
+    broadcastAnEvent: 0
+  - bodyText: Feel free to try the combinations out by retrieving your card from
+      the queue.
+    speakerName: Tutorial
+    displayingImage: {fileID: 21300000, guid: 6f8ab552348e73941b245fe9ca454974, type: 3}
     broadcastAnEvent: 0
   - bodyText: 'Feel free to visit the glossary in the pause menu should you need
       a refresher on key game mechanics. '
@@ -40,7 +44,7 @@ MonoBehaviour:
     broadcastAnEvent: 0
   - bodyText: "And remember, we still can\u2019t play Actions with overlapping Speeds."
     speakerName: Ives
-    displayingImage: {fileID: 21300000, guid: b1411cc1e1231574797f223a58264863, type: 3}
+    displayingImage: {fileID: 21300000, guid: 87cb7c6c6588a4a3a957b707239abbf0, type: 3}
     broadcastAnEvent: 0
   - bodyText: "In a crowded fight, stepping into each other\u2019s timing can be
       fatal."

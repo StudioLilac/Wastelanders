@@ -91,7 +91,6 @@ public class TutorialIntroduction : DialogueClasses
         DialogueBox.ClearDialogueEvents();
         ActionClass.CardHighlightedEvent -= OnPlayerFirstHighlightCard;
         EntityClass.OnEntityDeath -= FirstDummyDies;
-        DisplayableClass.OnShowCard -= ExplainDefense;
     }
 
     private IEnumerator ExecuteGameStart()
@@ -246,21 +245,21 @@ public class TutorialIntroduction : DialogueClasses
     private IEnumerator PlayerFirstHighlightCard(ActionClass card)
     {
         yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
-        HighlightManager.Instance.PlayerManuallyInsertedAction += OnPlayerFirstInsertCard;
+        this.Subscribe<PlayerManuallyInsertedAction>(OnPlayerFirstInsertCard);
         StartCoroutine(StartDialogueWithNextEvent(cardFieldsTutorial.Dialogue, () => { }));
     }
 
 
     //Once a player targets an enemy, we talk about the queue
-    private void OnPlayerFirstInsertCard(ActionClass card)
+    private void OnPlayerFirstInsertCard(PlayerManuallyInsertedAction ev)
     {
-        HighlightManager.Instance.PlayerManuallyInsertedAction -= OnPlayerFirstInsertCard;
+        this.UnSubscribe<PlayerManuallyInsertedAction>(OnPlayerFirstInsertCard);
         battleBeginButton.SelectionSprite.enabled = true;
         battleBeginButton.CanStartCombat = false;
-        StartCoroutine(PlayerFirstInsertCard(card));
+        StartCoroutine(PlayerFirstInsertCard());
     }
 
-    private IEnumerator PlayerFirstInsertCard(ActionClass card)
+    private IEnumerator PlayerFirstInsertCard()
     {
         yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
         DialogueManager.Instance.MoveBoxToBottom();
@@ -292,7 +291,7 @@ public class TutorialIntroduction : DialogueClasses
         yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
         CombatManager.Instance.GameState = GameState.SELECTION;
         new UIContextChangedEvent(new UIContext.Combat()).Invoke();
-        EntityClass.OnEntityDeath += OnDummyDies;
+        this.Subscribe<OnEntityDeath>(OnDummyDies);
         dummiesLeft = groupDummySpawnPos.Count;
         HUDV2.Instance.SetDeckInfoVisibility(true);
         StartCoroutine(DialogueBoxV2.Instance.Play(cardsExhaustedTutorial));
@@ -303,80 +302,17 @@ public class TutorialIntroduction : DialogueClasses
         yield return new WaitForSeconds(1f);
     }
 
-    private void OnDummyDies(EntityClass trainingDummy)
+    private void OnDummyDies(OnEntityDeath ev)
     {
-        trainingDummy.OutOfCombat();
-        trainingDummy.UnTargetable();
-        dummiesLeft -= 1;
-    }
-
-
-    //-----------------------------------Ives Fight----------------------------------------
-
-    private void BeginCombatIvesFight()
-    {
-        CombatManager.PlayersWinEvent += IvesDies; //Setup Listener to set state to Game Win
-        CombatManager.EnemiesWinEvent += EnemiesWin;
-        CombatManager.OnGameStateChanged += ExplainAbilities;
-        StartCoroutine(StartDialogueWithNextEvent(readingOpponentTutorial.Dialogue, () => { HighlightManager.Instance.PlayerManuallyInsertedAction += OnPlayerPlayClashingCard; }));
-    }
-
-    private void OnPlayerPlayClashingCard(ActionClass actionClass)
-    {
-        HighlightManager.Instance.PlayerManuallyInsertedAction -= OnPlayerPlayClashingCard;
-        StartCoroutine(StartDialogueWithNextEvent(clashingCardsTutorial.Dialogue, () => { CardComparator.Instance.playersAreRollingDiceEvent += OnPlayerClashingWithIves; }));
-    }
-
-    private IEnumerator OnPlayerClashingWithIves()
-    {
-        DialogueManager.Instance.MoveBoxToBottom();
-        CardComparator.Instance.playersAreRollingDiceEvent -= OnPlayerClashingWithIves;
-        yield return StartCoroutine(DialogueManager.Instance.StartDialogue(clashingOutcomeTutorial.Dialogue));
-    }
-
-    private void ExplainAbilities(GameState gameState)
-    {
-        if (gameState == GameState.SELECTION)
+        if (ev.Entity is TrainingDummy trainingDummy)
         {
-            CombatManager.OnGameStateChanged -= ExplainAbilities;
-            StartCoroutine(StartDialogueWithNextEvent(cardAbilitiesTutorial.Dialogue, () => { DisplayableClass.OnShowCard += ExplainDefense; CombatManager.OnGameStateChanged += GiveClashAdvice; }));
-        }
-
-    }
-
-    private void ExplainDefense(ActionClass actionClass)
-    {
-        DisplayableClass.OnShowCard -= ExplainDefense;
-        if (actionClass is Brace) StartCoroutine(StartDialogueWithNextEvent(defensiveCardsTutorial.Dialogue, () => { }));
-    }
-
-    private void GiveClashAdvice(GameState gameState)
-    {
-        if (gameState == GameState.SELECTION)
-        {
-            CombatManager.OnGameStateChanged -= GiveClashAdvice;
-            StartCoroutine(StartDialogueWithNextEvent(clashingStrategyTutorial.Dialogue, () => { }));
+            trainingDummy.OutOfCombat();
+            trainingDummy.UnTargetable();
+            dummiesLeft -= 1;
         }
     }
-    private void IvesDies()
-    {
-        CombatManager.PlayersWinEvent -= IvesDies; //Setup Listener to set state to Game Win
-        CombatManager.EnemiesWinEvent -= EnemiesWin;
-        CombatManager.Instance.GameState = GameState.GAME_WIN;
-    }
 
-    private void EnemiesWin()
-    {
-        GameLose();
-        CombatManager.PlayersWinEvent -= IvesDies;
-        CombatManager.EnemiesWinEvent -= EnemiesWin;
-        CombatManager.Instance.GameState = GameState.GAME_LOSE;
-    }
 
-    private void GameLose()
-    {
-        GameOver.Instance.FadeInWithDialogue(gameLoseDialogue);
-    }
     //------------------------------------------------------Helpers---------------------------------------------------------------------------------
 
     IEnumerator FadeImage(Image image, float duration, bool fadeIn)

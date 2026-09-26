@@ -16,9 +16,10 @@ namespace Managers {
         [SerializeField] private float padding = 0.5f;
 
         private List<GameObject> activeChevrons = new List<GameObject>();
-        
-        private Transform entity1;
-        private Transform entity2;
+#nullable enable
+        private Transform? entity1;
+        private Transform? entity2;
+        private ActionClass? highlightedAction;
         private bool hasActiveArrow = false;
         private bool isBidirectional = false;
         private float animationOffset = 0f;
@@ -33,38 +34,32 @@ namespace Managers {
             }
 
             this.Subscribe<DisplayableHoveredEvent>(HandleOnHovered);
-            this.Subscribe<DisplayableUnhoveredEvent>(HandleOnUnhovered);
-            this.Subscribe<BattleQueueIconClick>(HandleOnUnhovered);
+            this.Subscribe<DisplayableUnhoveredEvent>(_ => HandleOnUnhovered());
+            this.Subscribe<BattleQueueIconClick>(_ => HandleOnUnhovered());
+            this.Subscribe<PlayerManuallyInsertedAction>(_ => UpdateArrow());
         }
 
         private void HandleOnHovered(DisplayableHoveredEvent evt) {
-            var ac = evt.ActionClass;
-            bool isClashing = BattleQueue.BattleQueueInstance?.IsActionPartOfClash(ac) ?? false;
-            DrawArrow(ac.Origin.transform, ac.Target.transform, isClashing);
+            highlightedAction = evt.ActionClass;
+            UpdateArrow();
         }
 
-        private void HandleOnUnhovered(BattleQueueIconClick evt) => ClearArrow();
-
-        private void HandleOnUnhovered(DisplayableUnhoveredEvent evt) => ClearArrow();
-
-        GameObject CreateChevron() {
-            GameObject chevron = Instantiate(chevronPrefab, worldSpaceCanvas.transform);
-            Image image = chevron.GetComponent<Image>();
-            if (image != null) {
-                Color color = image.color;
-                color.a = 0f;
-                image.color = color;
-            }
-            return chevron;
-        }
-
-        void DestroyChevron(GameObject chevron) {
-            Destroy(chevron);
-        }
-
-        public void DrawArrow(Transform fromEntity, Transform toEntity, bool bidirectional = false) {
+        private void HandleOnUnhovered()
+        {
+            highlightedAction = null;
             ClearArrow();
-            
+        }
+
+        private void UpdateArrow()
+        {
+            if (highlightedAction == null) return;
+            bool isClashing = BattleQueue.BattleQueueInstance?.IsActionPartOfClash(highlightedAction) ?? false;
+            DrawArrow(highlightedAction.Origin.transform, highlightedAction.Target.transform, isClashing);
+        }
+
+        private void DrawArrow(Transform fromEntity, Transform toEntity, bool bidirectional = false)
+        {
+            ClearArrow();
             entity1 = fromEntity;
             entity2 = toEntity;
             isBidirectional = bidirectional;
@@ -81,6 +76,11 @@ namespace Managers {
             hasActiveArrow = false;
             entity1 = null;
             entity2 = null;
+        }
+
+        void DestroyChevron(GameObject chevron)
+        {
+            Destroy(chevron);
         }
 
         void Update() {
@@ -164,6 +164,18 @@ namespace Managers {
             }
         }
 
+        GameObject CreateChevron()
+        {
+            GameObject chevron = Instantiate(chevronPrefab, worldSpaceCanvas.transform);
+            Image image = chevron.GetComponent<Image>();
+            if (image != null)
+            {
+                Color color = image.color;
+                color.a = 0f;
+                image.color = color;
+            }
+            return chevron;
+        }
         void UpdateBidirectionalArrow(Vector3 start, Vector3 end, Vector3 direction, float distance) {
             Vector3 midpoint = (start + end) / 2f;
             float halfDistance = distance / 2f;

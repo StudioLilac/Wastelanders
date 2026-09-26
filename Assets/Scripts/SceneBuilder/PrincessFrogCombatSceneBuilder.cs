@@ -254,7 +254,7 @@ namespace SceneBuilder
         private Vector3[] PositionsFrom(Vector2 centerCoordinate, int count)
         {
             var dx = -1f * Mathf.Sign(centerCoordinate.x);
-            var dy = ContractExists(EnemySpawningContracts.QUEEN_BEETLE_SPAWN) ? 1.5f : 1f;
+            var dy = ContractExists(EnemySpawningContracts.QUEEN_BEETLE_SPAWN) ? 2.5f : 1f;
 
             var height = (count - 1) * dy;
             var top = centerCoordinate.y + height / 2f;

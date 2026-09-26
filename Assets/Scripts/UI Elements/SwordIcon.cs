@@ -5,14 +5,13 @@ using static IBattleQueueDisplayable;
 #nullable enable
 public class SwordIcon : MonoBehaviour
 {
-    private static readonly int ClashStateHash = Animator.StringToHash("ClashState");
     [SerializeField] private SpriteRenderer swordsIcon = null!;
     [SerializeField] private SpriteFadeHandler swordFader = null!;
     [SerializeField] private Animator swordsAnimator = null!;
     private ClashResultType currentClashType = default;
     private bool isActive = true;
     public GameObject GameObject => gameObject;
-
+    public static int ClashStateHash = Animator.StringToHash("ClashState");
     public void Awake()
     {
         Emphasize();

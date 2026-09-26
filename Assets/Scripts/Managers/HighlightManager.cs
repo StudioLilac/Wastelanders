@@ -6,17 +6,20 @@ using static UnityEngine.UI.Image;
 
 #nullable enable
 public record ActionIconClicked(ActionClass CardUI) : IEvent;
+public record EntityHovered(EntityClass Entity) : IEvent;
+public record EntityUnhovered(EntityClass Entity) : IEvent;
+public record GetCurrentHighlightedAction() : IQuery<ActionClass?>;
+public record PlayerManuallyInsertedAction() : IEvent;
 public record CurrentPlayer() : IQuery<PlayerClass?>;
 public record UpdateHand() : IEvent;
-public class HighlightManager : MonoBehaviour 
+public class HighlightManager : MonoBehaviour
 {
+    [SerializeField] private HoverIndicatorManager hoverIndicator = null!;
     private const float CURRENT_PLAYER_CROSSHAIR_SLOWDOWN_FACTOR = 0.35f;
     public static HighlightManager Instance { get; private set; } = null!;
     private EntityClass? currentHighlightedEnemyEntity = null;
     private ActionClass? currentHighlightedAction = null;
     private PlayerClass? selectedPlayer = null;
-    public delegate void ActionAddedDelegate(ActionClass card);
-    public event ActionAddedDelegate? PlayerManuallyInsertedAction;
 
     public static event Action<PlayerClass>? OnUpdateHand;
 
@@ -37,20 +40,16 @@ public class HighlightManager : MonoBehaviour
     private void Start()
     {
         this.Answer<CurrentPlayer, PlayerClass?>(GetCurrentPlayer);
+        this.Answer<GetCurrentHighlightedAction, ActionClass?>(_ => currentHighlightedAction);
         this.Subscribe<UpdateHand>(RenderAppropriateHand);
         this.Subscribe<ActionIconClicked>(e => OnIconClicked(e.CardUI, currentHighlightedAction));
         this.Subscribe<CardClicked>(c => OnActionClicked(c.Card));
         this.Subscribe<OnEntityClicked>(e => OnEntityClicked(e.Entity));
         this.Subscribe<GameStateChanged>(e => ResetSelection(e.NewState));
+        Instantiate(hoverIndicator, this.transform);
     }
 
-    private void OnDestroy()
-    {
-        PlayerManuallyInsertedAction = null;
-    }
-
-
-    public void OnEntityClicked(EntityClass clicked)
+    private void OnEntityClicked(EntityClass clicked)
     {
         if (CombatManager.Instance.GameState != GameState.SELECTION || PauseMenuV2.IsPaused) return;
 
@@ -135,13 +134,13 @@ public class HighlightManager : MonoBehaviour
     {
         currentHighlightedAction!.Target = currentHighlightedEnemyEntity;
         BattleQueue.BattleQueueInstance.AddAction(currentHighlightedAction);
-        PlayerManuallyInsertedAction?.Invoke(currentHighlightedAction);
         selectedPlayer!.HandleUseCard(currentHighlightedAction);
 
         currentHighlightedEnemyEntity!.DeHighlight();
         currentHighlightedAction.ForceNormalState();
         currentHighlightedEnemyEntity = null;
         currentHighlightedAction = null;
+        new PlayerManuallyInsertedAction().Invoke();
     }
 
     public void OnIconClicked(ActionClass clickedIcon, ActionClass? clashingAction)
@@ -155,12 +154,12 @@ public class HighlightManager : MonoBehaviour
             clashingAction.Target = null;
         } else
         {
-            PlayerManuallyInsertedAction?.Invoke(clickedIcon);
             selectedPlayer!.HandleUseCard(clashingAction);
             clickedIcon.Origin.DeHighlight();
             clashingAction.ForceNormalState();
             currentHighlightedEnemyEntity = null;
             currentHighlightedAction = null;
+            new PlayerManuallyInsertedAction().Invoke();
         }
     }
     public void OnActionClicked(ActionClass clicked)
@@ -237,5 +236,5 @@ public class HighlightManager : MonoBehaviour
     }
 
     private PlayerClass? GetCurrentPlayer(CurrentPlayer q) => selectedPlayer;
-    private static void RenderHand(PlayerClass player) => OnUpdateHand?.Invoke(player);
+    private static void RenderHand(PlayerClass player) => OnUpdateHand?.Invoke(player);    
 }

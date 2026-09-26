@@ -46,8 +46,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bd353aabc4247943a4de83d4aeeeb9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerDatabase: {fileID: 11400000, guid: 8727bc367ba518d4496483da96ba1cf0, type: 2}
-  cardDatabase: {fileID: 11400000, guid: 4ee9950b3d655254fb0def1cd879db6a, type: 2}
 --- !u!114 &1905115471838439451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,6 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 679523eb71397df4a9276a7796116b46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hoverIndicator: {fileID: 3792797094584038575, guid: 37a909827ef5f2342bbb74cf47e03849, type: 3}
 --- !u!114 &3136830004704286861
 MonoBehaviour:
   m_ObjectHideFlags: 0

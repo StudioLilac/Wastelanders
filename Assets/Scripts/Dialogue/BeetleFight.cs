@@ -583,9 +583,7 @@ public class BeetleFight : DialogueClasses
         Coroutine tutorialCoroutine = null;
         bool showNextCutout = false;
         this.Subscribe<CardClicked>(_ => showNextCutout = true); 
-        this.Subscribe<ClashFormed>(cf => {
-            if (cf.WasRedirected) finishedRedirectTutorial = true;
-        });
+        this.Subscribe<ClashFormed>(_ => finishedRedirectTutorial = true);
         this.Subscribe<CardInserted>(ci =>
         {
             if (!finishedRedirectTutorial && ci.ActionClass.Target == tutorialBeetle)
@@ -811,6 +809,6 @@ public class BeetleFight : DialogueClasses
     }
 
     private DialogueAsCode SelectAction => new DialogueAsCode().Line(DialogueCharacter.Ives, "Pick an Action that has a higher speed than Excavate's speed of 2.", picture: ivesPortrait);
-    private DialogueAsCode PlaceAction => new DialogueAsCode().Line(DialogueCharacter.Ives, "[Click] or [Drag] it onto the highlighted Action Icon. That'll form a clash and redirect the beetle's attack away from you.", picture: excavatePortrait);
+    private DialogueAsCode PlaceAction => new DialogueAsCode().Line(DialogueCharacter.Ives, "[Click] or [Drag] it onto the highlighted Action Icon. That'll form a clash and redirect the beetle's attack away from you, Jackie.", picture: excavatePortrait);
 
 }
