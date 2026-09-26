@@ -13,6 +13,11 @@ using WeaponDeckSerialization;
 using static CardDatabase;
 using static PlayerDatabase;
 
+public record EquipWeaponChanged() : IEvent;
+public record WeaponDeckModified(int AvailablePoints) : IEvent;
+public record GetCurrentDeckCards() : IQuery<List<ActionClass>>;
+public record GetCurrentEditingPlayer() : IQuery<PlayerData>;
+public record DeckSelectStateChanged(DeckSelectionState State) : IEvent;
 public class DeckSelectionManager : MonoBehaviour
 {
     [SerializeField] private GameObject characterSelectionUi;
@@ -46,9 +51,6 @@ public class DeckSelectionManager : MonoBehaviour
     public BuffExplainer buffExplainer;
     public static DeckSelectionManager Instance { get; private set; }
 #nullable enable
-    public delegate void PlayerActionDeckDelegate(int points);
-    public event PlayerActionDeckDelegate? PlayerActionDeckModifiedEvent;
-
     private string nextScene = SceneData.Get<SceneData.LevelSelect>().SceneName;
 
     private DeckSelectionState deckSelectionState;
@@ -75,11 +77,10 @@ public class DeckSelectionManager : MonoBehaviour
                     break;
             }
 
-            OnDeckSelectStateChanged?.Invoke(deckSelectionState);
+            new DeckSelectStateChanged(deckSelectionState).Invoke();
         }
     }
 
-    public static event Action<DeckSelectionState>? OnDeckSelectStateChanged;
     public static event Action<int, List<ActionClass>>? OnRenderDecks;
 
     private Collider2D[] allCollidersInScene = null!;
@@ -96,9 +97,13 @@ public class DeckSelectionManager : MonoBehaviour
         }
 
         allCollidersInScene = FindObjectsByType<Collider2D>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        this.Subscribe<WeaponSelectEvent>(WeaponSelected);
+        this.Subscribe<CardClicked>(c => ActionSelected(c.Card));
         this.Subscribe<PauseStateChangedEvent>(HandlePauseStateChanged);
-        this.Subscribe<CharachterSelected>(name => CharacterChosen(name.PlayerName));
+        this.Subscribe<CharacterSelected>(name => CharacterChosen(name.PlayerName));
         this.Subscribe<WeaponEditSelected>(weapon => WeaponDeckEdit(weapon.WeaponEditInformation));
+        this.Answer<GetCurrentDeckCards, List<ActionClass>>(GetCurrentDeckCards);
+        this.Answer<GetCurrentEditingPlayer, PlayerData>(_ => playerData);
     }
 
     void Start()
@@ -106,8 +111,6 @@ public class DeckSelectionManager : MonoBehaviour
         ActionClass.CardRightClickedEvent += CardRightClicked;
         ActionClass.CardHighlightedEvent += RenderCardInformation;
         ActionClass.CardUnhighlightedEvent += RemoveCardInformation;
-        WeaponSelect.WeaponSelectEvent += WeaponSelected;
-        this.Subscribe<CardClicked>(c => ActionSelected(c.Card));
         EnterDeckSelection();
     }
 
@@ -122,7 +125,6 @@ public class DeckSelectionManager : MonoBehaviour
         ActionClass.CardRightClickedEvent -= CardRightClicked;
         ActionClass.CardHighlightedEvent -= RenderCardInformation;
         ActionClass.CardUnhighlightedEvent -= RemoveCardInformation;
-        WeaponSelect.WeaponSelectEvent -= WeaponSelected;
     }
 
     public void PrevState()
@@ -167,8 +169,10 @@ public class DeckSelectionManager : MonoBehaviour
         selectedCharacterIndicator.gameObject.SetActive(true);
     }
 
-    private void WeaponSelected(WeaponSelect c, CardDatabase.WeaponType weaponType)
+    private void WeaponSelected(WeaponSelectEvent ev)
     {
+        (WeaponSelect c, CardDatabase.WeaponType weaponType) = ev;
+
         if (playerData.selectedWeapons.Contains(weaponType))
         {
             playerData.selectedWeapons.Remove(weaponType);
@@ -185,6 +189,7 @@ public class DeckSelectionManager : MonoBehaviour
         {
             new DisplayWarning(new PopupType.CustomPopup("2 Weapons Max! \n Deselect one to select this.")).Invoke();
         }
+        new EquipWeaponChanged().Invoke();
     }
 
     private void WeaponDeckEdit(WeaponEditInformation weaponEditInformation)
@@ -208,14 +213,13 @@ public class DeckSelectionManager : MonoBehaviour
         int availablePoints = weaponPointTuple.MaxPoints - currentPointsForWeapon;
         pointsText.TextUpdate("Available Points: <color=#FFD700>" + availablePoints.ToString() + "</color>");
 
-        PlayerActionDeckModifiedEvent?.Invoke(availablePoints);
+        new WeaponDeckModified(availablePoints).Invoke();
     }
 
-    public List<ActionClass> GetCurrentDeckCards()
+    private List<ActionClass> GetCurrentDeckCards(GetCurrentDeckCards cards)
     {
         if (playerData == null || cardDatabase == null) return new List<ActionClass>();
-        return cardDatabase.GetPrefabInfoForDeck(playerData.GetPlayerWeaponDeck(weaponType).weaponDeck)
-            .Select(it => it.ActionClass).ToList();
+        return cardDatabase.GetPrefabInfoForDeck(playerData.GetCombinedDeck()).Select(it => it.ActionClass).ToList();
     }
 
     // PERF: DeckContainsCard finds an actionFound but in doesn't return it, which is searched for again here.

@@ -17,35 +17,21 @@ public class DeckSpeedHistogram : MonoBehaviour
     [SerializeField] private SpeedBar[] speedBars; 
     [SerializeField] private TMP_Text cardCountText;
     [SerializeField] private int maxBarValue = 10;
-
+#nullable enable
     private void Start()
     {
-        if (DeckSelectionManager.Instance != null)
-        {
-            DeckSelectionManager.Instance.PlayerActionDeckModifiedEvent += OnDeckModified;
-            // Initialize with current deck
-            UpdateHistogram();
-        }
+        this.Subscribe<WeaponDeckModified>(_ => OnDeckModified());
+        UpdateHistogram();
     }
 
-    private void OnDestroy()
-    {
-        if (DeckSelectionManager.Instance != null)
-        {
-            DeckSelectionManager.Instance.PlayerActionDeckModifiedEvent -= OnDeckModified;
-        }
-    }
-
-    private void OnDeckModified(int availablePoints)
+    private void OnDeckModified()
     {
         UpdateHistogram();
     }
 
     public void UpdateHistogram()
     {
-        if (DeckSelectionManager.Instance == null) return;
-
-        List<ActionClass> deckCards = DeckSelectionManager.Instance.GetCurrentDeckCards();
+        List<ActionClass>? deckCards = new GetCurrentDeckCards().Query();
         if (deckCards == null) return;
 
         int totalCards = deckCards.Count;
