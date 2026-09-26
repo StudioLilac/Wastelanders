@@ -583,9 +583,7 @@ public class BeetleFight : DialogueClasses
         Coroutine tutorialCoroutine = null;
         bool showNextCutout = false;
         this.Subscribe<CardClicked>(_ => showNextCutout = true); 
-        this.Subscribe<ClashFormed>(cf => {
-            if (cf.WasRedirected) finishedRedirectTutorial = true;
-        });
+        this.Subscribe<ClashFormed>(_ => finishedRedirectTutorial = true);
         this.Subscribe<CardInserted>(ci =>
         {
             if (!finishedRedirectTutorial && ci.ActionClass.Target == tutorialBeetle)
