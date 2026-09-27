@@ -33,8 +33,8 @@ namespace SceneBuilder
         {
             bounty = BountyManager.Instance.ActiveBounty;
             
-            SpawnAll(DeterminePlayers(), playersPosition);
-            SpawnAll(DetermineEnemies(), enemiesPosition);
+            SpawnAll(DeterminePlayers(), EntityTeam.PlayerTeam, playersPosition);
+            SpawnAll(DetermineEnemies(), EntityTeam.EnemyTeam, enemiesPosition);
         }
 
         public void OnEnable()
@@ -181,9 +181,9 @@ namespace SceneBuilder
             };
         }
 
-        private void SpawnAll(GameObject[] prefabs, Vector3 position)
+        private void SpawnAll(GameObject[] prefabs, EntityTeam team, Vector3 position)
         {
-            var positions = PositionsFrom(position, prefabs.Length);
+            var positions = PositionsFrom(position, team, prefabs.Length);
             for (var i = 0; i < prefabs.Length; i++)
             {
                 Spawn(prefabs[i], positions[i]);
@@ -226,7 +226,7 @@ namespace SceneBuilder
         {
             List<EntityClass> spawns = new GetTeammates(EntityTeam.EnemyTeam).Query() ?? new();
 
-            var positions = PositionsFrom(enemiesPosition, spawns.Count);
+            var positions = PositionsFrom(enemiesPosition, EntityTeam.EnemyTeam, spawns.Count);
             for (var i = 0; i < spawns.Count; i++)
             {
                 spawns[i].SetReturnPosition(entityContainer.transform.position + positions[i]);
@@ -238,7 +238,7 @@ namespace SceneBuilder
             List<EntityClass> players = new GetTeammates(EntityTeam.PlayerTeam).Query() ?? new();
 
 
-            var positions = PositionsFrom(playersPosition, players.Count);
+            var positions = PositionsFrom(playersPosition, EntityTeam.PlayerTeam, players.Count);
             for (var i = 0; i < players.Count; i++)
             {
                 players[i].SetReturnPosition(entityContainer.transform.position + positions[i]);
@@ -248,13 +248,13 @@ namespace SceneBuilder
         private void HandleEntityChange(EntityClass entity)
         {
             UpdatePlayerLayout();
-            //UpdateEnemyLayout();
+            if (ContractExists(EnemySpawningContracts.QUEEN_BEETLE_SPAWN)) UpdateEnemyLayout();
         }
 
-        private Vector3[] PositionsFrom(Vector2 centerCoordinate, int count)
+        private Vector3[] PositionsFrom(Vector2 centerCoordinate, EntityTeam team, int count)
         {
             var dx = -1f * Mathf.Sign(centerCoordinate.x);
-            var dy = ContractExists(EnemySpawningContracts.QUEEN_BEETLE_SPAWN) ? 2.5f : 1f;
+            var dy = DetermineDY(team, count);
 
             var height = (count - 1) * dy;
             var top = centerCoordinate.y + height / 2f;
@@ -267,6 +267,13 @@ namespace SceneBuilder
 
             return positions;
         }
+
+        float DetermineDY(EntityTeam team, int count) => team switch {
+            EntityTeam.EnemyTeam when ContractExists(EnemySpawningContracts.QUEEN_BEETLE_SPAWN) && count == 2 => 2.5f,
+            EntityTeam.EnemyTeam when ContractExists(EnemySpawningContracts.QUEEN_BEETLE_SPAWN) => 1.4f,
+            EntityTeam.PlayerTeam => 1.1f,
+            _ => 1f,
+        };
 
         private bool ContractExists(IContracts contract)
         {

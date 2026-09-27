@@ -269,7 +269,7 @@ public class CombatInfo : MonoBehaviour
         }
         damagePopupText.GetComponent<MeshRenderer>().sortingOrder = FadeSortingOrder - 1;
         diceRollSprite.sortingOrder = FadeSortingOrder - 1;
-        buffListCanvas.sortingOrder = FadeSortingOrder - 1;
+        buffListCanvas.sortingOrder = FadeSortingOrder - 3;
         diceRollText.GetComponent<MeshRenderer>().sortingOrder = FadeSortingOrder - 1;
         healthBar.DeEmphasize();
     }

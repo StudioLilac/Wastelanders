@@ -17,9 +17,23 @@ public class PreBounty1 : MonoBehaviour
 
     [SerializeField] private float ivesMoveSpeed = 6f;
 
+
+    void Awake()
+    {
+        if (GameStateManager.Instance.PreviousScene == SceneData.Get<SceneData.LevelSelect>())
+            this.Answer<GetGameState, GameState?>(_ => GameState.GAME_START); // Mock this scene as a combat scene to allow jump into combat.
+    }
+
     public void Start()
     {
-        StartCoroutine(StartScene());
+        if (GameStateManager.Instance.JumpToCombat)
+        {
+            GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.Epilogue_3>().SceneName, payload: new CombatPayload(SceneData.Get<SceneData.Epilogue_3>(), JumpToCombat: true));
+        }
+        else
+        {
+            StartCoroutine(StartScene());
+        }
     }
 
     public IEnumerator StartScene()
