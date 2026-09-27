@@ -16,9 +16,6 @@ public class WeaponSelect : MonoBehaviour
     private Color hoverColor = new Color(0.6f, 0.6f, 0.6f);
 
 #nullable enable
-    public delegate void WeaponSelectDelegate(WeaponSelect weaponSelect, CardDatabase.WeaponType type);
-    public static event WeaponSelectDelegate? WeaponSelectEvent;
-
     private bool isMouseDown = false;
     private bool isLocked = false;
 
