@@ -46,13 +46,6 @@ public class DeckSelectionTutorial : MonoBehaviour
         StartCoroutine(ExecuteGameStart());
     }
 
-    private void OnDestroy()
-    {
-        WeaponSelect.WeaponSelectEvent -= HandleWeaponSelected;
-        DeckSelectionManager.Instance.PlayerActionDeckModifiedEvent -= HandleRunOutOfPoints;
-        DeckSelectionManager.OnDeckSelectStateChanged -= HandleDeckSelectStateChanged;
-    }
-
     private IEnumerator ExecuteGameStart()
     {
         bool showTutorial =
@@ -65,7 +58,7 @@ public class DeckSelectionTutorial : MonoBehaviour
         if (showHowToDeckSelectTutorial)
         {
             backButton.SetActive(false);
-            DeckSelectionManager.OnDeckSelectStateChanged += HandleDeckSelectStateChanged;
+            this.Subscribe<DeckSelectStateChanged>(HandleDeckSelectStateChanged);
             NormalizeTutorialDecks();
 
             foreach (WeaponEdit boxCollider in weaponEditBoxCollidersToDisable)
@@ -88,7 +81,7 @@ public class DeckSelectionTutorial : MonoBehaviour
                 playerSelectIndicator.enabled = true;
                 jackieSelect.GetComponent<BoxCollider2D>().enabled = true;
 
-                this.Subscribe<CharachterSelected>(HandleCharacterSelected);
+                this.Subscribe<CharacterSelected>(HandleCharacterSelected);
             }));
         }
         else if (showEnemyWeaponTutorial)
@@ -110,7 +103,7 @@ public class DeckSelectionTutorial : MonoBehaviour
                 materialTintFadeHandler.SetLightScreen();
             }
 
-            new CharachterSelected(PlayerDatabase.PlayerName.JACKIE).Invoke();
+            new CharacterSelected(PlayerDatabase.PlayerName.JACKIE).Invoke();
             interactionArea.gameObject.SetActive(true);
             materialTintFadeHandler.SetDarkScreen();
             screenCutoutScrim.SetTarget(new SpriteTarget(interactionArea));
@@ -125,14 +118,14 @@ public class DeckSelectionTutorial : MonoBehaviour
     }
 
 
-    private void HandleDeckSelectStateChanged(DeckSelectionState newState)
+    private void HandleDeckSelectStateChanged(DeckSelectStateChanged ev)
     {
-        backButton.SetActive(newState != DeckSelectionState.CharacterSelection);
+        backButton.SetActive(ev.State != DeckSelectionState.CharacterSelection);
     }
 
-    private void HandleCharacterSelected(CharachterSelected cs)
+    private void HandleCharacterSelected(CharacterSelected cs)
     {
-        this.UnSubscribe<CharachterSelected>(HandleCharacterSelected);
+        this.UnSubscribe<CharacterSelected>(HandleCharacterSelected);
 
         PlayerDatabase.PlayerName playerName = cs.PlayerName;
         playerSelectIndicator.enabled = false;
@@ -141,23 +134,24 @@ public class DeckSelectionTutorial : MonoBehaviour
         {
             weaponSelectIndicator.enabled = true;
             weaponSelectBoxCollidersToDisable.ForEach(ws => ws.GetComponent<PolygonCollider2D>().enabled = true);
-            WeaponSelect.WeaponSelectEvent += HandleWeaponSelected;
+            this.Subscribe<WeaponSelectEvent>(HandleWeaponSelected);
         }));
     }
 
-    private void HandleWeaponSelected(WeaponSelect weaponSelect, CardDatabase.WeaponType type)
+    private void HandleWeaponSelected(WeaponSelectEvent ev)
     {
+        (WeaponSelect weaponSelect, CardDatabase.WeaponType type) = ev;
         if (type != CardDatabase.WeaponType.PISTOL) return;
+        this.UnSubscribe<WeaponSelectEvent>(HandleWeaponSelected);
         weaponSelectIndicator.enabled = false;
-        WeaponSelect.WeaponSelectEvent -= HandleWeaponSelected;
+
         StartCoroutine(StartDialogueWithNextEvent(editYourWeapon, () => {
             foreach (WeaponEdit boxCollider in weaponEditBoxCollidersToDisable)
             {
                 boxCollider.GetComponent<BoxCollider2D>().enabled = true;
             }
-            DeckSelectionManager.OnDeckSelectStateChanged -= HandleDeckSelectStateChanged;
             editDeckIndicator.enabled = true;
-
+            this.UnSubscribe<DeckSelectStateChanged>(HandleDeckSelectStateChanged);
             this.Subscribe<WeaponEditSelected>(HandleWeaponEdited);
         }));
     }
@@ -170,13 +164,13 @@ public class DeckSelectionTutorial : MonoBehaviour
         editDeckIndicator.enabled = false;
         GameStateManager.Instance.UpdateLevelProgress(StageInformation.Get<StageInformation.FrogSlime>());
         DeckSelectionManager.Instance.SetNextScene(SceneData.Get<SceneData.FrogSlimeFight>().SceneName);
-        StartCoroutine(StartDialogueWithNextEvent(selectYourActions, () => { DeckSelectionManager.Instance.PlayerActionDeckModifiedEvent += HandleRunOutOfPoints; }));
+        StartCoroutine(StartDialogueWithNextEvent(selectYourActions, () => this.Subscribe<WeaponDeckModified>(HandleRunOutOfPoints)));
     }
-    private void HandleRunOutOfPoints(int points)
+    private void HandleRunOutOfPoints(WeaponDeckModified ev)
     {
-        if (points < 2)
+        if (ev.AvailablePoints < 2)
         {
-            DeckSelectionManager.Instance.PlayerActionDeckModifiedEvent -= HandleRunOutOfPoints;
+            this.UnSubscribe<WeaponDeckModified>(HandleRunOutOfPoints);
             backButtonIndicator.enabled = true;
             StartCoroutine(DialogueBoxV2.Instance.Play(backButtonTutorial));
         }

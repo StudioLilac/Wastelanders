@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 
+public record WeaponSelectEvent(WeaponSelect WeaponSelect, CardDatabase.WeaponType Type) : IEvent;
 public class WeaponSelect : MonoBehaviour
 {
     public CardDatabase.WeaponType type;
@@ -15,9 +16,6 @@ public class WeaponSelect : MonoBehaviour
     private Color hoverColor = new Color(0.6f, 0.6f, 0.6f);
 
 #nullable enable
-    public delegate void WeaponSelectDelegate(WeaponSelect weaponSelect, CardDatabase.WeaponType type);
-    public static event WeaponSelectDelegate? WeaponSelectEvent;
-
     private bool isMouseDown = false;
     private bool isLocked = false;
 
@@ -53,7 +51,7 @@ public class WeaponSelect : MonoBehaviour
         if (isMouseDown)
         {
             SetColor(baseColor);
-            WeaponSelectEvent?.Invoke(this, type);
+            new WeaponSelectEvent(this, type).Invoke();
         }
         isMouseDown = false;
     }

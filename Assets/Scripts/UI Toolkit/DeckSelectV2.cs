@@ -22,23 +22,22 @@ namespace UI_Toolkit
             rootDocument.panelSettings.sortingOrder = UISortOrder.Base.GetOrder();
 
             LoadInitialValues();
+            this.Subscribe<DeckSelectStateChanged>(OnDeckSelectStateChanged);
         }
 
         public void OnEnable()
         {
-            DeckSelectionManager.OnDeckSelectStateChanged += OnDeckSelectStateChanged;
             DeckSelectionManager.OnRenderDecks += OnRenderDecks;
         }
 
         public void OnDisable()
         {
-            DeckSelectionManager.OnDeckSelectStateChanged -= OnDeckSelectStateChanged;
             DeckSelectionManager.OnRenderDecks -= OnRenderDecks;
         }
 
-        private void OnDeckSelectStateChanged(DeckSelectionState state)
+        private void OnDeckSelectStateChanged(DeckSelectStateChanged ev)
         {
-            rootElem.style.display = state == DeckSelectionState.DeckSelection ? DisplayStyle.Flex : DisplayStyle.None;
+            rootElem.style.display = ev.State == DeckSelectionState.DeckSelection ? DisplayStyle.Flex : DisplayStyle.None;
         }
 
         private void OnRenderDecks(int cols, List<ActionClass> acs)
