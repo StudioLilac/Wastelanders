@@ -315,7 +315,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Too Slow
+  m_text: 'Too Slow
+
+    To Redirect'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bdff944414a5c49f68a57d29e782b2dd, type: 2}
   m_sharedMaterial: {fileID: -1472579445266561125, guid: bdff944414a5c49f68a57d29e782b2dd, type: 2}
