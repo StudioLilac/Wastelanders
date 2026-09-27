@@ -32,7 +32,7 @@ public class PrincessFrogBounties : IBounties
 
     public static readonly PrincessFrogBounties SLIME_CHALLENGE = new PrincessFrogBounties(
         contractSet: new HashSet<IContracts> { EnemySpawningContracts.SLIME_SPAWN },
-        challengeName: "Slime Fest",
+        challengeName: "SlimeFest",
         subtext: "Challenge for Level 5. Extras",
         flavourText: "Test your skills in this slimy situation!",
         rewards: "Slime Cards",
@@ -41,7 +41,7 @@ public class PrincessFrogBounties : IBounties
 
     public static readonly PrincessFrogBounties FROG_CHALLENGE = new PrincessFrogBounties(
         contractSet: new HashSet<IContracts> { EnemySpawningContracts.FROG_SPAWN },
-        challengeName: "Frog Fest",
+        challengeName: "FrogFest",
         subtext: "Challenge for Level 5. Extras",
         flavourText: "These frogs have gone wild, so hop to it!",
         rewards: "Frog Cards",

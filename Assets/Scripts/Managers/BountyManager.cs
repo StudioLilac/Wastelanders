@@ -77,10 +77,15 @@ public class BountyStateData
     {
         ChallengeCompletionState? challengeCompletionState = BountyCompletionData.Find(data => data.BountyName == bounty.BountyName);
 
+        if (challengeCompletionState == null)
+        {
+            BountyCompletionData.Add(new(bounty.BountyName, true));
+            return true;
+        }
+
         if (challengeCompletionState.Completed) return false;
 
-        if (challengeCompletionState == null) BountyCompletionData.Add(new(bounty.BountyName, true));
-        else challengeCompletionState.Completed = true;
+        challengeCompletionState.Completed = true;
         return true;
     }
 
