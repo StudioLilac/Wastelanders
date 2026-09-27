@@ -41,7 +41,7 @@ public class Epilogue3Driving
         .Line(DialogueCharacter.Ives,
             "Besides, a flat ain't the end of the world. It just tells me what kinda ground we're dealing with here.", sfx: SoundID.VN_jack_raising)
         .Line(DialogueCharacter.Ives,
-            "Jackie, radio the convoy. Tell 'em to let some air out of their tires. Softer rubber grips the rough better.")
+            "Jackie, radio the convoy. Tell 'em to let some air outta their tires. Softer rubber grips the rough better.")
         .Line(DialogueCharacter.Jackie,
             "Copy that. I'll keep watch while you work.", DialogueSprite.JackieRetort)
         .Line(DialogueCharacter.Jackie,
