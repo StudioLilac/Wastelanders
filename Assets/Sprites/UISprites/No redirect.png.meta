@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: c6f73c1c7e2584e6dbcb2a8f3d160b1a
+guid: c1abfae0cda1fd64aa42ac3b8cc536af
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8398409672689469449
-    second: frame0004_0
+      213: -772645343608881120
+    second: No redirect_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -34,10 +34,10 @@ TextureImporter:
   cubemapConvolution: 0
   seamlessCubemap: 0
   textureFormat: 1
-  maxTextureSize: 1024
+  maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -48,7 +48,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 1
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -85,20 +85,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
     buildTarget: Standalone
-    maxTextureSize: 1024
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 1024
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -113,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: frame0004_0
+      name: No redirect_0
       rect:
         serializedVersion: 2
-        x: 1025
-        y: 1416
-        width: 32
-        height: 19
+        x: 4
+        y: 0
+        width: 33
+        height: 43
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7f7b32d36ead27b80800000000000000
-      internalID: -8398409672689469449
+      spriteID: 02045d457230745f0800000000000000
+      internalID: -772645343608881120
       vertices: []
       indices: 
       edges: []
@@ -148,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      frame0004_0: -8398409672689469449
+      No redirect_0: -772645343608881120
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
