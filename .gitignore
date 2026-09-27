@@ -29,7 +29,7 @@
 
 # Visual Studio Code directory
 .vscode/
-Wastelanders.slnx 
+*.slnx
 
 # Gradle cache directory
 .gradle/
