@@ -54,7 +54,7 @@ public class Epilogue3Driving
             DialogueSprite.CamSmile)
         .Line(DialogueCharacter.Cam, "We'll be there soon, I promise!")
         .Line(DialogueCharacter.Jackie, "...Don't promise. Just get it done.", DialogueSprite.JackieSerious)
-        .Narrate("<i>After a short while, the grease covered Ives emerges from under the vehicle.</i>", sfx: SoundID.VN_drill)
+        .Narrate("<i>After a short break, a grease-covered Ives emerges from under the vehicle.</i>", sfx: SoundID.VN_drill)
         .Line(DialogueCharacter.Ives, "Let's get back to it.", DialogueSprite.IvesNeutral, sfx: SoundID.VN_door_shut)
         .Exit(DialogueCharacter.Jackie, DialogueCharacter.Cam, DialogueCharacter.Ives)
         .Narrate("<i>The engine revs back to life as the vanguard continues on their way.</i>", SoundID.VN_engine_rev);
