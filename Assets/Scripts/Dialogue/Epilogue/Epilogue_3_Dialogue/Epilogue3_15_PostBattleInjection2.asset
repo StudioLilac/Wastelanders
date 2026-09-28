@@ -23,8 +23,7 @@ MonoBehaviour:
     - rid: 6570561780457144463
     - rid: 6570561780457144465
     - rid: 6570561780457144466
-  - content: <i>The needle tumbles in the dirt as it is batted off to the side by
-      Jackie.</i>
+  - content: <i>Jackie rips out the needle and throws it to the ground.</i>
     speaker: {fileID: 11400000, guid: 9eb64e5cd0fdbe944b654af85100bcb6, type: 2}
     sfxId: 0
     picture: {fileID: 0}
