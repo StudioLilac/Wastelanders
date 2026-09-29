@@ -142,6 +142,12 @@ public class CombatInfo : MonoBehaviour
         RenderCombatIcons();
     }
 
+    public void RemoveAllCombatSprites()
+    {
+        combatCards.Clear();
+        RenderCombatIcons();
+    }
+
 
     private void RenderCombatIcons()
     {

@@ -241,8 +241,6 @@ public class CombatManager : MonoBehaviour
 
         AudioManager.Instance.StartCombatMusic();
         GameState = GameState.SELECTION;
-        
-        new UIContextChangedEvent(new UIContext.Combat()).Invoke();
     }
 
 
@@ -281,12 +279,13 @@ public class CombatManager : MonoBehaviour
 
     private void PerformInCombat()
     {
-
         foreach (EntityClass entity in GrabAllEntities())
         {
             entity.InCombat();
             entity.Targetable();
         }
+
+        new UIContextChangedEvent(new UIContext.Combat()).Invoke();
     }
 
     public void SetEnemiesPassive(List<EnemyClass> passiveEnemies)

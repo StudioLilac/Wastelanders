@@ -37,6 +37,7 @@ namespace Director
             CombatManager.Instance.BeginCombat();
             yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(1.5f));
             new BattleIntroEvent(Get<ClashIntro>()).Invoke();
+
             yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
             AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
             bool didUpdate = BountyManager.Instance.NotifyWin();
@@ -60,8 +61,6 @@ namespace Director
 
         private void EnemiesWin()
         {
-            CombatManager.EnemiesWinEvent -= EnemiesWin;
-            CombatManager.PlayersWinEvent -= PlayersWin;
             GameLose();
             CombatManager.Instance.GameState = GameState.GAME_LOSE;
         }

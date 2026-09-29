@@ -191,20 +191,35 @@ public abstract class EntityClass : SelectClass
     //Removes entity cards and self from BQ and combat manager. Kills itself
     public virtual IEnumerator Die()
     {
-        float runDirection = (Team == EntityTeam.PlayerTeam) ? -1f : 1f;
-        
-        if (damageSourceDirection != default)
-            runDirection = Mathf.Sign(damageSourceDirection.x);
-
-        float runDistance = 10f * runDirection;
 
         DestroyDeck();
         OutOfCombat();
         UnTargetable();
 
-        yield return StartCoroutine(MoveToPosition(myTransform.position + new Vector3(runDistance, 0, 0), 0, 0.8f));
+        yield return DeathRun();
         this.gameObject.SetActive(false);
     }
+
+    public IEnumerator DieRevivable()
+    {
+        UnTargetable();
+        statusEffects.Clear();
+        UpdateBuffs();
+        yield return DeathRun();
+        this.gameObject.SetActive(false);
+    }
+
+    private IEnumerator DeathRun()
+    {
+        float runDirection = (Team == EntityTeam.PlayerTeam) ? -1f : 1f;
+
+        if (damageSourceDirection != default)
+            runDirection = Mathf.Sign(damageSourceDirection.x);
+
+        float runDistance = 10f * runDirection;
+        yield return StartCoroutine(MoveToPosition(myTransform.position + new Vector3(runDistance, 0, 0), 0, 0.8f));
+    }
+
 
     public IEnumerator PassOut()
     {
@@ -237,6 +252,7 @@ public abstract class EntityClass : SelectClass
 
     public void Revive()
     {
+        this.gameObject.SetActive(true);
         IsDead = false;
 
         transform.rotation = Quaternion.identity;
@@ -586,6 +602,7 @@ public abstract class EntityClass : SelectClass
         combatInfo.DeactivateCardIcon();
         UpdateBuffs();
         combatInfo.DisableBuffList();
+        combatInfo.RemoveAllCombatSprites();
     }
 
     public void InCombat()
