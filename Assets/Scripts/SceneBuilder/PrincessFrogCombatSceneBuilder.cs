@@ -174,28 +174,16 @@ namespace SceneBuilder
 
         private void AdjustEnemyClass(EnemyClass enemyClass)
         {
-            if (bounty?.ContractSet.Contains(PlayerContracts.SOLO_JACKIE) == true) {
-                enemyClass.TargetingWeights = delegate (EntityClass entity)
-                {
-                    return entity.Team switch
-                    {
-                        EntityTeam.PlayerTeam => 100,
-                        EntityTeam.NeutralTeam => 33,
-                        _ => 0
-                    };
-                };
-            } else
+            enemyClass.TargetingWeights = delegate (EntityClass entity)
             {
-                enemyClass.TargetingWeights = delegate (EntityClass entity)
+                return entity.Team switch
                 {
-                    return entity.Team switch
-                    {
-                        EntityTeam.PlayerTeam => 100,
-                        EntityTeam.NeutralTeam => 20,
-                        _ => 0
-                    };
+                    EntityTeam.PlayerTeam => 100,
+                    EntityTeam.NeutralTeam when bounty?.ContractSet.Contains(PlayerContracts.SOLO_JACKIE) == true => 33,
+                    EntityTeam.NeutralTeam => 20,
+                    _ => 0
                 };
-            }
+            };
         }
 
         private void SpawnAll(GameObject[] prefabs, EntityTeam team, Vector3 position)
