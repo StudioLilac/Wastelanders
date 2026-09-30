@@ -11,7 +11,7 @@ public class AttentionSeeker : MonoBehaviour
 
     public void ConfigureAttention(Condition criteriaMet)
     {
-        if (criteriaMet() && attentionFlashRoutine == null)
+        if (criteriaMet() && attentionFlashRoutine == null && isActiveAndEnabled)
         {
             attentionFlashRoutine = StartCoroutine(FlashAttentionRoutine());
         }
