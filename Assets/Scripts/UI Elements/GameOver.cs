@@ -16,7 +16,7 @@ public interface IGameOverIntro
     string DeathMessage();
 }
 
-
+public record UsedContinue() : IEvent;
 public class GameOver : MonoBehaviour
 {
     public static GameOver Instance { get; private set; }
@@ -29,9 +29,11 @@ public class GameOver : MonoBehaviour
     [SerializeField] ButtonFadable continueButton;
     [SerializeField] TextMeshProUGUI gameOverText;
     [SerializeField] UIFadeHandler uiFadeScreen;
+    [SerializeField] Sprite injectionSprite;
 # nullable enable
     private IGameOverIntro? activeIntro = null;
     public const float FADE_IN_TIME = 1f;
+
 
     void Awake()
     {
@@ -78,6 +80,10 @@ public class GameOver : MonoBehaviour
         {
             continueButton.gameObject.SetActive(true);
             continueButton.OnClick += () => StartCoroutine(RevivePlayers(players));
+            continueButton.OnHover += () => 
+                new TooltipEvent(TextTipDisplayStyle.Display, "Continue", "Take an injection and continue the fight.\nCompleting the Bounty afterwards unlocks the story, but not the clear rewards.", Icon: injectionSprite).Invoke();
+            continueButton.OnUnHover += () => 
+                new TooltipEvent(TextTipDisplayStyle.None).Invoke();
         }
         else
         {
@@ -93,6 +99,7 @@ public class GameOver : MonoBehaviour
         });
         yield return FadeOut();
         CombatManager.Instance.BeginCombat();
+        new UsedContinue().Invoke();
     }
 
 

@@ -96,7 +96,7 @@ public class BountySelect : MonoBehaviour
             return;
         }
 
-        bool completed = BountyManager.Instance.IsBountyCompleted(bounty);
+        BountyCompletionState completed = BountyManager.Instance.GetBountyCompletionState(bounty);
 
         bountyTitle.SetText(bounty.BountyName);
         bountyTitle.gameObject.SetActive(true);
@@ -107,17 +107,18 @@ public class BountySelect : MonoBehaviour
         bountyDescription.SetText(bounty.FlavourText);
         bountyDescription.gameObject.SetActive(true);
 
-        bountyRewards.SetText(
-            completed ?
-            $"<color=#66AB51><size=150%>Bounty completed!</size>\nObtained </color>{bounty.Rewards}"
-            :
-            $"<color=#FC7B8C><size=150%>Rewards:</size></color>\n{bounty.Rewards}"
+        bountyRewards.SetText(completed switch {
+            BountyCompletionState.CompletedWithoutContinue => $"<color=#66AB51><size=150%>Bounty completed!</size>\nObtained </color>{bounty.Rewards}",
+            BountyCompletionState.CompletedWithContinue => $"<color=#FFE000><size=150%>Bounty was continued! Rewards:</size></color>\n{bounty.Rewards}",
+            _ => $"<color=#FC7B8C><size=150%>Rewards:</size></color>\n{bounty.Rewards}"
+        }
         );
 
         bountyRewards.gameObject.SetActive(true);
 
         chooseBountyText.gameObject.SetActive(false);
     }
+
 
 
     // We need to update the popup text

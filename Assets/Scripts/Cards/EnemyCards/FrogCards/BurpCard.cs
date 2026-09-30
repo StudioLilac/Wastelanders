@@ -5,7 +5,7 @@ namespace Cards.EnemyCards.FrogCards
     public class BurpCard : FrogAttacks, IPlayablePrincessFrogCard
     {
         public const int BURP_COST = 1;
-        private bool NoCost => (Origin == null || Origin.Team != EntityTeam.EnemyTeam) && BountyManager.Instance.IsBountyCompleted(PrincessFrogBounties.PRINCESS_FROG_CHALLENGE);
+        private bool NoCost => (Origin == null || Origin.Team != EntityTeam.EnemyTeam) && BountyManager.Instance.IsBountyCompleteWithoutContinues(PrincessFrogBounties.PRINCESS_FROG_CHALLENGE);
         public override void Initialize()
         {
             base.Initialize();

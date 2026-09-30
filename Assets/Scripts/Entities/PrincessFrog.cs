@@ -89,6 +89,7 @@ namespace Entities
             int activeMinionCount = OwnedMinions.Count - availableDeadMinions.Count + 1;
             int gobblePotentialStacks = 0;
             bool shouldBarf = false;
+            bool shouldGobble = true;
 
             for (int i = 0; i < NumberOfAttacks; i++)
             {
@@ -124,9 +125,10 @@ namespace Entities
                             blessPlayedThisTurn++;
                         }
                         break;
-                    case var _ when neutral.Count > 0 && (gobblePotentialStacks + currentStacks) < 4:
+                    case var _ when shouldGobble && neutral.Count > 0 && (gobblePotentialStacks + currentStacks) < 4:
                         AttackWith(GobbleCards[i], CalculateAttackTarget(neutral));
                         gobblePotentialStacks += 3; //Pretends gobble succeeds and makes furthur decisions from there.
+                        shouldGobble = false; // Gobble only once per turn. 
                         new CardUsed<GobbleCard>().Invoke();
                         break;
                     case >= 1:

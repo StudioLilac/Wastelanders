@@ -6,6 +6,7 @@ using static BattleIntroEnum;
 
 namespace Director
 {
+    // Deprecated ives fight combat director.
     public class IvesFightCombatDirector : MonoBehaviour
     {
         [SerializeField] private GameObject entityContainer;
@@ -37,8 +38,7 @@ namespace Director
             new BattleIntroEvent(Get<ClashIntro>()).Invoke();
             yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
             AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
-            BountyManager.Instance.NotifyWin();
-            GameStateManager.Instance.UpdateLevelProgress(StageInformation.Get<StageInformation.IvesFinale>());
+            GameStateManager.Instance.UpdateLevelProgress(StageInformation.Get<StageInformation.Season2>());
             yield return new WaitForSeconds(1f);
             yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
             GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.LevelSelect>().SceneName);

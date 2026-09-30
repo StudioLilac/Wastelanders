@@ -16,6 +16,8 @@ public class ButtonFadable : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public float fadeDuration = 0.1f;
 
     [CanBeNull] public event Action OnClick;
+    [CanBeNull] public event Action OnHover;
+    [CanBeNull] public event Action OnUnHover;
 
     private void Awake()
     {
@@ -26,12 +28,14 @@ public class ButtonFadable : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         StopAllCoroutines();
         StartCoroutine(FadeTo(hoverAlpha));
+        OnHover?.Invoke();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         StopAllCoroutines();
         StartCoroutine(FadeTo(normalAlpha));
+        OnUnHover?.Invoke();
     }
 
     public void OnPointerDown(PointerEventData eventData)

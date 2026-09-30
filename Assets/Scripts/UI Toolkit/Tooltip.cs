@@ -55,8 +55,9 @@ namespace UI_Toolkit
             stacksLabel = tooltipBox.Q<Label>("buff-stacks");
             descriptionLabel = tooltipBox.Q<Label>("buff-description");
             iconLabel = tooltipBox.Q<VisualElement>("buff-icon");
+            uiDocument.panelSettings.sortingOrder = UISortOrder.ToolTip.GetOrder();
 
-            HideTooltip();
+           HideTooltip();
         }
 
         private void Update()

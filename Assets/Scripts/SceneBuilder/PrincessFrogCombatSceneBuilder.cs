@@ -103,6 +103,7 @@ namespace SceneBuilder
             {
                 list.Add(frogPrefab.gameObject);
                 list.Add(frogPrefab.gameObject);
+                list.Add(frogPrefab.gameObject);
             }
             else if (bounty?.ContractSet.Contains(EnemySpawningContracts.SLIME_SPAWN) == true)
             {
