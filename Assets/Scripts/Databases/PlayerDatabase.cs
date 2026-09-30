@@ -79,7 +79,7 @@ public class PlayerDatabase : ScriptableObject
                 new WeaponProficiency(WeaponType.STAFF,  12),
                 new WeaponProficiency(WeaponType.AXE, 10),
                 new WeaponProficiency(WeaponType.FIST, 10),
-                new WeaponProficiency(WeaponType.ENEMY, 10)
+                new WeaponProficiency(WeaponType.ENEMY, 12)
             },
             selectedWeapons: new() { WeaponType.STAFF, WeaponType.PISTOL },
             playerDeck: new()
