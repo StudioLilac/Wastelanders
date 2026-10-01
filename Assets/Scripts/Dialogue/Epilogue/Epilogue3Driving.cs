@@ -28,14 +28,10 @@ public class Epilogue3Driving
             DialogueSprite.JackieRetort)
         .Line(DialogueCharacter.Cam,
             "I really thought the map was right...")
-        .Line(DialogueCharacter.Cam,
-            "Ives, don't the vehicles have automated systems? Shouldn’t we just put it on autopilot?")
-        .Line(DialogueCharacter.Ives,
-            "Nah, the rest of the convoy can. But we’re up in front so they can have it that easy.")
-        .Line(DialogueCharacter.Ives,
-            "Our job is to get a feel for the route and relay it back.")
-        .Line(DialogueCharacter.Ives,
-            "You put it on autopilot, and the machine assumes the road is paved too.")
+        .Line(DialogueCharacter.Cam, "Ives, don't the vehicles have automated systems? Shouldn’t we just put it on autopilot?")
+        .Line(DialogueCharacter.Ives, "Nah, maybe the rest of the convoy can since they're followin' our tracks.")
+        .Line(DialogueCharacter.Ives, "But we're up front to get a feel for the route first, then send it down the line.")
+        .Line(DialogueCharacter.Ives, "You put it on autopilot, and the machine assumes the road is paved too.")
         .Line(DialogueCharacter.Ives,
             "I need to feel the wheel kick in my hands to be able to steer around the worst of these holes.")
         .Line(DialogueCharacter.Ives,

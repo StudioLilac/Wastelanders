@@ -220,7 +220,7 @@ public abstract class SceneData : Enum<SceneData>
     {
         public override string SceneName => "PreBounty_2";
 
-        public override SceneAudio GetAudio(AudioDatabase database) => database.Empty;
+        public override SceneAudio GetAudio(AudioDatabase database) => database.Epilogue2;
 
         public override MonoBehaviour[] ScenePrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
         {

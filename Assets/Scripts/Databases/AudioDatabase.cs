@@ -22,6 +22,7 @@ public class AudioDatabase : ScriptableObject
     public SceneAudio Tundra;
 
     [Header("Epilogue Scenes")]
+    public SceneAudio Epilogue2;
     public SceneAudio Epilogue3;
     public SceneAudio Epilogue4;
     public SceneAudio Epilogue6;
