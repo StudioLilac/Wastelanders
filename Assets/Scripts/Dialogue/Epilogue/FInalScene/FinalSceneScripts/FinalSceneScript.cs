@@ -78,7 +78,7 @@ namespace Cinematics
              .Line(Jackie, "I... found out what happened to Ma.", lead: 600f, rate: 25f, hold: 1400f)
              .Line(Ives, "...You did?", lead: 500f, rate: 15f, hold: 1000f)
              .Line(Jackie, "Yeah, she’s still hiding. But I think I see her shadow now.", rate: 25f, hold: 1200f)
-             .Line(Ives, $"...You've been playing hide and seek with her for{{!{FinalSceneDirector.TEARS_BEGIN}}} quite some time now. Haven't you.", lead: 400f, rate: 18f, hold: 1400f)
+             .Line(Ives, $"...You've been playing hide and seek with her for{{!{FinalSceneDirector.TEARS_BEGIN}}} quite some time now. Haven't you?", lead: 400f, rate: 18f, hold: 1400f)
              .Narrate("Jackie grasps harder. Tears begin to stream down her face. She nods.", rate: 30f, lead: 300f, hold: 1500f)
              .Line(Ives, "...Shit. C'mere, these arms still work.", rate: 16f, hold: 1200f)
 

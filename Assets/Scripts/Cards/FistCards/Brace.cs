@@ -15,7 +15,7 @@ public class Brace : FistCards
         Speed = 5;
 
         myName = "Brace";
-        description = "Block, then block the next one sided attack currently targeting this character.";
+        description = "Block, then block the next unopposed attack currently targeting this character.";
         CardType = CardType.Defense;
         base.Initialize();
     }
