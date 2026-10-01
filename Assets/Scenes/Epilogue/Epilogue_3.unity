@@ -863,6 +863,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7638263227755287879, guid: 55dd1017896a4294ebc48577819d6683, type: 3}
   m_PrefabInstance: {fileID: 228893298}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &258061841 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1895653638891560157, guid: 3727fe42f1ca7415fb600d193eb41d2d, type: 3}
+  m_PrefabInstance: {fileID: 1016679463}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6adb464f1698da341ab4389bebbddc09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &298055690
 GameObject:
   m_ObjectHideFlags: 0
@@ -4004,11 +4015,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7946142163233550150, guid: 3727fe42f1ca7415fb600d193eb41d2d, type: 3}
   m_PrefabInstance: {fileID: 1016679463}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1016679465 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6780893822242830176, guid: 3727fe42f1ca7415fb600d193eb41d2d, type: 3}
-  m_PrefabInstance: {fileID: 1016679463}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1024906646
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6640,7 +6646,7 @@ MonoBehaviour:
   cutOutHandler: {fileID: 1555820040}
   screenCutoutScrim: {fileID: 1555820041}
   materialTintFadeHandler: {fileID: 1555820042}
-  cardIconRendering: {fileID: 1016679465}
+  cardIconRendering: {fileID: 258061841}
   IvesPortrait: {fileID: 21300000, guid: 2634a2f81fa74ad4f90374821cfd0ee6, type: 3}
   GlossaryPortrait: {fileID: 21300000, guid: ce77eb358f2d54544adbd71c03209471, type: 3}
   BurpPortrait: {fileID: 21300000, guid: 3a11f99b970509a4dbe6813a9604ddc1, type: 3}

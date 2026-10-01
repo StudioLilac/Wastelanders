@@ -7,6 +7,7 @@ using static ActionClass;
 [RequireComponent(typeof(SpriteRenderer))]
 public class CombatCardUI : DisplayableClass
 {
+    [SerializeField] SpriteRenderer mainIcon;
     [SerializeField] SpriteRenderer targetRenderer;
     [SerializeField] TextMeshPro rangeText;
 
@@ -18,6 +19,7 @@ public class CombatCardUI : DisplayableClass
 #nullable enable
     private int FadeSortingOrder => new GetFadeSortingOrder().Query() ?? 0;
     private string FadeSortingLayer => new GetFadeSortingLayer().Query() ?? string.Empty;
+    public SpriteRenderer SpriteRenderer => mainIcon;
 
     protected override void OnDestroy()
     {
@@ -40,7 +42,7 @@ public class CombatCardUI : DisplayableClass
 
     private void OnEnable()
     {
-        GetComponent<SpriteRenderer>().sortingLayerName = FadeSortingLayer;
+        mainIcon.sortingLayerName = FadeSortingLayer;
         targetRenderer.sortingLayerName = FadeSortingLayer;
         unseenEnemyActionIndicator.sortingLayerName = FadeSortingLayer;
 
@@ -89,7 +91,7 @@ public class CombatCardUI : DisplayableClass
         ActionClass.CardValuesUpdating += UpdateRangeText;
         SetTargetIcon(ActionClass);
         UpdateRangeText(ActionClass);
-        GetComponent<SpriteRenderer>().sprite = actionClass.GetIcon();
+        mainIcon.sprite = actionClass.GetIcon();
         if (!ActionClass.IsPlayedByPlayer()) RenderUnseenIndicator();
     }
 
@@ -111,7 +113,7 @@ public class CombatCardUI : DisplayableClass
 
     public void Emphasize()
     {
-        GetComponent<SpriteRenderer>().sortingOrder = FadeSortingOrder + 1;
+        mainIcon.sortingOrder = FadeSortingOrder + 1;
 
         rangeText.GetComponent<MeshRenderer>().sortingOrder = FadeSortingOrder + 2;
         targetRenderer.GetComponent<SpriteRenderer>().sortingOrder = FadeSortingOrder + 2;
@@ -124,7 +126,7 @@ public class CombatCardUI : DisplayableClass
 
     public void DeEmphasize()
     {
-        GetComponent<SpriteRenderer>().sortingOrder = FadeSortingOrder - 3;
+        mainIcon.sortingOrder = FadeSortingOrder - 3;
 
         rangeText.GetComponent<MeshRenderer>().sortingOrder = FadeSortingOrder - 1;
         targetRenderer.GetComponent<SpriteRenderer>().sortingOrder = FadeSortingOrder - 1;
