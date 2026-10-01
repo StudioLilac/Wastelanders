@@ -65,7 +65,7 @@ namespace Dialogue.PreBounty
             yield return scrim.FadeInLightScreen(1f);
             ControllableAudioChannel eerie = AudioManager.Instance.CreateChannel(suspenseDrone, AudioCategory.Music, level: 0f);
             eerie.Play();
-            eerie.FadeTo(1f, 1f);
+            StartCoroutine(eerie.FadeTo(1f, 2f));
 
             SoundID.VN_footsteps.Play();
             yield return new WaitForSeconds(0.5f);
@@ -124,7 +124,7 @@ namespace Dialogue.PreBounty
 
             yield return new WaitForSeconds(1f);
             yield return DialogueBoxV2.Instance.Play(PreBounty8Dialogue.AilinScan);
-            StartCoroutine(eerie.FadeTo(1.5f, 2f));
+            StartCoroutine(eerie.FadeTo(1.75f, 2f));
             for (float t = 0; t < 3; t += Time.deltaTime) { ailinRevealLayer.color = new Color(1, 1, 1, t / 3); yield return null; }
             ailinRevealLayer.color = Color.white;
             yield return new WaitForSeconds(1.5f);

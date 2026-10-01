@@ -23,13 +23,13 @@ namespace Dialogue.Epilogue {
         private IEnumerator Start()
         {
             scrim.SetDarkScreen();
-            ControllableAudioChannel buzz = AudioManager.Instance.CreateChannel(officeBuzz, AudioCategory.Music, level: 1.2f);
+            ControllableAudioChannel buzz = AudioManager.Instance.CreateChannel(officeBuzz, AudioCategory.Music, level: 1.3f);
             ControllableAudioChannel footsteps = AudioManager.Instance.CreateChannel(footstepLoop, AudioCategory.Music, level: 1f);
             buzz.Play(); footsteps.Play();
             yield return scrim.FadeInLightScreen(2f);
 
             yield return new WaitForSeconds(1f);
-            StartCoroutine(footsteps.FadeTo(0.4f, 1.5f));
+            StartCoroutine(footsteps.FadeTo(0.5f, 1.5f));
             StartCoroutine(blackFadeHandler.FadeToAlpha(0.7f, 1f));
             yield return DialogueBoxV2.Instance.Play(walkingDialogue.Into());
             StartCoroutine(footsteps.FadeTo(0f, 1.5f));

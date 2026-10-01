@@ -46,7 +46,7 @@ public class Epilogue_9 : MonoBehaviour
         tunnelBg.SetActive(true); caveBg.SetActive(false);
         SoundID.VN_footsteps.Play();
 
-        ControllableAudioChannel eerie = AudioManager.Instance.CreateChannel(evilBackgroundTrack, AudioCategory.Music, level: 0.7f);
+        ControllableAudioChannel eerie = AudioManager.Instance.CreateChannel(evilBackgroundTrack, AudioCategory.Music, level: 0.75f);
         eerie.Play();
         ControllableAudioChannel tracker = AudioManager.Instance.CreateChannel(SoundID.VN_ep7_tracker_loop, AudioCategory.Music);
         tracker.Play();
