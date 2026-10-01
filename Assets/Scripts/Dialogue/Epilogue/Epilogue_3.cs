@@ -470,14 +470,12 @@ public class Epilogue_3 : MonoBehaviour
         yield return new WaitForSeconds(3f);
         if (ivesFighter.IsDead)
         {
-            ivesFighter.gameObject.SetActive(true);
             ivesFighter.Revive();
             ivesFighter.OutOfCombat();
         }
 
         if (jackieFighter.IsDead)
         {
-            jackieFighter.gameObject.SetActive(true);
             jackieFighter.Revive();
             jackieFighter.OutOfCombat();
         }
@@ -493,7 +491,6 @@ public class Epilogue_3 : MonoBehaviour
 
         EnemyBeetles.ForEach(it =>
         {
-            it.gameObject.SetActive(true);
             it.Revive();
             it.OutOfCombat();
             StartCoroutine(it.MoveToPosition(ivesFighter.transform.position, 3f, 1f));

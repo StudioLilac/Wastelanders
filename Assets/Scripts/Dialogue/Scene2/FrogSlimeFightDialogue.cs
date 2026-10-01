@@ -304,7 +304,7 @@ public class FrogSlimeFightDialogue : DialogueClasses
         StartCoroutine(frog2.ResetPosition());
         StartCoroutine(slimeStack.ResetPosition());
         jackie.DestroyDeck();
-        jackie.maxHandSize = 4;//Reset Jackie's deck
+        jackie.handSize = 4;//Reset Jackie's deck
         jackie.InstantiatePool();
         jackie.Heal(30);
         yield return StartCoroutine(frog.ResetPosition());

@@ -16,6 +16,7 @@ public class BountyButton : MonoBehaviour
     [SerializeField] private SpriteRenderer selectedRenderer;
     [SerializeField] private Sprite completed;
     [SerializeField] private Sprite incomplete;
+    [SerializeField] private Sprite continued;
 
     [Range(0, 1)]
     [SerializeField] private float hoverAlpha; // transparency level of selectedSprite when mouse is over
@@ -106,8 +107,14 @@ public class BountyButton : MonoBehaviour
     {
         rewardIconRenderer.sprite = bounty?.GetBountyAssets(bountyAssetDatabase).Sprite;
         bountyTitle.text = bounty?.BountyName;
-        bountyBackRenderer.sprite = BountyManager.Instance.IsBountyCompleted(bounty) ? completed : incomplete;
+        bountyBackRenderer.sprite = ChooseSprite();
     }
+
+    private Sprite ChooseSprite() => BountyManager.Instance.GetBountyCompletionState(bounty) switch {
+        BountyCompletionState.CompletedWithContinue => continued,
+        BountyCompletionState.CompletedWithoutContinue => completed,
+        _ => incomplete
+    };
 
     private void UpdateSelectedAlpha(float alpha)
     {

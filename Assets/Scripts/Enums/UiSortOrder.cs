@@ -13,6 +13,7 @@ public enum UISortOrder
     GameOverScrim,
     GameOverText,
     GameOverDialogue,
+    ToolTip,
     PauseMenu,
     FadeScreen,
     SaveIndicator,

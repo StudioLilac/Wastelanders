@@ -11,7 +11,7 @@ namespace Cards.EnemyCards.FrogCards
         [SerializeField] private AnimationClip animationClip;
 
         public BlessBuffTarget TargetBuff { get; set; } = BlessBuffTarget.Resonate;
-        private bool NoCost => (Origin == null || Origin.Team != EntityTeam.EnemyTeam) && BountyManager.Instance.IsBountyCompleted(PrincessFrogBounties.PRINCESS_FROG_CHALLENGE);
+        private bool NoCost => (Origin == null || Origin.Team != EntityTeam.EnemyTeam) && BountyManager.Instance.IsBountyCompleteWithoutContinues(PrincessFrogBounties.PRINCESS_FROG_CHALLENGE);
 
         public override void Initialize()
         {

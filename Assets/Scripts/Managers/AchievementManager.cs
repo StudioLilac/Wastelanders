@@ -17,6 +17,7 @@ namespace Steamworks {
         // boolean flag to track whether one player has died in the current combat.
         // reset whenever a scene changes.
         private bool onePlayerDead = false;
+        private bool didContinue = false;
 
         protected override void Awake() {
             base.Awake();
@@ -31,6 +32,7 @@ namespace Steamworks {
             this.Subscribe<OnPlayerHit>(HandlePlayerHitCritical);
             this.Subscribe<OnFinishSparring>(HandlePlayerFinishedSparring);
             this.Subscribe<OnBuffsUpdatedEvent>(HandleOnBuffsUpdated);
+            this.Subscribe<UsedContinue>(_ => didContinue = true);
         }
 
         private void OnEnable() {
@@ -89,10 +91,11 @@ namespace Steamworks {
 
         private void OnSceneChanged(Scene arg0, Scene arg1) {
             onePlayerDead = false;
+            didContinue = false;
         }
 
         private void OnPlayersWin(TeamWinEvent teamWinEvent) {
-            if (teamWinEvent.Team == EntityTeam.PlayerTeam && onePlayerDead) {
+            if (teamWinEvent.Team == EntityTeam.PlayerTeam && onePlayerDead && !didContinue) {
                 SteamManager.UnlockAchievement("REVENGE");
             }
         }

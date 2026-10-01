@@ -8,6 +8,7 @@ using UnityEngine;
 
 namespace SceneBuilder
 {
+    public record RevivablePlayers() : IQuery<List<PlayerClass>>;
     public class PrincessFrogCombatSceneBuilder : SceneBuilder
     {
         [SerializeField] private Vector3 playersPosition;
@@ -28,6 +29,7 @@ namespace SceneBuilder
 #nullable enable
         private IBounties? bounty = null;
         private readonly List<EnemyClass> currentMinions = new();
+        private readonly List<PlayerClass> revivablePlayers = new();
 
         protected override void Build()
         {
@@ -35,6 +37,7 @@ namespace SceneBuilder
             
             SpawnAll(DeterminePlayers(), EntityTeam.PlayerTeam, playersPosition);
             SpawnAll(DetermineEnemies(), EntityTeam.EnemyTeam, enemiesPosition);
+            this.Answer<RevivablePlayers, List<PlayerClass>>(_ => revivablePlayers);
         }
 
         public void OnEnable()
@@ -100,6 +103,7 @@ namespace SceneBuilder
             {
                 list.Add(frogPrefab.gameObject);
                 list.Add(frogPrefab.gameObject);
+                list.Add(frogPrefab.gameObject);
             }
             else if (bounty?.ContractSet.Contains(EnemySpawningContracts.SLIME_SPAWN) == true)
             {
@@ -160,7 +164,7 @@ namespace SceneBuilder
         {
             if (bounty?.ContractSet.Contains(PlayerContracts.DECREASED_HAND_SIZE) == true)
             {
-                playerClass.maxHandSize = 3;
+                playerClass.handSize = 3;
             } else if (instakill)
             {
                 playerClass.AddStacks(Accuracy.buffName, 900);
@@ -170,11 +174,12 @@ namespace SceneBuilder
 
         private void AdjustEnemyClass(EnemyClass enemyClass)
         {
-            enemyClass.TargetingWeights = delegate(EntityClass entity)
+            enemyClass.TargetingWeights = delegate (EntityClass entity)
             {
                 return entity.Team switch
                 {
                     EntityTeam.PlayerTeam => 100,
+                    EntityTeam.NeutralTeam when bounty?.ContractSet.Contains(PlayerContracts.SOLO_JACKIE) == true => 33,
                     EntityTeam.NeutralTeam => 20,
                     _ => 0
                 };
@@ -213,6 +218,7 @@ namespace SceneBuilder
             else if (entity is PlayerClass playerClass)
             {
                 AdjustPlayerClass(playerClass);
+                SetupRevivable(playerClass);
             }
         }
 
@@ -220,6 +226,12 @@ namespace SceneBuilder
         {
             currentMinions.Add(minion);
             minion.DeathHandler = minion.PassOut;
+        }
+
+        private void SetupRevivable(PlayerClass player)
+        {
+            revivablePlayers.Add(player);
+            player.DeathHandler = player.DieRevivable;
         }
 
         private void UpdateEnemyLayout()

@@ -14,10 +14,13 @@ namespace Director
         [SerializeField] private DialogueWrapper gameOverDialogue; // sucks...
 
 #nullable enable
+        private bool usedContinue = false;
+
         private void Start()
         {
             if (CombatManager.Instance.GameState != GameState.GAME_START) return;
             StartCoroutine(OnStart());
+            this.Subscribe<UsedContinue>(_ => usedContinue = true);
         }
 
         public void OnDisable()
@@ -37,9 +40,10 @@ namespace Director
             CombatManager.Instance.BeginCombat();
             yield return StartCoroutine(UIFadeScreenManager.Instance.FadeInLightScreen(1.5f));
             new BattleIntroEvent(Get<ClashIntro>()).Invoke();
+
             yield return new WaitUntil(() => CombatManager.Instance.GameState == GameState.GAME_WIN);
             AudioManager.Instance.FadeOutCurrentBackgroundTrack(2f);
-            bool didUpdate = BountyManager.Instance.NotifyWin();
+            bool didUpdate = BountyManager.Instance.NotifyWin(usedContinue);
             yield return new WaitForSeconds(1f);
             yield return StartCoroutine(CombatManager.Instance.FadeInDarkScreen(1.5f));
             EpilogueSceneData? data = EpilogueSceneData.LatestCompleted(BountyManager.Instance.GetBountyProgress());
@@ -60,8 +64,6 @@ namespace Director
 
         private void EnemiesWin()
         {
-            CombatManager.EnemiesWinEvent -= EnemiesWin;
-            CombatManager.PlayersWinEvent -= PlayersWin;
             GameLose();
             CombatManager.Instance.GameState = GameState.GAME_LOSE;
         }

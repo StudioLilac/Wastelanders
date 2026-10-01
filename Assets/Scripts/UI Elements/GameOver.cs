@@ -1,5 +1,7 @@
 using DialogueScripts;
+using SceneBuilder;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,7 +16,7 @@ public interface IGameOverIntro
     string DeathMessage();
 }
 
-
+public record UsedContinue() : IEvent;
 public class GameOver : MonoBehaviour
 {
     public static GameOver Instance { get; private set; }
@@ -24,11 +26,14 @@ public class GameOver : MonoBehaviour
     [SerializeField] ButtonFadable restartButton;
     [SerializeField] Button levelSelectButton;
     [SerializeField] Button deckSelectButton;
+    [SerializeField] ButtonFadable continueButton;
     [SerializeField] TextMeshProUGUI gameOverText;
     [SerializeField] UIFadeHandler uiFadeScreen;
+    [SerializeField] Sprite injectionSprite;
 # nullable enable
     private IGameOverIntro? activeIntro = null;
     public const float FADE_IN_TIME = 1f;
+
 
     void Awake()
     {
@@ -42,6 +47,10 @@ public class GameOver : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        SetUpContinueButton(); // Put here to initialize after.
+    }
 
     void OnEnable()
     {
@@ -63,6 +72,36 @@ public class GameOver : MonoBehaviour
     }
 
     void Restart() => StartCoroutine(OnRestartClick());
+
+    void SetUpContinueButton()
+    {
+        var players = new RevivablePlayers().Query();
+        if (players is not null)
+        {
+            continueButton.gameObject.SetActive(true);
+            continueButton.OnClick += () => StartCoroutine(RevivePlayers(players));
+            continueButton.OnHover += () => 
+                new TooltipEvent(TextTipDisplayStyle.Display, "Continue", "Take an injection and continue the fight.\nCompleting the Bounty afterwards unlocks the story, but not the clear rewards.", Icon: injectionSprite).Invoke();
+            continueButton.OnUnHover += () => 
+                new TooltipEvent(TextTipDisplayStyle.None).Invoke();
+        }
+        else
+        {
+            continueButton.gameObject.SetActive(false);
+        }
+    }
+
+    IEnumerator RevivePlayers(List<PlayerClass> players)
+    {
+        players.ForEach(p => {
+            p.Revive();
+            p.Replenish();
+        });
+        yield return FadeOut();
+        CombatManager.Instance.BeginCombat();
+        new UsedContinue().Invoke();
+    }
+
 
     public void FadeInWithDialogue(DialogueWrapper dialogue)
     {
@@ -101,7 +140,13 @@ public class GameOver : MonoBehaviour
         yield return StartCoroutine(DialogueBoxV2.Instance.Play(dialogue));
         DialogueBoxV2.Instance.ChangeDialogueBoxOrder(UISortOrder.DialogueBox.GetOrder());
     }
-
+    private IEnumerator FadeOut()
+    {
+        canvasGroup.blocksRaycasts = false;
+        yield return StartCoroutine(FadeCoroutine(false, FADE_IN_TIME));
+        StartCoroutine(uiFadeScreen.FadeInLightScreen(1.5f));
+        yield return new WaitForSeconds(1f);    
+    }
 
     private float cycleScaling = 2f; // Higher the number, the faster one phase is 
     private float bobbingAmount = 0.1f; //Amplitude

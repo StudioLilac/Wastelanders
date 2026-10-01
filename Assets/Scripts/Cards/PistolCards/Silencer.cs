@@ -12,18 +12,17 @@ public class Silencer : PistolCards
         lowerBound = 1;
         upperBound = 4;
         Speed = 3;
-        description = "On hit, gain 2 Accuracy stacks.";
+        description = "If not staggered, gain 2 Accuracy stacks.";
         myName = "Silencer";
         CardType = CardType.RangedAttack;
         base.Initialize();
     }
 
-    protected override GlossaryNode[] GetChildrenGlossaryNodes() => new[] { StatusEffects.Accuracy, Keywords.OnHit };
+    protected override GlossaryNode[] GetChildrenGlossaryNodes() => new[] { StatusEffects.Accuracy, };
 
-    public override void OnHit()
+    public override void CardIsUnstaggered()
     {
-        base.OnHit();
+        base.CardIsUnstaggered();
         Origin.AddStacks(Accuracy.buffName, 2);
-
     }
 }

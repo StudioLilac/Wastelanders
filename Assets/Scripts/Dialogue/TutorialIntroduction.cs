@@ -290,7 +290,6 @@ public class TutorialIntroduction : DialogueClasses
     {
         yield return new WaitUntil(() => !DialogueManager.Instance.IsInDialogue());
         CombatManager.Instance.GameState = GameState.SELECTION;
-        new UIContextChangedEvent(new UIContext.Combat()).Invoke();
         this.Subscribe<OnEntityDeath>(OnDummyDies);
         dummiesLeft = groupDummySpawnPos.Count;
         HUDV2.Instance.SetDeckInfoVisibility(true);

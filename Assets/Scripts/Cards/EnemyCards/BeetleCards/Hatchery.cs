@@ -10,7 +10,7 @@ public class Hatchery : ActionClass, IPlayableQueenCard
     private const string HATCHERY_ANIMATION = "IsHatchery";
     private const string HATCHERY_SOUND = "WL_BeetleSummon";
     [SerializeField] private AnimationClip animationClip;
-    private bool NoCost => (Origin == null || Origin.Team != EntityTeam.EnemyTeam) && BountyManager.Instance.IsBountyCompleted(PrincessFrogBounties.PRINCESS_FROG_CHALLENGE);
+    private bool NoCost => (Origin == null || Origin.Team != EntityTeam.EnemyTeam) && BountyManager.Instance.IsBountyCompleteWithoutContinues(PrincessFrogBounties.PRINCESS_FROG_CHALLENGE);
     public override void Initialize()
     {
         base.Initialize();

@@ -17,24 +17,24 @@ public class PlayableEnemyWeapon : ISubWeaponType
     public static readonly PlayableEnemyWeapon beetleWeapons = new PlayableEnemyWeapon(
         name: "Beetle Cards",
         getSubWeaponCards: (db => db.GetCardsByType(CardDatabase.WeaponType.ENEMY).FindAll(card => card is IPlayableBeetleCard).ToList()),
-        isUnlocked: () => BountyManager.Instance.IsBountyCompleted(PrincessFrogBounties.DECREASED_HAND_SIZE)
+        isUnlocked: () => BountyManager.Instance.IsBountyCompleteWithoutContinues(PrincessFrogBounties.DECREASED_HAND_SIZE)
     );
 
     public static readonly PlayableEnemyWeapon frogWeapons = new PlayableEnemyWeapon(
         name: "Frog Cards",
         getSubWeaponCards: (db => db.GetCardsByType(CardDatabase.WeaponType.ENEMY).FindAll(card => card is IPlayableFrogCard).ToList()),
-        isUnlocked: () => BountyManager.Instance.IsBountyCompleted(PrincessFrogBounties.FROG_CHALLENGE)
+        isUnlocked: () => BountyManager.Instance.IsBountyCompleteWithoutContinues(PrincessFrogBounties.FROG_CHALLENGE)
     );
 
     public static readonly PlayableEnemyWeapon slimeWeapons = new PlayableEnemyWeapon(
         name: "Slime Cards",
         getSubWeaponCards: (db => db.GetCardsByType(CardDatabase.WeaponType.ENEMY).FindAll(card => card is IPlayableSlimeCard).ToList()),
-        isUnlocked: () => BountyManager.Instance.IsBountyCompleted(PrincessFrogBounties.SLIME_CHALLENGE)
+        isUnlocked: () => BountyManager.Instance.IsBountyCompleteWithoutContinues(PrincessFrogBounties.SLIME_CHALLENGE)
     );
     public static readonly PlayableEnemyWeapon queenBeetleWeapons = new PlayableEnemyWeapon(
         name: "Queen Beetle Cards",
         getSubWeaponCards: (db => db.GetCardsByType(CardDatabase.WeaponType.ENEMY).FindAll(card => card is IPlayableQueenCard).ToList()),
-        isUnlocked: () => BountyManager.Instance.IsBountyCompleted(PrincessFrogBounties.QUEEN_CHALLENGE)
+        isUnlocked: () => BountyManager.Instance.IsBountyCompleteWithoutContinues(PrincessFrogBounties.QUEEN_CHALLENGE)
     );
     public static readonly PlayableEnemyWeapon princessFrogWeapons = new PlayableEnemyWeapon(
         name: "Princess Frog Cards",
