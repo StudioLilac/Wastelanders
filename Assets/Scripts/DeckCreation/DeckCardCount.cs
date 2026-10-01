@@ -85,6 +85,8 @@ public class DeckCardCount : MonoBehaviour
             warningText.text = $"Warning: Unbalanced Speeds.\n{string.Join("\n", results)}";
             warningText.color = Color.yellow;
         }
+
+        deck.ForEach(d => Destroy(d.gameObject));
     }
     private void AutoSavePrompt()
     {
