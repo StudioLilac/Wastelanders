@@ -45,7 +45,7 @@ namespace Cinematics
         [SerializeField] private float holdPerWordMs = 70f;
         [SerializeField] private float holdMinMs = 500f;
         [SerializeField] private float holdMaxMs = 3000f;
-        [SerializeField] private float interruptedMs = 200f;
+        [SerializeField] private float interruptedMs = 400f;
 
         [SerializeField] private float fadeInSeconds = 0.35f;
         [SerializeField] private float fadeOutSeconds = 0.25f;

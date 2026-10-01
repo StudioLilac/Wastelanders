@@ -221,7 +221,6 @@ namespace UI_Toolkit
     }
 }
 
-
 public enum TextTipDisplayStyle
 {
     Display,
