@@ -1,9 +1,10 @@
 using Systems.Persistence;
 using UnityEngine;
+using static CardDatabase;
 
 public static class Versioning
 {
-    public const int CURRENT_GAMEDATA_VERSION = 1;
+    public const int CURRENT_GAMEDATA_VERSION = 2;
     public const int CURRENT_PREFERENCES_VERSION = 1;
 
     public static GameData MigrateGameData(GameData data)
@@ -16,6 +17,11 @@ public static class Versioning
             case 0:
                 Debug.Log("Migrating GameData from v0 to v1...");
                 data.SaveVersion = 1;
+                goto case 1;
+            case 1:
+                Debug.Log("Migrating GameData from v1 to v2...");
+                data.SaveVersion = 2;
+                data.playerInformation.JackieData.GetProficiencyPointsTuple(WeaponType.ENEMY).MaxPoints = 12;
                 goto default;
             default:
                 break;
