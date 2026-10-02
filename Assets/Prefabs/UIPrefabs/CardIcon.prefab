@@ -785,6 +785,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myTransform: {fileID: 3536522443032794703}
   unseenEnemyActionIndicator: {fileID: 3269086032622947826}
+  mainIcon: {fileID: 2894994820129497221}
   targetRenderer: {fileID: 2757504951976444535}
   rangeText: {fileID: 953675491295356407}
   oneTimeUseBuff: {fileID: 7499910793134081096}

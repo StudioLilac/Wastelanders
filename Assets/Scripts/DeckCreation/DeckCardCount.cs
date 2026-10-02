@@ -2,14 +2,17 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class DeckCardCount : MonoBehaviour
+public class DeckCardCount : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private TMP_Text textui;
     [SerializeField] private TMP_Text warningText;
     [SerializeField] private Image textimage;
+#nullable enable
     private DeckSelectionState currentState;
+    private TooltipEvent? currentDiagnostic;
 
     void Awake()
     {
@@ -84,6 +87,10 @@ public class DeckCardCount : MonoBehaviour
         {
             warningText.text = $"Warning: Unbalanced Speeds.\n{string.Join("\n", results)}";
             warningText.color = Color.yellow;
+            currentDiagnostic = new TooltipEvent(TextTipDisplayStyle.Display, Title: "Deck Diagnostic", Body: "Decks with too many Actions of the same speed may clog up your hand during combat. Remember, you can't play Actions with identical speeds on the same turn.");
+        } else
+        {
+            currentDiagnostic = null;
         }
 
         deck.ForEach(d => Destroy(d.gameObject));
@@ -104,4 +111,14 @@ public class DeckCardCount : MonoBehaviour
             dummy.gameObject.SetActive(false);
             return dummy;
         }).ToList();
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        currentDiagnostic?.Invoke();
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        new TooltipEvent(TextTipDisplayStyle.None, "").Invoke();
+    }
 }

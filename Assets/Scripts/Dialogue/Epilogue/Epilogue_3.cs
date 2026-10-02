@@ -110,7 +110,7 @@ public class Epilogue_3 : MonoBehaviour
     [SerializeField] private CutoutFadeHandler cutOutHandler;
     [SerializeField] private ScreenCutoutScrim screenCutoutScrim;
     [SerializeField] private MaterialTintFadeHandler materialTintFadeHandler;
-    [SerializeField] private GameObject cardIconRendering;
+    [SerializeField] private CombatInfo cardIconRendering;
 
     bool finishedTutorial = false;
 
@@ -187,10 +187,10 @@ public class Epilogue_3 : MonoBehaviour
 
     private IEnumerator StartScene()
     {
+        black.SetDarkScreen();
         yield return null;
         Setup();
         new SetGameState(GameState.OUT_OF_COMBAT).Invoke();
-        black.SetDarkScreen();
         if (!GameStateManager.Instance.JumpToCombat)
         {
             {
@@ -437,30 +437,21 @@ public class Epilogue_3 : MonoBehaviour
         new BattleIntroEvent(Get<ClashIntro>()).Invoke();
 
         yield return new WaitForSeconds(1f);
-        Transform? burpRenderer = cardIconRendering.transform.Cast<Transform>()
-                                                                .Where(child => child.GetComponent<CombatCardUI>()?.ActionClass is BurpCard)
-                                                                .FirstOrDefault();
-        if (burpRenderer != null)
+
         {
             yield return TakeStock.Play();
-            Transform? blessCard = cardIconRendering.transform.Cast<Transform>()
-                                                                .Where(child => child.GetComponent<CombatCardUI>()?.ActionClass is BlessCard)
-                                                                .FirstOrDefault();
-            var ui = blessCard.GetComponent<CombatCardUI>(); 
-            if (ui != null && ui.ActionClass != null)
-            {
-                ui.ActionClass.Target = ivesFighter;
-                ui.SetActionClass(ui.ActionClass);
-            }
 
-            this.Subscribe<DisplayableHoveredEvent>(StartTutorial);
-            void StartTutorial(DisplayableHoveredEvent e)
+            this.Subscribe<CardInserted>(StartTutorial);
+            void StartTutorial(CardInserted e)
             {
-                if (e.ActionClass is not BurpCard) return;
-                StartCoroutine(StartTimedTutorial(burpRenderer));
-                this.UnSubscribe<DisplayableHoveredEvent>(StartTutorial);
+                if (e.ActionClass is BurpCard && e.ActionClass.Target.IsDead)
+                {
+                    this.UnSubscribe<CardInserted>(StartTutorial);
+                    StartCoroutine(StartTimedTutorial());
+                }
             }
-        }        
+        }
+              
 
         yield return new WaitUntil(() => new GetGameState().Query() == GameState.GAME_WIN);
         GameStateManager.Instance.UpdateLevelProgress(StageInformation.Get<StageInformation.IvesFinale>());
@@ -592,10 +583,10 @@ public class Epilogue_3 : MonoBehaviour
     }
 
 
-    IEnumerator StartTimedTutorial(Transform burpRenderer)
+    IEnumerator StartTimedTutorial()
     {
         yield return new WaitForSeconds(2f);
-        Coroutine tutorial = StartCoroutine(RedirectTutorial(burpRenderer));
+        Coroutine tutorial = StartCoroutine(RedirectTutorial());
         this.Subscribe<GameStateChanged>(KillTutorial);
         void KillTutorial(GameStateChanged gs)
         {
@@ -610,7 +601,7 @@ public class Epilogue_3 : MonoBehaviour
         }
     }
 
-    IEnumerator RedirectTutorial(Transform burpRenderer)
+    IEnumerator RedirectTutorial()
     {
         Coroutine? tutorialCoroutine = null;
         bool showNextCutout = false;
@@ -623,9 +614,10 @@ public class Epilogue_3 : MonoBehaviour
             if (!finishedTutorial && ci.ActionClass.Target == princessFrog)
             {
                 if (tutorialCoroutine != null) StopCoroutine(tutorialCoroutine);
-                tutorialCoroutine = StartCoroutine(new DialogueAsCode().Line(DialogueCharacter.Tutorial, "You targeted the Princess Frog directly! Try dragging the Action onto the highlighted Icon instead!").Play());
+                tutorialCoroutine = StartCoroutine(new DialogueAsCode().Line(DialogueCharacter.Tutorial, "You targeted the Princess Frog directly! Try playing the Action onto the highlighted Icon instead!").Play());
             }
         });
+        yield return new WaitUntil(() => !DialogueBoxV2.Instance.IsActive);
         VerticalLayoutChange.MoveBoxV2ToTop();
         yield return Opener.Play();
         yield return materialTintFadeHandler.FadeToAlpha(200f / 255f, 1f);
@@ -634,9 +626,10 @@ public class Epilogue_3 : MonoBehaviour
         yield return cutOutHandler.FadeInLightScreen(0.5f);
         yield return HandSelect.Play();
         yield return new WaitUntil(() => showNextCutout);
-        yield return cutOutHandler.FadeInDarkScreen(0.2f);
-        var ui = burpRenderer.GetComponent<SpriteRenderer>();
-        screenCutoutScrim.SetTarget(new SpriteTarget(ui, Padding: new(1f, 1f)));
+        yield return cutOutHandler.FadeInDarkScreen(0.2f); 
+        CombatCardUI? burp = cardIconRendering.RenderedIcons().FirstOrDefault(icon => icon.ActionClass is BurpCard);
+        if (burp == null) yield break;
+        screenCutoutScrim.SetTarget(new SpriteTarget(burp.SpriteRenderer, Padding: new(1f, 1f)));
         yield return cutOutHandler.FadeInLightScreen(0.2f);
         yield return DragToThem.Play();
         yield return new WaitUntil(() => finishedTutorial);
@@ -651,13 +644,13 @@ public class Epilogue_3 : MonoBehaviour
     public Sprite CrossHair = null!;
     private DialogueAsCode TakeStock => new DialogueAsCode()
                                         .Line(DialogueCharacter.Ives, "Let's take stock first to see what this Frog can do.", picture: IvesPortrait)
-                                        .Line(DialogueCharacter.Tutorial, "[Hover] over the Action Icons that the Frog is declaring.", picture: BurpPortrait);
-    private DialogueAsCode Opener => new DialogueAsCode().Line(DialogueCharacter.Ives, "That Frog intends to heal the damage I just dealt to the beetle. Now's a good time to freshen up on how to redirect enemy Actions so we can prevent the heal.", picture: BurpPortrait);
-    private DialogueAsCode HandSelect => new DialogueAsCode().Line(DialogueCharacter.Ives, "Select a fast Action from mine or your hand, it's gotta be faster than or equal to the speed of its 'Burp' which is 2.", picture: IvesPortrait);
-    private DialogueAsCode DragToThem => new DialogueAsCode().Line(DialogueCharacter.Ives, "Now select that Action and [Click] on the Burp's Icon to redirect it.", picture: BurpPortrait);
+                                        .Line(DialogueCharacter.Tutorial, "[Hover] over the Action icons that the Frog is declaring.", picture: BurpPortrait);
+    private DialogueAsCode Opener => new DialogueAsCode().Line(DialogueCharacter.Ives, "Looks like that Frog is intending to revive the beetle we just knocked out. We mustn't let that happen.", picture: BurpPortrait)
+                                                         .Line(DialogueCharacter.Ives, "Now's a good time for a refresher on how to redirect enemy Actions.", picture: IvesPortrait);
+    private DialogueAsCode HandSelect => new DialogueAsCode().Line(DialogueCharacter.Ives, "Pick an Action that has an equal or higher speed than Burp's speed of 2.", picture: IvesPortrait);
+    private DialogueAsCode DragToThem => new DialogueAsCode().Line(DialogueCharacter.Ives, "[Click] or [Drag] the Action onto Burp's Action icon. That'll form a clash and redirect the attack to you.", picture: BurpPortrait);
     private DialogueAsCode Explanation => new DialogueAsCode()
-        .Line(DialogueCharacter.Ives, "If you had targetted the Frog directly, you would have made an unopposed attack.", picture: CrossHair)
-        .Line(DialogueCharacter.Tutorial, "You can check the Glossary in the pause menu [Esc.] if you ever forget about key game mechanics.", picture: GlossaryPortrait)
-        .Line(DialogueCharacter.Ives, "Now let's crush this operation!", picture: IvesPortrait)
+        .Line(DialogueCharacter.Ives, "That should prevent the revive. Now let's crush this operation!", picture: IvesPortrait)
+        .Line(DialogueCharacter.Tutorial, "If you ever need a refresher about key game mechanics, you can check the Glossary in the pause menu [Esc.] ", picture: GlossaryPortrait)
         ;
 }

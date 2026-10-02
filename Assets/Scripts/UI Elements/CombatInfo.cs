@@ -1,3 +1,4 @@
+using Cards.EnemyCards.FrogCards;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -148,6 +149,14 @@ public class CombatInfo : MonoBehaviour
         RenderCombatIcons();
     }
 
+    public List<CombatCardUI> RenderedIcons()
+    {
+        if (!gameObject.activeInHierarchy) return new();
+
+        return cardIconRendering.transform.Cast<Transform>()
+                                            .Select(child => child.GetComponent<CombatCardUI>())
+                                            .ToList();
+    }
 
     private void RenderCombatIcons()
     {

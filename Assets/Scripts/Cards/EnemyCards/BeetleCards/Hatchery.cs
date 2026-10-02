@@ -16,7 +16,7 @@ public class Hatchery : ActionClass, IPlayableQueenCard
         base.Initialize();
         lowerBound = 2;
         upperBound = 2;
-        Speed = 1;
+        Speed = 2;
         
         description = NoCost ? "If this card is not staggered, spawn 1 random beetle." :
             $"Spend +{HATCHERY_COST} resonance to play this card. If this card is not staggered, spawn 1 random beetle.";

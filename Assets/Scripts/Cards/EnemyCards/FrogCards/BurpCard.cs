@@ -11,8 +11,8 @@ namespace Cards.EnemyCards.FrogCards
             base.Initialize();
 
             myName = "Burp";
-            description = NoCost ? "On monster ally hit, heal ally (rolled power + resonance stacks)." : 
-                $"Spend {BURP_COST} Resonance to play. On monster ally hit, heal ally (rolled power + resonance stacks) and refund resonance spent.";
+            description = NoCost ? "On monster ally hit, revive and heal ally (rolled power + resonance stacks)." : 
+                $"Spend {BURP_COST} Resonance to play. On monster ally hit, revive and heal ally (rolled power + resonance stacks) and refund resonance spent.";
 
             CostToAddToDeck = 2;
             lowerBound = upperBound = 1;

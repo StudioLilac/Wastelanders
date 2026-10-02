@@ -38,7 +38,7 @@ namespace Dialogue.Epilogue
         {
             ControllableAudioChannel tracker = AudioManager.Instance.CreateChannel(SoundID.VN_ep7_tracker_loop, AudioCategory.Music);
             ControllableAudioChannel drips = AudioManager.Instance.CreateChannel(SoundID.VN_ep7_water_drips, AudioCategory.Music, level: 0f);
-            ControllableAudioChannel eerie = AudioManager.Instance.CreateChannel(suspenseDrone, AudioCategory.Music, level: 0.7f);
+            ControllableAudioChannel eerie = AudioManager.Instance.CreateChannel(suspenseDrone, AudioCategory.Music, level: 1f);
 
             tracker.Play();
             drips.Play();
@@ -53,16 +53,16 @@ namespace Dialogue.Epilogue
             yield return StartCoroutine(blackFadeHandler.FadeInLightScreen(1.5f));
             
             yield return DialogueBoxV2.Instance.Play(Epilogue_7_DAC.OutOfTheCave);
-            StartCoroutine(tracker.FadeTo(0.1f, 2f));
-            yield return DialogueBoxV2.Instance.Play(Epilogue_7_DAC.CreatureFight(eerie));
-            new ShakeScreen(Intensity: 0.8f).Invoke();
+            StartCoroutine(tracker.FadeTo(0.2f, 2f));
+            yield return DialogueBoxV2.Instance.Play(Epilogue_7_DAC.CreatureFight(this, eerie, tracker));
+            new ShakeScreen(Intensity: 0.8f, Duration: 1f).Invoke();
 
             // [Fade into Dead Creature background with Jackie and creature]
             yield return FadeOutSpriteRenderers(2, defaultBackground);
             yield return DialogueBoxV2.Instance.Play(Epilogue_7_DAC.DeadCreature);
 
             // "the beeping of the device begins to grow louder"
-            StartCoroutine(tracker.FadeTo(0.8f, 3f));
+            StartCoroutine(tracker.FadeTo(1f, 3f));
             blackingOutSr1.gameObject.SetActive(true);
             StartCoroutine(FadeInSpriteRenderer(1f, blackingOutSr1));
             yield return DialogueBoxV2.Instance.Play(Epilogue_7_DAC.BlackingOut1);
@@ -158,7 +158,7 @@ namespace Dialogue.Epilogue
         .Narrate("<i>She stops to gather her bearings again, making sure she takes the correct path among the many that lay in front of her.</i>");
 
         // The fight proper, from the creature stirring in the rubble to its collapse.
-        public static DialogueAsCode CreatureFight(ControllableAudioChannel eerie) => new DialogueAsCode()
+        public static DialogueAsCode CreatureFight(MonoBehaviour owner, ControllableAudioChannel eerie, ControllableAudioChannel tracker) => new DialogueAsCode()
             .Narrate("<i>The clearing is quiet. Aside from her blips, only the drips of water break the silence.</i>")
             .Do(new CallbackEvent(() => eerie.Play()))
             .Narrate("<i>Then one of the stones lets out a wet, guttural snarl. The rocks around her begin to shift.</i>", SoundID.VN_ep7_dragon_hiss)
@@ -166,6 +166,7 @@ namespace Dialogue.Epilogue
             .Narrate("<i>A massive, lizard-like creature with a scarred eye pounces from the rubble.</i>")
             .InterruptedLine(DialogueCharacter.Jackie, "Brace!", DialogueSprite.JackieSurprisedClosed)
             .Narrate("<i>Metal clashes against bone.</i>", SoundID.CB_clash_tie)
+            .Do(new CallbackEvent(() => new ShakeScreen(Intensity: 1f, Duration: 1f).Invoke()))
             .Narrate("<i>Jackie is thrown, slamming hard against the stone wall. Her ribs flaring as the wind is knocked out of her.</i>", SoundID.VN_ep7_jackie_hit_wall)
             .Line(DialogueCharacter.Jackie, "Ugh!")
             .Line(DialogueCharacter.Jackie, "Too heavy. Can't... can’t take it head on.")
@@ -175,17 +176,20 @@ namespace Dialogue.Epilogue
             .Narrate("<i>But she’s not quite fast enough. A claw catches and tears through her calf.</i>", SoundID.VN_ep7_pant_rip)
             .Line(DialogueCharacter.Jackie, "ACK! My leg...", DialogueSprite.JackieSurprisedOpen)
             .Narrate("<i>She tumbles through the gravel, kicking up dust and trailing red.</i>", SoundID.VN_ep7_gravel_drag)
+            .Do(new CallbackEvent(() => new ShakeScreen(Intensity: 0.6f).Invoke()))
             .Narrate("<i>Behind her, the beast wheels around, its tail knocking boulders on the wall loose.</i>", SoundID.VN_ep7_jackie_hit_wall)
             .Line(DialogueCharacter.Jackie, "’Don’t fight its strength... Fight its shape.’", DialogueSprite.JackieNeutralSoft)
             .Line(DialogueCharacter.Jackie, "Right. But how, with a busted leg?", DialogueSprite.JackieFocused) // expression is an added choice; the script leaves it unkeyed
             .Narrate("<i>She scrambles back, and steadies herself on stone.</i>", SoundID.VN_ep7_gravel_drag)
             .Narrate("<i>The beast stares down Jackie with its one good eye. Judging the damage and distance.</i>")
+            .Do(new CallbackEvent(() => owner.StartCoroutine(tracker.FadeTo(0.7f, 1f))))
             .Narrate("<i>Jackie props herself with the staff. Hot blood pounding in her ears. The glove beeping monotonously in rhythm.</i>")
             .Line(DialogueCharacter.Jackie, "I got it. I just need to time this.", DialogueSprite.JackieFocused)
             .Narrate("<i>Seeing its prey wobble upright, the creature lunges for the kill.</i>")
             .Line(DialogueCharacter.Jackie, "NOW!", DialogueSprite.JackieSurprisedOpen)
             .Narrate("<i>Jackie morphs into the form of the smallest beetle she’s fought.</i>", SoundID.VN_finger_snap)
             .Narrate("<i>The world balloons around her as she clings to the gravel. The creature’s momentum carrying it past her.</i>")
+            .Do(new CallbackEvent(() => new ShakeScreen(Intensity: 0.6f).Invoke()))
             .Narrate("<i>The entire cave shudders as maw meets stone.</i>", SoundID.VN_ep7_dragon_hit_wall)
             .Narrate("<i>Jackie unshifts, and in a breath, springs up on her good leg. Driving all of her weight behind her staff.</i>")
             .Narrate("<i>The steel tip finds the base of the skull, wedging itself arms-length deep.</i>", SoundID.CB_excavate)

@@ -6239,6 +6239,14 @@ PrefabInstance:
       propertyPath: m_fontColor32.rgba
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 164329129132165210, guid: f8ca2972854e8f34eb11d48477fef72a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 164329129132165210, guid: f8ca2972854e8f34eb11d48477fef72a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 255
+      objectReference: {fileID: 0}
     - target: {fileID: 382188811536624829, guid: f8ca2972854e8f34eb11d48477fef72a, type: 3}
       propertyPath: m_fontColor.b
       value: 1
@@ -7181,7 +7189,7 @@ MonoBehaviour:
   holdPerWordMs: 70
   holdMinMs: 500
   holdMaxMs: 3000
-  interruptedMs: 350
+  interruptedMs: 550
   fadeInSeconds: 0.35
   fadeOutSeconds: 0.25
   startAtBeat: 0

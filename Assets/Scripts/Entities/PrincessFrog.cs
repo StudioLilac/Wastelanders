@@ -16,17 +16,6 @@ namespace Entities
         public List<GameObject> BurpCards { get; private set; } = new();
         public List<GameObject> GobbleCards { get; private set; } = new();
         public List<EnemyClass> OwnedMinions { get; set; } = new();
-        public AttackDeciderDelegate AttackDecider { private get; set; } =
-            (int enemyCount) => 
-                Random.Range(0f, 1f) > enemyCount switch
-                {
-                    4 => 1f,
-                    3 => 0.66f,
-                    2 => 0.33f,
-                    1 => 0f,
-                    0 => 0f,
-                    _ => 1.0f
-                };
 
         public delegate bool AttackDeciderDelegate(int opponentCount);
 
@@ -93,8 +82,7 @@ namespace Entities
 
             for (int i = 0; i < NumberOfAttacks; i++)
             {
-                bool canBurp = availableDeadMinions.Count > 0;
-                bool shouldPlayBurp = canBurp && AttackDecider(activeMinionCount);
+                bool shouldPlayBurp = availableDeadMinions.Count > 0;
                 int currentStacks = GetBuffStacks(Resonate.buffName);
 
                 EntityClass burpTarget = null;

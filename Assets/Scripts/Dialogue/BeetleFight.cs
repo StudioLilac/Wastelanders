@@ -808,7 +808,7 @@ public class BeetleFight : DialogueClasses
         enemyEntity.DestroyDeck();
     }
 
-    private DialogueAsCode SelectAction => new DialogueAsCode().Line(DialogueCharacter.Ives, "Pick an Action that has a higher speed than Excavate's speed of 2.", picture: ivesPortrait);
+    private DialogueAsCode SelectAction => new DialogueAsCode().Line(DialogueCharacter.Ives, "Pick an Action that has an equal or higher speed than Excavate's speed of 2.", picture: ivesPortrait);
     private DialogueAsCode PlaceAction => new DialogueAsCode().Line(DialogueCharacter.Ives, "[Click] or [Drag] it onto the highlighted Action Icon. That'll form a clash and redirect the beetle's attack away from you, Jackie.", picture: excavatePortrait);
 
 }

@@ -138,22 +138,6 @@ namespace SceneBuilder
             if (bounty.ContractSet.Contains(PrincessFrogContracts.EXTRA_HEALTH))
                 princessFrog.StartingHealth = 75;
 
-            if (bounty.ContractSet.Contains(PrincessFrogContracts.AGGRESIVE_AI))
-            {
-                princessFrog.AttackDecider =
-                    (int currentEnemyCount) =>
-                        UnityEngine.Random.Range(0f, 1f) > currentEnemyCount switch
-                        {
-                            5 => 1f,
-                            4 => 0.7f,
-                            3 => 0.5f,
-                            2 => 0.2f,
-                            1 => 0f,
-                            0 => 0f,
-                            _ => 1.0f
-                        };
-            }
-
             if (bounty.ContractSet.Contains(PrincessFrogContracts.EXTRA_RESONANCE))
             {
                 princessFrog.AddStacks(Resonate.buffName, 1);

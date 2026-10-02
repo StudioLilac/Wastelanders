@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 #nullable enable
+public record TooltipEvent(TextTipDisplayStyle Style, string Title = "", string Body = "", string Caption = "", Sprite? Icon = null) : IEvent { }
+
 namespace UI_Toolkit
 {
     public class Tooltip : MonoBehaviour
@@ -218,9 +220,6 @@ namespace UI_Toolkit
         }
     }
 }
-
-public record TooltipEvent(TextTipDisplayStyle Style, string Title = "", string Body = "", string Caption = "", Sprite? Icon = null) : IEvent { }
-public record TooltipText(string Content, TextTipDisplayStyle Style) : IEvent {}
 
 public enum TextTipDisplayStyle
 {
