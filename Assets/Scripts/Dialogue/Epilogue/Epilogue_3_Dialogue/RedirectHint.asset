@@ -20,13 +20,13 @@ MonoBehaviour:
     picture: {fileID: 21300000, guid: 88a7e4552c1afa641acadc54e9b6cbac, type: 3}
     events: []
   - content: 'Right. It''ll be a good idea to redirect that Action away from the
-      crystals too if we can. '
+      crystals if we can. '
     speaker: {fileID: 11400000, guid: 5e611c80cca3abf42b4a5c1a2294b953, type: 2}
     sfxId: 0
     picture: {fileID: 21300000, guid: 2634a2f81fa74ad4f90374821cfd0ee6, type: 3}
     events: []
-  - content: <i>You can also redirect Enemy Actions by playing an Action onto the
-      Icon <i>in the Queue</i> as well.
+  - content: <i>You can redirect Enemy Actions by playing an Action onto the Icon
+      <i>in the Queue</i> as well.
     speaker: {fileID: 11400000, guid: b64e232132ef228439856328530fa3c8, type: 2}
     sfxId: 0
     picture: {fileID: 21300000, guid: d2c4ec02e6276894c8ebc5adbd2f086f, type: 3}
