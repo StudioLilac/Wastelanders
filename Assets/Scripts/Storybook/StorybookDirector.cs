@@ -34,7 +34,7 @@ namespace Storybook
         {
             return scene switch
             {
-                StorybookSceneEnum.Storybook1 => null, // Let the audio flow through from the prologue.
+                StorybookSceneEnum.Storybook1 => audio.Prologue2, // Let the audio flow through from the prologue.
                 StorybookSceneEnum.Storybook2 => audio.Prologue2,
                 StorybookSceneEnum.Storybook3 => audio.Prologue2,
                 StorybookSceneEnum.Storybook4 => audio.Prologue3,
@@ -63,10 +63,14 @@ namespace Storybook
         protected virtual void Awake()
         {
             dialogueRunner.AddCommandHandler<string, float>("bg", SetBackground);
+        }
+
+        private void OnEnable()
+        {
             dialogueRunner.onDialogueComplete?.AddListener(OnDialogueComplete);
         }
 
-        protected virtual void OnDestroy()
+        private void OnDisable()
         {
             dialogueRunner.onDialogueComplete?.RemoveListener(OnDialogueComplete);
         }
@@ -90,11 +94,6 @@ namespace Storybook
         private IEnumerator End() {
             yield return StartCoroutine(uiFadeHandler.FadeInDarkScreen(1f));
             GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.StorybookSelector>().SceneName);
-        }
-
-        private static string ToNodeName(StorybookSceneEnum scene)
-        {
-            return scene == StorybookSceneEnum.None ? "Start" : scene.ToString();
         }
 
         private void SetBackground(string key, float duration = DefaultBackgroundFadeDuration)
