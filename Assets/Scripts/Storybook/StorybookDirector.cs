@@ -14,7 +14,36 @@ namespace Storybook
         Storybook3,
         Storybook4
     }
-    
+
+    [Serializable]
+    public struct StoryBookAudio
+    {
+        public AudioClip? Prologue1;
+        public AudioClip? Prologue2;
+        public AudioClip? Prologue3;
+    }
+
+    public static class StorybookSceneEnumExtensions
+    {
+        public static string ToNodeName(this StorybookSceneEnum scene)
+        {
+            return scene == StorybookSceneEnum.None ? "Start" : scene.ToString();
+        }
+
+        public static AudioClip? GetMusic(this StorybookSceneEnum scene, StoryBookAudio audio)
+        {
+            return scene switch
+            {
+                StorybookSceneEnum.Storybook1 => null, // Let the audio flow through from the prologue.
+                StorybookSceneEnum.Storybook2 => audio.Prologue2,
+                StorybookSceneEnum.Storybook3 => audio.Prologue2,
+                StorybookSceneEnum.Storybook4 => audio.Prologue3,
+                _ => audio.Prologue1
+            };
+        }
+    }
+
+
     /// <summary>
     /// Base class for a scene's dialogue director. Handles the shared "bg" command
     /// (crossfading to an animated background clip by key) and exposes an overrideable
@@ -29,7 +58,7 @@ namespace Storybook
         [SerializeField] protected UIFadeHandler uiFadeHandler = null!;
 
         [Tooltip("Default entry node for this scene, useful for testing the scene. Can be overridden in code via EntryNode.")]
-        [SerializeField] private string EntryNode = "Start";
+        [SerializeField] private StoryBookAudio storybookAudio = default!;
 
         protected virtual void Awake()
         {
@@ -46,11 +75,12 @@ namespace Storybook
         {
             uiFadeHandler.SetLightScreen();
             StorybookSceneEnum requestedEntryNode = GameStateManager.Instance.Payload<StoryBookEntry>()?.StorybookEntryNode ?? StorybookSceneEnum.None;
-            string nodeName = requestedEntryNode == StorybookSceneEnum.None
-                ? EntryNode
-                : requestedEntryNode.ToString();
-
-            dialogueRunner.StartDialogue(string.IsNullOrWhiteSpace(nodeName) ? "Start" : nodeName);
+            AudioClip? audio = requestedEntryNode.GetMusic(storybookAudio);
+            if (audio != null)
+            {
+                AudioManager.Instance.FadeInBackgroundTrack(1f, audio, true);
+            }
+            dialogueRunner.StartDialogue(requestedEntryNode.ToNodeName());
         }
         
         protected virtual void OnDialogueComplete() {

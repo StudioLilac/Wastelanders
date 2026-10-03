@@ -25,9 +25,9 @@ namespace Storybook
     public static class StorybookPrologue_Dialogue
     {
         public static DialogueAsCode Flashback => new DialogueAsCode()
-            .Line(DialogueCharacter.Jackie, "I am ready. It’s time for me to stop being so useless and go out and fight.")
+            .Line(DialogueCharacter.Jackie, "Let me go Auntie Ives! It’s time for me to stop being so useless and go out and fight.")
             .Line(DialogueCharacter.Ives, "Feeling ready and being ready ain’t the same. You still need more training.")
-            .Line(DialogueCharacter.Jackie, "More training? No, no more training! You’re not my mom, you can’t tell me what to do!")
+            .Line(DialogueCharacter.Jackie, "More training? No, no more training! You’re not Ma, you can’t tell me what to do!")
             .Line(DialogueCharacter.Ives, "No. But your mom ain’t here. It’s just me.")
             .Narrate("<i>In a whirl of frustration, Jackie storms off to her bedroom, slamming the door behind her.</i>")
             .Narrate("<i>Ives exhales, shaking her head. She catches her reflection in the window, seeing her tattoo banded across her arm.</i>")

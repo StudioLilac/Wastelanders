@@ -372,7 +372,10 @@ MonoBehaviour:
   dialogueRunner: {fileID: 8309902627721212547}
   bg: {fileID: 511150655}
   uiFadeHandler: {fileID: 1863678789}
-  EntryNode: Storybook1
+  storybookAudio:
+    Prologue1: {fileID: 8300000, guid: f5f827c528cde5f45aa916fdd45ea4b5, type: 3}
+    Prologue2: {fileID: 8300000, guid: 890e9e757339e9449848495e6584a091, type: 3}
+    Prologue3: {fileID: 8300000, guid: 09c24a892ea0ae64bad15de5d54938dd, type: 3}
 --- !u!114 &511150655
 MonoBehaviour:
   m_ObjectHideFlags: 0
