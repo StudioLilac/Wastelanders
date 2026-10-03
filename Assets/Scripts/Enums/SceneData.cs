@@ -179,7 +179,7 @@ public abstract class SceneData : Enum<SceneData>
 
     public class StorybookPrologue : SceneData {
         public override string SceneName => "StorybookPrologue";
-        public override SceneAudio GetAudio(AudioDatabase database) => database.Empty;
+        public override SceneAudio GetAudio(AudioDatabase database) => database.StorybookPrologue;
         public override MonoBehaviour[] ScenePrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
             { prefabs.pauseMenuV2, prefabs.dialogueManager, prefabs.dialogueBoxV2};
         public override UIContext UIContextOnEntry => new UIContext.None();
@@ -187,7 +187,7 @@ public abstract class SceneData : Enum<SceneData>
 
     public class StorybookScene : SceneData {
         public override string SceneName => "StorybookScene";
-        public override SceneAudio GetAudio(AudioDatabase database) => database.Empty;
+        public override SceneAudio GetAudio(AudioDatabase database) => database.StorybookPrologue;
         public override MonoBehaviour[] ScenePrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
             { prefabs.pauseMenuV2 };
         public override UIContext UIContextOnEntry => new UIContext.None();
@@ -196,7 +196,7 @@ public abstract class SceneData : Enum<SceneData>
     public class StorybookSelector : SceneData
     {
         public override string SceneName => "StoryBookSelector";
-        public override SceneAudio GetAudio(AudioDatabase database) => database.Empty;
+        public override SceneAudio GetAudio(AudioDatabase database) => database.StorybookPrologue;
     }
     
     public class PreBounty0 : SceneData {
@@ -336,7 +336,7 @@ public abstract class SceneData : Enum<SceneData>
     {
         public override string SceneName => "Epilogue_11";
 
-        public override SceneAudio GetAudio(AudioDatabase database) => database.Machina;
+        public override SceneAudio GetAudio(AudioDatabase database) => database.Epilogue11;
 
         public override MonoBehaviour[] ScenePrefabs(SceneInitializerPrefabs prefabs) => new MonoBehaviour[]
         {
@@ -402,7 +402,7 @@ public static class SceneDataHelpers
     public static SceneAudio SelectMainMenuMusic(AudioDatabase database) => GameStateManager.Instance.CurrentLevelProgress switch
     {
         var progress when StageInformation.Get<StageInformation.Season2>().UnlockCriteriaMet() 
-            && GameStateManager.Instance.PreviousScene == SceneData.Get<SceneData.Epilogue_11>() => database.Machina,
+            && GameStateManager.Instance.PreviousScene == SceneData.Get<SceneData.Epilogue_11>() => database.Epilogue11,
         var progress when StageInformation.Get<StageInformation.PrincessFrogFight>().UnlockCriteriaMet() => database.Tundra,
         _ => database.MainMenu,
     };

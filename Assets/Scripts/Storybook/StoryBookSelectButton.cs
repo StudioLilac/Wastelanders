@@ -21,7 +21,16 @@ public class StoryBookSelectButton : SceneSelectButton
         
         public Sprite Thumbnail => thumbnailSprite;
 
-        public void OnClick() => GameStateManager.Instance.LoadScene(SceneData.Get<SceneData.StorybookScene>().SceneName, payload: new StoryBookEntry(sceneEnum));
+        public void OnClick()
+        {
+            var (sceneName, payload) = sceneEnum switch
+            {
+                StorybookSceneEnum.Storybook1 => (SceneData.Get<SceneData.StorybookPrologue>().SceneName, null),
+                _ => (SceneData.Get<SceneData.StorybookScene>().SceneName, new StoryBookEntry(sceneEnum))
+            };
+
+            GameStateManager.Instance.LoadScene(sceneName, payload: payload);
+        }
     }
 
     public void Bind(StorybookSceneEnum sceneEnum, Sprite thumbnail)
