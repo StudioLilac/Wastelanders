@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a670f5b60f9ade045bd8e0301eecbe93, type: 3}
-  m_Name: Machina
+  m_Name: Epilogue11
   m_EditorClassIdentifier: 
   backgroundMusicPrimary: {fileID: 8300000, guid: 331645ad102d77e4c857afa36c8e2c33, type: 3}
   backgroundMusicIntro: {fileID: 0}
