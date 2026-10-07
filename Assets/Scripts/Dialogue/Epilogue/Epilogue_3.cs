@@ -322,7 +322,10 @@ public class Epilogue_3 : MonoBehaviour
             ivesFighter.gameObject.SetActive(true);
             ivesFighter.OutOfCombat();
 
-            yield return DialogueBoxV2.Instance.Play(BattleJackieHumanForm);
+
+            yield return new WaitForSeconds(0.2f);
+            var dialogueCoroutine = StartCoroutine(DialogueBoxV2.Instance.Play(BattleJackieHumanForm));
+            yield return new WaitForSeconds(0.5f);
 
             //Ives intercepts Jackie and frees her from the control
             {
