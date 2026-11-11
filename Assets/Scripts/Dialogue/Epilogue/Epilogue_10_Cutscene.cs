@@ -52,6 +52,7 @@ namespace Dialogue.Epilogue
             fieldCrystal.SetActive(false);
             overlayRocks.gameObject.SetActive(false);
             baseCamera.transform.position = CombatCameraAnchor.position;
+            baseCamera.m_Lens.OrthographicSize = 4;
             var enemies = new List<EnemyClass>() { slime, slime2, frog, frog2, beetle1, beetle2, beetle3, jackiePrincessFrog };
             CombatManager.Instance.SetEnemiesPassive(enemies);
             enemies.ForEach(e => e.gameObject.SetActive(false));
