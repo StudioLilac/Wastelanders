@@ -944,7 +944,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The End of Season 1
+  m_text: The End of Chapter 1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d6d929d580da683488fd8dd5d54bd40d, type: 2}
   m_sharedMaterial: {fileID: 5271763460925903612, guid: d6d929d580da683488fd8dd5d54bd40d, type: 2}
