@@ -31,6 +31,7 @@ namespace Systems.Persistence
     }
 
 #nullable enable
+    public record OnGameSaved() : IEvent;
     public record GetSaveSystemStatus() : IQuery<SaveStatus?>;
     public record GetGameStateData() : IQuery<GameStateData?>;
     public record GetBountyStateData() : IQuery<BountyStateData?>;
@@ -170,7 +171,7 @@ namespace Systems.Persistence
 
             Debug.Log($"Saving the game, {gameData.SaveName}");
             dataService.Save(gameData);
-            UISaveIndicatorManager.Instance.Show();
+            new OnGameSaved().Invoke();
         }
 
         private void LoadGame()

@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using Systems.Persistence;
 
 public class UISaveIndicatorManager : PersistentSingleton<UISaveIndicatorManager>
 {
@@ -19,9 +20,10 @@ public class UISaveIndicatorManager : PersistentSingleton<UISaveIndicatorManager
         SetTextAlpha(0f);
         saveIndicatorCanvas.enabled = false;
         saveIndicatorCanvas.sortingOrder = UISortOrder.SaveIndicator.GetOrder();
+        this.Subscribe<OnGameSaved>(e => Show());
     }
 
-    public void Show()
+    private void Show()
     {
         if (activeCoroutine != null)
             StopCoroutine(activeCoroutine);
